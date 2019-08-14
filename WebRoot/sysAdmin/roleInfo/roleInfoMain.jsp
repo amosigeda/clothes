@@ -51,8 +51,8 @@ function ofuncs(rcode){
 			<table width="100%" class="table" >
                <tr>
                    <th colspan="13" nowrap="nowrap" align="left">角色 
-                  <!--  <input name="inset" type="button" class="but_1" accesskey="a"
-							tabindex="a" value="添加角色" onclick="insert()"> --></th>
+                    <input name="inset" type="button" class="but_1" accesskey="a"
+							tabindex="a" value="添加角色" onclick="insert()"></th>
                 </tr>         
                   <tr class="title_2">
 								
@@ -65,12 +65,12 @@ function ofuncs(rcode){
 					<td width="10%">
 						角色类型
 					</td>
-					<!-- <td width="30%" >
+					 <td width="30%" >
 						角色描述
 					</td>
 					<td width="25%">
 						操作
-					</td> -->
+					</td>
 				</tr>
 				<logic:iterate id="element" name="pageList">
 					<tr class="tr_5" onmouseover='this.className="tr_4"' onmouseout='this.className="tr_5"' >
@@ -84,19 +84,19 @@ function ofuncs(rcode){
 						<td>
 							<bean:write name="element" property="roleType" />
 						</td>
-						<%-- <td align="left">
+						 <td align="left">
 							<bean:write name="element" property="roleDesc" />
-						</td> --%>
-					<%-- 	<td align="left">
+						</td> 
+						<td align="left">
 							<a href="#"
 								onclick="ofuncs('<bean:write name="element" property="id" />')"  class="tbl_A" >【权限设置】</a>
 							<a href="#"
 							    onclick="update('<bean:write name="element" property="roleCode" />')"  class="tbl_A" >【编辑描述】</a>
 						<% if(!(("admin".equals(roleCode)) || ("saler".equals(roleCode)) || ("custom".equals(roleCode)))){%>	
-							<!-- <a href="#"
-							    onclick="del('<bean:write name="element" property="roleCode" />')"  class="tbl_A" >【删除】</a> -->
+							<a href="#"
+							    onclick="del('<bean:write name="element" property="roleCode" />')"  class="tbl_A" >【删除】</a> 
 						<%} %>
-						</td> --%>
+						</td> 
 					</tr>
 				</logic:iterate>
 			 	<tr class="title_3">

@@ -88,7 +88,7 @@ function ofuncs(projectId){
 			<table width="100%" class="table" border=0 cellpadding="0" cellspacing="1">
                <tr>
                 <th colspan="12" nowrap="nowrap" align="left">
-                                               xml信息
+                                               订单信息
                      <input type="button" class="but_1" accesskey="a"
 							tabindex="a" value="添 加" onclick="add()">
                 </th>
