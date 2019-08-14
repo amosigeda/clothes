@@ -5,6 +5,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 
 import javax.servlet.ServletInputStream;
@@ -107,5 +109,40 @@ public class DeleteDeviceFamilyAction extends BaseAction{
 		return null;
 		
 	}
+	public static void main(String[] args) {
+		
+		BigDecimal gold = new BigDecimal("99");
+		// 被消费人的收益
+		BigDecimal coverGold = new BigDecimal("0.0");
+		
+		// 平台总的收益(暂未分配)
+		BigDecimal systemGold= new BigDecimal("0.0");
 
+		BigDecimal copy = gold.divide(new BigDecimal(100), 2, RoundingMode.HALF_UP);
+		
+		systemGold=	gold.multiply(new BigDecimal("70")).divide(new BigDecimal("100"));
+		
+		coverGold =gold.subtract(systemGold);
+		
+		/*// 对消费的金币分为百分 得到每份数据
+		BigDecimal copy = gold.divide(new BigDecimal(100), 2, RoundingMode.HALF_UP);
+				// 得到用户的分成比例
+				BigDecimal fallInto = new BigDecimal("100");
+				fallInto = fallInto.subtract(new BigDecimal("70"));
+
+				coverGold = copy.multiply(fallInto);
+				coverGold = coverGold.setScale(2, BigDecimal.ROUND_DOWN);
+
+				systemGold = copy.multiply(new BigDecimal("70"));
+				systemGold = systemGold.setScale(2, BigDecimal.ROUND_DOWN);*/
+				
+				System.out.println(coverGold);
+				System.out.println(systemGold);
+				
+				
+				
+			}
+
+	
+	
 }
