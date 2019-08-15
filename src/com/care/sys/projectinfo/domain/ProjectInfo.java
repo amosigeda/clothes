@@ -10,7 +10,6 @@ public class ProjectInfo extends PublicVoBean implements Serializable{
 	public ProjectInfo(){
 		
 	}
-	
 	private Integer id;
 	private String projectNo;
 	private String projectName;

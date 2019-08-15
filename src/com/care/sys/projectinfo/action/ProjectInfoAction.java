@@ -1506,6 +1506,165 @@ public class ProjectInfoAction extends BaseAction {
 		}
 		return mapping.findForward("result");
 	}
+	
+	
+	public ActionForward insertUserDangAn(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) {
+       
+		
+		
+		
+		
+	
+		
+	//	String companyId = request.getParameter("companyId");
+		// String channelId = request.getParameter("channelId");
+		Result result = new Result();
+		String name = "";
+		String fileFormat = "";
+		try {
+			LoginUser loginUser = (LoginUser) request.getSession()
+					.getAttribute(Config.SystemConfig.LOGINUSER);
+			if (loginUser == null) {
+				return null;
+			}
+			   String orderId = System.currentTimeMillis()+"";//订单编号
+				System.out.println("订单号"+orderId);
+				String wwName =request.getParameter("projectNo"); 
+				String salePrice =request.getParameter("salePrice"); 
+				String wechat =request.getParameter("wechat"); 
+				String orderNumber =request.getParameter("orderNumber"); 
+				Date addTime =new Date();
+				String kehuPhone =request.getParameter("kehuPhone"); 
+				String orderType =request.getParameter("orderType"); 
+				String kehuName =request.getParameter("kehuName"); 
+				String qudao =request.getParameter("qudao"); 
+			    String xiadanKeFu =loginUser.getUserName();
+			    String address =request.getParameter("address"); 
+			    String height =request.getParameter("height"); 
+			    String weight =request.getParameter("weight"); 
+			    String age =request.getParameter("age"); 
+			    String sex =request.getParameter("sex"); 
+			    String jiankuanA =request.getParameter("jiankuanA"); 
+			    String lingweiB =request.getParameter("lingweiB"); 
+			    String xiongweiA =request.getParameter("xiongweiA"); 
+			    String xiongweiB =request.getParameter("xiongweiB"); 
+			    String zhongyaoA =request.getParameter("zhongyaoA"); 
+			    String zhongyaoB =request.getParameter("zhongyaoB"); 
+			    String fuweiA =request.getParameter("fuweiA"); 
+			    String fuweiB =request.getParameter("fuweiB"); 
+			    String houzhongyichangA =request.getParameter("houzhongyichangA"); 
+			    String xiuchangB =request.getParameter("xiuchangB"); 
+			    String qianyichangA =request.getParameter("qianyichangA"); 
+			    String xiufeiB =request.getParameter("xiufeiB"); 
+			    String xiuchangA =request.getParameter("xiuchangA"); 
+			    String xiukouB =request.getParameter("xiukouB"); 
+			    String xiufeiA =request.getParameter("xiufeiA"); 
+			    String lingkoukuaishiB =request.getParameter("lingkoukuaishiB"); 
+			    String xiukouA =request.getParameter("xiukouA"); 
+			    String yichangB =request.getParameter("yichangB"); 
+			    String kuchangC =request.getParameter("kuchangC"); 
+			    String xiongweiD =request.getParameter("xiongweiD"); 
+			    String yaoweiC =request.getParameter("yaoweiC"); 
+			    String zhongyaoD =request.getParameter("zhongyaoD"); 
+			    String tuiweiC =request.getParameter("tuiweiC"); 
+			    String yichangD =request.getParameter("yichangD"); 
+			    String dangweiC =request.getParameter("dangweiC"); 
+			    String datuiC =request.getParameter("datuiC"); 
+			    String zhongtuiC =request.getParameter("zhongtuiC"); 
+			    String xiaotuiC =request.getParameter("xiaotuiC"); 
+			    String tuikouC =request.getParameter("tuikouC"); 
+			    String kouxingC =request.getParameter("kouxingC"); 
+			    String kouseC =request.getParameter("kouseC"); 
+			    String kuanxingD =request.getParameter("kuanxingD"); 
+			    String botouD =request.getParameter("botouD"); 
+			    String koudaiC =request.getParameter("koudaiC"); 
+			    String daigai =request.getParameter("daigai"); 
+			    String pingxiedai =request.getParameter("pingxiedai"); 
+			    String miaoliao1 =request.getParameter("miaoliao1"); 
+			    String yongtu1 =request.getParameter("yongtu1"); 
+			    String miaoliao2 =request.getParameter("miaoliao2"); 
+			    String yongtu2 =request.getParameter("yongtu2"); 
+			    String tixingremark =request.getParameter("tixingremark"); 
+			    String remark =request.getParameter("remark"); 
+			
+			ProjectInfoForm form = (ProjectInfoForm) actionForm;
+			System.out.println(form.getChannelId());
+			Hashtable<?, ?> files = form.getMultipartRequestHandler()
+					.getFileElements();
+			if (files != null & files.size() > 0) {
+				Enumeration<?> enums = files.keys();
+				String fileKey = null;
+				while (enums.hasMoreElements()) {
+					fileKey = (String) (enums.nextElement());
+					FormFile file = (FormFile) files.get(fileKey);
+					if (!file.getFileName().isEmpty()) {
+						fileFormat = file.toString().substring(
+								file.toString().lastIndexOf("."),
+								file.toString().length());
+						name = Long.toString(new Date().getTime()) + fileFormat;
+						// CommUtils.createDateFile(dir); //创建当前文件夹，存在则返回文件名；
+						InputStream in = file.getInputStream();
+						// photoPath = photoPath + name; //输出文件路径
+						System.out.println(photoPath + name);
+						File f = new File(photoPath + name);
+						if (f.exists()) {
+							f.delete();
+						}
+
+						OutputStream out = new FileOutputStream(photoPath
+								+ name);
+						out.write(file.getFileData(), 0, file.getFileSize());
+
+						out.close();
+						out = null;
+						in.close();
+					}
+
+				}
+
+			}
+
+			StringBuffer sb = new StringBuffer();
+			// ProjectInfoForm form = (ProjectInfoForm) actionForm;
+			ProjectInfoFacade facade = ServiceBean.getInstance()
+					.getProjectInfoFacade();
+			ProjectInfo vo = new ProjectInfo();
+			vo.setCompanyId("");
+			vo.setChannelId(photoUrl + name);
+			if ("".equals(name) || name == "" || name == null) {
+				vo.setChannelId("");
+			}
+			vo.setProjectName(form.getProjectName());
+			vo.setAddTime(new Date());
+			//vo.setHeartS(proNo);
+			vo.setAdTitle(form.getAdTitle());
+			vo.setAdDetail(form.getAdDetail());
+			facade.insertProjectInfo(vo);
+			
+
+			result.setBackPage(HttpTools.httpServletPath(request, 
+					"queryProjectInfoXml"));
+			result.setResultCode("inserts"); 
+			result.setResultType("success"); 
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.debug(request.getQueryString() + "  " + e);
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"initInsertxml"));
+			if (e instanceof SystemException) { 
+				result.setResultCode(((SystemException) e).getErrCode());
+				result.setResultType(((SystemException) e).getErrType());
+			} else { 
+				result.setResultCode("noKnownException");
+				result.setResultType("sysRunException");
+			}
+		} finally {
+			request.setAttribute("result", result);
+		}
+		return mapping.findForward("result");
+	}
 
 }
 
