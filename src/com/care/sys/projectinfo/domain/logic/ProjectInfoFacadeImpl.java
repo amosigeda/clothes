@@ -216,4 +216,10 @@ public class ProjectInfoFacadeImpl implements ProjectInfoFacade{
 		return projectInfoDao.getProjectUserInfo(vo);
 	}
 
+	@Override
+	public int insertKeHuDangAnInfo(ProjectInfo vo) throws SystemException {
+		// TODO Auto-generated method stub
+		return projectInfoDao.insertKeHuDangAnInfo(vo);
+	}
+
 }

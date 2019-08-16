@@ -1529,8 +1529,7 @@ public class ProjectInfoAction extends BaseAction {
 			if (loginUser == null) {
 				return null;
 			}
-			   String orderId = System.currentTimeMillis()+"";//订单编号
-				System.out.println("订单号"+orderId);
+			    String orderId = System.currentTimeMillis()+"";//订单编号
 				String wwName =request.getParameter("projectNo"); 
 				String salePrice =request.getParameter("salePrice"); 
 				String wechat =request.getParameter("wechat"); 
@@ -1631,17 +1630,65 @@ public class ProjectInfoAction extends BaseAction {
 			ProjectInfoFacade facade = ServiceBean.getInstance()
 					.getProjectInfoFacade();
 			ProjectInfo vo = new ProjectInfo();
-			vo.setCompanyId("");
-			vo.setChannelId(photoUrl + name);
-			if ("".equals(name) || name == "" || name == null) {
-				vo.setChannelId("");
-			}
-			vo.setProjectName(form.getProjectName());
-			vo.setAddTime(new Date());
-			//vo.setHeartS(proNo);
-			vo.setAdTitle(form.getAdTitle());
-			vo.setAdDetail(form.getAdDetail());
-			facade.insertProjectInfo(vo);
+			vo.setOrderId(orderId);
+			vo.setWwName(wwName);
+			vo.setSalePrice(salePrice);
+			vo.setWechat(wechat);
+			vo.setOrderNumber(orderNumber);
+			vo.setAddTime(addTime);
+			vo.setKehuPhone(kehuPhone);
+			vo.setOrderType(orderType);
+			vo.setKehuName(kehuName);
+			vo.setQudao(qudao);
+			vo.setXiadanKeFu(xiadanKeFu);
+			vo.setAddress(address);
+			vo.setHeight(height);
+			vo.setWeight(weight);
+			vo.setAge(age);
+			vo.setJiankuanA(jiankuanA);
+			vo.setLingweiB(lingweiB);
+			vo.setXiongweiA(xiongweiA);
+			vo.setXiongweiB(xiongweiB);
+			vo.setZhongyaoA(zhongyaoA);
+			vo.setZhongyaoB(zhongyaoB);
+			vo.setFuweiA(fuweiA);
+			vo.setFuweiB(fuweiB);
+			vo.setHouzhongyichangA(houzhongyichangA);
+			vo.setXiuchangB(xiuchangB);
+			vo.setQianyichangA(qianyichangA);
+			vo.setXiufeiB(xiufeiB);
+			vo.setXiuchangA(xiuchangA);
+			vo.setXiukouB(xiukouB);
+			vo.setXiufeiA(xiufeiA);
+			vo.setYichangB(yichangB);
+			vo.setKuchangC(kuchangC);
+			vo.setXiongweiD(xiongweiD);
+			vo.setYaoweiC(yaoweiC);
+			vo.setZhongyaoD(zhongyaoD);
+			vo.setTuiweiC(tuiweiC);
+			vo.setYichangD(yichangD);
+			vo.setDangweiC(dangweiC);
+			vo.setDatuiC(datuiC);
+			vo.setZhongtuiC(zhongtuiC);
+			vo.setXiaotuiC(xiaotuiC);
+			vo.setTuikouC(tuikouC);
+			vo.setKouxingC(kouxingC);
+			vo.setKouseC(kouseC);
+			vo.setKuanxingD(kuanxingD);
+			vo.setBotouD(botouD);
+			vo.setKoudaiC(koudaiC);
+			vo.setDaigai(daigai);
+			vo.setPingxiedai(pingxiedai);
+			vo.setMiaoliao1(miaoliao1);
+			vo.setYongtu1(yongtu1);
+			vo.setMiaoliao2(miaoliao2);
+			vo.setYongtu2(yongtu2);
+			vo.setTixingremark(tixingremark);
+			vo.setRemark(remark);
+			vo.setStatus("1");
+			vo.setUpdateTime(addTime);
+		
+			facade.insertKeHuDangAnInfo(vo);
 			
 
 			result.setBackPage(HttpTools.httpServletPath(request, 

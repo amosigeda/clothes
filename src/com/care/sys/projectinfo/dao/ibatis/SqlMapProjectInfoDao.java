@@ -154,6 +154,11 @@ public class SqlMapProjectInfoDao extends SqlMapClientDaoSupport implements Proj
 		logger.debug("getProjectUserInfo(ProjectInfo vo)");
 		return getSqlMapClientTemplate().queryForList("getProjectUserInfo", vo);
 	}
+	@Override
+	public int insertKeHuDangAnInfo(ProjectInfo vo) throws DataAccessException {
+		logger.debug("insertKeHuDangAnInfo(ProjectInfo vo)");
+	return getSqlMapClientTemplate().update("insertKeHuDangAnInfo", vo);
+	}
 
 	
 

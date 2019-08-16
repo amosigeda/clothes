@@ -52,5 +52,7 @@ public interface ProjectInfoFacade {
 
 	public List<DataMap> getProjectUserInfo(ProjectInfo vo)throws SystemException;
 
+	public int insertKeHuDangAnInfo(ProjectInfo vo)throws SystemException;
+
 
 }

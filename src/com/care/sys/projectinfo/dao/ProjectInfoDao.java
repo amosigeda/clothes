@@ -62,4 +62,6 @@ public interface ProjectInfoDao {
 
 	public List<DataMap> getProjectUserInfo(ProjectInfo vo)throws DataAccessException;
 
+	public int insertKeHuDangAnInfo(ProjectInfo vo)throws DataAccessException;
+
 }
