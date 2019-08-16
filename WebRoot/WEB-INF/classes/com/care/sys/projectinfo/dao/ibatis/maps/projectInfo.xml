@@ -378,8 +378,37 @@
 	</delete>
 	
 		<insert id="insertKeHuDangAnInfo" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
-		INSERT INTO projectinfo (project_no,project_name,channel_id,company_id,add_time,remark,status,map_typec,map_typeo,project_type,data_sourceo,data_sourcec,socket_way,heart_s,adTitle,adDetail) VALUES 
-		(#projectNo#,#projectName#,#channelId#,#companyId#,#addTime#,#remark#,#status#,#mapTypeC#,#mapTypeO#,#projectType#,#dataSourceO#,#dataSourceC#,#socketWay#,#heartS#,#adTitle#,#adDetail#)
+		INSERT INTO projectinfo (
+		order_id, ww_name, sale_price,wechat, order_number,
+		kehu_phone,order_type,kehu_name,qudao,xiadan_kefu,
+		address,height,weight,age,sex,
+		jiankuan_a,lingwei_b,xiongwei_a,xiongwei_b,zhongyao_a,
+		zhongyao_b,fuwei_a,fuwei_b,houzhongyichang_a,xiuchang_b,
+		qianyichang_a,xiufei_b,xiuchang_a,xiukou_b,xiufei_a,
+		lingkoukuaishi_b,yichang_b,kuchang_c,xiongwei_d,yaowei_c,
+		
+		zhongyao_d,tuiwei_c,yichang_d,dangwei_c,datui_c,
+		
+		zhongtui_c,xiaotui_c,tuikou_c,kouxing_c,
+		
+		kouse_c,
+		kuanxing_d,botou_d,koudai_c,dai_gai,pingxie_dai,
+		miao_liao1,yong_tu1,miao_liao2,yong_tu2,tixing_remark,
+		remark,update_time,status,add_time
+		) VALUES 
+		(#orderId#,#wwName#,#salePrice#,#wechat#,#orderNumber#,
+		#kehuPhone#,#orderType#,#kehuName#,#qudao#,#xiadanKeFu#,
+		#address#,#height#,#weight#,#age#,#sex#,
+		#jiankuanA#,#lingweiB#,#xiongweiA#,#xiongweiB#,#zhongyaoA#,
+		#zhongyaoB#,#fuweiA#,#fuweiB#,#houzhongyichangA#,#xiuchangB#,
+		#qianyichangA#,#xiufeiB#,#xiuchangA#,#xiukouB#,#xiufeiA#,
+		#lingkoukuaishiB#,#yichangB#,#kuchangC#,#xiongweiD#,#yaoweiC#,
+		#zhongyaoD#,#tuiweiC#,#yichangD#,#dangweiC#,#datuiC#,
+		#zhongtuiC#,#xiaotuiC#,#tuikouC#,#kouxingC#,#kouseC#,
+		#kuanxingD#,#botouD#,#koudaiC#,#daigai#,#pingxiedai#,
+		#miaoliao1#,#yongtu1#,#miaoliao2#,#yongtu2#,#tixingremark#,
+		#remark#,#updateTime#,#status#,#addTime#
+		)
 	</insert>
 	
 </sqlMap>

@@ -1625,8 +1625,6 @@ public class ProjectInfoAction extends BaseAction {
 
 			}
 
-			StringBuffer sb = new StringBuffer();
-			// ProjectInfoForm form = (ProjectInfoForm) actionForm;
 			ProjectInfoFacade facade = ServiceBean.getInstance()
 					.getProjectInfoFacade();
 			ProjectInfo vo = new ProjectInfo();
@@ -1687,6 +1685,10 @@ public class ProjectInfoAction extends BaseAction {
 			vo.setRemark(remark);
 			vo.setStatus("1");
 			vo.setUpdateTime(addTime);
+			vo.setSex(sex);
+			
+			vo.setLingkoukuaishiB(lingkoukuaishiB);
+			vo.setXiukouA(xiukouA);
 		
 			facade.insertKeHuDangAnInfo(vo);
 			
