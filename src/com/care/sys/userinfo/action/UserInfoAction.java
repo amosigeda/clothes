@@ -119,14 +119,9 @@ public class UserInfoAction extends BaseAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
-		/*  String groupCode = request.getParameter("groupCode");
-	  if("".equals(groupCode)||groupCode==null){
-		  groupCode="2";
-	  }
-	    //String groupCode = request.getParameter("groupCode");
-	    System.out.println("groupCode="+groupCode);
+		String groupCode = request.getParameter("groupCode");
 		LoginUser loginUser = (LoginUser)request.getSession().getAttribute(Config.SystemConfig.LOGINUSER);
-		//String roleName = loginUser.getGroupCode();
+		String roleName = loginUser.getGroupCode();
 	
 		RoleInfo roleinfo = new RoleInfo();
 		if("2".equals(roleName)){
@@ -134,14 +129,13 @@ public class UserInfoAction extends BaseAction {
 		}else if("1".equals(roleName)){
 			roleinfo.setCondition("roleDesc !='admin'");
 		}
+	
+		List<DataMap> rlist = ServiceBean.getInstance().getRoleInfoFacade().getRoleInfo(roleinfo);
 		
-		roleinfo.setCondition("roleDesc !='admin'");
-	*/
-	//	List<DataMap> rlist = ServiceBean.getInstance().getRoleInfoFacade().getRoleInfo(roleinfo);
-		
-		//String s = this.getCompanyAndProjectCopy();		
-		//request.setAttribute("userList", s);
-		//request.setAttribute("roleList", CommUtils.getPrintSelect(rlist,"groupCode", "roleName", "id", groupCode, 1));
+		/*String s = this.getCompanyAndProject();		
+		request.setAttribute("companyList", s);*/
+		System.out.println(CommUtils.getPrintSelect(rlist,"groupCode", "roleName", "id", groupCode, 1));
+		request.setAttribute("roleList", CommUtils.getPrintSelect(rlist,"groupCode", "roleName", "id", groupCode, 1));
 		return mapping.findForward("insertUserInfo");
 	}
 
@@ -167,7 +161,8 @@ public class UserInfoAction extends BaseAction {
 			validateInsert(form); 
 			UserInfo vo = new UserInfo();
 			BeanUtils.copyProperties(vo, form); 
-			String[] companyIds = request.getParameterValues("companyId");			
+			String[] companyIds = request.getParameterValues("companyId");		
+			
 			
 			
 			if(companyIds != null){
@@ -203,19 +198,27 @@ public class UserInfoAction extends BaseAction {
 			vo.setCreateDate(new Date());  
 			vo.setUpdateDate(new Date());
 			vo.setUserName(form.getUserCode());
-			vo.setGroupCode("2");
-			vo.setTag(1);
-			vo.setCodes("manager");
 			vo.setPassWrd1(vo.getPassWrd());
 			vo.setPassWrd(MD5.MD5(vo.getPassWrd()));
 
-			/*roleInfo.setCondition("id ="+form.getGroupCode());
+			roleInfo.setCondition("id ="+form.getGroupCode());
 			List<DataMap> list= ServiceBean.getInstance().getRoleInfoFacade().getRoleInfo(roleInfo);
 			if(!list.isEmpty()){
 				roleDesc = list.get(0).getAt("roleDesc").toString();
-			}*/
+			}
 				
-			vo.setCode(roleDesc);		
+			vo.setCode(roleDesc);	
+			
+			String fenCompany = request.getParameter("fenComPany");
+			String gongHao = request.getParameter("gongHao");
+			String sex = request.getParameter("sex");
+			String phone = request.getParameter("phone");
+			
+			vo.setCompany(fenCompany);
+			vo.setGongHao(gongHao);
+			vo.setSex(sex);
+			vo.setPhoneNo(phone);
+			
 			ServiceBean.getInstance().getUserInfoFacade()
 					.insertUserInfo(vo);  
 			result.setBackPage(HttpTools.httpServletPath(request,
@@ -257,30 +260,28 @@ public class UserInfoAction extends BaseAction {
 			result.setResultType("success");
 			return mapping.findForward("result");
 		}
-		String s = this.getCompanyAndProjectCopy(code,list.get(0).getAt("company_id")+"");		
-		request.setAttribute("userList", s);
 		request.setAttribute("userInfo", list.get(0)); 
 
-		/*String groupCode = request.getParameter("groupCode");
+		String groupCode = request.getParameter("groupCode");
 		LoginUser loginUser = (LoginUser)request.getSession().getAttribute(Config.SystemConfig.LOGINUSER);
-		String roleName = loginUser.getGroupCode();*/
+		String roleName = loginUser.getGroupCode();
 	
-		/*RoleInfo roleinfo = new RoleInfo();
+		RoleInfo roleinfo = new RoleInfo();
 		if("2".equals(roleName)){
 			roleinfo.setCondition("roleDesc !='admin' and roleDesc !='manager'");
 		}else if("1".equals(roleName)){
 			roleinfo.setCondition("roleDesc !='admin'");
-		}*/
+		}
 	
 //		List<DataMap> rlist = ServiceBean.getInstance().getRoleInfoFacade().getRoleInfo(roleinfo);
 		
 //		String s = this.getCompanyAndProject();		
 //		request.setAttribute("companyList", s);
 //		request.setAttribute("roleList", CommUtils.getPrintSelect(rlist,"groupCode", "roleName", "id", groupCode, 1));
-	/*	List<DataMap> rlist = ServiceBean.getInstance().getRoleInfoFacade().getRoleInfo(roleinfo);
+		List<DataMap> rlist = ServiceBean.getInstance().getRoleInfoFacade().getRoleInfo(roleinfo);
 		request.setAttribute("roleList", CommUtils.getPrintSelect(rlist,
 				"groupCode", "roleName", "id", groupCode, 0));
-		String s = this.getCompanyAndProject();		
+		/*String s = this.getCompanyAndProject();		
 		request.setAttribute("companyList", s);*/
 		return mapping.findForward("updateUserInfo");
 	}
@@ -374,6 +375,17 @@ public class UserInfoAction extends BaseAction {
 			vo.setPassWrd(MD5.MD5(vo.getPassWrd()));
 			vo.setCode(roleDesc);
 			vo.setCompanyId(userCode);
+			
+			String company = request.getParameter("company");	
+			String phoneNo = request.getParameter("phoneNo");	
+			String sex = request.getParameter("sex");	
+			String gongHao = request.getParameter("gong_hao");	
+			
+			vo.setCompany(company);
+			vo.setPhoneNo(phoneNo);
+			vo.setSex(sex);
+			vo.setGongHao(gongHao);
+			
 			ServiceBean.getInstance().getUserInfoFacade()
 					.updateUserInfo(vo);
 			result.setBackPage(HttpTools.httpServletPath(request,

@@ -55,19 +55,26 @@ $("#province").change();
 <table width="100%" border="0"cellpadding="0" cellspacing="1"  class="tbl_11">
   <tr>
         <th colspan="3" nowrap="nowrap" align="left">
-                                    添加表盘
+                                    添加供应商
         </th>
        </tr>
   <tr class="tr_11">
-    <td align="left" width="7%">&nbsp;&nbsp;客户名</td>
+    <td align="left" width="7%">&nbsp;&nbsp;公司名称</td>
     <td align="left" width="20%" colspan="2">
       <input name="projectNo" size="50" id="projectNo" type="text" class="txt_1"maxlength="100"/><font color="red">*</font>
     </td>
     </tr>
    <tr class="tr_11">
-    <td align="left" width="7%">&nbsp;&nbsp;名字</td>
+    <td align="left" width="7%">&nbsp;&nbsp;联系人</td>
     <td align="left" width="20%" colspan="2">
       <input name="projectName" size="50" type="text" class="txt_1"maxlength="100"><font color="red">*</font>
+    </td>
+  </tr>
+  
+     <tr class="tr_11">
+    <td align="left" width="7%">&nbsp;&nbsp;所在地</td>
+    <td align="left" width="20%" colspan="2">
+      <input name="suozaidi" size="50" type="text" class="txt_1"maxlength="100"><font color="red">*</font>
     </td>
   </tr>
     
@@ -76,14 +83,22 @@ $("#province").change();
     <td align="left" width="20%" colspan="2">
     
     <select name="companyId"  value="companyId">     
-  <option value="R-400">R-400</option>     
-  <option value="R-360">R-360</option>  
-  <option value="S-320">S-320</option>  
+  <option value="1">1</option>     
+  <option value="2">2</option>  
+  <option value="3">3</option>  
+  <option value="4">4</option>  
+  <option value="5">5</option>  
  </select>  
-   
     </td>
   </tr>
-   <tr class="tr_11">
+  
+      <tr class="tr_11">
+    <td align="left" width="7%">&nbsp;&nbsp;电话</td>
+    <td align="left" width="20%" colspan="2">
+      <input name="phone" size="50" type="text" class="txt_1"maxlength="100"><font color="red">*</font>
+    </td>
+  </tr>
+   <!-- <tr class="tr_11">
     <td align="left" width="7%">&nbsp;&nbsp;图片png</td>
     <td width="20%">
     					<input type="file" name="adDetail" id="adDetail" multiple="multiple" class="imagePath"/>
@@ -97,7 +112,7 @@ $("#province").change();
     					<input type="file" name="channelId" id="channelId" multiple="multiple" class="imagePath"/>
     					<img alt="" src="" id="image1" class="showImage"> 
     				</td>
-  </tr>
+  </tr> -->
    
   
  <!-- <tr>
@@ -119,14 +134,14 @@ $("#province").change();
     <td align="left" width="20%" colspan="2">
 		<%=request.getAttribute("channelList")%><font color="red">*</font>
     </td>
-  </tr> -->
+  </tr> -->--%>
   <tr class="tr_11">
     <td align="left" width="7%">&nbsp;&nbsp;备注</td>
     <td align="left" width="20%">
       <textarea name="remark" id="remark" rows="5" cols="50" class="txt_1"></textarea>
     </td>
     <td><font color="red">（字数不能超过30字）</font></td>
-  </tr> --%>
+  </tr> 
   <tr class="tr_11">
   	<td></td><td></td>
   </tr>

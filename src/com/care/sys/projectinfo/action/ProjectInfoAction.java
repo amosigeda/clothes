@@ -850,7 +850,7 @@ public class ProjectInfoAction extends BaseAction {
 			String projectId = request.getParameter("projectId");
 			
 			String projectNo = request.getParameter("project_no");
-			String remark = request.getParameter("remark");
+			String project_name = request.getParameter("project_name");
 		
 
 			/* ���û������ֶ� */
@@ -903,11 +903,11 @@ public class ProjectInfoAction extends BaseAction {
 					sb.append(" and p.project_no='" + projectNo + "'");
 				}
 			}
-			if (remark != null && !"".equals(remark)) {
+			if (project_name != null && !"".equals(project_name)) {
 				if(sb.length()<=0){
-					sb.append("p.remark='" + remark + "'");
+					sb.append("p.project_name='" + project_name + "'");
 				}else{
-					sb.append(" and p.remark='" + remark + "'");
+					sb.append(" and p.project_name='" + project_name + "'");
 				}
 			}
 			
@@ -951,7 +951,7 @@ public class ProjectInfoAction extends BaseAction {
 			request.setAttribute("company", coms);
 			
 			request.setAttribute("project_no", projectNo);
-			request.setAttribute("remark", remark);
+			request.setAttribute("project_name", project_name);
 
 			request.setAttribute("fNow_date", startTime);
 			request.setAttribute("now_date", endTime);
@@ -1105,48 +1105,16 @@ public class ProjectInfoAction extends BaseAction {
 			}
 			vo.setProjectName(form.getProjectName());
 			vo.setAddTime(new Date());
-
-			vo.setAdTitle(clockdownloadUrl + zipName);
-			vo.setAdDetail(clockdownloadUrl + name);
+            String suoZaiDi  = request.getParameter("suozaidi");
+            String phone  = request.getParameter("phone");
+			vo.setAdTitle(suoZaiDi);
+			vo.setAdDetail(phone);
 			vo.setStatus("1");
-
+			vo.setChannelId(phone);
+			vo.setRemark(request.getParameter("remark"));
 			facade.insertProjectWatchInfo(vo);
 
-			List<DataMap> getProjectInfo = ServiceBean.getInstance()
-					.getProjectInfoFacade().getProjectWatchInfo(vo);
-			if (getProjectInfo.size() > 0) {
-				sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-				sb.append("<clockskins>");
-
-				for (int i = 0; i < getProjectInfo.size(); i++) {
-					sb.append("<clockskin>");
-					sb.append("<name id=\"");
-					sb.append(getProjectInfo.get(i).get("project_name") + "");
-					sb.append("\"/>");
-					sb.append("<skinid id=\"");
-					sb.append(getProjectInfo.get(i).get("remark") + "");
-					sb.append("\"/>");
-					sb.append("<file id=\"");
-					sb.append(getProjectInfo.get(i).get("channel_id") + "");
-					sb.append("\"/>");
-					sb.append("<customer id=\"");
-					sb.append(getProjectInfo.get(i).get("project_no") + "");
-					if("0".equals(getProjectInfo.get(i).get("status") + "")){
-						sb.append("-hide");
-					}
-					sb.append("\"/>");
-					sb.append("<type id=\"");
-					sb.append(getProjectInfo.get(i).get("company_id") + "");
-					sb.append("\"/>");
-					sb.append("</clockskin>");
-				}
-
-				sb.append("</clockskins>");
-
-			}
-			Constant.deleteFile(clockxmlpath + clockskinName);
-			Constant.createFileContent(clockxmlpath, clockskinName, sb
-					.toString().getBytes("UTF-8"));
+			
 
 			result.setBackPage(HttpTools.httpServletPath(request, // ����ɹ�����ת��ԭ��ҳ��
 					"queryWatchInfo"));
@@ -1219,9 +1187,8 @@ public class ProjectInfoAction extends BaseAction {
 			String id = request.getParameter("id");
 			String project_no = request.getParameter("project_no");
 			String project_name = request.getParameter("project_name");
-			// String channel_id = request.getParameter("channel_id");
 			String company_id = request.getParameter("company_id");
-		   fileName = request.getParameter("remark");
+		
 
 			// ProjectInfoForm form = (ProjectInfoForm) actionForm;
 			
@@ -1285,6 +1252,14 @@ public class ProjectInfoAction extends BaseAction {
 				vo.setRemark("");
 			}
 			vo.setCompanyId(company_id);
+			
+			String channel_id = request.getParameter("channel_id");
+			   String remark= request.getParameter("remark");
+			   String adTitle= request.getParameter("adTitle");
+			   
+			   vo.setChannelId(channel_id);
+			   vo.setRemark(remark);
+			   vo.setAdTitle(adTitle);
 		
 			
 			ServiceBean.getInstance().getProjectInfoFacade()

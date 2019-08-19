@@ -103,7 +103,7 @@ window.location="doUserInfo.do?method=initAdverPower&id="+id+"&userCode="+userCo
 	  	<font color="red">*（5~16位字母、数字或下滑线组合）</font>
     </td>
   </tr>
-  <%-- <%if(!userInfo.getAt("userCode").equals("admin")){ %>
+  <%if(!userInfo.getAt("userCode").equals("admin")){ %>
   <tr class="tr_11">
     <td width="12%" align="left">&nbsp;&nbsp;是否生效 </td>
     <td align="left">
@@ -111,9 +111,10 @@ window.location="doUserInfo.do?method=initAdverPower&id="+id+"&userCode="+userCo
 	          否<input type="radio" name="tag" class="radio_1" value="0" <%if("0".equals("" + userInfo.getAt("tag"))){%>checked<%}%>>
     </td>
   </tr>
-  <%} %> --%>
+  <%} %>
+  
   <%-- <tr class="tr_11" id="tr_role">
-    <td align="left" width="12%">&nbsp;&nbsp;角色</td>  
+    <td align="left" width="12%">&nbsp;&nbsp;角色</td> 
     <%if(!userInfo.getAt("userCode").equals("admin")){ %>  
     <td align="left" width="20%" colspan="2" id="td_role">
     	<input type="hidden" id="roleValue" value="<%=userInfo.getAt("groupCode")%>" />
@@ -125,39 +126,47 @@ window.location="doUserInfo.do?method=initAdverPower&id="+id+"&userCode="+userCo
 		  <%} %>
     <td></td>
   </tr> --%>
-  <tr class="tr_11"">
-    <td align="left" width="12%">&nbsp;&nbsp;可查看表盘用户</td>   
-      <td align="left" width="20%" colspan="2"> <%=request.getAttribute("userList") %> 
-      </td>
-        <td></td>
+  
+     <tr class="tr_11">
+    <td width="12%" align="left">&nbsp;&nbsp;分公司</td>
+    <td align="left" width="20%">
+    	<input name="company" type="text"  accesskey="p" tabindex="p" value="<%=userInfo.getAt("company")%>">
+    </td>
   </tr>
   
- <!--  <tr class="tr_11">
-    <td align="left" width="12%">&nbsp;&nbsp;登录账号</td>
-    <td align="left" width="20%" colspan="2">
-      <input name="userCode" id="userCode" type="text" class="txt_1"maxlength="20"/><font color="red">*（字母开头，5~15位字母、数字或下滑线组合）</font>
+    <tr class="tr_11">
+    <td width="12%" align="left">&nbsp;&nbsp;电话</td>
+    <td align="left" width="20%">
+    	<input name="phoneNo" type="text"  accesskey="p" tabindex="p" value="<%=userInfo.getAt("phoneNo")%>">
     </td>
-    <td></td>
-    </tr> -->
-
-<%--   <input type="hidden" id="checkCompanyId" value="<%=userInfo.getAt("company_id") %>" />
-  <input type="hidden" id="checkProjectId" value="<%=userInfo.getAt("project_id") %>" />
-  <%=request.getAttribute("companyList") %> --%> <%-- --%>
-  <!-- 
-  <tr class="tr_11">
-    <td width="7%" align="right">渠道查看权限&nbsp;</td>
-    <td ><div align="left">
-      <input name="channelPower" type="button"  accesskey="p" tabindex="p" class="but_1" onclick="onChannelPower()" value="配置">
-    </div></td>
-    </tr>
-     -->
-  <tr class="tr_11">
-   <%--  <td width="12%" align="left">&nbsp;&nbsp;备注</td>
+  </tr>
+  
+     <tr class="tr_11">
+    <td width="12%" align="left">&nbsp;&nbsp;工号</td>
+    <td align="left" width="20%">
+    	<input name="gong_hao" type="text"  accesskey="p" tabindex="p" value="<%=userInfo.getAt("gong_hao")%>">
+    </td>
+  </tr>
+  
+    <tr class="tr_11">
+    <td width="12%" align="left">&nbsp;&nbsp;性别</td>
+    <td align="left" width="20%">
+    	<select name="sex"  id="sex">     
+  <option value="男" <%=userInfo.getAt("sex").equals("男")? "selected":"" %>>男</option>     
+  <option value="女" <%=userInfo.getAt("sex").equals("女")? "selected":"" %>>女</option>  
+ </select>  
+    </td>
+  </tr>
+  
+  
+    <tr class="tr_11">
+    <td width="12%" align="left">&nbsp;&nbsp;备注</td>
     <td align="left" >
       <textarea name="remark" id="remark" rows="5" cols="50" class="txt_1"><%=userInfo.getAt("remark")%></textarea>
     </td>
-    <td><font color="red">（字数不能超过30字）</font></td> --%>
+    <td><font color="red">（字数不能超过30字）</font></td>
   </tr>
+  
   <tr  class="tr_11">
     <td></td>
     <td  align="left">&nbsp;&nbsp;&nbsp;<input type="button" name="ok" accesskey="y" tabindex="y"  value="确 定" class="but_1" onclick="onUpdate()">

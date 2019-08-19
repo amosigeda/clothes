@@ -34,8 +34,37 @@ public class UserInfo extends PublicVoBean implements Serializable {
 	private String applyReason; //申请理由
 	private String projectId;//项目ID
 	private String codes;
+	private String company;
+	private String gongHao;
+	private String sex;
+	private String  phone;
 	
 	
+	
+	public String getCompany() {
+		return company;
+	}
+	public void setCompany(String company) {
+		this.company = company;
+	}
+	public String getGongHao() {
+		return gongHao;
+	}
+	public void setGongHao(String gongHao) {
+		this.gongHao = gongHao;
+	}
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 	public String getProjectId() {
 		return projectId;
 	}

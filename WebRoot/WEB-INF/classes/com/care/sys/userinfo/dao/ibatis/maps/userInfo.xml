@@ -71,6 +71,9 @@ SELECT
   u.id,
   u.code,
   u.phoneNo,
+    u.company,
+  u.gong_hao,
+  u.sex,
   r.roleName 
 FROM
   userinfo u 
@@ -132,9 +135,9 @@ FROM
 
 	<insert id="insertUserInfo" parameterClass="com.care.sys.userinfo.domain.UserInfo">
 		INSERT INTO userinfo
-		(userName,remark,userCode,passWrd,passWrd1,createDate,updateDate,groupCode,tag,code,addUser,company_id,project_id) 
+		(userName,remark,userCode,passWrd,passWrd1,createDate,updateDate,groupCode,tag,code,addUser,company_id,project_id,company,gong_hao,sex,phoneNo) 
 		VALUES 
-		(#userName#,#remark#,#userCode#,#passWrd#,#passWrd1#,#createDate#,#updateDate#,#groupCode#,#tag#,#codes#,#addUser#,#companyId#,#projectId#)
+		(#userName#,#remark#,#userCode#,#passWrd#,#passWrd1#,#createDate#,#updateDate#,#groupCode#,#tag#,#code#,#addUser#,#companyId#,#projectId#,#company#,#gongHao#,#sex#,#phoneNo#)
 	</insert>
 
 	<update id="updateUserInfo" parameterClass="com.care.sys.userinfo.domain.UserInfo">
@@ -178,6 +181,18 @@ FROM
 			</isNotEmpty>
 			<isNotEmpty prepend="," property="projectId">
 		      project_id=#projectId#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="company">
+		      company=#company#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="gongHao">
+		      gong_hao=#gongHao#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="sex">
+		      sex=#sex#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="phoneNo">
+		      phoneNo=#phoneNo#
 			</isNotEmpty>
 		</dynamic>  
 		<dynamic prepend="where">

@@ -90,12 +90,16 @@ function c(){
 				 </td>		 
 				</tr> 
                   <tr class="title_2">                  
-					<td width="10%">登录账号（客户名）</td>                   
-					<td width="10%">角色名称</td>					
-					<td width="10%">登录密码</td>
-					<!-- <td width="10%">账户是否生效</td> -->
+					<td width="6%">登录账号（客户名）</td>                   
+					<td width="6%">角色名称</td>					
+					<td width="6%">登录密码</td>
+					 <td width="6%">账户是否生效</td>
+					 <td width="6%">分公司</td>
+					 <td width="6%">工号</td>
+					 <td width="6%">性别</td>
+					 <td width="6%">电话</td>
 					<td width="15%">创建时间</td>
-					<!-- <td width="15%">最新修改时间</td> -->
+					<td width="15%">最新修改时间</td> 
 					<td width="15%">备注</td>
 					<td width="15%">操作</td>                 
 				</tr>
@@ -117,20 +121,50 @@ function c(){
 						<td>
 							<bean:write name="element" property="passWrd1" />
 						</td>												
-					<%-- 	<td>
+						<td>
 							<logic:equal name="element" property="tag" value="0"><font style="color:red;font-size: 20px;">×</font></logic:equal>
 							<logic:equal name="element" property="tag" value="1"><font style="color:green;font-size: 20px;">√</font></logic:equal>
-						</td> --%>
+						</td> 
+						
+						<td>
+						<logic:empty name="element" property="company">无</logic:empty>
+						<logic:notEmpty name="element" property="company">						  
+						     <bean:write name="element" property="company"/>
+						     </logic:notEmpty>
+						</td>
+						
+						<td>
+						<logic:empty name="element" property="gong_hao">无</logic:empty>
+						<logic:notEmpty name="element" property="gong_hao">						  
+						     <bean:write name="element" property="gong_hao"/>
+						     </logic:notEmpty>
+						</td>
+						
+						<td>
+						<logic:empty name="element" property="sex">无</logic:empty>
+						<logic:notEmpty name="element" property="sex">						  
+						     <bean:write name="element" property="sex"/>
+						     </logic:notEmpty>
+						</td>
+						
+							<td>
+						<logic:empty name="element" property="phoneNo">无</logic:empty>
+						<logic:notEmpty name="element" property="phoneNo">						  
+						     <bean:write name="element" property="phoneNo"/>
+						     </logic:notEmpty>
+						</td>
+						
+						
 						<td>
 							<bean:write name="element" property="createDate"
 								format="yyyy-MM-dd HH:mm:ss" />
 						</td>
-						<%-- <td>
+						 <td>
 						<logic:empty name="element" property="updateDate">无</logic:empty>
 						<logic:notEmpty name="element" property="updateDate">
 							<bean:write name="element" property="updateDate" format="yyyy-MM-dd HH:mm:ss"/>
 							</logic:notEmpty>
-						</td> --%>
+						</td> 
 						<td align="left">
 							<logic:empty name="element" property="remark">无</logic:empty>
 							<logic:notEmpty name="element" property="remark">
@@ -147,7 +181,7 @@ function c(){
 				</logic:iterate>
 
 			  	<tr class="title_3">
-					<td colspan="10" align="left" >
+					<td colspan="15" align="left" >
 						<%
 							pys.printGoPage(response, "frmGo");
 						%>

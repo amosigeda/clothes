@@ -70,7 +70,7 @@
 		 	 success:function(msg){
 		 		 if(msg=="fail"){
 		 			 alert("该登录账号已经被占用！");
-		 			// $("#userCode").focus();
+		 			 $("#userCode").focus();
 		 			 return false;
 		 		 }
 		 	 }
@@ -84,12 +84,11 @@
 			return false;
 		}else{
 			var userCode = frm.userCode.value;
-			//var reg = /^[a-zA-Z]\w{4,14}$/;		
-			var reg = /^[a-zA-Z]\w{0,18}$/;		
+			var reg = /^[a-zA-Z]\w{4,14}$/;		
 			if(!reg.test(userCode)){
 				alert("账号格式不正确，请重新输入！");
 				frm.userCode.focus();
-				//return false;
+				return false;
 			}
 		}
 		if(frm.passWrd.value.trim() == ''){
@@ -132,7 +131,7 @@
 <table width="100%" border="0"cellpadding="0" cellspacing="1"  class="tbl_11" id="tb1">
   <tr>
         <th colspan="4" nowrap="nowrap" align="left">
-                                    添加用户
+                                    添加系统用户
         </th>
        </tr>
   <tr class="tr_11">
@@ -150,7 +149,7 @@
     <td></td>
   </tr>
     
-  <!-- <tr class="tr_11">
+  <tr class="tr_11">
     <td align="left" width="12%">&nbsp;&nbsp;是否生效
  	</td>
     <td align="left" width="20%" colspan="2">
@@ -159,24 +158,60 @@
       </div>
     </td>
     <td></td>
-  </tr> -->
+  </tr>
   <tr class="tr_11" id="tr_role">
-  
-  <td align="left" width="12%"></td>   
- <td>
-
-<%-- <%=request.getAttribute("userList") %> --%>
-
- </td>
-     <td><font color="red">（字数不能超过30字）</font></td>
+    <td align="left" width="12%">&nbsp;&nbsp;角色</td>   
+    <td align="left" width="20%" colspan="2" id="td_role">
+		<%=request.getAttribute("roleList") %><font color="red">*</font>
+    </td>
     <td></td>
   </tr>
-<!--   <tr class="tr_11" id="tr_role">
+<%--   <tr class="tr_11" id="tr_role">
     <td align="left" width="12%">&nbsp;&nbsp;客户</td>   
-    <td align="left" width="20%" colspan="2">项目</td>
+  <!--   <td align="left" width="20%" colspan="2">项目</td> -->
+    <td> <%=request.getAttribute("companyList") %></td>
+  </tr> --%>
+  
+    <tr class="tr_11" >
+    <td align="left" width="12%">&nbsp;&nbsp;分公司</td>
+    <td align="left" width="20%">
+        <input name="fenComPany" type="text" class="txt_1"maxlength="20"><font color="red">*</font>
+    </td>
+    <td><font color="red"></font></td>
     <td></td>
-  </tr> -->
- <%--  <%=request.getAttribute("companyList") %> --%>
+  </tr>
+  
+      <tr class="tr_11" >
+    <td align="left" width="12%">&nbsp;&nbsp;工号</td>
+    <td align="left" width="20%">
+        <input name="gongHao" type="text" class="txt_1"maxlength="20"><font color="red">*</font>
+    </td>
+    <td><font color="red"></font></td>
+    <td></td>
+  </tr>
+  
+  <tr class="tr_11">
+    <td align="left" width="12%">&nbsp;&nbsp;性别
+ 	</td>
+    <td align="left" width="20%" colspan="2">
+      <div style="margin-left: 10px;">男 <input name="sex" type="radio" class="radio_1" value="男 " checked="checked" >
+	    女<input type="radio" name="sex" class="radio_1" value="女" >
+      </div>
+    </td>
+    <td></td>
+  </tr>
+  
+  
+    <tr class="tr_11" >
+    <td align="left" width="12%">&nbsp;&nbsp;电话</td>
+    <td align="left" width="20%">
+        <input name="phone" type="text" class="txt_1"maxlength="20"><font color="red">*</font>
+    </td>
+    <td><font color="red"></font></td>
+    <td></td>
+  </tr>
+  
+ 
   <tr class="tr_11" >
     <td align="left" width="12%">&nbsp;&nbsp;备注</td>
     <td align="left" width="20%">

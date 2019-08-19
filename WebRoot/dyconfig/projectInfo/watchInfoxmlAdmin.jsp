@@ -40,7 +40,7 @@ function add(){
 }
 function c(){
     document.all.project_no.value="";
-    document.all.remark.value="";
+    document.all.project_name.value="";
     
   /*   document.all.userId.options[0].selected=true;
     document.all.projectId.options[0].selected=true; */
@@ -93,7 +93,7 @@ function ofuncs(projectId){
 			<table width="100%" class="table" border=0 cellpadding="0" cellspacing="1">
                <tr>
                 <th colspan="12" nowrap="nowrap" align="left">
-                                               表盘信息
+                                               供应商信息
                      <input type="button" class="but_1" accesskey="a"
 							tabindex="a" value="添 加" onclick="add()">
                 </th>
@@ -107,12 +107,12 @@ function ofuncs(projectId){
 							<input name="endTime" type="text" class="txt_1" id="endTime" style="cursor:text"
 								value="<%CommUtils.printReqByAtt(request,response,"now_date");%>" onclick="WdatePicker()"
 								size="9" readonly>		 --%>				
-							客户
+							公司名称
 						    <input id="project_no" name="project_no" type="text" class="txt_1" 
 						    value="<%CommUtils.printReqByAtt(request,response,"project_no");%>" size="20">
-						    skin id
-						    <input id="remark" name="remark" type="text" class="txt_1" 
-						    value="<%CommUtils.printReqByAtt(request,response,"remark");%>" size="20">
+						     联系人
+						    <input id="project_name" name="project_name" type="text" class="txt_1" 
+						    value="<%CommUtils.printReqByAtt(request,response,"project_name");%>" size="20">
 					<%-- 	项目名		
 						<%String projectId = (String)request.getAttribute("projectId"); %>			
 							<select id="projectId" name="projectId" >
@@ -129,30 +129,35 @@ function ofuncs(projectId){
 				</tr> 
 				<%int i=1; %>
                   <tr class="title_2">
-                 	 <td width="10%">
+                 	 <!-- <td width="10%">
 						预览
+					</td> -->
+					<td width="3%">
+						ID
 					</td>
 					<td width="8%">
-						客户名
+						供应商公司名称
 					</td>
 					<td width="8%">
-						name id
+						联系人
 					</td>
-					<td width="6%">
-						skinid id
+					<td width="3%">
+						所在地
 					</td>					
 					
 					<td width="6%">
-						type id
+						类型
 					</td>
 					<td width="6%">
-						file id
+						电话
 					</td>
 				
 					<td width="10%">
 						创建时间
 					</td>
-				
+					<td width="10%">
+						备注
+					</td>
 					<td width="10%">
 						操作
 					</td>
@@ -161,9 +166,14 @@ function ofuncs(projectId){
 				<logic:iterate id="element" name="pageList">
 					<tr class="tr_5" onmouseover='this.className="tr_4"'
 						onmouseout='this.className="tr_5"'>
-						 <td>
-    	                 <img src="<bean:write name="element" property="adDetail"/>"  style="vertical-align:bottom"  width = "150px" height = "150px"></img> 
+						
+						<td>
+							<bean:write name="element" property="id" />
 						</td>
+						
+						<%--  <td>
+    	                 <img src="<bean:write name="element" property="adDetail"/>"  style="vertical-align:bottom"  width = "150px" height = "150px"></img> 
+						</td> --%>
 						<td>
 						<logic:equal name="element" property="status" value="0">	
 							<a href="#"  style="color:red"><bean:write name="element" property="project_no" /></a>		
@@ -184,10 +194,10 @@ function ofuncs(projectId){
 						
 						<td>		
 							<logic:equal name="element" property="status" value="0">	
-							<a href="#"  style="color:red"><bean:write name="element" property="remark" /></a>		
+							<a href="#"  style="color:red"><bean:write name="element" property="adTitle" /></a>		
 						</logic:equal>			
    						<logic:equal name="element" property="status" value="1">	
-   							<a href="#"><bean:write name="element" property="remark"/></a>		
+   							<a href="#"><bean:write name="element" property="adTitle"/></a>		
    						</logic:equal>						
 						</td>						
 							
@@ -219,26 +229,30 @@ function ofuncs(projectId){
    							<a href="#"><bean:write name="element" property="add_time" format="yyyy-MM-dd HH:mm:ss"/></a>		
    						</logic:equal>							
 						</td>
-												 						
+								
+								<td>
+							<bean:write name="element" property="remark" />
+						</td>
+										 						
 						<td>
 					<%-- 	<a href=# onclick="updateStatus('<bean:write name="element" property="id" />')" style="color:#0000FF" >
 						<logic:equal name="element" property="status" value="0">【隐藏】</logic:equal>
 						<logic:equal name="element" property="status" value="1">【显示】</logic:equal>
 						</a> --%>
 						
-						<logic:equal name="element" property="status" value="0">			
+						<%-- <logic:equal name="element" property="status" value="0">			
    							<a href="#" onclick="updateStatus(<bean:write name='element' property='id'/>,1)" style="color:red">【显示】</a>		
    						</logic:equal>			
    							
    						<logic:equal name="element" property="status" value="1">			
    							<a href="#" style="color:#0000FF"  onclick="updateStatus(<bean:write name='element' property='id'/>,0)">【隐藏】</a>		
-   						</logic:equal>	
+   						</logic:equal>	 --%>
    						
 							<a href=# onclick="update('<bean:write name="element" property="id" />')" style="color:#0000FF" > 【修改】</a>
 							<a href=# onclick="deletee('<bean:write name="element" property="id" />')" style="color:#0000FF" > 【删除】</a>
 							<%-- <a href="http://appserver.paby.com:8080/wtpet/images/app/msg/<bean:write name="element" property="photo"/>" title="图片"><img src="http://appserver.paby.com:8080/wtpet/images/app/msg/<bean:write name="element" property="photo"/>" alt="反馈图片" 
 							 style="width:400px;height:200px;"/></a> --%>
-							 <a href="<bean:write name="element" property="adTitle"/>" title="zip" style="color:#0000FF">【下载zip】</a>
+							<%--  <a href="<bean:write name="element" property="adTitle"/>" title="zip" style="color:#0000FF">【下载zip】</a> --%>
 							<%-- <a href="#"
 								onclick="ofuncs('<bean:write name="element" property="id" />')"  class="tbl_A" >【权限设置】</a> --%>
 						</td>

@@ -76,11 +76,9 @@ function ofuncs(rcode){
 					<tr class="tr_5" onmouseover='this.className="tr_4"' onmouseout='this.className="tr_5"' >
 					<bean:define id="roleCode" name="element" property="roleCode"
 							type="java.lang.String" />
-					
 						<td>
 							<bean:write name="element" property="roleName" />
 						</td>
-
 						<td>
 							<bean:write name="element" property="roleType" />
 						</td>
