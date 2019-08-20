@@ -93,6 +93,14 @@ $("#province").change();
   </tr>
   
       <tr class="tr_11">
+    <td align="left" width="7%">&nbsp;&nbsp;是否月结</td>
+    <td align="left" width="20%" colspan="2">
+     <input type="radio" name="addType" value="是" checked="checked"/>是
+     <input type="radio" name="addType" value="否"/>否
+    </td>
+  </tr>
+  
+      <tr class="tr_11">
     <td align="left" width="7%">&nbsp;&nbsp;电话</td>
     <td align="left" width="20%" colspan="2">
       <input name="phone" size="50" type="text" class="txt_1"maxlength="100"><font color="red">*</font>

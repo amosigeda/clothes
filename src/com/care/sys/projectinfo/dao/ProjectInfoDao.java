@@ -64,4 +64,6 @@ public interface ProjectInfoDao {
 
 	public int insertKeHuDangAnInfo(ProjectInfo vo)throws DataAccessException;
 
+	public int updatePorjectInfoDangAn(ProjectInfo vo)throws DataAccessException;
+
 }

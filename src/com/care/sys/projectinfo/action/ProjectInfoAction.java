@@ -52,10 +52,10 @@ public class ProjectInfoAction extends BaseAction {
 	String xmlfileName = "advertising.xml";
 	// String xmlpath="E:/resin/resin-pro-4.0.53/webapps/ads/WIITE/C7/ads/";
 	String xmlpath = "/usr/local/resin-pro-4.0.53/webapps/ads/WIITE/C7/ads/";
-	// String photoPath="E:/resin/resin-pro-4.0.53/webapps/ads/photo/";
+    String photoPath="E:/resin/test/";
 	// String photoUrl="http://localhost:8080/ads/photo/";
 
-	String photoPath = "/usr/local/resin-pro-4.0.53/webapps/ads/photo/";
+	//String photoPath = "/usr/local/resin-pro-4.0.53/webapps/ads/photo/";
 	String photoUrl = "http://www.wiiteer.com:8999/ads/photo/";
 
 	/*************************************************************************************************************/
@@ -1112,7 +1112,13 @@ public class ProjectInfoAction extends BaseAction {
 			vo.setStatus("1");
 			vo.setChannelId(phone);
 			vo.setRemark(request.getParameter("remark"));
+			
+			 String addType  = request.getParameter("addType");
+			 vo.setSocketWay(addType);
+			 
 			facade.insertProjectWatchInfo(vo);
+			
+			
 
 			
 
@@ -1260,47 +1266,15 @@ public class ProjectInfoAction extends BaseAction {
 			   vo.setChannelId(channel_id);
 			   vo.setRemark(remark);
 			   vo.setAdTitle(adTitle);
+			   
+			   String addType= request.getParameter("addType");
+			   
+			   vo.setSocketWay(addType);
 		
 			
 			ServiceBean.getInstance().getProjectInfoFacade()
 					.updatePorjectWatchInfo(vo);
-			StringBuffer sb = new StringBuffer();
-			ProjectInfo voo = new ProjectInfo();
-			List<DataMap> getProjectInfo = ServiceBean.getInstance()
-					.getProjectInfoFacade().getProjectWatchInfo(voo);
-			if (getProjectInfo.size() > 0) {
-				sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-				sb.append("<clockskins>");
-
-				for (int i = 0; i < getProjectInfo.size(); i++) {
-					sb.append("<clockskin>");
-					sb.append("<name id=\"");
-					sb.append(getProjectInfo.get(i).get("project_name") + "");
-					sb.append("\"/>");
-					sb.append("<skinid id=\"");
-					sb.append(getProjectInfo.get(i).get("remark") + "");
-					sb.append("\"/>");
-					sb.append("<file id=\"");
-					sb.append(getProjectInfo.get(i).get("channel_id") + "");
-					sb.append("\"/>");
-					sb.append("<customer id=\"");
-					sb.append(getProjectInfo.get(i).get("project_no") + "");
-					if("0".equals(getProjectInfo.get(i).get("status") + "")){
-						sb.append("-hide");
-					}
-					sb.append("\"/>");
-					sb.append("<type id=\"");
-					sb.append(getProjectInfo.get(i).get("company_id") + "");
-					sb.append("\"/>");
-					sb.append("</clockskin>");
-				}
-
-				sb.append("</clockskins>");
-
-			}
-			Constant.deleteFile(clockxmlpath + clockskinName);
-			Constant.createFileContent(clockxmlpath, clockskinName, sb
-					.toString().getBytes("UTF-8"));
+		
 
 			result.setBackPage(HttpTools.httpServletPath(request, // ����ɹ�����ת��ԭ��ҳ��
 					"queryWatchInfo"));
@@ -1486,13 +1460,6 @@ public class ProjectInfoAction extends BaseAction {
 	public ActionForward insertUserDangAn(ActionMapping mapping,
 			ActionForm actionForm, HttpServletRequest request,
 			HttpServletResponse response) {
-       
-		
-		
-		
-		
-	
-		
 	//	String companyId = request.getParameter("companyId");
 		// String channelId = request.getParameter("channelId");
 		Result result = new Result();
@@ -1504,7 +1471,47 @@ public class ProjectInfoAction extends BaseAction {
 			if (loginUser == null) {
 				return null;
 			}
-			    String orderId = System.currentTimeMillis()+"";//订单编号
+			   
+			
+			ProjectInfoForm form = (ProjectInfoForm) actionForm;
+			System.out.println(form.getChannelId());
+			Hashtable<?, ?> files = form.getMultipartRequestHandler()
+					.getFileElements();
+			if (files != null & files.size() > 0) {
+				Enumeration<?> enums = files.keys();
+				String fileKey = null;
+				while (enums.hasMoreElements()) {
+					fileKey = (String) (enums.nextElement());
+					FormFile file = (FormFile) files.get(fileKey);
+					if (!file.getFileName().isEmpty()) {
+						fileFormat = file.toString().substring(
+								file.toString().lastIndexOf("."),
+								file.toString().length());
+						name = Long.toString(new Date().getTime()) + fileFormat;
+						// CommUtils.createDateFile(dir); //创建当前文件夹，存在则返回文件名；
+						InputStream in = file.getInputStream();
+						// photoPath = photoPath + name; //输出文件路径
+						System.out.println(photoPath + name);
+						File f = new File(photoPath + name);
+						if (f.exists()) {
+							f.delete();
+						}
+
+						OutputStream out = new FileOutputStream(photoPath
+								+ name);
+						out.write(file.getFileData(), 0, file.getFileSize());
+
+						out.close();
+						out = null;
+						in.close();
+					}
+
+				}
+
+			}
+			
+			
+			 String orderId = System.currentTimeMillis()+"";//订单编号
 				String wwName =request.getParameter("projectNo"); 
 				String salePrice =request.getParameter("salePrice"); 
 				String wechat =request.getParameter("wechat"); 
@@ -1562,43 +1569,7 @@ public class ProjectInfoAction extends BaseAction {
 			    String yongtu2 =request.getParameter("yongtu2"); 
 			    String tixingremark =request.getParameter("tixingremark"); 
 			    String remark =request.getParameter("remark"); 
-			
-			ProjectInfoForm form = (ProjectInfoForm) actionForm;
-			System.out.println(form.getChannelId());
-			Hashtable<?, ?> files = form.getMultipartRequestHandler()
-					.getFileElements();
-			if (files != null & files.size() > 0) {
-				Enumeration<?> enums = files.keys();
-				String fileKey = null;
-				while (enums.hasMoreElements()) {
-					fileKey = (String) (enums.nextElement());
-					FormFile file = (FormFile) files.get(fileKey);
-					if (!file.getFileName().isEmpty()) {
-						fileFormat = file.toString().substring(
-								file.toString().lastIndexOf("."),
-								file.toString().length());
-						name = Long.toString(new Date().getTime()) + fileFormat;
-						// CommUtils.createDateFile(dir); //创建当前文件夹，存在则返回文件名；
-						InputStream in = file.getInputStream();
-						// photoPath = photoPath + name; //输出文件路径
-						System.out.println(photoPath + name);
-						File f = new File(photoPath + name);
-						if (f.exists()) {
-							f.delete();
-						}
-
-						OutputStream out = new FileOutputStream(photoPath
-								+ name);
-						out.write(file.getFileData(), 0, file.getFileSize());
-
-						out.close();
-						out = null;
-						in.close();
-					}
-
-				}
-
-			}
+			    
 
 			ProjectInfoFacade facade = ServiceBean.getInstance()
 					.getProjectInfoFacade();
@@ -1659,7 +1630,7 @@ public class ProjectInfoAction extends BaseAction {
 			vo.setTixingremark(tixingremark);
 			vo.setRemark(remark);
 			vo.setStatus("1");
-			vo.setUpdateTime(addTime);
+			//vo.setUpdateTime(addTime);
 			vo.setSex(sex);
 			
 			vo.setLingkoukuaishiB(lingkoukuaishiB);
@@ -1681,6 +1652,211 @@ public class ProjectInfoAction extends BaseAction {
 				result.setResultCode(((SystemException) e).getErrCode());
 				result.setResultType(((SystemException) e).getErrType());
 			} else { 
+				result.setResultCode("noKnownException");
+				result.setResultType("sysRunException");
+			}
+		} finally {
+			request.setAttribute("result", result);
+		}
+		return mapping.findForward("result");
+	}
+	
+	public ActionForward updateProjectInfodangan(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		Result result = new Result();
+		try {
+			
+			LoginUser loginUser = (LoginUser) request.getSession()
+					.getAttribute(Config.SystemConfig.LOGINUSER);
+			if (loginUser == null) {
+				return null;
+			}
+			   
+			
+			String id = request.getParameter("id");
+			
+
+			/*ProjectInfoForm form = (ProjectInfoForm) actionForm;
+			String name = "";
+			String fileFormat = "";
+			Hashtable<?, ?> files = form.getMultipartRequestHandler()
+					.getFileElements();// 获取所有文件路径的枚举；
+			if (files != null & files.size() > 0) {
+				Enumeration<?> enums = files.keys();
+				String fileKey = null;
+				while (enums.hasMoreElements()) {
+					fileKey = (String) (enums.nextElement());
+					FormFile file = (FormFile) files.get(fileKey);
+					if (!file.getFileName().isEmpty()) {
+						fileFormat = file.toString().substring(
+								file.toString().lastIndexOf("."),
+								file.toString().length());
+						name = Long.toString(new Date().getTime()) + fileFormat;
+						InputStream in = file.getInputStream();
+						System.out.println(photoPath + name);
+						File f = new File(photoPath + name);
+						if (f.exists()) {
+							f.delete();
+						}
+
+						OutputStream out = new FileOutputStream(photoPath
+								+ name);
+						out.write(file.getFileData(), 0, file.getFileSize());
+
+						out.close();
+						out = null;
+						in.close();
+					}
+
+				}
+
+			}*/
+
+			ProjectInfo vo = new ProjectInfo();
+			vo.setCondition("id='" + id + "'");
+			 String orderId = System.currentTimeMillis()+"";//订单编号
+				String wwName =request.getParameter("projectNo"); 
+				String salePrice =request.getParameter("salePrice"); 
+				String wechat =request.getParameter("wechat"); 
+				String orderNumber =request.getParameter("orderNumber"); 
+				Date addTime =new Date();
+				String kehuPhone =request.getParameter("kehuPhone"); 
+				String orderType =request.getParameter("orderType"); 
+				String kehuName =request.getParameter("kehuName"); 
+				String qudao =request.getParameter("qudao"); 
+			    String xiadanKeFu =loginUser.getUserName();
+			    String address =request.getParameter("address"); 
+			    String height =request.getParameter("height"); 
+			    String weight =request.getParameter("weight"); 
+			    String age =request.getParameter("age"); 
+			    String sex =request.getParameter("sex"); 
+			    String jiankuanA =request.getParameter("jiankuanA"); 
+			    String lingweiB =request.getParameter("lingweiB"); 
+			    String xiongweiA =request.getParameter("xiongweiA"); 
+			    String xiongweiB =request.getParameter("xiongweiB"); 
+			    String zhongyaoA =request.getParameter("zhongyaoA"); 
+			    String zhongyaoB =request.getParameter("zhongyaoB"); 
+			    String fuweiA =request.getParameter("fuweiA"); 
+			    String fuweiB =request.getParameter("fuweiB"); 
+			    String houzhongyichangA =request.getParameter("houzhongyichangA"); 
+			    String xiuchangB =request.getParameter("xiuchangB"); 
+			    String qianyichangA =request.getParameter("qianyichangA"); 
+			    String xiufeiB =request.getParameter("xiufeiB"); 
+			    String xiuchangA =request.getParameter("xiuchangA"); 
+			    String xiukouB =request.getParameter("xiukouB"); 
+			    String xiufeiA =request.getParameter("xiufeiA"); 
+			    String lingkoukuaishiB =request.getParameter("lingkoukuaishiB"); 
+			    String xiukouA =request.getParameter("xiukouA"); 
+			    String yichangB =request.getParameter("yichangB"); 
+			    String kuchangC =request.getParameter("kuchangC"); 
+			    String xiongweiD =request.getParameter("xiongweiD"); 
+			    String yaoweiC =request.getParameter("yaoweiC"); 
+			    String zhongyaoD =request.getParameter("zhongyaoD"); 
+			    String tuiweiC =request.getParameter("tuiweiC"); 
+			    String yichangD =request.getParameter("yichangD"); 
+			    String dangweiC =request.getParameter("dangweiC"); 
+			    String datuiC =request.getParameter("datuiC"); 
+			    String zhongtuiC =request.getParameter("zhongtuiC"); 
+			    String xiaotuiC =request.getParameter("xiaotuiC"); 
+			    String tuikouC =request.getParameter("tuikouC"); 
+			    String kouxingC =request.getParameter("kouxingC"); 
+			    String kouseC =request.getParameter("kouseC"); 
+			    String kuanxingD =request.getParameter("kuanxingD"); 
+			    String botouD =request.getParameter("botouD"); 
+			    String koudaiC =request.getParameter("koudaiC"); 
+			    String daigai =request.getParameter("daigai"); 
+			    String pingxiedai =request.getParameter("pingxiedai"); 
+			    String miaoliao1 =request.getParameter("miaoliao1"); 
+			    String yongtu1 =request.getParameter("yongtu1"); 
+			    String miaoliao2 =request.getParameter("miaoliao2"); 
+			    String yongtu2 =request.getParameter("yongtu2"); 
+			    String tixingremark =request.getParameter("tixingremark"); 
+			    String remark =request.getParameter("remark"); 
+			    
+
+			
+			
+			vo.setOrderId(orderId);
+			vo.setWwName(wwName);
+			vo.setSalePrice(salePrice);
+			vo.setWechat(wechat);
+			vo.setOrderNumber(orderNumber);
+			vo.setAddTime(addTime);
+			vo.setKehuPhone(kehuPhone);
+			vo.setOrderType(orderType);
+			vo.setKehuName(kehuName);
+			vo.setQudao(qudao);
+			vo.setXiadanKeFu(xiadanKeFu);
+			vo.setAddress(address);
+			vo.setHeight(height);
+			vo.setWeight(weight);
+			vo.setAge(age);
+			vo.setJiankuanA(jiankuanA);
+			vo.setLingweiB(lingweiB);
+			vo.setXiongweiA(xiongweiA);
+			vo.setXiongweiB(xiongweiB);
+			vo.setZhongyaoA(zhongyaoA);
+			vo.setZhongyaoB(zhongyaoB);
+			vo.setFuweiA(fuweiA);
+			vo.setFuweiB(fuweiB);
+			vo.setHouzhongyichangA(houzhongyichangA);
+			vo.setXiuchangB(xiuchangB);
+			vo.setQianyichangA(qianyichangA);
+			vo.setXiufeiB(xiufeiB);
+			vo.setXiuchangA(xiuchangA);
+			vo.setXiukouB(xiukouB);
+			vo.setXiufeiA(xiufeiA);
+			vo.setYichangB(yichangB);
+			vo.setKuchangC(kuchangC);
+			vo.setXiongweiD(xiongweiD);
+			vo.setYaoweiC(yaoweiC);
+			vo.setZhongyaoD(zhongyaoD);
+			vo.setTuiweiC(tuiweiC);
+			vo.setYichangD(yichangD);
+			vo.setDangweiC(dangweiC);
+			vo.setDatuiC(datuiC);
+			vo.setZhongtuiC(zhongtuiC);
+			vo.setXiaotuiC(xiaotuiC);
+			vo.setTuikouC(tuikouC);
+			vo.setKouxingC(kouxingC);
+			vo.setKouseC(kouseC);
+			vo.setKuanxingD(kuanxingD);
+			vo.setBotouD(botouD);
+			vo.setKoudaiC(koudaiC);
+			vo.setDaigai(daigai);
+			vo.setPingxiedai(pingxiedai);
+			vo.setMiaoliao1(miaoliao1);
+			vo.setYongtu1(yongtu1);
+			vo.setMiaoliao2(miaoliao2);
+			vo.setYongtu2(yongtu2);
+			vo.setTixingremark(tixingremark);
+			vo.setRemark(remark);
+			vo.setStatus("1");
+			//vo.setUpdateTime(addTime);
+			vo.setSex(sex);
+			
+			vo.setLingkoukuaishiB(lingkoukuaishiB);
+			vo.setXiukouA(xiukouA);
+		
+			ServiceBean.getInstance().getProjectInfoFacade()
+					.updatePorjectInfoDangAn(vo);
+		
+
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryProjectInfoXml"));
+			result.setResultCode("updates");
+			result.setResultType("success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.debug(request.getQueryString() + "  " + e);
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryProjectInfoXml"));
+			if (e instanceof SystemException) { /* ����֪�쳣���н��� */
+				result.setResultCode(((SystemException) e).getErrCode());
+				result.setResultType(((SystemException) e).getErrType());
+			} else { /* ��δ֪�쳣���н�������ȫ�������δ֪�쳣 */
 				result.setResultCode("noKnownException");
 				result.setResultType("sysRunException");
 			}

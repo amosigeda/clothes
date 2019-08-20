@@ -503,14 +503,11 @@
 
 			<tr>
 				<td align="left">¸½¼þ</td>
-				<td colspan="7"><input type="file" name="channelId"
+				<td colspan="2"><input type="file" name="channelId"
 					id="channelId" multiple="multiple" class="imagePath" /> <img alt=""
 					src="" id="image1" class="showImage"></td>
-			</tr>
-
-			<tr class="tr_11">
-				<td width="7%"></td>
-				<td align="left" colspan="2">&nbsp;&nbsp;&nbsp;<input
+					
+						<td align="left" colspan="2">&nbsp;&nbsp;&nbsp;<input
 					type="button" name="ok" accesskey="y" tabindex="y" value="È· ¶¨"
 					class="but_1" onclick="onAdd()"
 					style="font-size:12;width:40px;height:21px;"> <input
@@ -520,6 +517,7 @@
 					style="font-size:12;width:40px;height:21px;">
 				</td>
 			</tr>
+
 		</table>
 
 	</form>

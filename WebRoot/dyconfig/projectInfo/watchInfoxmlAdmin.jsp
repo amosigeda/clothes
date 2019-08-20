@@ -151,7 +151,9 @@ function ofuncs(projectId){
 					<td width="6%">
 						电话
 					</td>
-				
+					<td width="6%">
+						是否月结
+					</td>
 					<td width="10%">
 						创建时间
 					</td>
@@ -219,6 +221,23 @@ function ofuncs(projectId){
    							<a href="#"><bean:write name="element" property="channel_id"/></a>		
    						</logic:equal>	
 						</td>
+						
+						
+						<td>
+						   <logic:empty name="element" property="socket_way">无</logic:empty>							
+							<logic:equal name="element" property="socket_way" value="否"><font color="red">否</font></logic:equal>							
+							<logic:equal name="element" property="socket_way" value="是"><font color="green">是</font></logic:equal>
+						</td>
+						
+						
+								<%-- <td>
+						<logic:equal name="element" property="status" value="0">	
+							<a href="#"  style="color:red"><bean:write name="element" property="socket_way" /></a>		
+						</logic:equal>			
+   						<logic:equal name="element" property="status" value="1">	
+   							<a href="#"><bean:write name="element" property="socket_way"/></a>		
+   						</logic:equal>	
+						</td> --%>
 					
 						
 						<td>		

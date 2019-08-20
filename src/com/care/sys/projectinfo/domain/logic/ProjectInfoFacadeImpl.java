@@ -222,4 +222,9 @@ public class ProjectInfoFacadeImpl implements ProjectInfoFacade{
 		return projectInfoDao.insertKeHuDangAnInfo(vo);
 	}
 
+	@Override
+	public int updatePorjectInfoDangAn(ProjectInfo vo) throws SystemException {
+		return projectInfoDao.updatePorjectInfoDangAn(vo);
+	}
+
 }

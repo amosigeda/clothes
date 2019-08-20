@@ -54,5 +54,7 @@ public interface ProjectInfoFacade {
 
 	public int insertKeHuDangAnInfo(ProjectInfo vo)throws SystemException;
 
+	public int updatePorjectInfoDangAn(ProjectInfo vo)  throws SystemException;
+
 
 }

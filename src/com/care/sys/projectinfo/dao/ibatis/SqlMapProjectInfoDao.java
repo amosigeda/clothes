@@ -66,7 +66,6 @@ public class SqlMapProjectInfoDao extends SqlMapClientDaoSupport implements Proj
 	}
 
 	public int updatePorjectInfo(ProjectInfo vo) throws DataAccessException {
-		// TODO Auto-generated method stub
 		logger.debug("updatePorjectInfo(ProjectInfo vo)");
 		return getSqlMapClientTemplate().update("updatePorjectInfo", vo);
 	}
@@ -158,6 +157,12 @@ public class SqlMapProjectInfoDao extends SqlMapClientDaoSupport implements Proj
 	public int insertKeHuDangAnInfo(ProjectInfo vo) throws DataAccessException {
 		logger.debug("insertKeHuDangAnInfo(ProjectInfo vo)");
 	return getSqlMapClientTemplate().update("insertKeHuDangAnInfo", vo);
+	}
+	@Override
+	public int updatePorjectInfoDangAn(ProjectInfo vo)
+			throws DataAccessException {
+		logger.debug("updatePorjectInfoDangAn(ProjectInfo vo)");
+		return getSqlMapClientTemplate().update("updatePorjectInfoDangAn", vo);
 	}
 
 	

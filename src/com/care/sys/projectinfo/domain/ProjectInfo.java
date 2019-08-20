@@ -89,7 +89,7 @@ public class ProjectInfo extends PublicVoBean implements Serializable{
 	private Integer dataSourceO;  //���� LBS���Դ ��1���ߵ� 2MiNiGps 0��
 	private Integer mapTypeC;  //���ڵ�ͼ���� ͼ�̣�1���ߵµ�ͼ��2���Google��ͼ��0���û��ͼ
 	private Integer mapTypeO;  //�����ҵ�ͼ���� ͼ�̣�1���ߵµ�ͼ��2���Google��ͼ��0���û��ͼ
-	private Integer socketWay;  //Socket���ӷ�����1���mina������ӣ�2���ֱ��socket,0�����
+	private String socketWay;  //Socket���ӷ�����1���mina������ӣ�2���ֱ��socket,0�����
 	private String locationSwitch;
 	private String beifen;
 	
@@ -507,10 +507,11 @@ public class ProjectInfo extends PublicVoBean implements Serializable{
 	public void setMapTypeO(Integer mapTypeO) {
 		this.mapTypeO = mapTypeO;
 	}
-	public Integer getSocketWay() {
+	
+	public String getSocketWay() {
 		return socketWay;
 	}
-	public void setSocketWay(Integer socketWay) {
+	public void setSocketWay(String socketWay) {
 		this.socketWay = socketWay;
 	}
 	public String getBeifen() {

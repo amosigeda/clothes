@@ -112,6 +112,15 @@ function onUpdate(){
     <td></td>
   </tr>
   
+  <tr class="tr_11">
+    <td width="7%" align="left">是否月结</td>
+    <td width="20%" align="left">
+    	<input name="addType" type="radio" class="txt_1" value="否" <%=projectInfo.getAt("socket_way").equals("否")? "checked":"" %>>否
+    	<input name="addType" type="radio" class="txt_1" value="是" <%=projectInfo.getAt("socket_way").equals("是")? "checked":"" %> >是
+    </td>
+    <td align="left"></td>
+  </tr>
+  
  
 <%--    <tr class="tr_11">
     <td width="7%" align="left">&nbsp;&nbsp;文件file </td>

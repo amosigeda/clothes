@@ -87,7 +87,7 @@ function ofuncs(projectId){
 			
 			<table width="100%" class="table" border=0 cellpadding="0" cellspacing="1">
                <tr>
-                <th colspan="12" nowrap="nowrap" align="left">
+                <th colspan="20" nowrap="nowrap" align="left">
                                                订单信息
                      <input type="button" class="but_1" accesskey="a"
 							tabindex="a" value="添 加" onclick="add()">
@@ -127,46 +127,41 @@ function ofuncs(projectId){
 				</tr> 
 				<%int i=1; %>
                   <tr class="title_2">
-                 	<td width="2%">
-						ID
+                 	<td width="5%">
+						订单编号
 					</td> 
-					<td width="8%">
-						客户名
+					<td width="5%">
+					旺旺名
+					</td> 
+						<td width="5%">
+					销售价格
+					</td> 
+						<td width="5%">
+					微信名
 					</td>
-					<td width="8%">
-						广告链接
+					
+					<td width="5%">
+					订单类型
 					</td>
-					<td width="6%">
-						图片
-					</td>					
-					<td width="6%">
-						语言
+						<td width="5%">
+					渠道
 					</td>
-					<td width="6%">
-						标题
+						<td width="5%">
+					下单客服
 					</td>
-					<td width="6%">
-						内容
+					<td width="5%">
+					性别
 					</td>
-					<!-- <td width="6%">
-						客户
-					</td> -->
-				<!-- 	<td width="6%">
-						设备数量
-					</td> -->
-					<!-- <td width="10%">
-						渠道名称
-					</td> -->					
-					<!-- <td width="6%">
-						状态
-					</td> -->
-					<td width="10%">
-						创建时间
+					<td width="5%">
+					下单时间
 					</td>
-					<!-- <td width="10%">
-						备注
-					</td> -->
-					<td width="10%">
+						<td width="5%">
+					状态
+					</td>
+					<td width="5%">
+						批单时间
+					</td>
+					<td width="5%">
 						操作
 					</td>
 				</tr>
@@ -175,64 +170,55 @@ function ofuncs(projectId){
 					<tr class="tr_5" onmouseover='this.className="tr_4"'
 						onmouseout='this.className="tr_5"'>
 						<td>							
-							<bean:write name="element" property="id" />
+							<bean:write name="element" property="order_id" />
 						</td>
 						<td>							
-							<bean:write name="element" property="project_no" />
+							<bean:write name="element" property="ww_name" />
 						</td>
 						<td>							
-							<bean:write name="element" property="project_name" />
+							<bean:write name="element" property="sale_price" />
+						</td>
+						<td>							
+							<bean:write name="element" property="wechat" />
+						</td>
+					
+						<td>							
+							<bean:write name="element" property="order_type" />
+						</td>
+						<td>							
+							<bean:write name="element" property="qudao" />
+						</td>
+						<td>							
+							<bean:write name="element" property="xiadan_kefu" />
 						</td>
 						
-						<td>
-						 <%-- <logic:empty name="element" property="channel_id">无</logic:empty>
-						<logic:notEmpty name="element" property="channel_id">
-								<a href="<bean:write name="element" property="channel_id" />" style="color:#0000FF"><bean:write name="element" property="channel_id" /></a>
-							</logic:notEmpty>	 --%> 
-							<bean:write name="element" property="channel_id" />
+							<td>							
+							<bean:write name="element" property="sex" />
 						</td>
-						<td>
-							<bean:write name="element" property="company_id" />											
-						</td>
-						<td>
-							<bean:write name="element" property="adTitle" />											
-						</td>
-						<td>
-							<bean:write name="element" property="adDetail" />											
-						</td>
-						<%-- <td>
-							<bean:write name="element" property="heart_s" />											
-						</td> --%>
-						<%-- <td>
-							<logic:empty name="element" property="count_device">0</logic:empty>
-							<logic:notEmpty name="element" property="count_device">
-								<a style="color:#0000FF" href="../deviceActiveInfo/doDeviceActiveInfo.do?method=queryDeviceActiveInfo&belongProject=
-									<bean:write name="element" property="belong_project"/>">
-									<bean:write name="element" property="count_device"/>
-								</a>
-							</logic:notEmpty>
-						</td> --%>
-						<!-- <td>							
-							<bean:write name="element" property="channel_id" />
-						</td> -->						
-					<%-- 	<td>
-							<logic:equal name="element" property="status" value="0"><font style="color:red;">暂停</font></logic:equal>							
-							<logic:equal name="element" property="status" value="1"><font style="color:green;">正常</font></logic:equal>
-						</td> --%>
-						<td>								
+							<td>								
 							<bean:write name="element" property="add_time" format="yyyy-MM-dd HH:mm:ss"/>
 						</td>
-						<%-- <td>	
-							<logic:empty name="element" property="remark">无</logic:empty>
-							<logic:notEmpty name="element" property="remark">			
-							<bean:write name="element" property="remark" />
-							</logic:notEmpty>
-						</td>	 --%>									 						
 						<td>
-							<a href=# onclick="update('<bean:write name="element" property="id" />')" style="color:#0000FF" > 【修改】</a>
-							<a href=# onclick="deletee('<bean:write name="element" property="id" />')" style="color:#0000FF" > 【删除】</a>
-							<%-- <a href="#"
-								onclick="ofuncs('<bean:write name="element" property="id" />')"  class="tbl_A" >【权限设置】</a> --%>
+						   <logic:empty name="element" property="status">无</logic:empty>							
+							<logic:equal name="element" property="status" value="1"><font color="red">客服提交</font></logic:equal>							
+							<logic:equal name="element" property="status" value="2"><font color="green">批单提交</font></logic:equal>
+							<logic:equal name="element" property="status" value="3"><font color="green">批单退回</font></logic:equal>
+						</td>
+						
+							<%-- <td>							
+							<bean:write name="element" property="status" />
+						</td> --%>
+							<td>			
+							<bean:write name="element" property="update_time" format="yyyy-MM-dd HH:mm:ss"/>				
+						</td>
+						
+						
+									 						
+						<td>
+						<logic:equal name="element" property="status" value="1">	
+   							<a href=# onclick="update('<bean:write name="element" property="id" />')" style="color:#0000FF" > 【修改】</a>
+   						</logic:equal>	
+							 <a href=# onclick="deletee('<bean:write name="element" property="id" />')" style="color:#0000FF" > 【删除】</a> 
 						</td>
 					</tr>
 				</logic:iterate>

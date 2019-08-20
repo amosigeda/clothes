@@ -386,15 +386,11 @@
 		zhongyao_b,fuwei_a,fuwei_b,houzhongyichang_a,xiuchang_b,
 		qianyichang_a,xiufei_b,xiuchang_a,xiukou_b,xiufei_a,
 		lingkoukuaishi_b,yichang_b,kuchang_c,xiongwei_d,yaowei_c,
-		
 		zhongyao_d,tuiwei_c,yichang_d,dangwei_c,datui_c,
-		
 		zhongtui_c,xiaotui_c,tuikou_c,kouxing_c,
-		
-		kouse_c,
-		kuanxing_d,botou_d,koudai_c,dai_gai,pingxie_dai,
+		kouse_c,kuanxing_d,botou_d,koudai_c,dai_gai,pingxie_dai,
 		miao_liao1,yong_tu1,miao_liao2,yong_tu2,tixing_remark,
-		remark,update_time,status,add_time
+		remark,update_time,status,add_time,xiukou_a
 		) VALUES 
 		(#orderId#,#wwName#,#salePrice#,#wechat#,#orderNumber#,
 		#kehuPhone#,#orderType#,#kehuName#,#qudao#,#xiadanKeFu#,
@@ -407,8 +403,202 @@
 		#zhongtuiC#,#xiaotuiC#,#tuikouC#,#kouxingC#,#kouseC#,
 		#kuanxingD#,#botouD#,#koudaiC#,#daigai#,#pingxiedai#,
 		#miaoliao1#,#yongtu1#,#miaoliao2#,#yongtu2#,#tixingremark#,
-		#remark#,#updateTime#,#status#,#addTime#
+		#remark#,#updateTime#,#status#,#addTime#,#xiukouA#
 		)
 	</insert>
+	
+	
+	<update id="updatePorjectInfoDangAn" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+		UPDATE projectinfo
+		<dynamic prepend="set">
+			<isNotEmpty prepend="," property="orderId">
+				order_id=#orderId#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="wwName">
+				ww_name=#wwName#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="salePrice">
+				sale_price=#salePrice#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="wechat">
+				wechat=#wechat#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="orderNumber">
+				order_number=#orderNumber#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="kehuPhone">
+				kehu_phone=#kehuPhone#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="orderType">
+				order_type=#orderType#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="kehuName">
+				kehu_name=#kehuName#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="qudao">
+				qudao=#qudao#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="xiadanKeFu">
+				xiadan_kefu=#xiadanKeFu#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="address">
+				address=#address#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="height">
+				height=#height#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="weight">
+				weight=#weight#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="age">
+				age=#age#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="sex">
+				sex=#sex#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="jiankuanA">
+				jiankuan_a=#jiankuanA#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="lingweiB">
+				lingwei_b=#lingweiB#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="xiongweiA">
+				xiongwei_a=#xiongweiA#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="xiongweiB">
+				xiongwei_b=#xiongweiB#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="zhongyaoA">
+				zhongyao_a=#zhongyaoA#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="zhongyaoB">
+				zhongyao_b=#zhongyaoB#
+			</isNotEmpty>
+           <isNotEmpty prepend="," property="zhongyaoB">
+				fuwei_a=#fuweiA#
+			</isNotEmpty>	
+			<isNotEmpty prepend="," property="fuweiB">
+				fuwei_b=#fuweiB#
+			</isNotEmpty>	
+			<isNotEmpty prepend="," property="houzhongyichangA">
+				houzhongyichang_a=#houzhongyichangA#
+			</isNotEmpty>	
+			<isNotEmpty prepend="," property="xiuchangB">
+				xiuchang_b=#xiuchangB#
+			</isNotEmpty>	
+			<isNotEmpty prepend="," property="qianyichangA">
+				qianyichang_a=#qianyichangA#
+			</isNotEmpty>		
+			<isNotEmpty prepend="," property="xiufeiB">
+				xiufei_b=#xiufeiB#
+			</isNotEmpty>	
+			<isNotEmpty prepend="," property="xiuchangA">
+				xiuchang_a=#xiuchangA#
+			</isNotEmpty>	
+			<isNotEmpty prepend="," property="xiukouB">
+				xiukou_b=#xiukouB#
+			</isNotEmpty>	
+			<isNotEmpty prepend="," property="xiufeiA">
+				xiufei_a=#xiufeiA#
+			</isNotEmpty>	
+				<isNotEmpty prepend="," property="lingkoukuaishiB">
+				lingkoukuaishi_b=#lingkoukuaishiB#
+			</isNotEmpty>	
+				<isNotEmpty prepend="," property="yichangB">
+				yichang_b=#yichangB#
+			</isNotEmpty>	
+				<isNotEmpty prepend="," property="kuchangC">
+				kuchang_c=#kuchangC#
+			</isNotEmpty>	
+				<isNotEmpty prepend="," property="xiongweiD">
+				xiongwei_d=#xiongweiD#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="yaoweiC">
+				yaowei_c=#yaoweiC#
+			</isNotEmpty>
+			
+			
+					<isNotEmpty prepend="," property="zhongyaoD">
+				zhongyao_d=#zhongyaoD#
+			</isNotEmpty>	
+				<isNotEmpty prepend="," property="tuiweiC">
+				tuiwei_c=#tuiweiC#
+			</isNotEmpty>	
+				<isNotEmpty prepend="," property="yichangD">
+				yichang_d=#yichangD#
+			</isNotEmpty>	
+				<isNotEmpty prepend="," property="dangweiC">
+				dangwei_c=#dangweiC#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="datuiC">
+				datui_c=#datuiC#
+			</isNotEmpty>
+			
+			
+				<isNotEmpty prepend="," property="zhongtuiC">
+				zhongtui_c=#zhongtuiC#
+			</isNotEmpty>	
+				<isNotEmpty prepend="," property="xiaotuiC">
+				xiaotui_c=#xiaotuiC#
+			</isNotEmpty>	
+				<isNotEmpty prepend="," property="tuikouC">
+				tuikou_c=#tuikouC#
+			</isNotEmpty>	
+				<isNotEmpty prepend="," property="kouxingC">
+				kouxing_c=#kouxingC#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="kouseC">
+				kouse_c=#kouseC#
+			</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="," property="kuanxingD">
+				kuanxing_d=#kuanxingD#
+			</isNotEmpty>	
+				<isNotEmpty prepend="," property="botouD">
+				botou_d=#botouD#
+			</isNotEmpty>	
+				<isNotEmpty prepend="," property="koudaiC">
+				koudai_c=#koudaiC#
+			</isNotEmpty>	
+				<isNotEmpty prepend="," property="daigai">
+				dai_gai=#daigai#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="pingxiedai">
+				pingxie_dai=#pingxiedai#
+			</isNotEmpty>
+			
+				<isNotEmpty prepend="," property="miaoliao1">
+				miao_liao1=#miaoliao1#
+			</isNotEmpty>	
+				<isNotEmpty prepend="," property="yongtu1">
+				yong_tu1=#yongtu1#
+			</isNotEmpty>	
+				<isNotEmpty prepend="," property="miaoliao2">
+				miao_liao2=#miaoliao2#
+			</isNotEmpty>	
+				<isNotEmpty prepend="," property="yongtu2">
+				yong_tu2=#yongtu2#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="tixingremark">
+				tixing_remark=#tixingremark#
+			</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="remark">
+				remark=#remark#
+			</isNotEmpty>	
+				<isNotEmpty prepend="," property="xiukouA">
+				xiukou_a=#xiukouA#
+			</isNotEmpty>	
+			
+					
+			
+		</dynamic>
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
 	
 </sqlMap>
