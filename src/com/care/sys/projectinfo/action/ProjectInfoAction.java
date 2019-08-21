@@ -97,9 +97,16 @@ public class ProjectInfoAction extends BaseAction {
 			String projectId = request.getParameter("projectId");
 
 			/* ���û������ֶ� */
-			form.setOrderBy("p.add_time");
+			form.setOrderBy("id");
 			form.setSort("1");
 			sb.append("1=1");
+			
+			String wwname = request.getParameter("wwname");
+			
+			
+			if (wwname != null && !"".equals(wwname)) {
+				sb.append(" and ww_name ='" + wwname + "'");
+			}
 
 			if (!projectInfoId.equals("0")) {
 				sb.append(" and p.id in(" + projectInfoId + ")");
@@ -130,11 +137,12 @@ public class ProjectInfoAction extends BaseAction {
 					.getProjectInfoFacade().getProjectInfo(pro);
 			request.setAttribute("project", pros);
 
-			CompanyInfo ci = new CompanyInfo();
+			/*CompanyInfo ci = new CompanyInfo();
 			List<DataMap> coms = ServiceBean.getInstance()
 					.getCompanyInfoFacade().getCompanyInfo(ci);
-			request.setAttribute("company", coms);
+			request.setAttribute("company", coms);*/
 
+			request.setAttribute("wwname", wwname);
 			request.setAttribute("fNow_date", startTime);
 			request.setAttribute("now_date", endTime);
 			request.setAttribute("companyId", companyId);
@@ -175,7 +183,7 @@ public class ProjectInfoAction extends BaseAction {
 			request.setAttribute("pageList", list);
 			request.setAttribute("PagePys", pys);
 		}
-		CommUtils.getIntervalTime(start, new Date(), href);
+		//CommUtils.getIntervalTime(start, new Date(), href);
 		return mapping.findForward("queryProjectInfoxml");
 	}
 
@@ -757,40 +765,8 @@ public class ProjectInfoAction extends BaseAction {
 			BeanUtils.copyProperties(vo, form);
 			ServiceBean.getInstance().getProjectInfoFacade()
 					.deletePorjectInfoxml(vo);
-			ProjectInfo voo = new ProjectInfo();
-			StringBuffer sb = new StringBuffer();
-			List<DataMap> getProjectInfo = ServiceBean.getInstance()
-					.getProjectInfoFacade().getProjectInfo(voo);
-			if (getProjectInfo.size() > 0) {
-				sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-				sb.append("<ads>");
-				for (int i = 0; i < getProjectInfo.size(); i++) {
-					sb.append("<advertising>");
-					sb.append("<customerName>");
-					sb.append(getProjectInfo.get(i).get("project_no") + "");
-					sb.append("</customerName>");
-					sb.append("<advertisingUrl>");
-					sb.append(getProjectInfo.get(i).get("project_name") + "");
-					sb.append("</advertisingUrl>");
-					sb.append("<iconUrl>");
-					sb.append(getProjectInfo.get(i).get("channel_id") + "");
-					sb.append("</iconUrl>");
-					sb.append("<lanugage>");
-					sb.append(getProjectInfo.get(i).get("company_id") + "");
-					sb.append("</lanugage>");
-					sb.append("<adTitle>");
-					sb.append(getProjectInfo.get(i).get("adTitle") + "");
-					sb.append("</adTitle>");
-					sb.append("<adDetail>");
-					sb.append(getProjectInfo.get(i).get("adDetail") + "");
-					sb.append("</adDetail>");
-					sb.append("</advertising>");
-				}
-				sb.append("</ads>");
-			}
-			Constant.deleteFile(xmlpath + xmlfileName);
-			Constant.createFileContent(xmlpath, xmlfileName, sb.toString()
-					.getBytes("UTF-8"));
+		
+			
 
 			result.setBackPage(HttpTools.httpServletPath(request,
 					"queryProjectInfoXml"));
@@ -1864,6 +1840,75 @@ public class ProjectInfoAction extends BaseAction {
 			request.setAttribute("result", result);
 		}
 		return mapping.findForward("result");
+	}
+	
+	
+	public ActionForward keFuTijiao(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		Result result = new Result();
+		try {
+			ProjectInfoForm form = (ProjectInfoForm) actionForm;
+
+			ProjectInfo vo = new ProjectInfo();
+			vo.setCondition("id='" + form.getId() + "'");
+			vo.setStatus("2");
+			ServiceBean.getInstance().getProjectInfoFacade()
+					.updatePorjectInfo(vo);
+		
+			
+
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryProjectInfoXml"));
+			result.setResultCode("deletes");
+			result.setResultType("success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.debug(request.getQueryString() + "  " + e);
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryProjectInfoXml"));
+			if (e instanceof SystemException) { /* ����֪�쳣���н��� */
+				result.setResultCode(((SystemException) e).getErrCode());
+				result.setResultType(((SystemException) e).getErrType());
+			} else { /* ��δ֪�쳣���н�������ȫ�������δ֪�쳣 */
+				result.setResultCode("noKnownException");
+				result.setResultType("sysRunException");
+			}
+		} finally {
+			request.setAttribute("result", result);
+		}
+		return mapping.findForward("result");
+	}
+	
+	public ActionForward piDanUpdateInit(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		LoginUser loginUser = (LoginUser) request.getSession().getAttribute(
+				Config.SystemConfig.LOGINUSER);
+		if (loginUser == null) {
+			return null;
+		}
+
+		String userName = loginUser.getUserName();
+
+		String id = request.getParameter("id");
+		ProjectInfo vo = new ProjectInfo();
+		vo.setCondition("id='" + id + "'");
+		List<DataMap> list = ServiceBean.getInstance().getProjectInfoFacade()
+				.getProjectInfo(vo);
+		if (list == null || list.size() == 0) {
+			Result result = new Result();
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryProjectInfoXml"));
+			result.setResultCode("rowDel");
+			result.setResultType("success");
+			return mapping.findForward("result");
+		}
+		request.setAttribute("projectInfo", list.get(0));
+		
+		return mapping.findForward("updateProjectInfoPiDan");
+		
 	}
 
 }

@@ -26,12 +26,12 @@
 	</head>
 	<script language="javascript">
 function finds(){
-    var st = new Date(frmGo.startTime.value.replace(/-/g,'/'));
+  /*   var st = new Date(frmGo.startTime.value.replace(/-/g,'/'));
 	var et = new Date(frmGo.endTime.value.replace(/-/g,'/'));
 	if(Date.parse(st) - Date.parse(et)>0){
 		alert("开始时间不能大于结束时间!");
 		return false;
-	}
+	} */
 	   frmGo.submit();
 }
 function add(){
@@ -39,10 +39,10 @@ function add(){
 	frmGo.submit();
 }
 function c(){
-    document.all.startTime.value="";
-    document.all.endTime.value="";
+    document.all.wwname.value="";
+   /*  document.all.endTime.value="";
     document.all.userId.options[0].selected=true;
-    document.all.projectId.options[0].selected=true;
+    document.all.projectId.options[0].selected=true; */
 } 
 
 function changeCompany(obj){
@@ -72,9 +72,27 @@ function update(id){
 	frmGo.action="doProjectInfo.do?method=initUpdatexml&id="+id;
 	frmGo.submit();
 }
-function deletee(id){
-	frmGo.action="doProjectInfo.do?method=deletexml&id="+id;
+
+function piDanUpdate(id){
+	frmGo.action="doProjectInfo.do?method=piDanUpdateInit&id="+id;
 	frmGo.submit();
+}
+
+function deletee(id){
+	if(confirm("确定删除吗?"))
+	{
+		frmGo.action="doProjectInfo.do?method=deletexml&id="+id;
+		frmGo.submit();
+	}
+	/* frmGo.action="doProjectInfo.do?method=deletexml&id="+id;
+	frmGo.submit(); */
+}
+function keFuTijiao(id){
+	if(confirm("确定提交吗?"))
+	{
+		frmGo.action="doProjectInfo.do?method=keFuTijiao&id="+id;
+		frmGo.submit();
+	}
 }
 function ofuncs(projectId){
 	window.open("projectRoleFuncFrame.jsp?projectId=" + i);
@@ -94,6 +112,16 @@ function ofuncs(projectId){
                 </th>
                 </tr>
                  <tr class="title_3">
+        <td colspan="13">          
+                 旺旺名
+						    <input id="wwname" name="wwname" type="text" class="txt_1" 
+						    value="<%CommUtils.printReqByAtt(request,response,"wwname");%>" size="20">
+						    
+						    <input name="find1" type="button" class="but_1" accesskey="f"
+							tabindex="f" value="搜 索" onclick="javascript:finds()">
+					     <input name="clear" type="button" class="but_1" accesskey="c"
+						    tabindex="c"  value="清除搜索" onclick="c()">
+						    
                   <%--      <td colspan="13">
 					  创建时间
                      <input name="startTime" type="text" class="txt_1"  id="startTime" style="cursor:text"
@@ -146,14 +174,15 @@ function ofuncs(projectId){
 						<td width="5%">
 					渠道
 					</td>
-						<td width="5%">
-					下单客服
-					</td>
+					
 					<td width="5%">
 					性别
 					</td>
 					<td width="5%">
 					下单时间
+					</td>
+						<td width="5%">
+					下单客服
 					</td>
 						<td width="5%">
 					状态
@@ -188,9 +217,7 @@ function ofuncs(projectId){
 						<td>							
 							<bean:write name="element" property="qudao" />
 						</td>
-						<td>							
-							<bean:write name="element" property="xiadan_kefu" />
-						</td>
+					
 						
 							<td>							
 							<bean:write name="element" property="sex" />
@@ -198,11 +225,15 @@ function ofuncs(projectId){
 							<td>								
 							<bean:write name="element" property="add_time" format="yyyy-MM-dd HH:mm:ss"/>
 						</td>
+							<td>							
+							<bean:write name="element" property="xiadan_kefu" />
+						</td>
 						<td>
 						   <logic:empty name="element" property="status">无</logic:empty>							
-							<logic:equal name="element" property="status" value="1"><font color="red">客服提交</font></logic:equal>							
-							<logic:equal name="element" property="status" value="2"><font color="green">批单提交</font></logic:equal>
-							<logic:equal name="element" property="status" value="3"><font color="green">批单退回</font></logic:equal>
+							<logic:equal name="element" property="status" value="1"><font color="red">客服保存</font></logic:equal>							
+							<logic:equal name="element" property="status" value="2"><font color="green">客服提交</font></logic:equal>							
+							<logic:equal name="element" property="status" value="3"><font color="green">批单提交</font></logic:equal>
+							<logic:equal name="element" property="status" value="4"><font color="red">批单退回</font></logic:equal>
 						</td>
 						
 							<%-- <td>							
@@ -216,9 +247,14 @@ function ofuncs(projectId){
 									 						
 						<td>
 						<logic:equal name="element" property="status" value="1">	
-   							<a href=# onclick="update('<bean:write name="element" property="id" />')" style="color:#0000FF" > 【修改】</a>
+   							<a href=# onclick="update('<bean:write name="element" property="id" />')" style="color:#0000FF" > [修改]</a>
+   							 	<a href=# onclick="keFuTijiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [提交]</a>
+   							 <a href=# onclick="deletee('<bean:write name="element" property="id" />')" style="color:#0000FF" > [删除]</a> 
+   							 
+   							 	<a href=# onclick="piDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单修改]</a>
+   							 
    						</logic:equal>	
-							 <a href=# onclick="deletee('<bean:write name="element" property="id" />')" style="color:#0000FF" > 【删除】</a> 
+							
 						</td>
 					</tr>
 				</logic:iterate>

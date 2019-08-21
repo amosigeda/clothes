@@ -91,11 +91,11 @@
 	</select>
 	
 	<select id="getProjectInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
-		SELECT * FROM projectinfo p LEFT JOIN 
+		SELECT * FROM projectinfo <!-- p LEFT JOIN 
 		(SELECT COUNT(id) count_user,belong_project FROM appuserinfo GROUP BY belong_project) 
 		a ON p.id=a.belong_project LEFT JOIN 
 		(SELECT COUNT(id) count_device,belong_project FROM device_active_info GROUP BY belong_project) 
-		b ON p.id=b.belong_project LEFT JOIN companyinfo c ON p.company_id=c.id
+		b ON p.id=b.belong_project LEFT JOIN companyinfo c ON p.company_id=c.id -->
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
 				$condition$
@@ -117,7 +117,7 @@
 	</select>
 	
 	<select id="getProjectInfoListCountByVo" resultClass="java.lang.Integer" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
-		SELECT COUNT(*) FROM projectinfo p LEFT JOIN companyinfo c ON p.company_id=c.id
+		SELECT COUNT(*) FROM projectinfo<!--  p LEFT JOIN companyinfo c ON p.company_id=c.id -->
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
 				$condition$
