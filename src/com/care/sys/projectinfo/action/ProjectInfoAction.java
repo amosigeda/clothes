@@ -1881,6 +1881,78 @@ public class ProjectInfoAction extends BaseAction {
 		return mapping.findForward("result");
 	}
 	
+	public ActionForward pidanTuiHui(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		Result result = new Result();
+		try {
+			ProjectInfoForm form = (ProjectInfoForm) actionForm;
+
+			ProjectInfo vo = new ProjectInfo();
+			vo.setCondition("id='" + form.getId() + "'");
+			vo.setStatus("4");
+			ServiceBean.getInstance().getProjectInfoFacade()
+					.updatePorjectInfo(vo);
+
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryProjectInfoXml"));
+			result.setResultCode("deletes");
+			result.setResultType("success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.debug(request.getQueryString() + "  " + e);
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryProjectInfoXml"));
+			if (e instanceof SystemException) { /* ����֪�쳣���н��� */
+				result.setResultCode(((SystemException) e).getErrCode());
+				result.setResultType(((SystemException) e).getErrType());
+			} else { /* ��δ֪�쳣���н�������ȫ�������δ֪�쳣 */
+				result.setResultCode("noKnownException");
+				result.setResultType("sysRunException");
+			}
+		} finally {
+			request.setAttribute("result", result);
+		}
+		return mapping.findForward("result");
+	}
+	
+	public ActionForward pidanTijiao(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		Result result = new Result();
+		try {
+			ProjectInfoForm form = (ProjectInfoForm) actionForm;
+
+			ProjectInfo vo = new ProjectInfo();
+			vo.setCondition("id='" + form.getId() + "'");
+			vo.setStatus("5");
+			ServiceBean.getInstance().getProjectInfoFacade()
+					.updatePorjectInfo(vo);
+
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryProjectInfoXml"));
+			result.setResultCode("deletes");
+			result.setResultType("success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.debug(request.getQueryString() + "  " + e);
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryProjectInfoXml"));
+			if (e instanceof SystemException) { /* ����֪�쳣���н��� */
+				result.setResultCode(((SystemException) e).getErrCode());
+				result.setResultType(((SystemException) e).getErrType());
+			} else { /* ��δ֪�쳣���н�������ȫ�������δ֪�쳣 */
+				result.setResultCode("noKnownException");
+				result.setResultType("sysRunException");
+			}
+		} finally {
+			request.setAttribute("result", result);
+		}
+		return mapping.findForward("result");
+	}
+	
 	public ActionForward piDanUpdateInit(ActionMapping mapping,
 			ActionForm actionForm, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -1909,6 +1981,127 @@ public class ProjectInfoAction extends BaseAction {
 		
 		return mapping.findForward("updateProjectInfoPiDan");
 		
+	}
+	
+	
+	public ActionForward updateProjectInfopidan(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		Result result = new Result();
+		try {
+			
+			LoginUser loginUser = (LoginUser) request.getSession()
+					.getAttribute(Config.SystemConfig.LOGINUSER);
+			if (loginUser == null) {
+				return null;
+			}
+			   
+			
+			String id = request.getParameter("id");
+			
+
+			
+
+			ProjectInfo vo = new ProjectInfo();
+			vo.setCondition("id='" + id + "'");
+			String jiankuanA2 = request.getParameter("jiankuanA2");
+			vo.setJiankuanA2(jiankuanA2);
+			String lingweiB2 = request.getParameter("lingweiB2");
+			vo.setLingweiB2(lingweiB2);
+			String xiongweiA2 = request.getParameter("xiongweiA2");
+			vo.setXiongweiA2(xiongweiA2);
+			String xiongweiB2 = request.getParameter("xiongweiB2");
+			vo.setXiongweiB2(xiongweiB2);
+			String zhongyaoA2 = request.getParameter("zhongyaoA2");
+			vo.setZhongyaoA2(zhongyaoA2);
+			String zhongyaoB2 = request.getParameter("zhongyaoB2");
+			vo.setZhongyaoB2(zhongyaoB2);
+			String fuweiA2 = request.getParameter("fuweiA2");
+			vo.setFuweiA2(fuweiA2);
+			String fuweiB2 = request.getParameter("fuweiB2");
+			vo.setFuweiB2(fuweiB2);
+			String houzhongyichangA2 = request.getParameter("houzhongyichangA2");
+			vo.setHouzhongyichangA2(houzhongyichangA2);
+			String xiuchangB2 = request.getParameter("xiuchangB2");
+			vo.setXiuchangB2(xiuchangB2);
+			String qianyichangA2 = request.getParameter("qianyichangA2");
+			vo.setQianyichangA2(qianyichangA2);
+			String xiufeiB2 = request.getParameter("xiufeiB2");
+			vo.setXiufeiB2(xiufeiB2);
+			String xiuchangA2 = request.getParameter("xiuchangA2");
+			vo.setXiuchangA2(xiuchangA2);
+			String xiukouB2 = request.getParameter("xiukouB2");
+			vo.setXiukouB2(xiukouB2);
+			String lingkoukuaishiB2 = request.getParameter("lingkoukuaishiB2");
+			vo.setLingkoukuaishiB2(lingkoukuaishiB2);
+			String xiukouA2 = request.getParameter("xiukouA2");
+			vo.setXiukouA2(xiukouA2);
+			String yichangB2 = request.getParameter("yichangB2");
+			vo.setYichangB2(yichangB2);
+			String kuchangC2 = request.getParameter("kuchangC2");
+			vo.setKuchangC2(kuchangC2);
+			String xiongweiD2 = request.getParameter("xiongweiD2");
+			vo.setXiongweiD2(xiongweiD2);
+			String yaoweiC2 = request.getParameter("yaoweiC2");
+			vo.setYaoweiC2(yaoweiC2);
+			String zhongyaoD2 = request.getParameter("zhongyaoD2");
+			vo.setZhongyaoD2(zhongyaoD2);
+			String tuiweiC2 = request.getParameter("tuiweiC2");
+			vo.setTuiweiC2(tuiweiC2);
+			String yichangD2 = request.getParameter("yichangD2");
+			vo.setYichangD2(yichangD2);
+			String dangweiC2 = request.getParameter("dangweiC2");
+			vo.setDangweiC2(dangweiC2);
+			String datuiC2 = request.getParameter("datuiC2");
+			vo.setDatuiC2(datuiC2);
+			String zhongtuiC2 = request.getParameter("zhongtuiC2");
+			vo.setZhongtuiC2(zhongtuiC2);
+			String xiaotuiC2 = request.getParameter("xiaotuiC2");
+			vo.setXiaotuiC2(xiaotuiC2);
+			String tuikouC2 = request.getParameter("tuikouC2");
+			vo.setTuikouC2(tuikouC2);
+			String mi1 = request.getParameter("mi1");
+			vo.setMi1(mi1);
+			String mi2 = request.getParameter("mi2");
+			vo.setMi2(mi2);
+			
+			
+			String pidanremark = request.getParameter("pidanremark");
+			vo.setPidanremark(pidanremark); 
+			
+		
+			ServiceBean.getInstance().getProjectInfoFacade()
+					.updatePorjectInfoDangAn(vo);
+			
+			
+		
+			vo.setCondition("id='" + id + "'");
+			vo.setStatus("3");
+			ServiceBean.getInstance().getProjectInfoFacade()
+					.updatePorjectInfo(vo);
+		
+
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryProjectInfoXml"));
+			result.setResultCode("updates");
+			result.setResultType("success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.debug(request.getQueryString() + "  " + e);
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryProjectInfoXml"));
+			if (e instanceof SystemException) { /* ����֪�쳣���н��� */
+				result.setResultCode(((SystemException) e).getErrCode());
+				result.setResultType(((SystemException) e).getErrType());
+			} else { /* ��δ֪�쳣���н�������ȫ�������δ֪�쳣 */
+				result.setResultCode("noKnownException");
+				result.setResultType("sysRunException");
+			}
+		} finally {
+			request.setAttribute("result", result);
+		}
+		return mapping.findForward("result");
 	}
 
 }

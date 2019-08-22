@@ -78,6 +78,15 @@ function piDanUpdate(id){
 	frmGo.submit();
 }
 
+
+function pidanTuiHui(id){
+	if(confirm("确定退回吗?"))
+	{
+		frmGo.action="doProjectInfo.do?method=pidanTuiHui&id="+id;
+		frmGo.submit();
+	}
+}
+
 function deletee(id){
 	if(confirm("确定删除吗?"))
 	{
@@ -91,6 +100,15 @@ function keFuTijiao(id){
 	if(confirm("确定提交吗?"))
 	{
 		frmGo.action="doProjectInfo.do?method=keFuTijiao&id="+id;
+		frmGo.submit();
+	}
+}
+
+
+function pidanTijiao(id){
+	if(confirm("确定提交吗?"))
+	{
+		frmGo.action="doProjectInfo.do?method=pidanTijiao&id="+id;
 		frmGo.submit();
 	}
 }
@@ -191,6 +209,9 @@ function ofuncs(projectId){
 						批单时间
 					</td>
 					<td width="5%">
+						批单备注
+					</td>
+					<td width="5%">
 						操作
 					</td>
 				</tr>
@@ -230,10 +251,11 @@ function ofuncs(projectId){
 						</td>
 						<td>
 						   <logic:empty name="element" property="status">无</logic:empty>							
-							<logic:equal name="element" property="status" value="1"><font color="red">客服保存</font></logic:equal>							
-							<logic:equal name="element" property="status" value="2"><font color="green">客服提交</font></logic:equal>							
-							<logic:equal name="element" property="status" value="3"><font color="green">批单提交</font></logic:equal>
+							<logic:equal name="element" property="status" value="1"><font color="green">客服保存</font></logic:equal>							
+							<logic:equal name="element" property="status" value="2"><font color="red">客服提交</font></logic:equal>							
+							<logic:equal name="element" property="status" value="3"><font color="green">批单保存</font></logic:equal>
 							<logic:equal name="element" property="status" value="4"><font color="red">批单退回</font></logic:equal>
+							<logic:equal name="element" property="status" value="5"><font color="green">批单提交</font></logic:equal>
 						</td>
 						
 							<%-- <td>							
@@ -241,6 +263,9 @@ function ofuncs(projectId){
 						</td> --%>
 							<td>			
 							<bean:write name="element" property="update_time" format="yyyy-MM-dd HH:mm:ss"/>				
+						</td>
+						<td>			
+							<bean:write name="element" property="pidan_remark"/>				
 						</td>
 						
 						
@@ -252,6 +277,28 @@ function ofuncs(projectId){
    							 <a href=# onclick="deletee('<bean:write name="element" property="id" />')" style="color:#0000FF" > [删除]</a> 
    							 
    							 	<a href=# onclick="piDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单修改]</a>
+   						</logic:equal>	
+   						
+   						
+   								<logic:equal name="element" property="status" value="2">	
+   							 	<a href=# onclick="piDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单修改]</a>
+   							 		<a href=# onclick="pidanTuiHui('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单退回]</a>
+   							 			<a href=# onclick="pidanTijiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单提交]</a>
+   						</logic:equal>	
+   						
+   						
+   								<logic:equal name="element" property="status" value="3">	
+   							 	<a href=# onclick="piDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单修改]</a>
+   							 		<a href=# onclick="pidanTuiHui('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单退回]</a>
+   							 			<a href=# onclick="pidanTijiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单提交]</a>
+   						</logic:equal>	
+   						
+   						
+   							<logic:equal name="element" property="status" value="4">	
+   							<a href=# onclick="update('<bean:write name="element" property="id" />')" style="color:#0000FF" > [修改]</a>
+   							 	<a href=# onclick="keFuTijiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [提交]</a>
+   							 
+   							 	<a href=# onclick="piDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单修改]</a>
    							 
    						</logic:equal>	
 							
@@ -260,7 +307,7 @@ function ofuncs(projectId){
 				</logic:iterate>
 
 			  	<tr class="title_3">
-					<td colspan="12" align="left" >  
+					<td colspan="20" align="left" >  
 						<%
 							pys.printGoPage(response, "frmGo");
 						%>

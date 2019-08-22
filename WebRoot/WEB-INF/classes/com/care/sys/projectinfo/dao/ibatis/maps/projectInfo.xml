@@ -516,8 +516,6 @@
 				<isNotEmpty prepend="," property="yaoweiC">
 				yaowei_c=#yaoweiC#
 			</isNotEmpty>
-			
-			
 					<isNotEmpty prepend="," property="zhongyaoD">
 				zhongyao_d=#zhongyaoD#
 			</isNotEmpty>	
@@ -533,8 +531,6 @@
 				<isNotEmpty prepend="," property="datuiC">
 				datui_c=#datuiC#
 			</isNotEmpty>
-			
-			
 				<isNotEmpty prepend="," property="zhongtuiC">
 				zhongtui_c=#zhongtuiC#
 			</isNotEmpty>	
@@ -583,7 +579,6 @@
 				<isNotEmpty prepend="," property="tixingremark">
 				tixing_remark=#tixingremark#
 			</isNotEmpty>
-			
 			<isNotEmpty prepend="," property="remark">
 				remark=#remark#
 			</isNotEmpty>	
@@ -591,7 +586,99 @@
 				xiukou_a=#xiukouA#
 			</isNotEmpty>	
 			
-					
+			<isNotEmpty prepend="," property="jiankuanA2">
+				jiankuan_a2=#jiankuanA2#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="lingweiB2">
+				lingwei_b2=#lingweiB2#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="xiongweiA2">
+				xiongwei_a2=#xiongweiA2#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="zhongyaoA2">
+				zhongyao_a2=#zhongyaoA2#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="zhongyaoB2">
+				zhongyao_b2=#zhongyaoB2#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="fuweiA2">
+				fuwei_a2=#fuweiA2#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="fuweiB2">
+				fuwei_b2=#fuweiB2#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="houzhongyichangA2">
+				houzhongyichang_a2=#houzhongyichangA2#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="xiuchangB2">
+				xiuchang_b2=#xiuchangB2#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="qianyichangA2">
+				qianyichang_a2=#qianyichangA2#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="xiufeiB2">
+				xiufei_b2=#xiufeiB2#
+			</isNotEmpty>
+           <isNotEmpty prepend="," property="xiuchangA2">
+				xiuchang_a2=#xiuchangA2#
+			</isNotEmpty>
+			 <isNotEmpty prepend="," property="xiukouB2">
+				xiukou_b2=#xiukouB2#
+			</isNotEmpty>
+			 <isNotEmpty prepend="," property="lingkoukuaishiB2">
+				lingkoukuaishi_b2=#lingkoukuaishiB2#
+			</isNotEmpty>
+			 <isNotEmpty prepend="," property="xiukouA2">
+				xiukou_a2=#xiukouA2#
+			</isNotEmpty>
+			 <isNotEmpty prepend="," property="xiukouA2">
+				xiukou_a2=#xiukouA2#
+			</isNotEmpty>
+			 <isNotEmpty prepend="," property="yichangB2">
+				yichang_b2=#yichangB2#
+			</isNotEmpty>
+			 <isNotEmpty prepend="," property="kuchangC2">
+				kuchang_c2=#kuchangC2#
+			</isNotEmpty>
+			 <isNotEmpty prepend="," property="xiongweiD2">
+				xiongwei_d2=#xiongweiD2#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="yaoweiC2">
+				yaowei_c2=#yaoweiC2#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="zhongyaoD2">
+				yaowei_c2=#zhongyaoD2#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="tuiweiC2">
+				tuiwei_c2=#tuiweiC2#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="yichangD2">
+				yichang_d2=#yichangD2#
+			</isNotEmpty>
+            <isNotEmpty prepend="," property="dangweiC2">
+				dangwei_c2=#dangweiC2#
+			</isNotEmpty>
+			   <isNotEmpty prepend="," property="datuiC2">
+				datui_c2=#datuiC2#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="zhongtuiC2">
+				zhongtui_c2=#zhongtuiC2#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="xiaotuiC2">
+				xiaotui_c2=#xiaotuiC2#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="tuikouC2">
+				tuikou_c2=#tuikouC2#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mi1">
+				mi1=#mi1#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mi2">
+				mi2=#mi2#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="pidanremark">
+				pidan_remark=#pidanremark#
+			</isNotEmpty>
 			
 		</dynamic>
 		<dynamic prepend="where">
