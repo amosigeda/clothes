@@ -3,45 +3,8 @@
 
 <sqlMap namespace="projectInfo">
 
-	<select id="getProjectInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
-		SELECT * FROM projectinfo
-		<dynamic prepend="where">
-			<isNotEmpty prepend="and" property="condition">
-				$condition$
-			</isNotEmpty>
-		</dynamic>
-	</select>
-	
-	<select id="getProjectUserInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
-		SELECT * FROM project_userinfo
-		<dynamic prepend="where">
-			<isNotEmpty prepend="and" property="condition">
-				$condition$
-			</isNotEmpty>
-		</dynamic>
-	</select>
-	
-	<select id="getRoleProjectFuncInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
-		SELECT * FROM roleprojectfuncinfo
-		<dynamic prepend="where">
-			<isNotEmpty prepend="and" property="idP">
-			  idP=#idP#
-			</isNotEmpty>
-			<isNotEmpty prepend="and" property="roleCodeP">
-			  roleCodeP=#roleCodeP#
-			</isNotEmpty>
-			<isNotEmpty prepend="and" property="mName">
-			  mName=#mName#
-			</isNotEmpty>
-			<isNotEmpty prepend="and" property="projectCode">
-			  projectCode=#projectCode#
-			</isNotEmpty>
-			<isNotEmpty prepend="and" property="condition">
-				$condition$
-			</isNotEmpty>
-		</dynamic>
-	</select>
-	<select id="getProjectName" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+	<select id="getProjectInfo" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
 		SELECT * FROM projectinfo
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
@@ -50,7 +13,49 @@
 		</dynamic>
 	</select>
 
-	<select id="getProjectStatus" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+	<select id="getProjectUserInfo" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+		SELECT * FROM project_userinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<select id="getRoleProjectFuncInfo" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+		SELECT * FROM roleprojectfuncinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="idP">
+				idP=#idP#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="roleCodeP">
+				roleCodeP=#roleCodeP#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="mName">
+				mName=#mName#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="projectCode">
+				projectCode=#projectCode#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	<select id="getProjectName" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+		SELECT * FROM projectinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<select id="getProjectStatus" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
 		SELECT * FROM protectinfo
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
@@ -58,8 +63,9 @@
 			</isNotEmpty>
 		</dynamic>
 	</select>
-	
-	<select id="getProjectLocationSwitchInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+
+	<select id="getProjectLocationSwitchInfo" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
 		SELECT * FROM data_switch_infomation
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
@@ -67,17 +73,18 @@
 			</isNotEmpty>
 		</dynamic>
 	</select>
-	<select id="getProjectRoleInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+	<select id="getProjectRoleInfo" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
 		SELECT * FROM roleprojectfuncinfo
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="roleCodeP">
-			  roleCodeP=#roleCodeP#
+				roleCodeP=#roleCodeP#
 			</isNotEmpty>
 			<isNotEmpty prepend="and" property="mName">
-			  mName=#mName#
+				mName=#mName#
 			</isNotEmpty>
-            <isNotEmpty prepend="and" property="projectCode">
-			  projectCode=#projectCode#
+			<isNotEmpty prepend="and" property="projectCode">
+				projectCode=#projectCode#
 			</isNotEmpty>
 			<isNotEmpty prepend="and" property="condition">
 				$condition$
@@ -89,13 +96,14 @@
 			</isNotEmpty>
 		</dynamic>
 	</select>
-	
-	<select id="getProjectInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
-		SELECT * FROM projectinfo <!-- p LEFT JOIN 
-		(SELECT COUNT(id) count_user,belong_project FROM appuserinfo GROUP BY belong_project) 
-		a ON p.id=a.belong_project LEFT JOIN 
-		(SELECT COUNT(id) count_device,belong_project FROM device_active_info GROUP BY belong_project) 
-		b ON p.id=b.belong_project LEFT JOIN companyinfo c ON p.company_id=c.id -->
+
+	<select id="getProjectInfoListByVo" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+		SELECT * FROM projectinfo <!-- p LEFT JOIN (SELECT COUNT(id) count_user,belong_project 
+			FROM appuserinfo GROUP BY belong_project) a ON p.id=a.belong_project LEFT 
+			JOIN (SELECT COUNT(id) count_device,belong_project FROM device_active_info 
+			GROUP BY belong_project) b ON p.id=b.belong_project LEFT JOIN companyinfo 
+			c ON p.company_id=c.id -->
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
 				$condition$
@@ -104,28 +112,30 @@
 		<dynamic prepend="order by">
 			<isNotEmpty prepend="order by" property="orderBy">
 				$orderBy$
-			</isNotEmpty> 
-		</dynamic>   
-			 limit
-			<isNotEmpty prepend=" " property="from">
-				$from$
 			</isNotEmpty>
-				,
-			<isNotEmpty prepend=" " property="pageSize">
-				$pageSize$
-			</isNotEmpty>
+		</dynamic>
+		limit
+		<isNotEmpty prepend=" " property="from">
+			$from$
+		</isNotEmpty>
+		,
+		<isNotEmpty prepend=" " property="pageSize">
+			$pageSize$
+		</isNotEmpty>
 	</select>
-	
-	<select id="getProjectInfoListCountByVo" resultClass="java.lang.Integer" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
-		SELECT COUNT(*) FROM projectinfo<!--  p LEFT JOIN companyinfo c ON p.company_id=c.id -->
+
+	<select id="getProjectInfoListCountByVo" resultClass="java.lang.Integer"
+		parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+		SELECT COUNT(*) FROM projectinfo<!-- p LEFT JOIN companyinfo c ON p.company_id=c.id -->
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
 				$condition$
 			</isNotEmpty>
 		</dynamic>
 	</select>
-	
-	<select id="getProjectLocationInfoListCountByVo" resultClass="java.lang.Integer" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+
+	<select id="getProjectLocationInfoListCountByVo" resultClass="java.lang.Integer"
+		parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
 		SELECT COUNT(*) FROM data_switch_infomation
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
@@ -133,24 +143,30 @@
 			</isNotEmpty>
 		</dynamic>
 	</select>
-	
-	<select id="getProjectInfoMaxId" resultClass="java.lang.Integer" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+
+	<select id="getProjectInfoMaxId" resultClass="java.lang.Integer"
+		parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
 		SELECT MAX(id) FROM projectinfo
 	</select>
-	
-	<select id="getProjectInfoCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+
+	<select id="getProjectInfoCount" resultClass="java.lang.Integer"
+		parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
 		SELECT COUNT(id) FROM projectinfo
-	</select>	
+	</select>
 	<insert id="insertProjectInfo" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
-		INSERT INTO projectinfo (project_no,project_name,channel_id,company_id,add_time,remark,status,map_typec,map_typeo,project_type,data_sourceo,data_sourcec,socket_way,heart_s,adTitle,adDetail) VALUES 
+		INSERT INTO
+		projectinfo
+		(project_no,project_name,channel_id,company_id,add_time,remark,status,map_typec,map_typeo,project_type,data_sourceo,data_sourcec,socket_way,heart_s,adTitle,adDetail)
+		VALUES
 		(#projectNo#,#projectName#,#channelId#,#companyId#,#addTime#,#remark#,#status#,#mapTypeC#,#mapTypeO#,#projectType#,#dataSourceO#,#dataSourceC#,#socketWay#,#heartS#,#adTitle#,#adDetail#)
 	</insert>
-	
-	
+
+
 	<insert id="insertRelevanceInfo2" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
-		INSERT INTO relevanceinfo(company_id,channel_id) VALUES (#companyId#,#channelId#)
+		INSERT INTO
+		relevanceinfo(company_id,channel_id) VALUES (#companyId#,#channelId#)
 	</insert>
-	
+
 	<update id="updatePorjectInfo" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
 		UPDATE projectinfo
 		<dynamic prepend="set">
@@ -187,9 +203,7 @@
 			<isNotEmpty prepend="," property="dataSourceO">
 				data_sourceo=#dataSourceO#
 			</isNotEmpty>
-			<!-- <isNotEmpty prepend="," property="heartS">
-				heart_s=#heartS#
-			</isNotEmpty> -->
+			<!-- <isNotEmpty prepend="," property="heartS"> heart_s=#heartS# </isNotEmpty> -->
 			<isNotEmpty prepend="," property="socketWay">
 				socket_way=#socketWay#
 			</isNotEmpty>
@@ -199,7 +213,7 @@
 			<isNotEmpty prepend="," property="adDetail">
 				adDetail=#adDetail#
 			</isNotEmpty>
-			<!-- 	,remark=#remark# -->
+			<!-- ,remark=#remark# -->
 		</dynamic>
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
@@ -207,7 +221,7 @@
 			</isNotEmpty>
 		</dynamic>
 	</update>
-	
+
 	<update id="updatePorjectSwitchInfo" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
 		UPDATE data_switch_infomation
 		<dynamic prepend="set">
@@ -220,7 +234,7 @@
 			<isNotEmpty prepend="," property="beifen">
 				beifen=#beifen#
 			</isNotEmpty>
-				
+
 		</dynamic>
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
@@ -228,40 +242,41 @@
 			</isNotEmpty>
 		</dynamic>
 	</update>
-	
+
 	<insert id="insertProjectRoleFuncInfo" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
-		INSERT INTO roleprojectfuncinfo(roleCodeP,mName,projectCode) VALUES (#roleCodeP#,#mName#,#projectCode#)
+		INSERT
+		INTO roleprojectfuncinfo(roleCodeP,mName,projectCode) VALUES
+		(#roleCodeP#,#mName#,#projectCode#)
 	</insert>
-	
+
 	<delete id="deleteProjectRoleFunInfo" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
 		DELETE FROM roleprojectfuncinfo
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="mName">
-			  mName=#mName#
+				mName=#mName#
 			</isNotEmpty>
-		<isNotEmpty prepend="and" property="roleCodeP">
-			 roleCodeP=#roleCodeP#
+			<isNotEmpty prepend="and" property="roleCodeP">
+				roleCodeP=#roleCodeP#
 			</isNotEmpty>
 			<isNotEmpty prepend="and" property="condition">
 				$condition$
 			</isNotEmpty>
 		</dynamic>
 	</delete>
-	
+
 	<delete id="deletePorjectInfoxml" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
 		DELETE FROM projectinfo
 		<dynamic prepend="where">
-		   <!--  <isNotEmpty prepend="and" property="id">
-			  id=#id#
-			</isNotEmpty> -->
+			<!-- <isNotEmpty prepend="and" property="id"> id=#id# </isNotEmpty> -->
 			<isNotEmpty prepend="and" property="condition">
 				$condition$
 			</isNotEmpty>
 		</dynamic>
 	</delete>
-	
-	
-	<select id="getWatchInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+
+
+	<select id="getWatchInfoListByVo" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
 		SELECT * FROM watchxml p
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
@@ -271,19 +286,20 @@
 		<dynamic prepend="order by">
 			<isNotEmpty prepend="order by" property="orderBy">
 				$orderBy$
-			</isNotEmpty> 
-		</dynamic>   
-			 limit
-			<isNotEmpty prepend=" " property="from">
-				$from$
 			</isNotEmpty>
-				,
-			<isNotEmpty prepend=" " property="pageSize">
-				$pageSize$
-			</isNotEmpty>
+		</dynamic>
+		limit
+		<isNotEmpty prepend=" " property="from">
+			$from$
+		</isNotEmpty>
+		,
+		<isNotEmpty prepend=" " property="pageSize">
+			$pageSize$
+		</isNotEmpty>
 	</select>
-	
-	<select id="getWatchInfoListCountByVo" resultClass="java.lang.Integer" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+
+	<select id="getWatchInfoListCountByVo" resultClass="java.lang.Integer"
+		parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
 		SELECT COUNT(*) FROM watchxml p
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
@@ -291,13 +307,17 @@
 			</isNotEmpty>
 		</dynamic>
 	</select>
-	
+
 	<insert id="insertProjectWatchInfo" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
-		INSERT INTO watchxml (project_no,project_name,channel_id,company_id,add_time,remark,status,map_typec,map_typeo,project_type,data_sourceo,data_sourcec,socket_way,heart_s,adTitle,adDetail) VALUES 
+		INSERT INTO
+		watchxml
+		(project_no,project_name,channel_id,company_id,add_time,remark,status,map_typec,map_typeo,project_type,data_sourceo,data_sourcec,socket_way,heart_s,adTitle,adDetail)
+		VALUES
 		(#projectNo#,#projectName#,#channelId#,#companyId#,#addTime#,#remark#,#status#,#mapTypeC#,#mapTypeO#,#projectType#,#dataSourceO#,#dataSourceC#,#socketWay#,#heartS#,#adTitle#,#adDetail#)
 	</insert>
-	
-	<select id="getProjectWatchInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+
+	<select id="getProjectWatchInfo" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
 		SELECT * FROM watchxml
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
@@ -306,7 +326,7 @@
 		</dynamic>
 		order by id desc
 	</select>
-	
+
 	<update id="updatePorjectWatchInfo" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
 		UPDATE watchxml
 		<dynamic prepend="set">
@@ -343,7 +363,7 @@
 			<isNotEmpty prepend="," property="dataSourceO">
 				data_sourceo=#dataSourceO#
 			</isNotEmpty>
-			 <isNotEmpty prepend="," property="heartS">
+			<isNotEmpty prepend="," property="heartS">
 				heart_s=#heartS#
 			</isNotEmpty>
 			<isNotEmpty prepend="," property="socketWay">
@@ -355,7 +375,7 @@
 			<isNotEmpty prepend="," property="adDetail">
 				adDetail=#adDetail#
 			</isNotEmpty>
-			<!-- 	,remark=#remark# -->
+			<!-- ,remark=#remark# -->
 		</dynamic>
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
@@ -363,22 +383,21 @@
 			</isNotEmpty>
 		</dynamic>
 	</update>
-	
-	
-		<delete id="deletePorjectInfoWatch" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+
+
+	<delete id="deletePorjectInfoWatch" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
 		DELETE FROM watchxml
 		<dynamic prepend="where">
-		   <!--  <isNotEmpty prepend="and" property="id">
-			  id=#id#
-			</isNotEmpty> -->
+			<!-- <isNotEmpty prepend="and" property="id"> id=#id# </isNotEmpty> -->
 			<isNotEmpty prepend="and" property="condition">
 				$condition$
 			</isNotEmpty>
 		</dynamic>
 	</delete>
-	
-		<insert id="insertKeHuDangAnInfo" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
-		INSERT INTO projectinfo (
+
+	<insert id="insertKeHuDangAnInfo" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+		INSERT INTO
+		projectinfo (
 		order_id, ww_name, sale_price,wechat, order_number,
 		kehu_phone,order_type,kehu_name,qudao,xiadan_kefu,
 		address,height,weight,age,sex,
@@ -391,7 +410,7 @@
 		kouse_c,kuanxing_d,botou_d,koudai_c,dai_gai,pingxie_dai,
 		miao_liao1,yong_tu1,miao_liao2,yong_tu2,tixing_remark,
 		remark,update_time,status,add_time,xiukou_a
-		) VALUES 
+		) VALUES
 		(#orderId#,#wwName#,#salePrice#,#wechat#,#orderNumber#,
 		#kehuPhone#,#orderType#,#kehuName#,#qudao#,#xiadanKeFu#,
 		#address#,#height#,#weight#,#age#,#sex#,
@@ -406,8 +425,8 @@
 		#remark#,#updateTime#,#status#,#addTime#,#xiukouA#
 		)
 	</insert>
-	
-	
+
+
 	<update id="updatePorjectInfoDangAn" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
 		UPDATE projectinfo
 		<dynamic prepend="set">
@@ -474,118 +493,118 @@
 			<isNotEmpty prepend="," property="zhongyaoB">
 				zhongyao_b=#zhongyaoB#
 			</isNotEmpty>
-           <isNotEmpty prepend="," property="zhongyaoB">
+			<isNotEmpty prepend="," property="zhongyaoB">
 				fuwei_a=#fuweiA#
-			</isNotEmpty>	
+			</isNotEmpty>
 			<isNotEmpty prepend="," property="fuweiB">
 				fuwei_b=#fuweiB#
-			</isNotEmpty>	
+			</isNotEmpty>
 			<isNotEmpty prepend="," property="houzhongyichangA">
 				houzhongyichang_a=#houzhongyichangA#
-			</isNotEmpty>	
+			</isNotEmpty>
 			<isNotEmpty prepend="," property="xiuchangB">
 				xiuchang_b=#xiuchangB#
-			</isNotEmpty>	
+			</isNotEmpty>
 			<isNotEmpty prepend="," property="qianyichangA">
 				qianyichang_a=#qianyichangA#
-			</isNotEmpty>		
+			</isNotEmpty>
 			<isNotEmpty prepend="," property="xiufeiB">
 				xiufei_b=#xiufeiB#
-			</isNotEmpty>	
+			</isNotEmpty>
 			<isNotEmpty prepend="," property="xiuchangA">
 				xiuchang_a=#xiuchangA#
-			</isNotEmpty>	
+			</isNotEmpty>
 			<isNotEmpty prepend="," property="xiukouB">
 				xiukou_b=#xiukouB#
-			</isNotEmpty>	
+			</isNotEmpty>
 			<isNotEmpty prepend="," property="xiufeiA">
 				xiufei_a=#xiufeiA#
-			</isNotEmpty>	
-				<isNotEmpty prepend="," property="lingkoukuaishiB">
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="lingkoukuaishiB">
 				lingkoukuaishi_b=#lingkoukuaishiB#
-			</isNotEmpty>	
-				<isNotEmpty prepend="," property="yichangB">
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="yichangB">
 				yichang_b=#yichangB#
-			</isNotEmpty>	
-				<isNotEmpty prepend="," property="kuchangC">
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="kuchangC">
 				kuchang_c=#kuchangC#
-			</isNotEmpty>	
-				<isNotEmpty prepend="," property="xiongweiD">
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="xiongweiD">
 				xiongwei_d=#xiongweiD#
 			</isNotEmpty>
-				<isNotEmpty prepend="," property="yaoweiC">
+			<isNotEmpty prepend="," property="yaoweiC">
 				yaowei_c=#yaoweiC#
 			</isNotEmpty>
-					<isNotEmpty prepend="," property="zhongyaoD">
+			<isNotEmpty prepend="," property="zhongyaoD">
 				zhongyao_d=#zhongyaoD#
-			</isNotEmpty>	
-				<isNotEmpty prepend="," property="tuiweiC">
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="tuiweiC">
 				tuiwei_c=#tuiweiC#
-			</isNotEmpty>	
-				<isNotEmpty prepend="," property="yichangD">
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="yichangD">
 				yichang_d=#yichangD#
-			</isNotEmpty>	
-				<isNotEmpty prepend="," property="dangweiC">
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="dangweiC">
 				dangwei_c=#dangweiC#
 			</isNotEmpty>
-				<isNotEmpty prepend="," property="datuiC">
+			<isNotEmpty prepend="," property="datuiC">
 				datui_c=#datuiC#
 			</isNotEmpty>
-				<isNotEmpty prepend="," property="zhongtuiC">
+			<isNotEmpty prepend="," property="zhongtuiC">
 				zhongtui_c=#zhongtuiC#
-			</isNotEmpty>	
-				<isNotEmpty prepend="," property="xiaotuiC">
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="xiaotuiC">
 				xiaotui_c=#xiaotuiC#
-			</isNotEmpty>	
-				<isNotEmpty prepend="," property="tuikouC">
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="tuikouC">
 				tuikou_c=#tuikouC#
-			</isNotEmpty>	
-				<isNotEmpty prepend="," property="kouxingC">
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="kouxingC">
 				kouxing_c=#kouxingC#
 			</isNotEmpty>
-				<isNotEmpty prepend="," property="kouseC">
+			<isNotEmpty prepend="," property="kouseC">
 				kouse_c=#kouseC#
 			</isNotEmpty>
-			
-			
+
+
 			<isNotEmpty prepend="," property="kuanxingD">
 				kuanxing_d=#kuanxingD#
-			</isNotEmpty>	
-				<isNotEmpty prepend="," property="botouD">
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="botouD">
 				botou_d=#botouD#
-			</isNotEmpty>	
-				<isNotEmpty prepend="," property="koudaiC">
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="koudaiC">
 				koudai_c=#koudaiC#
-			</isNotEmpty>	
-				<isNotEmpty prepend="," property="daigai">
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="daigai">
 				dai_gai=#daigai#
 			</isNotEmpty>
-				<isNotEmpty prepend="," property="pingxiedai">
+			<isNotEmpty prepend="," property="pingxiedai">
 				pingxie_dai=#pingxiedai#
 			</isNotEmpty>
-			
-				<isNotEmpty prepend="," property="miaoliao1">
+
+			<isNotEmpty prepend="," property="miaoliao1">
 				miao_liao1=#miaoliao1#
-			</isNotEmpty>	
-				<isNotEmpty prepend="," property="yongtu1">
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="yongtu1">
 				yong_tu1=#yongtu1#
-			</isNotEmpty>	
-				<isNotEmpty prepend="," property="miaoliao2">
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="miaoliao2">
 				miao_liao2=#miaoliao2#
-			</isNotEmpty>	
-				<isNotEmpty prepend="," property="yongtu2">
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="yongtu2">
 				yong_tu2=#yongtu2#
 			</isNotEmpty>
-				<isNotEmpty prepend="," property="tixingremark">
+			<isNotEmpty prepend="," property="tixingremark">
 				tixing_remark=#tixingremark#
 			</isNotEmpty>
 			<isNotEmpty prepend="," property="remark">
 				remark=#remark#
-			</isNotEmpty>	
-				<isNotEmpty prepend="," property="xiukouA">
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="xiukouA">
 				xiukou_a=#xiukouA#
-			</isNotEmpty>	
-			
+			</isNotEmpty>
+
 			<isNotEmpty prepend="," property="jiankuanA2">
 				jiankuan_a2=#jiankuanA2#
 			</isNotEmpty>
@@ -619,28 +638,28 @@
 			<isNotEmpty prepend="," property="xiufeiB2">
 				xiufei_b2=#xiufeiB2#
 			</isNotEmpty>
-           <isNotEmpty prepend="," property="xiuchangA2">
+			<isNotEmpty prepend="," property="xiuchangA2">
 				xiuchang_a2=#xiuchangA2#
 			</isNotEmpty>
-			 <isNotEmpty prepend="," property="xiukouB2">
+			<isNotEmpty prepend="," property="xiukouB2">
 				xiukou_b2=#xiukouB2#
 			</isNotEmpty>
-			 <isNotEmpty prepend="," property="lingkoukuaishiB2">
+			<isNotEmpty prepend="," property="lingkoukuaishiB2">
 				lingkoukuaishi_b2=#lingkoukuaishiB2#
 			</isNotEmpty>
-			 <isNotEmpty prepend="," property="xiukouA2">
+			<isNotEmpty prepend="," property="xiukouA2">
 				xiukou_a2=#xiukouA2#
 			</isNotEmpty>
-			 <isNotEmpty prepend="," property="xiukouA2">
+			<isNotEmpty prepend="," property="xiukouA2">
 				xiukou_a2=#xiukouA2#
 			</isNotEmpty>
-			 <isNotEmpty prepend="," property="yichangB2">
+			<isNotEmpty prepend="," property="yichangB2">
 				yichang_b2=#yichangB2#
 			</isNotEmpty>
-			 <isNotEmpty prepend="," property="kuchangC2">
+			<isNotEmpty prepend="," property="kuchangC2">
 				kuchang_c2=#kuchangC2#
 			</isNotEmpty>
-			 <isNotEmpty prepend="," property="xiongweiD2">
+			<isNotEmpty prepend="," property="xiongweiD2">
 				xiongwei_d2=#xiongweiD2#
 			</isNotEmpty>
 			<isNotEmpty prepend="," property="yaoweiC2">
@@ -655,10 +674,10 @@
 			<isNotEmpty prepend="," property="yichangD2">
 				yichang_d2=#yichangD2#
 			</isNotEmpty>
-            <isNotEmpty prepend="," property="dangweiC2">
+			<isNotEmpty prepend="," property="dangweiC2">
 				dangwei_c2=#dangweiC2#
 			</isNotEmpty>
-			   <isNotEmpty prepend="," property="datuiC2">
+			<isNotEmpty prepend="," property="datuiC2">
 				datui_c2=#datuiC2#
 			</isNotEmpty>
 			<isNotEmpty prepend="," property="zhongtuiC2">
@@ -679,7 +698,25 @@
 			<isNotEmpty prepend="," property="pidanremark">
 				pidan_remark=#pidanremark#
 			</isNotEmpty>
+			<isNotEmpty prepend="," property="xiufeiA2">
+				xiufei_a2=#xiufeiA2#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="xiongweiB2">
+				xiongwei_b2=#xiongweiB2#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="yaoweiC22">
+				yaowei_c22=#yaoweiC22#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="xiongweiB22">
+				xiongwei_2=#xiongweiB22#
+			</isNotEmpty>
 			
+				<isNotEmpty prepend="," property="gongyingshang1">
+				gongyingshang_1=#gongyingshang1#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="gongyingshang2">
+				gongyingshang_2=#gongyingshang2#
+			</isNotEmpty>
 		</dynamic>
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
@@ -687,5 +724,5 @@
 			</isNotEmpty>
 		</dynamic>
 	</update>
-	
+
 </sqlMap>

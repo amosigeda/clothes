@@ -194,14 +194,14 @@ function onUpdate(){
 						<input type="text"    readOnly="true"   readOnly="true"   size="20"  name="jiankuanA" id="jiankuanA"   value="<%=projectInfo.getAt("jiankuan_a")%>"  >
 				</td>
 				<td>
-				 <input name="jiankuanA2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+				 <input name="jiankuanA2" size="20" type="text" class="txt_1"  maxlength="50"  value="<%=projectInfo.getAt("jiankuan_a2")%>" ><font color="red">*</font>
 				</td>
 				<td>领围</td>
 				<td>
 						<input type="text"    readOnly="true"   readOnly="true"   size="20"  name="lingweiB" id="lingweiB"   value="<%=projectInfo.getAt("lingwei_b")%>"  >
 					</td>
 				<td>
-				 <input name="lingweiB2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+				 <input name="lingweiB2" size="20" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("lingwei_b2")%>" ><font color="red">*</font>
 			</td>	
 				<td>
 				</td>
@@ -215,14 +215,14 @@ function onUpdate(){
 							<input type="text"    readOnly="true"   readOnly="true"   size="20"  name="xiongweiA" id="xiongweiA"   value="<%=projectInfo.getAt("xiongwei_a")%>"  >
 				</td>
 				<td>
-				 <input name="xiongweiA2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+				 <input name="xiongweiA2" size="20" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("xiongwei_a2")%>"><font color="red">*</font>
 				</td>
 				<td>胸围</td>
 				<td>
 						<input type="text"    readOnly="true"    readOnly="true"  size="20"  name="xiongweiB" id="xiongweiB"   value="<%=projectInfo.getAt("xiongwei_b")%>"  >
 				</td>
 				<td>
-				 <input name="xiongweiB2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+				 <input name="xiongweiB22" size="20" type="text" class="txt_1"maxlength="50"  value="<%=projectInfo.getAt("xiongwei_2")%>"><font color="red">*</font>
 				</td>
 				<td></td>
 				<td></td>
@@ -234,14 +234,14 @@ function onUpdate(){
 						<input type="text"    readOnly="true"    readOnly="true"  size="20"  name="zhongyaoA" id="zhongyaoA"   value="<%=projectInfo.getAt("zhongyao_a")%>"  >
 				</td>
 				<td>
-				 <input name="zhongyaoA2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+				 <input name="zhongyaoA2" size="20" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("zhongyao_a2")%>"><font color="red">*</font>
 				</td>
 				<td>中腰</td>
 				<td>
 						<input type="text"    readOnly="true"   readOnly="true"   size="20"  name="zhongyaoB" id="zhongyaoB"   value="<%=projectInfo.getAt("zhongyao_b")%>"  >
 				</td>
 				<td>
-				 <input name="zhongyaoB2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+				 <input name="zhongyaoB2" size="20" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("zhongyao_b2")%>" ><font color="red">*</font>
 				</td>
 				<td></td>
 				<td></td>
@@ -253,14 +253,14 @@ function onUpdate(){
 					<input type="text"    readOnly="true"    readOnly="true"  size="20"  name="fuweiA" id="fuweiA"   value="<%=projectInfo.getAt("fuwei_a")%>"  >
 					</td>
 				<td>
-				 <input name="fuweiA2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+				 <input name="fuweiA2" size="20" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("fuwei_a2")%>"><font color="red">*</font>
 				</td>
 				<td>腹围</td>
 				<td>
 						<input type="text"    readOnly="true"   readOnly="true"   size="20"  name="fuweiB" id="fuweiB"   value="<%=projectInfo.getAt("fuwei_b")%>"  >
 					</td>
 				<td>
-				 <input name="fuweiB2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+				 <input name="fuweiB2" size="20" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("fuwei_b2")%>"><font color="red">*</font>
 				</td>
 				<td></td>
 				<td></td>
@@ -272,14 +272,14 @@ function onUpdate(){
 					<input type="text"    readOnly="true"   readOnly="true"   size="20"  name="houzhongyichangA" id="houzhongyichangA"   value="<%=projectInfo.getAt("houzhongyichang_a")%>"  >
 					</td>
 				<td>
-				 <input name="houzhongyichangA2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+				 <input name="houzhongyichangA2" size="20" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("houzhongyichang_a2")%>"><font color="red">*</font>
 				</td>
 				<td>袖长</td>
 				<td>
 						<input type="text"    readOnly="true"   readOnly="true"   size="20"  name="xiuchangB" id="xiuchangB"   value="<%=projectInfo.getAt("xiuchang_b")%>"  >
 				</td>
 				<td>
-					 <input name="xiuchangB2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+					 <input name="xiuchangB2" size="20" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("xiuchang_b2")%>"><font color="red">*</font>
 				</td>
 				<td></td>
 				<td></td>
@@ -291,14 +291,14 @@ function onUpdate(){
 						<input type="text"    readOnly="true"  readOnly="true"    size="20"  name="qianyichangA" id="qianyichangA"   value="<%=projectInfo.getAt("qianyichang_a")%>"  >
 				</td>
 				<td>
-				 <input name="qianyichangA2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+				 <input name="qianyichangA2" size="20" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("qianyichang_a2")%>"><font color="red">*</font>
 				</td>
 				<td>袖肥</td>
 				<td>
 						<input type="text"    readOnly="true"   readOnly="true"   size="20"  name="xiufeiB" id="xiufeiB"   value="<%=projectInfo.getAt("xiufei_b")%>"  >
 					</td>
 				<td>
-				 <input name="xiufeiB2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+				 <input name="xiufeiB2" size="20" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("xiufei_b2")%>"><font color="red">*</font>
 				</td>
 				<td></td>
 				<td></td>
@@ -310,14 +310,14 @@ function onUpdate(){
 						<input type="text"    readOnly="true"   readOnly="true"   size="20"  name="xiuchangA" id="xiuchangA"   value="<%=projectInfo.getAt("xiuchang_a")%>"  >
 				</td>
 				<td>
-				 <input name="xiuchangA2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+				 <input name="xiuchangA2" size="20" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("xiuchang_a2")%>" ><font color="red">*</font>
 				</td>
 				<td>袖口</td>
 				<td>
 						<input type="text"    readOnly="true"   readOnly="true"   size="20"  name="xiukouB" id="xiukouB"   value="<%=projectInfo.getAt("xiukou_b")%>"  >
 					</td>
 				<td>
-					 <input name="xiukouB2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+					 <input name="xiukouB2" size="20" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("xiukou_b2")%>"><font color="red">*</font>
 				</td>
 				<td></td>
 				<td></td>
@@ -329,14 +329,14 @@ function onUpdate(){
 					<input type="text"    readOnly="true"    readOnly="true"  size="20"  name="xiufeiA" id="xiufeiA"   value="<%=projectInfo.getAt("xiufei_a")%>"  >
 					</td>
 				<td>
-				<input name="xiukouB2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+				<input name="xiufeiA2" size="20" type="text" class="txt_1"maxlength="50"  value="<%=projectInfo.getAt("xiufei_a2")%>"><font color="red">*</font>
 				</td>
 				<td>领口款式</td>
 				<td>
 						<input type="text"    readOnly="true"   readOnly="true"   size="20"  name="lingkoukuaishiB" id="lingkoukuaishiB"   value="<%=projectInfo.getAt("lingkoukuaishi_b")%>"  >
 					</td>
 				<td>
-					<input name="lingkoukuaishiB2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+					<input name="lingkoukuaishiB2" size="20" type="text" class="txt_1"maxlength="50"  value="<%=projectInfo.getAt("lingkoukuaishi_b2")%>"><font color="red">*</font>
 				</td>
 				<td></td>
 				<td></td>
@@ -349,14 +349,14 @@ function onUpdate(){
 						<input type="text"    readOnly="true"     size="20"  name="xiukouA" id="xiukouA"   value="<%=projectInfo.getAt("xiukou_a")%>"  >
 					</td>
 				<td>
-					<input name="xiukouA2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+					<input name="xiukouA2" size="20" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("xiukou_a2")%>"><font color="red">*</font>
 				</td>
 				<td>衣长</td>
 				<td>
 						<input type="text"    readOnly="true"     size="20"  name="yichangB" id="yichangB"   value="<%=projectInfo.getAt("yichang_b")%>"  >
 					</td>
 				<td>
-					<input name="yichangB2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+					<input name="yichangB2" size="20" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("yichang_b2")%>"><font color="red">*</font>
 				</td>
 				<td></td>
 				<td></td>
@@ -378,14 +378,14 @@ function onUpdate(){
 					<input type="text"    readOnly="true"     size="20"  name="kuchangC" id="kuchangC"   value="<%=projectInfo.getAt("kuchang_c")%>"  >
 					</td>
 				<td>
-				<input name="kuchangC2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+				<input name="kuchangC2" size="20" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("kuchang_c2")%>"><font color="red">*</font>
 				</td>
 				<td>胸围</td>
 				<td>
 						<input type="text"    readOnly="true"     size="20"  name="xiongweiD" id="xiongweiD"   value="<%=projectInfo.getAt("xiongwei_d")%>"  >
 				</td>
 				<td>
-				<input name="xiongweiD2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+				<input name="xiongweiD2" size="20" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("xiongwei_d2")%>"><font color="red">*</font>
 				</td>
 				<td></td>
 				<td></td>
@@ -398,14 +398,14 @@ function onUpdate(){
 						<input type="text"    readOnly="true"     size="20"  name="yaoweiC" id="yaoweiC"   value="<%=projectInfo.getAt("yaowei_c")%>"  >
 					</td>
 				<td>
-					<input name="yaoweiC2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+					<input name="yaoweiC22" size="20" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("yaowei_c22")%>"><font color="red">*</font>
 				</td>
 				<td>中腰</td>
 				<td>
 						<input type="text"    readOnly="true"     size="20"  name="zhongyaoD" id="zhongyaoD"   value="<%=projectInfo.getAt("zhongyao_d")%>"  >
 				</td>
 				<td>
-				<input name="zhongyaoD2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+				<input name="zhongyaoD2" size="20" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("yaowei_c2")%>"><font color="red">*</font>
 				</td>
 				<td></td>
 				<td></td>
@@ -417,14 +417,14 @@ function onUpdate(){
 						<input type="text"    readOnly="true"     size="20"  name="tuiweiC" id="tuiweiC"   value="<%=projectInfo.getAt("tuiwei_c")%>"  >
 					</td>
 				<td>
-				<input name="tuiweiC2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+				<input name="tuiweiC2" size="20" type="text" class="txt_1"maxlength="50"  value="<%=projectInfo.getAt("tuiwei_c2")%>"><font color="red">*</font>
 				</td>
 				<td>衣长</td>
 				<td>
 						<input type="text"    readOnly="true"     size="20"  name="yichangD" id="yichangD"   value="<%=projectInfo.getAt("yichang_d")%>"  >
 					</td>
 				<td>
-					<input name="yichangD2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+					<input name="yichangD2" size="20" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("yichang_d2")%>"><font color="red">*</font>
 				</td>
 				<td></td>
 				<td></td>
@@ -437,7 +437,7 @@ function onUpdate(){
 						<input type="text"    readOnly="true"     size="20"  name="dangweiC" id="dangweiC"   value="<%=projectInfo.getAt("dangwei_c")%>"  >
 					</td>
 				<td>
-				<input name="dangweiC2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+				<input name="dangweiC2" size="20" type="text" class="txt_1"maxlength="50"  value="<%=projectInfo.getAt("dangwei_c2")%>"><font color="red">*</font>
 				</td>
 				<td></td>
 				<td></td>
@@ -452,7 +452,7 @@ function onUpdate(){
 						<input type="text"    readOnly="true"     size="20"  name="datuiC" id="datuiC"   value="<%=projectInfo.getAt("datui_c")%>"  >
 					</td>
 				<td>
-					<input name="datuiC2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+					<input name="datuiC2" size="20" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("datui_c2")%>"><font color="red">*</font>
 				</td>
 				<td></td>
 				<td></td>
@@ -468,7 +468,7 @@ function onUpdate(){
 						<input type="text"    readOnly="true"     size="20"  name="zhongtuiC" id="zhongtuiC"   value="<%=projectInfo.getAt("zhongtui_c")%>"  >
 				</td>
 				<td>
-					<input name="zhongtuiC2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+					<input name="zhongtuiC2" size="20" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("zhongtui_c2")%>"><font color="red">*</font>
 				</td>
 				<td></td>
 				<td></td>
@@ -484,7 +484,7 @@ function onUpdate(){
 						<input type="text"    readOnly="true"     size="20"  name="xiaotuiC" id="xiaotuiC"   value="<%=projectInfo.getAt("xiaotui_c")%>"  >
 					</td>
 				<td>
-				<input name="xiaotuiC2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+				<input name="xiaotuiC2" size="20" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("xiaotui_c2")%>"><font color="red">*</font>
 				</td>
 				<td></td>
 				<td></td>
@@ -499,7 +499,7 @@ function onUpdate(){
 						<input type="text"    readOnly="true"     size="20"  name="tuikouC" id="tuikouC"   value="<%=projectInfo.getAt("tuikou_c")%>"  >
 					</td>
 				<td>
-					<input name="tuikouC2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+					<input name="tuikouC2" size="20" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("tuikou_c2")%>"><font color="red">*</font>
 				</td>
 				<td></td>
 				<td></td>
@@ -579,7 +579,7 @@ function onUpdate(){
 				</td>
 				<td>米数</td>
 				<td>
-					<input name="mi1" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+					<input name="mi1" size="20" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("mi1")%>" ><font color="red">*</font>
 				</td>
 				<td>用途</td>
 				<td>
@@ -596,7 +596,7 @@ function onUpdate(){
 				</td>
 				<td>米数</td>
 				<td>
-					<input name="mi2" size="20" type="text" class="txt_1"maxlength="50"><font color="red">*</font>
+					<input name="mi2" size="20" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("mi2")%>" ><font color="red">*</font>
 				</td>
 				<td>用途</td>
 				<td>
@@ -621,7 +621,7 @@ function onUpdate(){
 				<tr>
 				<td>批单备注</td>
 				<td colspan="7">
-					<input type="text"    size="180"  name="pidanremark" id="pidanremark"    ><font color="red">*</font>
+					<input type="text"    size="180"  name="pidanremark" id="pidanremark"   value="<%=projectInfo.getAt("pidan_remark")%>" ><font color="red">*</font>
 					</td>
 				
 			</tr>

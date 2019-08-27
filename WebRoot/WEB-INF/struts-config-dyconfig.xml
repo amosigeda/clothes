@@ -129,6 +129,7 @@
    	 		
    	 		<!-- 批单修改 -->
    	 			<forward name="updateProjectInfoPiDan" path="/dyconfig/pidanInfo/updateProjectInfoxml.jsp"></forward>
+   	 			<forward name="updateProjectInfoGenDan" path="/dyconfig/gendanInfo/updateProjectInfoxml.jsp"></forward>
    	 	</action>
    	 	
    	 	<action name="saleInfoForm" path="/dyconfig/saleInfo/doSaleInfo" scope="request" type="com.care.sys.saleinfo.action.SaleInfoAction" parameter="method">

@@ -67,6 +67,7 @@ public class ProjectInfo extends PublicVoBean implements Serializable{
 	private String miaoliao2;
 	private String yongtu2;
 	private String tixingremark;
+	private String xiufeiA2;
 	
 	
 	private String projectNo;
@@ -130,8 +131,44 @@ public class ProjectInfo extends PublicVoBean implements Serializable{
 	private String mi1;
 	private String mi2;
 	private String pidanremark;
+	private String yaoweiC22;
+	private String xiongweiB22;
+	
+	private String gongyingshang1;
+	private String gongyingshang2;
 	
 	
+	
+	public String getGongyingshang1() {
+		return gongyingshang1;
+	}
+	public void setGongyingshang1(String gongyingshang1) {
+		this.gongyingshang1 = gongyingshang1;
+	}
+	public String getGongyingshang2() {
+		return gongyingshang2;
+	}
+	public void setGongyingshang2(String gongyingshang2) {
+		this.gongyingshang2 = gongyingshang2;
+	}
+	public String getXiongweiB22() {
+		return xiongweiB22;
+	}
+	public void setXiongweiB22(String xiongweiB22) {
+		this.xiongweiB22 = xiongweiB22;
+	}
+	public String getYaoweiC22() {
+		return yaoweiC22;
+	}
+	public void setYaoweiC22(String yaoweiC22) {
+		this.yaoweiC22 = yaoweiC22;
+	}
+	public String getXiufeiA2() {
+		return xiufeiA2;
+	}
+	public void setXiufeiA2(String xiufeiA2) {
+		this.xiufeiA2 = xiufeiA2;
+	}
 	public String getPidanremark() {
 		return pidanremark;
 	}

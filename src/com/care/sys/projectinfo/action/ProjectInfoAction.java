@@ -1917,6 +1917,81 @@ public class ProjectInfoAction extends BaseAction {
 		return mapping.findForward("result");
 	}
 	
+	
+	public ActionForward genDanTiJiao(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		Result result = new Result();
+		try {
+			ProjectInfoForm form = (ProjectInfoForm) actionForm;
+
+			ProjectInfo vo = new ProjectInfo();
+			vo.setCondition("id='" + form.getId() + "'");
+			vo.setStatus("9");
+			ServiceBean.getInstance().getProjectInfoFacade()
+					.updatePorjectInfo(vo);
+		
+			
+
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryProjectInfoXml"));
+			result.setResultCode("deletes");
+			result.setResultType("success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.debug(request.getQueryString() + "  " + e);
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryProjectInfoXml"));
+			if (e instanceof SystemException) { /* ����֪�쳣���н��� */
+				result.setResultCode(((SystemException) e).getErrCode());
+				result.setResultType(((SystemException) e).getErrType());
+			} else { /* ��δ֪�쳣���н�������ȫ�������δ֪�쳣 */
+				result.setResultCode("noKnownException");
+				result.setResultType("sysRunException");
+			}
+		} finally {
+			request.setAttribute("result", result);
+		}
+		return mapping.findForward("result");
+	}
+	
+	public ActionForward gendanTuiHui(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		Result result = new Result();
+		try {
+			ProjectInfoForm form = (ProjectInfoForm) actionForm;
+
+			ProjectInfo vo = new ProjectInfo();
+			vo.setCondition("id='" + form.getId() + "'");
+			vo.setStatus("8");
+			ServiceBean.getInstance().getProjectInfoFacade()
+					.updatePorjectInfo(vo);
+
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryProjectInfoXml"));
+			result.setResultCode("deletes");
+			result.setResultType("success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.debug(request.getQueryString() + "  " + e);
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryProjectInfoXml"));
+			if (e instanceof SystemException) { /* ����֪�쳣���н��� */
+				result.setResultCode(((SystemException) e).getErrCode());
+				result.setResultType(((SystemException) e).getErrType());
+			} else { /* ��δ֪�쳣���н�������ȫ�������δ֪�쳣 */
+				result.setResultCode("noKnownException");
+				result.setResultType("sysRunException");
+			}
+		} finally {
+			request.setAttribute("result", result);
+		}
+		return mapping.findForward("result");
+	}
+	
 	public ActionForward pidanTijiao(ActionMapping mapping,
 			ActionForm actionForm, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -1984,6 +2059,50 @@ public class ProjectInfoAction extends BaseAction {
 	}
 	
 	
+	public ActionForward genDanUpdateInit(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		LoginUser loginUser = (LoginUser) request.getSession().getAttribute(
+				Config.SystemConfig.LOGINUSER);
+		if (loginUser == null) {
+			return null;
+		}
+
+		//String userName = loginUser.getUserName();
+
+		String id = request.getParameter("id");
+		ProjectInfo vo = new ProjectInfo();
+		vo.setCondition("id='" + id + "'");
+		List<DataMap> list = ServiceBean.getInstance().getProjectInfoFacade()
+				.getProjectInfo(vo);
+		if (list == null || list.size() == 0) {
+			Result result = new Result();
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryProjectInfoXml"));
+			result.setResultCode("rowDel");
+			result.setResultType("success");
+			return mapping.findForward("result");
+		}
+		request.setAttribute("projectInfo", list.get(0));
+		
+		ProjectInfo voo = new ProjectInfo();
+		List<DataMap> Clist=  ServiceBean.getInstance().getProjectInfoFacade().getProjectWatchInfo(voo);
+		String sb = CommUtils
+				.getPrintSelect(Clist, "project_no1", "project_no",
+						"project_no", "", 1);
+		request.setAttribute("companyList", sb );
+		
+		String sb1 = CommUtils
+				.getPrintSelect(Clist, "project_no2", "project_no",
+						"project_no", "", 1);
+		
+		request.setAttribute("companyList1", sb1 );
+		
+		return mapping.findForward("updateProjectInfoGenDan");
+		
+	}
+	
+	
 	public ActionForward updateProjectInfopidan(ActionMapping mapping,
 			ActionForm actionForm, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -2011,8 +2130,8 @@ public class ProjectInfoAction extends BaseAction {
 			vo.setLingweiB2(lingweiB2);
 			String xiongweiA2 = request.getParameter("xiongweiA2");
 			vo.setXiongweiA2(xiongweiA2);
-			String xiongweiB2 = request.getParameter("xiongweiB2");
-			vo.setXiongweiB2(xiongweiB2);
+			String xiongweiB22 = request.getParameter("xiongweiB22");
+			vo.setXiongweiB22(xiongweiB22);
 			String zhongyaoA2 = request.getParameter("zhongyaoA2");
 			vo.setZhongyaoA2(zhongyaoA2);
 			String zhongyaoB2 = request.getParameter("zhongyaoB2");
@@ -2043,8 +2162,8 @@ public class ProjectInfoAction extends BaseAction {
 			vo.setKuchangC2(kuchangC2);
 			String xiongweiD2 = request.getParameter("xiongweiD2");
 			vo.setXiongweiD2(xiongweiD2);
-			String yaoweiC2 = request.getParameter("yaoweiC2");
-			vo.setYaoweiC2(yaoweiC2);
+			String yaoweiC22 = request.getParameter("yaoweiC22");
+			vo.setYaoweiC22(yaoweiC22);
 			String zhongyaoD2 = request.getParameter("zhongyaoD2");
 			vo.setZhongyaoD2(zhongyaoD2);
 			String tuiweiC2 = request.getParameter("tuiweiC2");
@@ -2066,6 +2185,9 @@ public class ProjectInfoAction extends BaseAction {
 			String mi2 = request.getParameter("mi2");
 			vo.setMi2(mi2);
 			
+			String xiufeiA2 = request.getParameter("xiufeiA2");
+			vo.setXiufeiA2(xiufeiA2);
+			
 			
 			String pidanremark = request.getParameter("pidanremark");
 			vo.setPidanremark(pidanremark); 
@@ -2078,6 +2200,68 @@ public class ProjectInfoAction extends BaseAction {
 		
 			vo.setCondition("id='" + id + "'");
 			vo.setStatus("3");
+			ServiceBean.getInstance().getProjectInfoFacade()
+					.updatePorjectInfo(vo);
+		
+
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryProjectInfoXml"));
+			result.setResultCode("updates");
+			result.setResultType("success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.debug(request.getQueryString() + "  " + e);
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryProjectInfoXml"));
+			if (e instanceof SystemException) { /* ����֪�쳣���н��� */
+				result.setResultCode(((SystemException) e).getErrCode());
+				result.setResultType(((SystemException) e).getErrType());
+			} else { /* ��δ֪�쳣���н�������ȫ�������δ֪�쳣 */
+				result.setResultCode("noKnownException");
+				result.setResultType("sysRunException");
+			}
+		} finally {
+			request.setAttribute("result", result);
+		}
+		return mapping.findForward("result");
+	}
+	
+	
+	
+	public ActionForward updateProjectInfoGenDan(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		Result result = new Result();
+		try {
+			
+			LoginUser loginUser = (LoginUser) request.getSession()
+					.getAttribute(Config.SystemConfig.LOGINUSER);
+			if (loginUser == null) {
+				return null;
+			}
+			   
+			
+			String id = request.getParameter("id");
+			String project_no1 = request.getParameter("project_no1");
+			String project_no2 = request.getParameter("project_no2");
+			
+		
+			
+			ProjectInfo vo = new ProjectInfo();
+			vo.setCondition("id='" + id + "'");
+			vo.setGongyingshang1(project_no1);
+		    vo.setGongyingshang2(project_no2);
+			
+			
+		
+			ServiceBean.getInstance().getProjectInfoFacade()
+					.updatePorjectInfoDangAn(vo);
+			
+			
+		
+			vo.setCondition("id='" + id + "'");
+			vo.setStatus("6");
 			ServiceBean.getInstance().getProjectInfoFacade()
 					.updatePorjectInfo(vo);
 		
