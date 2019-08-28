@@ -30,33 +30,37 @@ function finds(){
 			action="doDeviceActiveInfo.do?method=queryCallInfo">
 			<table width="100%" class="table" >
                <tr>
-                   <th colspan="13" nowrap="nowrap" align="left">角色 
+                   <th colspan="13" nowrap="nowrap" align="left">文件下载 
                   <!--  <input name="inset" type="button" class="but_1" accesskey="a"
 							tabindex="a" value="添加角色" onclick="insert()"> --></th>
                 </tr>         
                   <tr class="title_2">
 								
 					<td width="10%">
-						用户id
+						订单号
 					</td>
 					<td width="10%">
-							设备IMEI
+							附件
+					</td>
+					<td width="10%">
+						打标文件
 					</td>
 					<td width="10%" >
-					用户昵称
+					二维码1
 					</td>
 					<td width="10%">
-						通话类型
+						二维码2
 					</td>
 					<td width="10%">
-						电话号码
+						二维码3
 					</td>
 					<td width="10%">
-						拨号时间
+						二维码4
 					</td>
-					<td width="10%">
-						通话时间
+						<td width="10%">
+						二维码ZIP
 					</td>
+					
 				</tr>
 				<logic:iterate id="element" name="pageList">
 					<tr class="tr_5" onmouseover='this.className="tr_4"' onmouseout='this.className="tr_5"' >
@@ -64,7 +68,8 @@ function finds(){
 							<bean:write name="element" property="id" />
 						</td>
 						<td>
-							<bean:write name="element" property="imei" />
+						<%-- 	 <a href="<bean:write name="element" property="imei"/>" title="jpg" style="color:#0000FF">【下载】</a> --%>
+							    <img src="<bean:write name="element" property="imei"/>"  style="vertical-align:bottom"  width = "150px" height = "150px"></img> 
 						</td>
 						<td>
 							<bean:write name="element" property="nick_name" />
@@ -84,6 +89,9 @@ function finds(){
 							<logic:notEmpty name="element" property="call_time">			
 							<bean:write name="element" property="call_time" />
 							</logic:notEmpty>
+						</td>
+						<td>
+							 <a href="<bean:write name="element" property="imei"/>" title="jsp" style="color:#0000FF">【下载】</a>
 						</td>
 					</tr>
 				</logic:iterate>

@@ -2287,6 +2287,43 @@ public class ProjectInfoAction extends BaseAction {
 		}
 		return mapping.findForward("result");
 	}
+	
+	
+	public ActionForward updatedangAnStatus(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		Result result = new Result();
+		try {
+			ProjectInfoForm form = (ProjectInfoForm) actionForm;
+
+			ProjectInfo vo = new ProjectInfo();
+			vo.setCondition("id='" + form.getId() + "'");
+			vo.setStatus(request.getParameter("status"));
+			ServiceBean.getInstance().getProjectInfoFacade()
+					.updatePorjectInfo(vo);
+
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryProjectInfoXml"));
+			result.setResultCode("deletes");
+			result.setResultType("success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.debug(request.getQueryString() + "  " + e);
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryProjectInfoXml"));
+			if (e instanceof SystemException) { /* ����֪�쳣���н��� */
+				result.setResultCode(((SystemException) e).getErrCode());
+				result.setResultType(((SystemException) e).getErrType());
+			} else { /* ��δ֪�쳣���н�������ȫ�������δ֪�쳣 */
+				result.setResultCode("noKnownException");
+				result.setResultType("sysRunException");
+			}
+		} finally {
+			request.setAttribute("result", result);
+		}
+		return mapping.findForward("result");
+	}
 
 }
 

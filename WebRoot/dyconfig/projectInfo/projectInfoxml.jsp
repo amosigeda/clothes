@@ -134,6 +134,14 @@ function pidanTijiao(id){
 		frmGo.submit();
 	}
 }
+
+function  updatedangAnStatus(id,status){
+	if(confirm("确定提交吗?"))
+	{
+		frmGo.action="doProjectInfo.do?method=updatedangAnStatus&id="+id+"&status="+status;
+		frmGo.submit();
+	}
+}
 function ofuncs(projectId){
 	window.open("projectRoleFuncFrame.jsp?projectId=" + i);
 	//window.showModalDialog("roleFuncFrame.jsp?roleCode=" + rcode,		"","help:0;resizable:0;status=0;scrollbars=0;dialogWidth=25;dialogHeight=35;center=true");;
@@ -281,7 +289,8 @@ function ofuncs(projectId){
 							<logic:equal name="element" property="status" value="6"><font color="green">跟单保存</font></logic:equal>
 							<logic:equal name="element" property="status" value="7"><font color="green">跟单提交</font></logic:equal>
 							<logic:equal name="element" property="status" value="8"><font color="green">跟单退回</font></logic:equal>
-							<logic:equal name="element" property="status" value="8"><font color="green">跟单提交</font></logic:equal>
+							<logic:equal name="element" property="status" value="9"><font color="green">跟单提交</font></logic:equal>
+							<logic:equal name="element" property="status" value="10"><font color="gray">仓库已经在准备布料</font></logic:equal>
 						</td>
 						
 							<%-- <td>							
@@ -347,6 +356,28 @@ function ofuncs(projectId){
    							 	<a href=# onclick="gendanTuiHui('<bean:write name="element" property="id" />')" style="color:#0000FF" > [跟单退回]</a>
    							 	<a href=# onclick="genDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [跟单修改]</a>
    							 	<a href=# onclick="genDanTiJiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [跟单提交]</a>
+   						</logic:equal>	
+   						
+   						
+   						<logic:equal name="element" property="status" value="9">	
+   							 	<a href=# onclick="updatedangAnStatus('<bean:write name="element" property="id" />',10)" style="color:#0000FF" > [叫料]</a>
+   							 	<a href=# onclick="genDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [打标]</a>
+   							 	<logic:equal name="element" property="dadan_status" value="0">	
+   							 	<a href=# onclick="genDanTiJiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [打单]</a>
+   							 		</logic:equal>	
+   						</logic:equal>	
+   						
+   						
+   						
+   						
+   							<logic:equal name="element" property="status" value="10">	
+   							
+   							 	<a href=# onclick="genDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [打标]</a>
+   							 	
+   							 	
+   							 	<logic:equal name="element" property="dadan_status" value="0">	
+   							 	<a href=# onclick="genDanTiJiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [打单]</a>
+   							 		</logic:equal>	
    						</logic:equal>	
 							
 						</td>
