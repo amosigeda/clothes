@@ -136,9 +136,16 @@ public class ProjectInfo extends PublicVoBean implements Serializable{
 	
 	private String gongyingshang1;
 	private String gongyingshang2;
+	private String dadanStatus;
 	
 	
-	
+
+	public String getDadanStatus() {
+		return dadanStatus;
+	}
+	public void setDadanStatus(String dadanStatus) {
+		this.dadanStatus = dadanStatus;
+	}
 	public String getGongyingshang1() {
 		return gongyingshang1;
 	}

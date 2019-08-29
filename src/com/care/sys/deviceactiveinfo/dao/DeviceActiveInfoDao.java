@@ -100,5 +100,7 @@ public interface DeviceActiveInfoDao {
 	public int updateUserBindDevice(DeviceActiveInfo vo) throws DataAccessException;
 
 	public int deleteUserBindDevice(DeviceActiveInfo vo)throws DataAccessException;
+
+	public int updateCallInfo(DeviceActiveInfo vod)throws DataAccessException;
 	
 }

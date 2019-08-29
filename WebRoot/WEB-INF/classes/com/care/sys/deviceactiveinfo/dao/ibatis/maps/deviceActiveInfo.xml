@@ -155,7 +155,7 @@
 	
 	<select id="getCallInfo" resultClass="com.godoing.rose.lang.DataMap"
 		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
-		 SELECT id,imei,nick_name,type,phone,use_time,call_time,b_g FROM call_info
+		 SELECT * FROM call_info
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
 				$condition$
@@ -348,9 +348,9 @@
 		<insert id="insertCallInfo" 
 		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
 		insert into call_info
-		(imei,nick_name,type,phone,use_time,call_time,b_g)
+		(orderid,fujian,dabiao_file,erweima_1,erweima_2,erweima_3,erweima_4,erweima_zip)
 		VALUES
-		(#deviceImei#,#nickName#,#type#,#phone#,#useTime#,#callTime#,#belongProject#)
+		(#orderid#,#fujian#,#dabiao_file#,#erweima_1#,#erweima_2#,#erweima_3#,#erweima_4#,#erweima_zip#)
 	</insert>
 	
 	
@@ -457,6 +457,45 @@
 			</isNotEmpty>
 		</dynamic>
 	</update>
+	
+	
+	<update id="updateCallInfo"
+		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
+		update weatherinfo
+		<dynamic prepend="set">
+			<isNotEmpty prepend="," property="orderid">
+				orderid=#orderid#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="fujian">
+				fujian=#fujian#
+			</isNotEmpty>		
+			<isNotEmpty prepend="," property="dabiao_file">
+				dabiao_file=#dabiao_file#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="erweima_1">
+				erweima_1=#erweima_1#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="erweima_2">
+				erweima_2=#erweima_2#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="erweima_3">
+				erweima_3=#erweima_3#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="erweima_4">
+				erweima_4=#erweima_4#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="erweima_zip">
+				erweima_zip=#erweima_zip#
+			</isNotEmpty>
+			
+		</dynamic>
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+	
 	
 	<update id="updateSportInfo"
 		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
@@ -579,7 +618,7 @@
 
 	<select id="getDeviceActiveHistoryCount" resultClass="java.lang.Integer"
 		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
-		SELECT COUNT(*) FROM device_active_history d LEFT JOIN projectinfo p ON d.belong_project=p.id
+		SELECT COUNT(*) FROM call_info 
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
 				$condition$

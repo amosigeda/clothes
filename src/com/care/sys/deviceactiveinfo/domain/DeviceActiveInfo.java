@@ -93,6 +93,66 @@ public class DeviceActiveInfo extends PublicVoBean implements Serializable{
 	private String showFirst;
 	
 	
+	private String orderid;
+	private String fujian;
+	private String dabiao_file;
+	private String erweima_1;
+	private String erweima_2;
+	private String erweima_3;
+	private String erweima_4;
+	private String erweima_zip;
+	
+	
+	
+	
+	public String getOrderid() {
+		return orderid;
+	}
+	public void setOrderid(String orderid) {
+		this.orderid = orderid;
+	}
+	public String getFujian() {
+		return fujian;
+	}
+	public void setFujian(String fujian) {
+		this.fujian = fujian;
+	}
+	public String getDabiao_file() {
+		return dabiao_file;
+	}
+	public void setDabiao_file(String dabiao_file) {
+		this.dabiao_file = dabiao_file;
+	}
+	public String getErweima_1() {
+		return erweima_1;
+	}
+	public void setErweima_1(String erweima_1) {
+		this.erweima_1 = erweima_1;
+	}
+	public String getErweima_2() {
+		return erweima_2;
+	}
+	public void setErweima_2(String erweima_2) {
+		this.erweima_2 = erweima_2;
+	}
+	public String getErweima_3() {
+		return erweima_3;
+	}
+	public void setErweima_3(String erweima_3) {
+		this.erweima_3 = erweima_3;
+	}
+	public String getErweima_4() {
+		return erweima_4;
+	}
+	public void setErweima_4(String erweima_4) {
+		this.erweima_4 = erweima_4;
+	}
+	public String getErweima_zip() {
+		return erweima_zip;
+	}
+	public void setErweima_zip(String erweima_zip) {
+		this.erweima_zip = erweima_zip;
+	}
 	public Integer getBindCount() {
 		return bindCount;
 	}

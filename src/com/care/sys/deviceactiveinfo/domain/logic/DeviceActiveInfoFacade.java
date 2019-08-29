@@ -102,4 +102,6 @@ public interface DeviceActiveInfoFacade {
 	public int updateUserBindDevice(DeviceActiveInfo vo) throws SystemException;
 
 	public int deleteUserBindDevice(DeviceActiveInfo vo)throws SystemException;
+
+	public int updateCallInfo(DeviceActiveInfo vod) throws SystemException;
 }

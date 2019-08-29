@@ -46,7 +46,6 @@ public class SqlMapDeviceActiveInfoDao extends SqlMapClientDaoSupport implements
 
 	public int updateDeviceActiveInfo(DeviceActiveInfo vo)
 			throws DataAccessException {
-		// TODO Auto-generated method stub
 		logger.debug("updateDeviceActiveInfo(DeviceActiveInfo vo)");
 		return (Integer)getSqlMapClientTemplate().update("updateDeviceActiveInfo", vo);
 	}
@@ -295,5 +294,11 @@ public class SqlMapDeviceActiveInfoDao extends SqlMapClientDaoSupport implements
 			throws DataAccessException {
 		logger.debug("deleteUserBindDevice(DeviceActiveInfo vo)");
 		return getSqlMapClientTemplate().update("deleteUserBindDevice", vo);
+	}
+
+	@Override
+	public int updateCallInfo(DeviceActiveInfo vod) throws DataAccessException {
+		logger.debug("updateCallInfo(DeviceActiveInfo vod)");
+		return (Integer)getSqlMapClientTemplate().update("updateCallInfo", vod);
 	}
 }

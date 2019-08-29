@@ -34,10 +34,13 @@ import com.care.common.http.BaseAction;
 import com.care.common.lang.CommUtils;
 import com.care.common.lang.Constant;
 import com.care.sys.companyinfo.domain.CompanyInfo;
+import com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo;
 import com.care.sys.projectinfo.domain.ProjectInfo;
 import com.care.sys.projectinfo.domain.logic.ProjectInfoFacade;
 import com.care.sys.projectinfo.form.ProjectInfoForm;
 import com.care.sys.userinfo.domain.UserInfo;
+import com.care.utils.QRCodeUtil;
+import com.care.utils.ZipUtils;
 import com.godoing.rose.http.common.HttpTools;
 import com.godoing.rose.http.common.PagePys;
 import com.godoing.rose.http.common.Result;
@@ -2300,6 +2303,99 @@ public class ProjectInfoAction extends BaseAction {
 			ProjectInfo vo = new ProjectInfo();
 			vo.setCondition("id='" + form.getId() + "'");
 			vo.setStatus(request.getParameter("status"));
+			ServiceBean.getInstance().getProjectInfoFacade()
+					.updatePorjectInfo(vo);
+
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryProjectInfoXml"));
+			result.setResultCode("deletes");
+			result.setResultType("success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.debug(request.getQueryString() + "  " + e);
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryProjectInfoXml"));
+			if (e instanceof SystemException) { /* ����֪�쳣���н��� */
+				result.setResultCode(((SystemException) e).getErrCode());
+				result.setResultType(((SystemException) e).getErrType());
+			} else { /* ��δ֪�쳣���н�������ȫ�������δ֪�쳣 */
+				result.setResultCode("noKnownException");
+				result.setResultType("sysRunException");
+			}
+		} finally {
+			request.setAttribute("result", result);
+		}
+		return mapping.findForward("result");
+	}
+	
+	public ActionForward daDan(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		Result result = new Result();
+		try {
+			ProjectInfoForm form = (ProjectInfoForm) actionForm;
+
+	//		String qianZhui = "E:/resin/resin-pro-4.0.53/webapps/clothes/upload/photo/";
+  		String qianZhui = "D:/resin//webapps/clothes/upload/photo/";
+			
+			
+			String orderid =request.getParameter("orderid");
+			System.out.println(orderid);
+			String path =qianZhui +orderid;
+			Constant.deleteFile(path); 
+			Constant.createFile(path);
+			
+		for(int i=1;i<=4;i++){
+			// 存放在二维码中的内容
+			String text = "测试内容";
+			// 嵌入二维码的图片路径
+		//	String imgPath = "F:/UI/test/1.png";
+           String imgPath = "D:/1.png";
+			// 生成的二维码的路径及名称
+			String imgName = i+".jpg";
+			String destPath = path +"/" +imgName;
+			//生成二维码
+			QRCodeUtil.encode(text, imgPath, destPath, true);
+		}
+
+		String zipName = path +"/" +orderid+".zip";
+	    FileOutputStream fos1 = new FileOutputStream(new File(zipName));
+        ZipUtils.toZip(path, fos1, true);
+        
+    	DeviceActiveInfo vod = new DeviceActiveInfo();
+    	
+    	vod.setCondition("orderid = '"+orderid+"'");
+    	
+    	List<DataMap> list = ServiceBean.getInstance().getDeviceActiveInfoFacade().getAllCallInfo(vod);
+    	
+    	//String url = "http://localhost:8080/clothes/upload/photo/"+orderid+"/";
+    	String url = "http://47.111.148.8:9999/clothes/upload/photo/"+orderid+"/";
+    	if(list.size()>0){
+    		vod.setCondition("id='"+list.get(0).get("id")+"'");
+    		vod.setErweima_1(url+"1.jpg");
+    		vod.setErweima_2(url+"2.jpg");
+    		vod.setErweima_3(url+"3.jpg");
+    		vod.setErweima_4(url+"4.jpg");
+    		vod.setErweima_zip(url+orderid+".zip");
+    		ServiceBean.getInstance().getDeviceActiveInfoFacade().updateCallInfo(vod);
+    		
+    	}else{
+    		vod.setOrderid(orderid);
+    		vod.setErweima_1(url+"1.jpg");
+    		vod.setErweima_2(url+"2.jpg");
+    		vod.setErweima_3(url+"3.jpg");
+    		vod.setErweima_4(url+"4.jpg");
+    		vod.setErweima_zip(url+orderid+".zip");
+    		ServiceBean.getInstance().getDeviceActiveInfoFacade().insertCallInfo(vod);
+    	}
+		
+		
+        
+			
+			ProjectInfo vo = new ProjectInfo();
+			vo.setCondition("id='" + form.getId() + "'");
+			vo.setSocketWay("1");
 			ServiceBean.getInstance().getProjectInfoFacade()
 					.updatePorjectInfo(vo);
 

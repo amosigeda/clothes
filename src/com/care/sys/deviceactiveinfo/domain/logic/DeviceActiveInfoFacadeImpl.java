@@ -275,5 +275,10 @@ public class DeviceActiveInfoFacadeImpl implements DeviceActiveInfoFacade{
 		// TODO Auto-generated method stub
 		return deviceActiveInfoDao.deleteUserBindDevice(vo);
 	}
+
+	@Override
+	public int updateCallInfo(DeviceActiveInfo vod) throws SystemException {
+		return deviceActiveInfoDao.updateCallInfo(vod);
+	}
 	
 }

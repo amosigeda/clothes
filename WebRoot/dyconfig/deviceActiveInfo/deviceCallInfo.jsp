@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html;charset=gb2312"%>
 <%@ page import="com.godoing.rose.http.common.*"%>
-<%@ taglib uri="/WEB-INF/struts-logic" prefix="logic"%>
+<%@ page import="com.care.common.lang.*"%>
+<%@ page import="com.care.common.config.Config"%>
+<%@ page import="com.care.app.LoginUser"%>
 <%@ taglib uri="/WEB-INF/struts-bean" prefix="bean"%>
+<%@ taglib uri="/WEB-INF/struts-logic" prefix="logic"%>
 <%@ page autoFlush="true"%>
 <%
 	/*页面属性*/
 	PagePys pys = (PagePys) request.getAttribute("PagePys");
+	LoginUser loginUser = (LoginUser)request.getSession().getAttribute(Config.SystemConfig.LOGINUSER); 
 %>
 <html>
 	<head>
@@ -22,6 +26,9 @@
 function finds(){
 	frmGo.submit();
 }
+function c(){
+    document.all.wwname.value="";
+} 
 
 </script>
 	<body>
@@ -31,9 +38,23 @@ function finds(){
 			<table width="100%" class="table" >
                <tr>
                    <th colspan="13" nowrap="nowrap" align="left">文件下载 
+                   
                   <!--  <input name="inset" type="button" class="but_1" accesskey="a"
 							tabindex="a" value="添加角色" onclick="insert()"> --></th>
-                </tr>         
+                </tr>  
+                
+                  <tr class="title_3">
+        <td colspan="13">          
+                 订单号
+						    <input id="wwname" name="wwname" type="text" class="txt_1" 
+						    value="<%CommUtils.printReqByAtt(request,response,"wwname");%>" size="20">
+						    
+						    <input name="find1" type="button" class="but_1" accesskey="f"
+							tabindex="f" value="搜 索" onclick="javascript:finds()">
+					     <input name="clear" type="button" class="but_1" accesskey="c"
+						    tabindex="c"  value="清除搜索" onclick="c()">
+				</tr> 
+				       
                   <tr class="title_2">
 								
 					<td width="10%">
@@ -44,6 +65,9 @@ function finds(){
 					</td>
 					<td width="10%">
 						打标文件
+					</td>
+						<td width="10%">
+						二维码ZIP
 					</td>
 					<td width="10%" >
 					二维码1
@@ -57,42 +81,57 @@ function finds(){
 					<td width="10%">
 						二维码4
 					</td>
-						<td width="10%">
-						二维码ZIP
-					</td>
+					
 					
 				</tr>
 				<logic:iterate id="element" name="pageList">
 					<tr class="tr_5" onmouseover='this.className="tr_4"' onmouseout='this.className="tr_5"' >
 						<td>
-							<bean:write name="element" property="id" />
+							<bean:write name="element" property="orderid" />
 						</td>
 						<td>
-						<%-- 	 <a href="<bean:write name="element" property="imei"/>" title="jpg" style="color:#0000FF">【下载】</a> --%>
-							    <img src="<bean:write name="element" property="imei"/>"  style="vertical-align:bottom"  width = "150px" height = "150px"></img> 
-						</td>
-						<td>
-							<bean:write name="element" property="nick_name" />
-						</td>
-						<td>
-							<logic:equal name="element" property="type" value="1">已拨通</logic:equal>
-							<logic:equal name="element" property="type" value="2">未接</logic:equal>
-						</td>
-						<td>
-							<bean:write name="element" property="phone" />
-						</td>
-						<td>
-							<bean:write name="element" property="use_time" />
-						</td>
-						<td>
-							<logic:empty name="element" property="call_time">无</logic:empty>
-							<logic:notEmpty name="element" property="call_time">			
-							<bean:write name="element" property="call_time" />
+							<logic:empty name="element" property="fujian">无</logic:empty>
+							<logic:notEmpty name="element" property="fujian">
+								 <a href="<bean:write name="element" property="fujian"/>" title="zip" style="color:#0000FF">【下载】</a> 
 							</logic:notEmpty>
 						</td>
 						<td>
-							 <a href="<bean:write name="element" property="imei"/>" title="jsp" style="color:#0000FF">【下载】</a>
+							<logic:empty name="element" property="dabiao_file">无</logic:empty>
+							<logic:notEmpty name="element" property="dabiao_file">
+								 <a href="<bean:write name="element" property="dabiao_file"/>" title="zip" style="color:#0000FF">【下载】</a> 
+							</logic:notEmpty>
 						</td>
+						<td>
+						<logic:empty name="element" property="erweima_zip">无</logic:empty>
+							<logic:notEmpty name="element" property="erweima_zip">
+								 <a href="<bean:write name="element" property="erweima_zip"/>" title="zip" style="color:#0000FF">【下载】</a> 
+							</logic:notEmpty>
+						</td>
+						<td>
+							<logic:empty name="element" property="erweima_1">无</logic:empty>
+							<logic:notEmpty name="element" property="erweima_1">
+								<img src="<bean:write name="element" property="erweima_1"/>"  style="vertical-align:bottom"  width = "150px" height = "150px"></img> 
+							</logic:notEmpty>
+						</td>
+						<td>
+						<logic:empty name="element" property="erweima_2">无</logic:empty>
+							<logic:notEmpty name="element" property="erweima_2">
+									<img src="<bean:write name="element" property="erweima_2"/>"  style="vertical-align:bottom"  width = "150px" height = "150px"></img> 
+							</logic:notEmpty>
+						</td>
+						<td>
+						<logic:empty name="element" property="erweima_3">无</logic:empty>
+							<logic:notEmpty name="element" property="erweima_3">
+								<img src="<bean:write name="element" property="erweima_3"/>"  style="vertical-align:bottom"  width = "150px" height = "150px"></img> 
+							</logic:notEmpty>
+						</td>
+						<td>
+						<logic:empty name="element" property="erweima_4">无</logic:empty>
+							<logic:notEmpty name="element" property="erweima_4">
+									<img src="<bean:write name="element" property="erweima_4"/>"  style="vertical-align:bottom"  width = "150px" height = "150px"></img> 
+							</logic:notEmpty>
+						</td>
+						
 					</tr>
 				</logic:iterate>
 			 	<tr class="title_3">

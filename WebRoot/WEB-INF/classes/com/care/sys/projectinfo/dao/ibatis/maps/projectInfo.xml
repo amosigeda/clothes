@@ -717,6 +717,8 @@
 				<isNotEmpty prepend="," property="gongyingshang2">
 				gongyingshang_2=#gongyingshang2#
 			</isNotEmpty>
+			
+			
 		</dynamic>
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">

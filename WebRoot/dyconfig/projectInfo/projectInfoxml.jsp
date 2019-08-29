@@ -146,6 +146,11 @@ function ofuncs(projectId){
 	window.open("projectRoleFuncFrame.jsp?projectId=" + i);
 	//window.showModalDialog("roleFuncFrame.jsp?roleCode=" + rcode,		"","help:0;resizable:0;status=0;scrollbars=0;dialogWidth=25;dialogHeight=35;center=true");;
 }
+
+function daDan(id,orderid){
+		frmGo.action="doProjectInfo.do?method=daDan&id="+id+"&orderid="+orderid;;
+		frmGo.submit();
+}
 </script>
 	<body>
 		<span class="title_1"></span>
@@ -362,8 +367,8 @@ function ofuncs(projectId){
    						<logic:equal name="element" property="status" value="9">	
    							 	<a href=# onclick="updatedangAnStatus('<bean:write name="element" property="id" />',10)" style="color:#0000FF" > [叫料]</a>
    							 	<a href=# onclick="genDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [打标]</a>
-   							 	<logic:equal name="element" property="dadan_status" value="0">	
-   							 	<a href=# onclick="genDanTiJiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [打单]</a>
+   							 	<logic:equal name="element" property="socket_way" value="0">	
+   							 	<a href=# onclick="daDan('<bean:write name="element" property="id" />')" style="color:#0000FF" > [打单]</a>
    							 		</logic:equal>	
    						</logic:equal>	
    						
@@ -375,8 +380,8 @@ function ofuncs(projectId){
    							 	<a href=# onclick="genDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [打标]</a>
    							 	
    							 	
-   							 	<logic:equal name="element" property="dadan_status" value="0">	
-   							 	<a href=# onclick="genDanTiJiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [打单]</a>
+   							 	<logic:equal name="element" property="socket_way" value="0">	
+   							 	<a href=# onclick="daDan('<bean:write name="element" property="id" />','<bean:write name="element" property="order_id" />')" style="color:#0000FF" > [打单]</a>
    							 		</logic:equal>	
    						</logic:equal>	
 							

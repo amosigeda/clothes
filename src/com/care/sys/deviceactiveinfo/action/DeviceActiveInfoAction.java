@@ -679,8 +679,18 @@ public class DeviceActiveInfoAction extends BaseAction{
 		try{
 			DeviceActiveInfoForm form = (DeviceActiveInfoForm)actionForm;
 			
+			  form.setOrderBy("id"); 
+	            form.setSort("1"); 
+	           String orderId =  request.getParameter("wwname");
+	           request.setAttribute("wwname", orderId);
+	           if(orderId!=null&&!"".equals(orderId)){
+	        	   sb.append("orderid = '"+orderId +"'");
+	           }
+	            
 			DeviceActiveInfo vo = new DeviceActiveInfo(); 	
 			vo.setCondition(sb.toString());
+			vo.setOrderBy("id");
+			vo.setSort("1"); 
          	BeanUtils.copyProperties(vo,form);			
          	list = info.getCallInfo(vo);
 			BeanUtils.copyProperties(pys, form);  
