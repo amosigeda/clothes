@@ -103,7 +103,7 @@ function exit(){
           </span>     
   </div>
 	<div class="manage_title">
-	     管理系统
+	     不一管理系统
     </div>
 <ul class="view_menu">
 		   <%

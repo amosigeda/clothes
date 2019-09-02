@@ -138,8 +138,46 @@ public class ProjectInfo extends PublicVoBean implements Serializable{
 	private String gongyingshang2;
 	private String dadanStatus;
 	
+	private Date jiaoLiaoTime;
+	private String xizhuang_number;
+	private String chenshan_number;
+	private String xiku_number;
+	private String majia_number;
+	
+	
+	
 	
 
+	public String getXizhuang_number() {
+		return xizhuang_number;
+	}
+	public void setXizhuang_number(String xizhuang_number) {
+		this.xizhuang_number = xizhuang_number;
+	}
+	public String getChenshan_number() {
+		return chenshan_number;
+	}
+	public void setChenshan_number(String chenshan_number) {
+		this.chenshan_number = chenshan_number;
+	}
+	public String getXiku_number() {
+		return xiku_number;
+	}
+	public void setXiku_number(String xiku_number) {
+		this.xiku_number = xiku_number;
+	}
+	public String getMajia_number() {
+		return majia_number;
+	}
+	public void setMajia_number(String majia_number) {
+		this.majia_number = majia_number;
+	}
+	public Date getJiaoLiaoTime() {
+		return jiaoLiaoTime;
+	}
+	public void setJiaoLiaoTime(Date jiaoLiaoTime) {
+		this.jiaoLiaoTime = jiaoLiaoTime;
+	}
 	public String getDadanStatus() {
 		return dadanStatus;
 	}

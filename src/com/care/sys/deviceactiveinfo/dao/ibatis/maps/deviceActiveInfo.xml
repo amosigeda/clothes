@@ -461,7 +461,7 @@
 	
 	<update id="updateCallInfo"
 		parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
-		update weatherinfo
+		update call_info
 		<dynamic prepend="set">
 			<isNotEmpty prepend="," property="orderid">
 				orderid=#orderid#

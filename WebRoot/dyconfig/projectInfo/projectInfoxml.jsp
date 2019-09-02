@@ -111,7 +111,7 @@ function deletee(id){
 	frmGo.submit(); */
 }
 function keFuTijiao(id){
-	if(confirm("确定提交吗?"))
+	if(confirm("确定吗?"))
 	{
 		frmGo.action="doProjectInfo.do?method=keFuTijiao&id="+id;
 		frmGo.submit();
@@ -119,7 +119,7 @@ function keFuTijiao(id){
 }
 
 function genDanTiJiao(id){
-	if(confirm("确定提交吗?"))
+	if(confirm("确定吗?"))
 	{
 		frmGo.action="doProjectInfo.do?method=genDanTiJiao&id="+id;
 		frmGo.submit();
@@ -128,7 +128,7 @@ function genDanTiJiao(id){
 
 
 function pidanTijiao(id){
-	if(confirm("确定提交吗?"))
+	if(confirm("确定吗?"))
 	{
 		frmGo.action="doProjectInfo.do?method=pidanTijiao&id="+id;
 		frmGo.submit();
@@ -136,7 +136,7 @@ function pidanTijiao(id){
 }
 
 function  updatedangAnStatus(id,status){
-	if(confirm("确定提交吗?"))
+	if(confirm("确定吗?"))
 	{
 		frmGo.action="doProjectInfo.do?method=updatedangAnStatus&id="+id+"&status="+status;
 		frmGo.submit();
@@ -158,14 +158,14 @@ function daDan(id,orderid){
 			
 			<table width="100%" class="table" border=0 cellpadding="0" cellspacing="1">
                <tr>
-                <th colspan="20" nowrap="nowrap" align="left">
+                <th colspan="50" nowrap="nowrap" align="left">
                                                订单信息
                      <input type="button" class="but_1" accesskey="a"
 							tabindex="a" value="添 加" onclick="add()">
                 </th>
                 </tr>
                  <tr class="title_3">
-        <td colspan="13">          
+        <td colspan="50">          
                  旺旺名
 						    <input id="wwname" name="wwname" type="text" class="txt_1" 
 						    value="<%CommUtils.printReqByAtt(request,response,"wwname");%>" size="20">
@@ -247,6 +247,9 @@ function daDan(id,orderid){
 						批单备注
 					</td>
 					<td width="5%">
+						叫料时间
+					</td>
+					<td width="5%">
 						操作
 					</td>
 				</tr>
@@ -308,6 +311,9 @@ function daDan(id,orderid){
 							<bean:write name="element" property="pidan_remark"/>				
 						</td>
 						
+						<td>			
+							<bean:write name="element" property="jiaoLiao_time" format="yyyy-MM-dd HH:mm:ss"/>				
+						</td>
 						
 									 						
 						<td>

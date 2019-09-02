@@ -35,21 +35,13 @@
 
 	<select id="getAppUserInfoListByVo" resultClass="com.godoing.rose.lang.DataMap"
 		parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
-		SELECT a.*,p.project_name project,s.count_share
-		count_share,sa.*,count_device FROM appuserinfo a LEFT JOIN projectinfo
-		p ON a.belong_project=p.id LEFT JOIN saleinfo sa ON
-		a.user_name=sa.user_name AND a.belong_project=sa.belong_project
-		LEFT JOIN (SELECT COUNT(id)
-		count_share,user_id FROM share_info WHERE is_priority='0' GROUP BY
-		user_id) s ON a.id=s.user_id LEFT JOIN (SELECT COUNT(id)
-		count_device,user_id FROM device_active_info WHERE device_disable='1'
-		GROUP BY user_id) d ON a.id=d.user_id   
+		SELECT * FROM appuserinfo
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
 				$condition$
 			</isNotEmpty>
 		</dynamic>
-		GROUP BY a.user_name
+		
 		<dynamic prepend="order by">
 			<isNotEmpty prepend="order by" property="orderBy">
 				$orderBy$

@@ -213,6 +213,10 @@
 			<isNotEmpty prepend="," property="adDetail">
 				adDetail=#adDetail#
 			</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="jiaoLiaoTime">
+				jiaoLiao_time=#jiaoLiaoTime#
+			</isNotEmpty>
 			<!-- ,remark=#remark# -->
 		</dynamic>
 		<dynamic prepend="where">
@@ -410,6 +414,7 @@
 		kouse_c,kuanxing_d,botou_d,koudai_c,dai_gai,pingxie_dai,
 		miao_liao1,yong_tu1,miao_liao2,yong_tu2,tixing_remark,
 		remark,update_time,status,add_time,xiukou_a
+		,xizhuang_number,chenshan_number,xiku_number,majia_number
 		) VALUES
 		(#orderId#,#wwName#,#salePrice#,#wechat#,#orderNumber#,
 		#kehuPhone#,#orderType#,#kehuName#,#qudao#,#xiadanKeFu#,
@@ -423,6 +428,7 @@
 		#kuanxingD#,#botouD#,#koudaiC#,#daigai#,#pingxiedai#,
 		#miaoliao1#,#yongtu1#,#miaoliao2#,#yongtu2#,#tixingremark#,
 		#remark#,#updateTime#,#status#,#addTime#,#xiukouA#
+		,#xizhuang_number#,#chenshan_number#,#xiku_number#,#majia_number#
 		)
 	</insert>
 

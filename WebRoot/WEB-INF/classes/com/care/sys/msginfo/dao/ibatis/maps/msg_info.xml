@@ -31,10 +31,7 @@
 	</select>
 
 	<select id="getMsgInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.msginfo.domain.MsgInfo">
-		SELECT m.*,
-		SUBSTRING(m.msg_content,LOCATE('@',m.msg_content)+1,(LENGTH(m.msg_content)-LOCATE('@',REVERSE(m.msg_content)))-LOCATE('@',m.msg_content)) AS msgImei,
-		SUBSTRING(m.msg_content,1,(LOCATE('@',m.msg_content)-1)) AS msgContent,
-		a1.user_name from_user_name,a2.user_name to_user_name,a1.id user_id,p.project_name project FROM msg_info m LEFT JOIN appuserinfo a1 ON m.from_id=a1.id LEFT JOIN appuserinfo a2 ON m.to_id=a2.id LEFT JOIN projectinfo p ON p.id=m.belong_project
+		SELECT * FROM msg_info 
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
 				$condition$
@@ -56,7 +53,7 @@
 	</select>
 
 	<select id="getMsgInfoCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.msginfo.domain.MsgInfo">
-		SELECT COUNT(m.id) FROM msg_info m LEFT JOIN appuserinfo a1 ON m.from_id=a1.id LEFT JOIN appuserinfo a2 ON m.to_id=a2.id
+		SELECT COUNT(*) FROM msg_info 
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
 				$condition$

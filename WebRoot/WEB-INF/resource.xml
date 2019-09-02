@@ -2,10 +2,10 @@
 <Config>
        <result>
            <success>
-			   <deletes>删除成功</deletes>
-			   <inserts>新增成功</inserts>
-			   <updates>更新成功</updates>
-			   <save>保存成功</save>
+			   <deletes>success</deletes>
+			   <inserts>success</inserts>
+			   <updates>success</updates>
+			   <save>success</save>
 			   <salerDel>商务还没有建立,请建立</salerDel>
 			   <updateIcon>更新图片成功</updateIcon>
            </success>

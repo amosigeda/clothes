@@ -16,17 +16,36 @@
 <title>无标题文档</title>
 </head>
 <script type="text/javascript">
+
+$(document).ready(function(){
+	 $("#orderNumber").blur(function(){
+		 var userCodeValue = $("#orderNumber").val().trim();
+		 $.ajax({
+			 type:"post",
+			 url:"doProjectInfo.do?method=verfyDingDan",
+		 	 data:"userCode="+userCodeValue,
+		 	 success:function(msg){
+		 		 if(msg=="fail"){
+		 			 alert("已有该订单号");
+		 			 $("#orderNumber").focus();
+		 			 return false;
+		 		 }
+		 	 }
+		 });
+	 });
+});
+
 	function onAdd() {
 		/* if(frmGo.projectNo.value.trim() == ""){
 			alert("项目编号不能为空，请重新输入");
 			frmGo.projectNo.focus();
 			return false;
-		}
-		if(frmGo.projectName.value.trim() == ""){
-			alert("项目名称不能为空，请重新输入");
-			frmGo.projectName.focus();
+		}*/
+		if(frmGo.orderNumber.value.trim() == ""){
+			alert("订单号不能为空！");
+			frmGo.orderNumber.focus();
 			return false;
-		} */
+		} 
 		frmGo.submit();
 	}
 
@@ -60,9 +79,9 @@
 		%>
 		<!-- <input type="hidden" name="addUser" value="<%=loginUserCode%>"> -->
 		<!-- <table width="100%" border="0"cellpadding="0" cellspacing="0"  class="tbl_11" > -->
-		<table width="100%" class="tbl_11" border="1" bordercolorlight=#000000
-			bordercolordark=#000000 bordercolor=#000000 cellspacing="0"
-			cellpadding="2">
+	<table width="100%"  id="tb1"  class="tbl_11" border="1" bordercolorlight=#000000  bordercolordark=#000000  bordercolor=#000000 cellspacing="0"  cellpadding="2"> 
+		
+		<!-- <table width="100%" border="0"cellpadding="0" cellspacing="1"  class="tbl_11" id="tb1"  > -->
 			<tr>
 				<th colspan="8" nowrap="nowrap" align="left">添加订单信息(客户档案)</th>
 			</tr>
@@ -158,9 +177,13 @@
 			</tr>
 
 			<tr>
-				<td colspan="2">西装数量</td>
+				<td >西装数量</td>
+						<td><input name="xizhuang_number" size="20" id="xizhuang_number" type="number"
+					class="txt_1" maxlength="100" /><font color="red">*</font></td>
 				<td>衣码</td>
-				<td colspan="2">衬衫数量</td>
+				<td >衬衫数量</td>
+				<td><input name="chenshan_number" size="20" id="chenshan_number" type="number"
+					class="txt_1" maxlength="100" /><font color="red">*</font></td>
 				<td>衬衫码</td>
 				<td></td>
 				<td></td>
@@ -295,9 +318,13 @@
 			</tr>
 
 			<tr>
-				<td colspan="2">西裤数量</td>
+				<td>西裤数量</td>
+				<td><input name="xiku_number" size="20" id="xiku_number" type="number"
+					class="txt_1" maxlength="100" /><font color="red">*</font></td>
 				<td>裤码</td>
-				<td colspan="2">马甲数量</td>
+				<td >马甲数量</td>
+					<td><input name="majia_number" size="20" id="majia_number" type="number"
+					class="txt_1" maxlength="100" /><font color="red">*</font></td>
 				<td>马甲码</td>
 				<td></td>
 				<td></td>

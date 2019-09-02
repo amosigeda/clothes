@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 <script language="JavaScript" src="public/g_js.js"></script>
-<title> 登录后台业务管理系统 </title>
+<title> 登录不一后台管理系统 </title>
 <link href="css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <script language="javascript">

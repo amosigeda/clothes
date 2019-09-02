@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
-<title>欢迎使用管理系统</title>
+<title>欢迎使用不一管理系统</title>
 <SCRIPT language="javascript">
 top.moveTo(0,0);
 top.resizeTo(screen.availWidth ,screen.availHeight);

@@ -16,7 +16,7 @@
 	</select>
 
 	<select id="getFeedBackInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.feedbackinfo.domain.FeedBackInfo">
-		SELECT user_name,b.id,f.id,project_name,user_id,user_feedback_content,feedback_status,date_time,processing_content,processing_time FROM feedbackinfo f LEFT JOIN appuserinfo a  ON f.user_id=a.id  LEFT JOIN projectinfo b ON f.id=b.id
+		SELECT * FROM feedbackinfo 
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
 				$condition$
@@ -38,7 +38,7 @@
 	</select>
 
 	<select id="getFeedBackInfoCount" resultClass="java.lang.Integer" parameterClass="com.care.sys.feedbackinfo.domain.FeedBackInfo">
-		SELECT COUNT(*) FROM feedbackinfo f LEFT JOIN appuserinfo a  ON f.user_id=a.id  LEFT JOIN projectinfo b ON f.belong_project=b.id
+		SELECT COUNT(*) FROM feedbackinfo 
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
 				$condition$
