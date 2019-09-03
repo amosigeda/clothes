@@ -374,7 +374,7 @@ function daDan(id,orderid){
    							 	<a href=# onclick="updatedangAnStatus('<bean:write name="element" property="id" />',10)" style="color:#0000FF" > [叫料]</a>
    							 	<a href=# onclick="genDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [打标]</a>
    							 	<logic:equal name="element" property="socket_way" value="0">	
-   							 	<a href=# onclick="daDan('<bean:write name="element" property="id" />')" style="color:#0000FF" > [打单]</a>
+   							  	<a href=# onclick="daDan('<bean:write name="element" property="id" />','<bean:write name="element" property="order_id" />')" style="color:#0000FF" > [打单]</a>
    							 		</logic:equal>	
    						</logic:equal>	
    						

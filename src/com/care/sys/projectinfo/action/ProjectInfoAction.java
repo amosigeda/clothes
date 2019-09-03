@@ -1654,6 +1654,18 @@ public class ProjectInfoAction extends BaseAction {
 			String xiku_number = request.getParameter("xiku_number");
 			String majia_number = request.getParameter("majia_number");
 			
+			if(xizhuang_number == null || "".equals(xizhuang_number)){
+				xizhuang_number = "0";
+			}
+			if(chenshan_number == null || "".equals(chenshan_number)){
+				chenshan_number = "0";
+			}
+			if(xiku_number == null || "".equals(xiku_number)){
+				xiku_number = "0";
+			}
+			if(majia_number == null || "".equals(majia_number)){
+				majia_number = "0";
+			}
 			vo.setXizhuang_number(xizhuang_number);
 			vo.setChenshan_number(chenshan_number);
 			vo.setXiku_number(xiku_number);

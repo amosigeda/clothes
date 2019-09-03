@@ -55,7 +55,7 @@ function onView(download){
 			<table width="100%" class="table" border=0 cellpadding="0" cellspacing="1">
                <tr>
                 <th colspan="15" nowrap="nowrap" align="left">
-                    APP用户信息
+                    扫码用户信息
                 </th>
                 </tr>
                 <% if(request.getAttribute("user_id") == null){%>
@@ -71,7 +71,7 @@ function onView(download){
 						手机号				
 						    <input id="user" name="user" type="text" class="txt_1" 
 						    value="<%CommUtils.printReqByAtt(request,response,"user");%>" size="9">
-						项目
+						<%-- 项目
 							<%String belongProject = (String)request.getAttribute("belongProject"); %>
 							<select id="belongProject" name="belongProject">
 								<option value="">全部</option>
@@ -79,7 +79,7 @@ function onView(download){
 									<bean:define id="projectId" name="pro" property="id" type="java.lang.Integer" />																	
 									<option value='<%=projectId %>' <%=String.valueOf(projectId).equals(belongProject)? "selected" : "" %>><bean:write name="pro" property="project_name"/></option>
 								</logic:iterate>
-							</select>
+							</select> --%>
 						<input name="find1" type="button" class="but_1" accesskey="f"
 							tabindex="f" value="搜 索" onclick="javascript:finds()">
 					     <input name="clear" type="button" class="but_1" accesskey="c"
@@ -88,20 +88,15 @@ function onView(download){
 				<%} %>
                   <tr class="title_2"> 
                   	<td width="9%" >注册时间</td>
-                  <!-- 	<td width="5%">用户ID</td>  --> 
                   	<td width="8%" >手机号</td> 
-                  	<td width="6%" >项目</td>  
-                  	<td width="6%" >昵称</td>
-                  	<td width="5%" >绑定设备数</td>
-                  	<td width="5%" >绑定次数</td>
-                  	<td width="5%" >分享设备数</td> 
-                  	<td width="8%" >密码</td>
-                  	<td width="5%" >头像</td>                  	
-                  	<td width="8%" >手机型号</td>
-                  	<td width="8%" >系统版本</td>
-                    <td width="8%" >APP版本</td>
-                    <td width="8%" >IP地址</td>
-                    <td width="8%" >归属地</td>
+                  	<td width="6%" >公司</td>  
+                  	<td width="6%" >姓名</td>
+                 
+                  	<td width="8%" >微信号</td>
+                  	<td width="8%" >工种</td>
+                    <td width="8%" >备注</td>
+                     <!-- <td width="8%" >头像</td> -->
+             
 				</tr>
  
 				<logic:iterate id="element" name="pageList">
@@ -112,36 +107,21 @@ function onView(download){
 						<bean:write name="element" property="create_time" format="yyyy-MM-dd HH:mm:ss"/>
 						</logic:notEmpty>
 						</td>
-						<%-- <td><bean:write name="element" property="id"/></td> --%>	
 						<td><bean:write name="element" property="user_name"/></td>
 						<td>
-						<logic:empty name="element" property="project">无</logic:empty>
-						<logic:notEmpty name="element" property="project">
-						<a style="color:#00f" href="../projectInfo/doProjectInfo.do?method=queryProjectInfo&projectId=<bean:write name="element" property="belong_project"/>">
-									<bean:write name="element" property="project"/>
-							</a>
+						<logic:empty name="element" property="first_name">无</logic:empty>
+						<logic:notEmpty name="element" property="first_name">
+									<bean:write name="element" property="first_name"/>
 					</logic:notEmpty>
 						</td>
+						
 						<td>
 						<logic:empty name="element" property="nick_name">无</logic:empty>
 						<logic:notEmpty name="element" property="nick_name">
 						<bean:write name="element" property="nick_name" />
 						</logic:notEmpty>
 						</td>
-						<td>
-							<logic:empty name="element" property="count_device">0</logic:empty>
-							<a style="color: #0000FF"
-								href="../deviceActiveInfo/doDeviceActiveInfo.do?method=queryDeviceActiveInfo&user_id=<bean:write name="element" property="id" />">								
-								<bean:write name="element" property="count_device" />
-							</a>							
-						</td>
-						<td><bean:write name="element" property="bind_count" /></td>
-						<td>
-							<logic:empty name="element" property="count_share">0</logic:empty>
-							<logic:notEmpty name="element" property="count_share">
-								<bean:write name="element" property="count_share" />
-							</logic:notEmpty>
-						</td>
+					
 						<td>
 						<logic:empty name="element" property="password" >无</logic:empty>
 						<logic:notEmpty name="element" property="password">
@@ -149,38 +129,26 @@ function onView(download){
 						</logic:notEmpty></td>
 						
 						<td>
+						<logic:empty name="element" property="last_name">无</logic:empty>
+						<logic:notEmpty name="element" property="last_name">
+						<bean:write name="element" property="last_name" />
+						</logic:notEmpty>
+						</td>
+						
+						<td>
+						
+						<logic:empty name="element" property="email">无</logic:empty>
+						<logic:notEmpty name="element" property="email">
+						<bean:write name="element" property="email" />
+						</logic:notEmpty></td>																				
+						
+						<%-- 	<td>
 							<logic:empty name="element" property="head">无</logic:empty>
 							<logic:notEmpty name="element" property="head">
 								<a href=# onclick="onView('<bean:write name="element" property="head"/>')" style="color:#0000FF">下载</a>
 							</logic:notEmpty>							
-						</td>						
-						<td>
-						<logic:empty name="element" property="phone_model">无</logic:empty>
-						<logic:notEmpty name="element" property="phone_model">
-						<bean:write name="element" property="phone_model"/>
-						</logic:notEmpty></td>	
-						<td>
-						<logic:empty name="element" property="sys_version">无</logic:empty>
-						<logic:notEmpty name="element" property="sys_version">
-						<bean:write name="element" property="sys_version" />
-						</logic:notEmpty></td>
-						<td>
-						<logic:empty name="element" property="app_version">无</logic:empty>
-						<logic:notEmpty name="element" property="app_version">
-						<bean:write name="element" property="app_version" />
-						</logic:notEmpty></td>																				
-						<td>
-							<logic:empty name="element" property="ip" >旧数据</logic:empty>
-							<logic:notEmpty name="element" property="ip">
-								<bean:write name="element" property="ip" />
-							</logic:notEmpty>
-						</td>
-						<td>
-							<logic:empty name="element" property="province" >旧数据</logic:empty>
-							<logic:notEmpty name="element" property="province">
-								<bean:write name="element" property="province" />
-							</logic:notEmpty>
-						</td>
+						</td> --%>
+						
 					</tr>
 				</logic:iterate> 
 

@@ -24,6 +24,11 @@
 			src="<%=request.getContextPath()%>/public/My97DatePicker/WdatePicker.js"></script>
 	</head>
 	<script language="javascript">
+	function add(){
+		frmGo.action = "doMsgInfo.do?method=initInsert";
+		frmGo.submit();
+	}
+	
 function finds(){
     var st = new Date(frmGo.startTime.value.replace(/-/g,'/'));
 	var et = new Date(frmGo.endTime.value.replace(/-/g,'/'));
@@ -38,9 +43,9 @@ function c(){
     document.all.endTime.value="";
     document.all.startTime1.value="";
     document.all.endTime1.value="";
+    document.all.fromUserName.value="";
     document.all.toUserName.value="";
     document.all.content.value="";
-    document.all.fromUserName.value="";
     document.all.serieNo.value="";
     document.all.belongProject.value="";
     document.getElementById("statusSelect").options[0].selected = true;
@@ -53,7 +58,9 @@ function c(){
 			<table width="100%" class="table" border=0 cellpadding="0" cellspacing="1">
                <tr>
                 <th colspan="12" nowrap="nowrap" align="left">
-                IMEI信息A
+                售后信息
+                 <input type="button" class="but_1" accesskey="a"
+							tabindex="a" value="添 加" onclick="add()">
                 </th>
                 </tr>
                  <tr class="title_3">
@@ -74,16 +81,16 @@ function c(){
 								size="15" readonly>					
 						用户手机号
 						 <input id="fromUserName" name="fromUserName" type="text" class="txt_1" 
-						    value="<%CommUtils.printReqByAtt(request,response,"fromUserName");%>" size="9">
-						发送用户手机号
+						    value="<%CommUtils.printReqByAtt(request,response,"fromUserName");%>" size="15">
+						<%-- 发送用户手机号
 						 <input id="toUserName" name="toUserName" type="text" class="txt_1" 
-						    value="<%CommUtils.printReqByAtt(request,response,"toUserName");%>" size="9"><br>
+						    value="<%CommUtils.printReqByAtt(request,response,"toUserName");%>" size="9"><br> --%>
 						<!-- 
 						内容
 						 <input id="content" name="content" type="text" class="txt_1" 
 						    value="<%CommUtils.printReqByAtt(request,response,"content");%>" size="14"><br/>
 						 -->
-						IMEI
+				<%-- 		IMEI
 						<input id="serieNo" name="serieNo" type="text" class="txt_1" 
 						    value="<%CommUtils.printReqByAtt(request,response,"serieNo");%>" size="15">
 						  项目
@@ -104,7 +111,7 @@ function c(){
 						<option value="1">√</option>
 						<option value="0">×</option>
 						</select>
-						<%} %>
+						<%} %> --%>
 						<input name="find1" type="button" class="but_1" accesskey="f"
 							tabindex="f" value="搜 索" onclick="javascript:finds()">
 					     <input name="clear" type="button" class="but_1" accesskey="c"
@@ -112,53 +119,34 @@ function c(){
 				</tr> 
 				<%int i=1; %>
                   <tr class="title_2">                 	
-                  	<td width="6%">项目</td>                                   	                 	
-                  	<td width="6%" >用户手机号</td>
-                  	<td width="6%" >发送用户手机号</td>
-                  	<td width="10%">分享IMEI</td>
-                  	<td width="10%">内容</td>
-                  	<td width="8%">是否处理</td>
-                  	<td width="10%">产生时间</td>
-                  	<td width="10%">处理时间</td>
+                  	<td width="5%">原订单号</td>                                   	                 	
+                  	<td width="5%" >用户手机号</td>
+                  	<td width="5%" >发货物流</td>
+                  	<td width="5%" >物流编码</td>
+                  	<td width="5%">是否处理</td>
+                  	<td width="6%">产生时间</td>
+                  	<td width="6%">处理时间</td>
+                  	<td width="6%">添加账号</td>
+                  	<td width="8%">备注</td>
+                  	<!-- <td width="5%">操作</td> -->
                   </tr>	
                   
                   <logic:iterate id="element" name="pageList">
 					<tr class="tr_5" onmouseover='this.className="tr_4"' onmouseout='this.className="tr_5"' >						
 							<td>
-							<a style="color: #0000FF"  
-								href="../../dyconfig/projectInfo/doProjectInfo.do?method=queryProjectInfo&projectId=<bean:write name="element" property="belong_project" />">
-									<bean:write name="element" property="project"/>
-									 </a>
+									<bean:write name="element" property="order_id"/>
+						
 						</td>
 						<td>
-							<a style="color:#00f" href="../appUserInfo/doAppUserInfo.do?method=queryAppUserInfo&user_id=<bean:write name="element" property="user_id"/>">
-								<bean:write name="element" property="from_user_name"/>
-							</a>	
+								<bean:write name="element" property="phone"/>
 						</td>
 						<td>
-							<a style="color:#00f" href="../appUserInfo/doAppUserInfo.do?method=queryAppUserInfo&user_id=<bean:write name="element" property="user_id"/>">
-								<bean:write name="element" property="to_user_name"/>
-							</a>							
+								<bean:write name="element" property="fahuo_wuliu"/>
 						</td>
-							<td>
-							<a style="color:#00f" href="../deviceActiveInfo/doDeviceActiveInfo.do?method=queryDeviceActiveInfoOne&deviceImei=<bean:write name="element" property="msgImei"/>">
-								<bean:write name="element" property="msgImei"/>
-							</a>
+						<td>
+								<bean:write name="element" property="wuliu_bianma"/>
 						</td>
-						<td><logic:equal name="element" property="msgContent" value="0">绑定</logic:equal>
-							<logic:equal name="element" property="msgContent" value="1">解绑</logic:equal>
-							<logic:equal name="element" property="msgContent" value="2">进入围栏</logic:equal>
-							<logic:equal name="element" property="msgContent" value="3">出围栏</logic:equal>
-							<logic:equal name="element" property="msgContent" value="4">低电</logic:equal>
-							<logic:equal name="element" property="msgContent" value="5">戴上</logic:equal>
-							<logic:equal name="element" property="msgContent" value="6">脱落</logic:equal>
-							<logic:equal name="element" property="msgContent" value="7">SOS</logic:equal>
-							<logic:equal name="element" property="msgContent" value="8">远程关机</logic:equal>
-							<logic:equal name="element" property="msgContent" value="9">驱蚊</logic:equal>
-							<logic:equal name="element" property="msgContent" value="10">爱心</logic:equal>
-							<logic:equal name="element" property="msgContent" value="13">定位模式</logic:equal>
-							<logic:equal name="element" property="msgContent" value="14">离线状态</logic:equal>
-							</td>
+						
 						<td>
 							<logic:equal name="element" property="is_handler" value="1">
 								<font style="color:green;font-size: 20px;">√</font>
@@ -167,14 +155,25 @@ function c(){
 								<font style="color:red;font-size: 20px;">×</font>
 							</logic:equal>
 						</td>
+							<td>
+							<bean:write name="element" property="msg_handler_date" format="yyyy-MM-dd HH:mm:ss"/>
+							<logic:empty name="element" property="msg_handler_date">无</logic:empty>
+						</td>
 						<td>
 							<bean:write name="element" property="msg_occur_date" format="yyyy-MM-dd HH:mm:ss"/>
 							<logic:empty name="element" property="msg_occur_date">无</logic:empty>
 						</td>
-						<td>
-							<bean:write name="element" property="msg_handler_date" format="yyyy-MM-dd HH:mm:ss"/>
-							<logic:empty name="element" property="msg_handler_date">无</logic:empty>
+					<td>
+								<bean:write name="element" property="add_user"/>
 						</td>
+					
+							<td>
+								<bean:write name="element" property="remark"/>
+						</td>
+						
+						<%-- <td>
+								<bean:write name="element" property="remark"/>
+						</td> --%>
 					</tr>
 				</logic:iterate>
 				

@@ -80,6 +80,17 @@ public class UserInfoAction extends BaseAction {
 			form.setSort("0");
 			vo.setCondition(sb.toString());
 			BeanUtils.copyProperties(vo, form);
+			
+			
+			/*request.setAttribute("role","客户");
+			System.out.println("1");
+			   <%if(!"客户".equals(request.getAttribute("role"))){ %>
+               <input name="inset" type="button" class="but_1" accesskey="a"
+							tabindex="a" value="添 加" onclick="insert()">	
+				 <%} %>	
+				 
+				 往页面传递信息
+			*/	 
 			/*
 			if("1".equals(groupCode)){
 				vo.setCondition("userCode ='" + userCode + "'");

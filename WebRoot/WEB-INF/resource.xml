@@ -11,8 +11,8 @@
            </success>
            <fail>
                 <timeout>系统超时</timeout>
-				<loginCodeError>帐号错误!</loginCodeError>
-				<loginPwdError>密码错误!</loginPwdError>
+				<loginCodeError>username or password error!!!</loginCodeError>
+				<loginPwdError>username or password error!!!</loginPwdError>
 				<userCodeError>系统中存在重复的帐号</userCodeError>
 				<userNameError>存在重复的用户名</userNameError>
 				<productError>存在重复的项目</productError>

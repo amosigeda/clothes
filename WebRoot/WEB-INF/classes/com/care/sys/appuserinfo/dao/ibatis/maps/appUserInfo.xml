@@ -69,13 +69,7 @@
 
 	<select id="getAppUserInfoCountByVo" resultClass="java.lang.Integer"
 		parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
-		SELECT COUNT(*) FROM appuserinfo a LEFT JOIN projectinfo p ON
-		a.belong_project=p.id LEFT JOIN saleinfo sa ON
-		a.user_name=sa.user_name LEFT JOIN (SELECT COUNT(id)
-		count_share,user_id FROM share_info WHERE is_priority='0' GROUP BY
-		user_id) s ON a.id=s.user_id LEFT JOIN (SELECT COUNT(id)
-		count_device,user_id FROM device_active_info WHERE device_disable='1'
-		GROUP BY user_id) d ON a.id=d.user_id
+		SELECT COUNT(*) FROM appuserinfo 
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
 				$condition$

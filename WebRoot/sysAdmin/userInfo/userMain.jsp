@@ -70,7 +70,8 @@ function c(){
                <tr>
                 <th colspan="13" nowrap="nowrap" align="left">
                                                                 系统用户
-                 <%if(!"客户".equals(role)){ %>
+                                                                
+                 <%if(!"客户".equals(request.getAttribute("role"))){ %>
                  <input name="inset" type="button" class="but_1" accesskey="a"
 							tabindex="a" value="添 加" onclick="insert()">	
 				 <%} %>						

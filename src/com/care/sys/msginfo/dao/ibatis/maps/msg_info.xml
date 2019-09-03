@@ -71,7 +71,10 @@
 	</select>
 
 	<insert id="insertMsgInfo" parameterClass="com.care.sys.msginfo.domain.MsgInfo">
-		INSERT INTO msg_info(from_id,to_id,is_handler,msg_level,msg_content,msg_handler_date,belong_project,msg_occur_date) VALUES (#fromId#,#toId#,#isHandler#,#msgLevel#,#msgContent#,#msgHandlerDate#,#belongProject#,#msgOccurDate#)
+		INSERT INTO msg_info
+		(order_id,phone,fahuo_wuliu,wuliu_bianma,is_handler,msg_handler_date,remark,add_user) 
+		VALUES
+		(#order_id#,#phone#,#fahuo_wuliu#,#wuliu_bianma#,#isHandler#,#msgHandlerDate#,#remark#,#add_user#) 
 	</insert>
 
 	<update id="updateMsgInfo" parameterClass="com.care.sys.msginfo.domain.MsgInfo">

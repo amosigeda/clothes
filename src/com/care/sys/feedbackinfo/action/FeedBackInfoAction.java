@@ -58,7 +58,7 @@ public class FeedBackInfoAction extends BaseAction {
 			
 			FeedBackInfoForm form = (FeedBackInfoForm) actionForm;
 			/* 锟斤拷锟矫筹拷始锟斤拷锟斤拷锟斤拷锟斤拷锟?*/			
-			form.setOrderBy("date_time");
+			form.setOrderBy("id");
 			form.setSort("1");
 
 			FeedBackInfo vo = new FeedBackInfo();
@@ -72,7 +72,7 @@ public class FeedBackInfoAction extends BaseAction {
 		    
 		    
 			/*锟斤拷锟矫伙拷锟斤拷锟斤拷锟街讹拷*/
-            form.setOrderBy("date_time"); 
+            form.setOrderBy("id"); 
             form.setSort("1"); 
           
             if(!projectInfoId.equals("0")){
@@ -112,7 +112,7 @@ public class FeedBackInfoAction extends BaseAction {
 				if(sb.length() > 0){
 					sb.append(" and ");
 				}
-				sb.append("a.user_name like '%" + userName + "%'");
+				sb.append("user_id like '%" + userName + "%'");
 			}
 			if(userfeedbackcontent !=null && !"".equals(userfeedbackcontent)){
 				if(sb.length()>0){

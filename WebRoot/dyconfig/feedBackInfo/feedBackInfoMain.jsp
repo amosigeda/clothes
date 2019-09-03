@@ -61,23 +61,23 @@ function del(id){
 			<table width="100%" class="table" border=0 cellpadding="0" cellspacing="1">
                <tr>
                 <th colspan="13" nowrap="nowrap" align="left">
-                                                            意见反馈
+                                                           物流信息
                 </th>
                 </tr>
                    <tr class="title_3">			
 				    <td colspan="13">
 				    
-				    	反馈时间		
+				    	时间		
     					<input name="startTime" type="text" class="txt_1"  id="startTime" style="cursor:text"
 								value="<%CommUtils.printReqByAtt(request,response,"fNow_date");%>" onclick="WdatePicker()"
-								size="6" readonly> -
+								size="12" readonly> -
 				    	<input name="endTime" type="text" class="txt_1"  id="endTime" style="cursor:text"
 								value="<%CommUtils.printReqByAtt(request,response,"now_date");%>" onclick="WdatePicker()"
-								size="6" readonly>
-						用户名
+								size="12" readonly>
+						订单号
 						    <input id="userName" name="userName" type="text" class="txt_1" 
-						    value="<%CommUtils.printReqByAtt(request,response,"userName");%>" size="6">
-						    反馈内容
+						    value="<%CommUtils.printReqByAtt(request,response,"userName");%>" size="15">
+						<%--     反馈内容
 						    <input id="userfeedbackcontent" name="userfeedbackcontent" type="text" class="txt_1" 
 						    value="<%CommUtils.printReqByAtt(request,response,"userfeedbackcontent");%>" size="6">
 						项目
@@ -100,7 +100,7 @@ function del(id){
 								<option value="1">√</option>
 								<option value="0">×</option>
 							</select>
-							<%} %>
+							<%} %> --%>
 								
 						<input name="find1" type="button" class="but_1" accesskey="f"
 							tabindex="f" value="搜 索" onclick="javascript:finds()">
@@ -109,35 +109,40 @@ function del(id){
 						</td>					
 				</tr>
                  <tr class="title_2">                 	
-                    <td width="4%">用户名</td>
-                    <td width="4%">项目</td>                  
-					<td width="10%">反馈内容</td>	
-					<td width="8%">反馈时间</td>	
-					<td width="6%">是否处理</td>	
+                    <td width="5%">订单号</td>
+                    <td width="5%">快递类型</td>                  
+					<td width="5%">快递号</td>	
+					<td width="5%">价格</td>	
+					<td width="8%">录入时间</td>	
+					<!-- <td width="6%">是否处理</td>	
 					<td width="8%">处理内容</td>	
 					<td width="8%">处理时间</td>	
-					<td width="8%">操作</td>														
+					<td width="8%">操作</td>	 -->													
 				</tr>
 				<logic:iterate id="element" name="pageList">
 					<tr class="tr_5" onmouseover='this.className="tr_4"' onmouseout='this.className="tr_5"' >					 							
 						<td>
-							<a style="color:#00f" href="../appUserInfo/doAppUserInfo.do?method=queryAppUserInfo&user_id=<bean:write name="element" property="user_id"/>">		
-							<bean:write name="element" property="user_name" />
-							</a>
+							<bean:write name="element" property="user_id" />
+							<%-- <a style="color:#00f" href="../appUserInfo/doAppUserInfo.do?method=queryAppUserInfo&user_id=<bean:write name="element" property="user_id"/>">		
+							</a> --%>
 						</td>
 						<td>
-							<a style="color:#00f" href="../projectInfo/doProjectInfo.do?method=queryProjectInfo&projectId=<bean:write name="element" property="id"/>">
 								<bean:write name="element" property="project_name" />
-							</a>
+							<%-- <a style="color:#00f" href="../projectInfo/doProjectInfo.do?method=queryProjectInfo&projectId=<bean:write name="element" property="id"/>">
+							</a> --%>
 						</td>
-						<td align="left">
+						<td >
 							<bean:write name="element" property="user_feedback_content" />
+						</td>
+						
+							<td>
+								<bean:write name="element" property="price" />
 						</td>
 						<td>
 							<bean:write name="element" property="date_time" format="yyyy-MM-dd HH:mm:ss"/>
 						</td>
 						
-						<td>
+						<%-- <td>
 							<logic:equal name="element" property="feedback_status" value="0">
 								<font style="color:red;font-size:20px">×</font>
 							</logic:equal>
@@ -155,7 +160,7 @@ function del(id){
 						<a href=# onclick="update('<bean:write name="element" property="id" />')" style="color:#0000FF">【配置】</a>
 						<a href=# onclick="del('<bean:write name="element" property="id" />')" style="color:#0000FF" > 【删除】</a>
 						
-					</td>
+					</td> --%>
 					</tr>
 				</logic:iterate>
 				

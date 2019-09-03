@@ -106,7 +106,7 @@ public class AppUserInfoAction extends BaseAction{
 				if(sb.length() > 0){
 					sb.append(" and ");
 				}
-				sb.append("a.user_name like '%" + userName + "%'");
+				sb.append("user_name like '%" + userName + "%'");
 			}
 			if(user_id != null && !"".equals(user_id)){				
 				if(sb.length() > 0){
@@ -120,9 +120,9 @@ public class AppUserInfoAction extends BaseAction{
 				}
 				sb.append("a.belong_project='"+belongProject+"'");
 			}
-			ProjectInfo pro = new ProjectInfo();
+			/*ProjectInfo pro = new ProjectInfo();
 			List<DataMap> pros = ServiceBean.getInstance().getProjectInfoFacade().getProjectInfo(pro);
-			request.setAttribute("project", pros);
+			request.setAttribute("project", pros);*/
 			
 			request.setAttribute("fNow_date", startTime);
 		    request.setAttribute("now_date", endTime);

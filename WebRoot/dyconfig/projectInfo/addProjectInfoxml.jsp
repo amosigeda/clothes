@@ -11,6 +11,7 @@
 	type="text/css">
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/public/public.js"></script>
+	<scripttype="text/javascript"src="http://code.jquery.com/jquery-1.4.1.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/jquery-1.8.2.js"
 	type="text/javascript"></script>
 <title>无标题文档</title>
@@ -54,18 +55,17 @@ $(document).ready(function(){
 		document.getElementById('rePicture').style.display = "none"
 		document.getElementById('pictureView').style.display = "block"
 	}
-	/* $(document).ready(function(){ 
-	 $("#province").change(function(){ 
-	 $("#province option").each(function(i,o){ 
-	 if($(this).attr("selected")) 
-	 { 
-	 $(".city").hide(); 
-	 $(".city").eq(i).show(); 
-	 } 
-	 }); 
-	 }); 
-	 $("#province").change(); 
-	 });  */
+	
+    function InserTab() {
+        var trLen = $("#tab1 tr").length;
+        var rowT = "<tr><td><input type=text style='width:90px;' value='' id='d" + trLen + "'></td>" +
+            "<td><input type=text style='width:90px;' value='' id='d1" + trLen + "'></td>" +
+            "<td><input type=text style='width:90px;' value='' id='d2" + trLen + "'></td>" +
+            "<td><input type=text style='width:90px;' value='' id='d3" + trLen + "'></td></tr>";
+        var trPre = $("#tab1 tr:eq(" + (trLen - 1) + ")");
+        $(rowT).insertAfter($(trPre));
+    }
+ 
 </script>
 <body>
 	<span class="title_1"></span>
@@ -79,7 +79,13 @@ $(document).ready(function(){
 		%>
 		<!-- <input type="hidden" name="addUser" value="<%=loginUserCode%>"> -->
 		<!-- <table width="100%" border="0"cellpadding="0" cellspacing="0"  class="tbl_11" > -->
+		
+		
+    
 	<table width="100%"  id="tb1"  class="tbl_11" border="1" bordercolorlight=#000000  bordercolordark=#000000  bordercolor=#000000 cellspacing="0"  cellpadding="2"> 
+	
+	
+    
 		
 		<!-- <table width="100%" border="0"cellpadding="0" cellspacing="1"  class="tbl_11" id="tb1"  > -->
 			<tr>
@@ -502,7 +508,7 @@ $(document).ready(function(){
 				<td>供应商</td>
 				<td></td>
 			</tr>
-
+ 
 			<tr>
 				<td>面料2</td>
 				<td><input name="miaoliao2" size="20" id="miaoliao2"

@@ -27,7 +27,52 @@ public class MsgInfo extends PublicVoBean implements Serializable{
     private String belongProject;
     
     private Date msgOccurDate;  //ZST@20151111
+    
+    private String order_id;
+    private String phone;
+    private String fahuo_wuliu;
+    private String wuliu_bianma;
+    private String remark;
+    private String add_user;
+    
+    
 	
+	public String getOrder_id() {
+		return order_id;
+	}
+	public void setOrder_id(String order_id) {
+		this.order_id = order_id;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getFahuo_wuliu() {
+		return fahuo_wuliu;
+	}
+	public void setFahuo_wuliu(String fahuo_wuliu) {
+		this.fahuo_wuliu = fahuo_wuliu;
+	}
+	public String getWuliu_bianma() {
+		return wuliu_bianma;
+	}
+	public void setWuliu_bianma(String wuliu_bianma) {
+		this.wuliu_bianma = wuliu_bianma;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	public String getAdd_user() {
+		return add_user;
+	}
+	public void setAdd_user(String add_user) {
+		this.add_user = add_user;
+	}
 	public String getBelongProject() {
 		return belongProject;
 	}
