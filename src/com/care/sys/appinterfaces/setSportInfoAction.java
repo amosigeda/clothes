@@ -62,11 +62,12 @@ public class setSportInfoAction extends BaseAction {
 		String wechat = object.getString("wechat");
 		String typeWork = object.getString("typeWork");
 		String remark = object.getString("remark");
+		String token = object.getString("token");
 		
 		AppUserInfoFacade info = ServiceBean.getInstance().getAppUserInfoFacade();//����userApp������ȡ��user�ֵ䣩
 		try {
 			AppUserInfo vo = new AppUserInfo(); 
-			vo.setCondition("user_name='"+phone+"'  limit 1");
+			vo.setCondition("token='"+token+"'  limit 1");
 			List<DataMap> list  = info.getAppUserInfo(vo);
 			
 			vo.setUserName(phone);
@@ -76,6 +77,7 @@ public class setSportInfoAction extends BaseAction {
 			vo.setLast_name(typeWork);
 			vo.setEmail(remark);
 			vo.setUpdate_time(new Date());
+			vo.setToken(token);
 			if(list.size()>0){
 				vo.setCondition("id='"+list.get(0).get("id")+"'");
 				info.updateAppUserInfo(vo);

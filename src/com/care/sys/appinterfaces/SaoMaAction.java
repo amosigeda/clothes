@@ -69,9 +69,10 @@ G、发货-----，扫码，需要填写物流单号，给客户发短信，短�
 		try {
 			String phone = object.getString("phone");
 			String wechat = object.getString("wechat");
+			String token = object.getString("token");
 			
 			AppUserInfo vo = new AppUserInfo(); 
-			vo.setCondition("user_name = '"+phone+"' and password='"+ wechat +"' limit 1");
+			vo.setCondition("token='"+token+"'  limit 1");
 			List<DataMap> list  = ServiceBean.getInstance().getAppUserInfoFacade().getAppUserInfo(vo);
 			if(list.size()>0){
 				result = Constant.SUCCESS_CODE;

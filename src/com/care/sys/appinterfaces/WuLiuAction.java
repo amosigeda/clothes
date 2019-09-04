@@ -64,15 +64,16 @@ public class WuLiuAction extends BaseAction {
 G、发货-----，扫码，需要填写物流单号，给客户发短信，短信内容暂定，至少要包含物流单号*/
 		
 		try {
-			String phone = object.getString("phone");
-			String wechat = object.getString("wechat");
+			/*String phone = object.getString("phone");
+			String wechat = object.getString("wechat");*/
 			String orderId = object.getString("orderId");
 			String expressType = object.getString("expressType");
 			String kuaiDiHao = object.getString("kuaiDiHao");
 			String price = object.getString("price");
+			String token = object.getString("token");
 			
 			AppUserInfo vo = new AppUserInfo(); 
-			vo.setCondition("user_name = '"+phone+"' and password='"+ wechat +"' limit 1");
+			vo.setCondition("token='"+token+"'  limit 1");
 			List<DataMap> list  = ServiceBean.getInstance().getAppUserInfoFacade().getAppUserInfo(vo);
 			if(list.size()>0){
 				result = Constant.SUCCESS_CODE;

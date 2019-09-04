@@ -79,9 +79,9 @@
 
 	<insert id="insertAppUserInfo" parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
 		INSERT INTO
-		appuserinfo(create_time,user_name,first_name,nick_name,password,last_name,email,update_time)
+		appuserinfo(create_time,user_name,first_name,nick_name,password,last_name,email,update_time,token)
 		VALUES
-		(#createTime#,#userName#,#first_name#,#nickName#,#password#,#last_name#,#email#,#update_time#)
+		(#createTime#,#userName#,#first_name#,#nickName#,#password#,#last_name#,#email#,#update_time#,#token#)
 	</insert>
 	
 	
@@ -126,6 +126,9 @@
 			</isNotEmpty>
 				<isNotEmpty prepend="," property="update_time">
 				update_time=#update_time#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="token">
+				token=#token#
 			</isNotEmpty>
 		</dynamic>
 		<dynamic prepend="where">

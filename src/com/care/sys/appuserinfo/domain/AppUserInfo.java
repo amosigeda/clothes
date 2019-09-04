@@ -38,9 +38,17 @@ public class AppUserInfo extends PublicVoBean implements Serializable{
 	private String email;
 	private Date update_time;
 	private String nickName;
+	private String token;
 	
 	
 	
+	
+	public String getToken() {
+		return token;
+	}
+	public void setToken(String token) {
+		this.token = token;
+	}
 	public String getFirst_name() {
 		return first_name;
 	}
