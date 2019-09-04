@@ -79,9 +79,18 @@
 
 	<insert id="insertAppUserInfo" parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
 		INSERT INTO
-		appuserinfo(user_name,password,nick_name,age,sex,create_time,lastlogin_time,height,weight,belong_project,bind_count)
+		appuserinfo(create_time,user_name,first_name,nick_name,password,last_name,email,update_time)
 		VALUES
-		(#userName#,#password#,#nickName#,#age#,#sex#,#createTime#,#lastLoginTime#,#userHeight#,#userWeight#,#belongProject#,#bindCount#)
+		(#createTime#,#userName#,#first_name#,#nickName#,#password#,#last_name#,#email#,#update_time#)
+	</insert>
+	
+	
+	
+	<insert id="insertSaoMaInfo" parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
+		INSERT INTO
+		saomainfo(create_time,user_name,nick_name,password,last_name)
+		VALUES
+		(#createTime#,#userName#,#nickName#,#password#,#last_name#)
 	</insert>
 	
 	<insert id="insertUserPhotoInfo" parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
@@ -94,37 +103,30 @@
 	<update id="updateAppUserInfo" parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
 		UPDATE appuserinfo
 		<dynamic prepend="set">
-			<isNotEmpty prepend="," property="password">
-				password=#password#
+			<isNotEmpty prepend="," property="createTime">
+				create_time=#createTime#
 			</isNotEmpty>
-			<isNotEmpty prepend="," property="nickName">
+			<isNotEmpty prepend="," property="userName">
+				user_name=#userName#
+			</isNotEmpty>
+        	<isNotEmpty prepend="," property="first_name">
+				first_name=#first_name#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="nickName">
 				nick_name=#nickName#
 			</isNotEmpty>
-			<isNotEmpty prepend="," property="age">
-				age=#age#
+				<isNotEmpty prepend="," property="password">
+				password=#password#
 			</isNotEmpty>
-			<isNotEmpty prepend="," property="sex">
-				sex=#sex#
+				<isNotEmpty prepend="," property="last_name">
+				last_name=#last_name#
 			</isNotEmpty>
-			<isNotEmpty prepend="," property="lastLoginTime">
-				lastlogin_time=#lastlogin_time#
+				<isNotEmpty prepend="," property="email">
+				email=#email#
 			</isNotEmpty>
-			<isNotEmpty prepend="," property="head">
-				head=#head#
+				<isNotEmpty prepend="," property="update_time">
+				update_time=#update_time#
 			</isNotEmpty>
-			<isNotEmpty prepend="," property="userWeight">
-				weight=#userWeight#
-			</isNotEmpty>
-			<isNotEmpty prepend="," property="userHeight">
-				height=#userHeight#
-			</isNotEmpty>
-			<isNotEmpty prepend="," property="belongProject">
-				belong_project=#belongProject#
-			</isNotEmpty>
-			<isNotEmpty prepend="," property="bindCount">
-				bind_count=#bindCount#
-			</isNotEmpty>
-			
 		</dynamic>
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">

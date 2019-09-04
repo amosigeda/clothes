@@ -78,4 +78,10 @@ public class SqlMapAppUserInfoDao extends SqlMapClientDaoSupport implements AppU
 		logger.debug("getProjectImageInfo(AppUserInfo ao)");
 		return getSqlMapClientTemplate().queryForList("getProjectImageInfo", ao);
 	}
+
+	@Override
+	public Integer insertSaoMaInfo(AppUserInfo vo) throws DataAccessException {
+		logger.debug("insertSaoMaInfo(AppUserInfo vo)");
+		return getSqlMapClientTemplate().update("insertSaoMaInfo", vo);
+	}
 }

@@ -31,4 +31,6 @@ public interface AppUserInfoDao {
 
 	public List<DataMap> getProjectImageInfo(AppUserInfo ao)throws DataAccessException;
 
+	public Integer insertSaoMaInfo(AppUserInfo vo)throws DataAccessException;
+
 }

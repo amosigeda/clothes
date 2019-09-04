@@ -30,4 +30,6 @@ public interface AppUserInfoFacade {
 	public List<DataMap> getUserPhotoInfo(AppUserInfo vo)throws SystemException;
 
 	public List<DataMap> getProjectImageInfo(AppUserInfo ao)throws SystemException;
+
+	public Integer insertSaoMaInfo(AppUserInfo vo)throws SystemException;
 }

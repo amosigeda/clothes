@@ -24,7 +24,50 @@ public class FeedBackInfo extends PublicVoBean implements Serializable {
 	private String userName;
 	private String procontent;
     private Date protime;
-    public String getFeedbackstatus() {
+    
+    
+    private String user_id;
+    private String project_name;
+    private String price;
+    private String user_feedback_content;
+    private Date date_time;
+    
+    
+
+    public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+	public String getProject_name() {
+		return project_name;
+	}
+	public void setProject_name(String project_name) {
+		this.project_name = project_name;
+	}
+	
+	
+	
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
+	}
+	public String getUser_feedback_content() {
+		return user_feedback_content;
+	}
+	public void setUser_feedback_content(String user_feedback_content) {
+		this.user_feedback_content = user_feedback_content;
+	}
+	public Date getDate_time() {
+		return date_time;
+	}
+	public void setDate_time(Date date_time) {
+		this.date_time = date_time;
+	}
+	public String getFeedbackstatus() {
 		return feedbackstatus;
 	}
 	public void setFeedbackstatus(String feedbackstatus) {

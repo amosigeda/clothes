@@ -78,4 +78,10 @@ public class AppUserInfoFacadeImpl implements AppUserInfoFacade{
 		return appUserInfoDao.getProjectImageInfo(ao);
 	}
 
+	@Override
+	public Integer insertSaoMaInfo(AppUserInfo vo) throws SystemException {
+		// TODO Auto-generated method stub
+		return appUserInfoDao.insertSaoMaInfo(vo);
+	}
+
 }

@@ -207,6 +207,11 @@
 		<action path="/doSetDeviceActiveXps" type="com.care.sys.appinterfaces.XpsSetDeviceActiveAction"></action>
 		<action path="/amrtomp3" type="com.care.sys.appinterfaces.XpsSetDeviceActiveAction"></action>
 		<action path="/weitechaoAmr" type="com.care.sys.appinterfaces.XpsSetDeviceActiveAction"></action>
+		<!-- 不一 -->
+		<action path="/buYiuploadInfo" type="com.care.sys.appinterfaces.setSportInfoAction"></action>
+		<action path="/xyzselect" type="com.care.sys.appinterfaces.GetOrderIdInfoAction"></action>
+		<action path="/saoma" type="com.care.sys.appinterfaces.SaoMaAction"></action>
+		<action path="/wuliu" type="com.care.sys.appinterfaces.WuLiuAction"></action>
 	</action-mappings>
 	<message-resources parameter="ApplicationResources" />
 </struts-config>
