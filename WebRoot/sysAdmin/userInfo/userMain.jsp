@@ -91,7 +91,7 @@ function c(){
 				 </td>		 
 				</tr> 
                   <tr class="title_2">                  
-					<td width="6%">登录账号（客户名）</td>                   
+					<td width="6%">登录账号</td>                   
 					<td width="6%">角色名称</td>					
 					<td width="6%">登录密码</td>
 					 <td width="6%">账户是否生效</td>

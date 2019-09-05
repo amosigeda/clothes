@@ -144,10 +144,16 @@ public class ProjectInfo extends PublicVoBean implements Serializable{
 	private String xiku_number;
 	private String majia_number;
 	
-	
+	private Date pidan_time;
 	
 	
 
+	public Date getPidan_time() {
+		return pidan_time;
+	}
+	public void setPidan_time(Date pidan_time) {
+		this.pidan_time = pidan_time;
+	}
 	public String getXizhuang_number() {
 		return xizhuang_number;
 	}

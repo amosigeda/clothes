@@ -90,7 +90,7 @@ function ofuncs(rcode){
 								onclick="ofuncs('<bean:write name="element" property="id" />')"  class="tbl_A" >【权限设置】</a>
 							<a href="#"
 							    onclick="update('<bean:write name="element" property="roleCode" />')"  class="tbl_A" >【编辑描述】</a>
-						<% if(!(("admin".equals(roleCode)) || ("saler".equals(roleCode)) || ("custom".equals(roleCode)))){%>	
+						<% if(!(("admin".equals(roleCode)) || ("客服".equals(roleCode))|| ("批单".equals(roleCode))|| ("跟单".equals(roleCode))|| ("售后".equals(roleCode)) || ("经理".equals(roleCode)))){%>	
 							<a href="#"
 							    onclick="del('<bean:write name="element" property="roleCode" />')"  class="tbl_A" >【删除】</a> 
 						<%} %>

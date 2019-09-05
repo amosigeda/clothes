@@ -217,6 +217,10 @@
 			<isNotEmpty prepend="," property="jiaoLiaoTime">
 				jiaoLiao_time=#jiaoLiaoTime#
 			</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="pidan_time">
+				pidan_time=#pidan_time#
+			</isNotEmpty>
 			<!-- ,remark=#remark# -->
 		</dynamic>
 		<dynamic prepend="where">
@@ -722,6 +726,10 @@
 			</isNotEmpty>
 				<isNotEmpty prepend="," property="gongyingshang2">
 				gongyingshang_2=#gongyingshang2#
+			</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="pidan_time">
+				pidan_time=#pidan_time#
 			</isNotEmpty>
 			
 			

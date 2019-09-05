@@ -181,15 +181,51 @@ public class ProjectInfoAction extends BaseAction {
 			request.setAttribute("companyId", companyId);
 			request.setAttribute("userId", userId);
 			request.setAttribute("projectId", projectId);
-			if (!"admin".equals(userName)) {
-				if (sb.toString().length() > 0) {
-					sb.append(" and p.heart_s ='" + userName
-							+ "' AND p.project_no='" + userName + "'");
-				} else {
-					sb.append("p.heart_s ='" + userName
-							+ "' AND p.project_no='" + userName + "'");
+			
+			request.setAttribute("role","admin");
+			UserInfo uvo =new UserInfo();
+			uvo.setCondition("userCode = '"+userName+"' limit 1");
+			List<DataMap> listUo =  ServiceBean.getInstance().getUserInfoFacade().getUserInfo(uvo);
+			if(listUo.size()>0){
+				String role = listUo.get(0).get("code")+"";
+				request.setAttribute("role",role);
+				
+				if (!"admin".equals(userName)) {
+					if("批单".equals(role)){
+						if (sb.toString().length() > 0) {
+							sb.append(" and status >=2");
+						} else {
+							sb.append("status >=2");
+						}
+					}else if("客服".equals(role)){
+						if (sb.toString().length() > 0) {
+							sb.append(" and xiadan_kefu ='" + userName
+									 + "'");
+						} else {
+							sb.append("xiadan_kefu ='" + userName
+									 + "'");
+						}
+					}else if("跟单".equals(role)){
+						if (sb.toString().length() > 0) {
+							sb.append(" and status >=5");
+						} else {
+							sb.append("status >=5");
+						}
+					}else if("经理".equals(role)){
+						
+					}
+					
 				}
+				
 			}
+			
+			
+			
+			
+			
+			
+			
+			
 			vo.setCondition(sb.toString());
 
 			BeanUtils.copyProperties(vo, form);
@@ -231,11 +267,11 @@ public class ProjectInfoAction extends BaseAction {
 		}
 
 		String userName = loginUser.getUserName();
-		if ("admin".equals(userName)) {
+	/*	if ("admin".equals(userName)) {*/
 			return mapping.findForward("addProjectInfoxml");
-		} else {
+		/*} else {
 			return mapping.findForward("addProjectInfoxmlOther");
-		}
+		}*/
 	}
 
 	public ActionForward insertProjectInfoxml(ActionMapping mapping,
@@ -528,11 +564,11 @@ public class ProjectInfoAction extends BaseAction {
 			return mapping.findForward("result");
 		}
 		request.setAttribute("projectInfo", list.get(0));
-		if ("admin".equals(userName)) {
 			return mapping.findForward("updateProjectInfoxml");
+		/*	if ("admin".equals(userName)) {
 		} else {
 			return mapping.findForward("updateProjectInfoxmlOther");
-		}
+		}*/
 	}
 
 	public ActionForward updateProjectInfoxml(ActionMapping mapping,
@@ -1165,11 +1201,11 @@ public class ProjectInfoAction extends BaseAction {
 			return mapping.findForward("result");
 		}
 		request.setAttribute("projectInfo", list.get(0));
-		if ("admin".equals(userName)) {
-			return mapping.findForward("updateProjectWatchInfo");
+		return mapping.findForward("updateProjectWatchInfo");
+		/*	if ("admin".equals(userName)) {
 		} else {
 			return mapping.findForward("updateProjectWatchInfoOther");
-		}
+		}*/
 	}
 
 	public ActionForward updateProjectWatchInfo(ActionMapping mapping,
@@ -2039,6 +2075,7 @@ public class ProjectInfoAction extends BaseAction {
 			ProjectInfo vo = new ProjectInfo();
 			vo.setCondition("id='" + form.getId() + "'");
 			vo.setStatus("5");
+			vo.setPidan_time(new Date());
 			ServiceBean.getInstance().getProjectInfoFacade()
 					.updatePorjectInfo(vo);
 
@@ -2078,6 +2115,9 @@ public class ProjectInfoAction extends BaseAction {
 		String id = request.getParameter("id");
 		ProjectInfo vo = new ProjectInfo();
 		vo.setCondition("id='" + id + "'");
+	//	vo.setPidan_time(new Date());
+		// ServiceBean.getInstance().getProjectInfoFacade().updatePorjectInfoDangAn(vo);
+			
 		List<DataMap> list = ServiceBean.getInstance().getProjectInfoFacade()
 				.getProjectInfo(vo);
 		if (list == null || list.size() == 0) {
@@ -2318,6 +2358,8 @@ public class ProjectInfoAction extends BaseAction {
 
 			if ("10".equals(status)) {
 				vo.setJiaoLiaoTime(new Date());
+			}else if("11".equals(status)){
+				System.out.println("打标-----------------------------------------------------------------");
 			}
 			ServiceBean.getInstance().getProjectInfoFacade()
 					.updatePorjectInfo(vo);
