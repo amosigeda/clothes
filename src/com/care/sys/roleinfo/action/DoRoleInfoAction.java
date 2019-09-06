@@ -81,8 +81,10 @@ public class DoRoleInfoAction extends BaseAction{
     public ActionForward roleFuncInfo(ActionMapping mapping, ActionForm form,HttpServletRequest request,HttpServletResponse response) throws Exception {
     	String roleCode = request.getParameter("roleCode");
     	String factoryCode = request.getParameter("factoryCode");
-        request.setAttribute("trees",ServiceBean.getInstance().getRoleInfoFacade().getRoleFuncTree(roleCode)); //��ӦȨ�޵�����  Ȩ����
-        request.setAttribute("roleCode",request.getParameter("roleCode"));    //��Ӧ���������
+    	
+    	System.out.println("使用的是这里的的roleFuncInfo");
+        request.setAttribute("trees",ServiceBean.getInstance().getRoleInfoFacade().getRoleFuncTree(roleCode));
+        request.setAttribute("roleCode",request.getParameter("roleCode"));  
         request.setAttribute("factoryCode", request.getParameter("factoryCode"));
         return mapping.findForward("roleFuncInfo");
     }

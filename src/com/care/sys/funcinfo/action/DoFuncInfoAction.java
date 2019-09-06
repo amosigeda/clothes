@@ -57,6 +57,7 @@ public class DoFuncInfoAction extends BaseAction{
 			BeanUtils.copyProperties(pys,form);
 			pys.setCounts(list.getTotalSize());
 			/*���û������ֶ�*/
+			System.out.println("使用的是这里的的queryFuncInfo");
 			request.setAttribute("trees",info.getAllFuncTree());
 		}catch(Exception e){
 			e.printStackTrace();

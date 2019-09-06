@@ -41,20 +41,20 @@ function dTree(objName) {
 		inOrder					: false
 	}
 	this.icon = {
-		root				: '/Water/js/img/base.gif',
-		folder			: '/Water/js/img/folder.gif',
-		folderOpen	: '/Water/js/img/folderopen.gif',
-		node				: '/Water/js/img/page.gif',
-		empty				: '/Water/js/img/empty.gif',
-		line				: '/Water/js/img/line.gif',
-		join				: '/Water/js/img/join.gif',
-		joinBottom	: '/Water/js/img/joinbottom.gif',
-		plus				: '/Water/js/img/plus.gif',
-		plusBottom	: '/Water/js/img/plusbottom.gif',
-		minus				: '/Water/js/img/minus.gif',
-		minusBottom	: '/Water/js/img/minusbottom.gif',
-		nlPlus			: '/Water/js/img/nolines_plus.gif',
-		nlMinus			: '/Water/js/img/nolines_minus.gif'
+		root				: '/clothes/js/img/base.gif',
+		folder			: '/clothes/js/img/folder.gif',
+		folderOpen	: '/clothes/js/img/folderopen.gif',
+		node				: '/clothes/js/img/page.gif',
+		empty				: '/clothes/js/img/empty.gif',
+		line				: '/clothes/js/img/line.gif',
+		join				: '/clothes/js/img/join.gif',
+		joinBottom	: '/clothes/js/img/joinbottom.gif',
+		plus				: '/clothes/js/img/plus.gif',
+		plusBottom	: '/clothes/js/img/plusbottom.gif',
+		minus				: '/clothes/js/img/minus.gif',
+		minusBottom	: '/clothes/js/img/minusbottom.gif',
+		nlPlus			: '/clothes/js/img/nolines_plus.gif',
+		nlMinus			: '/clothes/js/img/nolines_minus.gif'
 	};
 	this.obj = objName;
 	this.aNodes = [];

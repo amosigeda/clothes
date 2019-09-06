@@ -81,7 +81,7 @@ public class RoleInfoFacadeImpl implements RoleInfoFacade {
 
     //ȡ�ý�ɫȨ���б�
     public String getRoleFuncTree(String roleCode) throws SystemException{
-        RoleFuncInfo rvo = new RoleFuncInfo();//�ҵ���ǰ��ɫ���е�
+        RoleFuncInfo rvo = new RoleFuncInfo();
         rvo.setRoleCode(roleCode);
         List<DataMap> rlist = roleFuncInfoDao.getRoleFuncInfo(rvo);
         ArrayList<String> rfList = new ArrayList<String>();
@@ -90,10 +90,10 @@ public class RoleInfoFacadeImpl implements RoleInfoFacade {
             rfList.add((String)map.get("funcCode"));
         }
 
-        //��
+     
         StringBuffer dt = new StringBuffer("d = new dTree('d');\r\t");
-        dt.append("d.add(0,-1,'权限列表');\r\t"); //������
-        //�ҵ�����Ȩ���б�
+        dt.append("d.add(0,-1,'权限列表');\r\t"); 
+        
         FuncInfo vo = new FuncInfo();
         vo.setCondition("statu ='1' ");
         List<DataMap> list = funcInfoDao.getFuncInfo(vo);
@@ -101,6 +101,7 @@ public class RoleInfoFacadeImpl implements RoleInfoFacade {
             dtRoleFunc(list, "super", dt, 0,rfList);
         }
         dt.append("document.write(d);");
+       // System.out.println(dt.toString());
         return dt.toString();
     }
 

@@ -40,7 +40,7 @@ function update(roleCode)
 	 frmGo.submit();
 }
 function ofuncs(rcode){
-	window.open("roleFuncFrame.jsp?roleCode=" + rcode);
+	window.open("roleFuncFrame.jsp?roleCode=" + rcode,		"","help:0;resizable:0;status=0;scrollbars=0;dialogWidth=25;dialogHeight=35;center=true");
 	//window.showModalDialog("roleFuncFrame.jsp?roleCode=" + rcode,		"","help:0;resizable:0;status=0;scrollbars=0;dialogWidth=25;dialogHeight=35;center=true");;
 }
 </script>
@@ -86,13 +86,15 @@ function ofuncs(rcode){
 							<bean:write name="element" property="roleDesc" />
 						</td> 
 						<td align="left">
-							<a href="#"
-								onclick="ofuncs('<bean:write name="element" property="id" />')"  class="tbl_A" >【权限设置】</a>
+							  
 							<a href="#"
 							    onclick="update('<bean:write name="element" property="roleCode" />')"  class="tbl_A" >【编辑描述】</a>
 						<% if(!(("admin".equals(roleCode)) || ("客服".equals(roleCode))|| ("批单".equals(roleCode))|| ("跟单".equals(roleCode))|| ("售后".equals(roleCode)) || ("经理".equals(roleCode)))){%>	
 							<a href="#"
 							    onclick="del('<bean:write name="element" property="roleCode" />')"  class="tbl_A" >【删除】</a> 
+							    
+							      <a href="#" onclick="ofuncs('<bean:write name="element" property="id" />')"  class="tbl_A" >【权限设置】</a>
+							
 						<%} %>
 						</td> 
 					</tr>
