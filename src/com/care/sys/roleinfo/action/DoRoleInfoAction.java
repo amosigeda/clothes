@@ -219,6 +219,7 @@ public class DoRoleInfoAction extends BaseAction{
 			BeanUtils.copyProperties(vo,form);
 			ServiceBean.getInstance().getRoleInfoFacade().updateRoleInfo(vo);
 			result.setBackPage(HttpTools.httpServletPath(request,"queryRoleInfo"));
+			
 			result.setResultCode("updates");
 			result.setResultType("success");
 		}catch(Exception e){

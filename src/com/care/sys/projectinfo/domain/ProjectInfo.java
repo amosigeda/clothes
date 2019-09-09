@@ -145,9 +145,41 @@ public class ProjectInfo extends PublicVoBean implements Serializable{
 	private String majia_number;
 	
 	private Date pidan_time;
+	private Date gendan_tijiao_time;
+	private Date tuihui_time;
+	
+	private String gendan_fuze;
+	private String gd_remark;
+	
+	
 	
 	
 
+	
+	public String getGd_remark() {
+		return gd_remark;
+	}
+	public void setGd_remark(String gd_remark) {
+		this.gd_remark = gd_remark;
+	}
+	public Date getTuihui_time() {
+		return tuihui_time;
+	}
+	public void setTuihui_time(Date tuihui_time) {
+		this.tuihui_time = tuihui_time;
+	}
+	public Date getGendan_tijiao_time() {
+		return gendan_tijiao_time;
+	}
+	public void setGendan_tijiao_time(Date gendan_tijiao_time) {
+		this.gendan_tijiao_time = gendan_tijiao_time;
+	}
+	public String getGendan_fuze() {
+		return gendan_fuze;
+	}
+	public void setGendan_fuze(String gendan_fuze) {
+		this.gendan_fuze = gendan_fuze;
+	}
 	public Date getPidan_time() {
 		return pidan_time;
 	}

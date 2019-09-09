@@ -100,7 +100,7 @@ window.location="doUserInfo.do?method=initAdverPower&id="+id+"&userCode="+userCo
     <td width="12%" align="left">&nbsp;&nbsp;密码</td>
     <td align="left" width="20%">
     	<input name="passWrd" type="text"  accesskey="p" tabindex="p" value="<%=userInfo.getAt("passWrd1")%>">
-	  	<font color="red">*（5~16位字母、数字或下滑线组合）</font>
+	  	<font color="red">*5~16位字母、数字或下滑线组合</font>
     </td>
   </tr>
   <%if(!userInfo.getAt("userCode").equals("admin")){ %>

@@ -70,33 +70,8 @@ public class ProjectInfoAction extends BaseAction {
 	// "E:/resin/resin-pro-4.0.53/webapps/ads/WIITE/biaopan/";
 	String clockdownloadUrl = "http://www.wiiteer.com:8999/ads/WIITE/biaopan/";
 	String clockxmlpath = "/usr/local/resin-pro-4.0.53/webapps/ads/WIITE/biaopan/";
-
-	public ActionForward verfyDingDan(ActionMapping mapping,
-			ActionForm actionForm, HttpServletRequest request,
-			HttpServletResponse response) {
-		List<DataMap> list = null;
-		ProjectInfo vo = new ProjectInfo();
-		String userCode = request.getParameter("userCode");
-		if (userCode != null && !"".equals(userCode)) {
-			vo.setCondition("order_number ='" + userCode + "'");
-			try {
-				list = ServiceBean.getInstance()
-						.getProjectInfoFacade().getProjectInfo(vo);
-				if (!list.isEmpty()&&list.size()>0) {
-					response.getWriter().write("fail");
-				} else {
-					response.getWriter().write("success");
-				}
-			} catch (SystemException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return null;
-	}
-
-	public ActionForward queryProjectInfoXml(ActionMapping mapping,
+	
+	public ActionForward daiban(ActionMapping mapping,
 			ActionForm actionForm, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		String href = request.getServletPath();
@@ -115,6 +90,10 @@ public class ProjectInfoAction extends BaseAction {
 			if (loginUser == null) {
 				return null;
 			}
+			
+			loginUser.setCvsCode("10");
+			request.getSession().setAttribute(
+					Config.SystemConfig.LOGINUSER, loginUser);
 
 			String userName = loginUser.getUserName();
 
@@ -181,6 +160,198 @@ public class ProjectInfoAction extends BaseAction {
 			request.setAttribute("companyId", companyId);
 			request.setAttribute("userId", userId);
 			request.setAttribute("projectId", projectId);
+			
+			request.setAttribute("role","admin");
+			UserInfo uvo =new UserInfo();
+			uvo.setCondition("userCode = '"+userName+"' limit 1");
+			List<DataMap> listUo =  ServiceBean.getInstance().getUserInfoFacade().getUserInfo(uvo);
+			if(listUo.size()>0){
+				String role = listUo.get(0).get("code")+"";
+				request.setAttribute("role",role);
+				
+				if (!"admin".equals(userName)) {
+					if("批单".equals(role)){
+						if (sb.toString().length() > 0) {
+							sb.append(" and status >=2");
+						} else {
+							sb.append("status >=2");
+						}
+					}else if("客服".equals(role)){
+						if (sb.toString().length() > 0) {
+							sb.append(" and xiadan_kefu ='" + userName
+									 + "'");
+						} else {
+							sb.append("xiadan_kefu ='" + userName
+									 + "'");
+						}
+					}else if("跟单".equals(role)){
+						if (sb.toString().length() > 0) {
+							sb.append(" and status >=5");
+						} else {
+							sb.append("status >=5");
+						}
+					}else if("经理".equals(role)){
+						
+					}
+					
+				}
+				
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			vo.setCondition(sb.toString());
+
+			BeanUtils.copyProperties(vo, form);
+			list = info.getProjectInfoListByVo(vo);
+			BeanUtils.copyProperties(pys, form);
+			pys.setCounts(list.getTotalSize());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error(request.getQueryString() + "  " + e);
+			result.setBackPage(Config.ABOUT_PAGE); /*
+													 * ����Ϊ����ҳ�棬���Գ������ת��ϵ
+													 * ͳĬ��ҳ��
+													 */
+			if (e instanceof SystemException) { /* ����֪�쳣���н��� */
+				result.setResultCode(((SystemException) e).getErrCode());
+				result.setResultType(((SystemException) e).getErrType());
+			} else { /* ��δ֪�쳣���н�������ȫ�������δ֪�쳣 */
+				result.setResultCode("noKnownException");
+				result.setResultType("sysRunException");
+			}
+		} finally {
+			request.setAttribute("result", result);
+			request.setAttribute("pageList", list);
+			request.setAttribute("PagePys", pys);
+		}
+		// CommUtils.getIntervalTime(start, new Date(), href);
+		return mapping.findForward("daiban");
+	}
+	
+
+	public ActionForward verfyDingDan(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) {
+		List<DataMap> list = null;
+		ProjectInfo vo = new ProjectInfo();
+		String userCode = request.getParameter("userCode");
+		if (userCode != null && !"".equals(userCode)) {
+			vo.setCondition("order_number ='" + userCode + "'");
+			try {
+				list = ServiceBean.getInstance()
+						.getProjectInfoFacade().getProjectInfo(vo);
+				if (!list.isEmpty()&&list.size()>0) {
+					response.getWriter().write("fail");
+				} else {
+					response.getWriter().write("success");
+				}
+			} catch (SystemException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+
+	public ActionForward queryProjectInfoXml(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		String href = request.getServletPath();
+		Date start = new Date();
+		Result result = new Result();// ���
+		PagePys pys = new PagePys();// ҳ������
+		DataList list = null; // ����ҳ��List ��logic itrate��ȡ��
+		StringBuffer sb = new StringBuffer();// �����ַ�����
+		ProjectInfoFacade info = ServiceBean.getInstance()
+				.getProjectInfoFacade();// ����userApp������ȡ��user�ֵ䣩
+		ProjectInfo pro = new ProjectInfo();
+
+		try {
+			LoginUser loginUser = (LoginUser) request.getSession()
+					.getAttribute(Config.SystemConfig.LOGINUSER);
+			if (loginUser == null) {
+				return null;
+			}
+			
+			
+			String userName = loginUser.getUserName();
+
+			String companyInfoId = loginUser.getCompanyId();
+			String projectInfoId = loginUser.getProjectId();
+			ProjectInfoForm form = (ProjectInfoForm) actionForm;
+			ProjectInfo vo = new ProjectInfo();
+			String startTime = request.getParameter("startTime");
+			String endTime = request.getParameter("endTime");
+			String companyId = request.getParameter("companyId");
+			String userId = request.getParameter("userId");
+			String projectId = request.getParameter("projectId");
+
+			/* ���û������ֶ� */
+			form.setOrderBy("id");
+			form.setSort("1");
+			sb.append("1=1");
+
+			String wwname = request.getParameter("wwname");
+			String phone = request.getParameter("phone");
+
+			if (wwname != null && !"".equals(wwname)) {
+				sb.append(" and ww_name ='" + wwname + "'");
+			}
+			if (phone != null && !"".equals(phone)) {
+				sb.append(" and kehu_phone ='" + phone + "'");
+			}
+
+			if (!projectInfoId.equals("0")) {
+				sb.append(" and p.id in(" + projectInfoId + ")");
+			} else {
+				if (!"0".equals(companyId) && companyId != null) {
+					sb.append(" and p.company_id in(" + companyInfoId + ")");
+				}
+			}
+			if (startTime != null && !"".equals(startTime)) {
+				sb.append(" and add_time >= '" + startTime
+						+ "'");
+			}
+			if (endTime != null && !"".equals(endTime)) {
+				sb.append(" and add_time <= '" + endTime
+						+ "'");
+			}
+			if (companyId != null && !"".equals(companyId)) {
+				sb.append(" and p.company_id='" + companyId + "'");
+			}
+			if (projectId != null && !"".equals(projectId)) {
+				sb.append(" and p.id ='" + projectId + "'");
+			}
+			if (userId != null && !"".equals(userId)) {
+				sb.append(" and p.company_id='" + userId + "'");
+				pro.setCondition("company_id = '" + userId + "'");
+			}
+			List<DataMap> pros = ServiceBean.getInstance()
+					.getProjectInfoFacade().getProjectInfo(pro);
+			request.setAttribute("project", pros);
+
+			/*
+			 * CompanyInfo ci = new CompanyInfo(); List<DataMap> coms =
+			 * ServiceBean.getInstance()
+			 * .getCompanyInfoFacade().getCompanyInfo(ci);
+			 * request.setAttribute("company", coms);
+			 */
+
+			request.setAttribute("wwname", wwname);
+			request.setAttribute("fNow_date", startTime);
+			request.setAttribute("now_date", endTime);
+			request.setAttribute("companyId", companyId);
+			request.setAttribute("userId", userId);
+			request.setAttribute("projectId", projectId);
+			request.setAttribute("phone", phone);
 			
 			request.setAttribute("role","admin");
 			UserInfo uvo =new UserInfo();
@@ -940,16 +1111,16 @@ public class ProjectInfoAction extends BaseAction {
 
 			if (projectNo != null && !"".equals(projectNo)) {
 				if (sb.length() <= 0) {
-					sb.append(" p.project_no='" + projectNo + "'");
+					sb.append(" p.project_no like '%" + projectNo + "%'");
 				} else {
-					sb.append(" and p.project_no='" + projectNo + "'");
+					sb.append(" and p.project_no like '%" + projectNo + "%'");
 				}
 			}
 			if (project_name != null && !"".equals(project_name)) {
 				if (sb.length() <= 0) {
-					sb.append("p.project_name='" + project_name + "'");
+					sb.append("p.project_name like '%" + project_name + "%'");
 				} else {
-					sb.append(" and p.project_name='" + project_name + "'");
+					sb.append(" and p.project_name  like '%" + project_name + "%'");
 				}
 			}
 
@@ -1967,6 +2138,7 @@ public class ProjectInfoAction extends BaseAction {
 			ProjectInfo vo = new ProjectInfo();
 			vo.setCondition("id='" + form.getId() + "'");
 			vo.setStatus("4");
+			vo.setTuihui_time(new Date());
 			ServiceBean.getInstance().getProjectInfoFacade()
 					.updatePorjectInfo(vo);
 
@@ -1998,11 +2170,19 @@ public class ProjectInfoAction extends BaseAction {
 
 		Result result = new Result();
 		try {
+			LoginUser loginUser = (LoginUser) request.getSession()
+					.getAttribute(Config.SystemConfig.LOGINUSER);
+			if (loginUser == null) {
+				return null;
+			}
+			
 			ProjectInfoForm form = (ProjectInfoForm) actionForm;
 
 			ProjectInfo vo = new ProjectInfo();
 			vo.setCondition("id='" + form.getId() + "'");
 			vo.setStatus("9");
+			vo.setGendan_fuze(loginUser.getUserName()+"");
+			vo.setGendan_tijiao_time(new Date());
 			ServiceBean.getInstance().getProjectInfoFacade()
 					.updatePorjectInfo(vo);
 
@@ -2034,11 +2214,20 @@ public class ProjectInfoAction extends BaseAction {
 
 		Result result = new Result();
 		try {
+			LoginUser loginUser = (LoginUser) request.getSession()
+					.getAttribute(Config.SystemConfig.LOGINUSER);
+			if (loginUser == null) {
+				return null;
+			}
+			
 			ProjectInfoForm form = (ProjectInfoForm) actionForm;
 
 			ProjectInfo vo = new ProjectInfo();
 			vo.setCondition("id='" + form.getId() + "'");
 			vo.setStatus("8");
+			vo.setGendan_fuze(loginUser.getUserName()+"");
+			vo.setTuihui_time(new Date());
+			
 			ServiceBean.getInstance().getProjectInfoFacade()
 					.updatePorjectInfo(vo);
 
@@ -2175,6 +2364,49 @@ public class ProjectInfoAction extends BaseAction {
 		return mapping.findForward("updateProjectInfoGenDan");
 
 	}
+	
+	
+	public ActionForward xiangQing(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		LoginUser loginUser = (LoginUser) request.getSession().getAttribute(
+				Config.SystemConfig.LOGINUSER);
+		if (loginUser == null) {
+			return null;
+		}
+
+		// String userName = loginUser.getUserName();
+
+		String id = request.getParameter("id");
+		ProjectInfo vo = new ProjectInfo();
+		vo.setCondition("id='" + id + "'");
+		List<DataMap> list = ServiceBean.getInstance().getProjectInfoFacade()
+				.getProjectInfo(vo);
+		if (list == null || list.size() == 0) {
+			Result result = new Result();
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryProjectInfoXml"));
+			result.setResultCode("rowDel");
+			result.setResultType("success");
+			return mapping.findForward("result");
+		}
+		request.setAttribute("projectInfo", list.get(0));
+
+		/*ProjectInfo voo = new ProjectInfo();
+		List<DataMap> Clist = ServiceBean.getInstance().getProjectInfoFacade()
+				.getProjectWatchInfo(voo);
+		String sb = CommUtils.getPrintSelect(Clist, "project_no1",
+				"project_no", "project_no", "", 1);
+		request.setAttribute("companyList", sb);
+
+		String sb1 = CommUtils.getPrintSelect(Clist, "project_no2",
+				"project_no", "project_no", "", 1);
+
+		request.setAttribute("companyList1", sb1);*/
+
+		return mapping.findForward("xiangQing");
+
+	}
 
 	public ActionForward updateProjectInfopidan(ActionMapping mapping,
 			ActionForm actionForm, HttpServletRequest request,
@@ -2189,6 +2421,7 @@ public class ProjectInfoAction extends BaseAction {
 				return null;
 			}
 
+			
 			String id = request.getParameter("id");
 
 			ProjectInfo vo = new ProjectInfo();
@@ -2264,8 +2497,15 @@ public class ProjectInfoAction extends BaseAction {
 			ServiceBean.getInstance().getProjectInfoFacade()
 					.updatePorjectInfoDangAn(vo);
 
+			String tag = request.getParameter("tag");
+			System.out.println("tag="+tag);
+			if("1".equals(tag)){
+				vo.setStatus("3");
+			}else{
+				vo.setStatus("4");
+				vo.setTuihui_time(new Date());
+			}
 			vo.setCondition("id='" + id + "'");
-			vo.setStatus("3");
 			ServiceBean.getInstance().getProjectInfoFacade()
 					.updatePorjectInfo(vo);
 
@@ -2312,12 +2552,22 @@ public class ProjectInfoAction extends BaseAction {
 			vo.setCondition("id='" + id + "'");
 			vo.setGongyingshang1(project_no1);
 			vo.setGongyingshang2(project_no2);
+			String gdremark = request.getParameter("gdremark");
+			vo.setGd_remark(gdremark);
+			
 
 			ServiceBean.getInstance().getProjectInfoFacade()
 					.updatePorjectInfoDangAn(vo);
 
+			String tag = request.getParameter("tag");
+			
 			vo.setCondition("id='" + id + "'");
-			vo.setStatus("6");
+			if("1".equals(tag)){
+				vo.setStatus("6");
+			}else{
+				vo.setStatus("8");
+			}
+			vo.setGendan_fuze(loginUser.getUserName()+"");
 			ServiceBean.getInstance().getProjectInfoFacade()
 					.updatePorjectInfo(vo);
 

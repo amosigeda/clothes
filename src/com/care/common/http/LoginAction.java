@@ -70,8 +70,11 @@ public class LoginAction extends BaseAction {
 				/* �����û���Ϣ */
 				List<DataMap> us = uf.getUserInfo(user);
 				LoginUser u = new LoginUser(us.get(0));
+				u.setCvsCode("0");
 				request.getSession().setAttribute(
 						Config.SystemConfig.LOGINUSER, u);   //���ù�������Ӻ����ȡ��������ʾ�˵�
+				
+				
 
 				/* д��½��־ */
 				String log = "";

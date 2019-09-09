@@ -15,8 +15,10 @@
 #a_test {
 	color: #fff;
 }
+
 </style>
 	
+
 	<script language="javascript">
 	window.setTimeout(CheckShowLeft(), 1000);
 	
@@ -46,6 +48,7 @@ function switchSysBar_top(){
 			document.img1.alt="隐藏菜单";
 		}
 }
+
 function clmenu(code,name){
 	//alert(window.parent.leftFrame);
 	//window.parent.leftFrame.location.reload(); 
@@ -97,10 +100,12 @@ function exit(){
 		onload="startTime();CheckShowLeft()">
 	 <div id="top">
   <div class="top_user">
-        <span class="smalltext"> 当前用户-<strong><%=LOGINUSER.getUserName()%></strong>-版本(V0.01.0001N-R01)-   
-          <a href="sysAdmin/sysLogInfo/doSysLogInfo.do?method=getOutTime" id="a_test" onclick="exit()">退出</a></span>
-         <span id="txt" class="smalltext">   
-          </span>     
+        <span class="smalltext"> 当前用户-<strong><%=LOGINUSER.getUserName()%></strong>-版本(V0.01.0001N-R01)-  
+          </span>
+        <span id="txt" class="smalltext">   
+          </span>    
+            <a href="#" id="a_test" onclick="" style="color:black">待办：<%=LOGINUSER.getCvsCode()%></a>
+            <a href="sysAdmin/sysLogInfo/doSysLogInfo.do?method=getOutTime" id="a_test" onclick="exit()" style="color:red">退出</a>
   </div>
 	<div class="manage_title">
 	     不一管理系统

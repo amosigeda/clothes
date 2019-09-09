@@ -101,7 +101,7 @@ public class RoleInfoFacadeImpl implements RoleInfoFacade {
             dtRoleFunc(list, "super", dt, 0,rfList);
         }
         dt.append("document.write(d);");
-       // System.out.println(dt.toString());
+        System.out.println(dt.toString());
         return dt.toString();
     }
 

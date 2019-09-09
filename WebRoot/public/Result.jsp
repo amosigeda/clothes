@@ -41,6 +41,7 @@
 <script language="javascript">
 function myOnload()
 {
+	/* alert("²Ù×÷³É¹¦"); */
   backForm.Submits.focus();
 }
 </script>

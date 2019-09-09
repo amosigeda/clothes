@@ -26,12 +26,12 @@
 	</head>
 	<script language="javascript">
 function finds(){
-  /*   var st = new Date(frmGo.startTime.value.replace(/-/g,'/'));
+    var st = new Date(frmGo.startTime.value.replace(/-/g,'/'));
 	var et = new Date(frmGo.endTime.value.replace(/-/g,'/'));
 	if(Date.parse(st) - Date.parse(et)>0){
 		alert("开始时间不能大于结束时间!");
 		return false;
-	} */
+	} 
 	   frmGo.submit();
 }
 function add(){
@@ -39,9 +39,11 @@ function add(){
 	frmGo.submit();
 }
 function c(){
+     document.all.startTime.value="";
+     document.all.endTime.value="";
+     document.all.phone.value="";
     document.all.wwname.value="";
-   /*  document.all.endTime.value="";
-    document.all.userId.options[0].selected=true;
+     /* document.all.userId.options[0].selected=true;
     document.all.projectId.options[0].selected=true; */
 } 
 
@@ -82,6 +84,10 @@ function genDanUpdate(id){
 	frmGo.action="doProjectInfo.do?method=genDanUpdateInit&id="+id;
 	frmGo.submit();
 }
+function xiangQing(id){
+	frmGo.action="doProjectInfo.do?method=xiangQing&id="+id;
+	frmGo.submit();
+}
 
 
 function pidanTuiHui(id){
@@ -111,7 +117,7 @@ function deletee(id){
 	frmGo.submit(); */
 }
 function keFuTijiao(id){
-	if(confirm("确定吗?"))
+	if(confirm("确定提交吗?"))
 	{
 		frmGo.action="doProjectInfo.do?method=keFuTijiao&id="+id;
 		frmGo.submit();
@@ -119,7 +125,7 @@ function keFuTijiao(id){
 }
 
 function genDanTiJiao(id){
-	if(confirm("确定吗?"))
+	if(confirm("确定提交吗?"))
 	{
 		frmGo.action="doProjectInfo.do?method=genDanTiJiao&id="+id;
 		frmGo.submit();
@@ -128,7 +134,7 @@ function genDanTiJiao(id){
 
 
 function pidanTijiao(id){
-	if(confirm("确定吗?"))
+	if(confirm("确定提交吗?"))
 	{
 		frmGo.action="doProjectInfo.do?method=pidanTijiao&id="+id;
 		frmGo.submit();
@@ -169,6 +175,21 @@ function daDan(id,orderid){
                 </tr>
                  <tr class="title_3">
         <td colspan="50">          
+              <%--    旺旺名
+						    <input id="wwname" name="wwname" type="text" class="txt_1" 
+						    value="<%CommUtils.printReqByAtt(request,response,"wwname");%>" size="20"> --%>
+						      创建时间
+                     <input name="startTime" type="text" class="txt_1"  id="startTime" style="cursor:text"
+								value="<%CommUtils.printReqByAtt(request,response,"fNow_date");%>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+								size="20" readonly> -
+							<input name="endTime" type="text" class="txt_1" id="endTime" style="cursor:text"
+								value="<%CommUtils.printReqByAtt(request,response,"now_date");%>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+								size="20" readonly>	
+								     
+								                  手机号
+						    <input id="phone" name="phone" type="text" class="txt_1" 
+						    value="<%CommUtils.printReqByAtt(request,response,"phone");%>" size="20">
+						    
                  旺旺名
 						    <input id="wwname" name="wwname" type="text" class="txt_1" 
 						    value="<%CommUtils.printReqByAtt(request,response,"wwname");%>" size="20">
@@ -216,6 +237,9 @@ function daDan(id,orderid){
 					</td> 
 					<td width="5%">
 					旺旺名
+					</td> 
+					<td width="5%">
+					手机号
 					</td> 
 						<td width="5%">
 					销售价格
@@ -271,6 +295,9 @@ function daDan(id,orderid){
 							<bean:write name="element" property="ww_name" />
 						</td>
 						<td>							
+							<bean:write name="element" property="kehu_phone" />
+						</td>
+						<td>							
 							<bean:write name="element" property="sale_price" />
 						</td>
 						<td>							
@@ -323,34 +350,40 @@ function daDan(id,orderid){
 						</td>
 						
 						
-						<%if("admin".equals(request.getAttribute("role"))){ %>
+						
+						 
+						 
 						<td>
+						<a href=# onclick="xiangQing('<bean:write name="element" property="id" />')" style="color:#0000FF" > [详情]</a>
+						
+						<%if("admin".equals(request.getAttribute("role"))){ %>
+						
 						<logic:equal name="element" property="status" value="1">	
    							<a href=# onclick="update('<bean:write name="element" property="id" />')" style="color:#0000FF" > [客服修改]</a>
    							 	<a href=# onclick="keFuTijiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [客服提交]</a>
    							 <a href=# onclick="deletee('<bean:write name="element" property="id" />')" style="color:#0000FF" > [客服删除]</a> 
    							 
-   							 	<a href=# onclick="piDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单修改]</a>
+   							 	<%-- <a href=# onclick="piDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单修改]</a> --%>
    						</logic:equal>	
    						
    						
    								<logic:equal name="element" property="status" value="2">	
    							 	<a href=# onclick="piDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单修改]</a>
-   							 		<a href=# onclick="pidanTuiHui('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单退回]</a>
+   							 		<%-- <a href=# onclick="pidanTuiHui('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单退回]</a> --%>
    							 			<a href=# onclick="pidanTijiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单提交]</a>
    						</logic:equal>	
    						
    					<!-- 	1客服保存  2客服提交  3批单保存  4批单退回   5批单提交 -->
    								<logic:equal name="element" property="status" value="3">	
    							 	<a href=# onclick="piDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单修改]</a>
-   							 		<a href=# onclick="pidanTuiHui('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单退回]</a>
+   							 		<%-- <a href=# onclick="pidanTuiHui('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单退回]</a> --%>
    							 			<a href=# onclick="pidanTijiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单提交]</a>
    						</logic:equal>	
    						
    						
    									<logic:equal name="element" property="status" value="8">	
    							 	<a href=# onclick="piDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单修改]</a>
-   							 		<a href=# onclick="pidanTuiHui('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单退回]</a>
+   							 	<%-- 	<a href=# onclick="pidanTuiHui('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单退回]</a> --%>
    							 			<a href=# onclick="pidanTijiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单提交]</a>
    						</logic:equal>	
    						
@@ -359,20 +392,20 @@ function daDan(id,orderid){
    							<a href=# onclick="update('<bean:write name="element" property="id" />')" style="color:#0000FF" > [客服修改]</a>
    							 	<a href=# onclick="keFuTijiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [客服提交]</a>
    							 
-   							 	<a href=# onclick="piDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单修改]</a>
+   							<%--  	<a href=# onclick="piDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单修改]</a> --%>
    							 
    						</logic:equal>	
    						
    						
    						
    							<logic:equal name="element" property="status" value="5">	
-   							 	<a href=# onclick="gendanTuiHui('<bean:write name="element" property="id" />')" style="color:#0000FF" > [跟单退回]</a>
+   							 	<%-- <a href=# onclick="gendanTuiHui('<bean:write name="element" property="id" />')" style="color:#0000FF" > [跟单退回]</a> --%>
    							 	<a href=# onclick="genDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [跟单修改]</a>
    						</logic:equal>	
    						
    						
    								<logic:equal name="element" property="status" value="6">	
-   							 	<a href=# onclick="gendanTuiHui('<bean:write name="element" property="id" />')" style="color:#0000FF" > [跟单退回]</a>
+   							 <%-- 	<a href=# onclick="gendanTuiHui('<bean:write name="element" property="id" />')" style="color:#0000FF" > [跟单退回]</a> --%>
    							 	<a href=# onclick="genDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [跟单修改]</a>
    							 	<a href=# onclick="genDanTiJiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [跟单提交]</a>
    						</logic:equal>	
@@ -399,12 +432,13 @@ function daDan(id,orderid){
    							 		</logic:equal>	
    						</logic:equal>	
 							
-						</td>
+						
 						 <%} %>	
 						 
 						 
+						 
+						 
 						 <%if("客服".equals(request.getAttribute("role"))){ %>
-						<td>
 						<logic:equal name="element" property="status" value="1">	
    							<a href=# onclick="update('<bean:write name="element" property="id" />')" style="color:#0000FF" > [客服修改]</a>
    							 	<a href=# onclick="keFuTijiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [客服提交]</a>
@@ -422,44 +456,43 @@ function daDan(id,orderid){
    							 	<a href=# onclick="keFuTijiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [客服提交]</a>
    							 <a href=# onclick="deletee('<bean:write name="element" property="id" />')" style="color:#0000FF" > [客服删除]</a> 
    						</logic:equal>	
-   						
-   						</td>
    						 <%} %>	
    						 
    						 
-   						  <%if("批单".equals(request.getAttribute("role"))){ %>
-						<td>
+   						 
+   						 <%if("批单".equals(request.getAttribute("role"))){ %>
 						<logic:equal name="element" property="status" value="2">	
    							 	<a href=# onclick="piDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单修改]</a>
-   							 		<a href=# onclick="pidanTuiHui('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单退回]</a>
+   							 		<%-- <a href=# onclick="pidanTuiHui('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单退回]</a> --%>
    							 			<a href=# onclick="pidanTijiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单提交]</a>
    						</logic:equal>	
    						<logic:equal name="element" property="status" value="3">	
    							 	<a href=# onclick="piDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单修改]</a>
-   							 		<a href=# onclick="pidanTuiHui('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单退回]</a>
+   							 	<%-- 	<a href=# onclick="pidanTuiHui('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单退回]</a> --%>
    							 			<a href=# onclick="pidanTijiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单提交]</a>
    						</logic:equal>	
    						
    						<logic:equal name="element" property="status" value="8">	
    							 	<a href=# onclick="piDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单修改]</a>
-   							 		<a href=# onclick="pidanTuiHui('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单退回]</a>
+   							 	<%-- 	<a href=# onclick="pidanTuiHui('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单退回]</a> --%>
    							 			<a href=# onclick="pidanTijiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单提交]</a>
    						</logic:equal>	
-   						</td>
    						 <%} %>	
    						 
-   						  
-   						  <%if("跟单".equals(request.getAttribute("role"))){ %>
-						<td>
+   						 
+   						 
+   						 
+   						 	  <%if("跟单".equals(request.getAttribute("role"))){ %>
+						
 							<logic:equal name="element" property="status" value="5">	
-   							 	<a href=# onclick="gendanTuiHui('<bean:write name="element" property="id" />')" style="color:#0000FF" > [跟单退回]</a>
+   							 <%-- 	<a href=# onclick="gendanTuiHui('<bean:write name="element" property="id" />')" style="color:#0000FF" > [跟单退回]</a> --%>
    							 	<a href=# onclick="genDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [跟单修改]</a>
    							 		<a href=# onclick="genDanTiJiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [跟单提交]</a>
    						</logic:equal>	
    						
    						
    								<logic:equal name="element" property="status" value="6">	
-   							 	<a href=# onclick="gendanTuiHui('<bean:write name="element" property="id" />')" style="color:#0000FF" > [跟单退回]</a>
+   							 <%-- 	<a href=# onclick="gendanTuiHui('<bean:write name="element" property="id" />')" style="color:#0000FF" > [跟单退回]</a> --%>
    							 	<a href=# onclick="genDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [跟单修改]</a>
    							 	<a href=# onclick="genDanTiJiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [跟单提交]</a>
    						</logic:equal>	
@@ -484,19 +517,16 @@ function daDan(id,orderid){
    							  	<a href=# onclick="daDan('<bean:write name="element" property="id" />','<bean:write name="element" property="order_id" />')" style="color:#0000FF" > [打单]</a>
    							 		</logic:equal>	
    						</logic:equal>	
-   						
-   						</td>
    						 <%} %>	
    						 
    						 
+   						 
    						  <%if("经理".equals(request.getAttribute("role"))){ %>
-						<td>
 						<logic:equal name="element" property="status" value="1">	
    							<a href=# onclick="update('<bean:write name="element" property="id" />')" style="color:#0000FF" > [客服修改]</a>
    							 	<a href=# onclick="keFuTijiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [客服提交]</a>
    							 <a href=# onclick="deletee('<bean:write name="element" property="id" />')" style="color:#0000FF" > [客服删除]</a> 
    						</logic:equal>	
-   						
    						<logic:equal name="element" property="status" value="4">	
    							<a href=# onclick="update('<bean:write name="element" property="id" />')" style="color:#0000FF" > [客服修改]</a>
    							 	<a href=# onclick="keFuTijiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [客服提交]</a>
@@ -508,9 +538,9 @@ function daDan(id,orderid){
    							 	<a href=# onclick="keFuTijiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [客服提交]</a>
    							 <a href=# onclick="deletee('<bean:write name="element" property="id" />')" style="color:#0000FF" > [客服删除]</a> 
    						</logic:equal>	
+   						 <%} %>	 
    						
    						</td>
-   						 <%} %>	
    						 
    						 
 					</tr>

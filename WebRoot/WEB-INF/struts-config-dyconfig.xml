@@ -111,6 +111,8 @@
    	 	<action name="projectInfoForm" path="/dyconfig/projectInfo/doProjectInfo" scope="request" type="com.care.sys.projectinfo.action.ProjectInfoAction" parameter="method">
    	 		<forward name="queryProjectInfo" path="/dyconfig/projectInfo/projectInfoMain.jsp"></forward>
    	 		<forward name="queryProjectInfoxml" path="/dyconfig/projectInfo/projectInfoxml.jsp"></forward>
+   	 		<forward name="daiban" path="/dyconfig/projectInfo/daiban.jsp"></forward>
+   	 		
    	 		<forward name="addProjectInfo" path="/dyconfig/projectInfo/addProjectInfo.jsp"></forward>
    	 			<forward name="addProjectInfoxml" path="/dyconfig/projectInfo/addProjectInfoxml.jsp"></forward>
    	 			<forward name="addProjectInfoxmlOther" path="/dyconfig/projectInfo/addProjectInfoxmlOther.jsp"></forward>
@@ -131,6 +133,7 @@
    	 		<!-- 批单修改 -->
    	 			<forward name="updateProjectInfoPiDan" path="/dyconfig/pidanInfo/updateProjectInfoxml.jsp"></forward>
    	 			<forward name="updateProjectInfoGenDan" path="/dyconfig/gendanInfo/updateProjectInfoxml.jsp"></forward>
+   	 			<forward name="xiangQing" path="/dyconfig/gendanInfo/xiangqing.jsp"></forward>
    	 	</action>
    	 	
    	 	<action name="saleInfoForm" path="/dyconfig/saleInfo/doSaleInfo" scope="request" type="com.care.sys.saleinfo.action.SaleInfoAction" parameter="method">

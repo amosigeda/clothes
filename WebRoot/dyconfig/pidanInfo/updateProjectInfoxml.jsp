@@ -35,16 +35,11 @@ function selectProject(obj){
 
 }
 function onUpdate(){
-/* 	if(frmGo.projectName.value.trim() == ''){
-		alert("项目名称不能为空");
-		frmGo.ProjectName.focus();
-		return false;
-	}
-	if(frmGo.remark.value.trim().length > 30){
-		alert("字数不能超过30字");
-		frmGo.remark.focus();
-		return false;
-	} */
+		if(frmGo.pidanremark.value.trim() == ''){
+			alert("批单备注不能为空");
+			frmGo.pidanremark.focus();
+			return false;
+		} 
 	frmGo.submit();
 }
 
@@ -60,7 +55,7 @@ function onUpdate(){
 			
 			
 			<tr>
-				<th colspan="8" nowrap="nowrap" align="left">修改订单信息</th>
+				<th colspan="8" nowrap="nowrap" align="left">批单修改订单信息</th>
 			</tr>
 			
 <!--   <tr>
@@ -625,15 +620,27 @@ function onUpdate(){
 					</td>
 				
 			</tr>
+			
+				<tr>
+				<td>提交类型</td>
+				<td colspan="7">
+						修改 <input name="tag" type="radio" class="radio_1" value="1" checked="checked" >
+	    退回<input type="radio" name="tag" class="radio_1" value="2" >
+					</td>
+				
+			</tr>
+			
+		
 
 			<tr>
 				
 					
 						<td align="left" colspan="2">
-						<input type="button" name="ok" accesskey="y" tabindex="y"  value="保存" class="but_1" onclick="onUpdate()">
+						<input type="button" name="ok" accesskey="y" tabindex="y"  value="确定" class="but_1" onclick="onUpdate()">
 	
       <input type="button" name="back" accesskey="b" tabindex="b" value="返 回" class="but_1" onclick="location='doProjectInfo.do?method=queryProjectInfoXml'">
       <input type="reset" name="back" accesskey="b" tabindex="b" value="重置" class="but_1" >
+    <!--   <input type="button" name="ok" accesskey="y" tabindex="y"  value="退回" color="red" class="but_1" onclick="onUpdate()"> -->
 				</td>
 			</tr>
 </table>

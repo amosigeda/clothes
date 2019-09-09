@@ -81,14 +81,14 @@ $("#province").change();
      <tr class="tr_11">
     <td align="left" width="7%">&nbsp;&nbsp;¿‡–Õ</td>
     <td align="left" width="20%" colspan="2">
-    
-    <select name="companyId"  value="companyId">     
+    <input name="companyId" size="50" type="text" class="txt_1"maxlength="100"><font color="red">*</font>
+   <!--  <select name="companyId"  value="companyId">     
   <option value="1">1</option>     
   <option value="2">2</option>  
   <option value="3">3</option>  
   <option value="4">4</option>  
   <option value="5">5</option>  
- </select>  
+ </select>   -->
     </td>
   </tr>
   

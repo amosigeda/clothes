@@ -35,16 +35,11 @@ function selectProject(obj){
 
 }
 function onUpdate(){
-/* 	if(frmGo.projectName.value.trim() == ''){
-		alert("项目名称不能为空");
-		frmGo.ProjectName.focus();
+ 	if(frmGo.gdremark.value.trim() == ''){
+		alert("跟单备注不能为空!!!");
+		frmGo.gdremark.focus();
 		return false;
 	}
-	if(frmGo.remark.value.trim().length > 30){
-		alert("字数不能超过30字");
-		frmGo.remark.focus();
-		return false;
-	} */
 	frmGo.submit();
 }
 
@@ -60,7 +55,7 @@ function onUpdate(){
 			
 			
 			<tr>
-				<th colspan="8" nowrap="nowrap" align="left">修改订单信息</th>
+				<th colspan="8" nowrap="nowrap" align="left">跟单修改订单信息</th>
 			</tr>
 			
 <!--   <tr>
@@ -627,9 +622,28 @@ function onUpdate(){
 				<td>批单备注</td>
 				<td colspan="7">
 						<input type="text"    readOnly="true"  size="20"  name="remark" id="remark"   value="<%=projectInfo.getAt("pidan_remark")%>"  >
+					
 					</td>
 			</tr>
 			<tr>
+			
+				<tr>
+				<td>跟单备注</td>
+				<td colspan="7">
+						<input type="text"      size="100"  name="gdremark" id="gdremark"   value="<%=projectInfo.getAt("gd_remark")%>"  > 
+							<font color="red">*</font>
+					</td>
+			</tr>
+			<tr>
+			
+			<tr>
+				<td>提交类型</td>
+				<td colspan="7">
+						修改 <input name="tag" type="radio" class="radio_1" value="1" checked="checked" >
+	    退回<input type="radio" name="tag" class="radio_1" value="2" >
+					</td>
+				
+			</tr>
 				
 					
 						<td align="left" colspan="2">

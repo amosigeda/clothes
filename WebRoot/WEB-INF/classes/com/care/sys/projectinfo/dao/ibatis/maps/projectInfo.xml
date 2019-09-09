@@ -204,14 +204,14 @@
 				data_sourceo=#dataSourceO#
 			</isNotEmpty>
 			<!-- <isNotEmpty prepend="," property="heartS"> heart_s=#heartS# </isNotEmpty> -->
-			<isNotEmpty prepend="," property="socketWay">
-				socket_way=#socketWay#
-			</isNotEmpty>
 			<isNotEmpty prepend="," property="adTitle">
 				adTitle=#adTitle#
 			</isNotEmpty>
 			<isNotEmpty prepend="," property="adDetail">
 				adDetail=#adDetail#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="socketWay">
+				socket_way=#socketWay#
 			</isNotEmpty>
 			
 			<isNotEmpty prepend="," property="jiaoLiaoTime">
@@ -220,6 +220,15 @@
 			
 			<isNotEmpty prepend="," property="pidan_time">
 				pidan_time=#pidan_time#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="gendan_fuze">
+				gendan_fuze=#gendan_fuze#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="gendan_tijiao_time">
+				gendan_tijiao_time=#gendan_tijiao_time#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="tuihui_time">
+				tuihui_time=#tuihui_time#
 			</isNotEmpty>
 			<!-- ,remark=#remark# -->
 		</dynamic>
@@ -730,6 +739,10 @@
 			
 			<isNotEmpty prepend="," property="pidan_time">
 				pidan_time=#pidan_time#
+			</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="gd_remark">
+				gd_remark=#gd_remark#
 			</isNotEmpty>
 			
 			
