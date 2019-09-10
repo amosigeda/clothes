@@ -1,5 +1,6 @@
 package com.care.sys.appuserinfo.dao;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
@@ -32,5 +33,9 @@ public interface AppUserInfoDao {
 	public List<DataMap> getProjectImageInfo(AppUserInfo ao)throws DataAccessException;
 
 	public Integer insertSaoMaInfo(AppUserInfo vo)throws DataAccessException;
+
+	public List<DataMap> getSaoMaInfoListByVo(AppUserInfo vo)throws DataAccessException;
+
+	public Integer getSaoMaInfoCount(AppUserInfo vo)throws DataAccessException;
 
 }

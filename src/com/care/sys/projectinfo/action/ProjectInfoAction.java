@@ -77,6 +77,17 @@ public class ProjectInfoAction extends BaseAction {
 		String href = request.getServletPath();
 		Date start = new Date();
 		Result result = new Result();// ���
+		
+		LoginUser loginUser = (LoginUser)request.getSession().getAttribute(Config.SystemConfig.LOGINUSER);
+		if (loginUser == null) {
+	            result.setBackPage(Config.INDEX_PAGE);
+	           result.setResultCode("timeout");
+	           result.setResultType("fail");
+	           request.setAttribute("result", null);
+	           return mapping.findForward("result");
+		}
+		
+		
 		PagePys pys = new PagePys();// ҳ������
 		DataList list = null; // ����ҳ��List ��logic itrate��ȡ��
 		StringBuffer sb = new StringBuffer();// �����ַ�����
@@ -85,11 +96,7 @@ public class ProjectInfoAction extends BaseAction {
 		ProjectInfo pro = new ProjectInfo();
 
 		try {
-			LoginUser loginUser = (LoginUser) request.getSession()
-					.getAttribute(Config.SystemConfig.LOGINUSER);
-			if (loginUser == null) {
-				return null;
-			}
+			
 			
 			loginUser.setCvsCode("10");
 			request.getSession().setAttribute(
@@ -267,6 +274,16 @@ public class ProjectInfoAction extends BaseAction {
 		String href = request.getServletPath();
 		Date start = new Date();
 		Result result = new Result();// ���
+		
+		LoginUser loginUser = (LoginUser)request.getSession().getAttribute(Config.SystemConfig.LOGINUSER);
+		if (loginUser == null) {
+	            result.setBackPage(Config.INDEX_PAGE);
+	           result.setResultCode("timeout");
+	           result.setResultType("fail");
+	           request.setAttribute("result", null);
+	           return mapping.findForward("result");
+		}
+		
 		PagePys pys = new PagePys();// ҳ������
 		DataList list = null; // ����ҳ��List ��logic itrate��ȡ��
 		StringBuffer sb = new StringBuffer();// �����ַ�����
@@ -275,11 +292,7 @@ public class ProjectInfoAction extends BaseAction {
 		ProjectInfo pro = new ProjectInfo();
 
 		try {
-			LoginUser loginUser = (LoginUser) request.getSession()
-					.getAttribute(Config.SystemConfig.LOGINUSER);
-			if (loginUser == null) {
-				return null;
-			}
+			
 			
 			
 			String userName = loginUser.getUserName();
@@ -1036,17 +1049,23 @@ public class ProjectInfoAction extends BaseAction {
 		String href = request.getServletPath();
 		Date start = new Date();
 		Result result = new Result();// ���
+		
+		LoginUser loginUser = (LoginUser)request.getSession().getAttribute(Config.SystemConfig.LOGINUSER);
+		if (loginUser == null) {
+	            result.setBackPage(Config.INDEX_PAGE);
+	           result.setResultCode("timeout");
+	           result.setResultType("fail");
+	           request.setAttribute("result", null);
+	           return mapping.findForward("result");
+		}
+		
 		PagePys pys = new PagePys();// ҳ������
 		DataList list = null; // ����ҳ��List ��logic itrate��ȡ��
 		StringBuffer sb = new StringBuffer();// �����ַ�����
 		ProjectInfoFacade info = ServiceBean.getInstance()
 				.getProjectInfoFacade();// ����userApp������ȡ��user�ֵ䣩
 		ProjectInfo pro = new ProjectInfo();
-		LoginUser loginUser = (LoginUser) request.getSession().getAttribute(
-				Config.SystemConfig.LOGINUSER);
-		if (loginUser == null) {
-			return null;
-		}
+	
 
 		String userName = loginUser.getUserName();
 

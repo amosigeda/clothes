@@ -535,8 +535,9 @@ $(document).ready(function(){
 			</tr>
 
 			<tr>
-				<td align="left">附件</td>
-				<td colspan="2"><input type="file" name="channelId"
+				<td align="left">附件(ZIP)</td>
+				<td colspan="2">请压缩后再添加--
+				<input type="file" name="channelId"
 					id="channelId" multiple="multiple" class="imagePath" /> <img alt=""
 					src="" id="image1" class="showImage"></td>
 					

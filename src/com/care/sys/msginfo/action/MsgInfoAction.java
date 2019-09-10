@@ -55,10 +55,13 @@ public class MsgInfoAction extends BaseAction {
 		StringBuffer sb = new StringBuffer();// �����ַ�����
 		MsgInfoFacade info = ServiceBean.getInstance().getMsgInfoFacade();// ����userApp������ȡ��user�ֵ䣩
 		try {
-			LoginUser loginUser = (LoginUser) request.getSession()
-					.getAttribute(Config.SystemConfig.LOGINUSER);
+			LoginUser loginUser = (LoginUser)request.getSession().getAttribute(Config.SystemConfig.LOGINUSER);
 			if (loginUser == null) {
-				return null;
+		            result.setBackPage(Config.INDEX_PAGE);
+		           result.setResultCode("timeout");
+		           result.setResultType("fail");
+		           request.setAttribute("result", null);
+		           return mapping.findForward("result");
 			}
 			String companyInfoId = loginUser.getCompanyId();
 			String projectInfoId = loginUser.getProjectId();

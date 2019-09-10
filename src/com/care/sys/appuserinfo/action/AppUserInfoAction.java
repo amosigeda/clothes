@@ -53,7 +53,11 @@ public class AppUserInfoAction extends BaseAction{
 		try {
 			LoginUser loginUser = (LoginUser)request.getSession().getAttribute(Config.SystemConfig.LOGINUSER);
 			if (loginUser == null) {
-				return null;
+		            result.setBackPage(Config.INDEX_PAGE);
+		           result.setResultCode("timeout");
+		           result.setResultType("fail");
+		           request.setAttribute("result", null);
+		           return mapping.findForward("result");
 			}
 			String companyInfoId = loginUser.getCompanyId();
 			String projectInfoId = loginUser.getProjectId();
@@ -269,5 +273,117 @@ public class AppUserInfoAction extends BaseAction{
 			}
 		return mapping.findForward("result");
 	}
+	
+	
+	public ActionForward queryGongLiangInfo(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		Date start = new Date();
+		String href= request.getServletPath();		 
+		Result result = new Result();//���
+		PagePys pys = new PagePys();//ҳ������
+		DataList list = null; //����ҳ��List  ��logic itrate��ȡ��
+		StringBuffer sb = new StringBuffer();//�����ַ�����
+		AppUserInfoFacade info = ServiceBean.getInstance().getAppUserInfoFacade();//����userApp������ȡ��user�ֵ䣩
+		try {
+			LoginUser loginUser = (LoginUser)request.getSession().getAttribute(Config.SystemConfig.LOGINUSER);
+			if (loginUser == null) {
+		            result.setBackPage(Config.INDEX_PAGE);
+		           result.setResultCode("timeout");
+		           result.setResultType("fail");
+		           request.setAttribute("result", null);
+		           return mapping.findForward("result");
+			}
+			String companyInfoId = loginUser.getCompanyId();
+			String projectInfoId = loginUser.getProjectId();
+			AppUserInfoForm form = (AppUserInfoForm) actionForm;
+			AppUserInfo vo = new AppUserInfo(); 
+			String userName = request.getParameter("user");
+			String startTime = request.getParameter("startTime");
+			String endTime   = request.getParameter("endTime");	
+			String user_id = request.getParameter("user_id");
+			String phone = request.getParameter("phone");
+			String gongzhong = request.getParameter("gongzhong");
+
+			/*���û������ֶ�*/
+            form.setOrderBy("id"); 
+            form.setSort("1"); 
+
+          
+			if(startTime != null && !"".equals(startTime)){		
+				if(sb.length() > 0){
+					sb.append(" and ");
+				}
+				sb.append("substring(create_time,1,10) >= '"+startTime+"'");
+			}
+			if(endTime != null && !"".equals(endTime)){
+				if(sb.length() > 0){
+					sb.append(" and ");
+				}
+				sb.append("substring(create_time,1,10) <= '"+endTime+"'");
+			}
+			if(userName != null && !"".equals(userName)){
+				if(sb.length() > 0){
+					sb.append(" and ");
+				}
+				sb.append("user_name like '%" + userName + "%'");
+			}
+			if(user_id != null && !"".equals(user_id)){				
+				if(sb.length() > 0){
+					sb.append(" and ");
+				}
+				sb.append("a.id = '" + user_id + "'");
+			}
+			if(gongzhong != null && !"".equals(gongzhong)){
+				if(sb.length() > 0){
+					sb.append(" and ");
+				}
+				sb.append("last_name='"+gongzhong+"'");
+			}
+			if(phone != null && !"".equals(phone)){
+				if(sb.length() > 0){
+					sb.append(" and ");
+				}
+				sb.append("user_name='"+phone+"'");
+			}
+			/*ProjectInfo pro = new ProjectInfo();
+			List<DataMap> pros = ServiceBean.getInstance().getProjectInfoFacade().getProjectInfo(pro);
+			request.setAttribute("project", pros);*/
+			
+			request.setAttribute("fNow_date", startTime);
+		    request.setAttribute("now_date", endTime);
+		    request.setAttribute("user", userName);
+		    request.setAttribute("user_id", user_id);
+		    request.setAttribute("phone", phone);
+		    request.setAttribute("gongzhong", gongzhong);
+		    
+			vo.setCondition(sb.toString());
+			
+         	BeanUtils.copyProperties(vo,form);			
+         	list = info.getSaoMaInfoListByVo(vo);  
+			BeanUtils.copyProperties(pys, form); 
+			pys.setCounts(list.getTotalSize());   
+			/* ���û������ֶ� */ 
+			 
+		} catch (Exception e) { 
+			e.printStackTrace();
+			logger.debug(request.getQueryString() + "  " + e);
+			result.setBackPage(Config.ABOUT_PAGE); /* ����Ϊ����ҳ�棬���Գ������ת��ϵͳĬ��ҳ�� */
+			if (e instanceof SystemException) { /* ����֪�쳣���н��� */
+				result.setResultCode(((SystemException) e).getErrCode());
+				result.setResultType(((SystemException) e).getErrType());
+			} else { /* ��δ֪�쳣���н�������ȫ�������δ֪�쳣 */
+				result.setResultCode("noKnownException");
+				result.setResultType("sysRunException"); 
+			}
+		} finally {
+			request.setAttribute("result", result);
+			request.setAttribute("pageList", list);
+			request.setAttribute("PagePys", pys);
+		}
+		CommUtils.getIntervalTime(start, new Date(), href); 
+		return mapping.findForward("queryGongLiangInfo");
+	}
+	
 
 }

@@ -18,6 +18,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionServlet;
 import org.apache.struts.actions.DispatchAction;
 
+import com.care.common.config.Config;
 import com.care.common.config.ServiceBean;
 import com.care.common.lang.Constant;
 import com.care.sys.funcinfo.domain.FuncInfo;
@@ -31,6 +32,9 @@ import com.godoing.rose.lang.SystemException;
 public abstract class BaseAction extends DispatchAction {
 
 	public int result = Constant.FAIL_CODE;  //Ĭ��ʧ��
+	
+	
+    
     public void setServlet(ActionServlet actionServlet) {
 
         /*���������ҳ���date�����Զ�ת��*/
@@ -53,15 +57,15 @@ public abstract class BaseAction extends DispatchAction {
                                            HttpServletRequest request,
                                            HttpServletResponse response,
                                            String name) throws Exception {
-//        Date dt = DateFormatTools.getDateByStr("2014-07-10 22:00:00");
-//        if(System.currentTimeMillis() > dt.getTime()){
-//            Result result = new Result();
-//            result.setBackPage(Config.INDEX_PAGE);
-//            result.setResultCode("timeout");
-//            result.setResultType("fail");
-//            request.setAttribute("result", null);
-//            return mapping.findForward("result");
-//        }
+/*        Date dt = DateFormatTools.getDateByStr("2014-07-10 22:00:00");
+        if(System.currentTimeMillis() > dt.getTime()){
+           Result result = new Result();
+            result.setBackPage(Config.INDEX_PAGE);
+           result.setResultCode("timeout");
+           result.setResultType("fail");
+           request.setAttribute("result", null);
+           return mapping.findForward("result");
+      }*/
 //        if(isTimeOut()){
 //            LoginUser user = (LoginUser) request.getSession().getAttribute(
 //                Config.SystemConfig.LOGINUSER);

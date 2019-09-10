@@ -34,6 +34,7 @@
 	<action-mappings>
 		<action name="appUserInfoFrom" path="/dyconfig/appUserInfo/doAppUserInfo" scope="request" type="com.care.sys.appuserinfo.action.AppUserInfoAction" parameter="method">
 			<forward name="queryAppUserInfo" path="/dyconfig/appUserInfo/appUserInfoMain.jsp" />
+			<forward name="queryGongLiangInfo" path="/dyconfig/appUserInfo/queryGongLiangInfoMain.jsp" />
     		<forward name="queryAppUserCount" path="/dyconfig/appUserInfo/appUserCountMain.jsp" />
     	</action>
     	

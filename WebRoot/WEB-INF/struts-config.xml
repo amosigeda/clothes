@@ -31,6 +31,8 @@
 			<forward name="channelPower" path="/sysAdmin/userInfo/channelPower.jsp" />
 			<forward name="adverPower" path="/sysAdmin/userInfo/adverPower.jsp" />
 			<forward name="internalApply" path="/sysAdmin/userInfo/internalApply.jsp"></forward>
+			
+				<forward name="index" path="/sessionOut.jsp" />
 		</action>
 		<action name="funcInfoForm" path="/sysAdmin/funcInfo/doFuncInfo"
 			scope="request" type="com.care.sys.funcinfo.action.DoFuncInfoAction"

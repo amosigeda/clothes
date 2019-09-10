@@ -12,7 +12,7 @@
 	if(resultType == null || resultCode == null || result.getBackPage() == null){
 		resultType = "fail";
 		resultCode = "timeout";
-		backPape= "/GXCareDevice/index.jsp";
+		backPape= "/clothes/index.jsp";
 		myself = "top";
 	}
 	/*取得显示说明*/
@@ -26,6 +26,12 @@
 	String fontClass = "result_err_font";
 	if(resultType.equals("success")){
 		pop = "操作成功";
+		tblClass = "result_cess";
+		butClass = "result_cess_btn";
+		trClass = "result_cess_tr";
+		fontClass = "result_cess_font";
+	}else if(resultType.equals("loginout")){
+		pop = "请重新登录";
 		tblClass = "result_cess";
 		butClass = "result_cess_btn";
 		trClass = "result_cess_tr";

@@ -44,6 +44,15 @@ public class UserInfoAction extends BaseAction {
 			ActionForm actionForm, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		LoginUser loginUser = (LoginUser)request.getSession().getAttribute(Config.SystemConfig.LOGINUSER);
+		if (loginUser == null) {
+			 Result result = new Result();
+	            result.setBackPage(Config.INDEX_PAGE);
+	           result.setResultCode("timeout");
+	           result.setResultType("fail");
+	           request.setAttribute("result", null);
+	           return mapping.findForward("result");
+		}
+		
 		String groupCode = loginUser.getGroupCode();
 		String userCode = loginUser.getUserCode();
 		String href= request.getServletPath();

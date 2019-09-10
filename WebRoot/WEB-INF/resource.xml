@@ -10,7 +10,7 @@
 			   <updateIcon>更新图片成功</updateIcon>
            </success>
            <fail>
-                <timeout>系统超时</timeout>
+                <timeout>timeout  Please login again.</timeout>
 				<loginCodeError>username or password error!!!</loginCodeError>
 				<loginPwdError>username or password error!!!</loginPwdError>
 				<userCodeError>系统中存在重复的帐号</userCodeError>

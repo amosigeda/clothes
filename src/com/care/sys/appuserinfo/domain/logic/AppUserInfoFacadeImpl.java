@@ -84,4 +84,11 @@ public class AppUserInfoFacadeImpl implements AppUserInfoFacade{
 		return appUserInfoDao.insertSaoMaInfo(vo);
 	}
 
+	@Override
+	public DataList getSaoMaInfoListByVo(AppUserInfo vo) throws SystemException {
+		DataList list = new DataList(appUserInfoDao.getSaoMaInfoListByVo(vo));
+		list.setTotalSize(appUserInfoDao.getSaoMaInfoCount(vo));
+		return list;
+	}
+
 }

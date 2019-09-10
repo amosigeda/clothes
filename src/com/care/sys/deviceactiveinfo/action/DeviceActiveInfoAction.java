@@ -672,6 +672,16 @@ public class DeviceActiveInfoAction extends BaseAction{
 			ActionForm actionForm, HttpServletRequest request,
 			HttpServletResponse response) {
 		Result result = new Result();
+		
+		LoginUser loginUser = (LoginUser)request.getSession().getAttribute(Config.SystemConfig.LOGINUSER);
+		if (loginUser == null) {
+	            result.setBackPage(Config.INDEX_PAGE);
+	           result.setResultCode("timeout");
+	           result.setResultType("fail");
+	           request.setAttribute("result", null);
+	           return mapping.findForward("result");
+		}
+		
 		PagePys pys = new PagePys();
 		DataList list = null;
 		StringBuffer sb = new StringBuffer();

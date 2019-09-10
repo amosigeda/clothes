@@ -12,6 +12,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.care.app.LoginUser;
 import com.care.common.config.Config;
 import com.care.common.config.ServiceBean;
 import com.care.common.http.BaseAction;
@@ -39,6 +40,16 @@ public class DoRoleInfoAction extends BaseAction{
 		String href= request.getServletPath();
 		Date start = new Date();
 		Result result = new Result();
+		
+		LoginUser loginUser = (LoginUser)request.getSession().getAttribute(Config.SystemConfig.LOGINUSER);
+		if (loginUser == null) {
+	            result.setBackPage(Config.INDEX_PAGE);
+	           result.setResultCode("timeout");
+	           result.setResultType("fail");
+	           request.setAttribute("result", null);
+	           return mapping.findForward("result");
+		}
+		
 		PagePys pys = new PagePys();
 		DataList list = null;
 		RoleInfoFacade info = ServiceBean.getInstance().getRoleInfoFacade();
