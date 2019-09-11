@@ -55,7 +55,7 @@ function onUpdate(){
 			
 			
 			<tr>
-				<th colspan="8" nowrap="nowrap" align="left">跟单修改订单信息</th>
+				<th colspan="8" nowrap="nowrap" align="left">订单详情信息</th>
 			</tr>
 			
 <!--   <tr>
@@ -108,7 +108,9 @@ function onUpdate(){
 	    <input type="text"    readOnly="true"   size="20"  name="orderType" id="orderType"  readOnly="true"   value="<%=projectInfo.getAt("order_type")%>"  >
 				</td>
 				<td>交付时间</td>
-				<td></td>
+				<td>
+				   <input type="text"    readOnly="true"   size="20"  name="orderType" id="orderType"  readOnly="true"   value="<%=projectInfo.getAt("jiaofu_time")%>"  >
+				</td>
 			</tr>
 
 
@@ -175,12 +177,19 @@ function onUpdate(){
 			</tr>
 
 			<tr>
-				<td colspan="2">西装数量</td>
+				<td>西装数量</td>
+				<td>	
+				<input type="text"    readOnly="true"   readOnly="true"   size="20"  name="jiankuanA" id="jiankuanA"   value="<%=projectInfo.getAt("xizhuang_number")%>"  >
+				</td>
 				<td>衣码</td>
-				<td colspan="2">衬衫数量</td>
+				<td>	<input type="text"    readOnly="true"   readOnly="true"   size="20"  name="jiankuanA" id="jiankuanA"   value="<%=projectInfo.getAt("yi_ma")%>"  ></td>
+				<td>衬衫数量</td>
+				<td>	<input type="text"    readOnly="true"   readOnly="true"   size="20"  name="jiankuanA" id="jiankuanA"   value="<%=projectInfo.getAt("chenshan_number")%>"  ></td>
 				<td>衬衫码</td>
-				<td></td>
-				<td></td>
+				<td>
+				<input type="text"    readOnly="true"   readOnly="true"   size="20"  name="jiankuanA" id="jiankuanA"   value="<%=projectInfo.getAt("chenshan_ma")%>"  >
+				</td>
+				
 			</tr>
 
 			<tr>
@@ -358,12 +367,15 @@ function onUpdate(){
 			</tr>
 
 			<tr>
-				<td colspan="2">西裤数量</td>
+				<td>西裤数量</td>
+				<td>	<input type="text"    readOnly="true"   readOnly="true"   size="20"  name="jiankuanA" id="jiankuanA"   value="<%=projectInfo.getAt("xiku_number")%>"  ></td>
 				<td>裤码</td>
-				<td colspan="2">马甲数量</td>
+				<td><input type="text"    readOnly="true"   readOnly="true"   size="20"  name="jiankuanA" id="jiankuanA"   value="<%=projectInfo.getAt("ku_ma")%>"  ></td>
+				<td>马甲数量</td>
+				<td>	<input type="text"    readOnly="true"   readOnly="true"   size="20"  name="jiankuanA" id="jiankuanA"   value="<%=projectInfo.getAt("majia_number")%>"  ></td>
 				<td>马甲码</td>
-				<td></td>
-				<td></td>
+					<td><input type="text"    readOnly="true"   readOnly="true"   size="20"  name="jiankuanA" id="jiankuanA"   value="<%=projectInfo.getAt("majia_ma")%>"  ></td>
+			
 			</tr>
 
 

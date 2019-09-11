@@ -108,7 +108,9 @@ function onUpdate(){
 	    <input type="text"    readOnly="true"   size="20"  name="orderType" id="orderType"  readOnly="true"   value="<%=projectInfo.getAt("order_type")%>"  >
 				</td>
 				<td>交付时间</td>
-				<td></td>
+				<td>
+				  <input type="text"    readOnly="true"   size="20"  name="orderType" id="orderType"  readOnly="true"   value="<%=projectInfo.getAt("jiaofu_time")%>"  >
+				</td>
 			</tr>
 
 
@@ -641,6 +643,7 @@ function onUpdate(){
 				<td colspan="7">
 						修改 <input name="tag" type="radio" class="radio_1" value="1" checked="checked" >
 	    退回<input type="radio" name="tag" class="radio_1" value="2" >
+	    	    提交<input type="radio" name="tag" class="radio_1" value="3" >
 					</td>
 				
 			</tr>

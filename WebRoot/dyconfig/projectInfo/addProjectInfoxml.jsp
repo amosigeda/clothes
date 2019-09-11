@@ -134,7 +134,13 @@ $(document).ready(function(){
 						<option value="重做">重做</option>
 				</select></td>
 				<td>交付时间</td>
-				<td></td>
+				<td>
+				<select name="jiaofu_time" value="jiaofu_time">
+						<option value="10">+10天  加急</option>
+						<option value="5">+5天  特别加急</option>
+						<option value="3">+3天   非常紧急</option>
+				</select> <font color="red">*</font></td>
+				</td>
 			</tr>
 
 
@@ -503,8 +509,21 @@ $(document).ready(function(){
 				<td>米数</td>
 				<td></td>
 				<td>用途</td>
-				<td><input name="yongtu1" size="20" id="yongtu1" type="text"
-					class="txt_1" maxlength="100" /><font color="red">*</font></td>
+				<td>
+				<select name="yongtu1" value="yongtu1">
+						<option value="上衣">上衣</option>
+						<option value="裤子">裤子</option>
+						<option value="马甲">马甲</option>
+						<option value="衬衫">衬衫</option>
+						<option value="西装套装">西装套装</option>
+						<option value="换片">换片</option>
+						<option value="其他">其他</option>
+				</select> <font color="red">*</font></td>
+				
+				<!-- <input name="yongtu1" size="20" id="yongtu1" type="text"
+					class="txt_1" maxlength="100" /><font color="red">*</font> -->
+					
+					</td>
 				<td>供应商</td>
 				<td></td>
 			</tr>
@@ -517,20 +536,31 @@ $(document).ready(function(){
 				<td>米数</td>
 				<td></td>
 				<td>用途</td>
-				<td><input name="yongtu2" size="20" id="yongtu2" type="text"
-					class="txt_1" maxlength="100" /><font color="red">*</font></td>
+				<td>
+				
+				<select name="yongtu2" value="yongtu2">
+						<option value="上衣">上衣</option>
+						<option value="裤子">裤子</option>
+						<option value="马甲">马甲</option>
+						<option value="衬衫">衬衫</option>
+						<option value="西装套装">西装套装</option>
+						<option value="换片">换片</option>
+						<option value="其他">其他</option>
+				</select> <font color="red">*</font></td>
+				<!-- <input name="yongtu2" size="20" id="yongtu2" type="text"
+					class="txt_1" maxlength="100" /><font color="red">*</font> --></td>
 				<td>供应商</td>
 				<td></td>
 			</tr>
 
 			<tr>
 				<td>体型备注</td>
-				<td colspan="3"><input name="tixingremark" size="60"
-					id="tixingremark" type="text" class="txt_1" maxlength="100" /><font
+				<td colspan="3"><input name="tixingremark" size=60"
+					id="tixingremark" type="text" class="txt_1" maxlength="1000" /><font
 					color="red">*</font></td>
 				<td>备注</td>
 				<td colspan="3"><input name="remark" size="60" id="remark"
-					type="text" class="txt_1" maxlength="100" /><font color="red">*</font>
+					type="text" class="txt_1" maxlength="1000" /><font color="red">*</font>
 				</td>
 			</tr>
 
@@ -541,7 +571,23 @@ $(document).ready(function(){
 					id="channelId" multiple="multiple" class="imagePath" /> <img alt=""
 					src="" id="image1" class="showImage"></td>
 					
-						<td align="left" colspan="2">&nbsp;&nbsp;&nbsp;<input
+						<td align="left" colspan="2">&
+				</td>
+			</tr>
+			
+				<tr>
+				<td>提交类型</td>
+				<td colspan="7">
+						保存 <input name="tag" type="radio" class="radio_1" value="1" checked="checked" >
+	    保存并提交<input type="radio" name="tag" class="radio_1" value="2" >
+					</td>
+				
+			</tr>
+			
+			<tr>
+					<td></td>
+				<td colspan="7">
+						<input
 					type="button" name="ok" accesskey="y" tabindex="y" value="确 定"
 					class="but_1" onclick="onAdd()"
 					style="font-size:12;width:40px;height:21px;"> <input
@@ -549,7 +595,8 @@ $(document).ready(function(){
 					class="but_1"
 					onclick="location='doProjectInfo.do?method=queryProjectInfoXml'"
 					style="font-size:12;width:40px;height:21px;">
-				</td>
+					</td>
+				
 			</tr>
 
 		</table>

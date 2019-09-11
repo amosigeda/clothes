@@ -108,7 +108,9 @@ function onUpdate(){
 	    <input type="text"    readOnly="true"   size="20"  name="orderType" id="orderType"  readOnly="true"   value="<%=projectInfo.getAt("order_type")%>"  >
 				</td>
 				<td>交付时间</td>
-				<td></td>
+				<td>
+				  <input type="text"    readOnly="true"   size="20"  name="orderType" id="orderType"  readOnly="true"   value="<%=projectInfo.getAt("jiaofu_time")%>"  >
+				</td>
 			</tr>
 
 
@@ -175,12 +177,24 @@ function onUpdate(){
 			</tr>
 
 			<tr>
-				<td colspan="2">西装数量</td>
-				<td>衣码</td>
-				<td colspan="2">衬衫数量</td>
+				<td>西装数量</td>
+				<td>
+				<input type="text"    readOnly="true"   readOnly="true"   size="20"  name="xizhuang_number" id="xizhuang_number"   value="<%=projectInfo.getAt("xizhuang_number")%>"  >
+				</td>
+				<td>衣码	</td>
+				<td><input name="yi_ma" size="20" type="text" class="txt_1"  maxlength="50"><font color="red">*</font>	</td>
+			
+				 
+				<td>衬衫数量</td>
+				<td>
+<input type="text"    readOnly="true"   readOnly="true"   size="20"  name="chenshan_number" id="chenshan_number"   value="<%=projectInfo.getAt("chenshan_number")%>"  >
+				
+</td>
 				<td>衬衫码</td>
-				<td></td>
-				<td></td>
+				
+				<td><input name="chenshan_ma" size="20" type="text" class="txt_1"  maxlength="50"><font color="red">*</font>	</td>
+				
+				
 			</tr>
 
 			<tr>
@@ -358,12 +372,25 @@ function onUpdate(){
 			</tr>
 
 			<tr>
-				<td colspan="2">西裤数量</td>
+				<td>西裤数量</td>
+				<td>
+				<input type="text"    readOnly="true"   readOnly="true"   size="20"  name="xiku_number" id="xiku_number"   value="<%=projectInfo.getAt("xiku_number")%>"  >
+				</td>
+				
 				<td>裤码</td>
-				<td colspan="2">马甲数量</td>
+				<td>
+<input name="ku_ma" size="20" type="text" class="txt_1"  maxlength="50"><font color="red">*</font>	
+</td>
+				<td>马甲数量</td>
+				<td>
+<input type="text"    readOnly="true"   readOnly="true"   size="20"  name="majia_number" id="majia_number"   value="<%=projectInfo.getAt("majia_number")%>"  >
+				
+</td>
 				<td>马甲码</td>
-				<td></td>
-				<td></td>
+				<td>
+				<input name="majia_ma" size="20" type="text" class="txt_1"  maxlength="50"><font color="red">*</font>	
+				</td>
+				
 			</tr>
 
 
@@ -626,6 +653,7 @@ function onUpdate(){
 				<td colspan="7">
 						修改 <input name="tag" type="radio" class="radio_1" value="1" checked="checked" >
 	    退回<input type="radio" name="tag" class="radio_1" value="2" >
+	    	    提交<input type="radio" name="tag" class="radio_1" value="3" >
 					</td>
 				
 			</tr>

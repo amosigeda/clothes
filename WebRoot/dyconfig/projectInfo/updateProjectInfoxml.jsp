@@ -60,7 +60,7 @@ function onUpdate(){
 			
 			
 			<tr>
-				<th colspan="8" nowrap="nowrap" align="left">修改订单信息</th>
+				<th colspan="8" nowrap="nowrap" align="left">客服修改订单信息</th>
 			</tr>
 			
 <!--   <tr>
@@ -540,6 +540,14 @@ function onUpdate(){
 				<td colspan="3">
 					<input type="text"   size="20"  name="remark" id="remark"   value="<%=projectInfo.getAt("remark")%>"  >
 				</td>
+			</tr>
+	<tr>
+				<td>提交类型</td>
+				<td colspan="7">
+						仅修改<input name="tag" type="radio" class="radio_1" value="1" checked="checked" >
+	  修改并提交<input type="radio" name="tag" class="radio_1" value="2" >
+					</td>
+				
 			</tr>
 
 			<tr>

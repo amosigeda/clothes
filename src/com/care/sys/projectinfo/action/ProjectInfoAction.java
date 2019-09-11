@@ -31,6 +31,7 @@ import com.care.app.LoginUser;
 import com.care.common.config.Config;
 import com.care.common.config.ServiceBean;
 import com.care.common.http.BaseAction;
+import com.care.common.lang.CommTools;
 import com.care.common.lang.CommUtils;
 import com.care.common.lang.Constant;
 import com.care.sys.companyinfo.domain.CompanyInfo;
@@ -1868,7 +1869,7 @@ public class ProjectInfoAction extends BaseAction {
 			vo.setYongtu2(yongtu2);
 			vo.setTixingremark(tixingremark);
 			vo.setRemark(remark);
-			vo.setStatus("1");
+			
 			// vo.setUpdateTime(addTime);
 			vo.setSex(sex);
 
@@ -1897,7 +1898,21 @@ public class ProjectInfoAction extends BaseAction {
 			vo.setXiku_number(xiku_number);
 			vo.setMajia_number(majia_number);
 			
+			String tag = request.getParameter("tag");
+			vo.setStatus(tag);
+			
+			
+			String jiaofu_time = request.getParameter("jiaofu_time");
+			
+			
+			vo.setJiaofu_time(CommTools.getAddTime(Integer.valueOf(jiaofu_time)));
+
+			
 			facade.insertKeHuDangAnInfo(vo);
+			
+			
+			
+			
 
 			result.setBackPage(HttpTools.httpServletPath(request,
 					"queryProjectInfoXml"));
@@ -2078,12 +2093,17 @@ public class ProjectInfoAction extends BaseAction {
 			vo.setYongtu2(yongtu2);
 			vo.setTixingremark(tixingremark);
 			vo.setRemark(remark);
-			vo.setStatus("1");
+			
 			// vo.setUpdateTime(addTime);
 			vo.setSex(sex);
 
 			vo.setLingkoukuaishiB(lingkoukuaishiB);
 			vo.setXiukouA(xiukouA);
+			
+			String tag = request.getParameter("tag");
+			vo.setStatus(tag);
+			
+			
 
 			ServiceBean.getInstance().getProjectInfoFacade()
 					.updatePorjectInfoDangAn(vo);
@@ -2512,6 +2532,16 @@ public class ProjectInfoAction extends BaseAction {
 
 			String pidanremark = request.getParameter("pidanremark");
 			vo.setPidanremark(pidanremark);
+			
+			String yi_ma = request.getParameter("yi_ma");
+			String chenshan_ma = request.getParameter("chenshan_ma");
+			String ku_ma = request.getParameter("ku_ma");
+			String majia_ma = request.getParameter("majia_ma");
+			
+			vo.setYi_ma(yi_ma);
+			vo.setChenshan_ma(chenshan_ma);
+			vo.setKu_ma(ku_ma);
+			vo.setMajia_ma(majia_ma);
 
 			ServiceBean.getInstance().getProjectInfoFacade()
 					.updatePorjectInfoDangAn(vo);
@@ -2520,10 +2550,14 @@ public class ProjectInfoAction extends BaseAction {
 			System.out.println("tag="+tag);
 			if("1".equals(tag)){
 				vo.setStatus("3");
-			}else{
+			}else if("2".equals(tag)){
 				vo.setStatus("4");
 				vo.setTuihui_time(new Date());
+			}else if("3".equals(tag)){
+				vo.setStatus("5");
+				vo.setPidan_time(new Date());
 			}
+			
 			vo.setCondition("id='" + id + "'");
 			ServiceBean.getInstance().getProjectInfoFacade()
 					.updatePorjectInfo(vo);
@@ -2583,8 +2617,12 @@ public class ProjectInfoAction extends BaseAction {
 			vo.setCondition("id='" + id + "'");
 			if("1".equals(tag)){
 				vo.setStatus("6");
-			}else{
+			}else if("2".equals(tag)){
 				vo.setStatus("8");
+			}else if("3".equals(tag)){
+				vo.setStatus("9");
+				vo.setGendan_fuze(loginUser.getUserName()+"");
+				vo.setGendan_tijiao_time(new Date());
 			}
 			vo.setGendan_fuze(loginUser.getUserName()+"");
 			ServiceBean.getInstance().getProjectInfoFacade()

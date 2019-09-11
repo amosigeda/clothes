@@ -152,10 +152,45 @@ public class ProjectInfo extends PublicVoBean implements Serializable{
 	private String gd_remark;
 	
 	
+	private String yi_ma;
+	private String chenshan_ma;
+	private String ku_ma;
+	private String majia_ma;
+	
+	private String jiaofu_time;
 	
 	
-
 	
+	public String getJiaofu_time() {
+		return jiaofu_time;
+	}
+	public void setJiaofu_time(String jiaofu_time) {
+		this.jiaofu_time = jiaofu_time;
+	}
+	public String getYi_ma() {
+		return yi_ma;
+	}
+	public void setYi_ma(String yi_ma) {
+		this.yi_ma = yi_ma;
+	}
+	public String getChenshan_ma() {
+		return chenshan_ma;
+	}
+	public void setChenshan_ma(String chenshan_ma) {
+		this.chenshan_ma = chenshan_ma;
+	}
+	public String getKu_ma() {
+		return ku_ma;
+	}
+	public void setKu_ma(String ku_ma) {
+		this.ku_ma = ku_ma;
+	}
+	public String getMajia_ma() {
+		return majia_ma;
+	}
+	public void setMajia_ma(String majia_ma) {
+		this.majia_ma = majia_ma;
+	}
 	public String getGd_remark() {
 		return gd_remark;
 	}
