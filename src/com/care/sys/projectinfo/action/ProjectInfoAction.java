@@ -453,6 +453,7 @@ public class ProjectInfoAction extends BaseAction {
 
 		String userName = loginUser.getUserName();
 	/*	if ("admin".equals(userName)) {*/
+	
 			return mapping.findForward("addProjectInfoxml");
 		/*} else {
 			return mapping.findForward("addProjectInfoxmlOther");
@@ -734,6 +735,14 @@ public class ProjectInfoAction extends BaseAction {
 		}
 
 		String userName = loginUser.getUserName();
+		request.setAttribute("role","admin");
+		UserInfo uvo =new UserInfo();
+		uvo.setCondition("userCode = '"+userName+"' limit 1");
+		List<DataMap> listUo =  ServiceBean.getInstance().getUserInfoFacade().getUserInfo(uvo);
+		if(listUo.size()>0){
+			String role = listUo.get(0).get("code")+"";
+			request.setAttribute("role",role);
+		}
 
 		String id = request.getParameter("id");
 		ProjectInfo vo = new ProjectInfo();
@@ -1906,7 +1915,29 @@ public class ProjectInfoAction extends BaseAction {
 			
 			
 			vo.setJiaofu_time(CommTools.getAddTime(Integer.valueOf(jiaofu_time)));
+			
+			
+			String kaicha = request.getParameter("kaicha");
+			String xiabai  = request.getParameter("xiabai");
+			String zhuangse  = request.getParameter("zhuangse");
+			String waizhubian  = request.getParameter("waizhubian");
+			String xiucha  = request.getParameter("xiucha");
+			String kuyao  = request.getParameter("kuyao");
+			String kuxing  = request.getParameter("kuxing");
+			String chenshanling  = request.getParameter("chenshanling");
+			String chenshanxiu  = request.getParameter("chenshanxiu");
+			//System.out.println("衬衫袖"+chenshanxiu);
+			
 
+			vo.setKaicha(kaicha);
+			vo.setXiabai(xiabai);
+			vo.setZhuangse(zhuangse);
+			vo.setWaizhubian(waizhubian);
+			vo.setXiucha(xiucha);
+			vo.setKuyao(kuyao);
+			vo.setKuxing(kuxing);
+			vo.setChenshanling(chenshanling);
+			vo.setChenshanxiu(chenshanxiu);
 			
 			facade.insertKeHuDangAnInfo(vo);
 			

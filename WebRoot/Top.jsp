@@ -104,7 +104,7 @@ function exit(){
           </span>
         <span id="txt" class="smalltext">   
           </span>    
-            <a href="#" id="a_test" onclick="" style="color:black">´ý°ì£º<%=LOGINUSER.getCvsCode()%></a>
+            <%-- <a href="#" id="a_test" onclick="" style="color:black">´ý°ì£º<%=LOGINUSER.getCvsCode()%></a> --%>
             <a href="sysAdmin/sysLogInfo/doSysLogInfo.do?method=getOutTime" id="a_test" onclick="exit()" style="color:red">ÍË³ö</a>
   </div>
 	<div class="manage_title">

@@ -160,7 +160,76 @@ public class ProjectInfo extends PublicVoBean implements Serializable{
 	private String jiaofu_time;
 	
 	
+	private String kaicha;
+	private String xiabai;
+	private String zhuangse;
+	private String waizhubian;
+	private String xiucha;
+	private String kuyao;
+	private String kuxing;
+	private String chenshanling;
+	private String chenshanxiu;
 	
+	
+	
+	
+	
+	
+	
+	public String getKaicha() {
+		return kaicha;
+	}
+	public void setKaicha(String kaicha) {
+		this.kaicha = kaicha;
+	}
+	public String getXiabai() {
+		return xiabai;
+	}
+	public void setXiabai(String xiabai) {
+		this.xiabai = xiabai;
+	}
+	public String getZhuangse() {
+		return zhuangse;
+	}
+	public void setZhuangse(String zhuangse) {
+		this.zhuangse = zhuangse;
+	}
+	public String getWaizhubian() {
+		return waizhubian;
+	}
+	public void setWaizhubian(String waizhubian) {
+		this.waizhubian = waizhubian;
+	}
+	public String getXiucha() {
+		return xiucha;
+	}
+	public void setXiucha(String xiucha) {
+		this.xiucha = xiucha;
+	}
+	public String getKuyao() {
+		return kuyao;
+	}
+	public void setKuyao(String kuyao) {
+		this.kuyao = kuyao;
+	}
+	public String getKuxing() {
+		return kuxing;
+	}
+	public void setKuxing(String kuxing) {
+		this.kuxing = kuxing;
+	}
+	public String getChenshanling() {
+		return chenshanling;
+	}
+	public void setChenshanling(String chenshanling) {
+		this.chenshanling = chenshanling;
+	}
+	public String getChenshanxiu() {
+		return chenshanxiu;
+	}
+	public void setChenshanxiu(String chenshanxiu) {
+		this.chenshanxiu = chenshanxiu;
+	}
 	public String getJiaofu_time() {
 		return jiaofu_time;
 	}
