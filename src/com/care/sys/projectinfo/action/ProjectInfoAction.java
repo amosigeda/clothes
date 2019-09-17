@@ -6,10 +6,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +40,7 @@ import com.care.common.lang.CommUtils;
 import com.care.common.lang.Constant;
 import com.care.sys.companyinfo.domain.CompanyInfo;
 import com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo;
+import com.care.sys.dynamicInfo.domain.DynamicInfo;
 import com.care.sys.projectinfo.domain.ProjectInfo;
 import com.care.sys.projectinfo.domain.logic.ProjectInfoFacade;
 import com.care.sys.projectinfo.form.ProjectInfoForm;
@@ -102,7 +107,6 @@ public class ProjectInfoAction extends BaseAction {
 			loginUser.setCvsCode("10");
 			request.getSession().setAttribute(
 					Config.SystemConfig.LOGINUSER, loginUser);
-
 			String userName = loginUser.getUserName();
 
 			String companyInfoId = loginUser.getCompanyId();
@@ -187,10 +191,10 @@ public class ProjectInfoAction extends BaseAction {
 					}else if("客服".equals(role)){
 						if (sb.toString().length() > 0) {
 							sb.append(" and xiadan_kefu ='" + userName
-									 + "'");
+									 + "' and status<=4 and status != 2 and status != 3");
 						} else {
 							sb.append("xiadan_kefu ='" + userName
-									 + "'");
+									 + "' status<=4 and status != 2 and status != 3");
 						}
 					}else if("跟单".equals(role)){
 						if (sb.toString().length() > 0) {
@@ -240,7 +244,7 @@ public class ProjectInfoAction extends BaseAction {
 			request.setAttribute("PagePys", pys);
 		}
 		// CommUtils.getIntervalTime(start, new Date(), href);
-		return mapping.findForward("daiban");
+		return mapping.findForward("queryProjectInfoxml");
 	}
 	
 
@@ -453,6 +457,15 @@ public class ProjectInfoAction extends BaseAction {
 
 		String userName = loginUser.getUserName();
 	/*	if ("admin".equals(userName)) {*/
+		
+	/*	DynamicInfo vo=new DynamicInfo();
+		vo.setCondition("1=1 order by id desc limit 1");
+
+		List<DataMap> list = ServiceBean.getInstance().getDynamicInfoFacade().getDynamicInfo(vo);
+		list.get(0).keySet().add("")
+
+		request.setAttribute("dynamicInfo", list.get(0));*/
+		
 	
 			return mapping.findForward("addProjectInfoxml");
 		/*} else {
@@ -757,6 +770,19 @@ public class ProjectInfoAction extends BaseAction {
 			result.setResultType("success");
 			return mapping.findForward("result");
 		}
+		
+		ProjectInfo voo = new ProjectInfo();
+		List<DataMap> Clist = ServiceBean.getInstance().getProjectInfoFacade()
+				.getProjectWatchInfo(voo);
+		String sb = CommUtils.getPrintSelect(Clist, "project_no1",
+				"project_no", "project_no", "", 1);
+		request.setAttribute("companyList", sb);
+
+		String sb1 = CommUtils.getPrintSelect(Clist, "project_no2",
+				"project_no", "project_no", "", 1);
+
+		request.setAttribute("companyList1", sb1);
+		
 		request.setAttribute("projectInfo", list.get(0));
 			return mapping.findForward("updateProjectInfoxml");
 		/*	if ("admin".equals(userName)) {
@@ -1697,7 +1723,34 @@ public class ProjectInfoAction extends BaseAction {
 				return null;
 			}
 
-			String orderId = System.currentTimeMillis() + "";// 订单编号
+		 	String orderId ="";// 订单编号
+			String userName = loginUser.getUserName();
+			UserInfo uvo =new UserInfo();
+			uvo.setCondition("userCode = '"+userName+"' limit 1");
+			List<DataMap> listUo =  ServiceBean.getInstance().getUserInfoFacade().getUserInfo(uvo);
+			
+			 SimpleDateFormat df = new SimpleDateFormat("yyMMdd");
+			 SimpleDateFormat yydf = new SimpleDateFormat("yyyyMMdd");
+		     Calendar calendar = Calendar.getInstance();
+		     
+		     ProjectInfo voCount = new ProjectInfo();
+		     voCount.setCondition("add_time>= '"+yydf.format(calendar.getTime())+"' and xiadan_kefu = '"+userName+"'");
+		    int shuliang =   ServiceBean.getInstance()
+					.getProjectInfoFacade().getProjectInfoCount(voCount);
+		    String compnay = listUo.get(0).get("company")+"";
+		    if(compnay == null || "".equals(compnay) ){
+		    	compnay="1";
+		    }
+		    
+		    	if(shuliang<10){
+		    		 orderId = compnay+ df.format(calendar.getTime()) +listUo.get(0).get("id")+"0"+shuliang;
+		    	}else{
+		    		orderId = compnay+ df.format(calendar.getTime()) +listUo.get(0).get("id")+shuliang;
+		    	}
+		    
+		     
+		     
+		    
 			
 			ProjectInfoForm form = (ProjectInfoForm) actionForm;
 			System.out.println(form.getChannelId());
@@ -1740,7 +1793,7 @@ public class ProjectInfoAction extends BaseAction {
 
 						// String url =
 						// "http://localhost:8080/clothes/upload/photo/"+orderid+"/";
-						String fujian = "http://47.111.148.8:9999/clothes/upload/fujian/"+name;
+						String fujian = "http://47.111.148.8:80/clothes/upload/fujian/"+name;
 						if (list.size() > 0) {
 							vod.setCondition("id='" + list.get(0).get("id") + "'");
 							vod.setFujian(fujian);
@@ -1982,35 +2035,11 @@ public class ProjectInfoAction extends BaseAction {
 
 			String id = request.getParameter("id");
 
-			/*
-			 * ProjectInfoForm form = (ProjectInfoForm) actionForm; String name
-			 * = ""; String fileFormat = ""; Hashtable<?, ?> files =
-			 * form.getMultipartRequestHandler() .getFileElements();//
-			 * 获取所有文件路径的枚举； if (files != null & files.size() > 0) {
-			 * Enumeration<?> enums = files.keys(); String fileKey = null; while
-			 * (enums.hasMoreElements()) { fileKey = (String)
-			 * (enums.nextElement()); FormFile file = (FormFile)
-			 * files.get(fileKey); if (!file.getFileName().isEmpty()) {
-			 * fileFormat = file.toString().substring(
-			 * file.toString().lastIndexOf("."), file.toString().length()); name
-			 * = Long.toString(new Date().getTime()) + fileFormat; InputStream
-			 * in = file.getInputStream(); System.out.println(photoPath + name);
-			 * File f = new File(photoPath + name); if (f.exists()) {
-			 * f.delete(); }
-			 * 
-			 * OutputStream out = new FileOutputStream(photoPath + name);
-			 * out.write(file.getFileData(), 0, file.getFileSize());
-			 * 
-			 * out.close(); out = null; in.close(); }
-			 * 
-			 * }
-			 * 
-			 * }
-			 */
+		
 
 			ProjectInfo vo = new ProjectInfo();
 			vo.setCondition("id='" + id + "'");
-			String orderId = System.currentTimeMillis() + "";// 订单编号
+			//String orderId = System.currentTimeMillis() + "";// 订单编号
 			String wwName = request.getParameter("projectNo");
 			String salePrice = request.getParameter("salePrice");
 			String wechat = request.getParameter("wechat");
@@ -2069,7 +2098,7 @@ public class ProjectInfoAction extends BaseAction {
 			String tixingremark = request.getParameter("tixingremark");
 			String remark = request.getParameter("remark");
 
-			vo.setOrderId(orderId);
+			//vo.setOrderId(orderId);
 			vo.setWwName(wwName);
 			vo.setSalePrice(salePrice);
 			vo.setWechat(wechat);
@@ -2135,9 +2164,163 @@ public class ProjectInfoAction extends BaseAction {
 			vo.setStatus(tag);
 			
 			
+			String kaicha = request.getParameter("kaicha");
+			String xiabai  = request.getParameter("xiabai");
+			String zhuangse  = request.getParameter("zhuangse");
+			String waizhubian  = request.getParameter("waizhubian");
+			String xiucha  = request.getParameter("xiucha");
+			String kuyao  = request.getParameter("kuyao");
+			String kuxing  = request.getParameter("kuxing");
+			String chenshanling  = request.getParameter("chenshanling");
+			String chenshanxiu  = request.getParameter("chenshanxiu");
+					vo.setKaicha(kaicha);
+			vo.setXiabai(xiabai);
+			vo.setZhuangse(zhuangse);
+			vo.setWaizhubian(waizhubian);
+			vo.setXiucha(xiucha);
+			vo.setKuyao(kuyao);
+			vo.setKuxing(kuxing);
+			vo.setChenshanling(chenshanling);
+			vo.setChenshanxiu(chenshanxiu);
+			
+			
+			String jiankuanA2 = request.getParameter("jiankuanA2");
+			vo.setJiankuanA2(jiankuanA2);
+			String lingweiB2 = request.getParameter("lingweiB2");
+			vo.setLingweiB2(lingweiB2);
+			String xiongweiA2 = request.getParameter("xiongweiA2");
+			vo.setXiongweiA2(xiongweiA2);
+			String xiongweiB22 = request.getParameter("xiongweiB22");
+			vo.setXiongweiB22(xiongweiB22);
+			String zhongyaoA2 = request.getParameter("zhongyaoA2");
+			vo.setZhongyaoA2(zhongyaoA2);
+			String zhongyaoB2 = request.getParameter("zhongyaoB2");
+			vo.setZhongyaoB2(zhongyaoB2);
+			String fuweiA2 = request.getParameter("fuweiA2");
+			vo.setFuweiA2(fuweiA2);
+			String fuweiB2 = request.getParameter("fuweiB2");
+			vo.setFuweiB2(fuweiB2);
+			String houzhongyichangA2 = request
+					.getParameter("houzhongyichangA2");
+			vo.setHouzhongyichangA2(houzhongyichangA2);
+			String xiuchangB2 = request.getParameter("xiuchangB2");
+			vo.setXiuchangB2(xiuchangB2);
+			String qianyichangA2 = request.getParameter("qianyichangA2");
+			vo.setQianyichangA2(qianyichangA2);
+			String xiufeiB2 = request.getParameter("xiufeiB2");
+			vo.setXiufeiB2(xiufeiB2);
+			String xiuchangA2 = request.getParameter("xiuchangA2");
+			vo.setXiuchangA2(xiuchangA2);
+			String xiukouB2 = request.getParameter("xiukouB2");
+			vo.setXiukouB2(xiukouB2);
+			String lingkoukuaishiB2 = request.getParameter("lingkoukuaishiB2");
+			vo.setLingkoukuaishiB2(lingkoukuaishiB2);
+			String xiukouA2 = request.getParameter("xiukouA2");
+			vo.setXiukouA2(xiukouA2);
+			String yichangB2 = request.getParameter("yichangB2");
+			vo.setYichangB2(yichangB2);
+			String kuchangC2 = request.getParameter("kuchangC2");
+			vo.setKuchangC2(kuchangC2);
+			String xiongweiD2 = request.getParameter("xiongweiD2");
+			vo.setXiongweiD2(xiongweiD2);
+			String yaoweiC22 = request.getParameter("yaoweiC22");
+			vo.setYaoweiC22(yaoweiC22);
+			String zhongyaoD2 = request.getParameter("zhongyaoD2");
+			vo.setZhongyaoD2(zhongyaoD2);
+			String tuiweiC2 = request.getParameter("tuiweiC2");
+			vo.setTuiweiC2(tuiweiC2);
+			String yichangD2 = request.getParameter("yichangD2");
+			vo.setYichangD2(yichangD2);
+			String dangweiC2 = request.getParameter("dangweiC2");
+			vo.setDangweiC2(dangweiC2);
+			String datuiC2 = request.getParameter("datuiC2");
+			vo.setDatuiC2(datuiC2);
+			String zhongtuiC2 = request.getParameter("zhongtuiC2");
+			vo.setZhongtuiC2(zhongtuiC2);
+			String xiaotuiC2 = request.getParameter("xiaotuiC2");
+			vo.setXiaotuiC2(xiaotuiC2);
+			String tuikouC2 = request.getParameter("tuikouC2");
+			vo.setTuikouC2(tuikouC2);
+			String mi1 = request.getParameter("mi1");
+			vo.setMi1(mi1);
+			String mi2 = request.getParameter("mi2");
+			vo.setMi2(mi2);
+
+			String xiufeiA2 = request.getParameter("xiufeiA2");
+			vo.setXiufeiA2(xiufeiA2);
+
+			String pidanremark = request.getParameter("pidanremark");
+			vo.setPidanremark(pidanremark);
+			
+			String yi_ma = request.getParameter("yi_ma");
+			String chenshan_ma = request.getParameter("chenshan_ma");
+			String ku_ma = request.getParameter("ku_ma");
+			String majia_ma = request.getParameter("majia_ma");
+			
+			vo.setYi_ma(yi_ma);
+			vo.setChenshan_ma(chenshan_ma);
+			vo.setKu_ma(ku_ma);
+			vo.setMajia_ma(majia_ma);
+			
+			
+
+String project_no1 = request.getParameter("project_no1");
+			String project_no2 = request.getParameter("project_no2");
+					String gdremark = request.getParameter("gdremark");
+					
+					vo.setGongyingshang1(project_no1);
+					vo.setGongyingshang2(project_no2);
+					vo.setGd_remark(gdremark);
 
 			ServiceBean.getInstance().getProjectInfoFacade()
 					.updatePorjectInfoDangAn(vo);
+			
+			
+			
+			
+			System.out.println("tag="+tag);
+			
+			String userName = loginUser.getUserName();
+			
+			UserInfo uvo =new UserInfo();
+			uvo.setCondition("userCode = '"+userName+"' limit 1");
+			List<DataMap> listUo =  ServiceBean.getInstance().getUserInfoFacade().getUserInfo(uvo);
+			if(listUo.size()>0){
+				String role = listUo.get(0).get("code")+"";
+				if("批单".equals(role)){
+					if("1".equals(tag)){
+						vo.setStatus("3");
+					}else if("3".equals(tag)){
+						vo.setStatus("4");
+						vo.setTuihui_time(new Date());
+					}else if("2".equals(tag)){
+						vo.setStatus("5");
+						vo.setPidan_time(new Date());
+					}
+					
+					vo.setCondition("id='" + id + "'");
+					ServiceBean.getInstance().getProjectInfoFacade()
+							.updatePorjectInfo(vo);
+				}else if("跟单".equals(role)){
+					if("1".equals(tag)){
+						vo.setStatus("6");
+					}else if("3".equals(tag)){
+						vo.setStatus("8");
+					}else if("2".equals(tag)){
+						vo.setStatus("9");
+						vo.setGendan_fuze(loginUser.getUserName()+"");
+						vo.setGendan_tijiao_time(new Date());
+					}
+					vo.setGendan_fuze(loginUser.getUserName()+"");
+					ServiceBean.getInstance().getProjectInfoFacade()
+							.updatePorjectInfo(vo);
+				}
+			}
+				
+			
+			
+			
+			
 
 			result.setBackPage(HttpTools.httpServletPath(request,
 					"queryProjectInfoXml"));

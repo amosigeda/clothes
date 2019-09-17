@@ -152,6 +152,13 @@
 	<select id="getProjectInfoCount" resultClass="java.lang.Integer"
 		parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
 		SELECT COUNT(id) FROM projectinfo
+		
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		
 	</select>
 	<insert id="insertProjectInfo" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
 		INSERT INTO
@@ -763,6 +770,36 @@
 			<isNotEmpty prepend="," property="majia_ma">
 				majia_ma=#majia_ma#
 			</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="," property="kaicha">
+				kaicha=#kaicha#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="xiabai">
+				xiabai=#xiabai#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="zhuangse">
+				zhuangse=#zhuangse#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="waizhubian">
+				waizhubian=#waizhubian#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="xiucha">
+				xiucha=#xiucha#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="kuyao">
+				kuyao=#kuyao#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="kuxing">
+				kuxing=#kuxing#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="chenshanling">
+				chenshanling=#chenshanling#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="chenshanxiu">
+				chenshanxiu=#chenshanxiu#
+			</isNotEmpty>
+			
 			
 			
 		</dynamic>

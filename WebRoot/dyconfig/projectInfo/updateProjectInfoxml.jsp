@@ -53,13 +53,14 @@ function onUpdate(){
 <span class="title_1"></span>
 <form name="frmGo" method="post" action="doProjectInfo.do?method=updateProjectInfodangan" encType="multipart/form-data" onsubmit="return onUpdate()">
 <input name="id" type="hidden" value="<%=projectInfo.getAt("id")%>" >
-<input name="role" type="hidden" value="<%=projectInfo.getAt("role")%>" >
+<%-- <input name="role" type="hidden" value="<%=projectInfo.getAt("role")%>" > --%>
 <!-- <table width="100%" border="0"cellpadding="0" cellspacing="1"  class="tbl_11"> -->
 <table width="100%" class="tbl_11" border="1" bordercolorlight=#000000
 			bordercolordark=#000000 bordercolor=#000000 cellspacing="0"
 			cellpadding="2">
 			
-			   <%if("admin".equals(request.getAttribute("role")) || "客服".equals(request.getAttribute("role"))){ %>
+			  <%--  <%if("admin".equals(request.getAttribute("role")) || "客服".equals(request.getAttribute("role"))){ %>
+			    <%} %>	 --%>
 			   
 			   <tr>
 				<th colspan="8" nowrap="nowrap" align="left"><%=request.getAttribute("role")%>修改订单信息</th>
@@ -77,7 +78,7 @@ function onUpdate(){
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">订单编号</td>
 				<td nowrap="nowrap" align="center" width="7%">
-	<input type="text"   readOnly="true"  size="20"  name="project_no1" id="project_no1" value=<%=projectInfo.getAt("order_id")%>>
+	<input type="text"   readOnly="true"  size="38"  name="project_no1" id="project_no1" value=<%=projectInfo.getAt("order_id")%>>
 </td>
 				<td nowrap="nowrap" align="center" width="7%">渠道</td>
 				<td nowrap="nowrap" align="center" width="7%">
@@ -91,19 +92,19 @@ function onUpdate(){
 						</td>
 				<td nowrap="nowrap" align="center" width="7%">年龄</td>
 				<td  nowrap="nowrap" align="center" width="7%">
-				<input type="text"      size="20"  name="age" id="age"   value="<%=projectInfo.getAt("age")%>"  >
+				<input type="text"      size="38"  name="age" id="age"   value="<%=projectInfo.getAt("age")%>"  >
 					</td>
 				<td nowrap="nowrap" align="center" width="7%">客户电话</td>	
 				<td  nowrap="nowrap" align="center" width="7%">
-				<input type="text"    size="20"  name="kehuPhone" id="kehuPhone"   value="<%=projectInfo.getAt("kehu_phone")%>"  >
+				<input type="text"    size="38"  name="kehuPhone" id="kehuPhone"   value="<%=projectInfo.getAt("kehu_phone")%>"  >
 					</td>
 			</tr>
 			
 				<tr>
 				<td nowrap="nowrap" align="center" width="7%">微信号</td>
-				<td nowrap="nowrap" align="center" width="7%"><input type="text"   size="20"  name="wechat" id="wechat"  value=<%=projectInfo.getAt("wechat")%>></td>
+				<td nowrap="nowrap" align="center" width="7%"><input type="text"   size="38"  name="wechat" id="wechat"  value=<%=projectInfo.getAt("wechat")%>></td>
 				<td nowrap="nowrap" align="center" width="7%">下单客服</td>
-				<td><input type="text"    readOnly="true"  size="20"  name="project_no" id="project_no"   value="<%=projectInfo.getAt("xiadan_kefu")%>"  ></td>
+				<td><input type="text"    size="38"  name="project_no" id="project_no"   value="<%=projectInfo.getAt("xiadan_kefu")%>"  ></td>
 				<td nowrap="nowrap" align="center" width="7%">性别</td>
 				<td  nowrap="nowrap" align="center" width="7%">
 					<input name="sex" type="radio" class="radio_1" value="男" <%if("男".equals("" + projectInfo.getAt("sex"))){%>checked<%}%>>男
@@ -111,36 +112,36 @@ function onUpdate(){
 					</td>
 				<td nowrap="nowrap" align="center" width="7%">客户姓名</td>	
 				<td  nowrap="nowrap" align="center" width="7%">
-				<input type="text"    size="20"  name="kehuName" id="kehuName"   value="<%=projectInfo.getAt("kehu_name")%>"  >
+				<input type="text"    size="38"  name="kehuName" id="kehuName"   value="<%=projectInfo.getAt("kehu_name")%>"  >
 					</td>
 			</tr>
 			
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">订单号</td>
 				<td nowrap="nowrap" align="center" width="7%">
-				<input type="text"   size="20"  name="orderNumber" id="orderNumber"  value=<%=projectInfo.getAt("order_number")%>>
+				<input type="text"   size="38"  name="orderNumber" id="orderNumber"  value=<%=projectInfo.getAt("order_number")%>>
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">销售价格</td>
 				<td nowrap="nowrap" align="center" width="7%">
-	<input type="text"   size="20"  name="salePrice" id="salePrice"  value=<%=projectInfo.getAt("sale_price")%>>
+	<input type="text"   size="38"  name="salePrice" id="salePrice"  value=<%=projectInfo.getAt("sale_price")%>>
 </td>
 				<td nowrap="nowrap" align="center" width="7%">身高</td>
 				<td nowrap="nowrap" align="center" width="7%">
-				<input type="text"      size="20"  name="height" id="height"   value="<%=projectInfo.getAt("height")%>"  >
+				<input type="text"      size="38"  name="height" id="height"   value="<%=projectInfo.getAt("height")%>"  >
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">体重</td>
 				<td nowrap="nowrap" align="center" width="7%">
-<input type="text"      size="20"  name="weight" id="weight"   value="<%=projectInfo.getAt("weight")%>"  >
+<input type="text"      size="38"  name="weight" id="weight"   value="<%=projectInfo.getAt("weight")%>"  >
 </td>
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">旺旺名</td>
 				<td nowrap="nowrap" align="center" width="7%">
-<input type="text"   size="20"  name="projectNo" id="projectNo"  value=<%=projectInfo.getAt("ww_name")%>>
+<input type="text"   size="38"  name="projectNo" id="projectNo"  value=<%=projectInfo.getAt("ww_name")%>>
 </td>
 				<td nowrap="nowrap" align="center" width="7%">下单时间</td>
 				<td nowrap="nowrap" align="center" width="7%">
-				<input type="text"    readOnly="true" size="20"  name="project_no" id="project_no"   value="<%=projectInfo.getAt("add_time")%>"  >
+				<input type="text"    readOnly="true" size="38"  name="project_no" id="project_no"   value="<%=projectInfo.getAt("add_time")%>"  >
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">客户地址</td>
 				<td nowrap="nowrap" align="center" width="7%" colspan="3">
@@ -170,94 +171,122 @@ function onUpdate(){
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">西装数量</td>
-				<td nowrap="nowrap" align="left" width="7%">
+				<td nowrap="nowrap" align="center" width="7%">
 				<input name="xizhuang_number" size="38" id="xizhuang_number" type="number"
-					class="txt_1" maxlength="100" /><font color="red"></font>
+					class="txt_1" maxlength="100"   value="<%=projectInfo.getAt("xizhuang_number")%>" />
 			</td>
 				<td nowrap="nowrap" align="center" width="7%">衣码</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="yi_ma" size="38" type="text" class="txt_1"  maxlength="50">
+				</td>
 				<td nowrap="nowrap" align="center" width="7%">衬衫数量</td>
-				<td nowrap="nowrap" align="left" width="7%">
+				<td nowrap="nowrap" align="center" width="7%">
 				<input name="chenshan_number" size="38" id="chenshan_number" type="number"
-					class="txt_1" maxlength="100" /><font color="red"></font>
+					class="txt_1" maxlength="100"  value="<%=projectInfo.getAt("chenshan_number")%>" />
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">衬衫码</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="chenshan_ma" size="38" type="text" class="txt_1"  maxlength="50">
+				</td>
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">肩宽</td>
 				<td nowrap="nowrap" align="center" width="7%">
-					<input type="text"      size="20"  name="jiankuanA" id="jiankuanA"   value="<%=projectInfo.getAt("jiankuan_a")%>"  >
+					<input type="text"      size="38"  name="jiankuanA" id="jiankuanA"   value="<%=projectInfo.getAt("jiankuan_a")%>"  >
 				</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				 <input name="jiankuanA2" size="38" type="text" class="txt_1"  maxlength="50"  value="<%=projectInfo.getAt("jiankuan_a2")%>" >
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%">领围</td>
 				<td nowrap="nowrap" align="center" width="7%">
-			<input type="text"      size="20"  name="lingweiB" id="lingweiB"   value="<%=projectInfo.getAt("lingwei_b")%>"  >
+			<input type="text"      size="38"  name="lingweiB" id="lingweiB"   value="<%=projectInfo.getAt("lingwei_b")%>"  >
 		</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
-			</tr>
-			<tr>
-				<td nowrap="nowrap" align="center" width="7%">胸围</td>
 				<td nowrap="nowrap" align="center" width="7%">
-					<input type="text"      size="20"  name="xiongweiA" id="xiongweiA"   value="<%=projectInfo.getAt("xiongwei_a")%>"  >
+				 <input name="lingweiB2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("lingwei_b2")%>" >
 				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
+			</tr>
+			<tr>
+				<td nowrap="nowrap" align="center" width="7%">胸围</td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<input type="text"      size="38"  name="xiongweiA" id="xiongweiA"   value="<%=projectInfo.getAt("xiongwei_a")%>"  >
+				</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<input name="xiongweiA2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("xiongwei_a2")%>">
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%">胸围</td>
 				<td nowrap="nowrap" align="center" width="7%">
-					<input type="text"      size="20"  name="xiongweiB" id="xiongweiB"   value="<%=projectInfo.getAt("xiongwei_b")%>"  >
+					<input type="text"      size="38"  name="xiongweiB" id="xiongweiB"   value="<%=projectInfo.getAt("xiongwei_b")%>"  >
 			</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				 <input name="xiongweiB22" size="38" type="text" class="txt_1"maxlength="50"  value="<%=projectInfo.getAt("xiongwei_2")%>">
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">中腰</td>
 				<td nowrap="nowrap" align="center" width="7%">
-			<input type="text"      size="20"  name="zhongyaoA" id="zhongyaoA"   value="<%=projectInfo.getAt("zhongyao_a")%>"  >
+			<input type="text"      size="38"  name="zhongyaoA" id="zhongyaoA"   value="<%=projectInfo.getAt("zhongyao_a")%>"  >
 		</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				 <input name="zhongyaoA2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("zhongyao_a2")%>">
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%">中腰</td>
 				<td nowrap="nowrap" align="center" width="7%">
-		<input type="text"      size="20"  name="zhongyaoA" id="zhongyaoA"   value="<%=projectInfo.getAt("zhongyao_a")%>"  >
+		<input type="text"      size="38"  name="zhongyaoA" id="zhongyaoA"   value="<%=projectInfo.getAt("zhongyao_a")%>"  >
 	</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="zhongyaoB2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("zhongyao_b2")%>" ><font color="red"></font>
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">腹围</td>
 				<td nowrap="nowrap" align="center" width="7%">
-			<input type="text"      size="20"  name="fuweiA" id="fuweiA"   value="<%=projectInfo.getAt("fuwei_a")%>"  >
+			<input type="text"      size="38"  name="fuweiA" id="fuweiA"   value="<%=projectInfo.getAt("fuwei_a")%>"  >
 		</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				 <input name="fuweiA2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("fuwei_a2")%>">
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%">腹围</td>
 				<td nowrap="nowrap" align="center" width="7%">
-<input type="text"      size="20"  name="fuweiB" id="fuweiB"   value="<%=projectInfo.getAt("fuwei_b")%>"  >
+<input type="text"      size="38"  name="fuweiB" id="fuweiB"   value="<%=projectInfo.getAt("fuwei_b")%>"  >
 </td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				 <input name="fuweiB2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("fuwei_b2")%>"><font color="red"></font>
+				
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">后中衣长</td>
 				<td nowrap="nowrap" align="center" width="7%">
-<input type="text"      size="20"  name="houzhongyichangA" id="houzhongyichangA"   value="<%=projectInfo.getAt("houzhongyichang_a")%>"  >
+<input type="text"      size="38"  name="houzhongyichangA" id="houzhongyichangA"   value="<%=projectInfo.getAt("houzhongyichang_a")%>"  >
 </td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				 <input name="houzhongyichangA2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("houzhongyichang_a2")%>">
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%">衣长</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="yichangB2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("yichang_b2")%>">
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 			</tr>
 				<tr>
 				<td nowrap="nowrap" align="center" width="7%">前衣长</td>
 				<td nowrap="nowrap" align="center" width="7%">
-		<input type="text"      size="20"  name="qianyichangA" id="qianyichangA"   value="<%=projectInfo.getAt("qianyichang_a")%>"  >
+		<input type="text"      size="38"  name="qianyichangA" id="qianyichangA"   value="<%=projectInfo.getAt("qianyichang_a")%>"  >
 	</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				 <input name="qianyichangA2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("qianyichang_a2")%>">
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%">腹围</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
@@ -267,59 +296,82 @@ function onUpdate(){
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">袖长</td>
 				<td nowrap="nowrap" align="center" width="7%">
-	<input type="text"      size="20"  name="xiuchangB" id="xiuchangB"   value="<%=projectInfo.getAt("xiuchang_b")%>"  >
+	<input type="text"      size="38"  name="xiuchangB" id="xiuchangB"   value="<%=projectInfo.getAt("xiuchang_b")%>"  >
 </td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%">袖长</td>
 				<td nowrap="nowrap" align="center" width="7%">
-				<input type="text"      size="20"  name="xiuchangA" id="xiuchangA"   value="<%=projectInfo.getAt("xiuchang_a")%>"  >
+				<input type="text"      size="38"  name="xiuchangA" id="xiuchangA"   value="<%=projectInfo.getAt("xiuchang_a")%>"  >
 				</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				 <input name="xiuchangA2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("xiuchang_a2")%>" >
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">袖肥</td>
 				<td nowrap="nowrap" align="center" width="7%">
-	<input type="text"      size="20"  name="xiufeiB" id="xiufeiB"   value="<%=projectInfo.getAt("xiufei_b")%>"  >
+	<input type="text"      size="38"  name="xiufeiB" id="xiufeiB"   value="<%=projectInfo.getAt("xiufei_b")%>"  >
 </td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				 <input name="xiufeiB2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("xiufei_b2")%>">
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%">袖肥</td>
 				<td nowrap="nowrap" align="center" width="7%">
-	<input type="text"      size="20"  name="xiufeiA" id="xiufeiA"   value="<%=projectInfo.getAt("xiufei_a")%>"  >
+	<input type="text"      size="38"  name="xiufeiA" id="xiufeiA"   value="<%=projectInfo.getAt("xiufei_a")%>"  >
 </td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="xiukouA2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("xiukou_a2")%>">
+				
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">袖口</td>
 				<td nowrap="nowrap" align="center" width="7%">
-<input type="text"      size="20"  name="xiukouB" id="xiukouB"   value="<%=projectInfo.getAt("xiukou_b")%>"  >
+<input type="text"      size="38"  name="xiukouB" id="xiukouB"   value="<%=projectInfo.getAt("xiukou_b")%>"  >
 </td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				 <input name="xiukouB2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("xiukou_b2")%>">
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%">袖口</td>
 				<td nowrap="nowrap" align="center" width="7%">
-					<input type="text"      size="20"  name="xiukouA" id="xiukouA"   value="<%=projectInfo.getAt("xiukou_a")%>"  >
+					<input type="text"      size="38"  name="xiukouA" id="xiukouA"   value="<%=projectInfo.getAt("xiukou_a")%>"  >
 				</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">西裤数量</td>
-				<td nowrap="nowrap" align="left" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="xiku_number" size="38" id="xiku_number" type="number"
+					class="txt_1"  value="<%=projectInfo.getAt("xiku_number")%>" />
+				</td>
 				<td nowrap="nowrap" align="center" width="7%">裤码</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="ku_ma" size="38" type="text" class="txt_1"  maxlength="50">
+				</td>
 				<td nowrap="nowrap" align="center" width="7%">马甲数量</td>
-				<td nowrap="nowrap" align="left" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<input name="majia_number" size="38" id="majia_number" type="number"
+					class="txt_1" maxlength="100"  value="<%=projectInfo.getAt("majia_number")%>" />
+				</td>
 				<td nowrap="nowrap" align="center" width="7%">马甲码</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="majia_ma" size="38" type="text" class="txt_1"  maxlength="50">
+				</td>
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">腰围</td>
-				<td nowrap="nowrap" align="center" width="7%">	<input type="text"      size="20"  name="yaoweiC" id="yaoweiC"   value="<%=projectInfo.getAt("yaowei_c")%>"  ></td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">	<input type="text"      size="38"  name="yaoweiC" id="yaoweiC"   value="<%=projectInfo.getAt("yaowei_c")%>"  ></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="yaoweiC22" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("yaowei_c22")%>">
+			
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%">肩宽</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
@@ -328,43 +380,59 @@ function onUpdate(){
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">臀围</td>
-				<td nowrap="nowrap" align="center" width="7%">	<input type="text"      size="20"  name="tuiweiC" id="tuiweiC"   value="<%=projectInfo.getAt("tuiwei_c")%>"  ></td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">	<input type="text"      size="38"  name="tuiweiC" id="tuiweiC"   value="<%=projectInfo.getAt("tuiwei_c")%>"  ></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="tuiweiC2" size="38" type="text" class="txt_1"maxlength="50"  value="<%=projectInfo.getAt("tuiwei_c2")%>">
+				
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%">胸围</td>
 				<td nowrap="nowrap" align="center" width="7%">
-<input type="text"      size="20"  name="xiongweiD" id="xiongweiD"   value="<%=projectInfo.getAt("xiongwei_d")%>"  >
+<input type="text"      size="38"  name="xiongweiD" id="xiongweiD"   value="<%=projectInfo.getAt("xiongwei_d")%>"  >
 </td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="xiongweiD2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("xiongwei_d2")%>">
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">档围</td>
 				<td nowrap="nowrap" align="center" width="7%">
-	<input type="text"      size="20"  name="dangweiC" id="dangweiC"   value="<%=projectInfo.getAt("dangwei_c")%>"  >
+	<input type="text"      size="38"  name="dangweiC" id="dangweiC"   value="<%=projectInfo.getAt("dangwei_c")%>"  >
 </td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="dangweiC2" size="38" type="text" class="txt_1"maxlength="50"  value="<%=projectInfo.getAt("dangwei_c2")%>">
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%">中腰</td>
-				<td nowrap="nowrap" align="center" width="7%">	<input type="text"      size="20"  name="zhongyaoD" id="zhongyaoD"   value="<%=projectInfo.getAt("zhongyao_d")%>"  ></td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">	<input type="text"      size="38"  name="zhongyaoD" id="zhongyaoD"   value="<%=projectInfo.getAt("zhongyao_d")%>"  ></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="zhongyaoD2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("yaowei_c2")%>">
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">大腿</td>
-				<td nowrap="nowrap" align="center" width="7%">	<input type="text"      size="20"  name="datuiC" id="datuiC"   value="<%=projectInfo.getAt("datui_c")%>"  ></td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">	<input type="text"      size="38"  name="datuiC" id="datuiC"   value="<%=projectInfo.getAt("datui_c")%>"  ></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="datuiC2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("datui_c2")%>">
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%">衣长</td>
-				<td nowrap="nowrap" align="center" width="7%">	<input type="text"      size="20"  name="yichangD" id="yichangD"   value="<%=projectInfo.getAt("yichang_d")%>"  ></td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">	<input type="text"      size="38"  name="yichangD" id="yichangD"   value="<%=projectInfo.getAt("yichang_d")%>"  ></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="yichangD2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("yichang_d2")%>">
+				
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 			</tr>
 			
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">中腿</td>
-				<td nowrap="nowrap" align="center" width="7%">	<input type="text"      size="20"  name="zhongtuiC" id="zhongtuiC"   value="<%=projectInfo.getAt("zhongtui_c")%>"  ></td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">	<input type="text"      size="38"  name="zhongtuiC" id="zhongtuiC"   value="<%=projectInfo.getAt("zhongtui_c")%>"  ></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="zhongtuiC2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("zhongtui_c2")%>">
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%">款型</td>
 				<td nowrap="nowrap" align="center" width="7%">
@@ -381,9 +449,11 @@ function onUpdate(){
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">小腿</td>
 				<td nowrap="nowrap" align="center" width="7%">
-					<input type="text"      size="20"  name="xiaotuiC" id="xiaotuiC"   value="<%=projectInfo.getAt("xiaotui_c")%>"  >
+					<input type="text"      size="38"  name="xiaotuiC" id="xiaotuiC"   value="<%=projectInfo.getAt("xiaotui_c")%>"  >
 				</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="xiaotuiC2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("xiaotui_c2")%>">
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
@@ -393,9 +463,12 @@ function onUpdate(){
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">裤长</td>
 				<td nowrap="nowrap" align="center" width="7%">
-				<input type="text"      size="20"  name="kuchangC" id="kuchangC"   value="<%=projectInfo.getAt("kuchang_c")%>"  >
+				<input type="text"      size="38"  name="kuchangC" id="kuchangC"   value="<%=projectInfo.getAt("kuchang_c")%>"  >
 				</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="kuchangC2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("kuchang_c2")%>">
+				
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
@@ -405,9 +478,11 @@ function onUpdate(){
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">脚口</td>
 				<td nowrap="nowrap" align="center" width="7%">
-					<input type="text"      size="20"  name="tuikouC" id="tuikouC"   value="<%=projectInfo.getAt("tuikou_c")%>"  >
+					<input type="text"      size="38"  name="tuikouC" id="tuikouC"   value="<%=projectInfo.getAt("tuikou_c")%>"  >
 				</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="tuikouC2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("tuikou_c2")%>">
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
@@ -536,32 +611,38 @@ function onUpdate(){
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">面料</td>
 				<td nowrap="nowrap" align="center" width="7%">
-			<input type="text"      size="20"  name="miaoliao1" id="miaoliao1"   value="<%=projectInfo.getAt("miao_liao1")%>"  >
+			<input type="text"      size="38"  name="miaoliao1" id="miaoliao1"   value="<%=projectInfo.getAt("miao_liao1")%>"  >
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">用途</td>
 				<td nowrap="nowrap" align="center" width="7%">
-					<input type="text"   size="20"  name="yongtu1" id="yongtu1"   value="<%=projectInfo.getAt("yong_tu1")%>"  >
+					<input type="text"   size="38"  name="yongtu1" id="yongtu1"   value="<%=projectInfo.getAt("yong_tu1")%>"  >
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">米数</td>
 				<td nowrap="nowrap" align="center" width="7%">
-					
+						<input name="mi1" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("mi1")%>" >
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">供应商</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<%=request.getAttribute("companyList")%>
+				</td>
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">面料</td>
 				<td nowrap="nowrap" align="center" width="7%">
-				<input type="text"   size="20"  name="miaoliao2" id="miaoliao2"   value="<%=projectInfo.getAt("miao_liao2")%>"  >
+				<input type="text"   size="38"  name="miaoliao2" id="miaoliao2"   value="<%=projectInfo.getAt("miao_liao2")%>"  >
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">用途</td>
 				<td nowrap="nowrap" align="center" width="7%">
-					<input type="text"   size="20"  name="yongtu2" id="yongtu2"   value="<%=projectInfo.getAt("yong_tu2")%>"  >
+					<input type="text"   size="38"  name="yongtu2" id="yongtu2"   value="<%=projectInfo.getAt("yong_tu2")%>"  >
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">米数</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="mi2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("mi2")%>" >
+				</td>
 				<td nowrap="nowrap" align="center" width="7%">供应商</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<%=request.getAttribute("companyList1")%>
+				</td>
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">附件</td>
@@ -578,17 +659,29 @@ function onUpdate(){
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">批单备注</td>
-				<td nowrap="nowrap" align="center" width="7%" colspan="7">
+				<td nowrap="nowrap" align="left" width="7%" colspan="7">
+				<input type="text"    size="160"  name="pidanremark" id="pidanremark"   value="<%=projectInfo.getAt("pidan_remark")%>" >
+					
+				</td>
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">跟单备注</td>
-				<td nowrap="nowrap" align="center" width="7%" colspan="7"></td>
+				<td nowrap="nowrap" align="left" width="7%" colspan="7">
+					<input type="text"      size="160"  name="gdremark" id="gdremark"   value="<%=projectInfo.getAt("gd_remark")%>"  > 
+				</td>
 			</tr>
 				<tr>
 				<td nowrap="nowrap" align="center" width="7%">提交类型</td>
-				<td nowrap="nowrap" align="center" width="7%" colspan="7">
+				<td nowrap="nowrap" align="left" width="7%" colspan="7">
 					保存 <input name="tag" type="radio" class="radio_1" value="1" checked="checked" >
 	    保存并提交<input type="radio" name="tag" class="radio_1" value="2" >
+	    
+	     <%if("admin".equals(request.getAttribute("role")) || "批单".equals(request.getAttribute("role")) || "跟单".equals(request.getAttribute("role")) ){ %>
+	     退回 <input type="radio" name="tag" class="radio_1" value="3" >
+			    <%} %>
+	    		
+	
+	    
 				</td>
 			</tr>
 			
@@ -613,7 +706,7 @@ function onUpdate(){
 			</tr>
 			
               
-				 <%} %>	
+				
 			
 		
 

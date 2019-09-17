@@ -350,21 +350,21 @@ function daDan(id,orderid){
    						
    						
    								<logic:equal name="element" property="status" value="2">	
-   							 	<a href=# onclick="piDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单修改]</a>
+   							 	<a href=# onclick="update('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单修改]</a>
    							 		<%-- <a href=# onclick="pidanTuiHui('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单退回]</a> --%>
    							 		<%-- 	<a href=# onclick="pidanTijiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单提交]</a> --%>
    						</logic:equal>	
    						
    					<!-- 	1客服保存  2客服提交  3批单保存  4批单退回   5批单提交 -->
    								<logic:equal name="element" property="status" value="3">	
-   							 	<a href=# onclick="piDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单修改]</a>
+   							 	<a href=# onclick="update('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单修改]</a>
    							 		<%-- <a href=# onclick="pidanTuiHui('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单退回]</a> --%>
    							 			<%-- <a href=# onclick="pidanTijiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单提交]</a> --%>
    						</logic:equal>	
    						
    						
    									<logic:equal name="element" property="status" value="8">	
-   							 	<a href=# onclick="piDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单修改]</a>
+   							 	<a href=# onclick="update('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单修改]</a>
    							 	<%-- 	<a href=# onclick="pidanTuiHui('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单退回]</a> --%>
    							 		<%-- 	<a href=# onclick="pidanTijiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单提交]</a> --%>
    						</logic:equal>	
