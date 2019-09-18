@@ -63,7 +63,7 @@ public class ProjectInfoAction extends BaseAction {
 	// String xmlpath="E:/resin/resin-pro-4.0.53/webapps/ads/WIITE/C7/ads/";
 	String xmlpath = "/usr/local/resin-pro-4.0.53/webapps/ads/WIITE/C7/ads/";
 //	String photoPath = "E:/resin/test/";
-	String photoPath = "D:/resin/webapps/clothes/upload/fujian/";
+	String photoPath = "D:/resin/webapps/watch/upload/fujian/";
 	//String qianZhui = "D:/resin/webapps/clothes/upload/photo/";
 	// String photoUrl="http://localhost:8080/ads/photo/";
 
@@ -260,9 +260,11 @@ public class ProjectInfoAction extends BaseAction {
 				list = ServiceBean.getInstance()
 						.getProjectInfoFacade().getProjectInfo(vo);
 				if (!list.isEmpty()&&list.size()>0) {
-					response.getWriter().write("fail");
+				
+					response.getWriter().write("已有该订单号");
+			//	response.getWriter().write("fail");
 				} else {
-					response.getWriter().write("success");
+					response.getWriter().write("可以使用该订单号");
 				}
 			} catch (SystemException e) {
 				e.printStackTrace();
@@ -456,17 +458,45 @@ public class ProjectInfoAction extends BaseAction {
 		}
 
 		String userName = loginUser.getUserName();
-	/*	if ("admin".equals(userName)) {*/
 		
-	/*	DynamicInfo vo=new DynamicInfo();
-		vo.setCondition("1=1 order by id desc limit 1");
-
-		List<DataMap> list = ServiceBean.getInstance().getDynamicInfoFacade().getDynamicInfo(vo);
-		list.get(0).keySet().add("")
-
-		request.setAttribute("dynamicInfo", list.get(0));*/
+		request.setAttribute("userName", userName);
 		
-	
+		 SimpleDateFormat df = new SimpleDateFormat("yyMMdd");
+		 SimpleDateFormat yydf = new SimpleDateFormat("yyyyMMdd");
+		 SimpleDateFormat yydfhh = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
+	     Calendar calendar = Calendar.getInstance();
+	     
+	  	String orderId ="";// 订单编号
+		
+		UserInfo uvo =new UserInfo();
+		uvo.setCondition("userCode = '"+userName+"' limit 1");
+		List<DataMap> listUo =  ServiceBean.getInstance().getUserInfoFacade().getUserInfo(uvo);
+		
+	     ProjectInfo voCount = new ProjectInfo();
+	     voCount.setCondition("add_time>= '"+yydf.format(calendar.getTime())+"' and xiadan_kefu = '"+userName+"'");
+	    int shuliang =   ServiceBean.getInstance()
+				.getProjectInfoFacade().getProjectInfoCount(voCount)+1;
+	    String compnay = listUo.get(0).get("company")+"";
+	    if(compnay == null || "".equals(compnay) ){
+	    	compnay="1";
+	    }
+	   String id =  listUo.get(0).get("id")+"";
+	    if(id.length()==4){
+	    	id="0"+id;
+	    }else if(id.length()==3){
+	    	id="00"+id;
+	    }else if(id.length()==2){
+	    	id="000"+id;
+	    }else if(id.length()==1){
+	    	id="0000"+id;
+	    }
+	    	if(shuliang<10){
+	    		 orderId = compnay+ df.format(calendar.getTime()) +id+"0"+shuliang;
+	    	}else{
+	    		orderId = compnay+ df.format(calendar.getTime()) +id+shuliang;
+	    	}
+	    	request.setAttribute("dingdan", orderId);
+	    	request.setAttribute("shijian", yydfhh.format(calendar.getTime()));
 			return mapping.findForward("addProjectInfoxml");
 		/*} else {
 			return mapping.findForward("addProjectInfoxmlOther");
@@ -1736,20 +1766,32 @@ public class ProjectInfoAction extends BaseAction {
 		     ProjectInfo voCount = new ProjectInfo();
 		     voCount.setCondition("add_time>= '"+yydf.format(calendar.getTime())+"' and xiadan_kefu = '"+userName+"'");
 		    int shuliang =   ServiceBean.getInstance()
-					.getProjectInfoFacade().getProjectInfoCount(voCount);
+					.getProjectInfoFacade().getProjectInfoCount(voCount)+1;
 		    String compnay = listUo.get(0).get("company")+"";
 		    if(compnay == null || "".equals(compnay) ){
 		    	compnay="1";
 		    }
 		    
+		    String id =  listUo.get(0).get("id")+"";
+		    if(id.length()==4){
+		    	id="0"+id;
+		    }else if(id.length()==3){
+		    	id="00"+id;
+		    }else if(id.length()==2){
+		    	id="000"+id;
+		    }else if(id.length()==1){
+		    	id="0000"+id;
+		    }
+		    
+		    
 		    	if(shuliang<10){
-		    		 orderId = compnay+ df.format(calendar.getTime()) +listUo.get(0).get("id")+"0"+shuliang;
+		    		 orderId = compnay+ df.format(calendar.getTime()) +id+"0"+shuliang;
 		    	}else{
-		    		orderId = compnay+ df.format(calendar.getTime()) +listUo.get(0).get("id")+shuliang;
+		    		orderId = compnay+ df.format(calendar.getTime()) +id+shuliang;
 		    	}
 		    
 		     
-		     
+		    	ProjectInfo vo = new ProjectInfo();
 		    
 			
 			ProjectInfoForm form = (ProjectInfoForm) actionForm;
@@ -1757,64 +1799,84 @@ public class ProjectInfoAction extends BaseAction {
 			Hashtable<?, ?> files = form.getMultipartRequestHandler()
 					.getFileElements();
 			if (files != null & files.size() > 0) {
+				vo.setFujian_url("http://47.111.148.8:80/watch/upload/fujian/"+orderId+".zip");
+				
+				String qianZhui = "D:/resin/webapps/watch/upload/fujian/";
+				String path = qianZhui + orderId;
+				
+				Constant.deleteFile(path);
+				Constant.createFile(path);
+				
 				Enumeration<?> enums = files.keys();
 				String fileKey = null;
 				while (enums.hasMoreElements()) {
+					System.out.println(1);
 					fileKey = (String) (enums.nextElement());
 					FormFile file = (FormFile) files.get(fileKey);
 					if (!file.getFileName().isEmpty()) {
-						fileFormat = file.toString().substring(
+						/*fileFormat = file.toString().substring(
 								file.toString().lastIndexOf("."),
 								file.toString().length());
-						name = Long.toString(new Date().getTime()) + fileFormat;
-						// CommUtils.createDateFile(dir); //创建当前文件夹，存在则返回文件名；
+						name = Long.toString(new Date().getTime()) + fileFormat;*/
+					//	 CommUtils.createDateFile(dir); //创建当前文件夹，存在则返回文件名；
 						InputStream in = file.getInputStream();
 						// photoPath = photoPath + name; //输出文件路径
-						System.out.println(photoPath + name);
-						File f = new File(photoPath + name);
+						
+						File f = new File(path+"/" + file.getFileName());
 						if (f.exists()) {
 							f.delete();
 						}
 
-						OutputStream out = new FileOutputStream(photoPath
-								+ name);
+						OutputStream out = new FileOutputStream(path+"/"
+								+ file.getFileName());
 						out.write(file.getFileData(), 0, file.getFileSize());
 
 						out.close();
 						out = null;
 						in.close();
 						
-						DeviceActiveInfo vod = new DeviceActiveInfo();
-
-						vod.setCondition("orderid = '" + orderId + "'");
-
-						List<DataMap> list = ServiceBean.getInstance()
-								.getDeviceActiveInfoFacade().getAllCallInfo(vod);
-
-						// String url =
-						// "http://localhost:8080/clothes/upload/photo/"+orderid+"/";
-						String fujian = "http://47.111.148.8:80/clothes/upload/fujian/"+name;
-						if (list.size() > 0) {
-							vod.setCondition("id='" + list.get(0).get("id") + "'");
-							vod.setFujian(fujian);
-							ServiceBean.getInstance().getDeviceActiveInfoFacade()
-									.updateCallInfo(vod);
-
-						} else {
-							vod.setOrderid(orderId);
-							vod.setFujian(fujian);
-							ServiceBean.getInstance().getDeviceActiveInfoFacade()
-									.insertCallInfo(vod);
-						}
+						
 
 						
 					}
 
 				}
+				
+				
+				String zipName = path + "/" + orderId + ".zip";
+				FileOutputStream fos1 = new FileOutputStream(new File(zipName));
+				ZipUtils.toZip(path, fos1, true);
+				
+				DeviceActiveInfo vod = new DeviceActiveInfo();
+
+				vod.setCondition("orderid = '" + orderId + "'");
+
+				List<DataMap> list = ServiceBean.getInstance()
+						.getDeviceActiveInfoFacade().getAllCallInfo(vod);
+
+				// String url =
+				// "http://localhost:8080/clothes/upload/photo/"+orderid+"/";
+				String fujian = "http://47.111.148.8:80/watch/upload/fujian/"+orderId+".zip";
+				
+				if (list.size() > 0) {
+					vod.setCondition("id='" + list.get(0).get("id") + "'");
+					vod.setFujian(fujian);
+					ServiceBean.getInstance().getDeviceActiveInfoFacade()
+							.updateCallInfo(vod);
+
+				} else {
+					vod.setOrderid(orderId);
+					vod.setFujian(fujian);
+					ServiceBean.getInstance().getDeviceActiveInfoFacade()
+							.insertCallInfo(vod);
+				}
+				
 
 			}
 
-			
+		/*	String ok = request.getParameter("okk");
+			System.out.println("ok="+ok);*/
+			System.out.println("按钮值="+request.getParameter("anniu"));
 			String wwName = request.getParameter("projectNo");
 			String salePrice = request.getParameter("salePrice");
 			String wechat = request.getParameter("wechat");
@@ -1875,7 +1937,7 @@ public class ProjectInfoAction extends BaseAction {
 
 			ProjectInfoFacade facade = ServiceBean.getInstance()
 					.getProjectInfoFacade();
-			ProjectInfo vo = new ProjectInfo();
+		
 			vo.setOrderId(orderId);
 			vo.setWwName(wwName);
 			vo.setSalePrice(salePrice);
@@ -2271,6 +2333,19 @@ String project_no1 = request.getParameter("project_no1");
 					vo.setGongyingshang1(project_no1);
 					vo.setGongyingshang2(project_no2);
 					vo.setGd_remark(gdremark);
+					
+					
+					String jiankuannew = request.getParameter("jiankuannew");
+					vo.setJiankuannew(jiankuannew);
+					
+					String dakuang1 = request.getParameter("dakuang1");
+					String dakuang2 = request.getParameter("dakuang2");
+					String dakuang3 = request.getParameter("dakuang3");
+					String dakuang4 = request.getParameter("dakuang4");
+					vo.setDakuang1(dakuang1);
+					vo.setDakuang2(dakuang2);
+					vo.setDakuang3(dakuang3);
+					vo.setDakuang4(dakuang4);
 
 			ServiceBean.getInstance().getProjectInfoFacade()
 					.updatePorjectInfoDangAn(vo);
@@ -2916,7 +2991,7 @@ String project_no1 = request.getParameter("project_no1");
 
 			// String qianZhui =
 			// "E:/resin/resin-pro-4.0.53/webapps/clothes/upload/photo/";
-			String qianZhui = "D:/resin/webapps/clothes/upload/photo/";
+			String qianZhui = "D:/resin/webapps/watch/upload/photo/";
 
 			String orderid = request.getParameter("orderid");
 			System.out.println(orderid);
@@ -2950,7 +3025,7 @@ String project_no1 = request.getParameter("project_no1");
 
 			// String url =
 			// "http://localhost:8080/clothes/upload/photo/"+orderid+"/";
-			String url = "http://47.111.148.8:9999/clothes/upload/photo/"
+			String url = "http://47.111.148.8:80/watch/upload/photo/"
 					+ orderid + "/";
 			if (list.size() > 0) {
 				vod.setCondition("id='" + list.get(0).get("id") + "'");

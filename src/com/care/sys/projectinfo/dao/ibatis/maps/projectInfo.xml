@@ -435,7 +435,7 @@
 		miao_liao1,yong_tu1,miao_liao2,yong_tu2,tixing_remark,
 		remark,update_time,status,add_time,xiukou_a
 		,xizhuang_number,chenshan_number,xiku_number,majia_number,jiaofu_time,
-		kaicha,xiabai,zhuangse,waizhubian,xiucha,kuyao,kuxing,chenshanling,chenshanxiu
+		kaicha,xiabai,zhuangse,waizhubian,xiucha,kuyao,kuxing,chenshanling,chenshanxiu,fujian_url
 		) VALUES
 		(#orderId#,#wwName#,#salePrice#,#wechat#,#orderNumber#,
 		#kehuPhone#,#orderType#,#kehuName#,#qudao#,#xiadanKeFu#,
@@ -450,7 +450,7 @@
 		#miaoliao1#,#yongtu1#,#miaoliao2#,#yongtu2#,#tixingremark#,
 		#remark#,#updateTime#,#status#,#addTime#,#xiukouA#
 		,#xizhuang_number#,#chenshan_number#,#xiku_number#,#majia_number#,#jiaofu_time#,
-		#kaicha#,#xiabai#,#zhuangse#,#waizhubian#,#xiucha#,#kuyao#,#kuxing#,#chenshanling#,#chenshanxiu#
+		#kaicha#,#xiabai#,#zhuangse#,#waizhubian#,#xiucha#,#kuyao#,#kuxing#,#chenshanling#,#chenshanxiu#,#fujian_url#
 		)
 	</insert>
 
@@ -798,6 +798,25 @@
 			</isNotEmpty>
 			<isNotEmpty prepend="," property="chenshanxiu">
 				chenshanxiu=#chenshanxiu#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="jiankuannew">
+				jiankuannew=#jiankuannew#
+			</isNotEmpty>
+			
+				<isNotEmpty prepend="," property="dakuang1">
+				dakuang1=#dakuang1#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="dakuang2">
+				dakuang2=#dakuang2#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="dakuang3">
+				dakuang3=#dakuang3#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="dakuang4">
+				dakuang4=#dakuang4#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="fujian_url">
+				fujian_url=#fujian_url#
 			</isNotEmpty>
 			
 			

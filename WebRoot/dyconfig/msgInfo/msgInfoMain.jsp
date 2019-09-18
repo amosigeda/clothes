@@ -30,8 +30,8 @@
 	}
 	
 function finds(){
-    var st = new Date(frmGo.startTime.value.replace(/-/g,'/'));
-	var et = new Date(frmGo.endTime.value.replace(/-/g,'/'));
+   var st = new Date(frmGo.startTime1.value.replace(/-/g,'/'));
+	var et = new Date(frmGo.endTime1.value.replace(/-/g,'/'));
 	if(Date.parse(st) - Date.parse(et)>0){
 		alert("开始时间不能大于结束时间!");
 		return false;
@@ -39,16 +39,16 @@ function finds(){
 	   frmGo.submit();
 }
 function c(){
-    document.all.startTime.value="";
-    document.all.endTime.value="";
+   /*  document.all.startTime.value="";
+    document.all.endTime.value=""; */
     document.all.startTime1.value="";
     document.all.endTime1.value="";
-    document.all.fromUserName.value="";
+ /*    document.all.fromUserName.value="";
     document.all.toUserName.value="";
     document.all.content.value="";
     document.all.serieNo.value="";
     document.all.belongProject.value="";
-    document.getElementById("statusSelect").options[0].selected = true;
+    document.getElementById("statusSelect").options[0].selected = true; */
 } 
 
 </script>
@@ -65,53 +65,21 @@ function c(){
                 </tr>
                  <tr class="title_3">
                        <td colspan="13">
-					  处理时间
+				<%-- 	  处理时间
                      <input name="startTime" type="text" class="txt_1"  id="startTime" style="cursor:text"
 								value="<%CommUtils.printReqByAtt(request,response,"fNow_date");%>" onclick="WdatePicker()"
 								size="9" readonly> -
 							<input name="endTime" type="text" class="txt_1" id="endTime" style="cursor:text"
 								value="<%CommUtils.printReqByAtt(request,response,"now_date");%>" onclick="WdatePicker()"
-								size="9" readonly>	
-					产生时间
+								size="9" readonly>	 --%>
+					提交时间
 					<input name="startTime1" type="text" class="txt_1"  id="startTime1" style="cursor:text"
-								value="<%CommUtils.printReqByAtt(request,response,"fNow_date1");%>" onclick="WdatePicker()"
-								size="15" readonly> -
+								value="<%CommUtils.printReqByAtt(request,response,"fNow_date1");%>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+								size="20" readonly> -
 							<input name="endTime1" type="text" class="txt_1" id="endTime1" style="cursor:text"
-								value="<%CommUtils.printReqByAtt(request,response,"now_date1");%>" onclick="WdatePicker()"
-								size="15" readonly>					
-						用户手机号
-						 <input id="fromUserName" name="fromUserName" type="text" class="txt_1" 
-						    value="<%CommUtils.printReqByAtt(request,response,"fromUserName");%>" size="15">
-						<%-- 发送用户手机号
-						 <input id="toUserName" name="toUserName" type="text" class="txt_1" 
-						    value="<%CommUtils.printReqByAtt(request,response,"toUserName");%>" size="9"><br> --%>
-						<!-- 
-						内容
-						 <input id="content" name="content" type="text" class="txt_1" 
-						    value="<%CommUtils.printReqByAtt(request,response,"content");%>" size="14"><br/>
-						 -->
-				<%-- 		IMEI
-						<input id="serieNo" name="serieNo" type="text" class="txt_1" 
-						    value="<%CommUtils.printReqByAtt(request,response,"serieNo");%>" size="15">
-						  项目
-						 <%String belongProject = (String)request.getAttribute("belongProject"); %>			
-							<select id="belongProject" name="belongProject" >
-								<option value="">全部</option>
-								<logic:iterate id="pro" name="project_name">
-									<bean:define id="projectId" name="pro" property="id" type="java.lang.Integer" />																	
-									<option value='<%=projectId %>' <%=String.valueOf(projectId).equals(belongProject)? "selected" : "" %>><bean:write name="pro" property="project_name"/></option>
-								</logic:iterate>
-							</select>
-						是否处理
-						<%if(request.getAttribute("statusSelect") != null && !"".equals(request.getAttribute("statusSelect"))){ %>
-						<%=request.getAttribute("statusSelect") %>
-						<%}else{ %>
-						<select id="statusSelect" name="statusSelect">
-						<option value="">全部</option>
-						<option value="1">√</option>
-						<option value="0">×</option>
-						</select>
-						<%} %> --%>
+								value="<%CommUtils.printReqByAtt(request,response,"now_date1");%>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+								size="20" readonly>					
+				
 						<input name="find1" type="button" class="but_1" accesskey="f"
 							tabindex="f" value="搜 索" onclick="javascript:finds()">
 					     <input name="clear" type="button" class="but_1" accesskey="c"
@@ -119,14 +87,16 @@ function c(){
 				</tr> 
 				<%int i=1; %>
                   <tr class="title_2">                 	
-                  	<td width="5%">原订单号</td>                                   	                 	
-                  	<td width="5%" >用户手机号</td>
-                  	<td width="5%" >发货物流</td>
-                  	<td width="5%" >物流编码</td>
-                  	<td width="5%">是否处理</td>
-                  	<td width="6%">产生时间</td>
-                  	<td width="6%">处理时间</td>
-                  	<td width="6%">添加账号</td>
+                  	<td width="5%">订单号</td>                                   	                 	
+                  	<td width="5%" >下单人</td>
+                  	<td width="5%" >姓名</td>
+                  	<td width="5%" >次数</td>
+                  	<td width="6%">提交时间</td>
+                  <td width="6%">交付时间</td> 
+                  	<td width="6%">米</td>
+                  	<td width="6%">供应商</td>
+                  	<td width="6%">面料</td>
+                  	<td width="6%">归责</td>
                   	<td width="8%">备注</td>
                   	<!-- <td width="5%">操作</td> -->
                   </tr>	
@@ -138,34 +108,49 @@ function c(){
 						
 						</td>
 						<td>
-								<bean:write name="element" property="phone"/>
+								<bean:write name="element" property="add_user"/>
 						</td>
 						<td>
-								<bean:write name="element" property="fahuo_wuliu"/>
+								<bean:write name="element" property="name"/>
 						</td>
 						<td>
-								<bean:write name="element" property="wuliu_bianma"/>
+								<bean:write name="element" property="cishu"/>
 						</td>
 						
-						<td>
+					<%-- 	<td>
 							<logic:equal name="element" property="is_handler" value="1">
 								<font style="color:green;font-size: 20px;">√</font>
 							</logic:equal>
 							<logic:equal name="element" property="is_handler" value="0">
 								<font style="color:red;font-size: 20px;">×</font>
 							</logic:equal>
-						</td>
+						</td> --%>
 							<td>
 							<bean:write name="element" property="msg_handler_date" format="yyyy-MM-dd HH:mm:ss"/>
 							<logic:empty name="element" property="msg_handler_date">无</logic:empty>
 						</td>
 						<td>
+								<bean:write name="element" property="jiaofutime"/>
+						</td>
+						<td>
+								<bean:write name="element" property="mi"/>
+						</td>
+						<td>
+								<bean:write name="element" property="gongyingshang"/>
+						</td>
+						<td>
+								<bean:write name="element" property="mianliao"/>
+						</td>
+						<td>
+								<bean:write name="element" property="guize"/>
+						</td>
+						<%-- <td>
 							<bean:write name="element" property="msg_occur_date" format="yyyy-MM-dd HH:mm:ss"/>
 							<logic:empty name="element" property="msg_occur_date">无</logic:empty>
-						</td>
-					<td>
+						</td> --%>
+					<%-- <td>
 								<bean:write name="element" property="add_user"/>
-						</td>
+						</td> --%>
 					
 							<td>
 								<bean:write name="element" property="remark"/>

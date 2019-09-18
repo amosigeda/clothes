@@ -169,13 +169,54 @@ public class ProjectInfo extends PublicVoBean implements Serializable{
 	private String kuxing;
 	private String chenshanling;
 	private String chenshanxiu;
+	private String jiankuannew;
+	private String dakuang1;
+	private String dakuang2;
+	private String dakuang3;
+	private String dakuang4;
+	
+	private String fujian_url;
 	
 	
 	
 	
 	
-	
-	
+	public String getFujian_url() {
+		return fujian_url;
+	}
+	public void setFujian_url(String fujian_url) {
+		this.fujian_url = fujian_url;
+	}
+	public String getDakuang1() {
+		return dakuang1;
+	}
+	public void setDakuang1(String dakuang1) {
+		this.dakuang1 = dakuang1;
+	}
+	public String getDakuang2() {
+		return dakuang2;
+	}
+	public void setDakuang2(String dakuang2) {
+		this.dakuang2 = dakuang2;
+	}
+	public String getDakuang3() {
+		return dakuang3;
+	}
+	public void setDakuang3(String dakuang3) {
+		this.dakuang3 = dakuang3;
+	}
+	public String getDakuang4() {
+		return dakuang4;
+	}
+	public void setDakuang4(String dakuang4) {
+		this.dakuang4 = dakuang4;
+	}
+	public String getJiankuannew() {
+		return jiankuannew;
+	}
+	public void setJiankuannew(String jiankuannew) {
+		this.jiankuannew = jiankuannew;
+	}
 	public String getKaicha() {
 		return kaicha;
 	}

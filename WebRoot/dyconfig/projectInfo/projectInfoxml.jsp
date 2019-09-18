@@ -233,7 +233,10 @@ function daDan(id,orderid){
 				<%int i=1; %>
                   <tr class="title_2">
                  	<td width="5%">
-						订单编号
+						系统生成订单编号
+					</td> 
+					<td width="5%">
+					订单号
 					</td> 
 					<td width="5%">
 					旺旺名
@@ -290,6 +293,9 @@ function daDan(id,orderid){
 						onmouseout='this.className="tr_5"'>
 						<td>							
 							<bean:write name="element" property="order_id" />
+						</td>
+						<td>							
+							<bean:write name="element" property="order_number" />
 						</td>
 						<td>							
 							<bean:write name="element" property="ww_name" />

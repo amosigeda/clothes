@@ -26,17 +26,27 @@ $(document).ready(function(){
 			 url:"doProjectInfo.do?method=verfyDingDan",
 		 	 data:"userCode="+userCodeValue,
 		 	 success:function(msg){
-		 		 if(msg=="fail"){
-		 			 alert("已有该订单号");
+		 		/*  if((msg != null){
+		 			 
+		 		 }else{
+		 		 alert(msg);
+		 		 } */
+		 		 
+		 		 if(msg!=null){
+		 			 alert(msg);
+		 		 } 
+		 		 /* if(msg=="fail"){
 		 			 $("#orderNumber").focus();
 		 			 return false;
-		 		 }
+		 		 }  */ 
 		 	 }
 		 });
 	 });
 });
 
-	function onAdd() {
+	function onAdd(wechat) {
+		   document.getElementById("anniu").setAttribute("value", wechat);
+		   
 		if(frmGo.orderNumber.value.trim() == ""){
 			alert("订单号不能为空！");
 			frmGo.orderNumber.focus();
@@ -60,7 +70,26 @@ $(document).ready(function(){
         var trPre = $("#tab1 tr:eq(" + (trLen - 1) + ")");
         $(rowT).insertAfter($(trPre));
     }
- 
+    
+    function setwechat(wechat) {
+        document.getElementById("xiongweiB").setAttribute("value", wechat);
+        document.getElementById("xiongweiD").setAttribute("value", wechat);
+    }
+
+    function setzhongyao(wechat) {
+        document.getElementById("zhongyaoB").setAttribute("value", wechat);
+        document.getElementById("zhongyaoD").setAttribute("value", wechat);
+    }
+    
+    
+    function setfuwei(wechat) {
+        document.getElementById("fuweiB").setAttribute("value", wechat);
+    }
+    
+    function setanniu(wechat) {
+        document.getElementById("anniu").setAttribute("value", wechat);
+    }
+    
 </script>
 <body>
 	<span class="title_1"></span>
@@ -98,7 +127,7 @@ $(document).ready(function(){
 			
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">订单编号</td>
-				<td nowrap="nowrap" align="center" width="7%">自动生成</td>
+				<td nowrap="nowrap" align="center" width="7%"><%=request.getAttribute("dingdan")%></td>
 				<td nowrap="nowrap" align="center" width="7%">渠道</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<select name="qudao" value="qudao">
@@ -128,7 +157,7 @@ $(document).ready(function(){
 				<td nowrap="nowrap" align="center" width="7%"><input name="wechat" size="38" id="wechat"
 					type="text" class="txt_1" maxlength="30" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%">下单客服</td>
-				<td></td>
+				<td nowrap="nowrap" align="center" width="7%"><%=request.getAttribute("userName")%></td>
 				<td nowrap="nowrap" align="center" width="7%">性别</td>
 				<td  nowrap="nowrap" align="center" width="7%">
 				<select name="sex" value="sex">
@@ -165,7 +194,7 @@ $(document).ready(function(){
 					id="projectNo" type="text" class="txt_1" maxlength="30" /><font
 					color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%">下单时间</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%"><%=request.getAttribute("shijian")%></td>
 				<td nowrap="nowrap" align="center" width="7%">客户地址</td>
 				<td nowrap="nowrap" align="left" width="7%" colspan="3"><input name="address" size="90" id="address"
 					type="text" class="txt_1" /><font color="red"></font></td>
@@ -225,7 +254,7 @@ $(document).ready(function(){
 				<td nowrap="nowrap" align="center" width="7%">胸围</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<input name="xiongweiA" size="38" id="xiongweiA"
-					type="text" class="txt_1" maxlength="100" /><font color="red"></font></td>
+					type="text" class="txt_1" maxlength="100" onchange="setwechat(this.value)" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%">胸围</td>
@@ -239,7 +268,7 @@ $(document).ready(function(){
 				<td nowrap="nowrap" align="center" width="7%">中腰</td>
 				<td nowrap="nowrap" align="center" width="7%">
 			<input name="zhongyaoA" size="38" id="zhongyaoA"
-					type="text" class="txt_1" maxlength="100" /><font color="red"></font></td>
+					type="text" class="txt_1" maxlength="100"  onchange="setzhongyao(this.value)" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%">中腰</td>
@@ -253,7 +282,7 @@ $(document).ready(function(){
 				<td nowrap="nowrap" align="center" width="7%">腹围</td>
 				<td nowrap="nowrap" align="center" width="7%">
 		<input name="fuweiA" size="38" id="fuweiA" type="text"
-					class="txt_1" maxlength="100" /><font color="red"></font></td>
+					class="txt_1" maxlength="100" onchange="setfuwei(this.value)" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%">腹围</td>
@@ -635,11 +664,17 @@ $(document).ready(function(){
 				
 		
 			<tr>
-				<td nowrap="nowrap" align="center" width="7%"><input
-					type="button" name="ok" accesskey="y" tabindex="y" value="确 定"
-					class="but_1" onclick="onAdd()"
-					style="font-size:12;width:40px;height:21px;"> <input
-					type="button" name="back" accesskey="b" tabindex="b" value="返 回"
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="anniu" size="200" id="anniu"
+					 type="hidden" class="txt_1"  />
+					
+				<input  id="ok"   title="1"
+					type="button" name="ok" accesskey="y" tabindex="y" value="确定" title="1"
+					class="but_1" onclick="onAdd(this.title)"
+					style="font-size:12;width:40px;height:21px;">
+					
+					 <input
+					type="button" name="back" accesskey="b" tabindex="b" value="返回"
 					class="but_1"
 					onclick="location='doProjectInfo.do?method=queryProjectInfoXml'"
 					style="font-size:12;width:40px;height:21px;"></td>

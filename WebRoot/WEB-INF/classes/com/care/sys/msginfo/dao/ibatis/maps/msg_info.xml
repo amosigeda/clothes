@@ -72,9 +72,13 @@
 
 	<insert id="insertMsgInfo" parameterClass="com.care.sys.msginfo.domain.MsgInfo">
 		INSERT INTO msg_info
-		(order_id,phone,fahuo_wuliu,wuliu_bianma,is_handler,msg_handler_date,remark,add_user) 
+		(order_id,phone,fahuo_wuliu,wuliu_bianma,is_handler,msg_handler_date,remark,add_user,
+		name,cishu,jiaofutime,mi,gongyingshang,mianliao,guize
+		) 
 		VALUES
-		(#order_id#,#phone#,#fahuo_wuliu#,#wuliu_bianma#,#isHandler#,#msgHandlerDate#,#remark#,#add_user#) 
+		(#order_id#,#phone#,#fahuo_wuliu#,#wuliu_bianma#,#isHandler#,#msgHandlerDate#,#remark#,#add_user#,
+		#name#,#cishu#,#jiaofutime#,#mi#,#gongyingshang#,#mianliao#,#guize#
+		) 
 	</insert>
 
 	<update id="updateMsgInfo" parameterClass="com.care.sys.msginfo.domain.MsgInfo">

@@ -34,9 +34,58 @@ public class MsgInfo extends PublicVoBean implements Serializable{
     private String wuliu_bianma;
     private String remark;
     private String add_user;
+    private String name;
+    private String cishu;
+    private String jiaofutime;
+    private String mi;
+    private String gongyingshang;
+    private String mianliao;
+    private String guize;
     
     
 	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getCishu() {
+		return cishu;
+	}
+	public void setCishu(String cishu) {
+		this.cishu = cishu;
+	}
+	public String getJiaofutime() {
+		return jiaofutime;
+	}
+	public void setJiaofutime(String jiaofutime) {
+		this.jiaofutime = jiaofutime;
+	}
+	public String getMi() {
+		return mi;
+	}
+	public void setMi(String mi) {
+		this.mi = mi;
+	}
+	public String getGongyingshang() {
+		return gongyingshang;
+	}
+	public void setGongyingshang(String gongyingshang) {
+		this.gongyingshang = gongyingshang;
+	}
+	public String getMianliao() {
+		return mianliao;
+	}
+	public void setMianliao(String mianliao) {
+		this.mianliao = mianliao;
+	}
+	public String getGuize() {
+		return guize;
+	}
+	public void setGuize(String guize) {
+		this.guize = guize;
+	}
 	public String getOrder_id() {
 		return order_id;
 	}

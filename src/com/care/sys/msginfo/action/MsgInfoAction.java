@@ -2,8 +2,11 @@ package com.care.sys.msginfo.action;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -43,6 +46,34 @@ import com.godoing.rose.log.LogFactory;
 public class MsgInfoAction extends BaseAction {
 
 	Log logger = LogFactory.getLog(MsgInfoAction.class);
+	
+	
+	public ActionForward verfyDingDan(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) {
+		List<DataMap> list = null;
+		ProjectInfo vo = new ProjectInfo();
+		String userCode = request.getParameter("userCode");
+		if (userCode != null && !"".equals(userCode)) {
+			vo.setCondition("order_number ='" + userCode + "'");
+			try {
+				list = ServiceBean.getInstance()
+						.getProjectInfoFacade().getProjectInfo(vo);
+				if (!list.isEmpty()&&list.size()>0) {
+					response.getWriter().write("success");
+				} else {
+					response.getWriter().write("不存在该订单号");
+					//response.getWriter().write("fail");
+				}
+			} catch (SystemException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+	
 
 	public ActionForward queryMsgInfo(ActionMapping mapping,
 			ActionForm actionForm, HttpServletRequest request,
@@ -121,11 +152,11 @@ public class MsgInfoAction extends BaseAction {
 						+ endTime + "'");
 			}
 			if (startTime1 != null && !"".equals(startTime1)) {
-				sb.append(" and substring(msg_occur_date,1,10) >= '"
+				sb.append(" and msg_handler_date >= '"
 						+ startTime1 + "'");
 			}
 			if (endTime1 != null && !"".equals(endTime1)) {
-				sb.append(" and substring(msg_occur_date,1,10) <= '" + endTime1
+				sb.append(" and msg_handler_date <= '" + endTime1
 						+ "'");
 			}
 			if (status != null && !"".equals(status)) {
@@ -196,6 +227,18 @@ public class MsgInfoAction extends BaseAction {
 	public ActionForward initInsert(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
+		LoginUser loginUser = (LoginUser) request.getSession().getAttribute(
+				Config.SystemConfig.LOGINUSER);
+		if (loginUser == null) {
+			return null;
+		}
+
+		String userName = loginUser.getUserName();
+		
+		request.setAttribute("username", userName);
+		 SimpleDateFormat yydfhh = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
+	     Calendar calendar = Calendar.getInstance();
+		request.setAttribute("shijian", yydfhh.format(calendar.getTime()));
 		return mapping.findForward("insertMsgInfo");
 	}
 	
@@ -210,22 +253,40 @@ public class MsgInfoAction extends BaseAction {
 			if (loginUser == null) {
 				return null;
 			}
-			String userName = loginUser.getUserName();
-			String order_id = request.getParameter("order_id");
+			MsgInfo vo = new MsgInfo();
+		/*	String order_id = request.getParameter("order_id");
 			String phone = request.getParameter("phone");
 			String fahuo_wuliu = request.getParameter("fahuo_wuliu");
-			String wuliu_bianma = request.getParameter("wuliu_bianma");
-			String remark = request.getParameter("remark");
+			String wuliu_bianma = request.getParameter("wuliu_bianma");*/
 			
-			MsgInfo vo = new MsgInfo();
+			
+			
+			String orderNumber = request.getParameter("orderNumber");
+			vo.setOrder_id(orderNumber);
+			String userName = loginUser.getUserName();
 			vo.setAdd_user(userName);
-			vo.setOrder_id(order_id);
-			vo.setPhone(phone);
-			vo.setFahuo_wuliu(fahuo_wuliu);
-			vo.setWuliu_bianma(wuliu_bianma);
-			vo.setRemark(remark);
-			vo.setIsHandler("0");
+			String name = request.getParameter("name");
+			vo.setName(name);
+			String cishu = request.getParameter("cishu");
+			vo.setCishu(cishu);
 			vo.setMsgHandlerDate(new Date());
+			String jiaofutime = request.getParameter("jiaofutime");
+			vo.setJiaofutime(jiaofutime);
+			String mi = request.getParameter("mi");
+			vo.setMi(mi);
+			String gongyingshang = request.getParameter("gongyingshang");
+			vo.setGongyingshang(gongyingshang);
+			String mianliao = request.getParameter("mianliao");
+			vo.setMianliao(mianliao);
+			String guize = request.getParameter("guize");
+			vo.setGuize(guize);
+			String remark = request.getParameter("remark");
+			vo.setRemark(remark);
+			
+			
+		
+			
+			vo.setIsHandler("0");
 			ServiceBean.getInstance().getMsgInfoFacade().insertMsgInfo(vo);
 			
 			result.setBackPage(HttpTools.httpServletPath(request, // ����ɹ�����ת��ԭ��ҳ��

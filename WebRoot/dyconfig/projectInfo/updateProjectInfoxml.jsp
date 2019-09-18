@@ -82,13 +82,24 @@ function onUpdate(){
 </td>
 				<td nowrap="nowrap" align="center" width="7%">渠道</td>
 				<td nowrap="nowrap" align="center" width="7%">
-					<input name="qudao" type="radio" class="radio_1" value="淘宝" <%if("淘宝".equals("" + projectInfo.getAt("qudao"))){%>checked<%}%>>淘宝
+				
+				<select name="qudao" value="qudao">
+						<option value="淘宝">淘宝</option>
+						<option value="工单">工单</option>
+						<option value="分销">分销</option>
+						<option value="线下">线下</option>
+						<option value="打样">打样</option>
+						<option value="重做">重做</option>
+						<option value="其他">其他</option>
+				</select> 
+				
+				<%-- 	<input name="qudao" type="radio" class="radio_1" value="淘宝" <%if("淘宝".equals("" + projectInfo.getAt("qudao"))){%>checked<%}%>>淘宝
 						<input name="qudao" type="radio" class="radio_1" value="工单" <%if("工单".equals("" + projectInfo.getAt("qudao"))){%>checked<%}%>>工单
 						<input name="qudao" type="radio" class="radio_1" value="分销" <%if("分销".equals("" + projectInfo.getAt("qudao"))){%>checked<%}%>>分销
 						<input name="qudao" type="radio" class="radio_1" value="线下" <%if("线下".equals("" + projectInfo.getAt("qudao"))){%>checked<%}%>>线下
 						<input name="qudao" type="radio" class="radio_1" value="打样" <%if("打样".equals("" + projectInfo.getAt("qudao"))){%>checked<%}%>>打样
 						<input name="qudao" type="radio" class="radio_1" value="重做" <%if("重做".equals("" + projectInfo.getAt("qudao"))){%>checked<%}%>>重做
-						<input name="qudao" type="radio" class="radio_1" value="其他" <%if("其他".equals("" + projectInfo.getAt("qudao"))){%>checked<%}%>>其他
+						<input name="qudao" type="radio" class="radio_1" value="其他" <%if("其他".equals("" + projectInfo.getAt("qudao"))){%>checked<%}%>>其他 --%>
 						</td>
 				<td nowrap="nowrap" align="center" width="7%">年龄</td>
 				<td  nowrap="nowrap" align="center" width="7%">
@@ -107,8 +118,14 @@ function onUpdate(){
 				<td><input type="text"    size="38"  name="project_no" id="project_no"   value="<%=projectInfo.getAt("xiadan_kefu")%>"  ></td>
 				<td nowrap="nowrap" align="center" width="7%">性别</td>
 				<td  nowrap="nowrap" align="center" width="7%">
-					<input name="sex" type="radio" class="radio_1" value="男" <%if("男".equals("" + projectInfo.getAt("sex"))){%>checked<%}%>>男
-	    <input name="sex" type="radio" class="radio_1" value="女" <%if("女".equals("" + projectInfo.getAt("sex"))){%>checked<%}%>>女
+				
+				<select name="sex" value="sex">
+						<option value="男">男</option>
+						<option value="女">女</option>
+				</select> 
+				
+				<%-- 	<input name="sex" type="radio" class="radio_1" value="男" <%if("男".equals("" + projectInfo.getAt("sex"))){%>checked<%}%>>男
+	    <input name="sex" type="radio" class="radio_1" value="女" <%if("女".equals("" + projectInfo.getAt("sex"))){%>checked<%}%>>女 --%>
 					</td>
 				<td nowrap="nowrap" align="center" width="7%">客户姓名</td>	
 				<td  nowrap="nowrap" align="center" width="7%">
@@ -151,9 +168,17 @@ function onUpdate(){
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">订单类型</td>
 				<td nowrap="nowrap" align="center" width="7%">
-					<input name="orderType" type="radio" class="radio_1" value="新单" <%if("新单".equals("" + projectInfo.getAt("order_type"))){%>checked<%}%>>新单
+			<%-- 		<input name="orderType" type="radio" class="radio_1" value="新单" <%if("新单".equals("" + projectInfo.getAt("order_type"))){%>checked<%}%>>新单
 	    <input name="orderType" type="radio" class="radio_1" value="打样" <%if("打样".equals("" + projectInfo.getAt("order_type"))){%>checked<%}%>>打样
-	    <input name="orderType" type="radio" class="radio_1" value="重做" <%if("重做".equals("" + projectInfo.getAt("order_type"))){%>checked<%}%>>重做
+	    <input name="orderType" type="radio" class="radio_1" value="重做" <%if("重做".equals("" + projectInfo.getAt("order_type"))){%>checked<%}%>>重做 --%>
+	    
+	    	<select name="orderType" value="orderType">
+						<option value="新单">新单</option>
+						<option value="打样">打样</option>
+						<option value="重做">重做</option>
+						<option value="其他">其他</option>
+				</select> 
+				
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">交付时间</td>
 				<td nowrap="nowrap" align="center" width="7%">
@@ -197,7 +222,9 @@ function onUpdate(){
 				<td nowrap="nowrap" align="center" width="7%">
 				 <input name="jiankuanA2" size="38" type="text" class="txt_1"  maxlength="50"  value="<%=projectInfo.getAt("jiankuan_a2")%>" >
 				</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%" rowspan="4">
+					<img src="http://47.111.148.8/watch/upload/test.png" width="100" height="100" />
+				</td>
 				<td nowrap="nowrap" align="center" width="7%">领围</td>
 				<td nowrap="nowrap" align="center" width="7%">
 			<input type="text"      size="38"  name="lingweiB" id="lingweiB"   value="<%=projectInfo.getAt("lingwei_b")%>"  >
@@ -205,7 +232,9 @@ function onUpdate(){
 				<td nowrap="nowrap" align="center" width="7%">
 				 <input name="lingweiB2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("lingwei_b2")%>" >
 				</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%" rowspan="4">
+					<img src="http://47.111.148.8/watch/upload/test.png" width="100" height="100" />
+				</td>
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">胸围</td>
@@ -216,7 +245,7 @@ function onUpdate(){
 				
 				<input name="xiongweiA2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("xiongwei_a2")%>">
 				</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				
 				<td nowrap="nowrap" align="center" width="7%">胸围</td>
 				<td nowrap="nowrap" align="center" width="7%">
 					<input type="text"      size="38"  name="xiongweiB" id="xiongweiB"   value="<%=projectInfo.getAt("xiongwei_b")%>"  >
@@ -234,7 +263,7 @@ function onUpdate(){
 				<td nowrap="nowrap" align="center" width="7%">
 				 <input name="zhongyaoA2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("zhongyao_a2")%>">
 				</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+			
 				<td nowrap="nowrap" align="center" width="7%">中腰</td>
 				<td nowrap="nowrap" align="center" width="7%">
 		<input type="text"      size="38"  name="zhongyaoA" id="zhongyaoA"   value="<%=projectInfo.getAt("zhongyao_a")%>"  >
@@ -252,7 +281,7 @@ function onUpdate(){
 				<td nowrap="nowrap" align="center" width="7%">
 				 <input name="fuweiA2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("fuwei_a2")%>">
 				</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				
 				<td nowrap="nowrap" align="center" width="7%">腹围</td>
 				<td nowrap="nowrap" align="center" width="7%">
 <input type="text"      size="38"  name="fuweiB" id="fuweiB"   value="<%=projectInfo.getAt("fuwei_b")%>"  >
@@ -271,13 +300,18 @@ function onUpdate(){
 				<td nowrap="nowrap" align="center" width="7%">
 				 <input name="houzhongyichangA2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("houzhongyichang_a2")%>">
 				</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%" rowspan="5">
+				 <input name="dakuang1" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("dakuang1")%>">
+<%-- 				 <textarea name="dakuang1" id="dakuang1" rows="8" cols="8" class="txt_1"  value="<%=projectInfo.getAt("dakuang1")%>"></textarea>
+ --%>				</td>
 				<td nowrap="nowrap" align="center" width="7%">衣长</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<input name="yichangB2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("yichang_b2")%>">
 				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%"rowspan="5">
+				 <input name="dakuang2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("dakuang2")%>">
+				 </td>
 			</tr>
 				<tr>
 				<td nowrap="nowrap" align="center" width="7%">前衣长</td>
@@ -287,7 +321,7 @@ function onUpdate(){
 				<td nowrap="nowrap" align="center" width="7%">
 				 <input name="qianyichangA2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("qianyichang_a2")%>">
 				</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+			<!-- 	<td nowrap="nowrap" align="center" width="7%"></td> -->
 				<td nowrap="nowrap" align="center" width="7%">腹围</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
@@ -299,7 +333,7 @@ function onUpdate(){
 	<input type="text"      size="38"  name="xiuchangB" id="xiuchangB"   value="<%=projectInfo.getAt("xiuchang_b")%>"  >
 </td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<!-- <td nowrap="nowrap" align="center" width="7%"></td> -->
 				<td nowrap="nowrap" align="center" width="7%">袖长</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<input type="text"      size="38"  name="xiuchangA" id="xiuchangA"   value="<%=projectInfo.getAt("xiuchang_a")%>"  >
@@ -317,7 +351,7 @@ function onUpdate(){
 				<td nowrap="nowrap" align="center" width="7%">
 				 <input name="xiufeiB2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("xiufei_b2")%>">
 				</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<!-- <td nowrap="nowrap" align="center" width="7%"></td> -->
 				<td nowrap="nowrap" align="center" width="7%">袖肥</td>
 				<td nowrap="nowrap" align="center" width="7%">
 	<input type="text"      size="38"  name="xiufeiA" id="xiufeiA"   value="<%=projectInfo.getAt("xiufei_a")%>"  >
@@ -336,7 +370,7 @@ function onUpdate(){
 				<td nowrap="nowrap" align="center" width="7%">
 				 <input name="xiukouB2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("xiukou_b2")%>">
 				</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<!-- <td nowrap="nowrap" align="center" width="7%"></td> -->
 				<td nowrap="nowrap" align="center" width="7%">袖口</td>
 				<td nowrap="nowrap" align="center" width="7%">
 					<input type="text"      size="38"  name="xiukouA" id="xiukouA"   value="<%=projectInfo.getAt("xiukou_a")%>"  >
@@ -372,11 +406,17 @@ function onUpdate(){
 				<input name="yaoweiC22" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("yaowei_c22")%>">
 			
 				</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%" rowspan="4">
+					<img src="http://47.111.148.8/watch/upload/test.png" width="100" height="100" />
+				</td>
 				<td nowrap="nowrap" align="center" width="7%">肩宽</td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<input name="jiankuannew" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("jiankuannew")%>">
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%" rowspan="4">
+					<img src="http://47.111.148.8/watch/upload/test.png" width="100" height="100" />
+				</td>
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">臀围</td>
@@ -385,7 +425,7 @@ function onUpdate(){
 				<input name="tuiweiC2" size="38" type="text" class="txt_1"maxlength="50"  value="<%=projectInfo.getAt("tuiwei_c2")%>">
 				
 				</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				
 				<td nowrap="nowrap" align="center" width="7%">胸围</td>
 				<td nowrap="nowrap" align="center" width="7%">
 <input type="text"      size="38"  name="xiongweiD" id="xiongweiD"   value="<%=projectInfo.getAt("xiongwei_d")%>"  >
@@ -403,7 +443,7 @@ function onUpdate(){
 				<td nowrap="nowrap" align="center" width="7%">
 				<input name="dangweiC2" size="38" type="text" class="txt_1"maxlength="50"  value="<%=projectInfo.getAt("dangwei_c2")%>">
 				</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				
 				<td nowrap="nowrap" align="center" width="7%">中腰</td>
 				<td nowrap="nowrap" align="center" width="7%">	<input type="text"      size="38"  name="zhongyaoD" id="zhongyaoD"   value="<%=projectInfo.getAt("zhongyao_d")%>"  ></td>
 				<td nowrap="nowrap" align="center" width="7%">
@@ -417,7 +457,7 @@ function onUpdate(){
 				<td nowrap="nowrap" align="center" width="7%">
 				<input name="datuiC2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("datui_c2")%>">
 				</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				
 				<td nowrap="nowrap" align="center" width="7%">衣长</td>
 				<td nowrap="nowrap" align="center" width="7%">	<input type="text"      size="38"  name="yichangD" id="yichangD"   value="<%=projectInfo.getAt("yichang_d")%>"  ></td>
 				<td nowrap="nowrap" align="center" width="7%">
@@ -433,18 +473,32 @@ function onUpdate(){
 				<td nowrap="nowrap" align="center" width="7%">
 				<input name="zhongtuiC2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("zhongtui_c2")%>">
 				</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%" rowspan="4">
+						<input name="dakuang3" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("dakuang3")%>">
+				</td>
 				<td nowrap="nowrap" align="center" width="7%">款型</td>
 				<td nowrap="nowrap" align="center" width="7%">
-	<input name="kuanxingD" type="radio" class="radio_1" value="修身" <%if("修身".equals("" + projectInfo.getAt("kuanxing_d"))){%>checked<%}%>>修身
+				
+				<select name="kuanxingD" value="kuanxingD">
+						<option value="修身">修身</option>
+						<option value="修身+">修身+</option>
+						<option value="合身">合身</option>
+						<option value="合身+">合身+</option>
+						<option value="宽松">宽松</option>
+						<option value="宽松+">宽松+</option>
+				</select> 
+				
+<%-- 	<input name="kuanxingD" type="radio" class="radio_1" value="修身" <%if("修身".equals("" + projectInfo.getAt("kuanxing_d"))){%>checked<%}%>>修身
 		<input name="kuanxingD" type="radio" class="radio_1" value="修身+" <%if("修身+".equals("" + projectInfo.getAt("kuanxing_d"))){%>checked<%}%>>修身+
 		<input name="kuanxingD" type="radio" class="radio_1" value="合身" <%if("合身".equals("" + projectInfo.getAt("kuanxing_d"))){%>checked<%}%>>合身
 		<input name="kuanxingD" type="radio" class="radio_1" value="合身+" <%if("合身+".equals("" + projectInfo.getAt("kuanxing_d"))){%>checked<%}%>>合身+
 		<input name="kuanxingD" type="radio" class="radio_1" value="宽松" <%if("宽松".equals("" + projectInfo.getAt("kuanxing_d"))){%>checked<%}%>>宽松
-		<input name="kuanxingD" type="radio" class="radio_1" value="宽松+" <%if("宽松+".equals("" + projectInfo.getAt("kuanxing_d"))){%>checked<%}%>>宽松+
+		<input name="kuanxingD" type="radio" class="radio_1" value="宽松+" <%if("宽松+".equals("" + projectInfo.getAt("kuanxing_d"))){%>checked<%}%>>宽松+ --%>
 </td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%" rowspan="4">
+					<input type="text"      size="38"  name="dakuang4" id="dakuang4"   value="<%=projectInfo.getAt("dakuang4")%>"  >
+				</td>
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">小腿</td>
@@ -454,7 +508,7 @@ function onUpdate(){
 				<td nowrap="nowrap" align="center" width="7%">
 				<input name="xiaotuiC2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("xiaotui_c2")%>">
 				</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
@@ -469,7 +523,7 @@ function onUpdate(){
 				<input name="kuchangC2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("kuchang_c2")%>">
 				
 				</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
@@ -483,7 +537,7 @@ function onUpdate(){
 				<td nowrap="nowrap" align="center" width="7%">
 				<input name="tuikouC2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("tuikou_c2")%>">
 				</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
@@ -499,7 +553,8 @@ function onUpdate(){
 						<option value="双排二扣一">双排二扣一</option>
 						<option value="双排四扣二">双排四扣二</option>
 						<option value="双排六扣二">双排六扣二</option>
-				</select> <font color="red"></font>
+						<option value="其他">其他</option>
+				</select>
 					</td>
 				<td nowrap="nowrap" align="center" width="7%">口袋</td>
 				<td nowrap="nowrap" align="center" width="7%">
@@ -508,6 +563,7 @@ function onUpdate(){
 						<option value="2平单线、5斜单线">2平单线、5斜单线</option>
 						<option value="3平双线、6斜双线">3平双线、6斜双线</option>
 						<option value="7外贴袋">7外贴袋</option>
+						<option value="其他">其他</option>
 				</select> <font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%">开叉</td>
 				<td nowrap="nowrap" align="center" width="7%">
@@ -519,17 +575,29 @@ function onUpdate(){
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">领型</td>
 				<td nowrap="nowrap" align="center" width="7%">
-				<input name="lingkoukuaishiB" size="38"
+				
+				<select name="lingkoukuaishiB" value="lingkoukuaishiB">
+						<option value="平驳领">平驳领</option>
+						<option value="戗驳领">戗驳领</option>
+						<option value="青果领">青果领</option>
+						<option value="假青果">假青果</option>
+						<option value="假平驳">假平驳</option>
+						<option value="宽平驳">宽平驳</option>
+						<option value="宽戗驳">宽戗驳</option>
+						<option value="其他">其他</option>
+				</select> 
+				
+				<!-- <input name="lingkoukuaishiB" size="38"
 					id="lingkoukuaishiB" type="text" class="txt_1" maxlength="100" /><font
-					color="red"></font>
+					color="red"></font> -->
 				</td>
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">下摆</td>
 				<td nowrap="nowrap" align="center" width="7%">
 					<select name="xiabai" value="xiabai">
+						<option value="直角下摆">直角下摆）</option>
 						<option value="圆角下摆">圆角下摆</option>
-						<option value="直角下摆（双排扣默认）">直角下摆（双排扣默认）</option>
 						<option value="大圆角下摆">大圆角下摆</option>
 						<option value="燕尾下摆">燕尾下摆</option>
 						<option value="其他">其他</option>
@@ -541,13 +609,20 @@ function onUpdate(){
 						<option value="袋条用色丁">袋条用色丁</option>
 						<option value="领边有色丁">领边有色丁</option>
 						<option value="驳头用色丁">驳头用色丁</option>
+						<option value="驳头用色丁">其他</option>
 				</select>
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">外珠边</td>
 				<td nowrap="nowrap" align="center" width="7%">
-				<input name="waizhubian" size="38"
+				
+				<select name="waizhubian" value="waizhubian">
+						<option value="有">有</option>
+						<option value="无">无</option>
+				</select> 
+				
+			<%-- 	<input name="waizhubian" size="38"
 					id="waizhubian" type="text" class="txt_1" maxlength="100"  value="<%=projectInfo.getAt("waizhubian")%>" /><font
-					color="red"></font>
+					color="red"></font> --%>
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">袖叉</td>
 				<td nowrap="nowrap" align="center" width="7%">
@@ -614,8 +689,20 @@ function onUpdate(){
 			<input type="text"      size="38"  name="miaoliao1" id="miaoliao1"   value="<%=projectInfo.getAt("miao_liao1")%>"  >
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">用途</td>
-				<td nowrap="nowrap" align="center" width="7%">
-					<input type="text"   size="38"  name="yongtu1" id="yongtu1"   value="<%=projectInfo.getAt("yong_tu1")%>"  >
+				<td nowrap="nowrap" align="center" width="7%"><!-- 
+					 <input type="text"   size="38"  name="yongtu1" id="yongtu1"   value="<%=projectInfo.getAt("yong_tu1")%>"  >-->
+					
+						<select name="yongtu1" value="yongtu1">
+						<option value="上衣">上衣</option>
+						<option value="裤子">裤子</option>
+						<option value="马甲">马甲</option>
+						<option value="衬衫">衬衫</option>
+						<option value="衬衫">衬衫</option>
+						<option value="西装套装">西装套装</option>
+						<option value="换片">换片</option>
+						<option value="其他">其他</option>
+				</select> 
+				
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">米数</td>
 				<td nowrap="nowrap" align="center" width="7%">
@@ -633,7 +720,17 @@ function onUpdate(){
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">用途</td>
 				<td nowrap="nowrap" align="center" width="7%">
-					<input type="text"   size="38"  name="yongtu2" id="yongtu2"   value="<%=projectInfo.getAt("yong_tu2")%>"  >
+					<select name="yongtu2" value="yongtu2">
+						<option value="上衣">上衣</option>
+						<option value="裤子">裤子</option>
+						<option value="马甲">马甲</option>
+						<option value="衬衫">衬衫</option>
+						<option value="衬衫">衬衫</option>
+						<option value="西装套装">西装套装</option>
+						<option value="换片">换片</option>
+						<option value="其他">其他</option>
+				</select> 
+					<%-- <input type="text"   size="38"  name="yongtu2" id="yongtu2"   value="<%=projectInfo.getAt("yong_tu2")%>"  > --%>
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">米数</td>
 				<td nowrap="nowrap" align="center" width="7%">
@@ -646,7 +743,7 @@ function onUpdate(){
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">附件</td>
-				<td nowrap="nowrap" align="center" width="7%"><input type="file" name="channelId"
+				<td nowrap="nowrap" align="center" width="7%"><input type="file" name="channelId"  multiple="multiple"
 					id="channelId" multiple="multiple" class="imagePath" /> <img alt=""
 					src="" id="image1" class="showImage"></td>
 			</tr>
