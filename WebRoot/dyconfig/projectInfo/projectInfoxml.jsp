@@ -179,10 +179,10 @@ function daDan(id,orderid){
 						    <input id="wwname" name="wwname" type="text" class="txt_1" 
 						    value="<%CommUtils.printReqByAtt(request,response,"wwname");%>" size="20"> --%>
 						      创建时间
-                     <input name="startTime" type="text" class="txt_1"  id="startTime" style="cursor:text"
+                     <input  name="startTime" type="text" class="txt_1"  id="startTime" style="cursor:text"
 								value="<%CommUtils.printReqByAtt(request,response,"fNow_date");%>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
 								size="20" readonly> -
-							<input name="endTime" type="text" class="txt_1" id="endTime" style="cursor:text"
+							<input  style="border:none;" name="endTime" type="text" class="txt_1" id="endTime" style="cursor:text"
 								value="<%CommUtils.printReqByAtt(request,response,"now_date");%>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
 								size="20" readonly>	
 								     

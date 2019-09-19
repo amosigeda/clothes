@@ -787,6 +787,19 @@ public class ProjectInfoAction extends BaseAction {
 			request.setAttribute("role",role);
 		}
 
+		
+		ProjectInfo voo = new ProjectInfo();
+		List<DataMap> Clist = ServiceBean.getInstance().getProjectInfoFacade()
+				.getProjectWatchInfo(voo);
+		String sb = CommUtils.getPrintSelect(Clist, "project_no1",
+				"project_no", "project_no", "", 1);
+		request.setAttribute("companyList", sb);
+
+		String sb1 = CommUtils.getPrintSelect(Clist, "project_no2",
+				"project_no", "project_no", "", 1);
+
+		request.setAttribute("companyList1", sb1);
+		
 		String id = request.getParameter("id");
 		ProjectInfo vo = new ProjectInfo();
 		vo.setCondition("id='" + id + "'");
@@ -801,17 +814,7 @@ public class ProjectInfoAction extends BaseAction {
 			return mapping.findForward("result");
 		}
 		
-		ProjectInfo voo = new ProjectInfo();
-		List<DataMap> Clist = ServiceBean.getInstance().getProjectInfoFacade()
-				.getProjectWatchInfo(voo);
-		String sb = CommUtils.getPrintSelect(Clist, "project_no1",
-				"project_no", "project_no", "", 1);
-		request.setAttribute("companyList", sb);
-
-		String sb1 = CommUtils.getPrintSelect(Clist, "project_no2",
-				"project_no", "project_no", "", 1);
-
-		request.setAttribute("companyList1", sb1);
+		
 		
 		request.setAttribute("projectInfo", list.get(0));
 			return mapping.findForward("updateProjectInfoxml");
@@ -1795,11 +1798,11 @@ public class ProjectInfoAction extends BaseAction {
 		    
 			
 			ProjectInfoForm form = (ProjectInfoForm) actionForm;
-			System.out.println(form.getChannelId());
 			Hashtable<?, ?> files = form.getMultipartRequestHandler()
 					.getFileElements();
 			if (files != null & files.size() > 0) {
-				vo.setFujian_url("http://47.111.148.8:80/watch/upload/fujian/"+orderId+".zip");
+				String downloadUrl ="http://47.111.148.8:80/watch/upload/fujian/"+orderId+"/"+orderId+".zip";
+				vo.setFujian_url(downloadUrl);
 				
 				String qianZhui = "D:/resin/webapps/watch/upload/fujian/";
 				String path = qianZhui + orderId;
@@ -1810,7 +1813,6 @@ public class ProjectInfoAction extends BaseAction {
 				Enumeration<?> enums = files.keys();
 				String fileKey = null;
 				while (enums.hasMoreElements()) {
-					System.out.println(1);
 					fileKey = (String) (enums.nextElement());
 					FormFile file = (FormFile) files.get(fileKey);
 					if (!file.getFileName().isEmpty()) {
@@ -1856,17 +1858,17 @@ public class ProjectInfoAction extends BaseAction {
 
 				// String url =
 				// "http://localhost:8080/clothes/upload/photo/"+orderid+"/";
-				String fujian = "http://47.111.148.8:80/watch/upload/fujian/"+orderId+".zip";
+				
 				
 				if (list.size() > 0) {
 					vod.setCondition("id='" + list.get(0).get("id") + "'");
-					vod.setFujian(fujian);
+					vod.setFujian(downloadUrl);
 					ServiceBean.getInstance().getDeviceActiveInfoFacade()
 							.updateCallInfo(vod);
 
 				} else {
 					vod.setOrderid(orderId);
-					vod.setFujian(fujian);
+					vod.setFujian(downloadUrl);
 					ServiceBean.getInstance().getDeviceActiveInfoFacade()
 							.insertCallInfo(vod);
 				}
@@ -2022,7 +2024,8 @@ public class ProjectInfoAction extends BaseAction {
 			vo.setXiku_number(xiku_number);
 			vo.setMajia_number(majia_number);
 			
-			String tag = request.getParameter("tag");
+			//String tag = request.getParameter("tag");
+			String tag =request.getParameter("anniu");
 			vo.setStatus(tag);
 			
 			
@@ -2096,10 +2099,93 @@ public class ProjectInfoAction extends BaseAction {
 			}
 
 			String id = request.getParameter("id");
+			String project_no1 = request.getParameter("project_no1");
+			String orderId = project_no1;
+			ProjectInfo vo = new ProjectInfo();
+			
+			
+			ProjectInfoForm form = (ProjectInfoForm) actionForm;
+			Hashtable<?, ?> files = form.getMultipartRequestHandler()
+					.getFileElements();
+			if (files != null & files.size() > 0) {
+				String downloadUrl ="http://47.111.148.8:80/watch/upload/fujian/"+orderId+"/"+orderId+".zip";
+				vo.setFujian_url(downloadUrl);
+				
+				String qianZhui = "D:/resin/webapps/watch/upload/fujian/";
+				String path = qianZhui + orderId;
+				
+				Constant.deleteFile(path);
+				Constant.createFile(path);
+				
+				Enumeration<?> enums = files.keys();
+				String fileKey = null;
+				while (enums.hasMoreElements()) {
+					fileKey = (String) (enums.nextElement());
+					FormFile file = (FormFile) files.get(fileKey);
+					if (!file.getFileName().isEmpty()) {
+						/*fileFormat = file.toString().substring(
+								file.toString().lastIndexOf("."),
+								file.toString().length());
+						name = Long.toString(new Date().getTime()) + fileFormat;*/
+					//	 CommUtils.createDateFile(dir); //创建当前文件夹，存在则返回文件名；
+						InputStream in = file.getInputStream();
+						// photoPath = photoPath + name; //输出文件路径
+						
+						File f = new File(path+"/" + file.getFileName());
+						if (f.exists()) {
+							f.delete();
+						}
 
+						OutputStream out = new FileOutputStream(path+"/"
+								+ file.getFileName());
+						out.write(file.getFileData(), 0, file.getFileSize());
+
+						out.close();
+						out = null;
+						in.close();
+						
+						
+
+						
+					}
+
+				}
+				
+				
+				String zipName = path + "/" + orderId + ".zip";
+				FileOutputStream fos1 = new FileOutputStream(new File(zipName));
+				ZipUtils.toZip(path, fos1, true);
+				
+				DeviceActiveInfo vod = new DeviceActiveInfo();
+
+				vod.setCondition("orderid = '" + orderId + "'");
+
+				List<DataMap> list = ServiceBean.getInstance()
+						.getDeviceActiveInfoFacade().getAllCallInfo(vod);
+
+				// String url =
+				// "http://localhost:8080/clothes/upload/photo/"+orderid+"/";
+			
+				
+				if (list.size() > 0) {
+					vod.setCondition("id='" + list.get(0).get("id") + "'");
+					vod.setFujian(downloadUrl);
+					ServiceBean.getInstance().getDeviceActiveInfoFacade()
+							.updateCallInfo(vod);
+
+				} else {
+					vod.setOrderid(orderId);
+					vod.setFujian(downloadUrl);
+					ServiceBean.getInstance().getDeviceActiveInfoFacade()
+							.insertCallInfo(vod);
+				}
+				
+
+			}
+			
 		
 
-			ProjectInfo vo = new ProjectInfo();
+		
 			vo.setCondition("id='" + id + "'");
 			//String orderId = System.currentTimeMillis() + "";// 订单编号
 			String wwName = request.getParameter("projectNo");
@@ -2222,7 +2308,8 @@ public class ProjectInfoAction extends BaseAction {
 			vo.setLingkoukuaishiB(lingkoukuaishiB);
 			vo.setXiukouA(xiukouA);
 			
-			String tag = request.getParameter("tag");
+			//String tag = request.getParameter("tag");
+			String tag =request.getParameter("anniu");
 			vo.setStatus(tag);
 			
 			
@@ -2326,7 +2413,7 @@ public class ProjectInfoAction extends BaseAction {
 			
 			
 
-String project_no1 = request.getParameter("project_no1");
+
 			String project_no2 = request.getParameter("project_no2");
 					String gdremark = request.getParameter("gdremark");
 					
@@ -2346,7 +2433,19 @@ String project_no1 = request.getParameter("project_no1");
 					vo.setDakuang2(dakuang2);
 					vo.setDakuang3(dakuang3);
 					vo.setDakuang4(dakuang4);
-
+					
+					
+				/*	String xc_que = request.getParameter("xc_que");
+					vo.setXc_que(xc_que);
+					String yichang_q = request.getParameter("yichang_q");
+					vo.setYichang_q(yichang_q);
+					String xiukou_que = request.getParameter("xiukou_que");
+					vo.setXiukou_que(xiukou_que);
+					String fuwei_quea = request.getParameter("fuwei_quea");
+					vo.setFuwei_quea(fuwei_quea);
+					String fuwei_queb = request.getParameter("fuwei_queb");
+					vo.setFuwei_queb(fuwei_queb);*/
+					
 			ServiceBean.getInstance().getProjectInfoFacade()
 					.updatePorjectInfoDangAn(vo);
 			

@@ -60,7 +60,7 @@ public class MsgInfoAction extends BaseAction {
 				list = ServiceBean.getInstance()
 						.getProjectInfoFacade().getProjectInfo(vo);
 				if (!list.isEmpty()&&list.size()>0) {
-					response.getWriter().write("success");
+					response.getWriter().write("可以增加该订单的售后");
 				} else {
 					response.getWriter().write("不存在该订单号");
 					//response.getWriter().write("fail");
@@ -233,6 +233,13 @@ public class MsgInfoAction extends BaseAction {
 			return null;
 		}
 
+		ProjectInfo voo = new ProjectInfo();
+		List<DataMap> Clist = ServiceBean.getInstance().getProjectInfoFacade()
+				.getProjectWatchInfo(voo);
+		String sb = CommUtils.getPrintSelect(Clist, "gongyingshang",
+				"project_no", "project_no", "", 1);
+		request.setAttribute("companyList", sb);
+		
 		String userName = loginUser.getUserName();
 		
 		request.setAttribute("username", userName);

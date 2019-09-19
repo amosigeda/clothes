@@ -177,10 +177,44 @@ public class ProjectInfo extends PublicVoBean implements Serializable{
 	
 	private String fujian_url;
 	
+	private String xc_que;
+	private String yichang_q;
+	private String xiukou_que;
+	private String fuwei_quea;
+	private String fuwei_queb;
 	
 	
 	
-	
+	public String getXc_que() {
+		return xc_que;
+	}
+	public void setXc_que(String xc_que) {
+		this.xc_que = xc_que;
+	}
+	public String getYichang_q() {
+		return yichang_q;
+	}
+	public void setYichang_q(String yichang_q) {
+		this.yichang_q = yichang_q;
+	}
+	public String getXiukou_que() {
+		return xiukou_que;
+	}
+	public void setXiukou_que(String xiukou_que) {
+		this.xiukou_que = xiukou_que;
+	}
+	public String getFuwei_quea() {
+		return fuwei_quea;
+	}
+	public void setFuwei_quea(String fuwei_quea) {
+		this.fuwei_quea = fuwei_quea;
+	}
+	public String getFuwei_queb() {
+		return fuwei_queb;
+	}
+	public void setFuwei_queb(String fuwei_queb) {
+		this.fuwei_queb = fuwei_queb;
+	}
 	public String getFujian_url() {
 		return fujian_url;
 	}

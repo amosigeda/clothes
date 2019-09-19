@@ -103,15 +103,28 @@ function onAdd(){
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">面料</td>
 				<td nowrap="nowrap" align="center" width="7%">用途</td>
-				<td nowrap="nowrap" align="center" width="7%"><input
-					name="yongtu" id="yongtu" type="text" size="38" maxlength="100" /></td>
+				<td nowrap="nowrap" align="center" width="7%"><!-- <input
+					name="yongtu" id="yongtu" type="text" size="38" maxlength="100" /> -->
+					
+					<select name="yongtu" value="yongtu">
+						<option value="上衣">上衣</option>
+						<option value="裤子">裤子</option>
+						<option value="马甲">马甲</option>
+						<option value="衬衫">衬衫</option>
+						<option value="西装套装">西装套装</option>
+						<option value="换片">换片</option>
+						<option value="其他">其他</option>
+				</select> 
+					</td>
 				<td nowrap="nowrap" align="center" width="7%">米数</td>
 				<td nowrap="nowrap" align="center" width="7%"><input name="mi"
 					id="mi" type="text" size="38" maxlength="100" /></td>
 				<td nowrap="nowrap" align="center" width="7%">供应商</td>
-				<td nowrap="nowrap" align="center" width="7%"><input
+				<td nowrap="nowrap" align="center" width="7%"><!-- <input
 					name="gongyingshang" id="gongyingshang" type="text" size="38"
-					maxlength="100" /></td>
+					maxlength="100" /> -->
+						<%=request.getAttribute("companyList")%>
+					</td>
 			</tr>
 
 			<tr>
