@@ -82,10 +82,10 @@ $(document).ready(function(){
 	
     function InserTab() {
         var trLen = $("#tab1 tr").length;
-        var rowT = "<tr><td><input style="border:none;"type=text style='width:90px;' value='' id='d" + trLen + "'></td>" +
-            "<td><input style="border:none;"type=text style='width:90px;' value='' id='d1" + trLen + "'></td>" +
-            "<td><input style="border:none;"type=text style='width:90px;' value='' id='d2" + trLen + "'></td>" +
-            "<td><input style="border:none;"type=text style='width:90px;' value='' id='d3" + trLen + "'></td></tr>";
+        var rowT = "<tr><td><input type=text style='width:90px;' value='' id='d" + trLen + "'></td>" +
+            "<td><input type=text style='width:90px;' value='' id='d1" + trLen + "'></td>" +
+            "<td><input type=text style='width:90px;' value='' id='d2" + trLen + "'></td>" +
+            "<td><input type=text style='width:90px;' value='' id='d3" + trLen + "'></td></tr>";
         var trPre = $("#tab1 tr:eq(" + (trLen - 1) + ")");
         $(rowT).insertAfter($(trPre));
     }
@@ -120,7 +120,7 @@ $(document).ready(function(){
 					.getAttribute(Config.SystemConfig.LOGINUSER);
 			String loginUserCode = loginUser.getUserCode();
 		%>
-		<!-- <input style="border:none;"type="hidden" name="addUser" value="<%=loginUserCode%>"> -->
+		<!-- <input type="hidden" name="addUser" value="<%=loginUserCode%>"> -->
 		<!-- <table width="100%" border="0"cellpadding="0" cellspacing="0"  class="tbl_11" > -->
 		
 		
@@ -160,12 +160,12 @@ $(document).ready(function(){
 				</select> <font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%">年龄</td>
 				<td  nowrap="nowrap" align="center" width="7%">
-				<input style="border:none;"name="age" size="50" id="age" type="number" 
+				<input name="age" size="50" id="age" type="number" 
 					class="txt_1" maxlength="100" /><font color="red"></font>
 					</td>
 				<td nowrap="nowrap" align="center" width="7%">客户电话</td>	
 				<td  nowrap="nowrap" align="center" width="7%">
-				<input style="border:none;"name="kehuPhone" size="38"  
+				<input name="kehuPhone" size="38"  
 					id="kehuPhone" type="text" class="txt_1" maxlength="30" /><font
 					color="red"></font>
 					</td>
@@ -173,7 +173,7 @@ $(document).ready(function(){
 			
 				<tr>
 				<td nowrap="nowrap" align="center" width="7%">微信号</td>
-				<td nowrap="nowrap" align="center" width="7%"><input style="border:none;"name="wechat" size="38" id="wechat"
+				<td nowrap="nowrap" align="center" width="7%"><input name="wechat" size="38" id="wechat"
 					type="text" class="txt_1" maxlength="30" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%">下单客服</td>
 				<td nowrap="nowrap" align="center" width="7%"><%=request.getAttribute("userName")%></td>
@@ -186,36 +186,36 @@ $(document).ready(function(){
 					</td>
 				<td nowrap="nowrap" align="center" width="7%">客户姓名</td>	
 				<td  nowrap="nowrap" align="center" width="7%">
-			<input style="border:none;"name="kehuName" size="38" id="kehuName" type="text"
+			<input name="kehuName" size="38" id="kehuName" type="text"
 					class="txt_1" maxlength="100" /><font color="red"></font>
 					</td>
 			</tr>
 			
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">订单号</td>
-				<td nowrap="nowrap" align="center" width="7%"><input style="border:none;"name="orderNumber" size="38"
+				<td nowrap="nowrap" align="center" width="7%"><input name="orderNumber" size="38"
 					id="orderNumber" type="text" class="txt_1" maxlength="30" /><font
 					color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%">销售价格</td>
-				<td nowrap="nowrap" align="center" width="7%"><input style="border:none;"name="salePrice" size="38"
+				<td nowrap="nowrap" align="center" width="7%"><input name="salePrice" size="38"
 					id="salePrice" type="text" class="txt_1" maxlength="30" /><font
 					color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%">身高</td>
-				<td nowrap="nowrap" align="center" width="7%"><input style="border:none;"name="height" size="38" id="height" type="text"
+				<td nowrap="nowrap" align="center" width="7%"><input name="height" size="38" id="height" type="text"
 					class="txt_1" maxlength="100" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%">体重</td>
-				<td nowrap="nowrap" align="center" width="7%"><input style="border:none;"name="weight" size="38" id="weight" type="text"
+				<td nowrap="nowrap" align="center" width="7%"><input name="weight" size="38" id="weight" type="text"
 					class="txt_1" maxlength="100" /><font color="red"></font></td>
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">旺旺名</td>
-				<td nowrap="nowrap" align="center" width="7%"><input style="border:none;"name="projectNo" size="38"
+				<td nowrap="nowrap" align="center" width="7%"><input name="projectNo" size="38"
 					id="projectNo" type="text" class="txt_1" maxlength="30" /><font
 					color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%">下单时间</td>
 				<td nowrap="nowrap" align="center" width="7%"><%=request.getAttribute("shijian")%></td>
 				<td nowrap="nowrap" align="center" width="7%">客户地址</td>
-				<td nowrap="nowrap" align="left" width="7%" colspan="3"><input style="border:none;"name="address" size="90" id="address"
+				<td nowrap="nowrap" align="left" width="7%" colspan="3"><input name="address" size="90" id="address"
 					type="text" class="txt_1" /><font color="red"></font></td>
 			</tr>
 			<tr>
@@ -242,14 +242,14 @@ $(document).ready(function(){
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">西装数量</td>
 				<td nowrap="nowrap" align="left" width="7%">
-				<input style="border:none;"name="xizhuang_number" size="38" id="xizhuang_number" type="number"
+				<input name="xizhuang_number" size="38" id="xizhuang_number" type="number"
 					class="txt_1" maxlength="100" /><font color="red"></font>
 			</td>
 				<td nowrap="nowrap" align="center" width="7%">衣码</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%">衬衫数量</td>
 				<td nowrap="nowrap" align="left" width="7%">
-				<input style="border:none;"name="chenshan_number" size="38" id="chenshan_number" type="number"
+				<input name="chenshan_number" size="38" id="chenshan_number" type="number"
 					class="txt_1" maxlength="100" /><font color="red"></font>
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">衬衫码</td>
@@ -258,7 +258,7 @@ $(document).ready(function(){
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">肩宽</td>
 				<td nowrap="nowrap" align="center" width="7%">
-				<input style="border:none;"name="jiankuanA" size="38" id="jiankuanA"
+				<input name="jiankuanA" size="38" id="jiankuanA"
 					type="text" class="txt_1" maxlength="100" /></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%"  rowspan="4">
@@ -266,7 +266,7 @@ $(document).ready(function(){
 					</td>
 				<td nowrap="nowrap" align="center" width="7%">领围</td>
 				<td nowrap="nowrap" align="center" width="7%">
-				<input style="border:none;"name="lingweiB" size="38" id="lingweiB" type="text"
+				<input name="lingweiB" size="38" id="lingweiB" type="text"
 					class="txt_1" maxlength="100" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%" rowspan="4">
@@ -276,13 +276,13 @@ $(document).ready(function(){
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">胸围</td>
 				<td nowrap="nowrap" align="center" width="7%">
-				<input style="border:none;"name="xiongweiA" size="38" id="xiongweiA"
+				<input name="xiongweiA" size="38" id="xiongweiA"
 					type="text" class="txt_1" maxlength="100" onchange="setwechat(this.value)" /><font color="red"></font></td>
 				
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%">胸围</td>
 				<td nowrap="nowrap" align="center" width="7%">
-			<input style="border:none;"name="xiongweiB" size="38" id="xiongweiB"
+			<input name="xiongweiB" size="38" id="xiongweiB"
 					type="text" class="txt_1" maxlength="100" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				
@@ -290,13 +290,13 @@ $(document).ready(function(){
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">中腰</td>
 				<td nowrap="nowrap" align="center" width="7%">
-			<input style="border:none;"name="zhongyaoA" size="38" id="zhongyaoA"
+			<input name="zhongyaoA" size="38" id="zhongyaoA"
 					type="text" class="txt_1" maxlength="100"  onchange="setzhongyao(this.value)" /><font color="red"></font></td>
 				
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%">中腰</td>
 				<td nowrap="nowrap" align="center" width="7%">
-		<input style="border:none;"name="zhongyaoB" size="38" id="zhongyaoB"
+		<input name="zhongyaoB" size="38" id="zhongyaoB"
 					type="text" class="txt_1" maxlength="100" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				
@@ -304,13 +304,13 @@ $(document).ready(function(){
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">腹围</td>
 				<td nowrap="nowrap" align="center" width="7%">
-		<input style="border:none;"name="fuweiA" size="38" id="fuweiA" type="text"
+		<input name="fuweiA" size="38" id="fuweiA" type="text"
 					class="txt_1" maxlength="100" onchange="setfuwei(this.value)" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				
 				<td nowrap="nowrap" align="center" width="7%">腹围</td>
 				<td nowrap="nowrap" align="center" width="7%">
-	<input style="border:none;"name="fuweiB" size="38" id="fuweiB" type="text"
+	<input name="fuweiB" size="38" id="fuweiB" type="text"
 					class="txt_1" maxlength="100" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				
@@ -318,7 +318,7 @@ $(document).ready(function(){
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">后中衣长</td>
 				<td nowrap="nowrap" align="center" width="7%">
-	<input style="border:none;"name="houzhongyichangA" size="38" id="houzhongyichangA" type="text" class="txt_1" maxlength="100" /><font color="red"></font></td>
+	<input name="houzhongyichangA" size="38" id="houzhongyichangA" type="text" class="txt_1" maxlength="100" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%" rowspan="5"></td>
 				<td nowrap="nowrap" align="center" width="7%">衣长</td>
@@ -329,7 +329,7 @@ $(document).ready(function(){
 				<tr>
 				<td nowrap="nowrap" align="center" width="7%">前衣长</td>
 				<td nowrap="nowrap" align="center" width="7%">
-	<input style="border:none;"name="qianyichangA" size="38" id="qianyichangA"
+	<input name="qianyichangA" size="38" id="qianyichangA"
 					type="text" class="txt_1" maxlength="100" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 			
@@ -341,12 +341,12 @@ $(document).ready(function(){
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">袖长</td>
 				<td nowrap="nowrap" align="center" width="7%">
-	<input style="border:none;"name="xiuchangB" size="38" id="xiuchangB"
+	<input name="xiuchangB" size="38" id="xiuchangB"
 					type="text" class="txt_1" maxlength="100" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 			
 				<td nowrap="nowrap" align="center" width="7%">袖长</td>
-				<td nowrap="nowrap" align="center" width="7%"><input style="border:none;"name="xiuchangA" size="38" id="xiuchangA"
+				<td nowrap="nowrap" align="center" width="7%"><input name="xiuchangA" size="38" id="xiuchangA"
 					type="text" class="txt_1" maxlength="100" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 			
@@ -354,12 +354,12 @@ $(document).ready(function(){
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">袖肥</td>
 				<td nowrap="nowrap" align="center" width="7%">
-	<input style="border:none;"name="xiufeiB" size="38" id="xiufeiB" type="text"
+	<input name="xiufeiB" size="38" id="xiufeiB" type="text"
 					class="txt_1" maxlength="100" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				
 				<td nowrap="nowrap" align="center" width="7%">袖肥</td>
-				<td nowrap="nowrap" align="center" width="7%"><input style="border:none;"name="xiufeiA" size="38" id="xiufeiA" type="text"
+				<td nowrap="nowrap" align="center" width="7%"><input name="xiufeiA" size="38" id="xiufeiA" type="text"
 					class="txt_1" maxlength="100" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 			
@@ -367,31 +367,31 @@ $(document).ready(function(){
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">袖口</td>
 				<td nowrap="nowrap" align="center" width="7%">
-<input style="border:none;"name="xiukouB" size="38" id="xiukouB" type="text"
+<input name="xiukouB" size="38" id="xiukouB" type="text"
 					class="txt_1" maxlength="100" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 			
 				<td nowrap="nowrap" align="center" width="7%">袖口</td>
-				<td nowrap="nowrap" align="center" width="7%"><input style="border:none;"name="xiukouA" size="38" id="xiukouA" type="text"
+				<td nowrap="nowrap" align="center" width="7%"><input name="xiukouA" size="38" id="xiukouA" type="text"
 					class="txt_1" maxlength="100" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 			
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">西裤数量</td>
-				<td nowrap="nowrap" align="left" width="7%"><input style="border:none;"name="xiku_number" size="38" id="xiku_number" type="number"
+				<td nowrap="nowrap" align="left" width="7%"><input name="xiku_number" size="38" id="xiku_number" type="number"
 					class="txt_1" maxlength="100" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%">裤码</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%">马甲数量</td>
-				<td nowrap="nowrap" align="left" width="7%"><input style="border:none;"name="majia_number" size="38" id="majia_number" type="number"
+				<td nowrap="nowrap" align="left" width="7%"><input name="majia_number" size="38" id="majia_number" type="number"
 					class="txt_1" maxlength="100" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%">马甲码</td>
 				
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">腰围</td>
-				<td nowrap="nowrap" align="center" width="7%"><input style="border:none;"name="yaoweiC" size="38" id="yaoweiC" type="text"
+				<td nowrap="nowrap" align="center" width="7%"><input name="yaoweiC" size="38" id="yaoweiC" type="text"
 					class="txt_1" maxlength="100" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%" rowspan="4">
@@ -406,43 +406,43 @@ $(document).ready(function(){
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">臀围</td>
-				<td nowrap="nowrap" align="center" width="7%"><input style="border:none;"name="tuiweiC" size="38" id="tuiweiC" type="text"
+				<td nowrap="nowrap" align="center" width="7%"><input name="tuiweiC" size="38" id="tuiweiC" type="text"
 					class="txt_1" maxlength="100" /><font color="red"></font></td>
 				
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%">胸围</td>
-				<td nowrap="nowrap" align="center" width="7%"><input style="border:none;"name="xiongweiD" size="38" id="xiongweiD"
+				<td nowrap="nowrap" align="center" width="7%"><input name="xiongweiD" size="38" id="xiongweiD"
 					type="text" class="txt_1" maxlength="100" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">档围</td>
-				<td nowrap="nowrap" align="center" width="7%"><input style="border:none;"name="dangweiC" size="38" id="dangweiC" type="text"
+				<td nowrap="nowrap" align="center" width="7%"><input name="dangweiC" size="38" id="dangweiC" type="text"
 					class="txt_1" maxlength="100" /><font color="red"></font></td>
 				
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%">中腰</td>
-				<td nowrap="nowrap" align="center" width="7%"><input style="border:none;"name="zhongyaoD" size="38" id="zhongyaoD"
+				<td nowrap="nowrap" align="center" width="7%"><input name="zhongyaoD" size="38" id="zhongyaoD"
 					type="text" class="txt_1" maxlength="100" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">大腿</td>
-				<td nowrap="nowrap" align="center" width="7%"><input style="border:none;"name="datuiC" size="38" id="datuiC" type="text"
+				<td nowrap="nowrap" align="center" width="7%"><input name="datuiC" size="38" id="datuiC" type="text"
 					class="txt_1" maxlength="100" /><font color="red"></font></td>
 				
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%">衣长</td>
-				<td nowrap="nowrap" align="center" width="7%"><input style="border:none;"name="yichangD" size="38" id="yichangD" type="text"
+				<td nowrap="nowrap" align="center" width="7%"><input name="yichangD" size="38" id="yichangD" type="text"
 					class="txt_1" maxlength="100" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">中腿</td>
-				<td nowrap="nowrap" align="center" width="7%"><input style="border:none;"name="zhongtuiC" size="38" id="zhongtuiC"
+				<td nowrap="nowrap" align="center" width="7%"><input name="zhongtuiC" size="38" id="zhongtuiC"
 					type="text" class="txt_1" maxlength="100" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%" rowspan="4"></td>
@@ -460,7 +460,7 @@ $(document).ready(function(){
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">小腿</td>
-				<td nowrap="nowrap" align="center" width="7%"><input style="border:none;"name="xiaotuiC" size="38" id="xiaotuiC" type="text"
+				<td nowrap="nowrap" align="center" width="7%"><input name="xiaotuiC" size="38" id="xiaotuiC" type="text"
 					class="txt_1" maxlength="100" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				
@@ -471,7 +471,7 @@ $(document).ready(function(){
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">裤长</td>
-				<td nowrap="nowrap" align="center" width="7%"><input style="border:none;"name="kuchangC" size="38" id="kuchangC" type="text"
+				<td nowrap="nowrap" align="center" width="7%"><input name="kuchangC" size="38" id="kuchangC" type="text"
 					class="txt_1" maxlength="100" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				
@@ -482,7 +482,7 @@ $(document).ready(function(){
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">脚口</td>
-				<td nowrap="nowrap" align="center" width="7%"><input style="border:none;"name="tuikouC" size="38" id="tuikouC" type="text"
+				<td nowrap="nowrap" align="center" width="7%"><input name="tuikouC" size="38" id="tuikouC" type="text"
 					class="txt_1" maxlength="100" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				
@@ -521,9 +521,9 @@ $(document).ready(function(){
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">领型</td>
 				<td nowrap="nowrap" align="center" width="7%">
-				<!-- <input style="border:none;"name="lingkoukuaishiB" size="38"
+				<input name="lingkoukuaishiB" size="38"
 					id="lingkoukuaishiB" type="text" class="txt_1" maxlength="100" /><font
-					color="red"></font> -->
+					color="red"></font>
 					<select name="lingkoukuaishiB" value="lingkoukuaishiB">
 						<option value="平驳领">平驳领</option>
 						<option value="戗驳领">戗驳领</option>
@@ -562,7 +562,7 @@ $(document).ready(function(){
 						<option value="无">无</option>
 				</select>
 				
-			<!-- 	<input style="border:none;"name="waizhubian" size="38"
+			<!-- 	<input name="waizhubian" size="38"
 					id="waizhubian" type="text" class="txt_1" maxlength="100" /><font
 					color="red"></font> -->
 				</td>
@@ -628,7 +628,7 @@ $(document).ready(function(){
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">面料</td>
 				<td nowrap="nowrap" align="center" width="7%">
-				<input style="border:none;"name="miaoliao1" size="38" id="miaoliao1"
+				<input name="miaoliao1" size="38" id="miaoliao1"
 					type="text" class="txt_1" maxlength="100" /><font color="red"></font>
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">用途</td>
@@ -651,7 +651,7 @@ $(document).ready(function(){
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">面料</td>
 				<td nowrap="nowrap" align="center" width="7%">
-				<input style="border:none;"name="miaoliao2" size="38" id="miaoliao2"
+				<input name="miaoliao2" size="38" id="miaoliao2"
 					type="text" class="txt_1" maxlength="100" /><font color="red"></font>
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">用途</td>
@@ -673,7 +673,7 @@ $(document).ready(function(){
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">附件</td>
-				<td nowrap="nowrap" align="center" width="7%"><input style="border:none;"type="file" name="channelId"
+				<td nowrap="nowrap" align="center" width="7%"><input type="file" name="channelId"
 					id="channelId" multiple="multiple" class="imagePath" /> <img alt=""
 					src="" id="image1" class="showImage"></td>
 			</tr>
@@ -681,7 +681,7 @@ $(document).ready(function(){
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">客服备注</td>
 				<td nowrap="nowrap" align="left" width="7%" colspan="7">
-			<input style="border:none;"name="remark" size="200" id="remark"
+			<input name="remark" size="200" id="remark"
 					type="text" class="txt_1" maxlength="1000" /><font color="red"></font></td>
 			</tr>
 			<tr>
@@ -695,8 +695,8 @@ $(document).ready(function(){
 			<!-- 	<tr>
 				<td nowrap="nowrap" align="center" width="7%">提交类型</td>
 				<td nowrap="nowrap" align="center" width="7%" colspan="7">
-					保存 <input style="border:none;"name="tag" type="radio" class="radio_1" value="1" checked="checked" >
-	    保存并提交<input style="border:none;"type="radio" name="tag" class="radio_1" value="2" >
+					保存 <input name="tag" type="radio" class="radio_1" value="1" checked="checked" >
+	    保存并提交<input type="radio" name="tag" class="radio_1" value="2" >
 				</td>
 			</tr> -->
 			
@@ -708,16 +708,16 @@ $(document).ready(function(){
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="right" width="7%">
-				<input style="border:none;"name="anniu" size="200" id="anniu"
+				<input name="anniu" size="200" id="anniu"
 					 type="hidden" class="txt_1"  />
 					
-				<input style="border:none;" id="ok"   title="1"
+				<input id="ok"   title="1"
 					type="button" name="ok" accesskey="y" tabindex="y" value="保存"
 					class="but_1" onclick="onAdd(this.title)"
 					style="font-size:12;width:40px;height:21px;">
 					</td>
 				<td nowrap="nowrap" align="left" width="7%">	
-					<input style="border:none;" id="ok"   title="2"
+					<input id="ok"   title="2"
 					type="button" name="ok" accesskey="y" tabindex="y" value="保存并提交" 
 					class="but_1" onclick="onAdd(this.title)"
 					style="font-size:12;width:80px;height:21px;">
@@ -920,7 +920,7 @@ $(document).ready(function(){
 				<td></td>
 				<td></td>
 				<td>衣长</td>
-				<td><input style="border:none;"name="yichangB" size="38" id="yichangB" type="text"
+				<td><input name="yichangB" size="38" id="yichangB" type="text"
 					class="txt_1" maxlength="100" /><font color="red"></font></td>
 				<td></td>
 				<td></td>
@@ -1038,7 +1038,7 @@ $(document).ready(function(){
 				<td>扣型</td>
 				<td></td>
 				<td>扣色</td>
-				<td><input style="border:none;"name="kouseC" size="38" id="kouseC" type="text"
+				<td><input name="kouseC" size="38" id="kouseC" type="text"
 					class="txt_1" maxlength="100" /><font color="red"></font></td>
 				<td>款型</td>
 				<td></td>
@@ -1083,7 +1083,7 @@ $(document).ready(function(){
 				<td>
 			</td>
 				
-				<input style="border:none;"name="yongtu1" size="38" id="yongtu1" type="text"
+				<input name="yongtu1" size="38" id="yongtu1" type="text"
 					class="txt_1" maxlength="100" /><font color="red"></font>
 					
 					</td>
@@ -1101,7 +1101,7 @@ $(document).ready(function(){
 				<td>
 				
 				</td>
-				<input style="border:none;"name="yongtu2" size="38" id="yongtu2" type="text"
+				<input name="yongtu2" size="38" id="yongtu2" type="text"
 					class="txt_1" maxlength="100" /><font color="red"></font></td>
 				<td>供应商</td>
 				<td></td>
@@ -1109,7 +1109,7 @@ $(document).ready(function(){
 
 			<tr>
 				<td>体型备注</td>
-				<td colspan="3"><input style="border:none;"name="tixingremark" size=60"
+				<td colspan="3"><input name="tixingremark" size=60"
 					id="tixingremark" type="text" class="txt_1" maxlength="1000" /><font
 					color="red"></font></td>
 				<td>备注</td>
