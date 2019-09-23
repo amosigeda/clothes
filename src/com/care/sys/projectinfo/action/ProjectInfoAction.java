@@ -3101,6 +3101,11 @@ public class ProjectInfoAction extends BaseAction {
 			DeviceActiveInfo vod = new DeviceActiveInfo();
 			
 			if(listOrder.size()>0){
+				
+				String nickName = listOrder.get(0).get("kehu_name")+"";
+				String riqi = listOrder.get(0).get("add_time")+"";
+				String yaowei = listOrder.get(0).get("yaowei_c")+"";
+				
 				String path= qianZhui + orderid;
 				Constant.deleteFile(path);
 				Constant.createFile(path);
@@ -3128,7 +3133,7 @@ public class ProjectInfoAction extends BaseAction {
 					// 生成二维码
 					QRCodeUtil.encode(text, imgPath, destPath, true);
 					
-					GetExCel.writeExcelDaBiao("1",orderid);
+					GetExCel.writeExcelDaBiao("1",orderid, nickName, riqi, yaowei,destPath);
 					vod.setErweima_1(url + "1.jpg");
 				}
 				if(chenshan_number!=0){
@@ -3142,7 +3147,7 @@ public class ProjectInfoAction extends BaseAction {
 					// 生成二维码
 					QRCodeUtil.encode(text, imgPath, destPath, true);
 					
-					GetExCel.writeExcelDaBiao("2",orderid);
+					GetExCel.writeExcelDaBiao("2",orderid, nickName, riqi, yaowei,destPath);
 					vod.setErweima_2(url + "2.jpg");
 				}
 				if(xiku_number!=0){
@@ -3156,7 +3161,7 @@ public class ProjectInfoAction extends BaseAction {
 					// 生成二维码
 					QRCodeUtil.encode(text, imgPath, destPath, true);
 					
-					GetExCel.writeExcelDaBiao("3",orderid);
+					GetExCel.writeExcelDaBiao("3",orderid, nickName, riqi, yaowei,destPath);
 					vod.setErweima_3(url + "3.jpg");
 				}
 				if(majia_number!=0){
@@ -3170,7 +3175,7 @@ public class ProjectInfoAction extends BaseAction {
 					// 生成二维码
 					QRCodeUtil.encode(text, imgPath, destPath, true);
 					
-					GetExCel.writeExcelDaBiao("4",orderid);
+					GetExCel.writeExcelDaBiao("4",orderid, nickName, riqi, yaowei,destPath);
 					vod.setErweima_4(url + "4.jpg");
 				}
 				
