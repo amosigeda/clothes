@@ -66,4 +66,8 @@ public interface ProjectInfoDao {
 
 	public int updatePorjectInfoDangAn(ProjectInfo vo)throws DataAccessException;
 
+	public int insertPorjectInfoDuoyu(ProjectInfo vo)throws DataAccessException;
+
+	public List<DataMap> getProjectInfoDuoYu(ProjectInfo vo)throws DataAccessException;
+
 }

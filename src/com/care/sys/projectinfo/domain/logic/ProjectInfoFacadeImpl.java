@@ -227,4 +227,17 @@ public class ProjectInfoFacadeImpl implements ProjectInfoFacade{
 		return projectInfoDao.updatePorjectInfoDangAn(vo);
 	}
 
+	@Override
+	public int insertPorjectInfoDuoyu(ProjectInfo vo) throws SystemException {
+		// TODO Auto-generated method stub
+		return projectInfoDao.insertPorjectInfoDuoyu(vo);
+	}
+
+	@Override
+	public List<DataMap> getProjectInfoDuoYu(ProjectInfo duoyu)
+			throws SystemException {
+		// TODO Auto-generated method stub
+		return projectInfoDao.getProjectInfoDuoYu(duoyu);
+	}
+
 }

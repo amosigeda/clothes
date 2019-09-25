@@ -22,6 +22,16 @@
 			</isNotEmpty>
 		</dynamic>
 	</select>
+	
+		<select id="getProjectInfoDuoYu" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+		SELECT * FROM project_info
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
 
 	<select id="getRoleProjectFuncInfo" resultClass="com.godoing.rose.lang.DataMap"
 		parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
@@ -435,7 +445,8 @@
 		miao_liao1,yong_tu1,miao_liao2,yong_tu2,tixing_remark,
 		remark,update_time,status,add_time,xiukou_a
 		,xizhuang_number,chenshan_number,xiku_number,majia_number,jiaofu_time,
-		kaicha,xiabai,zhuangse,waizhubian,xiucha,kuyao,kuxing,chenshanling,chenshanxiu,fujian_url
+		kaicha,xiabai,zhuangse,waizhubian,xiucha,kuyao,kuxing,chenshanling,chenshanxiu,fujian_url,
+		jiankuannew,yichang_b2
 		) VALUES
 		(#orderId#,#wwName#,#salePrice#,#wechat#,#orderNumber#,
 		#kehuPhone#,#orderType#,#kehuName#,#qudao#,#xiadanKeFu#,
@@ -450,7 +461,8 @@
 		#miaoliao1#,#yongtu1#,#miaoliao2#,#yongtu2#,#tixingremark#,
 		#remark#,#updateTime#,#status#,#addTime#,#xiukouA#
 		,#xizhuang_number#,#chenshan_number#,#xiku_number#,#majia_number#,#jiaofu_time#,
-		#kaicha#,#xiabai#,#zhuangse#,#waizhubian#,#xiucha#,#kuyao#,#kuxing#,#chenshanling#,#chenshanxiu#,#fujian_url#
+		#kaicha#,#xiabai#,#zhuangse#,#waizhubian#,#xiucha#,#kuyao#,#kuxing#,#chenshanling#,#chenshanxiu#,#fujian_url#,
+		#jiankuannew#,#yichangB2#
 		)
 	</insert>
 
@@ -503,8 +515,8 @@
 			<isNotEmpty prepend="," property="sex">
 				sex=#sex#
 			</isNotEmpty>
-			<isNotEmpty prepend="," property="jiankuanA">
-				jiankuan_a=#jiankuanA#
+			<isNotEmpty prepend="," property="jiankuan_a">
+				jiankuan_a=#jiankuan_a#
 			</isNotEmpty>
 			<isNotEmpty prepend="," property="lingweiB">
 				lingwei_b=#lingweiB#
@@ -819,6 +831,33 @@
 				fujian_url=#fujian_url#
 			</isNotEmpty>
 			
+			<isNotEmpty prepend="," property="xc_que">
+				xc_que=#xc_que#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="jiankuanque">
+				jiankuanque=#jiankuanque#
+			</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="xizhuang_number">
+				xizhuang_number=#xizhuang_number#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="chenshan_number">
+				chenshan_number=#chenshan_number#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="xiku_number">
+				xiku_number=#xiku_number#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="majia_number">
+				majia_number=#majia_number#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="fuweiA">
+				fuwei_a=#fuweiA#
+			</isNotEmpty>
+			
+				<isNotEmpty prepend="," property="yichang_q">
+				yichang_q=#yichang_q#
+			</isNotEmpty>
+			
 			
 			
 		</dynamic>
@@ -829,4 +868,9 @@
 		</dynamic>
 	</update>
 
+	
+		<insert id="insertPorjectInfoDuoyu" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
+		INSERT INTO project_info(orderid,fuwei_quea,fuwei_queb) 
+		VALUES 
+		(#orderNumber#,#fuwei_quea#,#fuwei_queb#)</insert>
 </sqlMap>

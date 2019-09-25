@@ -56,5 +56,9 @@ public interface ProjectInfoFacade {
 
 	public int updatePorjectInfoDangAn(ProjectInfo vo)  throws SystemException;
 
+	public int insertPorjectInfoDuoyu(ProjectInfo vo)throws SystemException;
+
+	public List<DataMap> getProjectInfoDuoYu(ProjectInfo duoyu)throws SystemException;
+
 
 }

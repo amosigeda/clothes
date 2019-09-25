@@ -164,6 +164,19 @@ public class SqlMapProjectInfoDao extends SqlMapClientDaoSupport implements Proj
 		logger.debug("updatePorjectInfoDangAn(ProjectInfo vo)");
 		return getSqlMapClientTemplate().update("updatePorjectInfoDangAn", vo);
 	}
+	@Override
+	public int insertPorjectInfoDuoyu(ProjectInfo vo)
+			throws DataAccessException {
+		logger.debug("insertPorjectInfoDuoyu(ProjectInfo vo)");
+		return getSqlMapClientTemplate().update("insertPorjectInfoDuoyu", vo);
+	}
+	@Override
+	public List<DataMap> getProjectInfoDuoYu(ProjectInfo vo)
+			throws DataAccessException {
+		// TODO Auto-generated method stub
+		logger.debug("getProjectInfoDuoYu(ProjectInfo vo)");
+		return getSqlMapClientTemplate().queryForList("getProjectInfoDuoYu", vo);
+	}
 
 	
 

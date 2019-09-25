@@ -12,6 +12,13 @@ public class ProjectInfo extends PublicVoBean implements Serializable{
 	}
 	private Integer id;
 	private String orderId;
+	private String jiankuan_a;
+	public String getJiankuan_a() {
+		return jiankuan_a;
+	}
+	public void setJiankuan_a(String jiankuan_a) {
+		this.jiankuan_a = jiankuan_a;
+	}
 	private String wwName;
 	private String salePrice;
 	private String wechat;
@@ -184,7 +191,15 @@ public class ProjectInfo extends PublicVoBean implements Serializable{
 	private String fuwei_queb;
 	
 	
+	private String jiankuanque;
 	
+	
+	public String getJiankuanque() {
+		return jiankuanque;
+	}
+	public void setJiankuanque(String jiankuanque) {
+		this.jiankuanque = jiankuanque;
+	}
 	public String getXc_que() {
 		return xc_que;
 	}

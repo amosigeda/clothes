@@ -16,14 +16,14 @@
 	type="text/javascript"></script>
 <title>无标题文档</title>
 </head>
-<style>
+<!-- <style>
 select
 {outline: none;border: none;
 appearance: none;
 -moz-appearance: none;
 -webkit-appearance: none;
 }
-</style>
+</style> -->
 
 <script type="text/javascript">
 
@@ -35,15 +35,18 @@ $(document).ready(function(){
 			 url:"doProjectInfo.do?method=verfyDingDan",
 		 	 data:"userCode="+userCodeValue,
 		 	 success:function(msg){
-		 		/*  if((msg != null){
+		 		 if(msg=="fail"){
+		 			 alert("已有该订单！！！");
+		 			 $("#orderNumber").focus();
+		 			 return false;
+		 		 }
+		 		 /*  if((msg != null){
 		 			 
 		 		 }else{
 		 		 alert(msg);
 		 		 } */
 		 		 
-		 		 if(msg!=null){
-		 			 alert(msg);
-		 		 } 
+		 		
 		 		 /* if(msg=="fail"){
 		 			 $("#orderNumber").focus();
 		 			 return false;
@@ -322,7 +325,9 @@ $(document).ready(function(){
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%" rowspan="5"></td>
 				<td nowrap="nowrap" align="center" width="7%">衣长</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<input  name="yichangB2" size="38" type="text" class="txt_1"maxlength="50" >
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%" rowspan="5"></td>
 			</tr>
@@ -334,7 +339,9 @@ $(document).ready(function(){
 				<td nowrap="nowrap" align="center" width="7%"></td>
 			
 				<td nowrap="nowrap" align="center" width="7%">腹围</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				 <input style="border:none;" name="fuwei_quea" size="38" type="text" class="txt_1"maxlength="50" >
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				
 			</tr>
@@ -398,7 +405,9 @@ $(document).ready(function(){
 					<img src="http://47.111.148.8/watch/upload/test.png" width="100" height="100" />
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">肩宽</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<input  name="jiankuannew" size="38" type="text" class="txt_1"maxlength="50" >
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%" rowspan="4">
 					<img src="http://47.111.148.8/watch/upload/test.png" width="100" height="100" />
@@ -495,6 +504,7 @@ $(document).ready(function(){
 				<td nowrap="nowrap" align="center" width="7%">扣型</td>
 				<td nowrap="nowrap" align="center" width="7%">
 					<select name="kouxingC" value="kouxingC">
+						<option value=""></option>
 						<option value="一粒扣">一粒扣</option>
 						<option value="二粒扣">二粒扣</option>
 						<option value="三粒扣">三粒扣</option>
@@ -506,6 +516,7 @@ $(document).ready(function(){
 				<td nowrap="nowrap" align="center" width="7%">口袋</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<select name="koudaiC" value="koudaiC">
+				         <option value=""></option>
 						<option value="1平袋盖、4斜袋盖">1平袋盖、4斜袋盖</option>
 						<option value="2平单线、5斜单线">2平单线、5斜单线</option>
 						<option value="3平双线、6斜双线">3平双线、6斜双线</option>
@@ -514,6 +525,7 @@ $(document).ready(function(){
 				<td nowrap="nowrap" align="center" width="7%">开叉</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<select name="kaicha" value="kaicha">
+				        <option value=""></option>
 						<option value="单叉">单叉</option>
 						<option value="双叉">双叉</option>
 						<option value="不开叉">不开叉</option>
@@ -521,10 +533,11 @@ $(document).ready(function(){
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">领型</td>
 				<td nowrap="nowrap" align="center" width="7%">
-				<input name="lingkoukuaishiB" size="38"
+				<!-- <input name="lingkoukuaishiB" size="38"
 					id="lingkoukuaishiB" type="text" class="txt_1" maxlength="100" /><font
-					color="red"></font>
+					color="red"></font> -->
 					<select name="lingkoukuaishiB" value="lingkoukuaishiB">
+					    <option value=""></option>
 						<option value="平驳领">平驳领</option>
 						<option value="戗驳领">戗驳领</option>
 						<option value="青果领">青果领</option>
@@ -540,6 +553,7 @@ $(document).ready(function(){
 				<td nowrap="nowrap" align="center" width="7%">下摆</td>
 				<td nowrap="nowrap" align="center" width="7%">
 					<select name="xiabai" value="xiabai">
+					<option value=""></option>
 						<option value="圆角下摆">圆角下摆</option>
 						<option value="直角下摆（双排扣默认）">直角下摆（双排扣默认）</option>
 						<option value="大圆角下摆">大圆角下摆</option>
@@ -550,6 +564,7 @@ $(document).ready(function(){
 				<td nowrap="nowrap" align="center" width="7%">撞色</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<select name="zhuangse" value="zhuangse">
+				<option value=""></option>
 						<option value="袋条用色丁">袋条用色丁</option>
 						<option value="领边有色丁">领边有色丁</option>
 						<option value="驳头用色丁">驳头用色丁</option>
@@ -558,6 +573,7 @@ $(document).ready(function(){
 				<td nowrap="nowrap" align="center" width="7%">外珠边</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<select name="waizhubian" value="waizhubian">
+				<option value=""></option>
 						<option value="有">有</option>
 						<option value="无">无</option>
 				</select>
@@ -569,6 +585,7 @@ $(document).ready(function(){
 				<td nowrap="nowrap" align="center" width="7%">袖叉</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<select name="xiucha" value="xiucha">
+				<option value=""></option>
 						<option value="真袖叉">真袖叉</option>
 						<option value="假袖叉">假袖叉</option>
 						<option value="翻袖">翻袖</option>
@@ -580,6 +597,7 @@ $(document).ready(function(){
 				<td nowrap="nowrap" align="center" width="7%">裤腰</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<select name="kuyao" value="kuyao">
+				<option value=""></option>
 						<option value="伸出订扣">伸出订扣</option>
 						<option value="伸出订钩">伸出订钩</option>
 						<option value="不伸头">不伸头</option>
@@ -592,6 +610,7 @@ $(document).ready(function(){
 				<td nowrap="nowrap" align="center" width="7%">裤型</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<select name="kuxing" value="kuxing">
+				<option value=""></option>
 						<option value="修身裤">修身裤</option>
 						<option value="翻边">翻边</option>
 						<option value="单褶">单褶</option>
@@ -604,6 +623,7 @@ $(document).ready(function(){
 				<td nowrap="nowrap" align="center" width="7%">衬衫领</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<select name="chenshanling" value="chenshanling">
+				<option value=""></option>
 						<option value="小方领">小方领</option>
 						<option value="小尖领">小尖领</option>
 						<option value="v尖领">v尖领</option>
@@ -615,6 +635,7 @@ $(document).ready(function(){
 				<td nowrap="nowrap" align="center" width="7%">衬衫袖</td>
 				<td nowrap="nowrap" align="center" width="7%">
 					<select name="chenshanxiu" value="chenshanxiu">
+					<option value=""></option>
 						<option value="法式门襟＋袖">法式门襟＋袖</option>
 						<option value="直角二扣">直角二扣</option>
 						<option value="直角一扣">直角一扣</option>
@@ -634,6 +655,7 @@ $(document).ready(function(){
 				<td nowrap="nowrap" align="center" width="7%">用途</td>
 				<td nowrap="nowrap" align="center" width="7%">
 					<select name="yongtu1" value="yongtu1">
+					<option value=""></option>
 						<option value="上衣">上衣</option>
 						<option value="裤子">裤子</option>
 						<option value="马甲">马甲</option>
@@ -657,6 +679,7 @@ $(document).ready(function(){
 				<td nowrap="nowrap" align="center" width="7%">用途</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<select name="yongtu2" value="yongtu2">
+				<option value=""></option>
 						<option value="上衣">上衣</option>
 						<option value="裤子">裤子</option>
 						<option value="马甲">马甲</option>

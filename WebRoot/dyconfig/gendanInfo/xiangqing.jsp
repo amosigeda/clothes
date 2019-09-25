@@ -310,7 +310,9 @@ function onUpdate(){
 				<td nowrap="nowrap" align="center" width="7%">
 				<input style="border:none;" name="yichangB2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("yichang_b2")%>">
 				</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input style="border:none;" name="yichangB2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("yichang_q")%>">
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"rowspan="5">
 				 <input style="border:none;" name="dakuang2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("dakuang2")%>">
 				 </td>
@@ -325,8 +327,12 @@ function onUpdate(){
 				</td>
 			<!-- 	<td nowrap="nowrap" align="center" width="7%"></td> -->
 				<td nowrap="nowrap" align="center" width="7%">腹围</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				 <input style="border:none;" name="fuwei_quea" size="38" type="text" class="txt_1"maxlength="50" value="<%=request.getAttribute("fuwei_quea")%>">
+				</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				 <input style="border:none;" name="fuwei_quea" size="38" type="text" class="txt_1"maxlength="50" value="<%=request.getAttribute("fuwei_queb")%>">
+				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 			</tr>
 			<tr>
@@ -334,7 +340,9 @@ function onUpdate(){
 				<td nowrap="nowrap" align="center" width="7%">
 	<input style="border:none;" type="text"      size="38"  name="xiuchangB" id="xiuchangB"   value="<%=projectInfo.getAt("xiuchang_b")%>"  >
 </td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<input style="border:none;" type="text"      size="38"  name="xiuchangB" id="xiuchangB"   value="<%=projectInfo.getAt("xc_que")%>"  >
+				</td>
 				<!-- <td nowrap="nowrap" align="center" width="7%"></td> -->
 				<td nowrap="nowrap" align="center" width="7%">袖长</td>
 				<td nowrap="nowrap" align="center" width="7%">
@@ -359,7 +367,7 @@ function onUpdate(){
 	<input style="border:none;" type="text"      size="38"  name="xiufeiA" id="xiufeiA"   value="<%=projectInfo.getAt("xiufei_a")%>"  >
 </td>
 				<td nowrap="nowrap" align="center" width="7%">
-				<input style="border:none;" name="xiukouA2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("xiukou_a2")%>">
+			
 				
 				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
@@ -378,6 +386,7 @@ function onUpdate(){
 					<input style="border:none;" type="text"      size="38"  name="xiukouA" id="xiukouA"   value="<%=projectInfo.getAt("xiukou_a")%>"  >
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">
+					<input style="border:none;" name="xiukouA2" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("xiukou_a2")%>">
 				</td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 			</tr>
@@ -415,7 +424,9 @@ function onUpdate(){
 				<td nowrap="nowrap" align="center" width="7%">
 					<input style="border:none;" name="jiankuannew" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("jiankuannew")%>">
 				</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<input style="border:none;" name="jiankuannew" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("jiankuanque")%>">
+				</td>
 				<td nowrap="nowrap" align="center" width="7%" rowspan="4">
 					<img src="http://47.111.148.8/watch/upload/test.png" width="100" height="100" />
 				</td>
@@ -480,15 +491,15 @@ function onUpdate(){
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">款型</td>
 				<td nowrap="nowrap" align="center" width="7%">
-				
-				<select name="kuanxingD" value="kuanxingD">
+					<input style="border:none;" name="dakuang3" size="38" type="text" class="txt_1"maxlength="50" value="<%=projectInfo.getAt("kuanxing_d")%>">
+			<!-- 	<select name="kuanxingD" value="kuanxingD">
 						<option value="修身">修身</option>
 						<option value="修身+">修身+</option>
 						<option value="合身">合身</option>
 						<option value="合身+">合身+</option>
 						<option value="宽松">宽松</option>
 						<option value="宽松+">宽松+</option>
-				</select> 
+				</select>  -->
 				
 <%-- 	<input style="border:none;" name="kuanxingD" type="radio" class="radio_1" value="修身" <%if("修身".equals("" + projectInfo.getAt("kuanxing_d"))){%>checked<%}%>>修身
 		<input style="border:none;" name="kuanxingD" type="radio" class="radio_1" value="修身+" <%if("修身+".equals("" + projectInfo.getAt("kuanxing_d"))){%>checked<%}%>>修身+
@@ -763,6 +774,16 @@ function onUpdate(){
                 <a href="<%=projectInfo.getAt("fujian_url")%>" title="zip" style="color:#0000FF">【下载】</a>
 				 <%}else{ %>
 				 无附件
+				 	 <%} %>
+				 	 
+				 	 <td nowrap="nowrap" align="center" width="7%">生成文件(二维码,打标文件,订单详情)</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				    <%if(!"无".equals(request.getAttribute("all"))){ %>
+                <a href="<%=request.getAttribute("all")%>" title="zip" style="color:#0000FF">【下载】</a>
+                 
+				 <%}else{ %>
+				 无
 				 	 <%} %>
 				 
 				<!-- <input style="border:none;" type="file" name="channelId"  multiple="multiple"
