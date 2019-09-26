@@ -423,22 +423,20 @@ function daDan(id,orderid){
    						<logic:equal name="element" property="status" value="9">	
    							 <%-- 	<a href=# onclick="updatedangAnStatus('<bean:write name="element" property="id" />',10)" style="color:#0000FF" > [叫料]</a>
    							 	<a href=# onclick="genDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [打标]</a> --%>
-   							 	<logic:equal name="element" property="socket_way" value="0">	
+   							 	<a href=# onclick="updatedangAnStatus('<bean:write name="element" property="id" />',10)" style="color:#0000FF" > [叫料]</a>
+   							 	<%-- <logic:equal name="element" property="socket_way" value="0">	
    							  	<a href=# onclick="daDan('<bean:write name="element" property="id" />','<bean:write name="element" property="order_id" />')" style="color:#0000FF" > [打单]</a>
-   							 		</logic:equal>	
+   							 		</logic:equal>	 --%>
    						</logic:equal>	
    						
    						
    						
    						
    							<logic:equal name="element" property="status" value="10">	
-   							
-   							<%--  	<a href=# onclick="genDanUpdate('<bean:write name="element" property="id" />')" style="color:#0000FF" > [打标]</a> --%>
-   							 	
-   							 	
-   							 	<logic:equal name="element" property="socket_way" value="0">	
-   							 	<a href=# onclick="daDan('<bean:write name="element" property="id" />','<bean:write name="element" property="order_id" />')" style="color:#0000FF" > [打单]</a>
-   							 		</logic:equal>	
+   							 	<logic:empty name="element" property="fujian_url">无</logic:empty>
+							<logic:notEmpty name="element" property="fujian_url">
+							       <a href="<bean:write name="element" property="fujian_url" />" title="zip" style="color:#0000FF">[打单]</a>	
+							</logic:notEmpty>
    						</logic:equal>	
 							
 						
@@ -465,6 +463,15 @@ function daDan(id,orderid){
    							 <%-- 	<a href=# onclick="keFuTijiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [客服提交]</a> --%>
    							 <a href=# onclick="deletee('<bean:write name="element" property="id" />')" style="color:#0000FF" > [客服删除]</a> 
    						</logic:equal>	
+   						
+   							<logic:equal name="element" property="status" value="10">	
+   							 	<logic:empty name="element" property="fujian_url">无</logic:empty>
+							<logic:notEmpty name="element" property="fujian_url">
+							       <a href="<bean:write name="element" property="fujian_url" />" title="zip" style="color:#0000FF">[打单]</a>	
+							</logic:notEmpty>
+   						</logic:equal>	
+   						
+   						
    						 <%} %>	
    						 
    						 
@@ -486,6 +493,17 @@ function daDan(id,orderid){
    							 	<%-- 	<a href=# onclick="pidanTuiHui('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单退回]</a> --%>
    							 			<%-- <a href=# onclick="pidanTijiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [批单提交]</a> --%>
    						</logic:equal>	
+   						
+   						
+   								<logic:equal name="element" property="status" value="10">	
+   							 	<logic:empty name="element" property="fujian_url">无</logic:empty>
+							<logic:notEmpty name="element" property="fujian_url">
+							       <a href="<bean:write name="element" property="fujian_url" />" title="zip" style="color:#0000FF">[打单]</a>	
+							</logic:notEmpty>
+   						</logic:equal>	
+   						
+   							
+							
    						 <%} %>	
    						 
    						 
@@ -507,18 +525,18 @@ function daDan(id,orderid){
    						</logic:equal>	
    						
    					<logic:equal name="element" property="status" value="9">	
-   							<%--  	<a href=# onclick="updatedangAnStatus('<bean:write name="element" property="id" />',10)" style="color:#0000FF" > [叫料]</a> --%>
+   							 	<a href=# onclick="updatedangAnStatus('<bean:write name="element" property="id" />',10)" style="color:#0000FF" > [叫料]</a> 
    							 <%-- 	<a href=# onclick="updatedangAnStatus('<bean:write name="element" property="id" />',11)" style="color:#0000FF" > [打标]</a> --%>
-   							 	<logic:equal name="element" property="socket_way" value="0">	
+   							 	<%-- <logic:equal name="element" property="socket_way" value="0">	
    							  	<a href=# onclick="daDan('<bean:write name="element" property="id" />','<bean:write name="element" property="order_id" />')" style="color:#0000FF" > [打单]</a>
-   							 		</logic:equal>	
+   							 		</logic:equal>	 --%>
    						</logic:equal>	
    						
-   							<logic:equal name="element" property="status" value="10">	
-   							 	<%-- 	<a href=# onclick="updatedangAnStatus('<bean:write name="element" property="id" />',11)" style="color:#0000FF" > [打标]</a> --%>
-   							 	<logic:equal name="element" property="socket_way" value="0">	
-   							  	<a href=# onclick="daDan('<bean:write name="element" property="id" />','<bean:write name="element" property="order_id" />')" style="color:#0000FF" > [打单]</a>
-   							 		</logic:equal>	
+   								<logic:equal name="element" property="status" value="10">	
+   							 	<logic:empty name="element" property="fujian_url">无</logic:empty>
+							<logic:notEmpty name="element" property="fujian_url">
+							       <a href="<bean:write name="element" property="fujian_url" />" title="zip" style="color:#0000FF">[打单]</a>	
+							</logic:notEmpty>
    						</logic:equal>	
    						
    							<logic:equal name="element" property="status" value="11">	
@@ -547,9 +565,17 @@ function daDan(id,orderid){
    							 	<%-- <a href=# onclick="keFuTijiao('<bean:write name="element" property="id" />')" style="color:#0000FF" > [客服提交]</a> --%>
    							 <a href=# onclick="deletee('<bean:write name="element" property="id" />')" style="color:#0000FF" > [客服删除]</a> 
    						</logic:equal>	
+   						
+   							<logic:equal name="element" property="status" value="10">	
+   							 	<logic:empty name="element" property="fujian_url">无</logic:empty>
+							<logic:notEmpty name="element" property="fujian_url">
+							       <a href="<bean:write name="element" property="fujian_url" />" title="zip" style="color:#0000FF">[打单]</a>	
+							</logic:notEmpty>
+   						</logic:equal>	
    						 <%} %>	 
    						
    						</td>
+   						 
    						 
    						 
 					</tr>

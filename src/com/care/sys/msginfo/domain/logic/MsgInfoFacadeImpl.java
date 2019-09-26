@@ -52,4 +52,10 @@ public class MsgInfoFacadeImpl implements MsgInfoFacade{
 		return list;
 	}
 
+	@Override
+	public List<DataMap> getMsgInfoById(MsgInfo vo) throws SystemException {
+		// TODO Auto-generated method stub
+		return msgInfoDao.getMsgInfoById(vo);
+	}
+
 }

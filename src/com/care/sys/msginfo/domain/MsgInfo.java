@@ -41,9 +41,15 @@ public class MsgInfo extends PublicVoBean implements Serializable{
     private String gongyingshang;
     private String mianliao;
     private String guize;
-    
+    private String yongtu;
     
 	
+	public String getYongtu() {
+		return yongtu;
+	}
+	public void setYongtu(String yongtu) {
+		this.yongtu = yongtu;
+	}
 	public String getName() {
 		return name;
 	}

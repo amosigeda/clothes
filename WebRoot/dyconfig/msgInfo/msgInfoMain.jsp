@@ -29,6 +29,11 @@
 		frmGo.submit();
 	}
 	
+	function update(id){
+		frmGo.action="doMsgInfo.do?method=initUpdatexml&id="+id;
+		frmGo.submit();
+	}
+	
 function finds(){
    var st = new Date(frmGo.startTime1.value.replace(/-/g,'/'));
 	var et = new Date(frmGo.endTime1.value.replace(/-/g,'/'));
@@ -41,6 +46,7 @@ function finds(){
 function c(){
    /*  document.all.startTime.value="";
     document.all.endTime.value=""; */
+    document.all.order_id.value="";
     document.all.startTime1.value="";
     document.all.endTime1.value="";
  /*    document.all.fromUserName.value="";
@@ -59,8 +65,11 @@ function c(){
                <tr>
                 <th colspan="12" nowrap="nowrap" align="left">
                 售后信息
-                 <input type="button" class="but_1" accesskey="a"
+                     <%if("admin".equals(request.getAttribute("role")) || "客服".equals(request.getAttribute("role")) || "经理".equals(request.getAttribute("role")) ){ %>
+                                                	
+                     <input type="button" class="but_1" accesskey="a"
 							tabindex="a" value="添 加" onclick="add()">
+							 <%} %>	
                 </th>
                 </tr>
                  <tr class="title_3">
@@ -72,6 +81,9 @@ function c(){
 							<input name="endTime" type="text" class="txt_1" id="endTime" style="cursor:text"
 								value="<%CommUtils.printReqByAtt(request,response,"now_date");%>" onclick="WdatePicker()"
 								size="9" readonly>	 --%>
+								订单号<input id="order_id" name="order_id" type="text" class="txt_1" 
+						    value="<%CommUtils.printReqByAtt(request,response,"order_id");%>" size="15">	
+						    
 					提交时间
 					<input name="startTime1" type="text" class="txt_1"  id="startTime1" style="cursor:text"
 								value="<%CommUtils.printReqByAtt(request,response,"fNow_date1");%>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
@@ -96,8 +108,9 @@ function c(){
                   	<td width="6%">米</td>
                   	<td width="6%">供应商</td>
                   	<td width="6%">面料</td>
-                  	<td width="6%">归责</td>
+                  	<td width="6%">状态</td> 
                   	<td width="8%">备注</td>
+                  		<td width="5%">操作</td>
                   	<!-- <td width="5%">操作</td> -->
                   </tr>	
                   
@@ -117,14 +130,11 @@ function c(){
 								<bean:write name="element" property="cishu"/>
 						</td>
 						
-					<%-- 	<td>
-							<logic:equal name="element" property="is_handler" value="1">
-								<font style="color:green;font-size: 20px;">√</font>
-							</logic:equal>
-							<logic:equal name="element" property="is_handler" value="0">
-								<font style="color:red;font-size: 20px;">×</font>
-							</logic:equal>
-						</td> --%>
+					 <%-- 	<td>
+						   <logic:empty name="element" property="is_handler">无</logic:empty>							
+							<logic:equal name="element" property="is_handler" value="1"><font color="green">客服保存</font></logic:equal>	
+							<logic:equal name="element" property="is_handler" value="2"><font color="green">客服提交</font></logic:equal>	
+						</td>  --%>
 							<td>
 							<bean:write name="element" property="msg_handler_date" format="yyyy-MM-dd HH:mm:ss"/>
 							<logic:empty name="element" property="msg_handler_date">无</logic:empty>
@@ -141,24 +151,31 @@ function c(){
 						<td>
 								<bean:write name="element" property="mianliao"/>
 						</td>
+						
 						<td>
-								<bean:write name="element" property="guize"/>
+					<!-- 	//1客服保存 2客服提交 3批单保存 4批单提交  5跟单保存 6跟单提交 7跟单退回  8批单退回 -->
+							   <logic:empty name="element" property="is_handler">无</logic:empty>							
+							<logic:equal name="element" property="is_handler" value="1"><font color="green">客服保存</font></logic:equal>		
+							<logic:equal name="element" property="is_handler" value="2"><font color="green">客服提交</font></logic:equal>		
+							<logic:equal name="element" property="is_handler" value="3"><font color="green">批单保存</font></logic:equal>		
+							<logic:equal name="element" property="is_handler" value="4"><font color="green">批单提交</font></logic:equal>		
+							<logic:equal name="element" property="is_handler" value="5"><font color="green">跟单保存</font></logic:equal>		
+							<logic:equal name="element" property="is_handler" value="6"><font color="green">跟单提交</font></logic:equal>		
+							<logic:equal name="element" property="is_handler" value="7"><font color="green">跟单退回</font></logic:equal>		
+							<logic:equal name="element" property="is_handler" value="8"><font color="red">批单退回</font></logic:equal>		
 						</td>
-						<%-- <td>
-							<bean:write name="element" property="msg_occur_date" format="yyyy-MM-dd HH:mm:ss"/>
-							<logic:empty name="element" property="msg_occur_date">无</logic:empty>
-						</td> --%>
-					<%-- <td>
-								<bean:write name="element" property="add_user"/>
-						</td> --%>
 					
 							<td>
 								<bean:write name="element" property="remark"/>
 						</td>
 						
-						<%-- <td>
-								<bean:write name="element" property="remark"/>
-						</td> --%>
+							<td>
+							 	<a href=# onclick="update('<bean:write name="element" property="id" />')" style="color:#0000FF" > [修改]</a>
+							<%--  <%if("客服".equals(request.getAttribute("role"))){ %>
+							  <%} %>	 --%>
+						</td>
+						
+					
 					</tr>
 				</logic:iterate>
 				

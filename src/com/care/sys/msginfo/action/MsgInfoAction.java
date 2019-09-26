@@ -28,6 +28,8 @@ import com.care.common.config.ServiceBean;
 import com.care.common.http.BaseAction;
 import com.care.common.lang.CommUtils;
 import com.care.common.lang.Constant;
+import com.care.sys.dynamicInfo.domain.DynamicInfo;
+import com.care.sys.dynamicInfo.form.DynamicInfoForm;
 import com.care.sys.msginfo.domain.MsgInfo;
 import com.care.sys.msginfo.domain.logic.MsgInfoFacade;
 import com.care.sys.msginfo.form.MsgInfoForm;
@@ -35,6 +37,7 @@ import com.care.sys.projectinfo.domain.ProjectInfo;
 import com.care.sys.projectinfo.domain.logic.ProjectInfoFacade;
 import com.care.sys.projectinfo.form.ProjectInfoForm;
 import com.care.sys.roleinfo.domain.RoleInfo;
+import com.care.sys.userinfo.domain.UserInfo;
 import com.godoing.rose.http.common.HttpTools;
 import com.godoing.rose.http.common.PagePys;
 import com.godoing.rose.http.common.Result;
@@ -60,11 +63,12 @@ public class MsgInfoAction extends BaseAction {
 				list = ServiceBean.getInstance()
 						.getProjectInfoFacade().getProjectInfo(vo);
 				if (!list.isEmpty()&&list.size()>0) {
-					response.getWriter().write("可以增加该订单的售后");
+					response.getWriter().write("fail");
 				} else {
-					response.getWriter().write("不存在该订单号");
-					//response.getWriter().write("fail");
+					response.getWriter().write("success");
 				}
+					//response.getWriter().write("fail");
+				
 			} catch (SystemException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -109,12 +113,31 @@ public class MsgInfoAction extends BaseAction {
 			String startTime1 = request.getParameter("startTime1");
 			String endTime1 = request.getParameter("endTime1");
 			String belongProject = request.getParameter("belongProject");
+			String order_id = request.getParameter("order_id");
 
 			/* ���û������ֶ� */
 			form.setOrderBy("id");
 			form.setSort("1");
 
 			sb.append("1=1");
+			request.setAttribute("role","admin");
+			String userName = loginUser.getUserName();
+			UserInfo uvo =new UserInfo();
+			uvo.setCondition("userCode = '"+userName+"' limit 1");
+			List<DataMap> listUo =  ServiceBean.getInstance().getUserInfoFacade().getUserInfo(uvo);
+			if(listUo.size()>0){
+				String role = listUo.get(0).get("code")+"";
+				request.setAttribute("role",role);
+				if("客服".equals(role)){
+					sb.append("    and add_user = '" + userName+"'");
+				}else if("批单".equals(role)){
+					sb.append("    and is_handler >= 2 and is_handler <= 3 ");
+					//1客服保存 2客服提交 3批单保存 4批单提交  5跟单保存 6跟单提交 7跟单退回  8批单退回
+				}else if("跟单".equals(role)){
+					sb.append("    and is_handler >= 4 and is_handler <= 5   ");
+				}
+			}
+			
 			if (!projectInfoId.equals("0")) {
 				sb.append(" and m.belong_project in(" + projectInfoId + ")");
 			} else {
@@ -137,8 +160,8 @@ public class MsgInfoAction extends BaseAction {
 					}
 				}
 			}
-			if (fromUserName != null && !"".equals(fromUserName)) {
-				sb.append(" and phone = '" + fromUserName + "'");
+			if (order_id != null && !"".equals(order_id)) {
+				sb.append(" and order_id = '" + order_id + "'");
 			}
 			if (toUserName != null && !"".equals(toUserName)) {
 				sb.append(" and a2.user_name = '" + toUserName + "'");
@@ -191,7 +214,7 @@ public class MsgInfoAction extends BaseAction {
 			request.setAttribute("serieNo", serieNo);
 			request.setAttribute("fNow_date1", startTime1);
 			request.setAttribute("now_date1", endTime1);
-			request.setAttribute("belongProject", belongProject);
+			request.setAttribute("order_id", order_id);
 
 			vo.setCondition(sb.toString());
 
@@ -289,11 +312,14 @@ public class MsgInfoAction extends BaseAction {
 			vo.setGuize(guize);
 			String remark = request.getParameter("remark");
 			vo.setRemark(remark);
+			String yongtu = request.getParameter("yongtu");
+			vo.setYongtu(yongtu);
 			
-			
+			String anniu = request.getParameter("anniu");
+			System.out.println("按钮="+anniu);
 		
 			
-			vo.setIsHandler("0");
+			vo.setIsHandler(anniu);
 			ServiceBean.getInstance().getMsgInfoFacade().insertMsgInfo(vo);
 			
 			result.setBackPage(HttpTools.httpServletPath(request, // ����ɹ�����ת��ԭ��ҳ��
@@ -317,6 +343,163 @@ public class MsgInfoAction extends BaseAction {
 		}
 		return mapping.findForward("result");
 	
+	}
+	
+	public ActionForward initUpdatexml(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		LoginUser loginUser = (LoginUser) request.getSession().getAttribute(
+				Config.SystemConfig.LOGINUSER);
+		if (loginUser == null) {
+			return null;
+		}
+
+		String userName = loginUser.getUserName();
+		request.setAttribute("role","admin");
+		UserInfo uvo =new UserInfo();
+		uvo.setCondition("userCode = '"+userName+"' limit 1");
+		List<DataMap> listUo =  ServiceBean.getInstance().getUserInfoFacade().getUserInfo(uvo);
+		if(listUo.size()>0){
+			String role = listUo.get(0).get("code")+"";
+			request.setAttribute("role",role);
+		}
+
+		
+		
+		
+		String id = request.getParameter("id");
+		MsgInfo vo = new MsgInfo();
+		vo.setCondition("id='" + id + "' limit 1");
+		List<DataMap> list = ServiceBean.getInstance().getMsgInfoFacade().getMsgInfoById(vo);
+		if (list == null || list.size() == 0) {
+			Result result = new Result();
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryMsgInfo"));
+			result.setResultCode("rowDel");
+			result.setResultType("success");
+			return mapping.findForward("result");
+		}
+		
+		
+		
+		request.setAttribute("msgInfo", list.get(0));
+		
+		ProjectInfo voo = new ProjectInfo();
+		List<DataMap> Clist = ServiceBean.getInstance().getProjectInfoFacade()
+				.getProjectWatchInfo(voo);
+		String sb = CommUtils.getPrintSelect(Clist, "project_no11",
+				"project_no", "project_no", list.get(0).get("gongyingshang")+"", 1);
+		request.setAttribute("companyList", sb);
+
+	
+		
+			return mapping.findForward("updateMsgInfo");
+		/*	if ("admin".equals(userName)) {
+		} else {
+			return mapping.findForward("updateProjectInfoxmlOther");
+		}*/
+	}
+	
+	
+	public ActionForward updateMsgInfo(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) {
+		
+		Result result = new Result();
+		try {
+			
+			LoginUser loginUser = (LoginUser) request.getSession()
+					.getAttribute(Config.SystemConfig.LOGINUSER);
+			if (loginUser == null) {
+				return null;
+			}
+			MsgInfo vo = new MsgInfo();
+		/*	String order_id = request.getParameter("order_id");
+			String phone = request.getParameter("phone");
+			String fahuo_wuliu = request.getParameter("fahuo_wuliu");
+			String wuliu_bianma = request.getParameter("wuliu_bianma");*/
+			
+			vo.setCondition("id='" + request.getParameter("id") + "'");
+			
+			/*String orderNumber = request.getParameter("orderNumber");
+			vo.setOrder_id(orderNumber);
+			String userName = loginUser.getUserName();
+			vo.setAdd_user(userName);*/
+			
+		
+			String name = request.getParameter("name");
+			vo.setName(name);
+			String cishu = request.getParameter("cishu");
+			vo.setCishu(cishu);
+			vo.setMsgHandlerDate(new Date());
+			String jiaofutime = request.getParameter("jiaofutime");
+			vo.setJiaofutime(jiaofutime);
+			String mi = request.getParameter("mi");
+			vo.setMi(mi);
+			String gongyingshang = request.getParameter("gongyingshang");
+			vo.setGongyingshang(gongyingshang);
+			String mianliao = request.getParameter("mianliao");
+			vo.setMianliao(mianliao);
+			String guize = request.getParameter("guize");
+			vo.setGuize(guize);
+			String remark = request.getParameter("remark");
+			vo.setRemark(remark);
+			String yongtu = request.getParameter("yongtu");
+			vo.setYongtu(yongtu);
+			
+			String anniu = request.getParameter("anniu");
+			System.out.println("按钮="+anniu);
+			String role = request.getParameter("role");
+			System.out.println("角色="+role);
+			if("1".equals(anniu)){
+				if("客服".equals(role)){
+					vo.setIsHandler("1");
+				}else if("经理".equals(role)){
+					vo.setIsHandler("1");
+				}else if("批单".equals(role)){
+					vo.setIsHandler("3");
+				}else if("跟单".equals(role)){
+					vo.setIsHandler("5");
+				}
+			}else if("2".equals(anniu)){
+
+				if("客服".equals(role)){
+					vo.setIsHandler("2");
+				}else if("经理".equals(role)){
+					vo.setIsHandler("2");
+				}else if("批单".equals(role)){
+					vo.setIsHandler("4");
+				}else if("跟单".equals(role)){
+					vo.setIsHandler("6");
+				}
+			
+			}
+//1客服保存 2客服提交 3批单保存 4批单提交  5跟单保存 6跟单提交 7跟单退回  8批单退回
+			ServiceBean.getInstance().getMsgInfoFacade().updateMsgInfo(vo);
+			
+			
+			
+			
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryMsgInfo"));
+			result.setResultCode("updates");
+			result.setResultType("success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.debug(request.getQueryString() + "  " + e);
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryMsgInfo"));
+			if (e instanceof SystemException) { /* ����֪�쳣���н��� */
+				result.setResultCode(((SystemException) e).getErrCode());
+				result.setResultType(((SystemException) e).getErrType());
+			} else { /* ��δ֪�쳣���н�������ȫ�������δ֪�쳣 */
+				result.setResultCode("noKnownException");
+				result.setResultType("sysRunException");
+			}
+		} finally {
+			request.setAttribute("result", result);
+		}
+		return mapping.findForward("result");
 	}
 	
 

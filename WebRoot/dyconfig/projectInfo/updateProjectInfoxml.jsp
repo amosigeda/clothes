@@ -191,8 +191,8 @@ function onUpdate(wechat){
 				<td nowrap="nowrap" align="center" width="7%">
 				<input style="border:none;" type="text"    readOnly="true" size="38"  name="project_no" id="project_no"   value="<%=projectInfo.getAt("add_time")%>"  >
 				</td>
-				<td nowrap="nowrap" align="center" width="7%">客户地址</td>
-				<td nowrap="nowrap" align="center" width="7%" colspan="3">
+				<td nowrap="nowrap" align="center" width="7%" rowspan="2">客户地址</td>
+				<td nowrap="nowrap" align="center" width="7%" colspan="3" rowspan="2">
 				<input style="border:none;" type="text"      size="50"  name="address" id="address"   value="<%=projectInfo.getAt("address")%>"  >
 				</td>
 			</tr>
@@ -222,10 +222,7 @@ function onUpdate(wechat){
 				</select> <font color="red"></font> -->
 				</td>
 				
-				<td nowrap="nowrap" align="center" width="7%"></td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+			
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">西装数量</td>

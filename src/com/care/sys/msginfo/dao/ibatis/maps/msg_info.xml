@@ -29,6 +29,16 @@
 		   </isNotEmpty>
 		</dynamic>
 	</select>
+	
+	
+	<select id="getMsgInfoById" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.msginfo.domain.MsgInfo">
+		SELECT * FROM msg_info
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
 
 	<select id="getMsgInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.msginfo.domain.MsgInfo">
 		SELECT * FROM msg_info 
@@ -73,11 +83,11 @@
 	<insert id="insertMsgInfo" parameterClass="com.care.sys.msginfo.domain.MsgInfo">
 		INSERT INTO msg_info
 		(order_id,phone,fahuo_wuliu,wuliu_bianma,is_handler,msg_handler_date,remark,add_user,
-		name,cishu,jiaofutime,mi,gongyingshang,mianliao,guize
+		name,cishu,jiaofutime,mi,gongyingshang,mianliao,guize,yongtu
 		) 
 		VALUES
 		(#order_id#,#phone#,#fahuo_wuliu#,#wuliu_bianma#,#isHandler#,#msgHandlerDate#,#remark#,#add_user#,
-		#name#,#cishu#,#jiaofutime#,#mi#,#gongyingshang#,#mianliao#,#guize#
+		#name#,#cishu#,#jiaofutime#,#mi#,#gongyingshang#,#mianliao#,#guize#,#yongtu#
 		) 
 	</insert>
 
@@ -87,8 +97,29 @@
 			<isNotEmpty prepend="," property="isHandler">
 		      is_handler=#isHandler#
 			</isNotEmpty>
-			<isNotEmpty prepend="," property="msgHandlerDate">
-		      msg_handler_date=#msgHandlerDate#
+			<isNotEmpty prepend="," property="name">
+		      name=#name#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="cishu">
+		      cishu=#cishu#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="jiaofutime">
+		      jiaofutime=#jiaofutime#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mi">
+		      mi=#mi#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="gongyingshang">
+		      gongyingshang=#gongyingshang#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mianliao">
+		      mianliao=#mianliao#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="remark">
+		      remark=#remark#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="yongtu">
+		      yongtu=#yongtu#
 			</isNotEmpty>
 		</dynamic>  
 		<dynamic prepend="where">

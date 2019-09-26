@@ -20,5 +20,7 @@ public interface MsgInfoFacade {
 	public int deleteMsgInfo(MsgInfo vo)throws SystemException;
 	
 	public DataList getMsgInfoListByVo(MsgInfo vo) throws SystemException;
+
+	public List<DataMap> getMsgInfoById(MsgInfo vo)throws SystemException;
 	
 }

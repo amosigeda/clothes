@@ -11,8 +11,9 @@
 	type="text/css">
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/public/public.js"></script>
-	<scripttype="text/javascript"src="http://code.jquery.com/jquery-1.4.1.min.js"></script>
-<script src="<%=request.getContextPath()%>/js/jquery-1.8.2.js"
+<scripttype
+	="text/javascript"src="http://code.jquery.com/jquery-1.4.1.min.js">
+</script> <script src="<%=request.getContextPath()%>/js/jquery-1.8.2.js"
 	type="text/javascript"></script>
 <title>无标题文档</title>
 </head>
@@ -27,29 +28,32 @@ $(document).ready(function(){
 			 url:"doMsgInfo.do?method=verfyDingDan",
 		 	 data:"userCode="+userCodeValue,
 		 	 success:function(msg){
-		 		alert(msg);
-		 	/* 	if(msg=="fail"){
-		 			 alert("不存在该订单号");
-		 		 } 
-		 		 if(msg=="fail"){
-		 			 $("#orderNumber").focus();
+		 		if(msg=="success"){
+		 			/* alert("不存在该订单号"); */
+		 			/* frmGo.orderNumber.focus(); */
+		 			  $("#orderNumber").focus(); 
 		 			 return false;
-		 		 }  */
-		 		 
-		 		/*  if(msg=="fail"){
-		 			 alert("不存在该订单号");
-		 			 $("#orderNumber").focus();
-		 			 return false;
-		 		 } */
+		 		 }
+		 		
+		 
 		 	 }
 		 });
 	 });
 });
 
-function onAdd(){
+function onAdd(wechat){
+	
+	 document.getElementById("anniu").setAttribute("value", wechat);
+	 
 	if(frmGo.orderNumber.value.trim() == ""){
 		alert("订单号不能为空！");
 		frmGo.orderNumber.focus();
+		return false;
+	} 
+	
+	if(frmGo.mi.value.trim() == ""){
+		alert("米数不能为空！");
+		frmGo.mi.focus();
 		return false;
 	} 
 	
@@ -63,13 +67,13 @@ function onAdd(){
 		<table width="100%" id="tb1" class="tbl_11" border="1"
 			bordercolorlight=#000000 bordercolordark=#000000 bordercolor=#000000
 			cellspacing="0" cellpadding="2">
-			
-<tr>
-				<th colspan="7" nowrap="nowrap" align="left">添加售后</th>
+
+			<tr>
+				<th colspan="8" nowrap="nowrap" align="left">添加售后</th>
 			</tr>
 
 			<tr>
-				<td colspan="7" nowrap="nowrap" align="center" width="7%">不一定制售后工单</td>
+				<td colspan="8" nowrap="nowrap" align="center" width="7%">不一定制售后工单</td>
 			</tr>
 
 			<tr>
@@ -79,6 +83,7 @@ function onAdd(){
 					class="txt_1" maxlength="30" /></td>
 				<td nowrap="nowrap" align="center" width="7%">下单人</td>
 				<td nowrap="nowrap" align="center" width="7%" colspan="2"><%=request.getAttribute("username")%></td>
+				<td nowrap="nowrap" align="center" width="7%"></td>
 			</tr>
 
 			<tr>
@@ -89,23 +94,29 @@ function onAdd(){
 				<td nowrap="nowrap" align="center" width="7%">售后次数</td>
 				<td nowrap="nowrap" align="center" width="7%" colspan="2"><input
 					name="cishu" id="cishu" type="number" /></td>
+						<td nowrap="nowrap" align="center" width="7%"></td>
 			</tr>
 
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%" colspan="2">下单时间</td>
 				<td nowrap="nowrap" align="center" width="7%"><%=request.getAttribute("shijian")%></td>
 				<td nowrap="nowrap" align="center" width="7%">交付日期</td>
-				<td nowrap="nowrap" align="center" width="7%" colspan="3"><input
+				<td nowrap="nowrap" align="left" width="7%" colspan="3"><input
 					name="jiaofutime" id="jiaofutime" type="text" size="38"
 					maxlength="100" /></td>
+						<td nowrap="nowrap" align="center" width="7%"></td>
 			</tr>
 
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%"><input
+					name="mianliao" id="mianliao" type="text" size="38" maxlength="100"
+					placeholder="面料" /></td>
 				<td nowrap="nowrap" align="center" width="7%">用途</td>
-				<td nowrap="nowrap" align="center" width="7%"><!-- <input
+				<td nowrap="nowrap" align="center" width="7%">
+					<!-- <input
 					name="yongtu" id="yongtu" type="text" size="38" maxlength="100" /> -->
-					
+
 					<select name="yongtu" value="yongtu">
 						<option value="上衣">上衣</option>
 						<option value="裤子">裤子</option>
@@ -114,46 +125,61 @@ function onAdd(){
 						<option value="西装套装">西装套装</option>
 						<option value="换片">换片</option>
 						<option value="其他">其他</option>
-				</select> 
-					</td>
+				</select>
+				</td>
 				<td nowrap="nowrap" align="center" width="7%">米数</td>
 				<td nowrap="nowrap" align="center" width="7%"><input name="mi"
 					id="mi" type="text" size="38" maxlength="100" /></td>
 				<td nowrap="nowrap" align="center" width="7%">供应商</td>
-				<td nowrap="nowrap" align="center" width="7%"><!-- <input
+				<td nowrap="nowrap" align="center" width="7%">
+					<!-- <input
 					name="gongyingshang" id="gongyingshang" type="text" size="38"
-					maxlength="100" /> -->
-						<%=request.getAttribute("companyList")%>
-					</td>
+					maxlength="100" /> --> <%=request.getAttribute("companyList")%>
+				</td>
+				
 			</tr>
-
+			<!-- 
 			<tr>
-				<td nowrap="nowrap" align="center" width="7%" colspan="3"><input
-					name="mianliao" id="mianliao" type="text" size="38" maxlength="100"
-					placeholder="面料" /></td>
+				<td nowrap="nowrap" align="center" width="7%" colspan="3"></td>
 				<td nowrap="nowrap" align="center" width="7%" colspan="4"><input
 					name="guize" id="guize" type="text" size="38" maxlength="100"
 					placeholder="归责：客户要求（手填，创建时）" /></td>
-			</tr>
+			</tr> -->
 
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">备注</td>
-				<td nowrap="nowrap" align="center" width="7%" colspan="6"><input
+				<td nowrap="nowrap" align="left" width="7%" colspan="7"><input
 					name="remark" id="remark" type="text" size="200" maxlength="100" />
 				</td>
 			</tr>
+			
+			<!-- <tr>
+				<td nowrap="nowrap" align="center" width="7%">批单备注</td>
+				<td nowrap="nowrap" align="left" width="7%" colspan="7"><input
+					name="pidanremark" id="pidanremark" type="text" size="200" maxlength="100" />
+				</td>
+			</tr> -->
 
 			<tr>
-				<td nowrap="nowrap" align="center" width="7%"></td>
-				<td nowrap="nowrap" align="center" width="7%"><input
-					type="button" name="ok" accesskey="y" tabindex="y" value="确 定"
-					class="but_1" onclick="onAdd()"
-					style="font-size:12;width:40px;height:21px;"> <input
-					type="reset" name="reset" accesskey="y" tabindex="y" value="重置"
-					class="but_1" style="font-size:12;width:40px;height:21px;">
-					<input type="button" name="back" accesskey="b" tabindex="b"
-					value="返 回" class="but_1"
-					onclick="location='doMsgInfo.do?method=queryMsgInfo'"
+				<td nowrap="nowrap" align="center" width="7%">
+					<input style="border:none;" name="anniu" size="200" id="anniu"
+					 type="hidden" class="txt_1"  />
+				</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					type="button" name="ok" accesskey="y" tabindex="y" value="保存" title ="1" 
+					class="but_1" onclick="onAdd(this.title)" 
+					style="font-size:12;width:40px;height:21px;"> 
+					
+							<input
+					type="button" name="ok" accesskey="y" tabindex="y" value="提交" title ="2" 
+					class="but_1" onclick="onAdd(this.title)"
+					style="font-size:12;width:40px;height:21px;"> 
+					
+					
+					 <input
+					type="button" name="back" accesskey="b" tabindex="b" value="返 回"
+					class="but_1" onclick="location='doMsgInfo.do?method=queryMsgInfo'"
 					style="font-size:12;width:40px;height:21px;"></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>

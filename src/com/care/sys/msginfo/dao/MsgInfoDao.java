@@ -20,4 +20,6 @@ public interface MsgInfoDao {
 	public int deleteMsgInfo(MsgInfo vo) throws DataAccessException;
 	
 	public List<DataMap> getMsgInfoListByVo(MsgInfo vo) throws DataAccessException;
+
+	public List<DataMap> getMsgInfoById(MsgInfo vo)throws DataAccessException;
 }

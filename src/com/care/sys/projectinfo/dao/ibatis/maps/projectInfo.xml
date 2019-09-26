@@ -188,7 +188,7 @@
 		UPDATE projectinfo
 		<dynamic prepend="set">
 			<isNotEmpty prepend="," property="projectName">
-				project_name=#projectName#
+				fujian_url=#projectName#
 			</isNotEmpty>
 			<isNotEmpty prepend="," property="projectNo">
 				project_no=#projectNo#
@@ -247,6 +247,8 @@
 			<isNotEmpty prepend="," property="tuihui_time">
 				tuihui_time=#tuihui_time#
 			</isNotEmpty>
+			
+			
 			<!-- ,remark=#remark# -->
 		</dynamic>
 		<dynamic prepend="where">
