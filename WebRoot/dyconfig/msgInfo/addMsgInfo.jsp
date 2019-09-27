@@ -29,7 +29,7 @@ $(document).ready(function(){
 		 	 data:"userCode="+userCodeValue,
 		 	 success:function(msg){
 		 		if(msg=="success"){
-		 			/* alert("不存在该订单号"); */
+		 			 alert("该订单号不可用"); 
 		 			/* frmGo.orderNumber.focus(); */
 		 			  $("#orderNumber").focus(); 
 		 			 return false;
@@ -51,9 +51,9 @@ function onAdd(wechat){
 		return false;
 	} 
 	
-	if(frmGo.mi.value.trim() == ""){
-		alert("米数不能为空！");
-		frmGo.mi.focus();
+	if(frmGo.name.value.trim() == ""){
+		alert("姓名不能为空！");
+		frmGo.name.focus();
 		return false;
 	} 
 	

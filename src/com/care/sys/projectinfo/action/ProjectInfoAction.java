@@ -469,7 +469,7 @@ public class ProjectInfoAction extends BaseAction {
 		
 		 SimpleDateFormat df = new SimpleDateFormat("yyMMdd");
 		 SimpleDateFormat yydf = new SimpleDateFormat("yyyyMMdd");
-		 SimpleDateFormat yydfhh = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
+		 SimpleDateFormat yydfhh = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	     Calendar calendar = Calendar.getInstance();
 	     
 	  	String orderId ="";// 订单编号
@@ -1824,12 +1824,12 @@ public class ProjectInfoAction extends BaseAction {
 			ProjectInfoForm form = (ProjectInfoForm) actionForm;
 			Hashtable<?, ?> files = form.getMultipartRequestHandler()
 					.getFileElements();
+		   int fileIsEmpty = 0;
+			
 			if (files != null & files.size() > 0) {
-				String downloadUrl ="http://47.111.148.8:80/watch/upload/fujian/"+orderId+"/"+orderId+".zip";
-				vo.setFujian_url(downloadUrl);
 				
-				String qianZhui = "D:/resin/webapps/watch/upload/fujian/";
-				String path = qianZhui + orderId;
+				//String qianZhui = "D:/resin/webapps/watch/upload/fujian/";
+				String path = "D:/resin/webapps/watch/upload/fujian/" + orderId;
 				
 				Constant.deleteFile(path);
 				Constant.createFile(path);
@@ -1840,6 +1840,7 @@ public class ProjectInfoAction extends BaseAction {
 					fileKey = (String) (enums.nextElement());
 					FormFile file = (FormFile) files.get(fileKey);
 					if (!file.getFileName().isEmpty()) {
+						fileIsEmpty = 1;
 						/*fileFormat = file.toString().substring(
 								file.toString().lastIndexOf("."),
 								file.toString().length());
@@ -1867,11 +1868,14 @@ public class ProjectInfoAction extends BaseAction {
 					}
 
 				}
-				
-				
-				String zipName = path + "/" + orderId + ".zip";
+			
+				if (fileIsEmpty == 1) {
+				String zipName = "D:/resin/webapps/watch/upload/fujianzip/" + orderId + ".zip";
 				FileOutputStream fos1 = new FileOutputStream(new File(zipName));
 				ZipUtils.toZip(path, fos1, true);
+				
+				String downloadUrl ="http://47.111.148.8:80/watch/upload/fujianzip/"+orderId+".zip";
+				vo.setFujian_url(downloadUrl);
 				
 				DeviceActiveInfo vod = new DeviceActiveInfo();
 
@@ -1880,8 +1884,7 @@ public class ProjectInfoAction extends BaseAction {
 				List<DataMap> list = ServiceBean.getInstance()
 						.getDeviceActiveInfoFacade().getAllCallInfo(vod);
 
-				// String url =
-				// "http://localhost:8080/clothes/upload/photo/"+orderid+"/";
+				
 				
 				
 				if (list.size() > 0) {
@@ -1896,6 +1899,9 @@ public class ProjectInfoAction extends BaseAction {
 					ServiceBean.getInstance().getDeviceActiveInfoFacade()
 							.insertCallInfo(vod);
 				}
+				
+				}
+			
 				
 
 			}
@@ -2153,12 +2159,11 @@ public class ProjectInfoAction extends BaseAction {
 			ProjectInfo vo = new ProjectInfo();
 			
 			
-			String downloadUrl ="http://47.111.148.8:80/watch/upload/fujian/"+orderId+"/"+orderId+".zip";
+			String downloadUrl ="http://47.111.148.8:80/watch/upload/fujianzip/"+orderId+".zip";
 			vo.setFujian_url(downloadUrl);
 			
 			String qianZhui = "D:/resin/webapps/watch/upload/fujian/";
 			String path = qianZhui + orderId;
-			
 			ProjectInfoForm form = (ProjectInfoForm) actionForm;
 			Hashtable<?, ?> files = form.getMultipartRequestHandler()
 					.getFileElements();
@@ -2214,7 +2219,7 @@ public class ProjectInfoAction extends BaseAction {
 			
 			File file = new File(path);
 			if (file.exists()) {
-				String zipName = path + "/" + orderId + ".zip";
+				String zipName =  "D:/resin/webapps/watch/upload/fujianzip/" + orderId + ".zip";
 				FileOutputStream fos1 = new FileOutputStream(new File(zipName));
 				ZipUtils.toZip(path, fos1, true);
 				
@@ -2560,19 +2565,24 @@ public class ProjectInfoAction extends BaseAction {
 					
 			ServiceBean.getInstance().getProjectInfoFacade()
 					.updatePorjectInfoDangAn(vo);
-			
-			ProjectInfo insertVO = new ProjectInfo();
 			String fuwei_quea = request.getParameter("fuwei_quea");
-			System.out.println("fuwei_quea="+fuwei_quea);
-			insertVO.setFuwei_quea(fuwei_quea);
 			String fuwei_queb = request.getParameter("fuwei_queb");
-			insertVO.setFuwei_queb(fuwei_queb);
-			System.out.println("fuwei_quea="+fuwei_queb);
 			
-			insertVO.setOrderNumber(orderId);
+			if(!"".equals(fuwei_quea) || !"".equals(fuwei_queb) ){
+				ProjectInfo insertVO = new ProjectInfo();
+				
+				System.out.println("fuwei_quea="+fuwei_quea);
+				insertVO.setFuwei_quea(fuwei_quea);
+				
+				insertVO.setFuwei_queb(fuwei_queb);
+				System.out.println("fuwei_quea="+fuwei_queb);
+				
+				insertVO.setOrderNumber(orderId);
+				
+				ServiceBean.getInstance().getProjectInfoFacade()
+				.insertPorjectInfoDuoyu(insertVO);
+			}
 			
-			ServiceBean.getInstance().getProjectInfoFacade()
-			.insertPorjectInfoDuoyu(insertVO);
 			
 			
 			System.out.println("tag="+tag);
@@ -2950,17 +2960,26 @@ public class ProjectInfoAction extends BaseAction {
 				.getDeviceActiveInfoFacade().getAllCallInfo(vod);
 		
 		if(downlist.size()>0){
-			String all =downlist.get(0).get("erweima_zip")+"";
+			String fujian =downlist.get(0).get("fujian")+"";
 	
-			if("".equals(all) || all == null ||all.length()<10 ){
-				request.setAttribute("all", "无");
-				System.out.println(1);
+			if("".equals(fujian) || fujian == null ||fujian.length()<10 ){
+				request.setAttribute("fujian", "无");
 			}else{
-				request.setAttribute("all", downlist.get(0).get("fujian")+"");
+				request.setAttribute("fujian", downlist.get(0).get("fujian")+"");
 			}
 			
+			String erweima_zip =downlist.get(0).get("erweima_zip")+"";
+			
+			if("".equals(erweima_zip) || erweima_zip == null ||erweima_zip.length()<10 ){
+				request.setAttribute("erweima_zip", "无");
+			}else{
+				request.setAttribute("erweima_zip", downlist.get(0).get("erweima_zip")+"");
+			}
+			
+			
 		}else{
-			request.setAttribute("all", "无");
+			request.setAttribute("fujian", "无");
+			request.setAttribute("erweima_zip", "无");
 		}
 		
 		ProjectInfo duoyu = new ProjectInfo();
@@ -3227,7 +3246,8 @@ public class ProjectInfoAction extends BaseAction {
 			if(listOrder.size()>0){
 				orderid = listOrder.get(0).get("order_id")+"";
 
-				String url = "http://47.111.148.8:80/watch/upload/photo/"+ orderid + "/";
+				String url = "http://47.111.148.8:80/watch/upload/zip/";
+				String urlPhoto = "http://47.111.148.8:80/watch/upload/photo/"+orderid+"/";
 				/*ProjectInfo fujianVo = new ProjectInfo();
 				fujianVo.setCondition("id='" + form.getId() + "'")*/
 				voStatus.setProjectName(url + orderid + ".zip");
@@ -3254,66 +3274,78 @@ public class ProjectInfoAction extends BaseAction {
 				String photo3="";
 				String photo4="";
 				
+				String baise = "D:/bai.png";
 				
+				String wechatUrlQian= "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx72e5182a29950eb2&redirect_uri=http%3A%2F%2Fwww.bzsxt.com%2FClothesWechat%2Fwechat_request&response_type=code&scope=snsapi_base&state=";
+				String wechatUrlhou="#wechat_redirect";
 				if(xizhuang_number!=0){
-					String text = "测试内容";
+					String text = wechatUrlQian+orderid+",xizhuang"+wechatUrlhou;
 					// 嵌入二维码的图片路径
 					// String imgPath = "F:/UI/test/1.png";
 					String imgPath = "D:/1.png";
 					// 生成的二维码的路径及名称
-					String imgName =  "1.jpg";
+					String imgName =  "1.png";
 					String destPath = path + "/" + imgName;
 					photo1 = destPath;
 					// 生成二维码
 					QRCodeUtil.encode(text, imgPath, destPath, true);
 					
 					GetExCel.writeExcelDaBiao("1",orderid, nickName, riqi, yaowei,destPath);
-					vod.setErweima_1(url + "1.jpg");
+					vod.setErweima_1(urlPhoto + "1.png");
+					//http://47.111.148.8:80/watch/upload/zip/4.png
+				}else{
+					photo1 = baise;
 				}
 				if(chenshan_number!=0){
-					String text = "测试内容";
+					String text = wechatUrlQian+orderid+",chenshan"+wechatUrlhou;
 					// 嵌入二维码的图片路径
 					// String imgPath = "F:/UI/test/1.png";
 					String imgPath = "D:/1.png";
 					// 生成的二维码的路径及名称
-					String imgName =  "2.jpg";
+					String imgName =  "2.png";
 					String destPath = path + "/" + imgName;
 					photo2 = destPath;
 					// 生成二维码
 					QRCodeUtil.encode(text, imgPath, destPath, true);
 					
 					GetExCel.writeExcelDaBiao("2",orderid, nickName, riqi, yaowei,destPath);
-					vod.setErweima_2(url + "2.jpg");
+					vod.setErweima_2(urlPhoto + "2.png");
+				}else{
+					photo1 = baise;
 				}
 				if(xiku_number!=0){
-					String text = "测试内容";
+					String text =wechatUrlQian+ orderid+",xiku"+wechatUrlhou;
 					// 嵌入二维码的图片路径
 					// String imgPath = "F:/UI/test/1.png";
 					String imgPath = "D:/1.png";
 					// 生成的二维码的路径及名称
-					String imgName =  "3.jpg";
+					String imgName =  "3.png";
 					String destPath = path + "/" + imgName;
 					photo3 = destPath;
 					// 生成二维码
 					QRCodeUtil.encode(text, imgPath, destPath, true);
 					
 					GetExCel.writeExcelDaBiao("3",orderid, nickName, riqi, yaowei,destPath);
-					vod.setErweima_3(url + "3.jpg");
+					vod.setErweima_3(urlPhoto + "3.png");
+				}else{
+					photo1 = baise;
 				}
 				if(majia_number!=0){
-					String text = "测试内容";
+					String text = wechatUrlQian+orderid+",majia"+wechatUrlhou;
 					// 嵌入二维码的图片路径
 					// String imgPath = "F:/UI/test/1.png";
 					String imgPath = "D:/1.png";
 					// 生成的二维码的路径及名称
-					String imgName =  "4.jpg";
+					String imgName =  "4.png";
 					String destPath = path + "/" + imgName;
 					photo4 = destPath;
 					// 生成二维码
 					QRCodeUtil.encode(text, imgPath, destPath, true);
 					
 					GetExCel.writeExcelDaBiao("4",orderid, nickName, riqi, yaowei,destPath);
-					vod.setErweima_4(url + "4.jpg");
+					vod.setErweima_4(urlPhoto + "4.png");
+				}else{
+					photo1 = baise;
 				}
 				
 				GetExCel.writeExcelXiangQing(orderid, 
@@ -3358,8 +3390,12 @@ public class ProjectInfoAction extends BaseAction {
 				
 				if(xizhuang_number!=0 || chenshan_number!=0 || xiku_number!=0 || majia_number==0 ){
 					String zipName = path + "/" + orderid + ".zip";
-					FileOutputStream fos1 = new FileOutputStream(new File(zipName));
+					String aa = "D:/resin/webapps/watch/upload/zip/"+orderid + ".zip";
+					FileOutputStream fos1 = new FileOutputStream(new File(aa));
+					System.out.println("path="+path);
+					//System.out.println("zipName="+zipName);
 					ZipUtils.toZip(path, fos1, true);
+					//ZipUtils.toZip(path, fos1, true);
 					
 					
 					/*String excelzipName = qianZhuiExcel + "/" + orderid + ".zip";
@@ -3378,18 +3414,18 @@ public class ProjectInfoAction extends BaseAction {
 					vod.setDabiao_file(url + orderid + ".zip");
 					if (list.size() > 0) {
 						vod.setCondition("id='" + list.get(0).get("id") + "'");
-						/*vod.setErweima_1(url + "1.jpg");
+						/*vod.setErweima_1(url + "1.png");
 					
-						vod.setErweima_3(url + "3.jpg");
-						vod.setErweima_4(url + "4.jpg");*/
+						vod.setErweima_3(url + "3.png");
+						vod.setErweima_4(url + "4.png");*/
 					
 						ServiceBean.getInstance().getDeviceActiveInfoFacade()
 								.updateCallInfo(vod);
 
 					} else {
 						vod.setOrderid(orderid);
-						/*vod.setErweima_1(url + "1.jpg");
-						vod.setErweima_2(url + "2.jpg");*/
+						/*vod.setErweima_1(url + "1.png");
+						vod.setErweima_2(url + "2.png");*/
 						ServiceBean.getInstance().getDeviceActiveInfoFacade()
 								.insertCallInfo(vod);
 					}
@@ -3481,14 +3517,14 @@ public class ProjectInfoAction extends BaseAction {
 					// String imgPath = "F:/UI/test/1.png";
 					String imgPath = "D:/1.png";
 					// 生成的二维码的路径及名称
-					String imgName =  "1.jpg";
+					String imgName =  "1.png";
 					String destPath = path + "/" + imgName;
 					photo1 = destPath;
 					// 生成二维码
 					QRCodeUtil.encode(text, imgPath, destPath, true);
 					
 					GetExCel.writeExcelDaBiao("1",orderid, nickName, riqi, yaowei,destPath);
-					vod.setErweima_1(url + "1.jpg");
+					vod.setErweima_1(url + "1.png");
 				}
 				if(chenshan_number!=0){
 					String text = "测试内容";
@@ -3496,14 +3532,14 @@ public class ProjectInfoAction extends BaseAction {
 					// String imgPath = "F:/UI/test/1.png";
 					String imgPath = "D:/1.png";
 					// 生成的二维码的路径及名称
-					String imgName =  "2.jpg";
+					String imgName =  "2.png";
 					String destPath = path + "/" + imgName;
 					photo2 = destPath;
 					// 生成二维码
 					QRCodeUtil.encode(text, imgPath, destPath, true);
 					
 					GetExCel.writeExcelDaBiao("2",orderid, nickName, riqi, yaowei,destPath);
-					vod.setErweima_2(url + "2.jpg");
+					vod.setErweima_2(url + "2.png");
 				}
 				if(xiku_number!=0){
 					String text = "测试内容";
@@ -3511,14 +3547,14 @@ public class ProjectInfoAction extends BaseAction {
 					// String imgPath = "F:/UI/test/1.png";
 					String imgPath = "D:/1.png";
 					// 生成的二维码的路径及名称
-					String imgName =  "3.jpg";
+					String imgName =  "3.png";
 					String destPath = path + "/" + imgName;
 					photo3 = destPath;
 					// 生成二维码
 					QRCodeUtil.encode(text, imgPath, destPath, true);
 					
 					GetExCel.writeExcelDaBiao("3",orderid, nickName, riqi, yaowei,destPath);
-					vod.setErweima_3(url + "3.jpg");
+					vod.setErweima_3(url + "3.png");
 				}
 				if(majia_number!=0){
 					String text = "测试内容";
@@ -3526,14 +3562,14 @@ public class ProjectInfoAction extends BaseAction {
 					// String imgPath = "F:/UI/test/1.png";
 					String imgPath = "D:/1.png";
 					// 生成的二维码的路径及名称
-					String imgName =  "4.jpg";
+					String imgName =  "4.png";
 					String destPath = path + "/" + imgName;
 					photo4 = destPath;
 					// 生成二维码
 					QRCodeUtil.encode(text, imgPath, destPath, true);
 					
 					GetExCel.writeExcelDaBiao("4",orderid, nickName, riqi, yaowei,destPath);
-					vod.setErweima_4(url + "4.jpg");
+					vod.setErweima_4(url + "4.png");
 				}
 				
 				GetExCel.writeExcelXiangQing(orderid, 
@@ -3598,18 +3634,18 @@ public class ProjectInfoAction extends BaseAction {
 					vod.setDabiao_file(url + orderid + ".zip");
 					if (list.size() > 0) {
 						vod.setCondition("id='" + list.get(0).get("id") + "'");
-						vod.setErweima_1(url + "1.jpg");
+						vod.setErweima_1(url + "1.png");
 					
-						vod.setErweima_3(url + "3.jpg");
-						vod.setErweima_4(url + "4.jpg");
+						vod.setErweima_3(url + "3.png");
+						vod.setErweima_4(url + "4.png");
 					
 						ServiceBean.getInstance().getDeviceActiveInfoFacade()
 								.updateCallInfo(vod);
 
 					} else {
 						vod.setOrderid(orderid);
-						vod.setErweima_1(url + "1.jpg");
-						vod.setErweima_2(url + "2.jpg");
+						vod.setErweima_1(url + "1.png");
+						vod.setErweima_2(url + "2.png");
 						ServiceBean.getInstance().getDeviceActiveInfoFacade()
 								.insertCallInfo(vod);
 					}

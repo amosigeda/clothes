@@ -39,10 +39,24 @@ public class AppUserInfo extends PublicVoBean implements Serializable{
 	private Date update_time;
 	private String nickName;
 	private String token;
+	private String order_id;
+	private String clothes_type;
+
 	
 	
 	
-	
+	public String getClothes_type() {
+		return clothes_type;
+	}
+	public void setClothes_type(String clothes_type) {
+		this.clothes_type = clothes_type;
+	}
+	public String getOrder_id() {
+		return order_id;
+	}
+	public void setOrder_id(String order_id) {
+		this.order_id = order_id;
+	}
 	public String getToken() {
 		return token;
 	}

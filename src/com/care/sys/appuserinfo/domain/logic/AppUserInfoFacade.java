@@ -34,4 +34,6 @@ public interface AppUserInfoFacade {
 	public Integer insertSaoMaInfo(AppUserInfo vo)throws SystemException;
 
 	public DataList getSaoMaInfoListByVo(AppUserInfo vo)throws SystemException;
+
+	public List<DataMap> getSaoMaInfo(AppUserInfo vo)throws SystemException;
 }

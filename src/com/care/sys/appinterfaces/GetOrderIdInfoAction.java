@@ -58,6 +58,7 @@ public class GetOrderIdInfoAction extends BaseAction {
 		}
 		JSONObject object = JSONObject.fromObject(sb.toString());
 		String orderId = object.getString("orderId");
+		String phone = object.getString("phone");
 		
 		
 		

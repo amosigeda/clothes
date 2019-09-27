@@ -11,7 +11,7 @@ public class CommTools {
 	}
 
 	public static String  getAddTime(int add) {
-		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		 String temp = "";
 				try {
 				     Date date = sdf.parse(sdf.format(new Date()));

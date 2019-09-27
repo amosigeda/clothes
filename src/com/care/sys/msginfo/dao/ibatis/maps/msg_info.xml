@@ -32,7 +32,7 @@
 	
 	
 	<select id="getMsgInfoById" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.msginfo.domain.MsgInfo">
-		SELECT * FROM msg_info
+		SELECT * FROM channelinfo
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
 				$condition$

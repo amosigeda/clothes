@@ -14,6 +14,8 @@
 	<scripttype="text/javascript"src="http://code.jquery.com/jquery-1.4.1.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/jquery-1.8.2.js"
 	type="text/javascript"></script>
+		<script language="JavaScript"
+			src="<%=request.getContextPath()%>/public/My97DatePicker/WdatePicker.js"></script>
 <title>无标题文档</title>
 </head>
 <!-- <style>
@@ -36,21 +38,10 @@ $(document).ready(function(){
 		 	 data:"userCode="+userCodeValue,
 		 	 success:function(msg){
 		 		 if(msg=="fail"){
-		 			/*  alert("已有该订单！！！"); */
+		 			alert("订单号重复！！！");
 		 			 $("#orderNumber").focus();
 		 			 return false;
 		 		 }
-		 		 /*  if((msg != null){
-		 			 
-		 		 }else{
-		 		 alert(msg);
-		 		 } */
-		 		 
-		 		
-		 		 /* if(msg=="fail"){
-		 			 $("#orderNumber").focus();
-		 			 return false;
-		 		 }  */ 
 		 	 }
 		 });
 	 });
@@ -71,7 +62,7 @@ function setSecond(obj){
 		
 	  }else{
 	    var sec = document.getElementById("xiabai");
-	    sec.innerHTML = "<option>直角下摆</option><option>圆角下摆</option><option>大圆角下摆</option><option>燕尾下摆</option><option>其他</option>";
+	    sec.innerHTML = "<option>无</option><option>直角下摆</option><option>圆角下摆</option><option>大圆角下摆</option><option>燕尾下摆</option><option>其他</option>";
 	  }
 	}
 	
@@ -241,7 +232,7 @@ function setSecond(obj){
 					id="projectNo" type="text" class="txt_1" maxlength="30" /><font
 					color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%">下单时间</td>
-				<td nowrap="nowrap" align="center" width="7%"><%=request.getAttribute("shijian")%></td>
+				<td nowrap="nowrap" align="left" width="7%"><%=request.getAttribute("shijian")%>  </td>
 				<td nowrap="nowrap" align="center" width="7%" rowspan="2">客户地址</td>
 				<td nowrap="nowrap" align="left" width="7%" colspan="3" rowspan="2"><input name="address" size="90" id="address"
 					type="text" class="txt_1" /><font color="red"></font></td>
@@ -253,14 +244,20 @@ function setSecond(obj){
 						<option value="新单">新单</option>
 						<option value="打样">打样</option>
 						<option value="重做">重做</option>
-				</select></td>
+				</select>
+				</td>
 				<td nowrap="nowrap" align="center" width="7%">交付时间</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<select name="jiaofu_time" value="jiaofu_time">
+				<td nowrap="nowrap" align="left" width="7%">
+				
+			<!-- 	<input name="startTime1" type="text" class="txt_1"  id="startTime1" style="cursor:text"
+								 onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+								size="20" readonly> -->
+					
+				<select name="jiaofu_time"  id="jiaofu_time" >
 						<option value="10">+10天  加急</option>
 						<option value="5">+5天  特别加急</option>
 						<option value="3">+3天   非常紧急</option>
-				</select> <font color="red"></font></td>
+				</select> <font color="red"><span id="uNameSpan"></span></font>
 				</td>
 			
 				
@@ -570,13 +567,14 @@ function setSecond(obj){
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">下摆</td>
 				<td nowrap="nowrap" align="center" width="7%">
-					<select id="xiabai" name="xiabai" value="xiabai">
-					<!-- <option value=""></option>
+					<select id="xiabai" name="xiabai" >
+					
+					 <option value=""></option>
 						<option value="圆角下摆">圆角下摆</option>
 						<option value="直角下摆（双排扣默认）">直角下摆（双排扣默认）</option>
 						<option value="大圆角下摆">大圆角下摆</option>
 						<option value="燕尾下摆">燕尾下摆</option>
-						<option value="其他">其他</option> -->
+						<option value="其他">其他</option>
 				</select>
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">撞色</td>
@@ -684,9 +682,9 @@ function setSecond(obj){
 				</select> <font color="red"></font>
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">米数</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%"><input name="" size="38" id="" type="text" class="txt_1" maxlength="100" readonly="true"  /></td>
 				<td nowrap="nowrap" align="center" width="7%">供应商</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%"><input name="" size="38" id="" type="text" class="txt_1" maxlength="100" readonly="true"  /></td>
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">面料</td>
@@ -708,15 +706,19 @@ function setSecond(obj){
 				</select> <font color="red"></font>
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">米数</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%"><input name="" size="38" id="" type="text" class="txt_1" maxlength="100" readonly="true"  /></td>
 				<td nowrap="nowrap" align="center" width="7%">供应商</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%"><input name="" size="38" id="" type="text" class="txt_1" maxlength="100" readonly="true"  /></td>
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">附件</td>
-				<td nowrap="nowrap" align="center" width="7%"><input type="file" name="channelId"
-					id="channelId" multiple="multiple" class="imagePath" /> <img alt=""
-					src="" id="image1" class="showImage"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input type="file" name="channelId"
+					id="channelId" multiple="multiple"  /><!--  <img alt=""
+					src="" id="image1" class="showImage"> -->
+					
+					
+					</td>
 			</tr>
 			
 			<tr>

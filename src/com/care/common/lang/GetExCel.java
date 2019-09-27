@@ -210,7 +210,7 @@ public class GetExCel {
 				WritableImage image = new WritableImage(1.5, 8, 0.5, 3, file);
 				sheet.addImage(image);
 				
-				sheet.mergeCells(1, 0, 3, 1);
+				//sheet.mergeCells(1, 0, 3, 1);
 				
 				// 这里的第一个数据代表第二列，第二个数据代表第一行，第三个数据代表第四列，第四个数据代表第二行
 				//sheet.mergeCells(1, 1, 2, 15);   //横 1 4  纵   纵 1 2   0 3 0 1  1  3  01
@@ -419,6 +419,8 @@ System.out.println("生成EXCEL文件 名称="+name+"         订单号="+orderI
 			sheet.addCell(label58);
 			/*Label label68 = new Label(6, 8, y, aFormat);
 			sheet.addCell(label68);*/
+			Label label78 = new Label(7, 8, "", aFormat);
+			sheet.addCell(label78);
 			
 			//第十行
 			Label label09 = new Label(0, 9, "胸围", aFormat);
@@ -436,6 +438,9 @@ System.out.println("生成EXCEL文件 名称="+name+"         订单号="+orderI
 			Label label69 = new Label(6, 9, d1, aFormat);
 			sheet.addCell(label69);
 			
+			Label label79 = new Label(7, 9, "", aFormat);
+			sheet.addCell(label79);
+			
 			//第十一行
 			Label label010 = new Label(0, 10, "中腰", aFormat);
 			sheet.addCell(label010);
@@ -451,6 +456,8 @@ System.out.println("生成EXCEL文件 名称="+name+"         订单号="+orderI
 			sheet.addCell(label510);
 			Label label610 = new Label(6, 10, d2, aFormat);
 			sheet.addCell(label610);
+			Label label710 = new Label(7, 10, "", aFormat);
+			sheet.addCell(label710);
 			
 			//第十二行
 			Label label011 = new Label(0, 11, "腹围", aFormat);
@@ -467,6 +474,8 @@ System.out.println("生成EXCEL文件 名称="+name+"         订单号="+orderI
 			sheet.addCell(label511);
 			Label label611 = new Label(6, 11, d3, aFormat);
 			sheet.addCell(label611);
+			Label label711 = new Label(7, 11, "", aFormat);
+			sheet.addCell(label711);
 			
 			//第十三行
 			Label label012 = new Label(0, 12, "后中衣长", aFormat);
@@ -586,6 +595,8 @@ System.out.println("生成EXCEL文件 名称="+name+"         订单号="+orderI
 			sheet.addCell(label518);
 			Label label618 = new Label(6, 18, d19, aFormat);
 			sheet.addCell(label618);
+			Label label718 = new Label(7, 18, "", aFormat);
+			sheet.addCell(label718);
 			
 			//第十九行
 			Label label019 = new Label(0, 19, "臀围", aFormat);
@@ -602,6 +613,8 @@ System.out.println("生成EXCEL文件 名称="+name+"         订单号="+orderI
 			sheet.addCell(label519);
 			Label label619 = new Label(6, 19, d20, aFormat);
 			sheet.addCell(label619);
+			Label label719 = new Label(7, 19, "", aFormat);
+			sheet.addCell(label719);
 			
 			//第二十行
 			Label label020 = new Label(0, 20, "裆围", aFormat);
@@ -618,6 +631,8 @@ System.out.println("生成EXCEL文件 名称="+name+"         订单号="+orderI
 			sheet.addCell(label520);
 			Label label620 = new Label(6, 20, d21, aFormat);
 			sheet.addCell(label620);
+			Label label720 = new Label(7, 20, "", aFormat);
+			sheet.addCell(label720);
 			
 			
 			//第二十一行
@@ -635,6 +650,8 @@ System.out.println("生成EXCEL文件 名称="+name+"         订单号="+orderI
 			sheet.addCell(label521);
 			Label label621 = new Label(6, 21, d22, aFormat);
 			sheet.addCell(label621);
+			Label label721 = new Label(7, 21, "", aFormat);
+			sheet.addCell(label721);
 			
 			//第二十一行
 			Label label022 = new Label(0, 22, "中腿", aFormat);
@@ -702,8 +719,17 @@ System.out.println("生成EXCEL文件 名称="+name+"         订单号="+orderI
 			//第二十六行
 			Label label027 = new Label(0, 27, "下摆", bFormat);
 			sheet.addCell(label027);
-			Label label127 = new Label(1, 27, a28, aFormat);
-			sheet.addCell(label127);
+			System.out.println("a28="+a28);
+			System.out.println(a28.length());
+			
+			if(a28!= null && !"".equals(a28) && !"".equals(null)){
+				Label label127 = new Label(1, 27, a28, aFormat);
+				sheet.addCell(label127);
+			}else{
+				Label label127 = new Label(1, 27, "", aFormat);
+				sheet.addCell(label127);
+			}
+			
 			Label label227 = new Label(2, 27, "撞色", bFormat);
 			sheet.addCell(label227);
 			Label label327 = new Label(3, 27, b28, aFormat);
@@ -807,15 +833,15 @@ System.out.println("生成EXCEL文件 名称="+name+"         订单号="+orderI
 			
 			
 		
-			sheet.setColumnView(0, 10);
-			sheet.setColumnView(1, 12);
-			sheet.setColumnView(2, 10);
+			sheet.setColumnView(0, 12);
+			sheet.setColumnView(1, 20);
+			sheet.setColumnView(2, 12);
 			sheet.setColumnView(3, 12);
-			sheet.setColumnView(4, 10);
+			sheet.setColumnView(4, 12);
 			sheet.setColumnView(5, 12);
-			sheet.setColumnView(6, 10);
+			sheet.setColumnView(6, 12);
 			sheet.setColumnView(7, 12);
-			sheet.setColumnView(8, 10);
+			sheet.setColumnView(8, 12);
 			sheet.setColumnView(9, 12);
 			
 			sheet.setRowView(0, 400, false);
@@ -860,26 +886,27 @@ System.out.println("生成EXCEL文件 名称="+name+"         订单号="+orderI
 			sheet.setRowView(39, 400, false);
 		
 			
-			
+			System.out.println("photo1="+photo1);
 //		      File file = new File("D:/123.png");
 			if(photo1!=null && !"".equals(photo1)){
 				 File file1 = new File(photo1);
 					WritableImage image1 = new WritableImage(3, 8, 1, 4, file1);
 					sheet.addImage(image1);
 			}
-			
+			System.out.println("photo2="+photo2);
 			if(photo2!=null && !"".equals(photo2)){
 				 File file2 = new File(photo2);
 				 WritableImage image2 = new WritableImage(7, 8, 1, 4, file2);
 					sheet.addImage(image2);
 			}
 		    
-			
+			System.out.println("photo3="+photo3);
 			if(photo3 !=null && !"".equals(photo3)){
 				 File file3 = new File(photo3);
 				 WritableImage image3 = new WritableImage(3, 18, 1, 4, file3);
 					sheet.addImage(image3);
 			}
+			System.out.println("photo4="+photo4);
 			
 			if(photo4 !=null && !"".equals(photo4)){
 				 File file4 = new File(photo4);
@@ -913,7 +940,7 @@ System.out.println("生成EXCEL文件 名称="+name+"         订单号="+orderI
 		    sheet.mergeCells(7, 12, 7, 16);   //横 1 4  纵   纵 0 2
 		    
 		    
-		    sheet.mergeCells(3, 22, 3, 26);   //横 1 4  纵   纵 0 2
+		   
 		
 		    
 		    sheet.mergeCells(1, 31, 7, 31);   //横 1 4  纵   纵 0 2
@@ -921,7 +948,7 @@ System.out.println("生成EXCEL文件 名称="+name+"         订单号="+orderI
 		    sheet.mergeCells(1, 33, 7, 33);   //横 1 4  纵   纵 0 2
 		    sheet.mergeCells(1, 34, 7, 34);   //横 1 4  纵   纵 0 2
 		    
-		    
+		    sheet.mergeCells(3, 22, 3, 25);   //横 1 4  纵   纵 0 2
 		    sheet.mergeCells(4, 22, 4, 25);   //横 1 4  纵   纵 0 2
 		    sheet.mergeCells(5, 22, 6, 25);   //横 1 4  纵   纵 0 2
 		    sheet.mergeCells(7, 22, 7, 25);   //横 1 4  纵   纵 0 2

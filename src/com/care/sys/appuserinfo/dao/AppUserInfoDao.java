@@ -38,4 +38,6 @@ public interface AppUserInfoDao {
 
 	public Integer getSaoMaInfoCount(AppUserInfo vo)throws DataAccessException;
 
+	public List<DataMap> getSaoMaInfo(AppUserInfo vo)throws DataAccessException;
+
 }

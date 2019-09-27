@@ -27,6 +27,13 @@ appearance: none;
 </style> -->
 
 <script language="javascript">
+function onc(){
+	var files = document.getElementById("inputfile").files;
+	for(var i=0; i< files.length; i++){
+	alert(input.files[i].name);
+	}  
+	}
+	
 function selectProject(obj){
     var a=frmGo.projectName1.value;
     var b=frmGo.projectName.value;
@@ -792,9 +799,20 @@ function onUpdate(wechat){
 			  <%if("admin".equals(request.getAttribute("role")) || "客服".equals(request.getAttribute("role")) || "客服经理".equals(request.getAttribute("role")) ){ %>
 <tr>
 				<td nowrap="nowrap" align="center" width="7%">附件</td>
-				<td nowrap="nowrap" align="center" width="7%"><input style="border:none;" type="file" name="channelId"  multiple="multiple"
-					id="channelId" multiple="multiple" class="imagePath" /> <img alt=""
-					src="" id="image1" class="showImage"></td>
+				<td nowrap="nowrap" align="center" width="7%">
+				 <%if(!"".equals(projectInfo.getAt("fujian_url"))&& projectInfo.getAt("fujian_url")!=null ){ %>
+                <a href="<%=projectInfo.getAt("fujian_url")%>" title="zip" style="color:#0000FF">【下载】</a>
+				 <%}else{ %>
+				 
+				 	 <%} %>
+				 	 
+				<input  type="file" id="inputfile" name="inputfile"  	multiple="multiple"   />
+					
+					
+				<!-- 	<input style="border:none;" type="file" name="file"  multiple="multiple"
+					id="file"  class="imagePath" /> -->
+					
+					</td>
 			</tr>
 			    <%} %>
 			    

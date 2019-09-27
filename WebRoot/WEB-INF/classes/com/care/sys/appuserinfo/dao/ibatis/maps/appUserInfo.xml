@@ -13,6 +13,16 @@
 		</dynamic>
 	</select>
 	
+	<select id="getSaoMaInfo" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
+		SELECT * FROM saomainfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
 	<select id="getProjectImageInfo" resultClass="com.godoing.rose.lang.DataMap"
 		parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
 		SELECT * FROM projectimage
@@ -123,9 +133,9 @@
 	
 	<insert id="insertSaoMaInfo" parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
 		INSERT INTO
-		saomainfo(create_time,user_name,nick_name,password,last_name)
+		saomainfo(create_time,user_name,nick_name,password,last_name,order_id,clothes_type)
 		VALUES
-		(#createTime#,#userName#,#nickName#,#password#,#last_name#)
+		(#createTime#,#userName#,#nickName#,#password#,#last_name#,#order_id#,#clothes_type#)
 	</insert>
 	
 	<insert id="insertUserPhotoInfo" parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">

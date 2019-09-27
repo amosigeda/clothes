@@ -42,8 +42,8 @@ public class doGetMsgAction extends BaseAction{
 		ServiceBean instance = ServiceBean.getInstance();
 		JSONObject json = new JSONObject();
 		JSONArray msgData = new JSONArray();
-		String user_id = "";
-		String belongProject = "";
+	
+		
 		
 			ServletInputStream input = request.getInputStream();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(input));
@@ -52,36 +52,34 @@ public class doGetMsgAction extends BaseAction{
 			while((online = reader.readLine()) != null){
 				sb.append(online);
 			}
-			JSONObject object = JSONObject.fromObject(sb.toString());
-			user_id = object.getString("user_id");
-			belongProject = object.getString("belong_project");
+			//JSONObject object = JSONObject.fromObject(sb.toString());
+			String phone =request.getParameter("phone"); 
+			
+		
 			
 			try{		//get����
 //			String user_id = request.getParameter("user_id");
 			MsgInfo msgInfo = new MsgInfo();
-			String condition = Constant.getDaysAgoCondition("msg_handler_date", -7);
-			msgInfo.setCondition("to_id ='"+user_id+"' and belong_project='"+belongProject+"' and is_handler ='0' and "+condition);
-			msgInfo.setOrderBy("id");
-			msgInfo.setSort("1");   //��id����
-			msgInfo.setFrom(0);
-    		msgInfo.setPageSize(100);
+		
+			msgInfo.setCondition("phone ='"+phone+"' order by id");
+		
     		
-			List<DataMap> msgList = instance.getMsgInfoFacade().getMsgInfo(msgInfo);
+			List<DataMap> msgList = instance.getMsgInfoFacade().getMsgInfoById(msgInfo);
 			int msgCount = msgList.size();
 			for(int j=0;j<msgCount;j++){
 				JSONObject msgJson = new JSONObject();
 				String msg_id = ""+ msgList.get(j).getAt("id");
-				String msg_content = ""+ msgList.get(j).getAt("msg_content");
-				String msg_date = "" + msgList.get(j).getAt("msg_handler_date");
+				String remark = ""+ msgList.get(j).getAt("remark");
+				String msg_date = "" + msgList.get(j).getAt("add_time");
 				
-				msgJson.put("msg_id", msg_id);
-				msgJson.put("msg_content", msg_content);
-				msgJson.put("msg_date", msg_date);
+				msgJson.put("id", msg_id);
+				msgJson.put("content", remark);
+				msgJson.put("add_time", msg_date);
 				
 				msgData.add(j,msgJson);
 			}
 			
-			json.put("msg_count", msgCount);  //��Ϣ����
+			//json.put("msg_count", msgCount);  //��Ϣ����
 			json.put("msg_array", msgData); 
 			result = Constant.SUCCESS_CODE;
 			
@@ -105,8 +103,6 @@ public class doGetMsgAction extends BaseAction{
 		}
 		json.put("request", href);
 		json.put(Constant.RESULTCODE, result);
-		//insertVisit(href,belongProject,user_id,0,start,new Date(),json.toString().getBytes("utf-8").length);
-	insertVisitReason(href, belongProject, "消息获取", user_id, 0, start,new Date(),json.toString().getBytes("utf-8").length);
 		response.setCharacterEncoding("UTF-8");	
 		response.getWriter().write(json.toString());		
 		return null;

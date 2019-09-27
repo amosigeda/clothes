@@ -209,8 +209,16 @@
 		<action path="/doSetDeviceActiveXps" type="com.care.sys.appinterfaces.XpsSetDeviceActiveAction"></action>
 		<action path="/amrtomp3" type="com.care.sys.appinterfaces.XpsSetDeviceActiveAction"></action>
 		<action path="/weitechaoAmr" type="com.care.sys.appinterfaces.XpsSetDeviceActiveAction"></action>
-		<!-- 不一 -->
+	
+	
+		<!-- 不一 上传个人资料-->
 		<action path="/buYiuploadInfo" type="com.care.sys.appinterfaces.setSportInfoAction"></action>
+		<action path="/exitmyself" type="com.care.sys.appinterfaces.exitmyselfAction"></action>
+			<action path="/doGetMsgbyPhone" type="com.care.sys.appinterfaces.doGetMsgAction"></action>
+			<action path="/doGetMsgbyOrderId" type="com.care.sys.appinterfaces.doGetMsgOrderAction"></action>
+			
+				<action path="/getClothesCount" type="com.care.sys.appinterfaces.doGetClothesCountAction"></action>
+
 		<action path="/xyzselect" type="com.care.sys.appinterfaces.GetOrderIdInfoAction"></action>
 		<action path="/saoma" type="com.care.sys.appinterfaces.SaoMaAction"></action>
 		<action path="/wuliu" type="com.care.sys.appinterfaces.WuLiuAction"></action>

@@ -128,14 +128,14 @@ public class MsgInfoAction extends BaseAction {
 			if(listUo.size()>0){
 				String role = listUo.get(0).get("code")+"";
 				request.setAttribute("role",role);
-				if("客服".equals(role)){
+				/*if("客服".equals(role)){
 					sb.append("    and add_user = '" + userName+"'");
 				}else if("批单".equals(role)){
 					sb.append("    and is_handler >= 2 and is_handler <= 3 ");
 					//1客服保存 2客服提交 3批单保存 4批单提交  5跟单保存 6跟单提交 7跟单退回  8批单退回
 				}else if("跟单".equals(role)){
 					sb.append("    and is_handler >= 4 and is_handler <= 5   ");
-				}
+				}*/
 			}
 			
 			if (!projectInfoId.equals("0")) {
@@ -266,7 +266,7 @@ public class MsgInfoAction extends BaseAction {
 		String userName = loginUser.getUserName();
 		
 		request.setAttribute("username", userName);
-		 SimpleDateFormat yydfhh = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
+		 SimpleDateFormat yydfhh = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	     Calendar calendar = Calendar.getInstance();
 		request.setAttribute("shijian", yydfhh.format(calendar.getTime()));
 		return mapping.findForward("insertMsgInfo");

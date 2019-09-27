@@ -770,21 +770,22 @@ function onUpdate(){
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">附件</td>
 				<td nowrap="nowrap" align="center" width="7%">
-				    <%if(!"无".equals(request.getAttribute("all"))){ %>
-                <a href="<%=request.getAttribute("all")%>" title="zip" style="color:#0000FF">【下载】</a>
+				    <%if(!"无".equals(request.getAttribute("fujian"))){ %>
+                <a href="<%=request.getAttribute("fujian")%>" title="zip" style="color:#0000FF">【下载】</a>
                  
 				 <%}else{ %>
-				 无
+				 
 				 	 <%} %>
 				 	 
 				   
 				 	 
 				 	 <td nowrap="nowrap" align="center" width="7%">生成文件(二维码,打标文件,订单详情)</td>
 				<td nowrap="nowrap" align="center" width="7%">
-				 <%if(!"".equals(projectInfo.getAt("fujian_url"))&& projectInfo.getAt("fujian_url")!=null ){ %>
-                <a href="<%=projectInfo.getAt("fujian_url")%>" title="zip" style="color:#0000FF">【下载】</a>
+				  <%if(!"无".equals(request.getAttribute("erweima_zip"))){ %>
+                <a href="<%=request.getAttribute("erweima_zip")%>" title="zip" style="color:#0000FF">【下载】</a>
+                 
 				 <%}else{ %>
-				 无
+				 
 				 	 <%} %>
 				
 				 </td>

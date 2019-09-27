@@ -91,4 +91,9 @@ public class AppUserInfoFacadeImpl implements AppUserInfoFacade{
 		return list;
 	}
 
+	@Override
+	public List<DataMap> getSaoMaInfo(AppUserInfo vo) throws SystemException {
+		return appUserInfoDao.getSaoMaInfo(vo);
+	}
+
 }
