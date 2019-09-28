@@ -28,6 +28,7 @@ import com.care.common.config.ServiceBean;
 import com.care.common.http.BaseAction;
 import com.care.common.lang.CommUtils;
 import com.care.common.lang.Constant;
+import com.care.common.lang.GetExCel;
 import com.care.sys.dynamicInfo.domain.DynamicInfo;
 import com.care.sys.dynamicInfo.form.DynamicInfoForm;
 import com.care.sys.msginfo.domain.MsgInfo;
@@ -345,14 +346,14 @@ public class MsgInfoAction extends BaseAction {
 	
 	}
 	
-	public ActionForward initUpdatexml(ActionMapping mapping,
+	public ActionForward initUpdate(ActionMapping mapping,
 			ActionForm actionForm, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		LoginUser loginUser = (LoginUser) request.getSession().getAttribute(
 				Config.SystemConfig.LOGINUSER);
-		if (loginUser == null) {
+		/*if (loginUser == null) {
 			return null;
-		}
+		}*/
 
 		String userName = loginUser.getUserName();
 		request.setAttribute("role","admin");
@@ -370,7 +371,7 @@ public class MsgInfoAction extends BaseAction {
 		String id = request.getParameter("id");
 		MsgInfo vo = new MsgInfo();
 		vo.setCondition("id='" + id + "' limit 1");
-		List<DataMap> list = ServiceBean.getInstance().getMsgInfoFacade().getMsgInfoById(vo);
+		List<DataMap> list = ServiceBean.getInstance().getMsgInfoFacade().getMsgInfoByIdUpdate(vo);
 		if (list == null || list.size() == 0) {
 			Result result = new Result();
 			result.setBackPage(HttpTools.httpServletPath(request,
@@ -391,9 +392,9 @@ public class MsgInfoAction extends BaseAction {
 				"project_no", "project_no", list.get(0).get("gongyingshang")+"", 1);
 		request.setAttribute("companyList", sb);
 
-	
+	System.out.println("走到这里否");
 		
-			return mapping.findForward("updateMsgInfo");
+			return mapping.findForward("a");
 		/*	if ("admin".equals(userName)) {
 		} else {
 			return mapping.findForward("updateProjectInfoxmlOther");
@@ -418,8 +419,8 @@ public class MsgInfoAction extends BaseAction {
 			String phone = request.getParameter("phone");
 			String fahuo_wuliu = request.getParameter("fahuo_wuliu");
 			String wuliu_bianma = request.getParameter("wuliu_bianma");*/
-			
-			vo.setCondition("id='" + request.getParameter("id") + "'");
+			String id = request.getParameter("id");
+			vo.setCondition("id='" + id + "'");
 			
 			/*String orderNumber = request.getParameter("orderNumber");
 			vo.setOrder_id(orderNumber);
@@ -471,12 +472,40 @@ public class MsgInfoAction extends BaseAction {
 					vo.setIsHandler("4");
 				}else if("跟单".equals(role)){
 					vo.setIsHandler("6");
+					
 				}
 			
 			}
 //1客服保存 2客服提交 3批单保存 4批单提交  5跟单保存 6跟单提交 7跟单退回  8批单退回
 			ServiceBean.getInstance().getMsgInfoFacade().updateMsgInfo(vo);
 			
+			if("2".equals(anniu)&&"跟单".equals(role)){
+				MsgInfo voDaYin = new MsgInfo();
+				voDaYin.setCondition("id='" + id + "' limit 1");
+				List<DataMap> listExcel = ServiceBean.getInstance().getMsgInfoFacade().getMsgInfoById(voDaYin);
+				if(listExcel.size()>0){
+					String orderId = listExcel.get(0).get("order_id")+"";
+					GetExCel.writeExcelShouHou(orderId,
+							listExcel.get(0).get("msg_handler_date")+"",
+							listExcel.get(0).get("add_user")+"",
+							listExcel.get(0).get("name")+"",
+							listExcel.get(0).get("cishu")+"",
+							listExcel.get(0).get("msg_handler_date")+"",
+							listExcel.get(0).get("jiaofutime")+"",
+							listExcel.get(0).get("mianliao")+"",
+							listExcel.get(0).get("yongtu")+"",
+							listExcel.get(0).get("mi")+"",
+							listExcel.get(0).get("gongyingshang")+"",
+							listExcel.get(0).get("remark")+""
+							);
+					
+					MsgInfo voexcel = new MsgInfo();
+					voexcel.setUrl("http://47.111.148.8:80/watch/upload/shouhou/"+orderId+".xls");
+					voexcel.setCondition("id='" + id + "'");
+					ServiceBean.getInstance().getMsgInfoFacade().updateMsgInfo(voexcel);
+					
+				}
+			}
 			
 			
 			

@@ -32,13 +32,23 @@
 	
 	
 	<select id="getMsgInfoById" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.msginfo.domain.MsgInfo">
-		SELECT * FROM channelinfo
+		SELECT * FROM msg_info
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
 				$condition$
 			</isNotEmpty>
 		</dynamic>
 	</select>
+	
+	<select id="getMsgInfoByIdUpdate" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.msginfo.domain.MsgInfo">
+		SELECT * FROM msg_info
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
 
 	<select id="getMsgInfoListByVo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.msginfo.domain.MsgInfo">
 		SELECT * FROM msg_info 
@@ -120,6 +130,9 @@
 			</isNotEmpty>
 			<isNotEmpty prepend="," property="yongtu">
 		      yongtu=#yongtu#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="url">
+		      url=#url#
 			</isNotEmpty>
 		</dynamic>  
 		<dynamic prepend="where">

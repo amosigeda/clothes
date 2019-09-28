@@ -65,9 +65,27 @@ public class doGetClothesCountAction extends BaseAction{
 		vo.setCondition("add_time >='" + starttime + "' and add_time <='"+endtime +"' and kehu_phone='"+kehu_phone+"'");
 		List<DataMap> list = ServiceBean.getInstance()
 				.getProjectInfoFacade().getProjectInfo(vo);
+		int xizhuang_number =0;
+		int chenshan_number =0;
+		int xiku_number =0;
+		int majia_number =0;
+		
+		if(list.size()>0){
+	
+			for(int i=0;i<list.size();i++){
+				xizhuang_number=xizhuang_number+Integer.valueOf(list.get(i).get("xizhuang_number")+"");
+				chenshan_number=chenshan_number+Integer.valueOf(list.get(i).get("chenshan_number")+"");
+				xiku_number=xiku_number+Integer.valueOf(list.get(i).get("xiku_number")+"");
+				majia_number=majia_number+Integer.valueOf(list.get(i).get("majia_number")+"");
+			}
+			
+		}
 		
 		
-		json.put("count", list.size());
+		json.put("xizhuang_number", xizhuang_number);
+		json.put("chenshan_number", chenshan_number);
+		json.put("xiku_number", xiku_number);
+		json.put("majia_number", majia_number);
 		
 			result = Constant.SUCCESS_CODE;
 			

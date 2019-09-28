@@ -2217,6 +2217,11 @@ public class ProjectInfoAction extends BaseAction {
 			}
 			
 			
+			
+		
+			
+			
+			
 			File file = new File(path);
 			if (file.exists()) {
 				String zipName =  "D:/resin/webapps/watch/upload/fujianzip/" + orderId + ".zip";

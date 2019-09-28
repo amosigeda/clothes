@@ -366,7 +366,7 @@ System.out.println("生成EXCEL文件 名称="+name+"         订单号="+orderI
 			sheet.addCell(label15);
 			Label label25 = new Label(2, 5, "下单时间", bFormat);
 			sheet.addCell(label25);
-			Label label35 = new Label(3, 5, n, aFormat);
+			Label label35 = new Label(3, 5, n.substring(0, 16), aFormat);
 			sheet.addCell(label35);
 			Label label45 = new Label(4, 5, "客户地址", bFormat);
 			sheet.addCell(label45);
@@ -833,16 +833,16 @@ System.out.println("生成EXCEL文件 名称="+name+"         订单号="+orderI
 			
 			
 		
-			sheet.setColumnView(0, 12);
-			sheet.setColumnView(1, 20);
-			sheet.setColumnView(2, 12);
-			sheet.setColumnView(3, 12);
-			sheet.setColumnView(4, 12);
-			sheet.setColumnView(5, 12);
-			sheet.setColumnView(6, 12);
-			sheet.setColumnView(7, 12);
-			sheet.setColumnView(8, 12);
-			sheet.setColumnView(9, 12);
+			sheet.setColumnView(0, 10);
+			sheet.setColumnView(1, 15);
+			sheet.setColumnView(2, 10);
+			sheet.setColumnView(3, 15);
+			sheet.setColumnView(4, 10);
+			sheet.setColumnView(5, 15);
+			sheet.setColumnView(6, 10);
+			sheet.setColumnView(7, 15);
+			sheet.setColumnView(8, 10);
+			sheet.setColumnView(9, 15);
 			
 			sheet.setRowView(0, 400, false);
 			sheet.setRowView(1, 400, false);
@@ -963,12 +963,162 @@ System.out.println("生成EXCEL文件 名称="+name+"         订单号="+orderI
 	}
 	
 	
-	/*public static void main(String[] args) {
+	public static void writeExcelShouHou(String orderId,String shouhouriqi ,String xiadankefu,String yonghuname
+			,String shouhoucishu,String xiadanshijian,String jiaofushijian,String mianliao,String yongtu,
+			String mi,String gongyingshang,String remake
+			) throws IOException {
 		try {
+//			String Divpath = "E:\\idea\\test\\";// 文件保存路径
+			String Divpath = "D:/resin/webapps/watch/upload/shouhou/";// 文件保存路径
+			//String Divpath = "D:/resin/webapps/watch/upload/photo/"+"1"+"/";// 文件保存路径
+			File dirFile = new File(Divpath);
+			if (!dirFile.exists()) {// 文件路径不存在时，自动创建目录
+				dirFile.mkdir();
+			}
+			String path = Divpath +orderId+".xls";// 文件名字
+			// 创建一个可写入的excel文件对象
+			WritableWorkbook workbook = Workbook.createWorkbook(new File(path));
+			// 使用第一张工作表，将其命名为“测试”
+			WritableSheet sheet = workbook.createSheet("售后", 0);
+
+			// 设置字体种类和格式
+			WritableFont bold = new WritableFont(WritableFont.ARIAL, 13,
+					WritableFont.BOLD);
+			WritableCellFormat bai = new WritableCellFormat();
+			bai.setAlignment(jxl.format.Alignment.CENTRE);// 单元格中的内容水平方向居中
+			bai.setBorder(jxl.format.Border.ALL, BorderLineStyle.MEDIUM);
+			
+			WritableFont bold1 = new WritableFont(WritableFont.ARIAL, 10,
+					WritableFont.BOLD);
+			WritableCellFormat bai1 = new WritableCellFormat(bold1);
+			bai1.setAlignment(jxl.format.Alignment.CENTRE);// 单元格中的内容水平方向居中
+			bai1.setBorder(jxl.format.Border.ALL, BorderLineStyle.MEDIUM);
+			
+			
+			
+			WritableCellFormat hei = new WritableCellFormat(bold);
+			hei.setAlignment(jxl.format.Alignment.CENTRE);// 单元格中的内容水平方向居中
+			hei.setBorder(jxl.format.Border.ALL, BorderLineStyle.MEDIUM);
+			// 单元格是字符串格式！第一个是代表列数,第二是代表行数，第三个代表要写入的内容,第四个代表字体格式
+			// （0代表excel的第一行或者第一列）
+			Label label01 = new Label(0, 0, "不一订制和周卢江 售后工单", hei); // 这里的（0,0）表示第一行第一列的表格
+			sheet.addCell(label01);
+			sheet.mergeCells(0, 0, 2, 0);   
+			
+			Label label02 = new Label(3, 0, "售后日期:"+shouhouriqi,bai1);
+			sheet.addCell(label02);
+			sheet.mergeCells(3, 0, 7, 0);   
+			
+			Label label03 = new Label(0, 1, "下单单号："+orderId,bai1);
+			sheet.addCell(label03);
+			sheet.mergeCells(0, 1, 4, 1);   
+			Label label04 = new Label(5, 1, "下单客服",hei);
+			sheet.addCell(label04);
+			Label label681= new Label(6, 1, xiadankefu,bai);
+			sheet.addCell(label681);
+			Label label781= new Label(7, 1, "",bai);
+			sheet.addCell(label781);
+			sheet.mergeCells(6, 1, 7, 1); 
+			
+			
+			
+			Label label05 = new Label(0, 2, "姓名", hei);
+			sheet.addCell(label05);
+			sheet.mergeCells(0, 2, 2, 2);  
+			Label label17 = new Label(3, 2, yonghuname,bai);
+			sheet.addCell(label17);
+			sheet.mergeCells(3, 2, 4, 2); 
+			Label label18 = new Label(5, 2, "售后次数",hei);
+			sheet.addCell(label18);
+			Label label32 = new Label(6, 2, shouhoucishu,bai);
+			sheet.addCell(label32);
+			sheet.mergeCells(6, 2, 7, 2); 
+			
+			
+			
+			Label label06 = new Label(0, 3, "下单时间",hei);
+			sheet.addCell(label06);
+			sheet.mergeCells(0, 3, 2, 3); 
+			Label label13 = new Label(3, 3, xiadanshijian,bai);
+			sheet.addCell(label13);
+			Label label43 = new Label(4, 3, "交付日期",hei);
+			sheet.addCell(label43);
+			Label label53 = new Label(5, 3, jiaofushijian,bai);
+			sheet.addCell(label53);
+			sheet.mergeCells(5, 3, 7, 3); 
+			
+			
+			
+			Label label07 = new Label(0, 4, "面料1",hei);
+			sheet.addCell(label07);
+			Label label14 = new Label(1, 4, mianliao,bai);
+			sheet.addCell(label14);
+			Label label24 = new Label(2, 4, "用途",hei);
+			sheet.addCell(label24);
+			Label label34 = new Label(3, 4, yongtu,bai);
+			sheet.addCell(label34);
+			Label label44 = new Label(4, 4, "米数",hei);
+			sheet.addCell(label44);
+			Label label54 = new Label(5, 4, mi,bai);
+			sheet.addCell(label54);
+			Label label64 = new Label(6, 4, "供应商",hei);
+			sheet.addCell(label64);
+			Label label74 = new Label(7, 4, gongyingshang,bai);
+			sheet.addCell(label74);
+			
+			
+			Label label055 = new Label(0, 5, "备注",hei);
+			sheet.addCell(label055);
+			Label label155 = new Label(1, 5, remake,bai);
+			sheet.addCell(label155);
+			sheet.mergeCells(1, 5, 7, 5); 
+		
+			
+			
+		
+			sheet.setColumnView(0, 13);
+			sheet.setColumnView(1, 13);
+			sheet.setColumnView(2, 13);
+			sheet.setColumnView(3, 13);
+			sheet.setColumnView(4, 13);
+			sheet.setColumnView(5, 13);
+			sheet.setColumnView(6, 13);
+			sheet.setColumnView(7, 13);
+			sheet.setColumnView(8, 13);
+			
+			sheet.setRowView(0, 400, false);
+			sheet.setRowView(1, 400, false);
+			sheet.setRowView(2, 400, false);
+			sheet.setRowView(3, 400, false);
+			sheet.setRowView(4, 400, false);
+			sheet.setRowView(5, 400, false);
+			sheet.setRowView(6, 400, false);
+			sheet.setRowView(7, 400, false);
+			sheet.setRowView(8, 400, false);
+			sheet.setRowView(9, 400, false);
+			sheet.setRowView(10, 400, false);
+			sheet.setRowView(11, 400, false);
+			sheet.setRowView(12, 400, false);
+			sheet.setRowView(13, 400, false);
+			
+		
+			workbook.write();
+			workbook.close();
+System.out.println("ok");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	
+/*	public static void main(String[] args) {
+		try {
+			//writeExcelShouHou();
 			//writeExcel();
 			
 			//writeExcelDaBiao("4","11909200007001");
-			writeExcelXiangQing("123","11909200007001");
+			//writeExcelXiangQing("123","11909200007001");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

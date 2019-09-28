@@ -49,5 +49,11 @@ public class SqlMapMsgInfoDao extends SqlMapClientDaoSupport implements MsgInfoD
 		logger.debug("getMsgInfoById(MsgInfo vo)");
 		return getSqlMapClientTemplate().queryForList("getMsgInfoById", vo);
 	}
+	@Override
+	public List<DataMap> getMsgInfoByIdUpdate(MsgInfo vo)
+			throws DataAccessException {
+		logger.debug("getMsgInfoByIdUpdate(MsgInfo vo)");
+		return getSqlMapClientTemplate().queryForList("getMsgInfoByIdUpdate", vo);
+	}
 
 }

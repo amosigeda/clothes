@@ -30,7 +30,7 @@
 	}
 	
 	function update(id){
-		frmGo.action="doMsgInfo.do?method=initUpdatexml&id="+id;
+		frmGo.action="doMsgInfo.do?method=initUpdate&id="+id;
 		frmGo.submit();
 	}
 	
@@ -170,9 +170,52 @@ function c(){
 						</td>
 						
 							<td>
+							 	
+							 	
+							 		<logic:equal name="element" property="is_handler" value="1">	
+   							<%if("客服".equals(request.getAttribute("role")) || "经理".equals(request.getAttribute("role")) || "admin".equals(request.getAttribute("role"))){ %>
 							 	<a href=# onclick="update('<bean:write name="element" property="id" />')" style="color:#0000FF" > [修改]</a>
-							<%--  <%if("客服".equals(request.getAttribute("role"))){ %>
-							  <%} %>	 --%>
+							 	<%} %>
+   						</logic:equal>	
+   						
+   						
+   						<logic:equal name="element" property="is_handler" value="2">	
+   							<%if("批单".equals(request.getAttribute("role")) || "admin".equals(request.getAttribute("role")) ){ %>
+							 	<a href=# onclick="update('<bean:write name="element" property="id" />')" style="color:#0000FF" > [修改]</a>
+							 	<%} %>
+   						</logic:equal>	
+   						
+   							<logic:equal name="element" property="is_handler" value="3">	
+   							<%if("批单".equals(request.getAttribute("role")) || "admin".equals(request.getAttribute("role")) ){ %>
+							 	<a href=# onclick="update('<bean:write name="element" property="id" />')" style="color:#0000FF" > [修改]</a>
+							 	<%} %>
+   						</logic:equal>	
+   						
+   						
+   						
+   							<logic:equal name="element" property="is_handler" value="4">	
+   							<%if("跟单".equals(request.getAttribute("role")) || "admin".equals(request.getAttribute("role")) ){ %>
+							 	<a href=# onclick="update('<bean:write name="element" property="id" />')" style="color:#0000FF" > [修改]</a>
+							 	<%} %>
+   						</logic:equal>
+   						<logic:equal name="element" property="is_handler" value="5">	
+   							<%if("跟单".equals(request.getAttribute("role")) || "admin".equals(request.getAttribute("role")) ){ %>
+							 	<a href=# onclick="update('<bean:write name="element" property="id" />')" style="color:#0000FF" > [修改]</a>
+							 	<%} %>
+   						</logic:equal>
+   						
+							 	
+							 	
+							 	
+							 		<logic:equal name="element" property="is_handler" value="6">	
+   							 	<logic:empty name="element" property="url"></logic:empty>
+							<logic:notEmpty name="element" property="url">
+							       <a href="<bean:write name="element" property="url" />" title="zip" style="color:#0000FF">[打单]</a>	
+							</logic:notEmpty>
+   						</logic:equal>	
+   						
+   						
+							
 						</td>
 						
 					

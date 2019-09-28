@@ -22,4 +22,6 @@ public interface MsgInfoDao {
 	public List<DataMap> getMsgInfoListByVo(MsgInfo vo) throws DataAccessException;
 
 	public List<DataMap> getMsgInfoById(MsgInfo vo)throws DataAccessException;
+
+	public List<DataMap> getMsgInfoByIdUpdate(MsgInfo vo)throws DataAccessException;
 }

@@ -806,7 +806,7 @@ function onUpdate(wechat){
 				 
 				 	 <%} %>
 				 	 
-				<input  type="file" id="inputfile" name="inputfile"  	multiple="multiple"   />
+				<input  type="file" id="inputfile" name="inputfile"  	 />
 					
 					
 				<!-- 	<input style="border:none;" type="file" name="file"  multiple="multiple"

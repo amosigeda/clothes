@@ -81,6 +81,7 @@ public class doGetMsgOrderAction extends BaseAction{
 			
 			//json.put("msg_count", msgCount);  //��Ϣ����
 			json.put("msg_array", msgData); 
+			json.put("orderid", phone); 
 			result = Constant.SUCCESS_CODE;
 			
 		}catch(Exception e){

@@ -714,7 +714,7 @@ function setSecond(obj){
 				<td nowrap="nowrap" align="center" width="7%">¸½¼þ</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<input type="file" name="channelId"
-					id="channelId" multiple="multiple"  /><!--  <img alt=""
+					id="channelId" /><!--  <img alt=""  multiple="multiple"  
 					src="" id="image1" class="showImage"> -->
 					
 					
