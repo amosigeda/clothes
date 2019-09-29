@@ -162,7 +162,8 @@ function onUpdate(){
     <tr class="tr_11">
     <td width="7%" align="left">&nbsp;&nbsp;备注</td>
     <td width="20%" align="left">
-      <textarea name="remark" id="remark" rows="5" cols="50" class="txt_1" maxlength="30"><%=projectInfo.getAt("remark")%></textarea>
+      <!-- <textarea name="remark" id="remark" rows="5" cols="50" class="txt_1" maxlength="30" ></textarea> -->
+         <textarea name="remarka" id="remarka" rows="5" cols="50" class="txt_1"><%=projectInfo.getAt("remark")%></textarea>
     </td>
     <td align="left">(字数不能超过30字)</font></td>
   </tr> 

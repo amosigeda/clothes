@@ -83,22 +83,25 @@ public class MsgInfoAction extends BaseAction {
 	public ActionForward queryMsgInfo(ActionMapping mapping,
 			ActionForm actionForm, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		Result result = new Result();// ���
+		LoginUser loginUser = (LoginUser)request.getSession().getAttribute(Config.SystemConfig.LOGINUSER);
+		if (loginUser == null) {
+	           result.setBackPage(Config.INDEX_PAGE);
+	           result.setResultCode("timeout");
+	           result.setResultType("fail");
+	           request.setAttribute("result", null);
+	           return mapping.findForward("result");
+		}
+		
 		Date start = new Date();
 		String href = request.getServletPath();
-		Result result = new Result();// ���
+	
 		PagePys pys = new PagePys();// ҳ������
 		DataList list = null; // ����ҳ��List ��logic itrate��ȡ��
 		StringBuffer sb = new StringBuffer();// �����ַ�����
 		MsgInfoFacade info = ServiceBean.getInstance().getMsgInfoFacade();// ����userApp������ȡ��user�ֵ䣩
 		try {
-			LoginUser loginUser = (LoginUser)request.getSession().getAttribute(Config.SystemConfig.LOGINUSER);
-			if (loginUser == null) {
-		            result.setBackPage(Config.INDEX_PAGE);
-		           result.setResultCode("timeout");
-		           result.setResultType("fail");
-		           request.setAttribute("result", null);
-		           return mapping.findForward("result");
-			}
+		
 			String companyInfoId = loginUser.getCompanyId();
 			String projectInfoId = loginUser.getProjectId();
 
@@ -289,7 +292,7 @@ public class MsgInfoAction extends BaseAction {
 			String phone = request.getParameter("phone");
 			String fahuo_wuliu = request.getParameter("fahuo_wuliu");
 			String wuliu_bianma = request.getParameter("wuliu_bianma");*/
-			
+		
 			
 			
 			String orderNumber = request.getParameter("orderNumber");
@@ -321,6 +324,42 @@ public class MsgInfoAction extends BaseAction {
 		
 			
 			vo.setIsHandler(anniu);
+			
+			String mianliao1 = request.getParameter("mianliao1");
+			String mianliao2 = request.getParameter("mianliao2");
+			String mianliao3 = request.getParameter("mianliao3");
+			String mianliao4 = request.getParameter("mianliao4");
+			String mianliao5 = request.getParameter("mianliao5");
+			String mianliao6 = request.getParameter("mianliao6");
+			String mianliao7 = request.getParameter("mianliao7");
+			String mianliao8 = request.getParameter("mianliao8");
+			String mianliao9 = request.getParameter("mianliao9");
+			String mianliao10 = request.getParameter("mianliao10");
+			String mianliao11 = request.getParameter("mianliao11");
+			String mianliao12 = request.getParameter("mianliao12");
+			String mianliao13 = request.getParameter("mianliao13");
+			String mianliao14 = request.getParameter("mianliao14");
+			
+			
+			String yongtu1 = request.getParameter("yongtu1");
+			String yongtu2 = request.getParameter("yongtu2");
+			String yongtu3 = request.getParameter("yongtu3");
+			String yongtu4 = request.getParameter("yongtu4");
+			String yongtu5 = request.getParameter("yongtu5");
+			String yongtu6 = request.getParameter("yongtu6");
+			String yongtu7 = request.getParameter("yongtu7");
+			String yongtu8 = request.getParameter("yongtu8");
+			String yongtu9 = request.getParameter("yongtu9");
+			String yongtu10 = request.getParameter("yongtu10");
+			String yongtu11 = request.getParameter("yongtu11");
+			String yongtu12 = request.getParameter("yongtu12");
+			String yongtu13 = request.getParameter("yongtu13");
+			String yongtu14 = request.getParameter("yongtu14");
+			
+			
+			
+			
+			
 			ServiceBean.getInstance().getMsgInfoFacade().insertMsgInfo(vo);
 			
 			result.setBackPage(HttpTools.httpServletPath(request, // ����ɹ�����ת��ԭ��ҳ��

@@ -56,13 +56,13 @@ public class doGetClothesCountAction extends BaseAction{
 			JSONObject object = JSONObject.fromObject(sb.toString());
 			String starttime =object.getString("starttime");
 			String endtime =object.getString("endtime"); 
-			String kehu_phone =object.getString("phone"); 
+			String wechat =object.getString("wechat"); 
 			
 		
 			
 			try{		//get����
 		ProjectInfo vo = new ProjectInfo();
-		vo.setCondition("add_time >='" + starttime + "' and add_time <='"+endtime +"' and kehu_phone='"+kehu_phone+"'");
+		vo.setCondition("add_time >='" + starttime + "' and add_time <='"+endtime +"' and wechat='"+wechat+"'");
 		List<DataMap> list = ServiceBean.getInstance()
 				.getProjectInfoFacade().getProjectInfo(vo);
 		int xizhuang_number =0;

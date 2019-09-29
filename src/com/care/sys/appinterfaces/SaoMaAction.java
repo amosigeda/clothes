@@ -69,6 +69,7 @@ G、发货-----，扫码，6需要填写物流单号，给客户发短信，短�
 		try {
 			String orderid = object.getString("orderid");
 			String wechat = object.getString("wechat");
+			System.out.println("wechat="+wechat);
 			String token = object.getString("token");
 			String clothes_type = object.getString("clothesType");//xizhuang
 			
@@ -78,14 +79,16 @@ G、发货-----，扫码，6需要填写物流单号，给客户发短信，短�
 		
 			
 			
-			vo.setCondition("  password = '"+wechat +  "'   and token='"+token+"'  limit 1");
+			vo.setCondition("  password = '"+ wechat +  "'   and token='"+token+"' order by id desc limit 1");
 			List<DataMap> list  = ServiceBean.getInstance().getAppUserInfoFacade().getAppUserInfo(vo);
 			if(list.size()>0){
 			int typePerson = Integer.valueOf(list.get(0).get("last_name")+"");
+			String phone =  list.get(0).get("user_name")+"";
+			String nickName = list.get(0).get("nick_name")+"";
 			//这个人的状态值
 			if(typePerson == 1){
 				
-				vo.setCondition("order_id='"+orderid +"'  clothes_type= '"+clothes_type +  "'   and last_name='1'   limit 1");
+				vo.setCondition("order_id='"+orderid +"' and  clothes_type= '"+clothes_type +  "'   and last_name='1'   limit 1");
 				List<DataMap> listSaoMa  = ServiceBean.getInstance().getAppUserInfoFacade().getSaoMaInfo(vo);
 				
 				if(listSaoMa.size()>0){
@@ -93,11 +96,12 @@ G、发货-----，扫码，6需要填写物流单号，给客户发短信，短�
 				}else{
 					//vo.setUserName(phone);
 					vo.setPassword(wechat);
-					vo.setNickName(list.get(0).get("nick_name")+"");
+					vo.setNickName(nickName);
 					vo.setCreateTime(new Date());
 					vo.setLast_name(typePerson+"");
 					vo.setOrder_id(orderid);
 					vo.setClothes_type(clothes_type);
+					vo.setUserName(phone);
 					
 					ServiceBean.getInstance().getAppUserInfoFacade().insertSaoMaInfo(vo);
 					result = Constant.SUCCESS_CODE;
@@ -108,18 +112,18 @@ G、发货-----，扫码，6需要填写物流单号，给客户发短信，短�
 
 
 				
-				vo.setCondition("order_id='"+orderid +"'  clothes_type= '"+clothes_type +  "'   and last_name='"+(typePerson-1)+"'   limit 1");
+				vo.setCondition("order_id='"+orderid +"'  and  clothes_type= '"+clothes_type +  "'   and last_name='"+(typePerson-1)+"'   limit 1");
 				List<DataMap> listSaoMa  = ServiceBean.getInstance().getAppUserInfoFacade().getSaoMaInfo(vo);
 				
 				if(listSaoMa.size()>0){
 					//vo.setUserName(phone);
 					vo.setPassword(wechat);
-					vo.setNickName(list.get(0).get("nick_name")+"");
+					vo.setNickName(nickName);
 					vo.setCreateTime(new Date());
 					vo.setLast_name(typePerson+"");
 					vo.setOrder_id(orderid);
 					vo.setClothes_type(clothes_type);
-					
+					vo.setUserName(phone);
 					ServiceBean.getInstance().getAppUserInfoFacade().insertSaoMaInfo(vo);
 					result = Constant.SUCCESS_CODE;
 				}else{
@@ -131,12 +135,12 @@ G、发货-----，扫码，6需要填写物流单号，给客户发短信，短�
 			}else{
 
 				
-				vo.setCondition("order_id='"+orderid +"'  clothes_type= '"+clothes_type +  "'   and last_name='"+(typePerson-1)+"'   limit 1");
+				vo.setCondition("order_id='"+orderid +"'  and  clothes_type= '"+clothes_type +  "'   and last_name='"+(typePerson-1)+"'   limit 1");
 				List<DataMap> listSaoMa  = ServiceBean.getInstance().getAppUserInfoFacade().getSaoMaInfo(vo);
 				
 				if(listSaoMa.size()>0){
 					
-					vo.setCondition("order_id='"+orderid +"'  clothes_type= '"+clothes_type +  "'   and last_name='"+typePerson+"'   limit 1");
+					vo.setCondition("order_id='"+orderid +"' and   clothes_type= '"+clothes_type +  "'   and last_name='"+typePerson+"'   limit 1");
 					List<DataMap> listSaoMaEr  = ServiceBean.getInstance().getAppUserInfoFacade().getSaoMaInfo(vo);
 					
 					if(listSaoMaEr.size()>0){
@@ -144,12 +148,12 @@ G、发货-----，扫码，6需要填写物流单号，给客户发短信，短�
 					}else{
 						//vo.setUserName(phone);
 						vo.setPassword(wechat);
-						vo.setNickName(list.get(0).get("nick_name")+"");
+						vo.setNickName(nickName);
 						vo.setCreateTime(new Date());
 						vo.setLast_name(typePerson+"");
 						vo.setOrder_id(orderid);
 						vo.setClothes_type(clothes_type);
-						
+						vo.setUserName(phone);
 						ServiceBean.getInstance().getAppUserInfoFacade().insertSaoMaInfo(vo);
 						result = Constant.SUCCESS_CODE;
 					}

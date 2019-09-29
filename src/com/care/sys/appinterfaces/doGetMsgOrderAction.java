@@ -25,6 +25,7 @@ import org.apache.struts.action.ActionMapping;
 import com.care.common.config.ServiceBean;
 import com.care.common.http.BaseAction;
 import com.care.common.lang.Constant;
+import com.care.sys.channelinfo.domain.ChannelInfo;
 import com.care.sys.msginfo.domain.MsgInfo;
 import com.godoing.rose.lang.DataMap;
 import com.godoing.rose.log.LogFactory;
@@ -59,12 +60,12 @@ public class doGetMsgOrderAction extends BaseAction{
 			
 			try{		//get����
 //			String user_id = request.getParameter("user_id");
-			MsgInfo msgInfo = new MsgInfo();
-		
-			msgInfo.setCondition("order_id ='"+phone+"' order by id");
+			
+			ChannelInfo vo = new ChannelInfo(); 
+			vo .setCondition("order_id ='"+phone+"' order by id");
 		
     		
-			List<DataMap> msgList = instance.getMsgInfoFacade().getMsgInfoById(msgInfo);
+			List<DataMap> msgList = instance.getChannelInfoFacade().getChannelInfo(vo);
 			int msgCount = msgList.size();
 			for(int j=0;j<msgCount;j++){
 				JSONObject msgJson = new JSONObject();

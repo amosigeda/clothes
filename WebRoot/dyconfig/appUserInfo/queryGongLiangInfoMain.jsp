@@ -90,17 +90,21 @@ function onView(download){
 				</tr> 
 				<%} %>
                   <tr class="title_2"> 
+                  	<td width="9%" >订单id</td>
                   	<td width="9%" >扫码时间</td>
                   	<td width="8%" >手机号</td> 
                   	<td width="8%" >微信号</td>
                   	<td width="8%" >姓名</td>
                   	<td width="8%" >工种</td>
-                  
+                  	<td width="8%" >类型</td>
              
 				</tr>
  
 				<logic:iterate id="element" name="pageList">
 					<tr class="tr_5" onmouseover='this.className="tr_4"' onmouseout='this.className="tr_5"' >
+					
+				<td><bean:write name="element" property="order_id"/></td>
+						
 						<td>
 						<logic:empty name="element" property="create_time">无</logic:empty>
 						<logic:notEmpty name="element" property="create_time">
@@ -133,7 +137,12 @@ function onView(download){
 						</logic:notEmpty>
 						</td>
 						
-						
+							<td>
+						<logic:empty name="element" property="clothes_type">无</logic:empty>
+						<logic:notEmpty name="element" property="clothes_type">
+						<bean:write name="element" property="clothes_type" />
+						</logic:notEmpty>
+						</td>
 					
 						
 					</tr>

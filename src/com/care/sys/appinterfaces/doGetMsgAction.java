@@ -25,6 +25,7 @@ import org.apache.struts.action.ActionMapping;
 import com.care.common.config.ServiceBean;
 import com.care.common.http.BaseAction;
 import com.care.common.lang.Constant;
+import com.care.sys.channelinfo.domain.ChannelInfo;
 import com.care.sys.msginfo.domain.MsgInfo;
 import com.godoing.rose.lang.DataMap;
 import com.godoing.rose.log.LogFactory;
@@ -54,17 +55,20 @@ public class doGetMsgAction extends BaseAction{
 			}
 			//JSONObject object = JSONObject.fromObject(sb.toString());
 			String phone =request.getParameter("phone"); 
+			String orderid =""; 
 			
 		
 			
 			try{		//get����
 //			String user_id = request.getParameter("user_id");
-			MsgInfo msgInfo = new MsgInfo();
 		
-			msgInfo.setCondition("phone ='"+phone+"' order by id");
+			
+			ChannelInfo vo = new ChannelInfo(); 
+			vo .setCondition("phone ='"+phone+"' order by id");
 		
     		
-			List<DataMap> msgList = instance.getMsgInfoFacade().getMsgInfoById(msgInfo);
+			List<DataMap> msgList = instance.getChannelInfoFacade().getChannelInfo(vo);
+    		
 			int msgCount = msgList.size();
 			for(int j=0;j<msgCount;j++){
 				JSONObject msgJson = new JSONObject();
@@ -79,6 +83,11 @@ public class doGetMsgAction extends BaseAction{
 				msgData.add(j,msgJson);
 			}
 			
+			if(msgCount>0){
+				orderid = msgList.get(0).get("order_id")+"";
+			}
+			
+			json.put("orderid", orderid); 
 			//json.put("msg_count", msgCount);  //��Ϣ����
 			json.put("msg_array", msgData); 
 			result = Constant.SUCCESS_CODE;

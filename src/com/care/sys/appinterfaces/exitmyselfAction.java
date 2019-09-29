@@ -58,7 +58,7 @@ public class exitmyselfAction extends BaseAction {
 		//JSONObject object = JSONObject.fromObject(sb.toString());
 	
 		String wechat = request.getParameter("wechat");//  object.getString("wechat");
-	
+System.out.println("wechat="+wechat);	
 		String token = request.getParameter("token");
 		
 		AppUserInfoFacade info = ServiceBean.getInstance().getAppUserInfoFacade();//����userApp������ȡ��user�ֵ䣩

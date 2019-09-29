@@ -19,71 +19,116 @@
 </head>
 
 <script type="text/javascript">
+	$(document).ready(function() {
+		$("#orderNumber").blur(function() {
+			var userCodeValue = $("#orderNumber").val().trim();
+			$.ajax({
+				type : "post",
+				url : "doMsgInfo.do?method=verfyDingDan",
+				data : "userCode=" + userCodeValue,
+				success : function(msg) {
+					if (msg == "success") {
+						alert("该订单号不可用");
+						/* frmGo.orderNumber.focus(); */
+						$("#orderNumber").focus();
+						return false;
+					}
 
-$(document).ready(function(){
-	 $("#orderNumber").blur(function(){
-		 var userCodeValue = $("#orderNumber").val().trim();
-		 $.ajax({
-			 type:"post",
-			 url:"doMsgInfo.do?method=verfyDingDan",
-		 	 data:"userCode="+userCodeValue,
-		 	 success:function(msg){
-		 		if(msg=="success"){
-		 			 alert("该订单号不可用"); 
-		 			/* frmGo.orderNumber.focus(); */
-		 			  $("#orderNumber").focus(); 
-		 			 return false;
-		 		 }
-		 		
-		 
-		 	 }
-		 });
-	 });
-});
+				}
+			});
+		});
+	});
 
-function onAdd(wechat){
-	
-	 document.getElementById("anniu").setAttribute("value", wechat);
-	 
-	if(frmGo.orderNumber.value.trim() == ""){
-		alert("订单号不能为空！");
-		frmGo.orderNumber.focus();
-		return false;
-	} 
-	
-	if(frmGo.name.value.trim() == ""){
-		alert("姓名不能为空！");
-		frmGo.name.focus();
-		return false;
-	} 
-	
-	frmGo.submit();
-}
+	function onAdd(wechat) {
 
+		document.getElementById("anniu").setAttribute("value", wechat);
+
+		if (frmGo.orderNumber.value.trim() == "") {
+			alert("订单号不能为空！");
+			frmGo.orderNumber.focus();
+			return false;
+		}
+
+		if (frmGo.name.value.trim() == "") {
+			alert("姓名不能为空！");
+			frmGo.name.focus();
+			return false;
+		}
+
+		frmGo.submit();
+	}
+
+	//添加行  id="huanjiename'+n+'"
+	function addTable() {
+		var tab = document.getElementById("tab01"); //获得表格
+		//var colsNum = tab.rows.item(0).cells.length; //表格的列数
+		//表格当前的行数 
+		var num = document.getElementById("tab01").rows.length;
+	
+		var rownum = num;
+		tab.insertRow(rownum);
+
+		var n=rownum-7;
+		
+		for (var i = 0; i < 8; i++) {
+			tab.rows[rownum].insertCell(i);//插入列
+			tab.rows[rownum].cells[i].setAttribute("align","center");
+			if (i == 0) {
+				tab.rows[rownum].cells[i].innerHTML = '面料';
+			} else if (i == 1) {
+				tab.rows[rownum].cells[i].innerHTML = '<input name="mianliao'+n+'" type="text"  size="38" maxlength="100" />';
+			} else if (i == 2) {
+				tab.rows[rownum].cells[i].innerHTML = '用途';
+			} else if( i == 3){
+				tab.rows[rownum].cells[i].innerHTML = '<input name="yongtu'+n+'" type="text" size="38" maxlength="100"/>';
+			}else if(i == 4 ){
+				tab.rows[rownum].cells[i].innerHTML = '米数';
+			}else if(i == 5){
+				tab.rows[rownum].cells[i].innerHTML = '<input name="mi'+n+'" type="text" size="38" maxlength="100"/>';
+			}else if(i == 6){
+				tab.rows[rownum].cells[i].innerHTML = '供应商';
+			}else {
+				tab.rows[rownum].cells[i].innerHTML = '<input name="gys'+n+'" type="text" size="38" maxlength="100"/>';
+			}
+		}
+		tab.rows[rownum].insertCell(i);
+		tab.rows[rownum].cells[i].innerHTML = '<a href="#" onclick="delRow(this)">删除行</a>';
+	}
+	//删除行
+	function delRow(obj) {
+		var Row = obj.parentNode;
+		var Row = obj.parentNode; //tr
+		while (Row.tagName.toLowerCase() != "tr") {
+			Row = Row.parentNode;
+		}
+		Row.parentNode.removeChild(Row); //删除行
+	}
 </script>
 <body>
 	<form name="frmGo" method="post"
 		action="doMsgInfo.do?method=insertMsgInfo" onsubmit="return onAdd()">
-		<table width="100%" id="tb1" class="tbl_11" border="1"
+		<table width="100%" id="tab01" class="tbl_11" border="1"
 			bordercolorlight=#000000 bordercolordark=#000000 bordercolor=#000000
 			cellspacing="0" cellpadding="2">
 
+			<!-- 	<table id="tab01" cellpadding="0" border="2" width="760px"> -->
 			<tr>
-				<th colspan="8" nowrap="nowrap" align="left">添加售后</th>
+				<th colspan="9" nowrap="nowrap" align="left">添加售后</th>
 			</tr>
 
 			<tr>
-				<td colspan="8" nowrap="nowrap" align="center" width="7%">不一定制售后工单</td>
+				<td colspan="9" nowrap="nowrap" align="center" width="7%">不一定制售后工单</td>
 			</tr>
 
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%" colspan="2">下单单号</td>
 				<td nowrap="nowrap" align="center" width="7%" colspan="2"><input
-					name="orderNumber" size="38" id="orderNumber" type="text"
+					name="orderNumber" size="38" id="orderNumber" type="text" 
 					class="txt_1" maxlength="30" /></td>
 				<td nowrap="nowrap" align="center" width="7%">下单人</td>
 				<td nowrap="nowrap" align="center" width="7%" colspan="2"><%=request.getAttribute("username")%></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
+					<td nowrap="nowrap" align="center" width="7%"></td>
 			</tr>
 
 			<tr>
@@ -94,7 +139,7 @@ function onAdd(wechat){
 				<td nowrap="nowrap" align="center" width="7%">售后次数</td>
 				<td nowrap="nowrap" align="center" width="7%" colspan="2"><input
 					name="cishu" id="cishu" type="number" /></td>
-						<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%"></td>
 			</tr>
 
 			<tr>
@@ -104,7 +149,7 @@ function onAdd(wechat){
 				<td nowrap="nowrap" align="left" width="7%" colspan="3"><input
 					name="jiaofutime" id="jiaofutime" type="text" size="38"
 					maxlength="100" /></td>
-						<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%"></td>
 			</tr>
 
 			<tr>
@@ -136,7 +181,8 @@ function onAdd(wechat){
 					name="gongyingshang" id="gongyingshang" type="text" size="38"
 					maxlength="100" /> --> <%=request.getAttribute("companyList")%>
 				</td>
-				
+
+
 			</tr>
 			<!-- 
 			<tr>
@@ -152,7 +198,7 @@ function onAdd(wechat){
 					name="remark" id="remark" type="text" size="200" maxlength="100" />
 				</td>
 			</tr>
-			
+
 			<!-- <tr>
 				<td nowrap="nowrap" align="center" width="7%">批单备注</td>
 				<td nowrap="nowrap" align="left" width="7%" colspan="7"><input
@@ -161,23 +207,16 @@ function onAdd(wechat){
 			</tr> -->
 
 			<tr>
-				<td nowrap="nowrap" align="center" width="7%">
-					<input style="border:none;" name="anniu" size="200" id="anniu"
-					 type="hidden" class="txt_1"  />
-				</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input
-					type="button" name="ok" accesskey="y" tabindex="y" value="保存" title ="1" 
-					class="but_1" onclick="onAdd(this.title)" 
-					style="font-size:12;width:40px;height:21px;"> 
-					
-							<input
-					type="button" name="ok" accesskey="y" tabindex="y" value="提交" title ="2" 
-					class="but_1" onclick="onAdd(this.title)"
-					style="font-size:12;width:40px;height:21px;"> 
-					
-					
-					 <input
+				<td nowrap="nowrap" align="center" width="7%"><input
+					style="border:none;" name="anniu" size="200" id="anniu"
+					type="hidden" class="txt_1" /></td>
+				<td nowrap="nowrap" align="center" width="7%"><input
+					type="button" name="ok" accesskey="y" tabindex="y" value="保存"
+					title="1" class="but_1" onclick="onAdd(this.title)"
+					style="font-size:12;width:40px;height:21px;"> <input
+					type="button" name="ok" accesskey="y" tabindex="y" value="提交"
+					title="2" class="but_1" onclick="onAdd(this.title)"
+					style="font-size:12;width:40px;height:21px;"> <input
 					type="button" name="back" accesskey="b" tabindex="b" value="返 回"
 					class="but_1" onclick="location='doMsgInfo.do?method=queryMsgInfo'"
 					style="font-size:12;width:40px;height:21px;"></td>
@@ -187,7 +226,18 @@ function onAdd(wechat){
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 			</tr>
+
+
+		
+
+
 		</table>
+		<table>
+		<button type="button" onclick="addTable();"
+			style="margin-left: 750px;">添加行</button>
+		<table>
+		
+
 	</form>
 </body>
 </html>

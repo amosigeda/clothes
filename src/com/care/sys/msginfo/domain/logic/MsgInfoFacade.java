@@ -24,5 +24,6 @@ public interface MsgInfoFacade {
 	public List<DataMap> getMsgInfoById(MsgInfo vo)throws SystemException;
 
 	public List<DataMap> getMsgInfoByIdUpdate(MsgInfo vo)throws SystemException;
+
 	
 }

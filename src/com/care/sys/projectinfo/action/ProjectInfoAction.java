@@ -88,7 +88,7 @@ public class ProjectInfoAction extends BaseAction {
 		
 		LoginUser loginUser = (LoginUser)request.getSession().getAttribute(Config.SystemConfig.LOGINUSER);
 		if (loginUser == null) {
-	            result.setBackPage(Config.INDEX_PAGE);
+	           result.setBackPage(Config.INDEX_PAGE);
 	           result.setResultCode("timeout");
 	           result.setResultType("fail");
 	           request.setAttribute("result", null);
@@ -1575,10 +1575,12 @@ public class ProjectInfoAction extends BaseAction {
 
 			String channel_id = request.getParameter("channel_id");
 			String remark = request.getParameter("remark");
+			String remarka = request.getParameter("remarka");
 			String adTitle = request.getParameter("adTitle");
-
+              System.out.println("remark= "+remark);
+              System.out.println("remark= "+remarka);
 			vo.setChannelId(channel_id);
-			vo.setRemark(remark);
+			vo.setRemark(remarka);
 			vo.setAdTitle(adTitle);
 
 			String addType = request.getParameter("addType");

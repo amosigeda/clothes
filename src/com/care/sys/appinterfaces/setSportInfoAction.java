@@ -55,14 +55,26 @@ public class setSportInfoAction extends BaseAction {
 		while ((online = reader.readLine()) != null) {
 			sb.append(online);
 		}
+		String company = request.getParameter("company");
+		//getString("company");
+//	String nickName = object.getString("nickName");
+String nickName = request.getParameter("nickName");
+//String remark = object.getString("remark");
+String remark = request.getParameter("remark");
+
+/*String phone = request.getParameter("phone");
+String wechat = request.getParameter("wechat");
+String typeWork = request.getParameter("typeWork");
+String token = request.getParameter("token");*/
+
+
 		JSONObject object = JSONObject.fromObject(sb.toString());
 		String phone = object.getString("phone");
-		String company = object.getString("company");
-		String nickName = object.getString("nickName");
 		String wechat = object.getString("wechat");
 		String typeWork = object.getString("typeWork");
-		String remark = object.getString("remark");
 		String token = object.getString("token");
+		
+		
 		
 		AppUserInfoFacade info = ServiceBean.getInstance().getAppUserInfoFacade();//����userApp������ȡ��user�ֵ䣩
 		try {
