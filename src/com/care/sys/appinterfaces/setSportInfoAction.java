@@ -79,7 +79,7 @@ String token = request.getParameter("token");*/
 		AppUserInfoFacade info = ServiceBean.getInstance().getAppUserInfoFacade();//����userApp������ȡ��user�ֵ䣩
 		try {
 			AppUserInfo vo = new AppUserInfo(); 
-			vo.setCondition("token='"+token+"'  limit 1");
+			vo.setCondition("password='"+ wechat+  "' and token='"+token+"'  limit 1");
 			List<DataMap> list  = info.getAppUserInfo(vo);
 			
 			vo.setUserName(phone);

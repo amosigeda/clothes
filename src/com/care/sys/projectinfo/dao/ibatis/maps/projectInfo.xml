@@ -872,7 +872,18 @@
 
 	
 		<insert id="insertPorjectInfoDuoyu" parameterClass="com.care.sys.projectinfo.domain.ProjectInfo">
-		INSERT INTO project_info(orderid,fuwei_quea,fuwei_queb) 
+		INSERT INTO project_info(orderid,fuwei_quea,fuwei_queb,
+		ml1,ml2,ml3,ml4,ml5,ml6,ml7,ml8,ml9,ml10,ml11,ml12,ml13,
+		yt1,yt2,yt3,yt4,yt5,yt6,yt7,yt8,yt9,yt10,yt11,yt12,yt13,
+		ms1,ms2,ms3,ms4,ms5,ms6,ms7,ms8,ms9,ms10,ms11,ms12,ms13,
+		gys1,gys2,gys3,gys4,gys5,gys6,gys7,gys8,gys9,gys10,gys11,gys12,gys13
+		) 
 		VALUES 
-		(#orderNumber#,#fuwei_quea#,#fuwei_queb#)</insert>
+		(#orderNumber#,#fuwei_quea#,#fuwei_queb#
+		,
+		#ml1#,#ml2#,#ml3#,#ml4#,#ml5#,#ml6#,#ml7#,#ml8#,#ml9#,#ml10#,#ml11#,#ml12#,#ml13#,
+		#yt1#,#yt2#,#yt3#,#yt4#,#yt5#,#yt6#,#yt7#,#yt8#,#yt9#,#yt10#,#yt11#,#yt12#,#yt13#,
+			#ms1#,#ms2#,#ms3#,#ms4#,#ms5#,#ms6#,#ms7#,#ms8#,#ms9#,#ms10#,#ms11#,#ms12#,#ms13#,
+		#gys1#,#gys2#,#gys3#,#gys4#,#gys5#,#gys6#,#gys7#,#gys8#,#gys9#,#gys10#,#gys11#,#gys12#,#gys13#
+		)</insert>
 </sqlMap>

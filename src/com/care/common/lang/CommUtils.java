@@ -243,7 +243,7 @@ public class CommUtils {
 					+ name + "</option>\n");
 		}
 		sf.append("\t\t\t</select>");
-		System.out.println(sf.toString());
+		/*System.out.println(sf.toString());*/
 		return sf.toString();
 	}
 	

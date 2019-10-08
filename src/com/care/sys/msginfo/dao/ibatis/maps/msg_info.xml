@@ -93,11 +93,19 @@
 	<insert id="insertMsgInfo" parameterClass="com.care.sys.msginfo.domain.MsgInfo">
 		INSERT INTO msg_info
 		(order_id,phone,fahuo_wuliu,wuliu_bianma,is_handler,msg_handler_date,remark,add_user,
-		name,cishu,jiaofutime,mi,gongyingshang,mianliao,guize,yongtu
+		name,cishu,jiaofutime,mi,gongyingshang,mianliao,guize,yongtu,
+		mianliao1,mianliao2,mianliao3,mianliao4,mianliao5,mianliao6,mianliao7,mianliao8,mianliao9,mianliao10,mianliao11,mianliao12,mianliao13,mianliao14,
+		yongtu1,yongtu2,yongtu3,yongtu4,yongtu5,yongtu6,yongtu7,yongtu8,yongtu9,yongtu10,yongtu11,yongtu12,yongtu13,yongtu14,
+		mi1,mi2,mi3,mi4,mi5,mi6,mi7,mi8,mi9,mi10,mi11,mi12,mi13,mi14,
+		gys1,gys2,gys3,gys4,gys5,gys6,gys7,gys8,gys9,gys10,gys11,gys12,gys13,gys14
 		) 
 		VALUES
 		(#order_id#,#phone#,#fahuo_wuliu#,#wuliu_bianma#,#isHandler#,#msgHandlerDate#,#remark#,#add_user#,
-		#name#,#cishu#,#jiaofutime#,#mi#,#gongyingshang#,#mianliao#,#guize#,#yongtu#
+		#name#,#cishu#,#jiaofutime#,#mi#,#gongyingshang#,#mianliao#,#guize#,#yongtu#,
+		#mianliao1#,#mianliao2#,#mianliao3#,#mianliao4#,#mianliao5#,#mianliao6#,#mianliao7#,#mianliao8#,#mianliao9#,#mianliao10#,#mianliao11#,#mianliao12#,#mianliao13#,#mianliao14#,
+		#yongtu1#,#yongtu2#,#yongtu3#,#yongtu4#,#yongtu5#,#yongtu6#,#yongtu7#,#yongtu8#,#yongtu9#,#yongtu10#,#yongtu11#,#yongtu12#,#yongtu13#,#yongtu14#,
+		#mi1#,#mi2#,#mi3#,#mi4#,#mi5#,#mi6#,#mi7#,#mi8#,#mi9#,#mi10#,#mi11#,#mi12#,#mi13#,#mi14#,
+		#gys1#,#gys2#,#gys3#,#gys4#,#gys5#,#gys6#,#gys7#,#gys8#,#gys9#,#gys10#,#gys11#,#gys12#,#gys13#,#gys14#
 		) 
 	</insert>
 
@@ -131,9 +139,185 @@
 			<isNotEmpty prepend="," property="yongtu">
 		      yongtu=#yongtu#
 			</isNotEmpty>
-				<isNotEmpty prepend="," property="url">
+			<isNotEmpty prepend="," property="url">
 		      url=#url#
 			</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="mianliao1">
+		      mianliao1=#mianliao1#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mianliao2">
+		      mianliao2=#mianliao2#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mianliao3">
+		      mianliao3=#mianliao3#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mianliao4">
+		      mianliao4=#mianliao4#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mianliao5">
+		      mianliao5=#mianliao5#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mianliao6">
+		      mianliao6=#mianliao6#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mianliao7">
+		      mianliao7=#mianliao7#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mianliao8">
+		      mianliao8=#mianliao8#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mianliao9">
+		      mianliao9=#mianliao9#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mianliao10">
+		      mianliao10=#mianliao10#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mianliao11">
+		      mianliao11=#mianliao11#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mianliao12">
+		      mianliao12=#mianliao12#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mianliao13">
+		      mianliao13=#mianliao13#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mianliao14">
+		      mianliao14=#mianliao14#
+			</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="," property="yongtu1">
+		      yongtu1=#yongtu1#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="yongtu2">
+		      yongtu2=#yongtu2#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="yongtu3">
+		      yongtu3=#yongtu3#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="yongtu4">
+		      yongtu4=#yongtu4#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="yongtu5">
+		      yongtu5=#yongtu5#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="yongtu6">
+		      yongtu6=#yongtu6#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="yongtu7">
+		      yongtu7=#yongtu7#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="yongtu8">
+		      yongtu8=#yongtu8#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="yongtu9">
+		      yongtu9=#yongtu9#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="yongtu10">
+		      yongtu10=#yongtu10#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="yongtu11">
+		      yongtu11=#yongtu11#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="yongtu12">
+		      yongtu12=#yongtu12#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="yongtu13">
+		      yongtu13=#yongtu13#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="yongtu14">
+		      yongtu14=#yongtu14#
+			</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="," property="mi1">
+		      mi1=#mi1#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mi2">
+		      mi2=#mi2#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mi3">
+		      mi3=#mi3#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mi4">
+		      mi4=#mi4#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mi5">
+		      mi5=#mi5#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mi6">
+		      mi6=#mi6#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mi7">
+		      mi7=#mi7#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mi8">
+		      mi8=#mi8#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mi9">
+		      mi9=#mi9#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mi10">
+		      mi10=#mi10#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mi11">
+		      mi11=#mi11#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mi12">
+		      mi12=#mi12#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mi13">
+		      mi13=#mi13#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="mi14">
+		      mi14=#mi14#
+			</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="gys1">
+		      gys1=#gys1#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="gys2">
+		      gys2=#gys2#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="gys3">
+		      gys3=#gys3#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="gys4">
+		      gys4=#gys4#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="gys5">
+		      gys5=#gys5#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="gys6">
+		      gys6=#gys6#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="gys7">
+		      gys7=#gys7#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="gys8">
+		      gys8=#gys8#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="gys9">
+		      gys9=#gys9#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="gys10">
+		      gys10=#gys10#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="gys11">
+		      gys11=#gys11#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="gys12">
+		      gys12=#gys12#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="gys13">
+		      gys13=#gys13#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="gys14">
+		      gys14=#gys14#
+			</isNotEmpty>
+			
+			
 		</dynamic>  
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">

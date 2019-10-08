@@ -103,7 +103,7 @@ public class QRCodeUtil {
 
 	public static void encode(String content, String imgPath, String destPath,
 			boolean needCompress) throws Exception {
-		BufferedImage image = QRCodeUtil.createImage(content, imgPath,
+		BufferedImage image = QRCodeUtil.createImage(content, "",
 				needCompress);
 		mkdirs(destPath);
 		// String file = new Random().nextInt(99999999)+".jpg";

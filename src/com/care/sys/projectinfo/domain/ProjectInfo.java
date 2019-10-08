@@ -194,6 +194,382 @@ public class ProjectInfo extends PublicVoBean implements Serializable{
 	private String jiankuanque;
 	
 	
+	
+	
+	
+	    private String ml1; 
+	    private String ml2; 
+	    private String ml3; 
+	    private String ml4; 
+	    private String ml5; 
+	    private String ml6; 
+	    private String ml7; 
+	    private String ml8; 
+	    private String ml9; 
+	    private String ml10; 
+	    private String ml11; 
+	    private String ml12; 
+	    private String ml13; 
+	   
+
+	    private String yt1; 
+	    private String yt2; 
+	    private String yt3; 
+	    private String yt4; 
+	    private String yt5; 
+	    private String yt6; 
+	    private String yt7; 
+	    private String yt8; 
+	    private String yt9; 
+	    private String yt10; 
+	    private String yt11; 
+	    private String yt12; 
+	    private String yt13; 
+	  
+
+	    private String ms1; 
+	    private String ms2; 
+	    private String ms3; 
+	    private String ms4; 
+	    private String ms5; 
+	    private String ms6; 
+	    private String ms7; 
+	    private String ms8; 
+	    private String ms9; 
+	    private String ms10; 
+	    private String ms11; 
+	    private String ms12; 
+	    private String ms13; 
+
+	    private String gys1; 
+	    private String gys2; 
+	    private String gys3; 
+	    private String gys4; 
+	    private String gys5; 
+	    private String gys6; 
+	    private String gys7; 
+	    private String gys8; 
+	    private String gys9; 
+	    private String gys10; 
+	    private String gys11; 
+	    private String gys12; 
+	    private String gys13; 
+	    
+	    
+	
+	
+	public String getMl1() {
+			return ml1;
+		}
+		public void setMl1(String ml1) {
+			this.ml1 = ml1;
+		}
+		public String getMl2() {
+			return ml2;
+		}
+		public void setMl2(String ml2) {
+			this.ml2 = ml2;
+		}
+		public String getMl3() {
+			return ml3;
+		}
+		public void setMl3(String ml3) {
+			this.ml3 = ml3;
+		}
+		public String getMl4() {
+			return ml4;
+		}
+		public void setMl4(String ml4) {
+			this.ml4 = ml4;
+		}
+		public String getMl5() {
+			return ml5;
+		}
+		public void setMl5(String ml5) {
+			this.ml5 = ml5;
+		}
+		public String getMl6() {
+			return ml6;
+		}
+		public void setMl6(String ml6) {
+			this.ml6 = ml6;
+		}
+		public String getMl7() {
+			return ml7;
+		}
+		public void setMl7(String ml7) {
+			this.ml7 = ml7;
+		}
+		public String getMl8() {
+			return ml8;
+		}
+		public void setMl8(String ml8) {
+			this.ml8 = ml8;
+		}
+		public String getMl9() {
+			return ml9;
+		}
+		public void setMl9(String ml9) {
+			this.ml9 = ml9;
+		}
+		public String getMl10() {
+			return ml10;
+		}
+		public void setMl10(String ml10) {
+			this.ml10 = ml10;
+		}
+		public String getMl11() {
+			return ml11;
+		}
+		public void setMl11(String ml11) {
+			this.ml11 = ml11;
+		}
+		public String getMl12() {
+			return ml12;
+		}
+		public void setMl12(String ml12) {
+			this.ml12 = ml12;
+		}
+		public String getMl13() {
+			return ml13;
+		}
+		public void setMl13(String ml13) {
+			this.ml13 = ml13;
+		}
+		public String getYt1() {
+			return yt1;
+		}
+		public void setYt1(String yt1) {
+			this.yt1 = yt1;
+		}
+		public String getYt2() {
+			return yt2;
+		}
+		public void setYt2(String yt2) {
+			this.yt2 = yt2;
+		}
+		public String getYt3() {
+			return yt3;
+		}
+		public void setYt3(String yt3) {
+			this.yt3 = yt3;
+		}
+		public String getYt4() {
+			return yt4;
+		}
+		public void setYt4(String yt4) {
+			this.yt4 = yt4;
+		}
+		public String getYt5() {
+			return yt5;
+		}
+		public void setYt5(String yt5) {
+			this.yt5 = yt5;
+		}
+		public String getYt6() {
+			return yt6;
+		}
+		public void setYt6(String yt6) {
+			this.yt6 = yt6;
+		}
+		public String getYt7() {
+			return yt7;
+		}
+		public void setYt7(String yt7) {
+			this.yt7 = yt7;
+		}
+		public String getYt8() {
+			return yt8;
+		}
+		public void setYt8(String yt8) {
+			this.yt8 = yt8;
+		}
+		public String getYt9() {
+			return yt9;
+		}
+		public void setYt9(String yt9) {
+			this.yt9 = yt9;
+		}
+		public String getYt10() {
+			return yt10;
+		}
+		public void setYt10(String yt10) {
+			this.yt10 = yt10;
+		}
+		public String getYt11() {
+			return yt11;
+		}
+		public void setYt11(String yt11) {
+			this.yt11 = yt11;
+		}
+		public String getYt12() {
+			return yt12;
+		}
+		public void setYt12(String yt12) {
+			this.yt12 = yt12;
+		}
+		public String getYt13() {
+			return yt13;
+		}
+		public void setYt13(String yt13) {
+			this.yt13 = yt13;
+		}
+		public String getMs1() {
+			return ms1;
+		}
+		public void setMs1(String ms1) {
+			this.ms1 = ms1;
+		}
+		public String getMs2() {
+			return ms2;
+		}
+		public void setMs2(String ms2) {
+			this.ms2 = ms2;
+		}
+		public String getMs3() {
+			return ms3;
+		}
+		public void setMs3(String ms3) {
+			this.ms3 = ms3;
+		}
+		public String getMs4() {
+			return ms4;
+		}
+		public void setMs4(String ms4) {
+			this.ms4 = ms4;
+		}
+		public String getMs5() {
+			return ms5;
+		}
+		public void setMs5(String ms5) {
+			this.ms5 = ms5;
+		}
+		public String getMs6() {
+			return ms6;
+		}
+		public void setMs6(String ms6) {
+			this.ms6 = ms6;
+		}
+		public String getMs7() {
+			return ms7;
+		}
+		public void setMs7(String ms7) {
+			this.ms7 = ms7;
+		}
+		public String getMs8() {
+			return ms8;
+		}
+		public void setMs8(String ms8) {
+			this.ms8 = ms8;
+		}
+		public String getMs9() {
+			return ms9;
+		}
+		public void setMs9(String ms9) {
+			this.ms9 = ms9;
+		}
+		public String getMs10() {
+			return ms10;
+		}
+		public void setMs10(String ms10) {
+			this.ms10 = ms10;
+		}
+		public String getMs11() {
+			return ms11;
+		}
+		public void setMs11(String ms11) {
+			this.ms11 = ms11;
+		}
+		public String getMs12() {
+			return ms12;
+		}
+		public void setMs12(String ms12) {
+			this.ms12 = ms12;
+		}
+		public String getMs13() {
+			return ms13;
+		}
+		public void setMs13(String ms13) {
+			this.ms13 = ms13;
+		}
+		public String getGys1() {
+			return gys1;
+		}
+		public void setGys1(String gys1) {
+			this.gys1 = gys1;
+		}
+		public String getGys2() {
+			return gys2;
+		}
+		public void setGys2(String gys2) {
+			this.gys2 = gys2;
+		}
+		public String getGys3() {
+			return gys3;
+		}
+		public void setGys3(String gys3) {
+			this.gys3 = gys3;
+		}
+		public String getGys4() {
+			return gys4;
+		}
+		public void setGys4(String gys4) {
+			this.gys4 = gys4;
+		}
+		public String getGys5() {
+			return gys5;
+		}
+		public void setGys5(String gys5) {
+			this.gys5 = gys5;
+		}
+		public String getGys6() {
+			return gys6;
+		}
+		public void setGys6(String gys6) {
+			this.gys6 = gys6;
+		}
+		public String getGys7() {
+			return gys7;
+		}
+		public void setGys7(String gys7) {
+			this.gys7 = gys7;
+		}
+		public String getGys8() {
+			return gys8;
+		}
+		public void setGys8(String gys8) {
+			this.gys8 = gys8;
+		}
+		public String getGys9() {
+			return gys9;
+		}
+		public void setGys9(String gys9) {
+			this.gys9 = gys9;
+		}
+		public String getGys10() {
+			return gys10;
+		}
+		public void setGys10(String gys10) {
+			this.gys10 = gys10;
+		}
+		public String getGys11() {
+			return gys11;
+		}
+		public void setGys11(String gys11) {
+			this.gys11 = gys11;
+		}
+		public String getGys12() {
+			return gys12;
+		}
+		public void setGys12(String gys12) {
+			this.gys12 = gys12;
+		}
+		public String getGys13() {
+			return gys13;
+		}
+		public void setGys13(String gys13) {
+			this.gys13 = gys13;
+		}
 	public String getJiankuanque() {
 		return jiankuanque;
 	}

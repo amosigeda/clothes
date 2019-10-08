@@ -69,7 +69,7 @@
 		tab.insertRow(rownum);
 
 		var n=rownum-7;
-		
+		if(n<=14){
 		for (var i = 0; i < 8; i++) {
 			tab.rows[rownum].insertCell(i);//插入列
 			tab.rows[rownum].cells[i].setAttribute("align","center");
@@ -93,6 +93,9 @@
 		}
 		tab.rows[rownum].insertCell(i);
 		tab.rows[rownum].cells[i].innerHTML = '<a href="#" onclick="delRow(this)">删除行</a>';
+		}else{
+			alert("最多添加14行");
+		}
 	}
 	//删除行
 	function delRow(obj) {

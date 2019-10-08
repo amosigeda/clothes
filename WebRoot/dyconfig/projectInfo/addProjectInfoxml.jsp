@@ -62,7 +62,7 @@ function setSecond(obj){
 		
 	  }else{
 	    var sec = document.getElementById("xiabai");
-	    sec.innerHTML = "<option>无</option><option>直角下摆</option><option>圆角下摆</option><option>大圆角下摆</option><option>燕尾下摆</option><option>其他</option>";
+	    sec.innerHTML = "<option></option><option>直角下摆</option><option>圆角下摆</option><option>大圆角下摆</option><option>燕尾下摆</option><option>其他</option>";
 	  }
 	}
 	
@@ -128,6 +128,57 @@ function setSecond(obj){
         document.getElementById("anniu").setAttribute("value", wechat);
     }
     
+  //添加行  id="huanjiename'+n+'"
+	function addTable() {
+		var tab = document.getElementById("tab01"); //获得表格
+		//var colsNum = tab.rows.item(0).cells.length; //表格的列数
+		//表格当前的行数 
+		var num = document.getElementById("tab01").rows.length;
+	
+		var rownum = num;
+		
+		tab.insertRow(rownum);
+
+		var n=rownum-36;
+		
+		if(n<=13){
+		for (var i = 0; i < 8; i++) {
+			tab.rows[rownum].insertCell(i);//插入列
+			tab.rows[rownum].cells[i].setAttribute("align","center");
+			if (i == 0) {
+				tab.rows[rownum].cells[i].innerHTML = '面料';
+			} else if (i == 1) {
+				tab.rows[rownum].cells[i].innerHTML = '<input name="ml'+n+'" type="text"  size="38" maxlength="100" />';
+			} else if (i == 2) {
+				tab.rows[rownum].cells[i].innerHTML = '用途';
+			} else if( i == 3){
+				tab.rows[rownum].cells[i].innerHTML = '<input name="yt'+n+'" type="text" size="38" maxlength="100"/>';
+			}else if(i == 4 ){
+				tab.rows[rownum].cells[i].innerHTML = '米数';
+			}else if(i == 5){
+				tab.rows[rownum].cells[i].innerHTML = '<input name="ms'+n+'" type="text" size="38" maxlength="100" readonly="true" />';
+			}else if(i == 6){
+				tab.rows[rownum].cells[i].innerHTML = '供应商';
+			}else {
+				tab.rows[rownum].cells[i].innerHTML = '<input name="gys'+n+'" type="text" size="38" maxlength="100" readonly="true" />';
+			}
+		}
+		tab.rows[rownum].insertCell(i);
+		tab.rows[rownum].cells[i].innerHTML = '<a href="#" onclick="delRow(this)">删除行</a>';
+		}else{
+			alert("最多添加13行");
+		}
+	}
+	//删除行
+	function delRow(obj) {
+		var Row = obj.parentNode;
+		var Row = obj.parentNode; //tr
+		while (Row.tagName.toLowerCase() != "tr") {
+			Row = Row.parentNode;
+		}
+		Row.parentNode.removeChild(Row); //删除行
+	}
+	
 </script>
 <body>
 	<span class="title_1"></span>
@@ -144,7 +195,7 @@ function setSecond(obj){
 		
 		
     
-	<table width="100%"  id="tb1"  class="tbl_11" border="1" bordercolorlight=#000000  bordercolordark=#000000  bordercolor=#000000 cellspacing="0"  cellpadding="2"> 
+	<table width="100%"  id="tab01"  class="tbl_11" border="1" bordercolorlight=#000000  bordercolordark=#000000  bordercolor=#000000 cellspacing="0"  cellpadding="2"> 
 	
 	
     		  
@@ -1193,7 +1244,9 @@ function setSecond(obj){
 			</tr> -->
 
 		</table>
-
+<button type="button" onclick="addTable();"
+			style="margin-left: 750px;">添加行</button>
+		<table>
 	</form>
 </body>
 </html>

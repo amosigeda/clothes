@@ -813,6 +813,7 @@ public class ProjectInfoAction extends BaseAction {
 		
 		
 		request.setAttribute("projectInfo", list.get(0));
+	
 		
 		ProjectInfo voo = new ProjectInfo();
 		List<DataMap> Clist = ServiceBean.getInstance().getProjectInfoFacade()
@@ -837,8 +838,10 @@ public class ProjectInfoAction extends BaseAction {
 		List<DataMap> listDuoyu = ServiceBean.getInstance().getProjectInfoFacade()
 				.getProjectInfoDuoYu(duoyu);
 		if(listDuoyu.size()>0){
-			request.setAttribute("fuwei_quea", listDuoyu.get(0).get("fuwei_quea")+"");
-			request.setAttribute("fuwei_queb", listDuoyu.get(0).get("fuwei_queb")+"");
+			/*request.setAttribute("fuwei_quea", listDuoyu.get(0).get("fuwei_quea")+"");
+			request.setAttribute("fuwei_queb", listDuoyu.get(0).get("fuwei_queb")+"");*/
+			
+			request.setAttribute("duoyu", listDuoyu.get(0));
 		}
 		
 			return mapping.findForward("updateProjectInfoxml");
@@ -2113,6 +2116,64 @@ public class ProjectInfoAction extends BaseAction {
 			
 			insertVO.setOrderNumber(orderId);
 			insertVO.setFuwei_queb(" ");
+			
+			String ml1 = request.getParameter("ml1");
+			String ml2 = request.getParameter("ml2");
+			String ml3 = request.getParameter("ml3");
+			String ml4 = request.getParameter("ml4");
+			String ml5 = request.getParameter("ml5");
+			String ml6 = request.getParameter("ml6");
+			String ml7 = request.getParameter("ml7");
+			String ml8 = request.getParameter("ml8");
+			String ml9 = request.getParameter("ml9");
+			String ml10 = request.getParameter("ml10");
+			String ml11 = request.getParameter("ml11");
+			String ml12 = request.getParameter("ml12");
+			String ml13 = request.getParameter("ml13");
+			insertVO.setMl1(ml1);
+			insertVO.setMl2(ml2);
+			insertVO.setMl3(ml3);
+			insertVO.setMl4(ml4);
+			insertVO.setMl5(ml5);
+			insertVO.setMl6(ml6);
+			insertVO.setMl7(ml7);
+			insertVO.setMl8(ml8);
+			insertVO.setMl9(ml9);
+			insertVO.setMl10(ml10);
+			insertVO.setMl11(ml11);
+			insertVO.setMl12(ml12);
+			insertVO.setMl13(ml13);
+			
+			String yt1 = request.getParameter("yt1");
+			String yt2 = request.getParameter("yt2");
+			String yt3 = request.getParameter("yt3");
+			String yt4 = request.getParameter("yt4");
+			String yt5 = request.getParameter("yt5");
+			String yt6 = request.getParameter("yt6");
+			String yt7 = request.getParameter("yt7");
+			String yt8 = request.getParameter("yt8");
+			String yt9 = request.getParameter("yt9");
+			String yt10 = request.getParameter("yt10");
+			String yt11 = request.getParameter("yt11");
+			String yt12 = request.getParameter("yt12");
+			String yt13 = request.getParameter("yt13");
+			insertVO.setYt1(yt1);
+			insertVO.setYt2(yt2);
+			insertVO.setYt3(yt3);
+			insertVO.setYt4(yt4);
+			insertVO.setYt5(yt5);
+			insertVO.setYt6(yt6);
+			insertVO.setYt7(yt7);
+			insertVO.setYt8(yt8);
+			insertVO.setYt9(yt9);
+			insertVO.setYt10(yt10);
+			insertVO.setYt11(yt11);
+			insertVO.setYt12(yt12);
+			insertVO.setYt13(yt13);
+			
+			
+			
+			
 			ServiceBean.getInstance().getProjectInfoFacade()
 			.insertPorjectInfoDuoyu(insertVO);
 			
@@ -2575,7 +2636,7 @@ public class ProjectInfoAction extends BaseAction {
 			String fuwei_quea = request.getParameter("fuwei_quea");
 			String fuwei_queb = request.getParameter("fuwei_queb");
 			
-			if(!"".equals(fuwei_quea) || !"".equals(fuwei_queb) ){
+			//if(!"".equals(fuwei_quea) || !"".equals(fuwei_queb) ){
 				ProjectInfo insertVO = new ProjectInfo();
 				
 				System.out.println("fuwei_quea="+fuwei_quea);
@@ -2586,9 +2647,119 @@ public class ProjectInfoAction extends BaseAction {
 				
 				insertVO.setOrderNumber(orderId);
 				
+				String ml1 = request.getParameter("ml1");
+				String ml2 = request.getParameter("ml2");
+				String ml3 = request.getParameter("ml3");
+				String ml4 = request.getParameter("ml4");
+				String ml5 = request.getParameter("ml5");
+				String ml6 = request.getParameter("ml6");
+				String ml7 = request.getParameter("ml7");
+				String ml8 = request.getParameter("ml8");
+				String ml9 = request.getParameter("ml9");
+				String ml10 = request.getParameter("ml10");
+				String ml11 = request.getParameter("ml11");
+				String ml12 = request.getParameter("ml12");
+				String ml13 = request.getParameter("ml13");
+				insertVO.setMl1(ml1);
+				insertVO.setMl2(ml2);
+				insertVO.setMl3(ml3);
+				insertVO.setMl4(ml4);
+				insertVO.setMl5(ml5);
+				insertVO.setMl6(ml6);
+				insertVO.setMl7(ml7);
+				insertVO.setMl8(ml8);
+				insertVO.setMl9(ml9);
+				insertVO.setMl10(ml10);
+				insertVO.setMl11(ml11);
+				insertVO.setMl12(ml12);
+				insertVO.setMl13(ml13);
+				
+				String yt1 = request.getParameter("yt1");
+				String yt2 = request.getParameter("yt2");
+				String yt3 = request.getParameter("yt3");
+				String yt4 = request.getParameter("yt4");
+				String yt5 = request.getParameter("yt5");
+				String yt6 = request.getParameter("yt6");
+				String yt7 = request.getParameter("yt7");
+				String yt8 = request.getParameter("yt8");
+				String yt9 = request.getParameter("yt9");
+				String yt10 = request.getParameter("yt10");
+				String yt11 = request.getParameter("yt11");
+				String yt12 = request.getParameter("yt12");
+				String yt13 = request.getParameter("yt13");
+				insertVO.setYt1(yt1);
+				insertVO.setYt2(yt2);
+				insertVO.setYt3(yt3);
+				insertVO.setYt4(yt4);
+				insertVO.setYt5(yt5);
+				insertVO.setYt6(yt6);
+				insertVO.setYt7(yt7);
+				insertVO.setYt8(yt8);
+				insertVO.setYt9(yt9);
+				insertVO.setYt10(yt10);
+				insertVO.setYt11(yt11);
+				insertVO.setYt12(yt12);
+				insertVO.setYt13(yt13);
+				
+				String ms1 = request.getParameter("ms1");
+				String ms2 = request.getParameter("ms2");
+				String ms3 = request.getParameter("ms3");
+				String ms4 = request.getParameter("ms4");
+				String ms5 = request.getParameter("ms5");
+				String ms6 = request.getParameter("ms6");
+				String ms7 = request.getParameter("ms7");
+				String ms8 = request.getParameter("ms8");
+				String ms9 = request.getParameter("ms9");
+				String ms10 = request.getParameter("ms10");
+				String ms11 = request.getParameter("ms11");
+				String ms12 = request.getParameter("ms12");
+				String ms13 = request.getParameter("ms13");
+				insertVO.setMs1(ms1);
+				insertVO.setMs2(ms2);
+				insertVO.setMs3(ms3);
+				insertVO.setMs4(ms4);
+				insertVO.setMs5(ms5);
+				insertVO.setMs6(ms6);
+				insertVO.setMs7(ms7);
+				insertVO.setMs8(ms8);
+				insertVO.setMs9(ms9);
+				insertVO.setMs10(ms10);
+				insertVO.setMs11(ms11);
+				insertVO.setMs12(ms12);
+				insertVO.setMs13(ms13);
+				
+				
+				String gys1 = request.getParameter("gys1");
+				String gys2 = request.getParameter("gys2");
+				String gys3 = request.getParameter("gys3");
+				String gys4 = request.getParameter("gys4");
+				String gys5 = request.getParameter("gys5");
+				String gys6 = request.getParameter("gys6");
+				String gys7 = request.getParameter("gys7");
+				String gys8 = request.getParameter("gys8");
+				String gys9 = request.getParameter("gys9");
+				String gys10 = request.getParameter("gys10");
+				String gys11 = request.getParameter("gys11");
+				String gys12 = request.getParameter("gys12");
+				String gys13 = request.getParameter("gys13");
+				insertVO.setGys1(gys1);
+				insertVO.setGys2(gys2);
+				insertVO.setGys3(gys3);
+				insertVO.setGys4(gys4);
+				insertVO.setGys5(gys5);
+				insertVO.setGys6(gys6);
+				insertVO.setGys7(gys7);
+				insertVO.setGys8(gys8);
+				insertVO.setGys9(gys9);
+				insertVO.setGys10(gys10);
+				insertVO.setGys11(gys11);
+				insertVO.setGys12(gys12);
+				insertVO.setGys13(gys13);
+				
+				
 				ServiceBean.getInstance().getProjectInfoFacade()
 				.insertPorjectInfoDuoyu(insertVO);
-			}
+			//}
 			
 			
 			

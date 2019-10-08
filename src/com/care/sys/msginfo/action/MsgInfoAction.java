@@ -340,6 +340,21 @@ public class MsgInfoAction extends BaseAction {
 			String mianliao13 = request.getParameter("mianliao13");
 			String mianliao14 = request.getParameter("mianliao14");
 			
+			vo.setMianliao1(mianliao1);
+			vo.setMianliao2(mianliao2);
+			vo.setMianliao3(mianliao3);
+			vo.setMianliao4(mianliao4);
+			vo.setMianliao5(mianliao5);
+			vo.setMianliao6(mianliao6);
+			vo.setMianliao7(mianliao7);
+			vo.setMianliao8(mianliao8);
+			vo.setMianliao9(mianliao9);
+			vo.setMianliao10(mianliao10);
+			vo.setMianliao11(mianliao11);
+			vo.setMianliao12(mianliao12);
+			vo.setMianliao13(mianliao13);
+			vo.setMianliao14(mianliao14);
+			
 			
 			String yongtu1 = request.getParameter("yongtu1");
 			String yongtu2 = request.getParameter("yongtu2");
@@ -355,6 +370,82 @@ public class MsgInfoAction extends BaseAction {
 			String yongtu12 = request.getParameter("yongtu12");
 			String yongtu13 = request.getParameter("yongtu13");
 			String yongtu14 = request.getParameter("yongtu14");
+			
+			vo.setYongtu1(yongtu1);
+			vo.setYongtu2(yongtu2);
+			vo.setYongtu3(yongtu3);
+			vo.setYongtu4(yongtu4);
+			vo.setYongtu5(yongtu5);
+			vo.setYongtu6(yongtu6);
+			vo.setYongtu7(yongtu7);
+			vo.setYongtu8(yongtu8);
+			vo.setYongtu9(yongtu9);
+			vo.setYongtu10(yongtu10);
+			vo.setYongtu11(yongtu11);
+			vo.setYongtu12(yongtu12);
+			vo.setYongtu13(yongtu13);
+			vo.setYongtu14(yongtu14);
+			
+			
+			String mi1 = request.getParameter("mi1");
+			String mi2 = request.getParameter("mi2");
+			String mi3 = request.getParameter("mi3");
+			String mi4 = request.getParameter("mi4");
+			String mi5 = request.getParameter("mi5");
+			String mi6 = request.getParameter("mi6");
+			String mi7 = request.getParameter("mi7");
+			String mi8 = request.getParameter("mi8");
+			String mi9 = request.getParameter("mi9");
+			String mi10 = request.getParameter("mi10");
+			String mi11 = request.getParameter("mi11");
+			String mi12 = request.getParameter("mi12");
+			String mi13 = request.getParameter("mi13");
+			String mi14 = request.getParameter("mi14");
+			
+			vo.setMi1(mi1);
+			vo.setMi2(mi2);
+			vo.setMi3(mi3);
+			vo.setMi4(mi4);
+			vo.setMi5(mi5);
+			vo.setMi6(mi6);
+			vo.setMi7(mi7);
+			vo.setMi8(mi8);
+			vo.setMi9(mi9);
+			vo.setMi10(mi10);
+			vo.setMi11(mi11);
+			vo.setMi12(mi12);
+			vo.setMi13(mi13);
+			vo.setMi14(mi14);
+			
+			String gys1 = request.getParameter("gys1");
+			String gys2 = request.getParameter("gys2");
+			String gys3 = request.getParameter("gys3");
+			String gys4 = request.getParameter("gys4");
+			String gys5 = request.getParameter("gys5");
+			String gys6 = request.getParameter("gys6");
+			String gys7 = request.getParameter("gys7");
+			String gys8 = request.getParameter("gys8");
+			String gys9 = request.getParameter("gys9");
+			String gys10 = request.getParameter("gys10");
+			String gys11 = request.getParameter("gys11");
+			String gys12 = request.getParameter("gys12");
+			String gys13 = request.getParameter("gys13");
+			String gys14 = request.getParameter("gys14");
+			
+			vo.setGys1(gys1);
+			vo.setGys2(gys2);
+			vo.setGys3(gys3);
+			vo.setGys4(gys4);
+			vo.setGys5(gys5);
+			vo.setGys6(gys6);
+			vo.setGys7(gys7);
+			vo.setGys8(gys8);
+			vo.setGys9(gys9);
+			vo.setGys10(gys10);
+			vo.setGys11(gys11);
+			vo.setGys12(gys12);
+			vo.setGys13(gys13);
+			vo.setGys14(gys14);
 			
 			
 			
@@ -516,6 +607,131 @@ public class MsgInfoAction extends BaseAction {
 			
 			}
 //1客服保存 2客服提交 3批单保存 4批单提交  5跟单保存 6跟单提交 7跟单退回  8批单退回
+			
+			
+			String mianliao1 = request.getParameter("mianliao1");
+			String mianliao2 = request.getParameter("mianliao2");
+			String mianliao3 = request.getParameter("mianliao3");
+			String mianliao4 = request.getParameter("mianliao4");
+			String mianliao5 = request.getParameter("mianliao5");
+			String mianliao6 = request.getParameter("mianliao6");
+			String mianliao7 = request.getParameter("mianliao7");
+			String mianliao8 = request.getParameter("mianliao8");
+			String mianliao9 = request.getParameter("mianliao9");
+			String mianliao10 = request.getParameter("mianliao10");
+			String mianliao11 = request.getParameter("mianliao11");
+			String mianliao12 = request.getParameter("mianliao12");
+			String mianliao13 = request.getParameter("mianliao13");
+			String mianliao14 = request.getParameter("mianliao14");
+			
+			vo.setMianliao1(mianliao1);
+			vo.setMianliao2(mianliao2);
+			vo.setMianliao3(mianliao3);
+			vo.setMianliao4(mianliao4);
+			vo.setMianliao5(mianliao5);
+			vo.setMianliao6(mianliao6);
+			vo.setMianliao7(mianliao7);
+			vo.setMianliao8(mianliao8);
+			vo.setMianliao9(mianliao9);
+			vo.setMianliao10(mianliao10);
+			vo.setMianliao11(mianliao11);
+			vo.setMianliao12(mianliao12);
+			vo.setMianliao13(mianliao13);
+			vo.setMianliao14(mianliao14);
+			
+			
+			String yongtu1 = request.getParameter("yongtu1");
+			String yongtu2 = request.getParameter("yongtu2");
+			String yongtu3 = request.getParameter("yongtu3");
+			String yongtu4 = request.getParameter("yongtu4");
+			String yongtu5 = request.getParameter("yongtu5");
+			String yongtu6 = request.getParameter("yongtu6");
+			String yongtu7 = request.getParameter("yongtu7");
+			String yongtu8 = request.getParameter("yongtu8");
+			String yongtu9 = request.getParameter("yongtu9");
+			String yongtu10 = request.getParameter("yongtu10");
+			String yongtu11 = request.getParameter("yongtu11");
+			String yongtu12 = request.getParameter("yongtu12");
+			String yongtu13 = request.getParameter("yongtu13");
+			String yongtu14 = request.getParameter("yongtu14");
+			
+			vo.setYongtu1(yongtu1);
+			vo.setYongtu2(yongtu2);
+			vo.setYongtu3(yongtu3);
+			vo.setYongtu4(yongtu4);
+			vo.setYongtu5(yongtu5);
+			vo.setYongtu6(yongtu6);
+			vo.setYongtu7(yongtu7);
+			vo.setYongtu8(yongtu8);
+			vo.setYongtu9(yongtu9);
+			vo.setYongtu10(yongtu10);
+			vo.setYongtu11(yongtu11);
+			vo.setYongtu12(yongtu12);
+			vo.setYongtu13(yongtu13);
+			vo.setYongtu14(yongtu14);
+			
+			
+			String mi1 = request.getParameter("mi1");
+			String mi2 = request.getParameter("mi2");
+			String mi3 = request.getParameter("mi3");
+			String mi4 = request.getParameter("mi4");
+			String mi5 = request.getParameter("mi5");
+			String mi6 = request.getParameter("mi6");
+			String mi7 = request.getParameter("mi7");
+			String mi8 = request.getParameter("mi8");
+			String mi9 = request.getParameter("mi9");
+			String mi10 = request.getParameter("mi10");
+			String mi11 = request.getParameter("mi11");
+			String mi12 = request.getParameter("mi12");
+			String mi13 = request.getParameter("mi13");
+			String mi14 = request.getParameter("mi14");
+			
+			vo.setMi1(mi1);
+			vo.setMi2(mi2);
+			vo.setMi3(mi3);
+			vo.setMi4(mi4);
+			vo.setMi5(mi5);
+			vo.setMi6(mi6);
+			vo.setMi7(mi7);
+			vo.setMi8(mi8);
+			vo.setMi9(mi9);
+			vo.setMi10(mi10);
+			vo.setMi11(mi11);
+			vo.setMi12(mi12);
+			vo.setMi13(mi13);
+			vo.setMi14(mi14);
+			
+			String gys1 = request.getParameter("gys1");
+			String gys2 = request.getParameter("gys2");
+			String gys3 = request.getParameter("gys3");
+			String gys4 = request.getParameter("gys4");
+			String gys5 = request.getParameter("gys5");
+			String gys6 = request.getParameter("gys6");
+			String gys7 = request.getParameter("gys7");
+			String gys8 = request.getParameter("gys8");
+			String gys9 = request.getParameter("gys9");
+			String gys10 = request.getParameter("gys10");
+			String gys11 = request.getParameter("gys11");
+			String gys12 = request.getParameter("gys12");
+			String gys13 = request.getParameter("gys13");
+			String gys14 = request.getParameter("gys14");
+			
+			vo.setGys1(gys1);
+			vo.setGys2(gys2);
+			vo.setGys3(gys3);
+			vo.setGys4(gys4);
+			vo.setGys5(gys5);
+			vo.setGys6(gys6);
+			vo.setGys7(gys7);
+			vo.setGys8(gys8);
+			vo.setGys9(gys9);
+			vo.setGys10(gys10);
+			vo.setGys11(gys11);
+			vo.setGys12(gys12);
+			vo.setGys13(gys13);
+			vo.setGys14(gys14);
+			
+			
 			ServiceBean.getInstance().getMsgInfoFacade().updateMsgInfo(vo);
 			
 			if("2".equals(anniu)&&"跟单".equals(role)){

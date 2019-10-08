@@ -833,16 +833,16 @@ System.out.println("生成EXCEL文件 名称="+name+"         订单号="+orderI
 			
 			
 		
-			sheet.setColumnView(0, 10);
-			sheet.setColumnView(1, 15);
-			sheet.setColumnView(2, 10);
-			sheet.setColumnView(3, 15);
-			sheet.setColumnView(4, 10);
-			sheet.setColumnView(5, 15);
-			sheet.setColumnView(6, 10);
-			sheet.setColumnView(7, 15);
-			sheet.setColumnView(8, 10);
-			sheet.setColumnView(9, 15);
+			sheet.setColumnView(0, 9);
+			sheet.setColumnView(1, 13);
+			sheet.setColumnView(2, 9);
+			sheet.setColumnView(3, 13);
+			sheet.setColumnView(4, 9);
+			sheet.setColumnView(5, 13);
+			sheet.setColumnView(6, 9);
+			sheet.setColumnView(7, 13);
+			sheet.setColumnView(8, 9);
+			sheet.setColumnView(9, 13);
 			
 			sheet.setRowView(0, 400, false);
 			sheet.setRowView(1, 400, false);
@@ -966,6 +966,9 @@ System.out.println("生成EXCEL文件 名称="+name+"         订单号="+orderI
 	public static void writeExcelShouHou(String orderId,String shouhouriqi ,String xiadankefu,String yonghuname
 			,String shouhoucishu,String xiadanshijian,String jiaofushijian,String mianliao,String yongtu,
 			String mi,String gongyingshang,String remake
+			/*,String mianliao1,String mianliao2,String mianliao3,String mianliao4,String mianliao5,String mianliao6,String mianliao7,String mianliao8,String mianliao9,String mianliao10,String mianliao11,String mianliao12,String mianliao13,String mianliao14,
+			String yongtu1,String yongtu2,String yongtu3,String yongtu4,String yongtu5,String yongtu6,String yongtu7,String yongtu8,String yongtu9,String yongtu10,String yongtu11,String yongtu12,String yongtu13,String yongtu14,
+			String yongtu1,*/
 			) throws IOException {
 		try {
 //			String Divpath = "E:\\idea\\test\\";// 文件保存路径
