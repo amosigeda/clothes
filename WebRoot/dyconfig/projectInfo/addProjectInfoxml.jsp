@@ -134,14 +134,14 @@ function setSecond(obj){
 		//var colsNum = tab.rows.item(0).cells.length; //表格的列数
 		//表格当前的行数 
 		var num = document.getElementById("tab01").rows.length;
-	
-		var rownum = num;
+	 /*   alert("当前行="+num); */
+		var rownum = num-5;
 		
 		tab.insertRow(rownum);
 
-		var n=rownum-36;
-		
-		if(n<=13){
+		var n=rownum-35+5;
+		/*    alert("n="+n); */
+		if(n<=14){
 		for (var i = 0; i < 8; i++) {
 			tab.rows[rownum].insertCell(i);//插入列
 			tab.rows[rownum].cells[i].setAttribute("align","center");
@@ -152,7 +152,19 @@ function setSecond(obj){
 			} else if (i == 2) {
 				tab.rows[rownum].cells[i].innerHTML = '用途';
 			} else if( i == 3){
-				tab.rows[rownum].cells[i].innerHTML = '<input name="yt'+n+'" type="text" size="38" maxlength="100"/>';
+				tab.rows[rownum].cells[i].innerHTML = '<select name="yt'+n+'"  value="" style="width:100%"  > <option value=""></option> <option value="上衣">上衣</option> <option value="裤子">裤子</option>  <option value="马甲">马甲</option> <option value="衬衫">衬衫</option> <option value="西装套装">西装套装</option><option value="换片">换片</option><option value="其他">其他</option></select>';
+				 
+					/* '<input name="yt'+n+'" type="text" size="38" maxlength="100"/>'; */
+					
+					
+				/* <option value="上衣">上衣</option>
+				<option value="裤子">裤子</option>
+				<option value="马甲">马甲</option>
+				<option value="衬衫">衬衫</option>
+				<option value="西装套装">西装套装</option>
+				<option value="换片">换片</option>
+				<option value="其他">其他</option> */
+					/* '<input name="yt'+n+'" type="text" size="38" maxlength="100"/>'; */
 			}else if(i == 4 ){
 				tab.rows[rownum].cells[i].innerHTML = '米数';
 			}else if(i == 5){
@@ -164,9 +176,9 @@ function setSecond(obj){
 			}
 		}
 		tab.rows[rownum].insertCell(i);
-		tab.rows[rownum].cells[i].innerHTML = '<a href="#" onclick="delRow(this)">删除行</a>';
+		tab.rows[rownum].cells[i].innerHTML = '<a href="#" onclick="delRow(this)">-</a>';
 		}else{
-			alert("最多添加13行");
+			alert("最多新增15行");
 		}
 	}
 	//删除行
@@ -178,6 +190,38 @@ function setSecond(obj){
 		}
 		Row.parentNode.removeChild(Row); //删除行
 	}
+	
+	function look(){
+		var value=document.getElementById("jiaofu_time").value;//获取值
+	 
+		
+		 
+		
+
+		  var a = new Date();
+		  a = a.valueOf();
+		  a = a + value * 24 * 60 * 60 * 1000;
+		  a = new Date(a);
+
+var months = a.getMonth()+1;
+var days = a.getDate();
+var hours = a.getHours();
+var min = a.getMinutes();
+var year = a.getFullYear();
+
+
+var xianshi=year+"/"+months+"/"+days+" "+hours+":"+min;
+document.getElementById("test").setAttribute("value", xianshi );
+
+
+
+
+	 
+
+	 
+
+	}
+	
 	
 </script>
 <body>
@@ -297,20 +341,20 @@ function setSecond(obj){
 						<option value="重做">重做</option>
 				</select>
 				</td>
-				<td nowrap="nowrap" align="center" width="7%">交付时间</td>
+				<td nowrap="nowrap" align="center" width="7%">交付时间<input  type="text" name="test" id="test"></td>
 				<td nowrap="nowrap" align="left" width="7%">
 				
 			<!-- 	<input name="startTime1" type="text" class="txt_1"  id="startTime1" style="cursor:text"
 								 onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
 								size="20" readonly> -->
 					
-				<select name="jiaofu_time"  id="jiaofu_time" >
+				<select name="jiaofu_time"  id="jiaofu_time" onchange="look();" >
 						<option value="10">+10天  加急</option>
 						<option value="5">+5天  特别加急</option>
 						<option value="3">+3天   非常紧急</option>
-				</select> <font color="red"><span id="uNameSpan"></span></font>
+				</select> 
 				</td>
-			
+				
 				
 			</tr>
 			<tr>
@@ -583,10 +627,13 @@ function setSecond(obj){
 				<td nowrap="nowrap" align="center" width="7%">
 				<select name="koudaiC" value="koudaiC">
 				         <option value=""></option>
-						<option value="1平袋盖、4斜袋盖">1平袋盖、4斜袋盖</option>
-						<option value="2平单线、5斜单线">2平单线、5斜单线</option>
-						<option value="3平双线、6斜双线">3平双线、6斜双线</option>
-						<option value="7外贴袋">7外贴袋</option>
+						<option value="平袋盖">平袋盖</option>
+						<option value="平单线">平单线</option>
+						<option value="平双线">平双线</option>
+						<option value="斜袋盖">斜袋盖</option>
+						<option value="斜单线">斜单线</option>
+						<option value="斜双线">斜双线</option>
+						<option value="外贴袋">外贴袋</option>
 				</select> <font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%">开叉</td>
 				<td nowrap="nowrap" align="center" width="7%">
@@ -714,7 +761,8 @@ function setSecond(obj){
 				</td>
 			</tr>
 			<tr>
-				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%"><button type="button" onclick="addTable();"
+			style="margin-left: 0px;">+</button>面料</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<input name="miaoliao1" size="38" id="miaoliao1"
 					type="text" class="txt_1" maxlength="100" /><font color="red"></font>
@@ -730,14 +778,14 @@ function setSecond(obj){
 						<option value="西装套装">西装套装</option>
 						<option value="换片">换片</option>
 						<option value="其他">其他</option>
-				</select> <font color="red"></font>
+				</select>
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">米数</td>
 				<td nowrap="nowrap" align="center" width="7%"><input name="" size="38" id="" type="text" class="txt_1" maxlength="100" readonly="true"  /></td>
 				<td nowrap="nowrap" align="center" width="7%">供应商</td>
 				<td nowrap="nowrap" align="center" width="7%"><input name="" size="38" id="" type="text" class="txt_1" maxlength="100" readonly="true"  /></td>
 			</tr>
-			<tr>
+			<!-- <tr>
 				<td nowrap="nowrap" align="center" width="7%">面料</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<input name="miaoliao2" size="38" id="miaoliao2"
@@ -760,17 +808,39 @@ function setSecond(obj){
 				<td nowrap="nowrap" align="center" width="7%"><input name="" size="38" id="" type="text" class="txt_1" maxlength="100" readonly="true"  /></td>
 				<td nowrap="nowrap" align="center" width="7%">供应商</td>
 				<td nowrap="nowrap" align="center" width="7%"><input name="" size="38" id="" type="text" class="txt_1" maxlength="100" readonly="true"  /></td>
-			</tr>
+			</tr> -->
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">附件</td>
 				<td nowrap="nowrap" align="center" width="7%">
-				<input type="file" name="channelId"
-					id="channelId" /><!--  <img alt=""  multiple="multiple"  
+				<input type="file" name="channelId" style="width:180px;"
+					/>
+					 <!--  <input type="file" name="impFile[0]"  style="width:50px;"/>
+                    <input type="file" name="impFile[1]"  style="width:50px;"/> -->
+					<!--  <img alt=""  multiple="multiple"  
 					src="" id="image1" class="showImage"> -->
 					
+					</td>
+					
+					<td nowrap="nowrap" align="center" width="7%">
+				
+					 <input type="file" name="impFile[0]"  style="width:180px;"/>
+                   <!--   <input type="file" name="impFile[1]"  style="width:50px;"/> -->
+					<!--  <img alt=""  multiple="multiple"  
+					src="" id="image1" class="showImage"> -->
 					
 					</td>
+					
+					<td nowrap="nowrap" align="center" width="7%">
+                     <input type="file" name="impFile[1]"  style="width:180px;"/>
+					</td>
+					<td nowrap="nowrap" align="center" width="7%">
+                     <input type="file" name="impFile[2]"  style="width:180px;"/>
+					</td>
+					<td nowrap="nowrap" align="center" width="7%">
+                     <input type="file" name="impFile[3]"  style="width:180px;"/>
+					</td>
 			</tr>
+			
 			
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">客服备注</td>
@@ -804,8 +874,6 @@ function setSecond(obj){
 			
 			
 			
-				
-		
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%"></td>
 				<td nowrap="nowrap" align="right" width="7%">
@@ -830,423 +898,15 @@ function setSecond(obj){
 					style="font-size:12;width:40px;height:21px;">
 					</td>
 			
-			</tr>
+			</tr>	
+		
 			
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-
-	<!-- 		<tr>
-				<td align="left">订单编号</td>
-				<td colspan="2" align="left">自动生成</td>
-				<td align="left">旺旺名</td>
-				<td colspan="2" align="left"></td>
-				<td align="left">销售价格</td>
-				<td align="left"></td>
-			</tr>
-
-			<tr>
-				<td>微信名</td>
-				<td colspan="2"></td>
-				<td>订单号</td>
-				<td colspan="2"></td>
-				<td>下单时间</td>
-				<td></td>
-			</tr>
-
-
-			<tr>
-				<td>客户电话</td>
-				
-				<td>订单类型</td>
-				<td colspan="2"></td>
-				<td>交付时间</td>
-				<td>
-				</td>
-			</tr>
-
-
-			<tr>
-				<td>客户姓名</td>
-				<td></td>
-				<td>渠道</td>
-				
-				<td>下单客服</td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-
-			<tr>
-				<td>客户地址</td>
-				<td colspan="7">
-				</td>
-			</tr>
-
-			<tr>
-				<td>身高</td>
-				<td></td>
-				<td>体重</td>
-				<td></td>
-				<td>年龄</td>
-				
-				<td>性别</td>
-				<td></td>
-			</tr>
-
-			<tr>
-				<td >西装数量</td>
-						<td></td>
-				<td>衣码</td>
-				<td >衬衫数量</td>
-				<td></td>
-				<td>衬衫码</td>
-				<td></td>
-				<td></td>
-			</tr>
-
-			<tr>
-				<td>肩宽</td>
-				<td>
-				</td>
-				<td></td>
-				<td>领围</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-
-			<tr>
-				<td>胸围</td>
-				<td>
-				</td>
-				<td></td>
-				<td>胸围</td>
-				<td>
-				</td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-
-			<tr>
-				<td>中腰</td>
-				<td>
-				</td>
-				<td></td>
-				<td>中腰</td>
-				<td>
-				</td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-
-			<tr>
-				<td>腹围</td>
-				<td></td>
-				<td></td>
-				<td>腹围</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-
-			<tr>
-				<td>后中衣长</td>
-				<td></td>
-				<td></td>
-				<td>袖长</td>
-				<td>
-				</td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-
-			<tr>
-				<td>前衣长</td>
-				<td>
-				</td>
-				<td></td>
-				<td>袖肥</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-
-			<tr>
-				<td>袖长</td>
-				<td>
-				</td>
-				<td></td>
-				<td>袖口</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-
-			<tr>
-				<td>袖肥</td>
-				<td></td>
-				<td></td>
-				<td>领口款式</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-
-
-			<tr>
-				<td>袖口</td>
-				<td></td>
-				<td></td>
-				<td>衣长</td>
-				<td><input name="yichangB" size="38" id="yichangB" type="text"
-					class="txt_1" maxlength="100" /><font color="red"></font></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-
-			<tr>
-				<td>西裤数量</td>
-				<td></td>
-				<td>裤码</td>
-				<td >马甲数量</td>
-					<td></td>
-				<td>马甲码</td>
-				<td></td>
-				<td></td>
-			</tr>
-
-
-			<tr>
-				<td>裤长</td>
-				<td></td>
-				<td></td>
-				<td>胸围</td>
-				<td>
-				</td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-
-
-			<tr>
-				<td>腰围</td>
-				<td></td>
-				<td></td>
-				<td>中腰</td>
-				<td>
-				</td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-
-			<tr>
-				<td>臀围</td>
-				<td></td>
-				<td></td>
-				<td>衣长</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-
-
-			<tr>
-				<td>档围</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-
-			<tr>
-				<td>大腿</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-
-
-			<tr>
-				<td>中腿</td>
-				<td>
-				</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-
-
-			<tr>
-				<td>小腿</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-
-			<tr>
-				<td>脚口</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-
-			<tr>
-				<td>扣型</td>
-				<td></td>
-				<td>扣色</td>
-				<td><input name="kouseC" size="38" id="kouseC" type="text"
-					class="txt_1" maxlength="100" /><font color="red"></font></td>
-				<td>款型</td>
-				<td></td>
-				<td>驳头</td>
-				<td><select name="botouD" value="botouD">
-						<option value="西装领">西装领</option>
-						<option value="平驳领">平驳领</option>
-						<option value="戗驳领">戗驳领</option>
-						<option value="青果领">青果领</option>
-						<option value="立领">立领</option>
-						<option value="中华立领">中华立领</option>
-						<option value="其它">其它</option>
-				</select> <font color="red"></font></td>
-			</tr>
-
-			<tr>
-				<td>口袋</td>
-				<td></td>
-				<td>袋盖</td>
-				<td><select name="daigai" value="daigai">
-						<option value="有">有</option>
-						<option value="无">无</option>
-						<option value="其它">其它</option>
-				</select> <font color="red"></font></td>
-				<td>平斜袋</td>
-				<td><select name="pingxiedai" value="pingxiedai">
-						<option value="平袋">平袋</option>
-						<option value="斜袋">斜袋</option>
-						<option value="其它">其它</option>
-				</select> <font color="red"></font></td>
-				<td></td>
-				<td></td>
-			</tr>
-
-			<tr>
-				<td>面料1</td>
-				<td>
-				</td>
-				<td>米数</td>
-				<td></td>
-				<td>用途</td>
-				<td>
-			</td>
-				
-				<input name="yongtu1" size="38" id="yongtu1" type="text"
-					class="txt_1" maxlength="100" /><font color="red"></font>
-					
-					</td>
-				<td>供应商</td>
-				<td></td>
-			</tr>
- 
-			<tr>
-				<td>面料2</td>
-				<td>
-				</td>
-				<td>米数</td>
-				<td></td>
-				<td>用途</td>
-				<td>
-				
-				</td>
-				<input name="yongtu2" size="38" id="yongtu2" type="text"
-					class="txt_1" maxlength="100" /><font color="red"></font></td>
-				<td>供应商</td>
-				<td></td>
-			</tr>
-
-			<tr>
-				<td>体型备注</td>
-				<td colspan="3"><input name="tixingremark" size=60"
-					id="tixingremark" type="text" class="txt_1" maxlength="1000" /><font
-					color="red"></font></td>
-				<td>备注</td>
-				<td colspan="3">
-				</td>
-			</tr>
-
-			<tr>
-				<td align="left">附件(ZIP)</td>
-				<td colspan="2">请压缩后再添加--
-				</td>
-					
-						<td align="left" colspan="2">&
-				</td>
-			</tr>
-			
-				<tr>
-				<td>提交类型</td>
-				<td colspan="7">
-						
-					</td>
-				
-			</tr>
-			
-			<tr>
-					<td></td>
-				<td colspan="7">
-					
-					</td>
-				
-			</tr> -->
+	
 
 		</table>
-<button type="button" onclick="addTable();"
-			style="margin-left: 750px;">添加行</button>
-		<table>
+
+			
 	</form>
 </body>
 </html>

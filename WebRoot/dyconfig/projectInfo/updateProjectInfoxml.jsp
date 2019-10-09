@@ -28,6 +28,69 @@ appearance: none;
 </style> -->
 
 <script language="javascript">
+//添加行  id="huanjiename'+n+'"
+function addTable() {
+	var tab = document.getElementById("tab01"); //获得表格
+	//var colsNum = tab.rows.item(0).cells.length; //表格的列数
+	//表格当前的行数 
+	var num = document.getElementById("tab01").rows.length;
+
+	var rownum = num-5;
+	
+	tab.insertRow(rownum);
+
+	var n=rownum-35+5;
+
+	if(n<=14){
+	for (var i = 0; i < 8; i++) {
+		tab.rows[rownum].insertCell(i);//插入列
+		tab.rows[rownum].cells[i].setAttribute("align","center");
+		if (i == 0) {
+			tab.rows[rownum].cells[i].innerHTML = '面料';
+		} else if (i == 1) {
+			tab.rows[rownum].cells[i].innerHTML = '<input name="ml'+n+'" type="text"  size="38" maxlength="100" />';
+		} else if (i == 2) {
+			tab.rows[rownum].cells[i].innerHTML = '用途';
+		} else if( i == 3){
+			tab.rows[rownum].cells[i].innerHTML = '<select name="yt'+n+'"  value="" style="width:100%"  > <option value=""></option> <option value="上衣">上衣</option> <option value="裤子">裤子</option>  <option value="马甲">马甲</option> <option value="衬衫">衬衫</option> <option value="西装套装">西装套装</option><option value="换片">换片</option><option value="其他">其他</option></select>';
+			 
+				/* '<input name="yt'+n+'" type="text" size="38" maxlength="100"/>'; */
+				
+				
+			/* <option value="上衣">上衣</option>
+			<option value="裤子">裤子</option>
+			<option value="马甲">马甲</option>
+			<option value="衬衫">衬衫</option>
+			<option value="西装套装">西装套装</option>
+			<option value="换片">换片</option>
+			<option value="其他">其他</option> */
+				/* '<input name="yt'+n+'" type="text" size="38" maxlength="100"/>'; */
+		}else if(i == 4 ){
+			tab.rows[rownum].cells[i].innerHTML = '米数';
+		}else if(i == 5){
+			tab.rows[rownum].cells[i].innerHTML = '<input name="ms'+n+'" type="text" size="38" maxlength="100" readonly="true" />';
+		}else if(i == 6){
+			tab.rows[rownum].cells[i].innerHTML = '供应商';
+		}else {
+			tab.rows[rownum].cells[i].innerHTML = '<input name="gys'+n+'" type="text" size="38" maxlength="100" readonly="true" />';
+		}
+	}
+	tab.rows[rownum].insertCell(i);
+	tab.rows[rownum].cells[i].innerHTML = '<a href="#" onclick="delRow(this)">-</a>';
+	}else{
+		alert("最多新增15行");
+	}
+}
+//删除行
+function delRow(obj) {
+	var Row = obj.parentNode;
+	var Row = obj.parentNode; //tr
+	while (Row.tagName.toLowerCase() != "tr") {
+		Row = Row.parentNode;
+	}
+	Row.parentNode.removeChild(Row); //删除行
+}
+
 function onc(){
 	var files = document.getElementById("inputfile").files;
 	for(var i=0; i< files.length; i++){
@@ -92,7 +155,7 @@ function onUpdate(wechat){
 <input style="border:none;" name="role" id ="role" type="hidden" value="<%=request.getAttribute("role")%>" >
 <%-- <input style="border:none;" name="role" type="hidden" value="<%=projectInfo.getAt("role")%>" > --%>
 <!-- <table width="100%" border="0"cellpadding="0" cellspacing="1"  class="tbl_11"> -->
-<table width="100%" class="tbl_11" border="1" bordercolorlight=#000000
+<table width="100%" id="tab01" class="tbl_11" border="1" bordercolorlight=#000000
 			bordercolordark=#000000 bordercolor=#000000 cellspacing="0"
 			cellpadding="2">
 			
@@ -605,10 +668,15 @@ function onUpdate(wechat){
 				<td nowrap="nowrap" align="center" width="7%">
 				<select name="koudaiC" value="koudaiC">
 					<option value="" <%=projectInfo.getAt("koudai_c").equals("")? "selected":"" %> ></option>
-						<option value="1平袋盖、4斜袋盖" <%=projectInfo.getAt("koudai_c").equals("1平袋盖、4斜袋盖")? "selected":"" %>  >1平袋盖、4斜袋盖</option>
-						<option value="2平单线、5斜单线" <%=projectInfo.getAt("koudai_c").equals("2平单线、5斜单线")? "selected":"" %>  >2平单线、5斜单线</option>
-						<option value="3平双线、6斜双线" <%=projectInfo.getAt("koudai_c").equals("3平双线、6斜双线")? "selected":"" %>  >3平双线、6斜双线</option>
-						<option value="7外贴袋" <%=projectInfo.getAt("koudai_c").equals("7外贴袋")? "selected":"" %> >7外贴袋</option>
+					
+					   <option value=""></option>
+						<option value="平袋盖" <%=projectInfo.getAt("koudai_c").equals("平袋盖")? "selected":"" %> >平袋盖</option>
+						<option value="平单线" <%=projectInfo.getAt("koudai_c").equals("平单线")? "selected":"" %> >平单线</option>
+						<option value="平双线" <%=projectInfo.getAt("koudai_c").equals("平双线")? "selected":"" %> >平双线</option>
+						<option value="斜袋盖" <%=projectInfo.getAt("koudai_c").equals("斜袋盖")? "selected":"" %> >斜袋盖</option>
+						<option value="斜单线" <%=projectInfo.getAt("koudai_c").equals("斜单线")? "selected":"" %> >斜单线</option>
+						<option value="斜双线" <%=projectInfo.getAt("koudai_c").equals("斜双线")? "selected":"" %> >斜双线</option>
+						<option value="外贴袋" <%=projectInfo.getAt("koudai_c").equals("外贴袋")? "selected":"" %> >外贴袋</option>
 						<option value="其他" <%=projectInfo.getAt("koudai_c").equals("其他")? "selected":"" %>  >其他</option>
 				</select> <font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%">开叉</td>
@@ -740,23 +808,26 @@ function onUpdate(wechat){
 				</td>
 			</tr>
 			<tr>
-				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				 <%if("admin".equals(request.getAttribute("role"))|| "客服".equals(request.getAttribute("role"))|| "经理".equals(request.getAttribute("role")) ){ %>
+				<button type="button" onclick="addTable();"
+			style="margin-left: 0px;">+</button>
+			 <%} %>
+				面料</td>
 				<td nowrap="nowrap" align="center" width="7%">
 			<input style="border:none;" type="text"      size="38"  name="miaoliao1" id="miaoliao1"   value="<%=projectInfo.getAt("miao_liao1")%>"  >
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">用途</td>
-				<td nowrap="nowrap" align="center" width="7%"><!-- 
-					 <input style="border:none;" type="text"   size="38"  name="yongtu1" id="yongtu1"   value="<%=projectInfo.getAt("yong_tu1")%>"  >-->
-					
+				<td nowrap="nowrap" align="center" width="7%">
 						<select name="yongtu1" value="yongtu1">
-						<option value="上衣">上衣</option>
-						<option value="裤子">裤子</option>
-						<option value="马甲">马甲</option>
-						<option value="衬衫">衬衫</option>
-						<option value="衬衫">衬衫</option>
-						<option value="西装套装">西装套装</option>
-						<option value="换片">换片</option>
-						<option value="其他">其他</option>
+						<option value="" <%=projectInfo.getAt("yong_tu1").equals("")? "selected":"" %> ></option>
+						<option value="上衣" <%=projectInfo.getAt("yong_tu1").equals("上衣")? "selected":"" %> >上衣</option>
+						<option value="裤子" <%=projectInfo.getAt("yong_tu1").equals("裤子")? "selected":"" %>  >裤子</option>
+						<option value="马甲"  <%=projectInfo.getAt("yong_tu1").equals("马甲")? "selected":"" %>  >马甲</option>
+						<option value="衬衫"  <%=projectInfo.getAt("yong_tu1").equals("衬衫")? "selected":"" %>  >衬衫</option>
+						<option value="西装套装" <%=projectInfo.getAt("yong_tu1").equals("西装套装")? "selected":"" %>  >西装套装</option>
+						<option value="换片" <%=projectInfo.getAt("yong_tu1").equals("换片")? "selected":"" %>  >换片</option>
+						<option value="其他" <%=projectInfo.getAt("yong_tu1").equals("其他")? "selected":"" %>  >其他</option>
 				</select> 
 				
 				</td>
@@ -769,7 +840,688 @@ function onUpdate(wechat){
 					<%=request.getAttribute("companyList")%>
 				</td>
 			</tr>
+			
+				 <%if(!"".equals(duoyu.getAt("ml1"))&& duoyu.getAt("ml1")!=null ){ %>
+          	<tr>
+				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="ml1" id="ml1"  value="<%=duoyu.getAt("ml1")%>"
+				
+				 type="text" size="38"
+					maxlength="100" placeholder=""
+					 />
+					</td>
+				<td nowrap="nowrap" align="center" width="7%">用途</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+					<select name="yt1" value="yt1">
+						<option value="" <%=duoyu.getAt("yt1").equals("")? "selected":"" %> ></option>
+						<option value="上衣" <%=duoyu.getAt("yt1").equals("上衣")? "selected":"" %> >上衣</option>
+						<option value="裤子" <%=duoyu.getAt("yt1").equals("裤子")? "selected":"" %>  >裤子</option>
+						<option value="马甲"  <%=duoyu.getAt("yt1").equals("马甲")? "selected":"" %>  >马甲</option>
+						<option value="衬衫"  <%=duoyu.getAt("yt1").equals("衬衫")? "selected":"" %>  >衬衫</option>
+						<option value="西装套装" <%=duoyu.getAt("yt1").equals("西装套装")? "selected":"" %>  >西装套装</option>
+						<option value="换片" <%=duoyu.getAt("yt1").equals("换片")? "selected":"" %>  >换片</option>
+						<option value="其他" <%=duoyu.getAt("yt1").equals("其他")? "selected":"" %>  >其他</option>
+						</select> 
+				<%-- <input
+					name="yt1" id="yt1"  value="<%=duoyu.getAt("yt1")%>"
+					
+					type="text" size="38" maxlength="100"
+					placeholder="" 
+					 />--%></td> 
+
+				<td nowrap="nowrap" align="center" width="7%">米数</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<input name="ms1" id="ms1"  value="<%=duoyu.getAt("ms1")%>"
+				
+				type="text" size="38" maxlength="100"
+					 /></td>
+				<td nowrap="nowrap" align="center" width="7%">供应商</td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<%=request.getAttribute("gys1")%>
+				<%-- <input
+					name="gys1" id="gys1"  value="<%=duoyu.getAt("gys1")%>"
+					type="text" size="38" maxlength="100"
+					 /> --%></td>
+			</tr>
+			
+				 <%} %>
+			
+			
+			 <%if(!"".equals(duoyu.getAt("ml2"))&& duoyu.getAt("ml2")!=null ){ %>
+          
+				
+				 
 			<tr>
+				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="ml2" id="ml2"  value="<%=duoyu.getAt("ml2")%>"
+				
+				 type="text" size="38"
+					maxlength="100" placeholder=""
+					 />
+					</td>
+				<td nowrap="nowrap" align="center" width="7%">用途</td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<select name="yt2" value="yt2">
+						<option value="" <%=duoyu.getAt("yt2").equals("")? "selected":"" %> ></option>
+						<option value="上衣" <%=duoyu.getAt("yt2").equals("上衣")? "selected":"" %> >上衣</option>
+						<option value="裤子" <%=duoyu.getAt("yt2").equals("裤子")? "selected":"" %>  >裤子</option>
+						<option value="马甲"  <%=duoyu.getAt("yt2").equals("马甲")? "selected":"" %>  >马甲</option>
+						<option value="衬衫"  <%=duoyu.getAt("yt2").equals("衬衫")? "selected":"" %>  >衬衫</option>
+						<option value="西装套装" <%=duoyu.getAt("yt2").equals("西装套装")? "selected":"" %>  >西装套装</option>
+						<option value="换片" <%=duoyu.getAt("yt2").equals("换片")? "selected":"" %>  >换片</option>
+						<option value="其他" <%=duoyu.getAt("yt2").equals("其他")? "selected":"" %>  >其他</option>
+						</select> 
+						
+				<%-- <input
+					name="yt2" id="yt2"  value="<%=duoyu.getAt("yt2")%>"
+					
+					type="text" size="38" maxlength="100"
+					placeholder="" 
+					 /> --%></td>
+
+				<td nowrap="nowrap" align="center" width="7%">米数</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<input name="ms2" id="ms2"  value="<%=duoyu.getAt("ms2")%>"
+				
+				type="text" size="38" maxlength="100"
+					 /></td>
+				<td nowrap="nowrap" align="center" width="7%">供应商</td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<%=request.getAttribute("gys2")%>
+			<%-- 	<input
+					name="gys2" id="gys2"  value="<%=duoyu.getAt("gys2")%>"
+					type="text" size="38" maxlength="100"
+					 /> --%>
+					 </td>
+			</tr>
+			 <%} %>
+			
+			
+			 <%if(!"".equals(duoyu.getAt("ml3"))&& duoyu.getAt("ml3")!=null ){ %>
+          
+			
+				 
+			<tr>
+				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="ml3" id="ml3"  value="<%=duoyu.getAt("ml3")%>"
+				
+				 type="text" size="38"
+					maxlength="100" placeholder=""
+					 />
+					</td>
+				<td nowrap="nowrap" align="center" width="7%">用途</td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<select name="yt3" value="yt3">
+						<option value="" <%=duoyu.getAt("yt3").equals("")? "selected":"" %> ></option>
+						<option value="上衣" <%=duoyu.getAt("yt3").equals("上衣")? "selected":"" %> >上衣</option>
+						<option value="裤子" <%=duoyu.getAt("yt3").equals("裤子")? "selected":"" %>  >裤子</option>
+						<option value="马甲"  <%=duoyu.getAt("yt3").equals("马甲")? "selected":"" %>  >马甲</option>
+						<option value="衬衫"  <%=duoyu.getAt("yt3").equals("衬衫")? "selected":"" %>  >衬衫</option>
+						<option value="西装套装" <%=duoyu.getAt("yt3").equals("西装套装")? "selected":"" %>  >西装套装</option>
+						<option value="换片" <%=duoyu.getAt("yt3").equals("换片")? "selected":"" %>  >换片</option>
+						<option value="其他" <%=duoyu.getAt("yt3").equals("其他")? "selected":"" %>  >其他</option>
+						</select> 
+				<%-- <input
+					name="yt3" id="yt3"  value="<%=duoyu.getAt("yt3")%>"
+					
+					type="text" size="38" maxlength="100"
+					placeholder="" 
+					 /> --%></td>
+
+				<td nowrap="nowrap" align="center" width="7%">米数</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<input name="ms3" id="ms3"  value="<%=duoyu.getAt("ms3")%>"
+				
+				type="text" size="38" maxlength="100"
+					 /></td>
+				<td nowrap="nowrap" align="center" width="7%">供应商</td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<%=request.getAttribute("gys3")%>
+			<%-- 	<input
+					name="gys3" id="gys3"  value="<%=duoyu.getAt("gys3")%>"
+					type="text" size="38" maxlength="100"
+					 /> --%></td>
+			</tr>
+				 <%} %>
+			
+			 <%if(!"".equals(duoyu.getAt("ml4"))&& duoyu.getAt("ml4")!=null ){ %>
+          
+			
+				<tr>
+				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="ml4" id="ml4"  value="<%=duoyu.getAt("ml4")%>"
+				
+				 type="text" size="38"
+					maxlength="100" placeholder=""
+					 />
+					</td>
+				<td nowrap="nowrap" align="center" width="7%">用途</td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<select name="yt4" value="yt4">
+						<option value="" <%=duoyu.getAt("yt4").equals("")? "selected":"" %> ></option>
+						<option value="上衣" <%=duoyu.getAt("yt4").equals("上衣")? "selected":"" %> >上衣</option>
+						<option value="裤子" <%=duoyu.getAt("yt4").equals("裤子")? "selected":"" %>  >裤子</option>
+						<option value="马甲"  <%=duoyu.getAt("yt4").equals("马甲")? "selected":"" %>  >马甲</option>
+						<option value="衬衫"  <%=duoyu.getAt("yt4").equals("衬衫")? "selected":"" %>  >衬衫</option>
+						<option value="西装套装" <%=duoyu.getAt("yt4").equals("西装套装")? "selected":"" %>  >西装套装</option>
+						<option value="换片" <%=duoyu.getAt("yt4").equals("换片")? "selected":"" %>  >换片</option>
+						<option value="其他" <%=duoyu.getAt("yt4").equals("其他")? "selected":"" %>  >其他</option>
+						</select> 
+			<%-- 	<input
+					name="yt4" id="yt4"  value="<%=duoyu.getAt("yt4")%>"
+					
+					type="text" size="38" maxlength="100"
+					placeholder="" 
+					 /> --%></td>
+
+				<td nowrap="nowrap" align="center" width="7%">米数</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<input name="ms4" id="ms4"  value="<%=duoyu.getAt("ms4")%>"
+				
+				type="text" size="38" maxlength="100"
+					 /></td>
+				<td nowrap="nowrap" align="center" width="7%">供应商</td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<%=request.getAttribute("gys4")%>
+				<%-- <input
+					name="gys4" id="gys4"  value="<%=duoyu.getAt("gys4")%>"
+					type="text" size="38" maxlength="100"
+					 /> --%></td>
+			</tr>
+				 <%} %>
+			
+				
+				 <%if(!"".equals(duoyu.getAt("ml5"))&& duoyu.getAt("ml5")!=null ){ %>
+          
+				
+				<tr>
+				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="ml5" id="ml5"  value="<%=duoyu.getAt("ml5")%>"
+				
+				 type="text" size="38"
+					maxlength="100" placeholder=""
+					 />
+					</td>
+				<td nowrap="nowrap" align="center" width="7%">用途</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+					<select name="yt5" value="yt5">
+						<option value="" <%=duoyu.getAt("yt5").equals("")? "selected":"" %> ></option>
+						<option value="上衣" <%=duoyu.getAt("yt5").equals("上衣")? "selected":"" %> >上衣</option>
+						<option value="裤子" <%=duoyu.getAt("yt5").equals("裤子")? "selected":"" %>  >裤子</option>
+						<option value="马甲"  <%=duoyu.getAt("yt5").equals("马甲")? "selected":"" %>  >马甲</option>
+						<option value="衬衫"  <%=duoyu.getAt("yt5").equals("衬衫")? "selected":"" %>  >衬衫</option>
+						<option value="西装套装" <%=duoyu.getAt("yt5").equals("西装套装")? "selected":"" %>  >西装套装</option>
+						<option value="换片" <%=duoyu.getAt("yt5").equals("换片")? "selected":"" %>  >换片</option>
+						<option value="其他" <%=duoyu.getAt("yt5").equals("其他")? "selected":"" %>  >其他</option>
+						</select> 
+						
+				<%-- <input
+					name="yt5" id="yt5"  value="<%=duoyu.getAt("yt5")%>"
+					
+					type="text" size="38" maxlength="100"
+					placeholder="" 
+					 /> --%></td>
+
+				<td nowrap="nowrap" align="center" width="7%">米数</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<input name="ms5" id="ms5"  value="<%=duoyu.getAt("ms5")%>"
+				
+				type="text" size="38" maxlength="100"
+					 /></td>
+				<td nowrap="nowrap" align="center" width="7%">供应商</td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<%=request.getAttribute("gys5")%>
+				<%-- <input
+					name="gys5" id="gys5"  value="<%=duoyu.getAt("gys5")%>"
+					type="text" size="38" maxlength="100"
+					 /> --%></td>
+			</tr>
+			 <%} %>
+			
+			
+			 <%if(!"".equals(duoyu.getAt("ml6"))&& duoyu.getAt("ml6")!=null ){ %>
+          
+				
+				 
+					<tr>
+				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="ml6" id="ml6"  value="<%=duoyu.getAt("ml6")%>"
+				
+				 type="text" size="38"
+					maxlength="100" placeholder=""
+					 />
+					</td>
+				<td nowrap="nowrap" align="center" width="7%">用途</td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<select name="yt6" value="yt6">
+						<option value="" <%=duoyu.getAt("yt6").equals("")? "selected":"" %> ></option>
+						<option value="上衣" <%=duoyu.getAt("yt6").equals("上衣")? "selected":"" %> >上衣</option>
+						<option value="裤子" <%=duoyu.getAt("yt6").equals("裤子")? "selected":"" %>  >裤子</option>
+						<option value="马甲"  <%=duoyu.getAt("yt6").equals("马甲")? "selected":"" %>  >马甲</option>
+						<option value="衬衫"  <%=duoyu.getAt("yt6").equals("衬衫")? "selected":"" %>  >衬衫</option>
+						<option value="西装套装" <%=duoyu.getAt("yt6").equals("西装套装")? "selected":"" %>  >西装套装</option>
+						<option value="换片" <%=duoyu.getAt("yt6").equals("换片")? "selected":"" %>  >换片</option>
+						<option value="其他" <%=duoyu.getAt("yt6").equals("其他")? "selected":"" %>  >其他</option>
+						</select> 
+						
+				<%-- <input
+					name="yt6" id="yt6"  value="<%=duoyu.getAt("yt6")%>"
+					
+					type="text" size="38" maxlength="100"
+					placeholder="" 
+					 /> --%></td>
+
+				<td nowrap="nowrap" align="center" width="7%">米数</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<input name="ms6" id="ms6"  value="<%=duoyu.getAt("ms6")%>"
+				
+				type="text" size="38" maxlength="100"
+					 /></td>
+				<td nowrap="nowrap" align="center" width="7%">供应商</td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<%=request.getAttribute("gys6")%>
+				<%-- <input
+					name="gys6" id="gys6"  value="<%=duoyu.getAt("gys6")%>"
+					type="text" size="38" maxlength="100"
+					 /> --%></td>
+			</tr>
+			 <%} %>
+			
+			 <%if(!"".equals(duoyu.getAt("ml7"))&& duoyu.getAt("ml1")!=null ){ %>
+          
+				 
+					<tr>
+				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="ml7" id="ml7"  value="<%=duoyu.getAt("ml7")%>"
+				
+				 type="text" size="38"
+					maxlength="100" placeholder=""
+					 />
+					</td>
+				<td nowrap="nowrap" align="center" width="7%">用途</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<select name="yt7" value="yt7">
+						<option value="" <%=duoyu.getAt("yt7").equals("")? "selected":"" %> ></option>
+						<option value="上衣" <%=duoyu.getAt("yt7").equals("上衣")? "selected":"" %> >上衣</option>
+						<option value="裤子" <%=duoyu.getAt("yt7").equals("裤子")? "selected":"" %>  >裤子</option>
+						<option value="马甲"  <%=duoyu.getAt("yt7").equals("马甲")? "selected":"" %>  >马甲</option>
+						<option value="衬衫"  <%=duoyu.getAt("yt7").equals("衬衫")? "selected":"" %>  >衬衫</option>
+						<option value="西装套装" <%=duoyu.getAt("yt7").equals("西装套装")? "selected":"" %>  >西装套装</option>
+						<option value="换片" <%=duoyu.getAt("yt7").equals("换片")? "selected":"" %>  >换片</option>
+						<option value="其他" <%=duoyu.getAt("yt7").equals("其他")? "selected":"" %>  >其他</option>
+						</select> 
+						
+				<%-- <input
+					name="yt7" id="yt7"  value="<%=duoyu.getAt("yt7")%>"
+					
+					type="text" size="38" maxlength="100"
+					placeholder="" 
+					 /> --%></td>
+
+				<td nowrap="nowrap" align="center" width="7%">米数</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<input name="ms7" id="ms7"  value="<%=duoyu.getAt("ms7")%>"
+				
+				type="text" size="38" maxlength="100"
+					 /></td>
+				<td nowrap="nowrap" align="center" width="7%">供应商</td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<%=request.getAttribute("gys7")%>
+				<%-- <input
+					name="gys7" id="gys7"  value="<%=duoyu.getAt("gys7")%>"
+					type="text" size="38" maxlength="100"
+					 /> --%></td>
+			</tr>
+			 <%} %>
+			
+			
+			 <%if(!"".equals(duoyu.getAt("ml8"))&& duoyu.getAt("ml8")!=null ){ %>
+          
+				
+				 
+				<tr>
+				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="ml8" id="ml8"  value="<%=duoyu.getAt("ml8")%>"
+				
+				 type="text" size="38"
+					maxlength="100" placeholder=""
+					 />
+					</td>
+				<td nowrap="nowrap" align="center" width="7%">用途</td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<select name="yt8" value="yt8">
+						<option value="" <%=duoyu.getAt("yt8").equals("")? "selected":"" %> ></option>
+						<option value="上衣" <%=duoyu.getAt("yt8").equals("上衣")? "selected":"" %> >上衣</option>
+						<option value="裤子" <%=duoyu.getAt("yt8").equals("裤子")? "selected":"" %>  >裤子</option>
+						<option value="马甲"  <%=duoyu.getAt("yt8").equals("马甲")? "selected":"" %>  >马甲</option>
+						<option value="衬衫"  <%=duoyu.getAt("yt8").equals("衬衫")? "selected":"" %>  >衬衫</option>
+						<option value="西装套装" <%=duoyu.getAt("yt8").equals("西装套装")? "selected":"" %>  >西装套装</option>
+						<option value="换片" <%=duoyu.getAt("yt8").equals("换片")? "selected":"" %>  >换片</option>
+						<option value="其他" <%=duoyu.getAt("yt8").equals("其他")? "selected":"" %>  >其他</option>
+						</select> 
+						
+			<%-- 	<input
+					name="yt8" id="yt8"  value="<%=duoyu.getAt("yt8")%>"
+					
+					type="text" size="38" maxlength="100"
+					placeholder="" 
+					 /> --%></td>
+
+				<td nowrap="nowrap" align="center" width="7%">米数</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<input name="ms8" id="ms8"  value="<%=duoyu.getAt("ms8")%>"
+				
+				type="text" size="38" maxlength="100"
+					 /></td>
+				<td nowrap="nowrap" align="center" width="7%">供应商</td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<%=request.getAttribute("gys8")%>
+				<%-- <input
+					name="gys8" id="gys8"  value="<%=duoyu.getAt("gys8")%>"
+					type="text" size="38" maxlength="100"
+					 /> --%></td>
+			</tr>
+			 <%} %>
+			 
+			  <%if(!"".equals(duoyu.getAt("ml9"))&& duoyu.getAt("ml9")!=null ){ %>
+          
+				
+				 
+				<tr>
+				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="ml9" id="ml9"  value="<%=duoyu.getAt("ml9")%>"
+				
+				 type="text" size="38"
+					maxlength="100" placeholder=""
+					 />
+					</td>
+				<td nowrap="nowrap" align="center" width="7%">用途</td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<select name="yt9" value="yt9">
+						<option value="" <%=duoyu.getAt("yt9").equals("")? "selected":"" %> ></option>
+						<option value="上衣" <%=duoyu.getAt("yt9").equals("上衣")? "selected":"" %> >上衣</option>
+						<option value="裤子" <%=duoyu.getAt("yt9").equals("裤子")? "selected":"" %>  >裤子</option>
+						<option value="马甲"  <%=duoyu.getAt("yt9").equals("马甲")? "selected":"" %>  >马甲</option>
+						<option value="衬衫"  <%=duoyu.getAt("yt9").equals("衬衫")? "selected":"" %>  >衬衫</option>
+						<option value="西装套装" <%=duoyu.getAt("yt9").equals("西装套装")? "selected":"" %>  >西装套装</option>
+						<option value="换片" <%=duoyu.getAt("yt9").equals("换片")? "selected":"" %>  >换片</option>
+						<option value="其他" <%=duoyu.getAt("yt9").equals("其他")? "selected":"" %>  >其他</option>
+						</select> 
+						
+				<%-- <input
+					name="yt9" id="yt9"  value="<%=duoyu.getAt("yt9")%>"
+					
+					type="text" size="38" maxlength="100"
+					placeholder="" 
+					 /> --%></td>
+
+				<td nowrap="nowrap" align="center" width="7%">米数</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<input name="ms9" id="ms9"  value="<%=duoyu.getAt("ms9")%>"
+				
+				type="text" size="38" maxlength="100"
+					 /></td>
+				<td nowrap="nowrap" align="center" width="7%">供应商</td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<%=request.getAttribute("gys9")%>
+				<%-- <input
+					name="gys9" id="gys9"  value="<%=duoyu.getAt("gys9")%>"
+					type="text" size="38" maxlength="100"
+					 /> --%></td>
+			</tr>
+			 <%} %>
+			
+				 <%if(!"".equals(duoyu.getAt("ml10"))&& duoyu.getAt("ml10")!=null ){ %>
+				
+					<tr>
+				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="ml10" id="ml10"  value="<%=duoyu.getAt("ml10")%>"
+				
+				 type="text" size="38"
+					maxlength="100" placeholder=""
+					 />
+					</td>
+				<td nowrap="nowrap" align="center" width="7%">用途</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<select name="yt10" value="yt10">
+						<option value="" <%=duoyu.getAt("yt10").equals("")? "selected":"" %> ></option>
+						<option value="上衣" <%=duoyu.getAt("yt10").equals("上衣")? "selected":"" %> >上衣</option>
+						<option value="裤子" <%=duoyu.getAt("yt10").equals("裤子")? "selected":"" %>  >裤子</option>
+						<option value="马甲"  <%=duoyu.getAt("yt10").equals("马甲")? "selected":"" %>  >马甲</option>
+						<option value="衬衫"  <%=duoyu.getAt("yt10").equals("衬衫")? "selected":"" %>  >衬衫</option>
+						<option value="西装套装" <%=duoyu.getAt("yt10").equals("西装套装")? "selected":"" %>  >西装套装</option>
+						<option value="换片" <%=duoyu.getAt("yt10").equals("换片")? "selected":"" %>  >换片</option>
+						<option value="其他" <%=duoyu.getAt("yt10").equals("其他")? "selected":"" %>  >其他</option>
+						</select> 
+						
+			<%-- 	<input
+					name="yt10" id="yt10"  value="<%=duoyu.getAt("yt10")%>"
+					
+					type="text" size="38" maxlength="100"
+					placeholder="" 
+					 /> --%></td>
+
+				<td nowrap="nowrap" align="center" width="7%">米数</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<input name="ms10" id="ms10"  value="<%=duoyu.getAt("ms10")%>"
+				
+				type="text" size="38" maxlength="100"
+					 /></td>
+				<td nowrap="nowrap" align="center" width="7%">供应商</td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<%=request.getAttribute("gys10")%>
+				<%-- <input
+					name="gys10" id="gys10"  value="<%=duoyu.getAt("gys10")%>"
+					type="text" size="38" maxlength="100"
+					 /> --%></td>
+			</tr> <%} %>
+			
+			
+			 <%if(!"".equals(duoyu.getAt("ml11"))&& duoyu.getAt("ml11")!=null ){ %>
+          
+				 
+					<tr>
+				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="ml11" id="ml11"  value="<%=duoyu.getAt("ml11")%>"
+				
+				 type="text" size="38"
+					maxlength="100" placeholder=""
+					 />
+					</td>
+				<td nowrap="nowrap" align="center" width="7%">用途</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<select name="yt11" value="yt11">
+						<option value="" <%=duoyu.getAt("yt11").equals("")? "selected":"" %> ></option>
+						<option value="上衣" <%=duoyu.getAt("yt11").equals("上衣")? "selected":"" %> >上衣</option>
+						<option value="裤子" <%=duoyu.getAt("yt11").equals("裤子")? "selected":"" %>  >裤子</option>
+						<option value="马甲"  <%=duoyu.getAt("yt11").equals("马甲")? "selected":"" %>  >马甲</option>
+						<option value="衬衫"  <%=duoyu.getAt("yt11").equals("衬衫")? "selected":"" %>  >衬衫</option>
+						<option value="西装套装" <%=duoyu.getAt("yt11").equals("西装套装")? "selected":"" %>  >西装套装</option>
+						<option value="换片" <%=duoyu.getAt("yt11").equals("换片")? "selected":"" %>  >换片</option>
+						<option value="其他" <%=duoyu.getAt("yt11").equals("其他")? "selected":"" %>  >其他</option>
+						</select> 
+						
+			<%-- 	<input
+					name="yt11" id="yt11"  value="<%=duoyu.getAt("yt11")%>"
+					
+					type="text" size="38" maxlength="100"
+					placeholder="" 
+					 /> --%></td>
+
+				<td nowrap="nowrap" align="center" width="7%">米数</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<input name="ms11" id="ms11"  value="<%=duoyu.getAt("ms11")%>"
+				
+				type="text" size="38" maxlength="100"
+					 /></td>
+				<td nowrap="nowrap" align="center" width="7%">供应商</td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<%=request.getAttribute("gys11")%>
+				<%-- <input
+					name="gys11" id="gys11"  value="<%=duoyu.getAt("gys11")%>"
+					type="text" size="38" maxlength="100"
+					 /> --%></td>
+			</tr>
+			 <%} %>
+			 
+			  <%if(!"".equals(duoyu.getAt("ml12"))&& duoyu.getAt("ml12")!=null ){ %>
+          
+				
+				<tr>
+				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="ml12" id="ml12"  value="<%=duoyu.getAt("ml12")%>"
+				
+				 type="text" size="38"
+					maxlength="100" placeholder=""
+					 />
+					</td>
+				<td nowrap="nowrap" align="center" width="7%">用途</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+					<select name="yt12" value="yt12">
+						<option value="" <%=duoyu.getAt("yt12").equals("")? "selected":"" %> ></option>
+						<option value="上衣" <%=duoyu.getAt("yt12").equals("上衣")? "selected":"" %> >上衣</option>
+						<option value="裤子" <%=duoyu.getAt("yt12").equals("裤子")? "selected":"" %>  >裤子</option>
+						<option value="马甲"  <%=duoyu.getAt("yt12").equals("马甲")? "selected":"" %>  >马甲</option>
+						<option value="衬衫"  <%=duoyu.getAt("yt12").equals("衬衫")? "selected":"" %>  >衬衫</option>
+						<option value="西装套装" <%=duoyu.getAt("yt12").equals("西装套装")? "selected":"" %>  >西装套装</option>
+						<option value="换片" <%=duoyu.getAt("yt12").equals("换片")? "selected":"" %>  >换片</option>
+						<option value="其他" <%=duoyu.getAt("yt12").equals("其他")? "selected":"" %>  >其他</option>
+						</select> 
+						
+			<%-- 	<input
+					name="yt12" id="yt12"  value="<%=duoyu.getAt("yt12")%>"
+					
+					type="text" size="38" maxlength="100"
+					placeholder="" 
+					 /> --%></td>
+
+				<td nowrap="nowrap" align="center" width="7%">米数</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<input name="ms12" id="ms12"  value="<%=duoyu.getAt("ms12")%>"
+				
+				type="text" size="38" maxlength="100"
+					 /></td>
+				<td nowrap="nowrap" align="center" width="7%">供应商</td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<%=request.getAttribute("gys12")%>
+				<%-- <input
+					name="gys12" id="gys12"  value="<%=duoyu.getAt("gys12")%>"
+					type="text" size="38" maxlength="100"
+					 /> --%></td>
+			</tr>
+			 <%} %>
+			 
+			  <%if(!"".equals(duoyu.getAt("ml13"))&& duoyu.getAt("ml13")!=null ){ %>
+          
+				
+				<tr>
+				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="ml13" id="ml13"  value="<%=duoyu.getAt("ml13")%>"
+				
+				 type="text" size="38"
+					maxlength="100" placeholder=""
+					 />
+					</td>
+				<td nowrap="nowrap" align="center" width="7%">用途</td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<select name="yt13" value="yt13">
+						<option value="" <%=duoyu.getAt("yt13").equals("")? "selected":"" %> ></option>
+						<option value="上衣" <%=duoyu.getAt("yt13").equals("上衣")? "selected":"" %> >上衣</option>
+						<option value="裤子" <%=duoyu.getAt("yt13").equals("裤子")? "selected":"" %>  >裤子</option>
+						<option value="马甲"  <%=duoyu.getAt("yt13").equals("马甲")? "selected":"" %>  >马甲</option>
+						<option value="衬衫"  <%=duoyu.getAt("yt13").equals("衬衫")? "selected":"" %>  >衬衫</option>
+						<option value="西装套装" <%=duoyu.getAt("yt13").equals("西装套装")? "selected":"" %>  >西装套装</option>
+						<option value="换片" <%=duoyu.getAt("yt13").equals("换片")? "selected":"" %>  >换片</option>
+						<option value="其他" <%=duoyu.getAt("yt13").equals("其他")? "selected":"" %>  >其他</option>
+						</select> 
+						
+			<%-- 	<input
+					name="yt13" id="yt13"  value="<%=duoyu.getAt("yt13")%>"
+					
+					type="text" size="38" maxlength="100"
+					placeholder="" 
+					 /> --%></td>
+
+				<td nowrap="nowrap" align="center" width="7%">米数</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<input name="ms13" id="ms13"  value="<%=duoyu.getAt("ms13")%>"
+				
+				type="text" size="38" maxlength="100"
+					 /></td>
+				<td nowrap="nowrap" align="center" width="7%">供应商</td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<%=request.getAttribute("gys13")%>
+				<%-- <input
+					name="gys13" id="gys13"  value="<%=duoyu.getAt("gys13")%>"
+					type="text" size="38" maxlength="100"
+					 /> --%></td>
+			</tr>
+			 <%} %>
+			  <%if(!"".equals(duoyu.getAt("ml14"))&& duoyu.getAt("ml14")!=null ){ %>
+			<tr>
+				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="ml14" id="ml14"  value="<%=duoyu.getAt("ml14")%>"
+				
+				 type="text" size="38"
+					maxlength="100" placeholder=""
+					 />
+					</td>
+				<td nowrap="nowrap" align="center" width="7%">用途</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					name="yt14" id="yt14"  value="<%=duoyu.getAt("yt14")%>"
+					
+					type="text" size="38" maxlength="100"
+					placeholder="" 
+					 /></td>
+
+				<td nowrap="nowrap" align="center" width="7%">米数</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<input name="ms14" id="ms14"  value="<%=duoyu.getAt("ms14")%>"
+				
+				type="text" size="38" maxlength="100"
+					 /></td>
+				<td nowrap="nowrap" align="center" width="7%">供应商</td>
+				<td nowrap="nowrap" align="center" width="7%">
+					<%=request.getAttribute("gys14")%>
+			<%-- 	<input
+					name="gys14" id="gys14"  value="<%=duoyu.getAt("gys14")%>"
+					type="text" size="38" maxlength="100"
+					 /> --%></td>
+			</tr> <%} %>
+		<%-- 	<tr>
 				<td nowrap="nowrap" align="center" width="7%">面料</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<input style="border:none;" type="text"   size="38"  name="miaoliao2" id="miaoliao2"   value="<%=projectInfo.getAt("miao_liao2")%>"  >
@@ -786,7 +1538,7 @@ function onUpdate(wechat){
 						<option value="换片">换片</option>
 						<option value="其他">其他</option>
 				</select> 
-					<%-- <input style="border:none;" type="text"   size="38"  name="yongtu2" id="yongtu2"   value="<%=projectInfo.getAt("yong_tu2")%>"  > --%>
+					<input style="border:none;" type="text"   size="38"  name="yongtu2" id="yongtu2"   value="<%=projectInfo.getAt("yong_tu2")%>"  >
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">米数</td>
 				<td nowrap="nowrap" align="center" width="7%">
@@ -796,7 +1548,7 @@ function onUpdate(wechat){
 				<td nowrap="nowrap" align="center" width="7%">
 					<%=request.getAttribute("companyList1")%>
 				</td>
-			</tr>
+			</tr> --%>
 			  <%if("admin".equals(request.getAttribute("role")) || "客服".equals(request.getAttribute("role")) || "客服经理".equals(request.getAttribute("role")) ){ %>
 <tr>
 				<td nowrap="nowrap" align="center" width="7%">附件</td>
@@ -877,7 +1629,11 @@ function onUpdate(wechat){
 			
   
 
-			<tr>
+		
+			
+			
+              
+				<tr>
 			<td nowrap="nowrap" align="center" width="7%">
 			<input style="border:none;" name="anniu" size="200" id="anniu"
 					 type="hidden" class="txt_1"  />
@@ -901,447 +1657,7 @@ function onUpdate(wechat){
 	<input style="border:none;" type="button"  title ="3" name="ok" accesskey="y" tabindex="y"  value="退回" class="but_1" onclick="onUpdate(this.title)" style="color: red">
 			    <%} %>
 				</td>
-			</tr>
-			
-			
-			<tr>
-				<td nowrap="nowrap" align="center" width="7%">面料</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input name="ml1" id="ml1"  value="<%=duoyu.getAt("ml1")%>"
-				
-				 type="text" size="38"
-					maxlength="100" placeholder=""
-					 />
-					</td>
-				<td nowrap="nowrap" align="center" width="7%">用途</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input
-					name="yt1" id="yt1"  value="<%=duoyu.getAt("yt1")%>"
-					
-					type="text" size="38" maxlength="100"
-					placeholder="" 
-					 /></td>
-
-				<td nowrap="nowrap" align="center" width="7%">米数</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				
-				<input name="ms1" id="ms1"  value="<%=duoyu.getAt("ms1")%>"
-				
-				type="text" size="38" maxlength="100"
-					 /></td>
-				<td nowrap="nowrap" align="center" width="7%">供应商</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input
-					name="gys1" id="gys1"  value="<%=duoyu.getAt("gys1")%>"
-					type="text" size="38" maxlength="100"
-					 /></td>
 			</tr>	
-			
-			<tr>
-				<td nowrap="nowrap" align="center" width="7%">面料</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input name="ml2" id="ml2"  value="<%=duoyu.getAt("ml2")%>"
-				
-				 type="text" size="38"
-					maxlength="100" placeholder=""
-					 />
-					</td>
-				<td nowrap="nowrap" align="center" width="7%">用途</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input
-					name="yt2" id="yt2"  value="<%=duoyu.getAt("yt2")%>"
-					
-					type="text" size="38" maxlength="100"
-					placeholder="" 
-					 /></td>
-
-				<td nowrap="nowrap" align="center" width="7%">米数</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				
-				<input name="ms2" id="ms2"  value="<%=duoyu.getAt("ms2")%>"
-				
-				type="text" size="38" maxlength="100"
-					 /></td>
-				<td nowrap="nowrap" align="center" width="7%">供应商</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input
-					name="gys2" id="gys2"  value="<%=duoyu.getAt("gys2")%>"
-					type="text" size="38" maxlength="100"
-					 /></td>
-			</tr>
-			
-			
-			<tr>
-				<td nowrap="nowrap" align="center" width="7%">面料</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input name="ml3" id="ml3"  value="<%=duoyu.getAt("ml3")%>"
-				
-				 type="text" size="38"
-					maxlength="100" placeholder=""
-					 />
-					</td>
-				<td nowrap="nowrap" align="center" width="7%">用途</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input
-					name="yt3" id="yt3"  value="<%=duoyu.getAt("yt3")%>"
-					
-					type="text" size="38" maxlength="100"
-					placeholder="" 
-					 /></td>
-
-				<td nowrap="nowrap" align="center" width="7%">米数</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				
-				<input name="ms3" id="ms3"  value="<%=duoyu.getAt("ms3")%>"
-				
-				type="text" size="38" maxlength="100"
-					 /></td>
-				<td nowrap="nowrap" align="center" width="7%">供应商</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input
-					name="gys3" id="gys3"  value="<%=duoyu.getAt("gys3")%>"
-					type="text" size="38" maxlength="100"
-					 /></td>
-			</tr>
-			
-			
-			
-				<tr>
-				<td nowrap="nowrap" align="center" width="7%">面料</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input name="ml4" id="ml4"  value="<%=duoyu.getAt("ml4")%>"
-				
-				 type="text" size="38"
-					maxlength="100" placeholder=""
-					 />
-					</td>
-				<td nowrap="nowrap" align="center" width="7%">用途</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input
-					name="yt4" id="yt4"  value="<%=duoyu.getAt("yt4")%>"
-					
-					type="text" size="38" maxlength="100"
-					placeholder="" 
-					 /></td>
-
-				<td nowrap="nowrap" align="center" width="7%">米数</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				
-				<input name="ms4" id="ms4"  value="<%=duoyu.getAt("ms4")%>"
-				
-				type="text" size="38" maxlength="100"
-					 /></td>
-				<td nowrap="nowrap" align="center" width="7%">供应商</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input
-					name="gys4" id="gys4"  value="<%=duoyu.getAt("gys4")%>"
-					type="text" size="38" maxlength="100"
-					 /></td>
-			</tr>
-			
-			
-				<tr>
-				<td nowrap="nowrap" align="center" width="7%">面料</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input name="ml5" id="ml5"  value="<%=duoyu.getAt("ml5")%>"
-				
-				 type="text" size="38"
-					maxlength="100" placeholder=""
-					 />
-					</td>
-				<td nowrap="nowrap" align="center" width="7%">用途</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input
-					name="yt5" id="yt5"  value="<%=duoyu.getAt("yt5")%>"
-					
-					type="text" size="38" maxlength="100"
-					placeholder="" 
-					 /></td>
-
-				<td nowrap="nowrap" align="center" width="7%">米数</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				
-				<input name="ms5" id="ms5"  value="<%=duoyu.getAt("ms5")%>"
-				
-				type="text" size="38" maxlength="100"
-					 /></td>
-				<td nowrap="nowrap" align="center" width="7%">供应商</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input
-					name="gys5" id="gys5"  value="<%=duoyu.getAt("gys5")%>"
-					type="text" size="38" maxlength="100"
-					 /></td>
-			</tr>
-			
-			
-					<tr>
-				<td nowrap="nowrap" align="center" width="7%">面料</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input name="ml6" id="ml6"  value="<%=duoyu.getAt("ml6")%>"
-				
-				 type="text" size="38"
-					maxlength="100" placeholder=""
-					 />
-					</td>
-				<td nowrap="nowrap" align="center" width="7%">用途</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input
-					name="yt6" id="yt6"  value="<%=duoyu.getAt("yt6")%>"
-					
-					type="text" size="38" maxlength="100"
-					placeholder="" 
-					 /></td>
-
-				<td nowrap="nowrap" align="center" width="7%">米数</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				
-				<input name="ms6" id="ms6"  value="<%=duoyu.getAt("ms6")%>"
-				
-				type="text" size="38" maxlength="100"
-					 /></td>
-				<td nowrap="nowrap" align="center" width="7%">供应商</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input
-					name="gys6" id="gys6"  value="<%=duoyu.getAt("gys6")%>"
-					type="text" size="38" maxlength="100"
-					 /></td>
-			</tr>
-			
-			
-					<tr>
-				<td nowrap="nowrap" align="center" width="7%">面料</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input name="ml7" id="ml7"  value="<%=duoyu.getAt("ml7")%>"
-				
-				 type="text" size="38"
-					maxlength="100" placeholder=""
-					 />
-					</td>
-				<td nowrap="nowrap" align="center" width="7%">用途</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input
-					name="yt7" id="yt7"  value="<%=duoyu.getAt("yt7")%>"
-					
-					type="text" size="38" maxlength="100"
-					placeholder="" 
-					 /></td>
-
-				<td nowrap="nowrap" align="center" width="7%">米数</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				
-				<input name="ms7" id="ms7"  value="<%=duoyu.getAt("ms7")%>"
-				
-				type="text" size="38" maxlength="100"
-					 /></td>
-				<td nowrap="nowrap" align="center" width="7%">供应商</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input
-					name="gys7" id="gys7"  value="<%=duoyu.getAt("gys7")%>"
-					type="text" size="38" maxlength="100"
-					 /></td>
-			</tr>
-			
-			
-				<tr>
-				<td nowrap="nowrap" align="center" width="7%">面料</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input name="ml8" id="ml8"  value="<%=duoyu.getAt("ml8")%>"
-				
-				 type="text" size="38"
-					maxlength="100" placeholder=""
-					 />
-					</td>
-				<td nowrap="nowrap" align="center" width="7%">用途</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input
-					name="yt8" id="yt8"  value="<%=duoyu.getAt("yt8")%>"
-					
-					type="text" size="38" maxlength="100"
-					placeholder="" 
-					 /></td>
-
-				<td nowrap="nowrap" align="center" width="7%">米数</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				
-				<input name="ms8" id="ms8"  value="<%=duoyu.getAt("ms8")%>"
-				
-				type="text" size="38" maxlength="100"
-					 /></td>
-				<td nowrap="nowrap" align="center" width="7%">供应商</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input
-					name="gys8" id="gys8"  value="<%=duoyu.getAt("gys8")%>"
-					type="text" size="38" maxlength="100"
-					 /></td>
-			</tr>
-			
-				<tr>
-				<td nowrap="nowrap" align="center" width="7%">面料</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input name="ml9" id="ml9"  value="<%=duoyu.getAt("ml9")%>"
-				
-				 type="text" size="38"
-					maxlength="100" placeholder=""
-					 />
-					</td>
-				<td nowrap="nowrap" align="center" width="7%">用途</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input
-					name="yt9" id="yt9"  value="<%=duoyu.getAt("yt9")%>"
-					
-					type="text" size="38" maxlength="100"
-					placeholder="" 
-					 /></td>
-
-				<td nowrap="nowrap" align="center" width="7%">米数</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				
-				<input name="ms9" id="ms9"  value="<%=duoyu.getAt("ms9")%>"
-				
-				type="text" size="38" maxlength="100"
-					 /></td>
-				<td nowrap="nowrap" align="center" width="7%">供应商</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input
-					name="gys9" id="gys9"  value="<%=duoyu.getAt("gys9")%>"
-					type="text" size="38" maxlength="100"
-					 /></td>
-			</tr>
-			
-			
-					<tr>
-				<td nowrap="nowrap" align="center" width="7%">面料</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input name="ml10" id="ml10"  value="<%=duoyu.getAt("ml10")%>"
-				
-				 type="text" size="38"
-					maxlength="100" placeholder=""
-					 />
-					</td>
-				<td nowrap="nowrap" align="center" width="7%">用途</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input
-					name="yt10" id="yt10"  value="<%=duoyu.getAt("yt10")%>"
-					
-					type="text" size="38" maxlength="100"
-					placeholder="" 
-					 /></td>
-
-				<td nowrap="nowrap" align="center" width="7%">米数</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				
-				<input name="ms10" id="ms10"  value="<%=duoyu.getAt("ms10")%>"
-				
-				type="text" size="38" maxlength="100"
-					 /></td>
-				<td nowrap="nowrap" align="center" width="7%">供应商</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input
-					name="gys10" id="gys10"  value="<%=duoyu.getAt("gys10")%>"
-					type="text" size="38" maxlength="100"
-					 /></td>
-			</tr>
-			
-					<tr>
-				<td nowrap="nowrap" align="center" width="7%">面料</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input name="ml11" id="ml11"  value="<%=duoyu.getAt("ml11")%>"
-				
-				 type="text" size="38"
-					maxlength="100" placeholder=""
-					 />
-					</td>
-				<td nowrap="nowrap" align="center" width="7%">用途</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input
-					name="yt11" id="yt11"  value="<%=duoyu.getAt("yt11")%>"
-					
-					type="text" size="38" maxlength="100"
-					placeholder="" 
-					 /></td>
-
-				<td nowrap="nowrap" align="center" width="7%">米数</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				
-				<input name="ms11" id="ms11"  value="<%=duoyu.getAt("ms11")%>"
-				
-				type="text" size="38" maxlength="100"
-					 /></td>
-				<td nowrap="nowrap" align="center" width="7%">供应商</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input
-					name="gys11" id="gys11"  value="<%=duoyu.getAt("gys11")%>"
-					type="text" size="38" maxlength="100"
-					 /></td>
-			</tr>
-			
-				<tr>
-				<td nowrap="nowrap" align="center" width="7%">面料</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input name="ml12" id="ml12"  value="<%=duoyu.getAt("ml12")%>"
-				
-				 type="text" size="38"
-					maxlength="100" placeholder=""
-					 />
-					</td>
-				<td nowrap="nowrap" align="center" width="7%">用途</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input
-					name="yt12" id="yt12"  value="<%=duoyu.getAt("yt12")%>"
-					
-					type="text" size="38" maxlength="100"
-					placeholder="" 
-					 /></td>
-
-				<td nowrap="nowrap" align="center" width="7%">米数</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				
-				<input name="ms12" id="ms12"  value="<%=duoyu.getAt("ms12")%>"
-				
-				type="text" size="38" maxlength="100"
-					 /></td>
-				<td nowrap="nowrap" align="center" width="7%">供应商</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input
-					name="gys12" id="gys12"  value="<%=duoyu.getAt("gys12")%>"
-					type="text" size="38" maxlength="100"
-					 /></td>
-			</tr>
-			
-				<tr>
-				<td nowrap="nowrap" align="center" width="7%">面料</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input name="ml13" id="ml13"  value="<%=duoyu.getAt("ml13")%>"
-				
-				 type="text" size="38"
-					maxlength="100" placeholder=""
-					 />
-					</td>
-				<td nowrap="nowrap" align="center" width="7%">用途</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input
-					name="yt13" id="yt13"  value="<%=duoyu.getAt("yt13")%>"
-					
-					type="text" size="38" maxlength="100"
-					placeholder="" 
-					 /></td>
-
-				<td nowrap="nowrap" align="center" width="7%">米数</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				
-				<input name="ms13" id="ms13"  value="<%=duoyu.getAt("ms13")%>"
-				
-				type="text" size="38" maxlength="100"
-					 /></td>
-				<td nowrap="nowrap" align="center" width="7%">供应商</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				<input
-					name="gys13" id="gys13"  value="<%=duoyu.getAt("gys13")%>"
-					type="text" size="38" maxlength="100"
-					 /></td>
-			</tr>
-              
-				
 			
 		
 

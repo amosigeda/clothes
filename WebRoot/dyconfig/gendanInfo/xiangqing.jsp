@@ -8,6 +8,7 @@
 <%@ taglib uri="/WEB-INF/struts-logic" prefix="logic"%>
 
 <jsp:useBean id = "projectInfo" scope = "request" class = "com.godoing.rose.lang.DataMap"/>
+<jsp:useBean id = "duoyu" scope = "request" class = "com.godoing.rose.lang.DataMap"/>
 <%@ page autoFlush="true" %>
 <html>
 <head>
@@ -737,7 +738,530 @@ function onUpdate(){
 						<input style="border:none;" type="text"   readOnly="true"  size="38"  name="project_no1" id="project_no1" value=<%=projectInfo.getAt("gongyingshang_1")%>>
 				</td>
 			</tr>
+			
+				 <%if(!"".equals(duoyu.getAt("ml1"))&& duoyu.getAt("ml1")!=null ){ %>
+          	<tr>
+				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="ml1" id="ml1"  value="<%=duoyu.getAt("ml1")%>"
+				
+				 type="text" size="38"
+					maxlength="100" placeholder=""
+					 />
+					</td>
+				<td nowrap="nowrap" align="center" width="7%">用途</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					name="yt1" id="yt1"  value="<%=duoyu.getAt("yt1")%>"
+					
+					type="text" size="38" maxlength="100"
+					placeholder="" 
+					 /></td>
+
+				<td nowrap="nowrap" align="center" width="7%">米数</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<input name="ms1" id="ms1"  value="<%=duoyu.getAt("ms1")%>"
+				
+				type="text" size="38" maxlength="100"
+					 /></td>
+				<td nowrap="nowrap" align="center" width="7%">供应商</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					name="gys1" id="gys1"  value="<%=duoyu.getAt("gys1")%>"
+					type="text" size="38" maxlength="100"
+					 /></td>
+			</tr>
+			
+				 <%} %>
+			
+			
+			 <%if(!"".equals(duoyu.getAt("ml2"))&& duoyu.getAt("ml2")!=null ){ %>
+          
+				
+				 
 			<tr>
+				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="ml2" id="ml2"  value="<%=duoyu.getAt("ml2")%>"
+				
+				 type="text" size="38"
+					maxlength="100" placeholder=""
+					 />
+					</td>
+				<td nowrap="nowrap" align="center" width="7%">用途</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					name="yt2" id="yt2"  value="<%=duoyu.getAt("yt2")%>"
+					
+					type="text" size="38" maxlength="100"
+					placeholder="" 
+					 /></td>
+
+				<td nowrap="nowrap" align="center" width="7%">米数</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<input name="ms2" id="ms2"  value="<%=duoyu.getAt("ms2")%>"
+				
+				type="text" size="38" maxlength="100"
+					 /></td>
+				<td nowrap="nowrap" align="center" width="7%">供应商</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					name="gys2" id="gys2"  value="<%=duoyu.getAt("gys2")%>"
+					type="text" size="38" maxlength="100"
+					 /></td>
+			</tr>
+			 <%} %>
+			
+			
+			 <%if(!"".equals(duoyu.getAt("ml3"))&& duoyu.getAt("ml3")!=null ){ %>
+          
+			
+				 
+			<tr>
+				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="ml3" id="ml3"  value="<%=duoyu.getAt("ml3")%>"
+				
+				 type="text" size="38"
+					maxlength="100" placeholder=""
+					 />
+					</td>
+				<td nowrap="nowrap" align="center" width="7%">用途</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					name="yt3" id="yt3"  value="<%=duoyu.getAt("yt3")%>"
+					
+					type="text" size="38" maxlength="100"
+					placeholder="" 
+					 /></td>
+
+				<td nowrap="nowrap" align="center" width="7%">米数</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<input name="ms3" id="ms3"  value="<%=duoyu.getAt("ms3")%>"
+				
+				type="text" size="38" maxlength="100"
+					 /></td>
+				<td nowrap="nowrap" align="center" width="7%">供应商</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					name="gys3" id="gys3"  value="<%=duoyu.getAt("gys3")%>"
+					type="text" size="38" maxlength="100"
+					 /></td>
+			</tr>
+				 <%} %>
+			
+			 <%if(!"".equals(duoyu.getAt("ml4"))&& duoyu.getAt("ml4")!=null ){ %>
+          
+			
+				<tr>
+				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="ml4" id="ml4"  value="<%=duoyu.getAt("ml4")%>"
+				
+				 type="text" size="38"
+					maxlength="100" placeholder=""
+					 />
+					</td>
+				<td nowrap="nowrap" align="center" width="7%">用途</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					name="yt4" id="yt4"  value="<%=duoyu.getAt("yt4")%>"
+					
+					type="text" size="38" maxlength="100"
+					placeholder="" 
+					 /></td>
+
+				<td nowrap="nowrap" align="center" width="7%">米数</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<input name="ms4" id="ms4"  value="<%=duoyu.getAt("ms4")%>"
+				
+				type="text" size="38" maxlength="100"
+					 /></td>
+				<td nowrap="nowrap" align="center" width="7%">供应商</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					name="gys4" id="gys4"  value="<%=duoyu.getAt("gys4")%>"
+					type="text" size="38" maxlength="100"
+					 /></td>
+			</tr>
+				 <%} %>
+			
+				
+				 <%if(!"".equals(duoyu.getAt("ml5"))&& duoyu.getAt("ml5")!=null ){ %>
+          
+				
+				<tr>
+				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="ml5" id="ml5"  value="<%=duoyu.getAt("ml5")%>"
+				
+				 type="text" size="38"
+					maxlength="100" placeholder=""
+					 />
+					</td>
+				<td nowrap="nowrap" align="center" width="7%">用途</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					name="yt5" id="yt5"  value="<%=duoyu.getAt("yt5")%>"
+					
+					type="text" size="38" maxlength="100"
+					placeholder="" 
+					 /></td>
+
+				<td nowrap="nowrap" align="center" width="7%">米数</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<input name="ms5" id="ms5"  value="<%=duoyu.getAt("ms5")%>"
+				
+				type="text" size="38" maxlength="100"
+					 /></td>
+				<td nowrap="nowrap" align="center" width="7%">供应商</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					name="gys5" id="gys5"  value="<%=duoyu.getAt("gys5")%>"
+					type="text" size="38" maxlength="100"
+					 /></td>
+			</tr>
+			 <%} %>
+			
+			
+			 <%if(!"".equals(duoyu.getAt("ml6"))&& duoyu.getAt("ml6")!=null ){ %>
+          
+				
+				 
+					<tr>
+				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="ml6" id="ml6"  value="<%=duoyu.getAt("ml6")%>"
+				
+				 type="text" size="38"
+					maxlength="100" placeholder=""
+					 />
+					</td>
+				<td nowrap="nowrap" align="center" width="7%">用途</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					name="yt6" id="yt6"  value="<%=duoyu.getAt("yt6")%>"
+					
+					type="text" size="38" maxlength="100"
+					placeholder="" 
+					 /></td>
+
+				<td nowrap="nowrap" align="center" width="7%">米数</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<input name="ms6" id="ms6"  value="<%=duoyu.getAt("ms6")%>"
+				
+				type="text" size="38" maxlength="100"
+					 /></td>
+				<td nowrap="nowrap" align="center" width="7%">供应商</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					name="gys6" id="gys6"  value="<%=duoyu.getAt("gys6")%>"
+					type="text" size="38" maxlength="100"
+					 /></td>
+			</tr>
+			 <%} %>
+			
+			 <%if(!"".equals(duoyu.getAt("ml7"))&& duoyu.getAt("ml1")!=null ){ %>
+          
+				 
+					<tr>
+				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="ml7" id="ml7"  value="<%=duoyu.getAt("ml7")%>"
+				
+				 type="text" size="38"
+					maxlength="100" placeholder=""
+					 />
+					</td>
+				<td nowrap="nowrap" align="center" width="7%">用途</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					name="yt7" id="yt7"  value="<%=duoyu.getAt("yt7")%>"
+					
+					type="text" size="38" maxlength="100"
+					placeholder="" 
+					 /></td>
+
+				<td nowrap="nowrap" align="center" width="7%">米数</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<input name="ms7" id="ms7"  value="<%=duoyu.getAt("ms7")%>"
+				
+				type="text" size="38" maxlength="100"
+					 /></td>
+				<td nowrap="nowrap" align="center" width="7%">供应商</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					name="gys7" id="gys7"  value="<%=duoyu.getAt("gys7")%>"
+					type="text" size="38" maxlength="100"
+					 /></td>
+			</tr>
+			 <%} %>
+			
+			
+			 <%if(!"".equals(duoyu.getAt("ml8"))&& duoyu.getAt("ml8")!=null ){ %>
+          
+				
+				 
+				<tr>
+				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="ml8" id="ml8"  value="<%=duoyu.getAt("ml8")%>"
+				
+				 type="text" size="38"
+					maxlength="100" placeholder=""
+					 />
+					</td>
+				<td nowrap="nowrap" align="center" width="7%">用途</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					name="yt8" id="yt8"  value="<%=duoyu.getAt("yt8")%>"
+					
+					type="text" size="38" maxlength="100"
+					placeholder="" 
+					 /></td>
+
+				<td nowrap="nowrap" align="center" width="7%">米数</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<input name="ms8" id="ms8"  value="<%=duoyu.getAt("ms8")%>"
+				
+				type="text" size="38" maxlength="100"
+					 /></td>
+				<td nowrap="nowrap" align="center" width="7%">供应商</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					name="gys8" id="gys8"  value="<%=duoyu.getAt("gys8")%>"
+					type="text" size="38" maxlength="100"
+					 /></td>
+			</tr>
+			 <%} %>
+			 
+			  <%if(!"".equals(duoyu.getAt("ml9"))&& duoyu.getAt("ml9")!=null ){ %>
+          
+				
+				 
+				<tr>
+				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="ml9" id="ml9"  value="<%=duoyu.getAt("ml9")%>"
+				
+				 type="text" size="38"
+					maxlength="100" placeholder=""
+					 />
+					</td>
+				<td nowrap="nowrap" align="center" width="7%">用途</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					name="yt9" id="yt9"  value="<%=duoyu.getAt("yt9")%>"
+					
+					type="text" size="38" maxlength="100"
+					placeholder="" 
+					 /></td>
+
+				<td nowrap="nowrap" align="center" width="7%">米数</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<input name="ms9" id="ms9"  value="<%=duoyu.getAt("ms9")%>"
+				
+				type="text" size="38" maxlength="100"
+					 /></td>
+				<td nowrap="nowrap" align="center" width="7%">供应商</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					name="gys9" id="gys9"  value="<%=duoyu.getAt("gys9")%>"
+					type="text" size="38" maxlength="100"
+					 /></td>
+			</tr>
+			 <%} %>
+			
+				 <%if(!"".equals(duoyu.getAt("ml10"))&& duoyu.getAt("ml10")!=null ){ %>
+				
+					<tr>
+				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="ml10" id="ml10"  value="<%=duoyu.getAt("ml10")%>"
+				
+				 type="text" size="38"
+					maxlength="100" placeholder=""
+					 />
+					</td>
+				<td nowrap="nowrap" align="center" width="7%">用途</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					name="yt10" id="yt10"  value="<%=duoyu.getAt("yt10")%>"
+					
+					type="text" size="38" maxlength="100"
+					placeholder="" 
+					 /></td>
+
+				<td nowrap="nowrap" align="center" width="7%">米数</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<input name="ms10" id="ms10"  value="<%=duoyu.getAt("ms10")%>"
+				
+				type="text" size="38" maxlength="100"
+					 /></td>
+				<td nowrap="nowrap" align="center" width="7%">供应商</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					name="gys10" id="gys10"  value="<%=duoyu.getAt("gys10")%>"
+					type="text" size="38" maxlength="100"
+					 /></td>
+			</tr> <%} %>
+			
+			
+			 <%if(!"".equals(duoyu.getAt("ml11"))&& duoyu.getAt("ml11")!=null ){ %>
+          
+				 
+					<tr>
+				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="ml11" id="ml11"  value="<%=duoyu.getAt("ml11")%>"
+				
+				 type="text" size="38"
+					maxlength="100" placeholder=""
+					 />
+					</td>
+				<td nowrap="nowrap" align="center" width="7%">用途</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					name="yt11" id="yt11"  value="<%=duoyu.getAt("yt11")%>"
+					
+					type="text" size="38" maxlength="100"
+					placeholder="" 
+					 /></td>
+
+				<td nowrap="nowrap" align="center" width="7%">米数</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<input name="ms11" id="ms11"  value="<%=duoyu.getAt("ms11")%>"
+				
+				type="text" size="38" maxlength="100"
+					 /></td>
+				<td nowrap="nowrap" align="center" width="7%">供应商</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					name="gys11" id="gys11"  value="<%=duoyu.getAt("gys11")%>"
+					type="text" size="38" maxlength="100"
+					 /></td>
+			</tr>
+			 <%} %>
+			 
+			  <%if(!"".equals(duoyu.getAt("ml12"))&& duoyu.getAt("ml12")!=null ){ %>
+          
+				
+				<tr>
+				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="ml12" id="ml12"  value="<%=duoyu.getAt("ml12")%>"
+				
+				 type="text" size="38"
+					maxlength="100" placeholder=""
+					 />
+					</td>
+				<td nowrap="nowrap" align="center" width="7%">用途</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					name="yt12" id="yt12"  value="<%=duoyu.getAt("yt12")%>"
+					
+					type="text" size="38" maxlength="100"
+					placeholder="" 
+					 /></td>
+
+				<td nowrap="nowrap" align="center" width="7%">米数</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<input name="ms12" id="ms12"  value="<%=duoyu.getAt("ms12")%>"
+				
+				type="text" size="38" maxlength="100"
+					 /></td>
+				<td nowrap="nowrap" align="center" width="7%">供应商</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					name="gys12" id="gys12"  value="<%=duoyu.getAt("gys12")%>"
+					type="text" size="38" maxlength="100"
+					 /></td>
+			</tr>
+			 <%} %>
+			 
+			  <%if(!"".equals(duoyu.getAt("ml13"))&& duoyu.getAt("ml13")!=null ){ %>
+          
+				
+				<tr>
+				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="ml13" id="ml13"  value="<%=duoyu.getAt("ml13")%>"
+				
+				 type="text" size="38"
+					maxlength="100" placeholder=""
+					 />
+					</td>
+				<td nowrap="nowrap" align="center" width="7%">用途</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					name="yt13" id="yt13"  value="<%=duoyu.getAt("yt13")%>"
+					
+					type="text" size="38" maxlength="100"
+					placeholder="" 
+					 /></td>
+
+				<td nowrap="nowrap" align="center" width="7%">米数</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<input name="ms13" id="ms13"  value="<%=duoyu.getAt("ms13")%>"
+				
+				type="text" size="38" maxlength="100"
+					 /></td>
+				<td nowrap="nowrap" align="center" width="7%">供应商</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					name="gys13" id="gys13"  value="<%=duoyu.getAt("gys13")%>"
+					type="text" size="38" maxlength="100"
+					 /></td>
+			</tr>
+			 <%} %>
+			  <%if(!"".equals(duoyu.getAt("ml14"))&& duoyu.getAt("ml14")!=null ){ %>
+			<tr>
+				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="ml14" id="ml14"  value="<%=duoyu.getAt("ml14")%>"
+				
+				 type="text" size="38"
+					maxlength="100" placeholder=""
+					 />
+					</td>
+				<td nowrap="nowrap" align="center" width="7%">用途</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					name="yt14" id="yt14"  value="<%=duoyu.getAt("yt14")%>"
+					
+					type="text" size="38" maxlength="100"
+					placeholder="" 
+					 /></td>
+
+				<td nowrap="nowrap" align="center" width="7%">米数</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				
+				<input name="ms14" id="ms14"  value="<%=duoyu.getAt("ms14")%>"
+				
+				type="text" size="38" maxlength="100"
+					 /></td>
+				<td nowrap="nowrap" align="center" width="7%">供应商</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input
+					name="gys14" id="gys14"  value="<%=duoyu.getAt("gys14")%>"
+					type="text" size="38" maxlength="100"
+					 /></td>
+			</tr> <%} %>
+			
+		<%-- 	<tr>
 				<td nowrap="nowrap" align="center" width="7%">面料</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<input style="border:none;" type="text"   size="38"  name="miaoliao2" id="miaoliao2"   value="<%=projectInfo.getAt("miao_liao2")%>"  >
@@ -755,7 +1279,7 @@ function onUpdate(){
 						<option value="换片">换片</option>
 						<option value="其他">其他</option>
 				</select>  -->
-					<%-- <input style="border:none;" type="text"   size="38"  name="yongtu2" id="yongtu2"   value="<%=projectInfo.getAt("yong_tu2")%>"  > --%>
+					<input style="border:none;" type="text"   size="38"  name="yongtu2" id="yongtu2"   value="<%=projectInfo.getAt("yong_tu2")%>"  >
 				</td>
 				<td nowrap="nowrap" align="center" width="7%">米数</td>
 				<td nowrap="nowrap" align="center" width="7%">
@@ -764,9 +1288,9 @@ function onUpdate(){
 				<td nowrap="nowrap" align="center" width="7%">供应商</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<input style="border:none;" type="text"   readOnly="true"  size="38"  name="project_no1" id="project_no1" value=<%=projectInfo.getAt("gongyingshang_2")%>>
-					<%-- <%=request.getAttribute("companyList1")%> --%>
+					<%=request.getAttribute("companyList1")%>
 				</td>
-			</tr>
+			</tr> --%>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">附件</td>
 				<td nowrap="nowrap" align="center" width="7%">

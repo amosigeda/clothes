@@ -65,10 +65,10 @@
 		//表格当前的行数 
 		var num = document.getElementById("tab01").rows.length;
 	
-		var rownum = num;
+		var rownum = num-2;
 		tab.insertRow(rownum);
 
-		var n=rownum-7;
+		var n=rownum-7+2;
 		if(n<=14){
 		for (var i = 0; i < 8; i++) {
 			tab.rows[rownum].insertCell(i);//插入列
@@ -92,7 +92,7 @@
 			}
 		}
 		tab.rows[rownum].insertCell(i);
-		tab.rows[rownum].cells[i].innerHTML = '<a href="#" onclick="delRow(this)">删除行</a>';
+		tab.rows[rownum].cells[i].innerHTML = '<a href="#" onclick="delRow(this)">-</a>';
 		}else{
 			alert("最多添加14行");
 		}
@@ -156,7 +156,8 @@
 			</tr>
 
 			<tr>
-				<td nowrap="nowrap" align="center" width="7%">面料</td>
+				<td nowrap="nowrap" align="center" width="7%"><button type="button" onclick="addTable();"
+			style="margin-left: 0px;">+</button>面料</td>
 				<td nowrap="nowrap" align="center" width="7%"><input
 					name="mianliao" id="mianliao" type="text" size="38" maxlength="100"
 					placeholder="面料" /></td>
@@ -235,10 +236,7 @@
 
 
 		</table>
-		<table>
-		<button type="button" onclick="addTable();"
-			style="margin-left: 750px;">添加行</button>
-		<table>
+		
 		
 
 	</form>

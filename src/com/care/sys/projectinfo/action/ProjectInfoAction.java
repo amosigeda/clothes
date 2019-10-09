@@ -456,12 +456,18 @@ public class ProjectInfoAction extends BaseAction {
 	public ActionForward initInsertxml(ActionMapping mapping,
 			ActionForm actionForm, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-
-		LoginUser loginUser = (LoginUser) request.getSession().getAttribute(
-				Config.SystemConfig.LOGINUSER);
+		Result result = new Result();// ���
+	
+		
+		LoginUser loginUser = (LoginUser)request.getSession().getAttribute(Config.SystemConfig.LOGINUSER);
 		if (loginUser == null) {
-			return null;
+	           result.setBackPage(Config.INDEX_PAGE);
+	           result.setResultCode("timeout");
+	           result.setResultType("fail");
+	           request.setAttribute("result", null);
+	           return mapping.findForward("result");
 		}
+		
 
 		String userName = loginUser.getUserName();
 		
@@ -842,6 +848,48 @@ public class ProjectInfoAction extends BaseAction {
 			request.setAttribute("fuwei_queb", listDuoyu.get(0).get("fuwei_queb")+"");*/
 			
 			request.setAttribute("duoyu", listDuoyu.get(0));
+			
+			String gys1 = CommUtils.getPrintSelect(Clist, "gys1","project_no", "project_no", listDuoyu.get(0).get("gys1")+"", 1);
+			request.setAttribute("gys1", gys1);
+			
+			String gys2 = CommUtils.getPrintSelect(Clist, "gys2","project_no", "project_no", listDuoyu.get(0).get("gys2")+"", 1);
+			request.setAttribute("gys2", gys2);
+			
+			String gys3 = CommUtils.getPrintSelect(Clist, "gys3","project_no", "project_no", listDuoyu.get(0).get("gys3")+"", 1);
+			request.setAttribute("gys3", gys3);
+			
+			String gys4 = CommUtils.getPrintSelect(Clist, "gys4","project_no", "project_no", listDuoyu.get(0).get("gys4")+"", 1);
+			request.setAttribute("gys4", gys4);
+			
+			String gys5 = CommUtils.getPrintSelect(Clist, "gys5","project_no", "project_no", listDuoyu.get(0).get("gys5")+"", 1);
+			request.setAttribute("gys5", gys5);
+			
+			String gys6 = CommUtils.getPrintSelect(Clist, "gys6","project_no", "project_no", listDuoyu.get(0).get("gys6")+"", 1);
+			request.setAttribute("gys6", gys6);
+			
+			String gys7 = CommUtils.getPrintSelect(Clist, "gys7","project_no", "project_no", listDuoyu.get(0).get("gys7")+"", 1);
+			request.setAttribute("gys7", gys7);
+			
+			String gys8 = CommUtils.getPrintSelect(Clist, "gys8","project_no", "project_no", listDuoyu.get(0).get("gys8")+"", 1);
+			request.setAttribute("gys8", gys8);
+			
+			String gys9 = CommUtils.getPrintSelect(Clist, "gys9","project_no", "project_no", listDuoyu.get(0).get("gys9")+"", 1);
+			request.setAttribute("gys9", gys9);
+			
+			String gys10 = CommUtils.getPrintSelect(Clist, "gys10","project_no", "project_no", listDuoyu.get(0).get("gys10")+"", 1);
+			request.setAttribute("gys10", gys10);
+			
+			String gys11 = CommUtils.getPrintSelect(Clist, "gys11","project_no", "project_no", listDuoyu.get(0).get("gys11")+"", 1);
+			request.setAttribute("gys11", gys11);
+			
+			String gys12 = CommUtils.getPrintSelect(Clist, "gys12","project_no", "project_no", listDuoyu.get(0).get("gys12")+"", 1);
+			request.setAttribute("gys12", gys12);
+			
+			String gys13 = CommUtils.getPrintSelect(Clist, "gys13","project_no", "project_no", listDuoyu.get(0).get("gys13")+"", 1);
+			request.setAttribute("gys13", gys13);
+			
+			String gys14 = CommUtils.getPrintSelect(Clist, "gys14","project_no", "project_no", listDuoyu.get(0).get("gys14")+"", 1);
+			request.setAttribute("gys14", gys14);
 		}
 		
 			return mapping.findForward("updateProjectInfoxml");
@@ -1829,6 +1877,14 @@ public class ProjectInfoAction extends BaseAction {
 			ProjectInfoForm form = (ProjectInfoForm) actionForm;
 			Hashtable<?, ?> files = form.getMultipartRequestHandler()
 					.getFileElements();
+			
+			   Hashtable<Object, FormFile> fileMap = form.getMultipartRequestHandler().getFileElements();
+               //遍历文件列表
+               for(Object key : fileMap.keySet()){ 
+                   FormFile file =  fileMap.get(key);
+                   System.out.println("遍历文件"+file.getFileName());
+               }
+               
 		   int fileIsEmpty = 0;
 			
 			if (files != null & files.size() > 0) {
@@ -2130,6 +2186,7 @@ public class ProjectInfoAction extends BaseAction {
 			String ml11 = request.getParameter("ml11");
 			String ml12 = request.getParameter("ml12");
 			String ml13 = request.getParameter("ml13");
+			String ml14 = request.getParameter("ml14");
 			insertVO.setMl1(ml1);
 			insertVO.setMl2(ml2);
 			insertVO.setMl3(ml3);
@@ -2143,8 +2200,10 @@ public class ProjectInfoAction extends BaseAction {
 			insertVO.setMl11(ml11);
 			insertVO.setMl12(ml12);
 			insertVO.setMl13(ml13);
+			insertVO.setMl14(ml14);
 			
 			String yt1 = request.getParameter("yt1");
+			System.out.println("用途1="+yt1);
 			String yt2 = request.getParameter("yt2");
 			String yt3 = request.getParameter("yt3");
 			String yt4 = request.getParameter("yt4");
@@ -2157,6 +2216,7 @@ public class ProjectInfoAction extends BaseAction {
 			String yt11 = request.getParameter("yt11");
 			String yt12 = request.getParameter("yt12");
 			String yt13 = request.getParameter("yt13");
+			String yt14 = request.getParameter("yt14");
 			insertVO.setYt1(yt1);
 			insertVO.setYt2(yt2);
 			insertVO.setYt3(yt3);
@@ -2170,6 +2230,7 @@ public class ProjectInfoAction extends BaseAction {
 			insertVO.setYt11(yt11);
 			insertVO.setYt12(yt12);
 			insertVO.setYt13(yt13);
+			insertVO.setYt14(yt14);
 			
 			
 			
@@ -3171,6 +3232,7 @@ public class ProjectInfoAction extends BaseAction {
 		if(listDuoyu.size()>0){
 			request.setAttribute("fuwei_quea", listDuoyu.get(0).get("fuwei_quea")+"");
 			request.setAttribute("fuwei_queb", listDuoyu.get(0).get("fuwei_queb")+"");
+			request.setAttribute("duoyu", listDuoyu.get(0));
 		}
 		
 

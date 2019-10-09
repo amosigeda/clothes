@@ -165,27 +165,8 @@ function onAdd(wechat){
 				</td>
 			</tr> -->
 
-			<tr>
-				<td nowrap="nowrap" align="center" width="7%"><input
-					style="border:none;" name="anniu" size="200" id="anniu"
-					type="hidden" class="txt_1" /></td>
-				<td nowrap="nowrap" align="center" width="7%"><input
-					type="button" name="ok" accesskey="y" tabindex="y" value="保存"
-					title="1" class="but_1" onclick="onAdd(this.title)"
-					style="font-size:12;width:40px;height:21px;"> <input
-					type="button" name="ok" accesskey="y" tabindex="y" value="提交"
-					title="2" class="but_1" onclick="onAdd(this.title)"
-					style="font-size:12;width:40px;height:21px;"> <input
-					type="button" name="back" accesskey="b" tabindex="b" value="返 回"
-					class="but_1" onclick="location='doMsgInfo.do?method=queryMsgInfo'"
-					style="font-size:12;width:40px;height:21px;"></td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
-			</tr>
-
+		
+ <%if(!"".equals(msgInfo.getAt("mianliao1"))&& msgInfo.getAt("mianliao1")!=null ){ %>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">面料</td>
 				<td nowrap="nowrap" align="center" width="7%">
@@ -220,8 +201,8 @@ function onAdd(wechat){
 					type="text" size="38" maxlength="100"
 					 /></td>
 			</tr>
-			
-			
+			 <%} %>
+			 <%if(!"".equals(msgInfo.getAt("mianliao2"))&& msgInfo.getAt("mianliao2")!=null ){ %>
 				<tr>
 				<td nowrap="nowrap" align="center" width="7%">面料</td>
 				<td nowrap="nowrap" align="center" width="7%">
@@ -256,8 +237,8 @@ function onAdd(wechat){
 					type="text" size="38" maxlength="100"
 					 /></td>
 			</tr>
-			
-			
+			 <%} %>
+			 <%if(!"".equals(msgInfo.getAt("mianliao3"))&& msgInfo.getAt("mianliao3")!=null ){ %>
 				<tr>
 				<td nowrap="nowrap" align="center" width="7%">面料</td>
 				<td nowrap="nowrap" align="center" width="7%">
@@ -292,8 +273,8 @@ function onAdd(wechat){
 					type="text" size="38" maxlength="100"
 					 /></td>
 			</tr>
-			
-			
+			 <%} %>
+			 <%if(!"".equals(msgInfo.getAt("mianliao4"))&& msgInfo.getAt("mianliao4")!=null ){ %>
 				<tr>
 				<td nowrap="nowrap" align="center" width="7%">面料</td>
 				<td nowrap="nowrap" align="center" width="7%">
@@ -328,8 +309,8 @@ function onAdd(wechat){
 					type="text" size="38" maxlength="100"
 					 /></td>
 			</tr>
-			
-			
+			 <%} %>
+			 <%if(!"".equals(msgInfo.getAt("mianliao5"))&& msgInfo.getAt("mianliao5")!=null ){ %>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">面料</td>
 				<td nowrap="nowrap" align="center" width="7%">
@@ -364,8 +345,8 @@ function onAdd(wechat){
 					type="text" size="38" maxlength="100"
 					 /></td>
 			</tr>
-			
-			
+			 <%} %>
+			 <%if(!"".equals(msgInfo.getAt("mianliao6"))&& msgInfo.getAt("mianliao6")!=null ){ %>
 				<tr>
 				<td nowrap="nowrap" align="center" width="7%">面料</td>
 				<td nowrap="nowrap" align="center" width="7%">
@@ -397,8 +378,8 @@ function onAdd(wechat){
 					type="text" size="38" maxlength="100"
 					 /></td>
 			</tr>
-			
-			
+			 <%} %>
+			 <%if(!"".equals(msgInfo.getAt("mianliao7"))&& msgInfo.getAt("mianliao7")!=null ){ %>
 				<tr>
 				<td nowrap="nowrap" align="center" width="7%">面料</td>
 				<td nowrap="nowrap" align="center" width="7%">
@@ -430,8 +411,8 @@ function onAdd(wechat){
 					type="text" size="38" maxlength="100"
 					 /></td>
 			</tr>
-			
-			
+			 <%} %>
+				 <%if(!"".equals(msgInfo.getAt("mianliao8"))&& msgInfo.getAt("mianliao8")!=null ){ %>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">面料</td>
 				<td nowrap="nowrap" align="center" width="7%">
@@ -463,8 +444,8 @@ function onAdd(wechat){
 					type="text" size="38" maxlength="100"
 					 /></td>
 			</tr>
-			
-			
+			 <%} %>
+				 <%if(!"".equals(msgInfo.getAt("mianliao9"))&& msgInfo.getAt("mianliao9")!=null ){ %>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">面料</td>
 				<td nowrap="nowrap" align="center" width="7%">
@@ -496,7 +477,8 @@ function onAdd(wechat){
 					type="text" size="38" maxlength="100"
 					 /></td>
 			</tr>
-			
+			 <%} %>
+				 <%if(!"".equals(msgInfo.getAt("mianliao10"))&& msgInfo.getAt("mianliao10")!=null ){ %>
 			
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">面料</td>
@@ -529,7 +511,8 @@ function onAdd(wechat){
 					type="text" size="38" maxlength="100"
 					 /></td>
 			</tr>
-			
+			 <%} %>
+				 <%if(!"".equals(msgInfo.getAt("mianliao11"))&& msgInfo.getAt("mianliao11")!=null ){ %>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">面料</td>
 				<td nowrap="nowrap" align="center" width="7%">
@@ -562,7 +545,8 @@ function onAdd(wechat){
 					type="text" size="38" maxlength="100"
 					 /></td>
 			</tr>
-			
+				 <%} %>
+				 <%if(!"".equals(msgInfo.getAt("mianliao12"))&& msgInfo.getAt("mianliao12")!=null ){ %>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">面料</td>
 				<td nowrap="nowrap" align="center" width="7%">
@@ -596,7 +580,8 @@ function onAdd(wechat){
 					 /></td>
 			</tr>
 			
-			
+			 <%} %>
+				 <%if(!"".equals(msgInfo.getAt("mianliao13"))&& msgInfo.getAt("mianliao13")!=null ){ %>
 				<tr>
 				<td nowrap="nowrap" align="center" width="7%">面料</td>
 				<td nowrap="nowrap" align="center" width="7%">
@@ -630,7 +615,8 @@ function onAdd(wechat){
 					 /></td>
 			</tr>
 			
-			
+			 <%} %>
+				 <%if(!"".equals(msgInfo.getAt("mianliao14"))&& msgInfo.getAt("mianliao14")!=null ){ %>
 				<tr>
 				<td nowrap="nowrap" align="center" width="7%">面料</td>
 				<td nowrap="nowrap" align="center" width="7%">
@@ -663,7 +649,29 @@ function onAdd(wechat){
 					type="text" size="38" maxlength="100"
 					 /></td>
 			</tr>
-			
+				 <%} %>
+				
+				 
+				<tr>
+				<td nowrap="nowrap" align="center" width="7%"><input
+					style="border:none;" name="anniu" size="200" id="anniu"
+					type="hidden" class="txt_1" /></td>
+				<td nowrap="nowrap" align="center" width="7%"><input
+					type="button" name="ok" accesskey="y" tabindex="y" value="保存"
+					title="1" class="but_1" onclick="onAdd(this.title)"
+					style="font-size:12;width:40px;height:21px;"> <input
+					type="button" name="ok" accesskey="y" tabindex="y" value="提交"
+					title="2" class="but_1" onclick="onAdd(this.title)"
+					style="font-size:12;width:40px;height:21px;"> <input
+					type="button" name="back" accesskey="b" tabindex="b" value="返 回"
+					class="but_1" onclick="location='doMsgInfo.do?method=queryMsgInfo'"
+					style="font-size:12;width:40px;height:21px;"></td>
+				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%"></td>
+				<td nowrap="nowrap" align="center" width="7%"></td>
+			</tr>
 			
 		</table>
 	</form>

@@ -210,6 +210,7 @@ public class ProjectInfo extends PublicVoBean implements Serializable{
 	    private String ml11; 
 	    private String ml12; 
 	    private String ml13; 
+	    private String ml14; 
 	   
 
 	    private String yt1; 
@@ -225,6 +226,7 @@ public class ProjectInfo extends PublicVoBean implements Serializable{
 	    private String yt11; 
 	    private String yt12; 
 	    private String yt13; 
+	    private String yt14; 
 	  
 
 	    private String ms1; 
@@ -240,6 +242,7 @@ public class ProjectInfo extends PublicVoBean implements Serializable{
 	    private String ms11; 
 	    private String ms12; 
 	    private String ms13; 
+	    private String ms14; 
 
 	    private String gys1; 
 	    private String gys2; 
@@ -254,10 +257,34 @@ public class ProjectInfo extends PublicVoBean implements Serializable{
 	    private String gys11; 
 	    private String gys12; 
 	    private String gys13; 
+	    private String gys14; 
 	    
 	    
 	
-	
+	public String getMl14() {
+			return ml14;
+		}
+		public void setMl14(String ml14) {
+			this.ml14 = ml14;
+		}
+		public String getYt14() {
+			return yt14;
+		}
+		public void setYt14(String yt14) {
+			this.yt14 = yt14;
+		}
+		public String getMs14() {
+			return ms14;
+		}
+		public void setMs14(String ms14) {
+			this.ms14 = ms14;
+		}
+		public String getGys14() {
+			return gys14;
+		}
+		public void setGys14(String gys14) {
+			this.gys14 = gys14;
+		}
 	public String getMl1() {
 			return ml1;
 		}
