@@ -193,11 +193,6 @@ function setSecond(obj){
 	
 	function look(){
 		var value=document.getElementById("jiaofu_time").value;//获取值
-	 
-		
-		 
-		
-
 		  var a = new Date();
 		  a = a.valueOf();
 		  a = a + value * 24 * 60 * 60 * 1000;
@@ -210,15 +205,13 @@ var min = a.getMinutes();
 var year = a.getFullYear();
 
 
-var xianshi=year+"/"+months+"/"+days+" "+hours+":"+min;
+//var xianshi=year+"/"+months+"/"+days+" "+hours+":"+min;
+var xianshi=year+"/"+months+"/"+days;
 document.getElementById("test").setAttribute("value", xianshi );
 
-
-
-
-	 
-
-	 
+var selectObj = document.getElementById("jiaofu_time");
+alert(selectObj);
+selectObj[0].text=xianshi;
 
 	}
 	
@@ -341,18 +334,18 @@ document.getElementById("test").setAttribute("value", xianshi );
 						<option value="重做">重做</option>
 				</select>
 				</td>
-				<td nowrap="nowrap" align="center" width="7%">交付时间<input  type="text" name="test" id="test"></td>
+				<td nowrap="nowrap" align="center" width="7%">交付时间</td>
 				<td nowrap="nowrap" align="left" width="7%">
 				
 			<!-- 	<input name="startTime1" type="text" class="txt_1"  id="startTime1" style="cursor:text"
 								 onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
 								size="20" readonly> -->
-					
-				<select name="jiaofu_time"  id="jiaofu_time" onchange="look();" >
+						<%=request.getAttribute("jiaofu")%>
+				<!-- <select name="jiaofu_time"  id="jiaofu_time" onchange="look();" >
 						<option value="10">+10天  加急</option>
 						<option value="5">+5天  特别加急</option>
 						<option value="3">+3天   非常紧急</option>
-				</select> 
+				</select>  -->
 				</td>
 				
 				

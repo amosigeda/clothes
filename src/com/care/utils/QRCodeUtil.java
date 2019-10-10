@@ -9,8 +9,9 @@ import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.OutputStream;
+import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -22,6 +23,7 @@ import com.google.zxing.MultiFormatReader;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.Result;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
@@ -41,9 +43,9 @@ public class QRCodeUtil {
 			boolean needCompress) throws Exception {
 		@SuppressWarnings("rawtypes")
 		Hashtable hints = new Hashtable();
-		hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
+		hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
 		hints.put(EncodeHintType.CHARACTER_SET, CHARSET);
-		hints.put(EncodeHintType.MARGIN, 1);
+		hints.put(EncodeHintType.MARGIN, 0);
 		BitMatrix bitMatrix = new MultiFormatWriter().encode(content,
 				BarcodeFormat.QR_CODE, QRCODE_SIZE, QRCODE_SIZE, hints);
 		int width = bitMatrix.getWidth();
@@ -176,5 +178,61 @@ public class QRCodeUtil {
 	public static String decode(String path) throws Exception {
 		return QRCodeUtil.decode(new File(path));
 	}
+	
+public static void main(String[] args) {
+        
+        int width=300;
+        int height=300;
+        
+        String format="png";
+        //这里如果你想自动跳转的话，需要加上https://
+        String content="https://github.com/hbbliyong/QRCode.git";
+        
+        HashMap hits=new HashMap();
+        hits.put(EncodeHintType.CHARACTER_SET, "utf-8");//编码
+        //纠错等级，纠错等级越高存储信息越少
+        hits.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.M);
+        //边距
+        hits.put(EncodeHintType.MARGIN, 0);
+        
+        try {
+            BitMatrix bitMatrix=new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, width, height,hits);
+            //如果做网页版输出可以用输出到流
+            //MatrixToImageWriter.writeToStream(matrix, format, stream);
+            Path path=new File("E:/idea/test/zxingQRCode.png").toPath();
+            MatrixToImageWriter.writeToPath(bitMatrix, format, path);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        System.out.println("that is all");
+    }
+
+   public static void diErZhong(String text,String luJing){
+	   int width=300;
+       int height=300;
+       
+       String format="png";
+       //这里如果你想自动跳转的话，需要加上https://
+      // String content="https://github.com/hbbliyong/QRCode.git";
+       
+       HashMap hits=new HashMap();
+       hits.put(EncodeHintType.CHARACTER_SET, "utf-8");//编码
+       //纠错等级，纠错等级越高存储信息越少
+       hits.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.M);
+       //边距
+       hits.put(EncodeHintType.MARGIN, 0);
+       
+       try {
+           BitMatrix bitMatrix=new MultiFormatWriter().encode(text, BarcodeFormat.QR_CODE, width, height,hits);
+           //如果做网页版输出可以用输出到流
+           //MatrixToImageWriter.writeToStream(matrix, format, stream);
+           Path path=new File(luJing).toPath();
+           MatrixToImageWriter.writeToPath(bitMatrix, format, path);
+       } catch (Exception e) {
+           // TODO Auto-generated catch block
+           e.printStackTrace();
+       }
+   }
 
 }

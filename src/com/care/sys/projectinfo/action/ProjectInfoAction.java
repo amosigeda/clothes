@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -509,8 +510,19 @@ public class ProjectInfoAction extends BaseAction {
 	    	}
 	    	request.setAttribute("dingdan", orderId);
 	    	request.setAttribute("shijian", yydfhh.format(calendar.getTime()));
+	    	
+	    	StringBuffer sf = new StringBuffer();
+			sf.append("<select name='jiaofu_time' id='jiaofu_time'>\n");
+			
+				sf.append("\t\t\t<option value='10'>"+ "+10天    " +CommTools.getAddTime(10)+ "</option>\n");
+				sf.append("\t\t\t<option value='5'>"+ "+5天  特别加急  " +CommTools.getAddTime(5)+ "</option>\n");
+				sf.append("\t\t\t<option value='3'>"+ "+3天   非常紧急  " +CommTools.getAddTime(3)+ "</option>\n");
+			
+			sf.append("\t\t\t</select>");
+				request.setAttribute("jiaofu", sf.toString());
+			
 			return mapping.findForward("addProjectInfoxml");
-		/*} else {
+		/*} else 
 			return mapping.findForward("addProjectInfoxmlOther");
 		}*/
 	}
@@ -849,49 +861,62 @@ public class ProjectInfoAction extends BaseAction {
 			
 			request.setAttribute("duoyu", listDuoyu.get(0));
 			
-			String gys1 = CommUtils.getPrintSelect(Clist, "gys1","project_no", "project_no", listDuoyu.get(0).get("gys1")+"", 1);
+			String gys1 = CommUtils.getPrintSelectGys(Clist, "gys1","project_no", "project_no", listDuoyu.get(0).get("gys1")+"", 1);
 			request.setAttribute("gys1", gys1);
 			
-			String gys2 = CommUtils.getPrintSelect(Clist, "gys2","project_no", "project_no", listDuoyu.get(0).get("gys2")+"", 1);
+			String gys2 = CommUtils.getPrintSelectGys(Clist, "gys2","project_no", "project_no", listDuoyu.get(0).get("gys2")+"", 1);
 			request.setAttribute("gys2", gys2);
 			
-			String gys3 = CommUtils.getPrintSelect(Clist, "gys3","project_no", "project_no", listDuoyu.get(0).get("gys3")+"", 1);
+			String gys3 = CommUtils.getPrintSelectGys(Clist, "gys3","project_no", "project_no", listDuoyu.get(0).get("gys3")+"", 1);
 			request.setAttribute("gys3", gys3);
 			
-			String gys4 = CommUtils.getPrintSelect(Clist, "gys4","project_no", "project_no", listDuoyu.get(0).get("gys4")+"", 1);
+			String gys4 = CommUtils.getPrintSelectGys(Clist, "gys4","project_no", "project_no", listDuoyu.get(0).get("gys4")+"", 1);
 			request.setAttribute("gys4", gys4);
 			
-			String gys5 = CommUtils.getPrintSelect(Clist, "gys5","project_no", "project_no", listDuoyu.get(0).get("gys5")+"", 1);
+			String gys5 = CommUtils.getPrintSelectGys(Clist, "gys5","project_no", "project_no", listDuoyu.get(0).get("gys5")+"", 1);
 			request.setAttribute("gys5", gys5);
 			
-			String gys6 = CommUtils.getPrintSelect(Clist, "gys6","project_no", "project_no", listDuoyu.get(0).get("gys6")+"", 1);
+			String gys6 = CommUtils.getPrintSelectGys(Clist, "gys6","project_no", "project_no", listDuoyu.get(0).get("gys6")+"", 1);
 			request.setAttribute("gys6", gys6);
 			
-			String gys7 = CommUtils.getPrintSelect(Clist, "gys7","project_no", "project_no", listDuoyu.get(0).get("gys7")+"", 1);
+			String gys7 = CommUtils.getPrintSelectGys(Clist, "gys7","project_no", "project_no", listDuoyu.get(0).get("gys7")+"", 1);
 			request.setAttribute("gys7", gys7);
 			
-			String gys8 = CommUtils.getPrintSelect(Clist, "gys8","project_no", "project_no", listDuoyu.get(0).get("gys8")+"", 1);
+			String gys8 = CommUtils.getPrintSelectGys(Clist, "gys8","project_no", "project_no", listDuoyu.get(0).get("gys8")+"", 1);
 			request.setAttribute("gys8", gys8);
 			
-			String gys9 = CommUtils.getPrintSelect(Clist, "gys9","project_no", "project_no", listDuoyu.get(0).get("gys9")+"", 1);
+			String gys9 = CommUtils.getPrintSelectGys(Clist, "gys9","project_no", "project_no", listDuoyu.get(0).get("gys9")+"", 1);
 			request.setAttribute("gys9", gys9);
 			
-			String gys10 = CommUtils.getPrintSelect(Clist, "gys10","project_no", "project_no", listDuoyu.get(0).get("gys10")+"", 1);
+			String gys10 = CommUtils.getPrintSelectGys(Clist, "gys10","project_no", "project_no", listDuoyu.get(0).get("gys10")+"", 1);
 			request.setAttribute("gys10", gys10);
 			
-			String gys11 = CommUtils.getPrintSelect(Clist, "gys11","project_no", "project_no", listDuoyu.get(0).get("gys11")+"", 1);
+			String gys11 = CommUtils.getPrintSelectGys(Clist, "gys11","project_no", "project_no", listDuoyu.get(0).get("gys11")+"", 1);
 			request.setAttribute("gys11", gys11);
 			
-			String gys12 = CommUtils.getPrintSelect(Clist, "gys12","project_no", "project_no", listDuoyu.get(0).get("gys12")+"", 1);
+			String gys12 = CommUtils.getPrintSelectGys(Clist, "gys12","project_no", "project_no", listDuoyu.get(0).get("gys12")+"", 1);
 			request.setAttribute("gys12", gys12);
 			
-			String gys13 = CommUtils.getPrintSelect(Clist, "gys13","project_no", "project_no", listDuoyu.get(0).get("gys13")+"", 1);
+			String gys13 = CommUtils.getPrintSelectGys(Clist, "gys13","project_no", "project_no", listDuoyu.get(0).get("gys13")+"", 1);
 			request.setAttribute("gys13", gys13);
 			
-			String gys14 = CommUtils.getPrintSelect(Clist, "gys14","project_no", "project_no", listDuoyu.get(0).get("gys14")+"", 1);
+			String gys14 = CommUtils.getPrintSelectGys(Clist, "gys14","project_no", "project_no", listDuoyu.get(0).get("gys14")+"", 1);
 			request.setAttribute("gys14", gys14);
 		}
 		
+		
+	/*	StringBuffer sf = new StringBuffer();
+		sf.append("<select name='jiaofu_time' id='jiaofu_time'>\n");
+		
+			sf.append("\t\t\t<option value='10'>"+ "+10天  加急  " +CommTools.getAddTime(10)+ "</option>\n");
+			sf.append("\t\t\t<option value='5'>"+ "+5天  特别加急  " +CommTools.getAddTime(5)+ "</option>\n");
+			sf.append("\t\t\t<option value='3'>"+ "+3天   非常紧急  " +CommTools.getAddTime(3)+ "</option>\n");
+		
+		sf.append("\t\t\t</select>");
+			request.setAttribute("jiaofu", sf.toString());*/
+			
+			
+			
 			return mapping.findForward("updateProjectInfoxml");
 		/*	if ("admin".equals(userName)) {
 		} else {
@@ -3516,10 +3541,10 @@ public class ProjectInfoAction extends BaseAction {
 				
 				String baise = "D:/bai.png";
 				
-				String wechatUrlQian= "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx72e5182a29950eb2&redirect_uri=http%3A%2F%2Fwww.bzsxt.com%2FClothesWechat%2Fwechat_request&response_type=code&scope=snsapi_base&state=";
-				String wechatUrlhou="#wechat_redirect";
+				String wechatUrlQian= "http://www.bzsxt.com/ClothesWechat/scan?state=";
+				//String wechatUrlhou="#wechat_redirect";
 				if(xizhuang_number!=0){
-					String text = wechatUrlQian+orderid+",xizhuang"+wechatUrlhou;
+					String text = wechatUrlQian+orderid+",1";
 					// 嵌入二维码的图片路径
 					// String imgPath = "F:/UI/test/1.png";
 					String imgPath = "D:/1.png";
@@ -3529,7 +3554,7 @@ public class ProjectInfoAction extends BaseAction {
 					photo1 = destPath;
 					// 生成二维码
 					QRCodeUtil.encode(text, imgPath, destPath, true);
-					
+					//QRCodeUtil.diErZhong(text,destPath);
 					GetExCel.writeExcelDaBiao("1",orderid, nickName, riqi, yaowei,destPath);
 					vod.setErweima_1(urlPhoto + "1.png");
 					//http://47.111.148.8:80/watch/upload/zip/4.png
@@ -3537,7 +3562,7 @@ public class ProjectInfoAction extends BaseAction {
 					photo1 = baise;
 				}
 				if(chenshan_number!=0){
-					String text = wechatUrlQian+orderid+",chenshan"+wechatUrlhou;
+					String text = wechatUrlQian+orderid+",2";
 					// 嵌入二维码的图片路径
 					// String imgPath = "F:/UI/test/1.png";
 					String imgPath = "D:/1.png";
@@ -3547,14 +3572,14 @@ public class ProjectInfoAction extends BaseAction {
 					photo2 = destPath;
 					// 生成二维码
 					QRCodeUtil.encode(text, imgPath, destPath, true);
-					
+					//QRCodeUtil.diErZhong(text,destPath);
 					GetExCel.writeExcelDaBiao("2",orderid, nickName, riqi, yaowei,destPath);
 					vod.setErweima_2(urlPhoto + "2.png");
 				}else{
 					photo1 = baise;
 				}
 				if(xiku_number!=0){
-					String text =wechatUrlQian+ orderid+",xiku"+wechatUrlhou;
+					String text =wechatUrlQian+ orderid+",3";
 					// 嵌入二维码的图片路径
 					// String imgPath = "F:/UI/test/1.png";
 					String imgPath = "D:/1.png";
@@ -3564,14 +3589,14 @@ public class ProjectInfoAction extends BaseAction {
 					photo3 = destPath;
 					// 生成二维码
 					QRCodeUtil.encode(text, imgPath, destPath, true);
-					
+					//QRCodeUtil.diErZhong(text,destPath);
 					GetExCel.writeExcelDaBiao("3",orderid, nickName, riqi, yaowei,destPath);
 					vod.setErweima_3(urlPhoto + "3.png");
 				}else{
 					photo1 = baise;
 				}
 				if(majia_number!=0){
-					String text = wechatUrlQian+orderid+",majia"+wechatUrlhou;
+					String text = wechatUrlQian+orderid+",4";
 					// 嵌入二维码的图片路径
 					// String imgPath = "F:/UI/test/1.png";
 					String imgPath = "D:/1.png";
@@ -3581,7 +3606,7 @@ public class ProjectInfoAction extends BaseAction {
 					photo4 = destPath;
 					// 生成二维码
 					QRCodeUtil.encode(text, imgPath, destPath, true);
-					
+					//QRCodeUtil.diErZhong(text,destPath);
 					GetExCel.writeExcelDaBiao("4",orderid, nickName, riqi, yaowei,destPath);
 					vod.setErweima_4(urlPhoto + "4.png");
 				}else{

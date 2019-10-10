@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.util.Date;
 
 import jxl.Workbook;
+import jxl.format.Alignment;
+import jxl.format.PaperSize;
+import jxl.format.VerticalAlignment;
 import jxl.write.BorderLineStyle;
 import jxl.write.DateFormat;
 import jxl.write.DateTime;
@@ -110,46 +113,50 @@ public class GetExCel {
 				WritableWorkbook workbook = Workbook.createWorkbook(new File(path));
 				// 使用第一张工作表，将其命名为“测试”
 				WritableSheet sheet = workbook.createSheet("档案", 0);
+			
 
 				// 设置字体种类和格式
-				WritableFont bold = new WritableFont(WritableFont.ARIAL, 12,
+				WritableFont bold = new WritableFont(WritableFont.createFont("宋体") , 9,
 						WritableFont.BOLD);
-				WritableCellFormat wcfFormat = new WritableCellFormat();
-				wcfFormat.setAlignment(jxl.format.Alignment.CENTRE);// 单元格中的内容水平方向居中
+				WritableCellFormat wcfFormat = new WritableCellFormat(bold);
+				wcfFormat.setAlignment(jxl.format.Alignment.LEFT);// 单元格中的内容水平方向居中
 				wcfFormat.setBorder(jxl.format.Border.ALL, BorderLineStyle.MEDIUM);
+				wcfFormat.setVerticalAlignment(VerticalAlignment.CENTRE);
 				
-				WritableCellFormat leftwcfFormat = new WritableCellFormat();
+				WritableCellFormat leftwcfFormat = new WritableCellFormat(bold);
 				leftwcfFormat.setAlignment(jxl.format.Alignment.LEFT);// 单元格中的内容水平方向居中
 				leftwcfFormat.setBorder(jxl.format.Border.ALL, BorderLineStyle.MEDIUM);
+				leftwcfFormat.setVerticalAlignment(VerticalAlignment.CENTRE);
+				//leftwcfFormat.setAlignment(Alignment.CENTRE); //设置垂直对齐
 				// 单元格是字符串格式！第一个是代表列数,第二是代表行数，第三个代表要写入的内容,第四个代表字体格式
 				// （0代表excel的第一行或者第一列）
-				Label label01 = new Label(0, 0, "订单编号", wcfFormat); // 这里的（0,0）表示第一行第一列的表格
+				Label label01 = new Label(0, 0, "  订单编号", wcfFormat); // 这里的（0,0）表示第一行第一列的表格
 				sheet.addCell(label01);
-				Label label03 = new Label(0, 1, "生产车间",wcfFormat);
+				Label label03 = new Label(0, 1, "  生产车间",wcfFormat);
 				sheet.addCell(label03);
-				Label label05 = new Label(0, 2, "客户姓名",wcfFormat);
+				Label label05 = new Label(0, 2, "  客户姓名",wcfFormat);
 				sheet.addCell(label05);
-				Label label06 = new Label(0, 3, "执行标准-西装",wcfFormat);
+				Label label06 = new Label(0, 3, "  执行标准-西装",wcfFormat);
 				sheet.addCell(label06);
-				Label label07 = new Label(0, 4, "执行标准-西裤",wcfFormat);
+				Label label07 = new Label(0, 4, "  执行标准-西裤",wcfFormat);
 				sheet.addCell(label07);
-				Label label08 = new Label(0, 5, "尺码",wcfFormat);
+				Label label08 = new Label(0, 5, "  尺码",wcfFormat);
 				sheet.addCell(label08);
-				Label label09 = new Label(0, 6, "数量",wcfFormat);
+				Label label09 = new Label(0, 6, "  数量",wcfFormat);
 				sheet.addCell(label09);
-				Label label10 = new Label(0, 7, "辅助数量",wcfFormat);
+				Label label10 = new Label(0, 7, "  辅助数量",wcfFormat);
 				sheet.addCell(label10);
-				Label label11 = new Label(0, 8, "下单日期",wcfFormat);
+				Label label11 = new Label(0, 8, "  下单日期",wcfFormat);
 				sheet.addCell(label11);
-				Label label12 = new Label(0, 9, "洗涤方式",wcfFormat);
+				Label label12 = new Label(0, 9, "  洗涤方式",wcfFormat);
 				sheet.addCell(label12);
-				Label label13 = new Label(0, 10, "操作员",wcfFormat);
+				Label label13 = new Label(0, 10, "  操作员",wcfFormat);
 				sheet.addCell(label13);
-				Label label14 = new Label(0, 11, "质检员",wcfFormat);
+				Label label14 = new Label(0, 11, "  质检员",wcfFormat);
 				sheet.addCell(label14);
-				Label label15 = new Label(0, 12, "工艺等级",wcfFormat);
+				Label label15 = new Label(0, 12, "  工艺等级",wcfFormat);
 				sheet.addCell(label15);
-				Label label16 = new Label(0, 13, "裤腰围",wcfFormat);
+				Label label16 = new Label(0, 13, "  裤腰围",wcfFormat);
 				sheet.addCell(label16);
 				
 				
@@ -170,7 +177,7 @@ public class GetExCel {
 				Label label22 = new Label(1, 7, "1",leftwcfFormat);
 				sheet.addCell(label22);
 //				Label label23 = new Label(1, 8, "2019/09/08",leftwcfFormat);
-				Label label23 = new Label(1, 8, riqi,leftwcfFormat);
+				Label label23 = new Label(1, 8, riqi.substring(0, 10),leftwcfFormat);
 				sheet.addCell(label23);
 				Label label24 = new Label(1, 9, "只可干洗",leftwcfFormat);
 				sheet.addCell(label24);
@@ -184,23 +191,23 @@ public class GetExCel {
 				sheet.addCell(label28);
 				
 			
-				sheet.setColumnView(0, 20);
-				sheet.setColumnView(1, 24);
+				sheet.setColumnView(0, 16);
+				sheet.setColumnView(1, 22);
 				
-				sheet.setRowView(0, 400, false);
-				sheet.setRowView(1, 400, false);
-				sheet.setRowView(2, 400, false);
-				sheet.setRowView(3, 400, false);
-				sheet.setRowView(4, 400, false);
-				sheet.setRowView(5, 400, false);
-				sheet.setRowView(6, 400, false);
-				sheet.setRowView(7, 400, false);
-				sheet.setRowView(8, 400, false);
-				sheet.setRowView(9, 400, false);
-				sheet.setRowView(10, 400, false);
-				sheet.setRowView(11, 400, false);
-				sheet.setRowView(12, 400, false);
-				sheet.setRowView(13, 400, false);
+				sheet.setRowView(0, 300, false);
+				sheet.setRowView(1, 300, false);
+				sheet.setRowView(2, 300, false);
+				sheet.setRowView(3, 300, false);
+				sheet.setRowView(4, 300, false);
+				sheet.setRowView(5, 300, false);
+				sheet.setRowView(6, 300, false);
+				sheet.setRowView(7, 300, false);
+				sheet.setRowView(8, 300, false);
+				sheet.setRowView(9, 300, false);
+				sheet.setRowView(10, 300, false);
+				sheet.setRowView(11, 300, false);
+				sheet.setRowView(12, 300, false);
+				sheet.setRowView(13, 300, false);
 				
 				// 插入图片
 //				File file = new File("D:/123.png");
@@ -215,6 +222,12 @@ public class GetExCel {
 				// 这里的第一个数据代表第二列，第二个数据代表第一行，第三个数据代表第四列，第四个数据代表第二行
 				//sheet.mergeCells(1, 1, 2, 15);   //横 1 4  纵   纵 1 2   0 3 0 1  1  3  01
 				// 关闭对象，释放资源
+				sheet.getSettings().setLeftMargin(2);
+				sheet.getSettings().setRightMargin(2);
+				sheet.getSettings().setTopMargin(1);
+				sheet.getSettings().setBottomMargin(1);
+				sheet.getSettings().setPaperSize(PaperSize.JAPANESE_POSTCARD);
+				
 				workbook.write();
 				workbook.close();
 System.out.println("生成EXCEL文件 名称="+name+"         订单号="+orderId);

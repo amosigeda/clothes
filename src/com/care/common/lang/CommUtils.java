@@ -222,6 +222,31 @@ public class CommUtils {
 //	 *            int 是否选择
 //	 * @return String
 //	 */
+	public static String getPrintSelectGys(List<DataMap> list, String names, String tname,
+			String tvalue, String svalue, int isSelect) {
+		if (list == null || list.size() == 0) {
+			return "";
+		}
+		StringBuffer sf = new StringBuffer();
+		sf.append("<select name='" + names + "' id='"+ names +"'>\n");
+		Iterator<DataMap> it = list.iterator();
+		sf.append("\t\t\t<option value=''></option>\n");
+		while (it.hasNext()) {
+			DataMap map = it.next();
+			String value = "" + map.getAt(tvalue);
+			String name = "" + map.getAt(tname);
+			
+			String selected = "";
+			if (value.equals(svalue)) {
+				selected = "selected";
+			}
+			sf.append("\t\t\t<option value='" + value + "' " + selected + ">"
+					+ name + "</option>\n");
+		}
+		sf.append("\t\t\t</select>");
+	/*	System.out.println(sf.toString());*/
+		return sf.toString();
+	}
 	public static String getPrintSelect(List<DataMap> list, String names, String tname,
 			String tvalue, String svalue, int isSelect) {
 		if (list == null || list.size() == 0) {
@@ -230,6 +255,7 @@ public class CommUtils {
 		StringBuffer sf = new StringBuffer();
 		sf.append("<select name='" + names + "' id='"+ names +"'>\n");
 		Iterator<DataMap> it = list.iterator();
+	
 		while (it.hasNext()) {
 			DataMap map = it.next();
 			String value = "" + map.getAt(tvalue);

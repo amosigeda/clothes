@@ -11,5 +11,8 @@ public class VarTool {
 	public static final int send_device = 2;
 	public static final int chat_group = 0;
 	public static final int chat_user = 1;
+	public static void main(String[] args) {
+		System.out.println("2019-09-29 14:31:10.0".substring(0, 10));
+	}
 
 }
