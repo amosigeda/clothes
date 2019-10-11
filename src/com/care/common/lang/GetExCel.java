@@ -222,15 +222,15 @@ public class GetExCel {
 				// 这里的第一个数据代表第二列，第二个数据代表第一行，第三个数据代表第四列，第四个数据代表第二行
 				//sheet.mergeCells(1, 1, 2, 15);   //横 1 4  纵   纵 1 2   0 3 0 1  1  3  01
 				// 关闭对象，释放资源
-				sheet.getSettings().setLeftMargin(2);
-				sheet.getSettings().setRightMargin(2);
-				sheet.getSettings().setTopMargin(1);
-				sheet.getSettings().setBottomMargin(1);
-				sheet.getSettings().setPaperSize(PaperSize.JAPANESE_POSTCARD);
+				sheet.getSettings().setLeftMargin(0.5);
+				sheet.getSettings().setRightMargin(0.5);
+				sheet.getSettings().setTopMargin(2);
+				sheet.getSettings().setBottomMargin(2);
+				sheet.getSettings().setPaperSize(PaperSize.JAPANESE_POSTCARD_ROTATED);
 				
 				workbook.write();
 				workbook.close();
-System.out.println("生成EXCEL文件 名称="+name+"         订单号="+orderId);
+System.out.println("生成EXCEL文件 名称="+name+"         订单号1123="+orderId);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -777,7 +777,7 @@ System.out.println("生成EXCEL文件 名称="+name+"         订单号="+orderI
 			
 			
 			//第二十八行
-			Label label029 = new Label(0, 29, "面料1", bFormat);
+			Label label029 = new Label(0, 29, "面料", bFormat);
 			sheet.addCell(label029);
 			Label label129 = new Label(1, 29, a30, aFormat);
 			sheet.addCell(label129);
@@ -795,7 +795,7 @@ System.out.println("生成EXCEL文件 名称="+name+"         订单号="+orderI
 			sheet.addCell(label729);
 			
 			//第二十九行
-			Label label030 = new Label(0, 30, "面料1", bFormat);
+			/*Label label030 = new Label(0, 30, "面料1", bFormat);
 			sheet.addCell(label030);
 			Label label130 = new Label(1, 30, a31, aFormat);
 			sheet.addCell(label130);
@@ -810,7 +810,7 @@ System.out.println("生成EXCEL文件 名称="+name+"         订单号="+orderI
 			Label label630 = new Label(6, 30, "供应商", bFormat);
 			sheet.addCell(label630);
 			Label label730 = new Label(7, 30, d31, aFormat);
-			sheet.addCell(label730);
+			sheet.addCell(label730);*/
 			
 			//第三十行
 			Label label031 = new Label(0, 31, "客服备注", bFormat);
@@ -1128,8 +1128,142 @@ System.out.println("ok");
 	}
 	
 	
-/*	public static void main(String[] args) {
+	public static void writeExcelDaoChu(String orderId) throws IOException {
 		try {
+//			String Divpath = "E:\\idea\\test\\";// 文件保存路径
+			String Divpath = "D:/resin/webapps/watch/upload/shouhou/";// 文件保存路径
+			//String Divpath = "D:/resin/webapps/watch/upload/photo/"+"1"+"/";// 文件保存路径
+			File dirFile = new File(Divpath);
+			if (!dirFile.exists()) {// 文件路径不存在时，自动创建目录
+				dirFile.mkdir();
+			}
+			String path = Divpath +orderId+".xls";// 文件名字
+			// 创建一个可写入的excel文件对象
+			WritableWorkbook workbook = Workbook.createWorkbook(new File(path));
+			// 使用第一张工作表，将其命名为“测试”
+			WritableSheet sheet = workbook.createSheet("导出", 0);
+
+			// 设置字体种类和格式
+			WritableFont bold = new WritableFont(WritableFont.createFont("宋体") , 9,
+					WritableFont.BOLD);
+			WritableCellFormat bai = new WritableCellFormat();
+			bai.setAlignment(jxl.format.Alignment.CENTRE);// 单元格中的内容水平方向居中
+			bai.setBorder(jxl.format.Border.ALL, BorderLineStyle.MEDIUM);
+			bai.setVerticalAlignment(VerticalAlignment.CENTRE);
+			WritableFont bold1 = new WritableFont(WritableFont.createFont("宋体") , 9,
+					WritableFont.BOLD);
+			WritableCellFormat bai1 = new WritableCellFormat(bold1);
+			bai1.setAlignment(jxl.format.Alignment.CENTRE);// 单元格中的内容水平方向居中
+			bai1.setBorder(jxl.format.Border.ALL, BorderLineStyle.MEDIUM);
+			bai1.setVerticalAlignment(VerticalAlignment.CENTRE);
+			
+			
+			WritableCellFormat hei = new WritableCellFormat(bold);
+			hei.setAlignment(jxl.format.Alignment.CENTRE);// 单元格中的内容水平方向居中
+			hei.setBorder(jxl.format.Border.ALL, BorderLineStyle.MEDIUM);
+			hei.setVerticalAlignment(VerticalAlignment.CENTRE);
+			// 单元格是字符串格式！第一个是代表列数,第二是代表行数，第三个代表要写入的内容,第四个代表字体格式
+			// （0代表excel的第一行或者第一列）
+			Label label00 = new Label(0, 0, "订单编号", hei); // 这里的（0,0）表示第一行第一列的表格
+			sheet.addCell(label00);
+			
+			Label label10 = new Label(1, 0, "旺旺名", hei); // 这里的（0,0）表示第一行第一列的表格
+			sheet.addCell(label10);
+			Label label20 = new Label(2, 0, "销售价格", hei); // 这里的（0,0）表示第一行第一列的表格
+			sheet.addCell(label20);
+			Label label30 = new Label(3, 0, "微信名", hei); // 这里的（0,0）表示第一行第一列的表格
+			sheet.addCell(label30);
+			Label label40 = new Label(4, 0, "订单号", hei); // 这里的（0,0）表示第一行第一列的表格
+			sheet.addCell(label40);
+			Label label50 = new Label(5, 0, "下单时间", hei); // 这里的（0,0）表示第一行第一列的表格
+			sheet.addCell(label50);
+			Label label60 = new Label(6, 0, "客户电话", hei); // 这里的（0,0）表示第一行第一列的表格
+			sheet.addCell(label60);
+			Label label70 = new Label(7, 0, "客户姓名", hei); // 这里的（0,0）表示第一行第一列的表格
+			sheet.addCell(label70);
+			Label label80 = new Label(8, 0, "客户地址", hei); // 这里的（0,0）表示第一行第一列的表格
+			sheet.addCell(label80);
+			Label label90 = new Label(9, 0, "渠道", hei); // 这里的（0,0）表示第一行第一列的表格
+			sheet.addCell(label90);
+			Label label100 = new Label(10, 0, "订单类型", hei); // 这里的（0,0）表示第一行第一列的表格
+			sheet.addCell(label100);
+			Label label110 = new Label(11, 0, "交付时间", hei); // 这里的（0,0）表示第一行第一列的表格
+			sheet.addCell(label110);
+			Label label120 = new Label(12, 0, "发货时间", hei); // 这里的（0,0）表示第一行第一列的表格
+			sheet.addCell(label120);
+			Label label130 = new Label(13, 0, "下单客服", hei); // 这里的（0,0）表示第一行第一列的表格
+			sheet.addCell(label130);
+			
+			
+			sheet.addCell(new Label(0, 1, "订单编号", bai));
+			sheet.addCell(new Label(1, 1, "旺旺名", bai));
+			sheet.addCell(new Label(2, 1, "销售价格", bai));
+			sheet.addCell(new Label(3, 1, "微信名", bai));
+			sheet.addCell(new Label(4, 1, "订单号", bai));
+			sheet.addCell(new Label(5, 1, "下单时间", bai));
+			sheet.addCell(new Label(6, 1, "客户电话", bai));
+			sheet.addCell(new Label(7, 1, "客户姓名", bai));
+			sheet.addCell(new Label(8, 1, "客户地址", bai));
+			sheet.addCell(new Label(9, 1, "渠道", bai));
+			sheet.addCell(new Label(10, 1, "订单类型", bai));
+			sheet.addCell(new Label(11, 1, "交付时间", bai));
+			sheet.addCell(new Label(12, 1, "发货时间", bai));
+			sheet.addCell(new Label(13, 1, "下单客服", bai));
+			
+			
+			sheet.addCell(new Label(0, 2, "订单编号", bai));
+			sheet.addCell(new Label(1, 2, "旺旺名", bai));
+			sheet.addCell(new Label(2, 2, "销售价格", bai));
+			sheet.addCell(new Label(3, 2, "微信名", bai));
+			sheet.addCell(new Label(4, 2, "订单号", bai));
+			sheet.addCell(new Label(5, 2, "下单时间", bai));
+			sheet.addCell(new Label(6, 2, "客户电话", bai));
+			sheet.addCell(new Label(7, 2, "客户姓名", bai));
+			sheet.addCell(new Label(8, 2, "客户地址", bai));
+			sheet.addCell(new Label(9, 2, "渠道", bai));
+			sheet.addCell(new Label(10, 2, "订单类型", bai));
+			sheet.addCell(new Label(11, 2, "交付时间", bai));
+			sheet.addCell(new Label(12, 2, "发货时间", bai));
+			sheet.addCell(new Label(13, 2, "下单客服", bai));
+			
+		
+			sheet.setColumnView(0, 15);
+			sheet.setColumnView(1, 15);
+			sheet.setColumnView(2, 15);
+			sheet.setColumnView(3, 15);
+			sheet.setColumnView(4, 15);
+			sheet.setColumnView(5, 15);
+			sheet.setColumnView(6, 15);
+			sheet.setColumnView(7, 15);
+			sheet.setColumnView(8, 15);
+			sheet.setColumnView(9, 15);
+			sheet.setColumnView(10, 15);
+			sheet.setColumnView(11, 15);
+			sheet.setColumnView(12, 15);
+			sheet.setColumnView(13, 15);
+			sheet.setColumnView(14, 15);
+			sheet.setColumnView(15, 15);
+			
+			sheet.setRowView(0, 300, false);
+			sheet.setRowView(1, 250, false);
+			sheet.setRowView(2, 250, false);
+			sheet.setRowView(3, 250, false);
+			
+			
+		
+			workbook.write();
+			workbook.close();
+System.out.println("ok");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	
+	public static void main(String[] args) {
+		try {
+			writeExcelDaoChu("121");
 			//writeExcelShouHou();
 			//writeExcel();
 			
@@ -1138,5 +1272,5 @@ System.out.println("ok");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}*/
+	}
 }

@@ -1,6 +1,9 @@
 package com.care.sys.projectinfo.action;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,6 +28,15 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 
+import jxl.Workbook;
+import jxl.format.VerticalAlignment;
+import jxl.write.BorderLineStyle;
+import jxl.write.Label;
+import jxl.write.WritableCellFormat;
+import jxl.write.WritableFont;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.logging.Log;
 import org.apache.ecs.xhtml.u;
@@ -37,10 +49,14 @@ import com.care.app.LoginUser;
 import com.care.common.config.Config;
 import com.care.common.config.ServiceBean;
 import com.care.common.http.BaseAction;
+import com.care.common.lang.Base64Convert;
 import com.care.common.lang.CommTools;
 import com.care.common.lang.CommUtils;
 import com.care.common.lang.Constant;
 import com.care.common.lang.GetExCel;
+import com.care.common.lang.ParseDomDocument;
+import com.care.common.lang.TestFileManager;
+import com.care.sys.appuserinfo.domain.AppUserInfo;
 import com.care.sys.companyinfo.domain.CompanyInfo;
 import com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo;
 import com.care.sys.dynamicInfo.domain.DynamicInfo;
@@ -320,6 +336,10 @@ public class ProjectInfoAction extends BaseAction {
 			String companyId = request.getParameter("companyId");
 			String userId = request.getParameter("userId");
 			String orderId = request.getParameter("orderId");
+			
+			String anniu = request.getParameter("anniu");
+			
+		
 
 			/* ���û������ֶ� */
 			form.setOrderBy("id");
@@ -355,7 +375,7 @@ public class ProjectInfoAction extends BaseAction {
 				sb.append(" and p.company_id='" + companyId + "'");
 			}
 			if (orderId != null && !"".equals(orderId)) {
-				sb.append(" and order_number ='" + orderId + "'");
+				sb.append(" and order_number like '%" + orderId + "%'");
 			}
 			if (userId != null && !"".equals(userId)) {
 				sb.append(" and p.company_id='" + userId + "'");
@@ -363,6 +383,9 @@ public class ProjectInfoAction extends BaseAction {
 			}
 			List<DataMap> pros = ServiceBean.getInstance()
 					.getProjectInfoFacade().getProjectInfo(pro);
+			
+		
+			
 			request.setAttribute("project", pros);
 
 			/*
@@ -428,6 +451,169 @@ public class ProjectInfoAction extends BaseAction {
 
 			BeanUtils.copyProperties(vo, form);
 			list = info.getProjectInfoListByVo(vo);
+			System.out.println("按钮="+anniu);
+			System.out.println("搜索到的长度="+pros.size());
+			System.err.println(sb.toString());
+			
+			ProjectInfo prolis = new ProjectInfo();
+			prolis.setCondition(sb.toString());
+			List<DataMap> proslist = ServiceBean.getInstance()
+					.getProjectInfoFacade().getProjectInfo(prolis);
+			
+			if(proslist.size()>=1 && "2".equals(anniu)){
+				
+				String orderIdName = System.currentTimeMillis()+"";
+				
+
+				String Divpath = "D:/resin/webapps/watch/upload/daochu/";// 文件保存路径
+				File dirFile = new File(Divpath);
+				if (!dirFile.exists()) {// 文件路径不存在时，自动创建目录
+					dirFile.mkdir();
+				}
+				String path = Divpath +orderIdName+".xls";// 文件名字
+				// 创建一个可写入的excel文件对象
+				WritableWorkbook workbook = Workbook.createWorkbook(new File(path));
+				// 使用第一张工作表，将其命名为“测试”
+				WritableSheet sheet = workbook.createSheet("导出", 0);
+
+				// 设置字体种类和格式
+				WritableFont bold = new WritableFont(WritableFont.createFont("宋体") , 9,
+						WritableFont.BOLD);
+				WritableCellFormat bai = new WritableCellFormat();
+				bai.setAlignment(jxl.format.Alignment.CENTRE);// 单元格中的内容水平方向居中
+				bai.setBorder(jxl.format.Border.ALL, BorderLineStyle.MEDIUM);
+				bai.setVerticalAlignment(VerticalAlignment.CENTRE);
+				WritableFont bold1 = new WritableFont(WritableFont.createFont("宋体") , 9,
+						WritableFont.BOLD);
+				WritableCellFormat bai1 = new WritableCellFormat(bold1);
+				bai1.setAlignment(jxl.format.Alignment.CENTRE);// 单元格中的内容水平方向居中
+				bai1.setBorder(jxl.format.Border.ALL, BorderLineStyle.MEDIUM);
+				bai1.setVerticalAlignment(VerticalAlignment.CENTRE);
+				
+				
+				WritableCellFormat hei = new WritableCellFormat(bold);
+				hei.setAlignment(jxl.format.Alignment.CENTRE);// 单元格中的内容水平方向居中
+				hei.setBorder(jxl.format.Border.ALL, BorderLineStyle.MEDIUM);
+				hei.setVerticalAlignment(VerticalAlignment.CENTRE);
+				// 单元格是字符串格式！第一个是代表列数,第二是代表行数，第三个代表要写入的内容,第四个代表字体格式
+				// （0代表excel的第一行或者第一列）
+				
+				Label label00 = new Label(0, 0, "订单编号", hei); // 这里的（0,0）表示第一行第一列的表格
+				sheet.addCell(label00);
+				
+				Label label10 = new Label(1, 0, "旺旺名", hei); // 这里的（0,0）表示第一行第一列的表格
+				sheet.addCell(label10);
+				Label label20 = new Label(2, 0, "销售价格", hei); // 这里的（0,0）表示第一行第一列的表格
+				sheet.addCell(label20);
+				Label label30 = new Label(3, 0, "微信名", hei); // 这里的（0,0）表示第一行第一列的表格
+				sheet.addCell(label30);
+				Label label40 = new Label(4, 0, "订单号", hei); // 这里的（0,0）表示第一行第一列的表格
+				sheet.addCell(label40);
+				Label label50 = new Label(5, 0, "下单时间", hei); // 这里的（0,0）表示第一行第一列的表格
+				sheet.addCell(label50);
+				Label label60 = new Label(6, 0, "客户电话", hei); // 这里的（0,0）表示第一行第一列的表格
+				sheet.addCell(label60);
+				Label label70 = new Label(7, 0, "客户姓名", hei); // 这里的（0,0）表示第一行第一列的表格
+				sheet.addCell(label70);
+				Label label80 = new Label(8, 0, "客户地址", hei); // 这里的（0,0）表示第一行第一列的表格
+				sheet.addCell(label80);
+				Label label90 = new Label(9, 0, "渠道", hei); // 这里的（0,0）表示第一行第一列的表格
+				sheet.addCell(label90);
+				Label label100 = new Label(10, 0, "订单类型", hei); // 这里的（0,0）表示第一行第一列的表格
+				sheet.addCell(label100);
+				Label label110 = new Label(11, 0, "交付时间", hei); // 这里的（0,0）表示第一行第一列的表格
+				sheet.addCell(label110);
+				Label label120 = new Label(12, 0, "发货时间", hei); // 这里的（0,0）表示第一行第一列的表格
+				sheet.addCell(label120);
+				Label label130 = new Label(13, 0, "下单客服", hei); // 这里的（0,0）表示第一行第一列的表格
+				sheet.addCell(label130);
+				
+				
+				
+				for(int i=0;i<proslist.size();i++){
+					String ooid =proslist.get(i).get("order_id")+"";
+				    sheet.addCell(new Label(0, i+1, ooid ,   bai));
+					sheet.addCell(new Label(1, i+1, proslist.get(i).get("ww_name")+"", bai));
+					sheet.addCell(new Label(2, i+1,  proslist.get(i).get("sale_price")+"", bai));
+					sheet.addCell(new Label(3, i+1, proslist.get(i).get("wechat")+"", bai));
+					sheet.addCell(new Label(4, i+1, proslist.get(i).get("order_number")+"", bai));
+					sheet.addCell(new Label(5, i+1, (proslist.get(i).get("add_time")+"").substring(0,10), bai));
+					sheet.addCell(new Label(6, i+1, proslist.get(i).get("kehu_phone")+"", bai));
+					sheet.addCell(new Label(7, i+1, proslist.get(i).get("kehu_name")+"", bai));
+					sheet.addCell(new Label(8, i+1, proslist.get(i).get("address")+"", bai));
+					sheet.addCell(new Label(9, i+1, proslist.get(i).get("qudao")+"", bai));
+					sheet.addCell(new Label(10, i+1, proslist.get(i).get("order_type")+"", bai));
+					sheet.addCell(new Label(11, i+1, (proslist.get(i).get("jiaofu_time")+"").substring(0, 10), bai));
+					
+					AppUserInfo voapp = new AppUserInfo(); 
+					
+					voapp.setCondition("order_id='"+ooid +"  and last_name='6'   limit 1"); //
+					List<DataMap> listSaoMa  = ServiceBean.getInstance().getAppUserInfoFacade().getSaoMaInfo(voapp);
+					
+					sheet.addCell(new Label(12, i+1, "", bai));
+					if(listSaoMa.size()>0){
+						sheet.addCell(new Label(12, i+1, (listSaoMa.get(0).get("create_time")+"").substring(0, 10), bai));
+					}
+					sheet.addCell(new Label(13, i+1, proslist.get(i).get("xiadan_kefu")+"", bai));
+				
+				
+					sheet.setRowView(i+1, 250, false);
+				}
+				sheet.setColumnView(0, 15);
+				sheet.setColumnView(1, 15);
+				sheet.setColumnView(2, 15);
+				sheet.setColumnView(3, 15);
+				sheet.setColumnView(4, 15);
+				sheet.setColumnView(5, 15);
+				sheet.setColumnView(6, 15);
+				sheet.setColumnView(7, 15);
+				sheet.setColumnView(8, 15);
+				sheet.setColumnView(9, 15);
+				sheet.setColumnView(10, 15);
+				sheet.setColumnView(11, 15);
+				sheet.setColumnView(12, 15);
+				sheet.setColumnView(13, 15);
+				sheet.setColumnView(14, 15);
+				sheet.setColumnView(15, 15);
+			
+				
+				sheet.setRowView(0, 300, false);
+				workbook.write();
+				workbook.close();
+	
+			
+	
+	
+				
+					
+					 // path是指欲下载的文件的路径。
+				      File file = new File(path);
+				      
+				      if (file.exists()) {
+				    	  System.err.println("文件存在");
+				    	   // 取得文件名。
+					      String filename = file.getName();
+					      // 取得文件的后缀名。
+					      //String ext = filename.substring(filename.lastIndexOf(".") + 1).toUpperCase();
+					 
+					      // 以流的形式下载文件。
+					      InputStream fis = new BufferedInputStream(new FileInputStream(path));
+					      byte[] buffer = new byte[fis.available()];
+					      fis.read(buffer);
+					      fis.close();
+					      // 清空response
+					      response.reset();
+					      // 设置response的Header
+					      response.addHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes()));
+					      response.addHeader("Content-Length", "" + file.length());
+					      OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
+					      response.setContentType("application/octet-stream");
+					      toClient.write(buffer);
+					      toClient.flush();
+					      toClient.close();
+						}
+			}
+			
 			BeanUtils.copyProperties(pys, form);
 			pys.setCounts(list.getTotalSize());
 
@@ -3543,6 +3729,18 @@ public class ProjectInfoAction extends BaseAction {
 				
 				String wechatUrlQian= "http://www.bzsxt.com/ClothesWechat/scan?state=";
 				//String wechatUrlhou="#wechat_redirect";
+				String xmlYuanPath = "D:/不一定制洗水标.xml";
+				
+				String Divpath = "D:/resin/webapps/watch/upload/photo/"+orderid+"/";// 文件保存路径
+				
+				File dirFile = new File(Divpath);
+				
+				if (!dirFile.exists()) {// 文件路径不存在时，自动创建目录
+					dirFile.mkdir();
+				}
+				
+			
+				
 				if(xizhuang_number!=0){
 					String text = wechatUrlQian+orderid+",1";
 					// 嵌入二维码的图片路径
@@ -3555,7 +3753,18 @@ public class ProjectInfoAction extends BaseAction {
 					// 生成二维码
 					QRCodeUtil.encode(text, imgPath, destPath, true);
 					//QRCodeUtil.diErZhong(text,destPath);
-					GetExCel.writeExcelDaBiao("1",orderid, nickName, riqi, yaowei,destPath);
+					//GetExCel.writeExcelDaBiao("1",orderid, nickName, riqi, yaowei,destPath);
+					
+					  File source = new File(xmlYuanPath);//原复制文件
+			    	  String lastName = Divpath + "1.xml";//复制到的地方路径和名称
+			    	  File dest = new File(lastName);
+			    	  TestFileManager.copyFileUsingFileChannels(source,dest);
+			    	  ParseDomDocument.xmlReadDemo(lastName,orderid,nickName,riqi,yaowei,Base64Convert.GetImageStr(photo1));
+			    	  
+			    	  File file = new File(lastName);
+			    	  String lastNameddl = Divpath + "1.ddl";//最终修改的名称
+			    	  file.renameTo(new File(lastNameddl));
+					
 					vod.setErweima_1(urlPhoto + "1.png");
 					//http://47.111.148.8:80/watch/upload/zip/4.png
 				}else{
@@ -3573,7 +3782,17 @@ public class ProjectInfoAction extends BaseAction {
 					// 生成二维码
 					QRCodeUtil.encode(text, imgPath, destPath, true);
 					//QRCodeUtil.diErZhong(text,destPath);
-					GetExCel.writeExcelDaBiao("2",orderid, nickName, riqi, yaowei,destPath);
+					//GetExCel.writeExcelDaBiao("2",orderid, nickName, riqi, yaowei,destPath);
+					  File source = new File(xmlYuanPath);//原复制文件
+			    	  String lastName = Divpath + "2.xml";//复制到的地方路径和名称
+			    	  File dest = new File(lastName);
+			    	  TestFileManager.copyFileUsingFileChannels(source,dest);
+			    	  ParseDomDocument.xmlReadDemo(lastName,orderid,nickName,riqi,yaowei,Base64Convert.GetImageStr(photo2));
+			    	  
+			    	  File file = new File(lastName);
+			    	  String lastNameddl = Divpath + "2.ddl";//最终修改的名称
+			    	  file.renameTo(new File(lastNameddl));
+					
 					vod.setErweima_2(urlPhoto + "2.png");
 				}else{
 					photo1 = baise;
@@ -3590,7 +3809,17 @@ public class ProjectInfoAction extends BaseAction {
 					// 生成二维码
 					QRCodeUtil.encode(text, imgPath, destPath, true);
 					//QRCodeUtil.diErZhong(text,destPath);
-					GetExCel.writeExcelDaBiao("3",orderid, nickName, riqi, yaowei,destPath);
+					//GetExCel.writeExcelDaBiao("3",orderid, nickName, riqi, yaowei,destPath);
+					  File source = new File(xmlYuanPath);//原复制文件
+			    	  String lastName = Divpath + "3.xml";//复制到的地方路径和名称
+			    	  File dest = new File(lastName);
+			    	  TestFileManager.copyFileUsingFileChannels(source,dest);
+			    	  ParseDomDocument.xmlReadDemo(lastName,orderid,nickName,riqi,yaowei,Base64Convert.GetImageStr(photo3));
+			    	  
+			    	  File file = new File(lastName);
+			    	  String lastNameddl = Divpath + "3.ddl";//最终修改的名称
+			    	  file.renameTo(new File(lastNameddl));
+					
 					vod.setErweima_3(urlPhoto + "3.png");
 				}else{
 					photo1 = baise;
@@ -3607,7 +3836,16 @@ public class ProjectInfoAction extends BaseAction {
 					// 生成二维码
 					QRCodeUtil.encode(text, imgPath, destPath, true);
 					//QRCodeUtil.diErZhong(text,destPath);
-					GetExCel.writeExcelDaBiao("4",orderid, nickName, riqi, yaowei,destPath);
+				//	GetExCel.writeExcelDaBiao("4",orderid, nickName, riqi, yaowei,destPath);
+					  File source = new File(xmlYuanPath);//原复制文件
+			    	  String lastName = Divpath + "4.xml";//复制到的地方路径和名称
+			    	  File dest = new File(lastName);
+			    	  TestFileManager.copyFileUsingFileChannels(source,dest);
+			    	  ParseDomDocument.xmlReadDemo(lastName,orderid,nickName,riqi,yaowei,Base64Convert.GetImageStr(photo4));
+			    	  
+			    	  File file = new File(lastName);
+			    	  String lastNameddl = Divpath + "4.ddl";//最终修改的名称
+			    	  file.renameTo(new File(lastNameddl));
 					vod.setErweima_4(urlPhoto + "4.png");
 				}else{
 					photo1 = baise;

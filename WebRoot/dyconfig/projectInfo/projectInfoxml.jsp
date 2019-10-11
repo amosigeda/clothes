@@ -25,7 +25,8 @@
 			src="<%=request.getContextPath()%>/public/My97DatePicker/WdatePicker.js"></script>
 	</head>
 	<script language="javascript">
-function finds(){
+function finds(wechat){
+	  document.getElementById("anniu").setAttribute("value", wechat);
     var st = new Date(frmGo.startTime.value.replace(/-/g,'/'));
 	var et = new Date(frmGo.endTime.value.replace(/-/g,'/'));
 	if(Date.parse(st) - Date.parse(et)>0){
@@ -34,6 +35,14 @@ function finds(){
 	} 
 	   frmGo.submit();
 }
+
+function findss(wechat){
+	  document.getElementById("anniu").setAttribute("value", wechat);
+		
+	   frmGo.submit();
+}
+
+
 function add(){
 	frmGo.action = "doProjectInfo.do?method=initInsertxml";
 	frmGo.submit();
@@ -143,7 +152,7 @@ function pidanTijiao(id){
 }
 
 function  updatedangAnStatus(id,status){
-	if(confirm("确定吗?"))
+	if(confirm("确定叫料?"))
 	{
 		frmGo.action="doProjectInfo.do?method=updatedangAnStatus&id="+id+"&status="+status;
 		frmGo.submit();
@@ -199,11 +208,16 @@ function ofuncs(projectId){
 						    <input id="wwname" name="wwname" type="text" class="txt_1" 
 						    value="<%CommUtils.printReqByAtt(request,response,"wwname");%>" size="20">
 						    
-						    <input name="find1" type="button" class="but_1" accesskey="f"
-							tabindex="f" value="搜 索" onclick="javascript:finds()">
+						    <input name="find1" type="button" class="but_1" accesskey="f" title="1"
+							tabindex="f" value="搜 索" onclick="javascript:finds(this.title)">
 					     <input name="clear" type="button" class="but_1" accesskey="c"
 						    tabindex="c"  value="清除搜索" onclick="c()">
 						    
+						    <input name="find2" type="button" class="but_1" accesskey="f"  title="2"
+							tabindex="f" value="导出EXCEL" onclick="javascript:findss(this.title)">
+						    
+						    <input name="anniu" size="200" id="anniu"
+					 type="hidden" class="txt_1"  />
                   <%--      <td colspan="13">
 					  创建时间
                      <input name="startTime" type="text" class="txt_1"  id="startTime" style="cursor:text"
