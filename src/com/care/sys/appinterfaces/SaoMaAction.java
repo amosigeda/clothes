@@ -59,7 +59,7 @@ public class SaoMaAction extends BaseAction {
 		JSONObject object = JSONObject.fromObject(sb.toString());
 		
 		/*
-d、裁床-----，扫码，一扫码状态自动更新，流程下一步  1
+d、裁床-----，扫码，一扫码状态自动更新，流程下一步  1  2
 E、前道开包-----，扫码  2
 F、后道-----，扫码  3
 G、大汤-----，扫码4
@@ -85,6 +85,14 @@ G、发货-----，扫码，6需要填写物流单号，给客户发短信，短�
 			int typePerson = Integer.valueOf(list.get(0).get("last_name")+"");
 			String phone =  list.get(0).get("user_name")+"";
 			String nickName = list.get(0).get("nick_name")+"";
+			
+			ProjectInfo voStatus = new ProjectInfo();
+			voStatus.setCondition("order_id='" + orderid + "'");
+		
+			
+			voStatus.setStatus("2"+typePerson);
+	
+	
 			//这个人的状态值
 			if(typePerson == 1){
 				
@@ -105,6 +113,8 @@ G、发货-----，扫码，6需要填写物流单号，给客户发短信，短�
 					
 					ServiceBean.getInstance().getAppUserInfoFacade().insertSaoMaInfo(vo);
 					result = Constant.SUCCESS_CODE;
+					ServiceBean.getInstance().getProjectInfoFacade()
+					.updatePorjectInfo(voStatus);
 				}
 				
 				
@@ -126,6 +136,8 @@ G、发货-----，扫码，6需要填写物流单号，给客户发短信，短�
 					vo.setUserName(phone);
 					ServiceBean.getInstance().getAppUserInfoFacade().insertSaoMaInfo(vo);
 					result = Constant.SUCCESS_CODE;
+					ServiceBean.getInstance().getProjectInfoFacade()
+					.updatePorjectInfo(voStatus);
 				}else{
 					result = Constant.FAIL_CODE;
 				}
@@ -156,6 +168,8 @@ G、发货-----，扫码，6需要填写物流单号，给客户发短信，短�
 						vo.setUserName(phone);
 						ServiceBean.getInstance().getAppUserInfoFacade().insertSaoMaInfo(vo);
 						result = Constant.SUCCESS_CODE;
+						ServiceBean.getInstance().getProjectInfoFacade()
+						.updatePorjectInfo(voStatus);
 					}
 					
 				}else{

@@ -16,6 +16,8 @@
 <link href="<%=request.getContextPath()%>/css/tbls.css" rel="stylesheet" type="text/css">
 <script language="JavaScript" src="<%=request.getContextPath()%>/public/public.js"></script>
 <script language="JavaScript" src="<%=request.getContextPath()%>/js/jquery-1.8.2.js"></script>
+<script language="JavaScript"
+			src="<%=request.getContextPath()%>/public/My97DatePicker/WdatePicker.js"></script>
 <title>无标题文档</title>
 </head>
 <!-- <style>
@@ -39,7 +41,8 @@ function addTable() {
 	
 	tab.insertRow(rownum);
 
-	var n=rownum-35+5;
+	var n=rownum-32;
+	alert(n);
 
 	if(n<=14){
 	for (var i = 0; i < 8; i++) {
@@ -185,13 +188,20 @@ function onUpdate(wechat){
 				 <%if("admin".equals(request.getAttribute("role")) || "客服".equals(request.getAttribute("role")) || "经理".equals(request.getAttribute("role")) ){ %>
 				<select name="qudao" value="qudao">
 					<option value="" <%=projectInfo.getAt("qudao").equals("")? "selected":"" %>></option>
-						<option value="淘宝" <%=projectInfo.getAt("qudao").equals("淘宝")? "selected":"" %>>淘宝</option>
+						
 						<option value="工单" <%=projectInfo.getAt("qudao").equals("工单")? "selected":"" %>>工单</option>
 						<option value="分销" <%=projectInfo.getAt("qudao").equals("分销")? "selected":"" %>>分销</option>
 						<option value="线下" <%=projectInfo.getAt("qudao").equals("线下")? "selected":"" %>>线下</option>
 						<option value="打样" <%=projectInfo.getAt("qudao").equals("打样")? "selected":"" %>>打样</option>
 						<option value="重做" <%=projectInfo.getAt("qudao").equals("重做")? "selected":"" %>>重做</option>
 						<option value="其他" <%=projectInfo.getAt("qudao").equals("其他")? "selected":"" %>>其他</option>
+						<option value="深圳淘宝">深圳淘宝</option>
+						<option value="南京淘宝">南京淘宝</option>
+						
+						<option value="线下转款_曹" <%=projectInfo.getAt("qudao").equals("线下转款_曹")? "selected":"" %>>线下转款_曹</option>
+						<option value="线下转款_周" <%=projectInfo.getAt("qudao").equals("线下转款_周")? "selected":"" %>>线下转款_周</option>
+						<option value="线下转款_公账" <%=projectInfo.getAt("qudao").equals("线下转款_公账")? "selected":"" %>>线下转款_公账</option>
+						
 				</select> 
 				<%}else{ %>
 					<input style="border:none;" type="text"   readOnly="true"  size="38"  name="project_no1" id="project_no1" value=<%=projectInfo.getAt("qudao")%>>
@@ -262,25 +272,38 @@ function onUpdate(wechat){
 					</td>
 			</tr>
 			
+			
+		
+			
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">订单号</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				 <%if("admin".equals(request.getAttribute("role")) || "客服".equals(request.getAttribute("role")) || "经理".equals(request.getAttribute("role")) ){ %>
-				
-				<input style="border:none;" type="text"   size="38"  name="orderNumber" id="orderNumber"  value=<%=projectInfo.getAt("order_number")%>>
-				 <%}else{ %>
-				<input style="border:none;" type="text"  readonly="true" size="38"  name="orderNumber" id="orderNumber"  value=<%=projectInfo.getAt("order_number")%>>
- <%} %>
+				<td nowrap="nowrap" align="left" width="7%" colspan="7">
+				 	 <%if("admin".equals(request.getAttribute("role")) || "客服".equals(request.getAttribute("role")) || "经理".equals(request.getAttribute("role")) ){ %>
+			<input style="border:none;" name="orderNumber"  id="orderNumber"
+					type="text" class="txt_1" maxlength="1000" size="200" value=<%=projectInfo.getAt("order_number")%> />
+					
+						 <%}else{ %>
+						 <input style="border:none;" name="orderNumber"  id="orderNumber" readonly="true"
+					type="text" class="txt_1" maxlength="1000" size="200" value=<%=projectInfo.getAt("order_number")%> />
+					 <%} %>	 
+					 
+					 
 				</td>
+				</tr>
+	
+		<tr>
 				<td nowrap="nowrap" align="center" width="7%">销售价格</td>
-				<td nowrap="nowrap" align="center" width="7%">
-				 <%if("admin".equals(request.getAttribute("role")) || "客服".equals(request.getAttribute("role")) || "经理".equals(request.getAttribute("role")) ){ %>
-				
-	<input style="border:none;" type="text"   size="38"  name="salePrice" id="salePrice"  value=<%=projectInfo.getAt("sale_price")%>>
-	 <%}else{ %>
-	<input style="border:none;" type="text" readonly="true"  size="38"  name="salePrice" id="salePrice"  value=<%=projectInfo.getAt("sale_price")%>>
- <%} %>
+				<td nowrap="nowrap" align="left" width="7%" colspan="7">
+					 <%if("admin".equals(request.getAttribute("role")) || "客服".equals(request.getAttribute("role")) || "经理".equals(request.getAttribute("role")) ){ %>
+			<input name="salePrice"  id="salePrice"
+					type="text" class="txt_1" maxlength="1000" size="200" value=<%=projectInfo.getAt("sale_price")%> >
+					 <%}else{ %>
+						<input name="salePrice"  id="salePrice" readonly="true"
+					type="text" class="txt_1" maxlength="1000" size="200" value=<%=projectInfo.getAt("sale_price")%> >
+					 <%} %>	 
 </td>
+</tr>
+<tr>
 				<td nowrap="nowrap" align="center" width="7%">身高</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				 <%if("admin".equals(request.getAttribute("role")) || "客服".equals(request.getAttribute("role")) || "经理".equals(request.getAttribute("role")) ){ %>
@@ -345,7 +368,7 @@ function onUpdate(wechat){
 				<td nowrap="nowrap" align="center" width="7%">
 					 <%if("admin".equals(request.getAttribute("role")) || "客服".equals(request.getAttribute("role")) || "经理".equals(request.getAttribute("role")) ){ %>
 		
-				<input style="border:none;" type="text"      size="38"  name="jiankuanAa" id="jiankuanAa"   value="<%=projectInfo.getAt("jiaofu_time")%>"  >
+				<input style="border:none;" type="text"      size="38"  name="jiaofu_time" id="jiaofu_time"   value="<%=projectInfo.getAt("jiaofu_time")%>"  	 onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" >
 					 <%}else{ %>
 				<input style="border:none;" type="text"      size="38"  name="jiankuanAa" id="jiankuanAa"  readonly="true"  value="<%=projectInfo.getAt("jiaofu_time")%>"  >
 	    
@@ -1346,7 +1369,7 @@ function onUpdate(wechat){
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">
-				 <%if("admin".equals(request.getAttribute("role"))|| "客服".equals(request.getAttribute("role"))|| "经理".equals(request.getAttribute("role")) ){ %>
+				 <%if("admin".equals(request.getAttribute("role"))|| "客服".equals(request.getAttribute("role"))|| "经理".equals(request.getAttribute("role")) || "跟单".equals(request.getAttribute("role")) ){ %>
 				<button type="button" onclick="addTable();"
 			style="margin-left: 0px;">+</button>
 			 <%} %>
@@ -2649,8 +2672,13 @@ function onUpdate(wechat){
       <input style="border:none;" type="button" name="back" accesskey="b" tabindex="b" value="返 回" class="but_1" onclick="location='doProjectInfo.do?method=queryProjectInfoXml'">
    <!--    <input style="border:none;" type="reset" name="back" accesskey="b" tabindex="b" value="重置" class="but_1" > -->
       
-       <%if("admin".equals(request.getAttribute("role")) || "批单".equals(request.getAttribute("role")) || "跟单".equals(request.getAttribute("role")) ){ %>
+       <%if("批单".equals(request.getAttribute("role")) ){ %>
 	<input style="border:none;" type="button"  title ="3" name="ok" accesskey="y" tabindex="y"  value="退回" class="but_1" onclick="onUpdate(this.title)" style="color: red">
+			    <%} %>
+			    
+			      <%if("跟单".equals(request.getAttribute("role")) ){ %>
+	<input style="border:none;" type="button"  title ="3" name="ok" accesskey="y" tabindex="y"  value="退回给批单" class="but_1" onclick="onUpdate(this.title)" style="color: red">
+			 <input style="border:none;" type="button"  title ="4" name="ok" accesskey="y" tabindex="y"  value="退回给客服" class="but_1" onclick="onUpdate(this.title)" style="color: red">
 			    <%} %>
 				</td>
 			</tr>	

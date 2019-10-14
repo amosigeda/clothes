@@ -134,14 +134,14 @@ function setSecond(obj){
 		//var colsNum = tab.rows.item(0).cells.length; //表格的列数
 		//表格当前的行数 
 		var num = document.getElementById("tab01").rows.length;
-	 /*   alert("当前行="+num); */
+	
 		var rownum = num-5;
 		
 		tab.insertRow(rownum);
 
-		var n=rownum-35+5;
-		/*    alert("n="+n); */
-		if(n<=14){
+		var n=rownum-32;
+		   alert("n="+n); 
+		
 		for (var i = 0; i < 8; i++) {
 			tab.rows[rownum].insertCell(i);//插入列
 			tab.rows[rownum].cells[i].setAttribute("align","center");
@@ -177,9 +177,9 @@ function setSecond(obj){
 		}
 		tab.rows[rownum].insertCell(i);
 		tab.rows[rownum].cells[i].innerHTML = '<a href="#" onclick="delRow(this)">-</a>';
-		}else{
+		/* }else{
 			alert("最多新增15行");
-		}
+		} */
 	}
 	//删除行
 	function delRow(obj) {
@@ -190,6 +190,10 @@ function setSecond(obj){
 		}
 		Row.parentNode.removeChild(Row); //删除行
 	}
+	
+	
+	
+	
 	
 	function look(){
 		var value=document.getElementById("jiaofu_time").value;//获取值
@@ -257,13 +261,18 @@ selectObj[0].text=xianshi;
 				<td nowrap="nowrap" align="center" width="7%">渠道</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<select name="qudao" value="qudao">
-						<option value="淘宝">淘宝</option>
+						<option value=""></option>
+						<option value="深圳淘宝">深圳淘宝</option>
+						<option value="南京淘宝">南京淘宝</option>
 						<option value="工单">工单</option>
 						<option value="分销">分销</option>
 						<option value="线下">线下</option>
 						<option value="打样">打样</option>
 						<option value="重做">重做</option>
 						<option value="其他">其他</option>
+						<option value="线下转款_曹">线下转款_曹</option>
+						<option value="线下转款_周">线下转款_周</option>
+						<option value="线下转款_公账">线下转款_公账</option>
 				</select> <font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%">年龄</td>
 				<td  nowrap="nowrap" align="center" width="7%">
@@ -298,21 +307,31 @@ selectObj[0].text=xianshi;
 					</td>
 			</tr>
 			
+	
+			
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">订单号</td>
-				<td nowrap="nowrap" align="center" width="7%"><input name="orderNumber" size="38"
-					id="orderNumber" type="text" class="txt_1" maxlength="30" /><font
-					color="red"></font></td>
+				<td nowrap="nowrap" align="left" width="7%" colspan="7">
+			<input name="orderNumber"  id="orderNumber"
+					type="text" class="txt_1" maxlength="1000" size="200"/><font color="red"></font></td>
+			</tr>
+				<tr>
 				<td nowrap="nowrap" align="center" width="7%">销售价格</td>
-				<td nowrap="nowrap" align="center" width="7%"><input name="salePrice" size="38"
-					id="salePrice" type="text" class="txt_1" maxlength="30" /><font
-					color="red"></font></td>
+				<td nowrap="nowrap" align="left" width="7%" colspan="7">
+			<input name="salePrice"  id="salePrice"
+					type="text" class="txt_1" maxlength="1000" size="200"/><font color="red"></font></td>
+			</tr>
+			
+			
+			
+			<tr>
+				
 				<td nowrap="nowrap" align="center" width="7%">身高</td>
 				<td nowrap="nowrap" align="center" width="7%"><input name="height" size="38" id="height" type="text"
 					class="txt_1" maxlength="100" /><font color="red"></font></td>
 				<td nowrap="nowrap" align="center" width="7%">体重</td>
 				<td nowrap="nowrap" align="center" width="7%"><input name="weight" size="38" id="weight" type="text"
-					class="txt_1" maxlength="100" /><font color="red"></font></td>
+					class="txt_1" maxlength="100" /></td>
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">旺旺名</td>
@@ -337,11 +356,11 @@ selectObj[0].text=xianshi;
 				<td nowrap="nowrap" align="center" width="7%">交付时间</td>
 				<td nowrap="nowrap" align="left" width="7%">
 				
-			<!-- 	<input name="startTime1" type="text" class="txt_1"  id="startTime1" style="cursor:text"
-								 onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
-								size="20" readonly> -->
-						<%=request.getAttribute("jiaofu")%>
-				<!-- <select name="jiaofu_time"  id="jiaofu_time" onchange="look();" >
+			<input name="jiaofu_time" type="text" class="txt_1"  id="jiaofu_time" style="cursor:text"
+								 onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
+								size="20" > 
+					<%-- 	<%=request.getAttribute("jiaofu")%> --%>
+				<!-- <select name="jiaofu_time"  id="jiaofu_time" onchange="look();"   HH:mm:ss>
 						<option value="10">+10天  加急</option>
 						<option value="5">+5天  特别加急</option>
 						<option value="3">+3天   非常紧急</option>
@@ -838,8 +857,8 @@ selectObj[0].text=xianshi;
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">客服备注</td>
 				<td nowrap="nowrap" align="left" width="7%" colspan="7">
-			<input name="remark" size="200" id="remark"
-					type="text" class="txt_1" maxlength="1000" /><font color="red"></font></td>
+			<input name="remark"  id="remark"
+					type="text" class="txt_1" maxlength="1000" size="200"/><font color="red"></font></td>
 			</tr>
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">批单备注</td>

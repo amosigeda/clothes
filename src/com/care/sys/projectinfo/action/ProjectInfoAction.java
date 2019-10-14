@@ -459,7 +459,7 @@ public class ProjectInfoAction extends BaseAction {
 			prolis.setCondition(sb.toString());
 			List<DataMap> proslist = ServiceBean.getInstance()
 					.getProjectInfoFacade().getProjectInfo(prolis);
-			
+			System.err.println(sb.toString());
 			if(proslist.size()>=1 && "2".equals(anniu)){
 				
 				String orderIdName = System.currentTimeMillis()+"";
@@ -537,22 +537,22 @@ public class ProjectInfoAction extends BaseAction {
 					sheet.addCell(new Label(2, i+1,  proslist.get(i).get("sale_price")+"", bai));
 					sheet.addCell(new Label(3, i+1, proslist.get(i).get("wechat")+"", bai));
 					sheet.addCell(new Label(4, i+1, proslist.get(i).get("order_number")+"", bai));
-					sheet.addCell(new Label(5, i+1, (proslist.get(i).get("add_time")+"").substring(0,10), bai));
+					sheet.addCell(new Label(5, i+1, proslist.get(i).get("add_time")+"", bai));
 					sheet.addCell(new Label(6, i+1, proslist.get(i).get("kehu_phone")+"", bai));
 					sheet.addCell(new Label(7, i+1, proslist.get(i).get("kehu_name")+"", bai));
 					sheet.addCell(new Label(8, i+1, proslist.get(i).get("address")+"", bai));
 					sheet.addCell(new Label(9, i+1, proslist.get(i).get("qudao")+"", bai));
 					sheet.addCell(new Label(10, i+1, proslist.get(i).get("order_type")+"", bai));
-					sheet.addCell(new Label(11, i+1, (proslist.get(i).get("jiaofu_time")+"").substring(0, 10), bai));
+					sheet.addCell(new Label(11, i+1, proslist.get(i).get("jiaofu_time")+"", bai));
 					
 					AppUserInfo voapp = new AppUserInfo(); 
 					
-					voapp.setCondition("order_id='"+ooid +"  and last_name='6'   limit 1"); //
+					voapp.setCondition("order_id='"+ooid +"'  and last_name='6'   limit 1"); //
 					List<DataMap> listSaoMa  = ServiceBean.getInstance().getAppUserInfoFacade().getSaoMaInfo(voapp);
 					
 					sheet.addCell(new Label(12, i+1, "", bai));
 					if(listSaoMa.size()>0){
-						sheet.addCell(new Label(12, i+1, (listSaoMa.get(0).get("create_time")+"").substring(0, 10), bai));
+						sheet.addCell(new Label(12, i+1, listSaoMa.get(0).get("create_time")+"", bai));
 					}
 					sheet.addCell(new Label(13, i+1, proslist.get(i).get("xiadan_kefu")+"", bai));
 				
@@ -697,7 +697,7 @@ public class ProjectInfoAction extends BaseAction {
 	    	request.setAttribute("dingdan", orderId);
 	    	request.setAttribute("shijian", yydfhh.format(calendar.getTime()));
 	    	
-	    	StringBuffer sf = new StringBuffer();
+	    	/*StringBuffer sf = new StringBuffer();
 			sf.append("<select name='jiaofu_time' id='jiaofu_time'>\n");
 			
 				sf.append("\t\t\t<option value='10'>"+ "+10天    " +CommTools.getAddTime(10)+ "</option>\n");
@@ -705,7 +705,7 @@ public class ProjectInfoAction extends BaseAction {
 				sf.append("\t\t\t<option value='3'>"+ "+3天   非常紧急  " +CommTools.getAddTime(3)+ "</option>\n");
 			
 			sf.append("\t\t\t</select>");
-				request.setAttribute("jiaofu", sf.toString());
+				request.setAttribute("jiaofu", sf.toString());*/
 			
 			return mapping.findForward("addProjectInfoxml");
 		/*} else 
@@ -2334,10 +2334,11 @@ public class ProjectInfoAction extends BaseAction {
 			vo.setStatus(tag);
 			
 			
-			String jiaofu_time = request.getParameter("jiaofu_time");
+			String jiaofu_time= request.getParameter("jiaofu_time");
 			
 			
-			vo.setJiaofu_time(CommTools.getAddTime(Integer.valueOf(jiaofu_time)));
+//			vo.setJiaofu_time(CommTools.getAddTime(Integer.valueOf(jiaofu_time)));
+			vo.setJiaofu_time(jiaofu_time);
 			
 			
 			String kaicha = request.getParameter("kaicha");
@@ -2683,7 +2684,10 @@ public class ProjectInfoAction extends BaseAction {
 			String yongtu2 = request.getParameter("yongtu2");
 			String tixingremark = request.getParameter("tixingremark");
 			String remark = request.getParameter("remark");
+			String jiaofu_time = request.getParameter("jiaofu_time");
 
+			
+			vo.setJiaofu_time(jiaofu_time);
 			//vo.setOrderId(orderId);
 			vo.setWwName(wwName);
 			vo.setSalePrice(salePrice);
@@ -3061,14 +3065,20 @@ public class ProjectInfoAction extends BaseAction {
 				}else if("跟单".equals(role)){
 					if("1".equals(tag)){
 						vo.setStatus("6");
+						vo.setGendan_fuze(loginUser.getUserName()+"");
 					}else if("3".equals(tag)){
 						vo.setStatus("8");
+						vo.setGendan_fuze(loginUser.getUserName()+"");
 					}else if("2".equals(tag)){
 						vo.setStatus("9");
 						vo.setGendan_fuze(loginUser.getUserName()+"");
 						vo.setGendan_tijiao_time(new Date());
+						
+					}else if("4".equals(tag)){
+						vo.setStatus("4");
+						vo.setTuihui_time(new Date());
 					}
-					vo.setGendan_fuze(loginUser.getUserName()+"");
+				
 					ServiceBean.getInstance().getProjectInfoFacade()
 							.updatePorjectInfo(vo);
 				}
@@ -3681,268 +3691,272 @@ public class ProjectInfoAction extends BaseAction {
 
 			if ("10".equals(status)) {
 				voStatus.setJiaoLiaoTime(new Date());
+				  String qianZhui = "D:/resin/webapps/watch/upload/photo/";
+					
+					ProjectInfo vo = new ProjectInfo();
+					vo.setCondition("id='" + form.getId() + "'");
+					String orderid = "";
+					
+					List<DataMap>  listOrder =ServiceBean.getInstance().getProjectInfoFacade().getProjectInfo(vo);
+					DeviceActiveInfo vod = new DeviceActiveInfo();	
+					if(listOrder.size()>0){
+						orderid = listOrder.get(0).get("order_id")+"";
+
+						String url = "http://47.111.148.8:80/watch/upload/zip/";
+						String urlPhoto = "http://47.111.148.8:80/watch/upload/photo/"+orderid+"/";
+						/*ProjectInfo fujianVo = new ProjectInfo();
+						fujianVo.setCondition("id='" + form.getId() + "'")*/
+						voStatus.setProjectName(url + orderid + ".zip");
+						
+								
+						String nickName = listOrder.get(0).get("kehu_name")+"";
+						String riqi = listOrder.get(0).get("add_time")+"";
+						String yaowei = listOrder.get(0).get("yaowei_c")+"";
+						
+						String path= qianZhui + orderid;
+						Constant.deleteFile(path);
+						Constant.createFile(path);
+					
+						
+						int xizhuang_number= Integer.valueOf(listOrder.get(0).get("xizhuang_number")+"");
+						int chenshan_number= Integer.valueOf(listOrder.get(0).get("chenshan_number")+"");
+						int xiku_number= Integer.valueOf(listOrder.get(0).get("xiku_number")+"");
+						int majia_number= Integer.valueOf(listOrder.get(0).get("majia_number")+"");
+						
+				
+					
+						String photo1="";
+						String photo2="";
+						String photo3="";
+						String photo4="";
+						
+						String baise = "D:/bai.png";
+						
+						String wechatUrlQian= "http://www.bzsxt.com/ClothesWechat/scan?state=";
+						//String wechatUrlhou="#wechat_redirect";
+						String xmlYuanPath = "D:/不一定制洗水标.xml";
+						
+						String Divpath = "D:/resin/webapps/watch/upload/photo/"+orderid+"/";// 文件保存路径
+						
+						File dirFile = new File(Divpath);
+						
+						if (!dirFile.exists()) {// 文件路径不存在时，自动创建目录
+							dirFile.mkdir();
+						}
+						
+					
+						
+						if(xizhuang_number!=0){
+							String text = wechatUrlQian+orderid+",1";
+							// 嵌入二维码的图片路径
+							// String imgPath = "F:/UI/test/1.png";
+							String imgPath = "D:/1.png";
+							// 生成的二维码的路径及名称
+							String imgName =  "1.png";
+							String destPath = path + "/" + imgName;
+							photo1 = destPath;
+							// 生成二维码
+							QRCodeUtil.encode(text, imgPath, destPath, true);
+							//QRCodeUtil.diErZhong(text,destPath);
+							//GetExCel.writeExcelDaBiao("1",orderid, nickName, riqi, yaowei,destPath);
+							
+							  File source = new File(xmlYuanPath);//原复制文件
+					    	  String lastName = Divpath + "1.xml";//复制到的地方路径和名称
+					    	  File dest = new File(lastName);
+					    	  TestFileManager.copyFileUsingFileChannels(source,dest);
+					    	  ParseDomDocument.xmlReadDemo(lastName,orderid,nickName,riqi,yaowei,Base64Convert.GetImageStr(photo1));
+					    	  ParseDomDocument.xmlReadDemopng(lastName,Base64Convert.GetImageStr(photo1));
+					    	  File file = new File(lastName);
+					    	  String lastNameddl = Divpath + "1.ddl";//最终修改的名称
+					    	  file.renameTo(new File(lastNameddl));
+							
+							vod.setErweima_1(urlPhoto + "1.png");
+							//http://47.111.148.8:80/watch/upload/zip/4.png
+						}else{
+							photo1 = baise;
+						}
+						if(chenshan_number!=0){
+							String text = wechatUrlQian+orderid+",2";
+							// 嵌入二维码的图片路径
+							// String imgPath = "F:/UI/test/1.png";
+							String imgPath = "D:/1.png";
+							// 生成的二维码的路径及名称
+							String imgName =  "2.png";
+							String destPath = path + "/" + imgName;
+							photo2 = destPath;
+							// 生成二维码
+							QRCodeUtil.encode(text, imgPath, destPath, true);
+							//QRCodeUtil.diErZhong(text,destPath);
+							//GetExCel.writeExcelDaBiao("2",orderid, nickName, riqi, yaowei,destPath);
+							  File source = new File(xmlYuanPath);//原复制文件
+					    	  String lastName = Divpath + "2.xml";//复制到的地方路径和名称
+					    	  File dest = new File(lastName);
+					    	  TestFileManager.copyFileUsingFileChannels(source,dest);
+					    	  ParseDomDocument.xmlReadDemo(lastName,orderid,nickName,riqi,yaowei,Base64Convert.GetImageStr(photo2));
+					    	  ParseDomDocument.xmlReadDemopng(lastName,Base64Convert.GetImageStr(photo2));
+					    	  File file = new File(lastName);
+					    	  String lastNameddl = Divpath + "2.ddl";//最终修改的名称
+					    	  file.renameTo(new File(lastNameddl));
+							
+							vod.setErweima_2(urlPhoto + "2.png");
+						}else{
+							photo1 = baise;
+						}
+						if(xiku_number!=0){
+							String text =wechatUrlQian+ orderid+",3";
+							// 嵌入二维码的图片路径
+							// String imgPath = "F:/UI/test/1.png";
+							String imgPath = "D:/1.png";
+							// 生成的二维码的路径及名称
+							String imgName =  "3.png";
+							String destPath = path + "/" + imgName;
+							photo3 = destPath;
+							// 生成二维码
+							QRCodeUtil.encode(text, imgPath, destPath, true);
+							//QRCodeUtil.diErZhong(text,destPath);
+							//GetExCel.writeExcelDaBiao("3",orderid, nickName, riqi, yaowei,destPath);
+							  File source = new File(xmlYuanPath);//原复制文件
+					    	  String lastName = Divpath + "3.xml";//复制到的地方路径和名称
+					    	  File dest = new File(lastName);
+					    	  TestFileManager.copyFileUsingFileChannels(source,dest);
+					    	  ParseDomDocument.xmlReadDemo(lastName,orderid,nickName,riqi,yaowei,Base64Convert.GetImageStr(photo3));
+					    	  ParseDomDocument.xmlReadDemopng(lastName,Base64Convert.GetImageStr(photo3));
+					    	  File file = new File(lastName);
+					    	  String lastNameddl = Divpath + "3.ddl";//最终修改的名称
+					    	  file.renameTo(new File(lastNameddl));
+							
+							vod.setErweima_3(urlPhoto + "3.png");
+						}else{
+							photo1 = baise;
+						}
+						if(majia_number!=0){
+							String text = wechatUrlQian+orderid+",4";
+							// 嵌入二维码的图片路径
+							// String imgPath = "F:/UI/test/1.png";
+							String imgPath = "D:/1.png";
+							// 生成的二维码的路径及名称
+							String imgName =  "4.png";
+							String destPath = path + "/" + imgName;
+							photo4 = destPath;
+							// 生成二维码
+							QRCodeUtil.encode(text, imgPath, destPath, true);
+							//QRCodeUtil.diErZhong(text,destPath);
+						//	GetExCel.writeExcelDaBiao("4",orderid, nickName, riqi, yaowei,destPath);
+							  File source = new File(xmlYuanPath);//原复制文件
+					    	  String lastName = Divpath + "4.xml";//复制到的地方路径和名称
+					    	  File dest = new File(lastName);
+					    	  TestFileManager.copyFileUsingFileChannels(source,dest);
+					    	  ParseDomDocument.xmlReadDemo(lastName,orderid,nickName,riqi,yaowei,Base64Convert.GetImageStr(photo4));
+					    	  ParseDomDocument.xmlReadDemopng(lastName,Base64Convert.GetImageStr(photo4));
+					    	  File file = new File(lastName);
+					    	  String lastNameddl = Divpath + "4.ddl";//最终修改的名称
+					    	  file.renameTo(new File(lastNameddl));
+							vod.setErweima_4(urlPhoto + "4.png");
+						}else{
+							photo1 = baise;
+						}
+						
+						GetExCel.writeExcelXiangQing(orderid, 
+								listOrder.get(0).get("order_id")+"",listOrder.get(0).get("qudao")+"",listOrder.get(0).get("age")+"",listOrder.get(0).get("kehu_phone")+"",
+								listOrder.get(0).get("wechat")+"",listOrder.get(0).get("xiadan_kefu")+"",listOrder.get(0).get("sex")+"",listOrder.get(0).get("kehu_name")+"",
+								listOrder.get(0).get("order_number")+"",listOrder.get(0).get("sale_price")+"",listOrder.get(0).get("height")+"",listOrder.get(0).get("weight")+"",
+								listOrder.get(0).get("ww_name")+"",listOrder.get(0).get("add_time")+"",listOrder.get(0).get("address")+"",
+								listOrder.get(0).get("order_type")+"",listOrder.get(0).get("jiaofu_time")+"",
+								listOrder.get(0).get("xizhuang_number")+"",listOrder.get(0).get("yi_ma")+"",listOrder.get(0).get("chenshan_number")+"",listOrder.get(0).get("chenshan_ma")+"",
+								listOrder.get(0).get("jiankuan_a")+"",listOrder.get(0).get("jiankuan_a2")+"",listOrder.get(0).get("lingwei_b")+"",listOrder.get(0).get("lingwei_b2")+"",
+								listOrder.get(0).get("xiongwei_a")+"",listOrder.get(0).get("xiongwei_a2")+"",listOrder.get(0).get("xiongwei_b")+"",listOrder.get(0).get("xiongwei_2")+"",
+								listOrder.get(0).get("zhongyao_a")+"",listOrder.get(0).get("zhongyao_a2")+"",listOrder.get(0).get("zhongyao_a")+"",listOrder.get(0).get("zhongyao_b2")+"",
+								listOrder.get(0).get("fuwei_a")+"",listOrder.get(0).get("fuwei_a2")+"",listOrder.get(0).get("fuwei_b")+"",listOrder.get(0).get("fuwei_b2")+"",
+								listOrder.get(0).get("houzhongyichang_a")+"",listOrder.get(0).get("houzhongyichang_a2")+"",listOrder.get(0).get("dakuang1")+"",listOrder.get(0).get("yichang_b2")+"",listOrder.get(0).get("dakuang2")+"",
+								listOrder.get(0).get("qianyichang_a")+"",listOrder.get(0).get("qianyichang_a2")+"",listOrder.get(0).get("fuwei_b")+"",listOrder.get(0).get("fuwei_b2")+"",//腹围可能需要更改
+								listOrder.get(0).get("xiuchang_b")+"",listOrder.get(0).get("xc_que")+"",listOrder.get(0).get("xiuchang_a")+"",listOrder.get(0).get("xiuchang_a2")+"",
+								listOrder.get(0).get("xiufei_b")+"",listOrder.get(0).get("xiufei_b2")+"",listOrder.get(0).get("xiufei_a")+"","",
+								listOrder.get(0).get("xiukou_b")+"",listOrder.get(0).get("xiukou_b2")+"",listOrder.get(0).get("xiukou_a")+"",listOrder.get(0).get("xiukou_a2")+"",
+								listOrder.get(0).get("xiku_number")+"",listOrder.get(0).get("ku_ma")+"",listOrder.get(0).get("majia_number")+"",listOrder.get(0).get("majia_ma")+"",
+								listOrder.get(0).get("yaowei_c")+"",listOrder.get(0).get("yaowei_c22")+"",listOrder.get(0).get("jiankuannew")+"",listOrder.get(0).get("jiankuanque")+"",
+								listOrder.get(0).get("tuiwei_c")+"",listOrder.get(0).get("tuiwei_c2")+"",listOrder.get(0).get("xiongwei_d")+"",listOrder.get(0).get("xiongwei_d2")+"",
+								listOrder.get(0).get("dangwei_c")+"",listOrder.get(0).get("dangwei_c2")+"",listOrder.get(0).get("zhongyao_d")+"",listOrder.get(0).get("yaowei_c2")+"",
+								listOrder.get(0).get("datui_c")+"",listOrder.get(0).get("datui_c2")+"",listOrder.get(0).get("yichang_d")+"",listOrder.get(0).get("yichang_d2")+"",
+								listOrder.get(0).get("zhongtui_c")+"",listOrder.get(0).get("zhongtui_c2")+"",listOrder.get(0).get("dakuang3")+"",listOrder.get(0).get("kuanxing_d")+"",listOrder.get(0).get("dakuang4")+"",
+								listOrder.get(0).get("xiaotui_c")+"",listOrder.get(0).get("xiaotui_c2")+"",
+								listOrder.get(0).get("kuchang_c")+"",listOrder.get(0).get("kuchang_c2")+"",
+								listOrder.get(0).get("tuikou_c")+"",listOrder.get(0).get("tuikou_c2")+"",
+								
+								
+								listOrder.get(0).get("kouxing_c")+"",listOrder.get(0).get("koudai_c")+"",	listOrder.get(0).get("kaicha")+"",listOrder.get(0).get("lingkoukuaishi_b")+"",
+								listOrder.get(0).get("xiabai")+"",listOrder.get(0).get("zhuangse")+"",	listOrder.get(0).get("waizhubian")+"",listOrder.get(0).get("xiucha")+"",
+								listOrder.get(0).get("kuyao")+"",listOrder.get(0).get("kuxing")+"",	listOrder.get(0).get("chenshanling")+"",listOrder.get(0).get("chenshanxiu")+"",
+
+								listOrder.get(0).get("miao_liao1")+"",listOrder.get(0).get("yong_tu1")+"",	listOrder.get(0).get("mi1")+"",listOrder.get(0).get("gongyingshang_1")+"",
+								listOrder.get(0).get("miao_liao2")+"",listOrder.get(0).get("yong_tu2")+"",	listOrder.get(0).get("mi2")+"",listOrder.get(0).get("gongyingshang_2")+"",
+								
+								listOrder.get(0).get("remark")+"",
+								listOrder.get(0).get("pidan_remark")+"",
+								listOrder.get(0).get("gd_remark")+""  ,
+								photo1,photo2,photo3,photo4
+								);
+						
+						if(xizhuang_number!=0 || chenshan_number!=0 || xiku_number!=0 || majia_number==0 ){
+							String zipName = path + "/" + orderid + ".zip";
+							String aa = "D:/resin/webapps/watch/upload/zip/"+orderid + ".zip";
+							FileOutputStream fos1 = new FileOutputStream(new File(aa));
+							System.out.println("path="+path);
+							//System.out.println("zipName="+zipName);
+							ZipUtils.toZip(path, fos1, true);
+							//ZipUtils.toZip(path, fos1, true);
+							
+							
+							/*String excelzipName = qianZhuiExcel + "/" + orderid + ".zip";
+							FileOutputStream fos2 = new FileOutputStream(new File(excelzipName));
+							ZipUtils.toZip(pathExcle, fos2, true);*/
+
+						
+							vod.setCondition("orderid = '" + orderid + "'");
+
+							List<DataMap> list = ServiceBean.getInstance()
+									.getDeviceActiveInfoFacade().getAllCallInfo(vod);
+
+							// String url =
+							// "http://localhost:8080/clothes/upload/photo/"+orderid+"/";
+							vod.setErweima_zip(url + orderid + ".zip");
+							vod.setDabiao_file(url + orderid + ".zip");
+							if (list.size() > 0) {
+								vod.setCondition("id='" + list.get(0).get("id") + "'");
+								/*vod.setErweima_1(url + "1.png");
+							
+								vod.setErweima_3(url + "3.png");
+								vod.setErweima_4(url + "4.png");*/
+							
+								ServiceBean.getInstance().getDeviceActiveInfoFacade()
+										.updateCallInfo(vod);
+
+							} else {
+								vod.setOrderid(orderid);
+								/*vod.setErweima_1(url + "1.png");
+								vod.setErweima_2(url + "2.png");*/
+								ServiceBean.getInstance().getDeviceActiveInfoFacade()
+										.insertCallInfo(vod);
+							}
+
+							
+							vo.setCondition("id='" + form.getId() + "'");
+							vo.setFujian_url(url + orderid + ".zip");
+						
+							//vo.setSocketWay("1");
+							/*ServiceBean.getInstance().getProjectInfoFacade()
+									.updatePorjectInfo(vo);*/
+							
+						}		
+						}
+					
 			}else if("11".equals(status)){
 				System.out.println("打标-----------------------------------------------------------------");
 			
+			}else if("0".equals(status)){
+				System.out.println("作废");
 			}
 			
-            String qianZhui = "D:/resin/webapps/watch/upload/photo/";
-			
-			ProjectInfo vo = new ProjectInfo();
-			vo.setCondition("id='" + form.getId() + "'");
-			String orderid = "";
-			
-			List<DataMap>  listOrder =ServiceBean.getInstance().getProjectInfoFacade().getProjectInfo(vo);
-			DeviceActiveInfo vod = new DeviceActiveInfo();	
-			if(listOrder.size()>0){
-				orderid = listOrder.get(0).get("order_id")+"";
-
-				String url = "http://47.111.148.8:80/watch/upload/zip/";
-				String urlPhoto = "http://47.111.148.8:80/watch/upload/photo/"+orderid+"/";
-				/*ProjectInfo fujianVo = new ProjectInfo();
-				fujianVo.setCondition("id='" + form.getId() + "'")*/
-				voStatus.setProjectName(url + orderid + ".zip");
-				
-						
-				String nickName = listOrder.get(0).get("kehu_name")+"";
-				String riqi = listOrder.get(0).get("add_time")+"";
-				String yaowei = listOrder.get(0).get("yaowei_c")+"";
-				
-				String path= qianZhui + orderid;
-				Constant.deleteFile(path);
-				Constant.createFile(path);
-			
-				
-				int xizhuang_number= Integer.valueOf(listOrder.get(0).get("xizhuang_number")+"");
-				int chenshan_number= Integer.valueOf(listOrder.get(0).get("chenshan_number")+"");
-				int xiku_number= Integer.valueOf(listOrder.get(0).get("xiku_number")+"");
-				int majia_number= Integer.valueOf(listOrder.get(0).get("majia_number")+"");
-				
-		
-			
-				String photo1="";
-				String photo2="";
-				String photo3="";
-				String photo4="";
-				
-				String baise = "D:/bai.png";
-				
-				String wechatUrlQian= "http://www.bzsxt.com/ClothesWechat/scan?state=";
-				//String wechatUrlhou="#wechat_redirect";
-				String xmlYuanPath = "D:/不一定制洗水标.xml";
-				
-				String Divpath = "D:/resin/webapps/watch/upload/photo/"+orderid+"/";// 文件保存路径
-				
-				File dirFile = new File(Divpath);
-				
-				if (!dirFile.exists()) {// 文件路径不存在时，自动创建目录
-					dirFile.mkdir();
-				}
-				
-			
-				
-				if(xizhuang_number!=0){
-					String text = wechatUrlQian+orderid+",1";
-					// 嵌入二维码的图片路径
-					// String imgPath = "F:/UI/test/1.png";
-					String imgPath = "D:/1.png";
-					// 生成的二维码的路径及名称
-					String imgName =  "1.png";
-					String destPath = path + "/" + imgName;
-					photo1 = destPath;
-					// 生成二维码
-					QRCodeUtil.encode(text, imgPath, destPath, true);
-					//QRCodeUtil.diErZhong(text,destPath);
-					//GetExCel.writeExcelDaBiao("1",orderid, nickName, riqi, yaowei,destPath);
-					
-					  File source = new File(xmlYuanPath);//原复制文件
-			    	  String lastName = Divpath + "1.xml";//复制到的地方路径和名称
-			    	  File dest = new File(lastName);
-			    	  TestFileManager.copyFileUsingFileChannels(source,dest);
-			    	  ParseDomDocument.xmlReadDemo(lastName,orderid,nickName,riqi,yaowei,Base64Convert.GetImageStr(photo1));
-			    	  
-			    	  File file = new File(lastName);
-			    	  String lastNameddl = Divpath + "1.ddl";//最终修改的名称
-			    	  file.renameTo(new File(lastNameddl));
-					
-					vod.setErweima_1(urlPhoto + "1.png");
-					//http://47.111.148.8:80/watch/upload/zip/4.png
-				}else{
-					photo1 = baise;
-				}
-				if(chenshan_number!=0){
-					String text = wechatUrlQian+orderid+",2";
-					// 嵌入二维码的图片路径
-					// String imgPath = "F:/UI/test/1.png";
-					String imgPath = "D:/1.png";
-					// 生成的二维码的路径及名称
-					String imgName =  "2.png";
-					String destPath = path + "/" + imgName;
-					photo2 = destPath;
-					// 生成二维码
-					QRCodeUtil.encode(text, imgPath, destPath, true);
-					//QRCodeUtil.diErZhong(text,destPath);
-					//GetExCel.writeExcelDaBiao("2",orderid, nickName, riqi, yaowei,destPath);
-					  File source = new File(xmlYuanPath);//原复制文件
-			    	  String lastName = Divpath + "2.xml";//复制到的地方路径和名称
-			    	  File dest = new File(lastName);
-			    	  TestFileManager.copyFileUsingFileChannels(source,dest);
-			    	  ParseDomDocument.xmlReadDemo(lastName,orderid,nickName,riqi,yaowei,Base64Convert.GetImageStr(photo2));
-			    	  
-			    	  File file = new File(lastName);
-			    	  String lastNameddl = Divpath + "2.ddl";//最终修改的名称
-			    	  file.renameTo(new File(lastNameddl));
-					
-					vod.setErweima_2(urlPhoto + "2.png");
-				}else{
-					photo1 = baise;
-				}
-				if(xiku_number!=0){
-					String text =wechatUrlQian+ orderid+",3";
-					// 嵌入二维码的图片路径
-					// String imgPath = "F:/UI/test/1.png";
-					String imgPath = "D:/1.png";
-					// 生成的二维码的路径及名称
-					String imgName =  "3.png";
-					String destPath = path + "/" + imgName;
-					photo3 = destPath;
-					// 生成二维码
-					QRCodeUtil.encode(text, imgPath, destPath, true);
-					//QRCodeUtil.diErZhong(text,destPath);
-					//GetExCel.writeExcelDaBiao("3",orderid, nickName, riqi, yaowei,destPath);
-					  File source = new File(xmlYuanPath);//原复制文件
-			    	  String lastName = Divpath + "3.xml";//复制到的地方路径和名称
-			    	  File dest = new File(lastName);
-			    	  TestFileManager.copyFileUsingFileChannels(source,dest);
-			    	  ParseDomDocument.xmlReadDemo(lastName,orderid,nickName,riqi,yaowei,Base64Convert.GetImageStr(photo3));
-			    	  
-			    	  File file = new File(lastName);
-			    	  String lastNameddl = Divpath + "3.ddl";//最终修改的名称
-			    	  file.renameTo(new File(lastNameddl));
-					
-					vod.setErweima_3(urlPhoto + "3.png");
-				}else{
-					photo1 = baise;
-				}
-				if(majia_number!=0){
-					String text = wechatUrlQian+orderid+",4";
-					// 嵌入二维码的图片路径
-					// String imgPath = "F:/UI/test/1.png";
-					String imgPath = "D:/1.png";
-					// 生成的二维码的路径及名称
-					String imgName =  "4.png";
-					String destPath = path + "/" + imgName;
-					photo4 = destPath;
-					// 生成二维码
-					QRCodeUtil.encode(text, imgPath, destPath, true);
-					//QRCodeUtil.diErZhong(text,destPath);
-				//	GetExCel.writeExcelDaBiao("4",orderid, nickName, riqi, yaowei,destPath);
-					  File source = new File(xmlYuanPath);//原复制文件
-			    	  String lastName = Divpath + "4.xml";//复制到的地方路径和名称
-			    	  File dest = new File(lastName);
-			    	  TestFileManager.copyFileUsingFileChannels(source,dest);
-			    	  ParseDomDocument.xmlReadDemo(lastName,orderid,nickName,riqi,yaowei,Base64Convert.GetImageStr(photo4));
-			    	  
-			    	  File file = new File(lastName);
-			    	  String lastNameddl = Divpath + "4.ddl";//最终修改的名称
-			    	  file.renameTo(new File(lastNameddl));
-					vod.setErweima_4(urlPhoto + "4.png");
-				}else{
-					photo1 = baise;
-				}
-				
-				GetExCel.writeExcelXiangQing(orderid, 
-						listOrder.get(0).get("order_id")+"",listOrder.get(0).get("qudao")+"",listOrder.get(0).get("age")+"",listOrder.get(0).get("kehu_phone")+"",
-						listOrder.get(0).get("wechat")+"",listOrder.get(0).get("xiadan_kefu")+"",listOrder.get(0).get("sex")+"",listOrder.get(0).get("kehu_name")+"",
-						listOrder.get(0).get("order_number")+"",listOrder.get(0).get("sale_price")+"",listOrder.get(0).get("height")+"",listOrder.get(0).get("weight")+"",
-						listOrder.get(0).get("ww_name")+"",listOrder.get(0).get("add_time")+"",listOrder.get(0).get("address")+"",
-						listOrder.get(0).get("order_type")+"",listOrder.get(0).get("jiaofu_time")+"",
-						listOrder.get(0).get("xizhuang_number")+"",listOrder.get(0).get("yi_ma")+"",listOrder.get(0).get("chenshan_number")+"",listOrder.get(0).get("chenshan_ma")+"",
-						listOrder.get(0).get("jiankuan_a")+"",listOrder.get(0).get("jiankuan_a2")+"",listOrder.get(0).get("lingwei_b")+"",listOrder.get(0).get("lingwei_b2")+"",
-						listOrder.get(0).get("xiongwei_a")+"",listOrder.get(0).get("xiongwei_a2")+"",listOrder.get(0).get("xiongwei_b")+"",listOrder.get(0).get("xiongwei_2")+"",
-						listOrder.get(0).get("zhongyao_a")+"",listOrder.get(0).get("zhongyao_a2")+"",listOrder.get(0).get("zhongyao_a")+"",listOrder.get(0).get("zhongyao_b2")+"",
-						listOrder.get(0).get("fuwei_a")+"",listOrder.get(0).get("fuwei_a2")+"",listOrder.get(0).get("fuwei_b")+"",listOrder.get(0).get("fuwei_b2")+"",
-						listOrder.get(0).get("houzhongyichang_a")+"",listOrder.get(0).get("houzhongyichang_a2")+"",listOrder.get(0).get("dakuang1")+"",listOrder.get(0).get("yichang_b2")+"",listOrder.get(0).get("dakuang2")+"",
-						listOrder.get(0).get("qianyichang_a")+"",listOrder.get(0).get("qianyichang_a2")+"",listOrder.get(0).get("fuwei_b")+"",listOrder.get(0).get("fuwei_b2")+"",//腹围可能需要更改
-						listOrder.get(0).get("xiuchang_b")+"",listOrder.get(0).get("xc_que")+"",listOrder.get(0).get("xiuchang_a")+"",listOrder.get(0).get("xiuchang_a2")+"",
-						listOrder.get(0).get("xiufei_b")+"",listOrder.get(0).get("xiufei_b2")+"",listOrder.get(0).get("xiufei_a")+"","",
-						listOrder.get(0).get("xiukou_b")+"",listOrder.get(0).get("xiukou_b2")+"",listOrder.get(0).get("xiukou_a")+"",listOrder.get(0).get("xiukou_a2")+"",
-						listOrder.get(0).get("xiku_number")+"",listOrder.get(0).get("ku_ma")+"",listOrder.get(0).get("majia_number")+"",listOrder.get(0).get("majia_ma")+"",
-						listOrder.get(0).get("yaowei_c")+"",listOrder.get(0).get("yaowei_c22")+"",listOrder.get(0).get("jiankuannew")+"",listOrder.get(0).get("jiankuanque")+"",
-						listOrder.get(0).get("tuiwei_c")+"",listOrder.get(0).get("tuiwei_c2")+"",listOrder.get(0).get("xiongwei_d")+"",listOrder.get(0).get("xiongwei_d2")+"",
-						listOrder.get(0).get("dangwei_c")+"",listOrder.get(0).get("dangwei_c2")+"",listOrder.get(0).get("zhongyao_d")+"",listOrder.get(0).get("yaowei_c2")+"",
-						listOrder.get(0).get("datui_c")+"",listOrder.get(0).get("datui_c2")+"",listOrder.get(0).get("yichang_d")+"",listOrder.get(0).get("yichang_d2")+"",
-						listOrder.get(0).get("zhongtui_c")+"",listOrder.get(0).get("zhongtui_c2")+"",listOrder.get(0).get("dakuang3")+"",listOrder.get(0).get("kuanxing_d")+"",listOrder.get(0).get("dakuang4")+"",
-						listOrder.get(0).get("xiaotui_c")+"",listOrder.get(0).get("xiaotui_c2")+"",
-						listOrder.get(0).get("kuchang_c")+"",listOrder.get(0).get("kuchang_c2")+"",
-						listOrder.get(0).get("tuikou_c")+"",listOrder.get(0).get("tuikou_c2")+"",
-						
-						
-						listOrder.get(0).get("kouxing_c")+"",listOrder.get(0).get("koudai_c")+"",	listOrder.get(0).get("kaicha")+"",listOrder.get(0).get("lingkoukuaishi_b")+"",
-						listOrder.get(0).get("xiabai")+"",listOrder.get(0).get("zhuangse")+"",	listOrder.get(0).get("waizhubian")+"",listOrder.get(0).get("xiucha")+"",
-						listOrder.get(0).get("kuyao")+"",listOrder.get(0).get("kuxing")+"",	listOrder.get(0).get("chenshanling")+"",listOrder.get(0).get("chenshanxiu")+"",
-
-						listOrder.get(0).get("miao_liao1")+"",listOrder.get(0).get("yong_tu1")+"",	listOrder.get(0).get("mi1")+"",listOrder.get(0).get("gongyingshang_1")+"",
-						listOrder.get(0).get("miao_liao2")+"",listOrder.get(0).get("yong_tu2")+"",	listOrder.get(0).get("mi2")+"",listOrder.get(0).get("gongyingshang_2")+"",
-						
-						listOrder.get(0).get("remark")+"",
-						listOrder.get(0).get("pidan_remark")+"",
-						listOrder.get(0).get("gd_remark")+""  ,
-						photo1,photo2,photo3,photo4
-						);
-				
-				if(xizhuang_number!=0 || chenshan_number!=0 || xiku_number!=0 || majia_number==0 ){
-					String zipName = path + "/" + orderid + ".zip";
-					String aa = "D:/resin/webapps/watch/upload/zip/"+orderid + ".zip";
-					FileOutputStream fos1 = new FileOutputStream(new File(aa));
-					System.out.println("path="+path);
-					//System.out.println("zipName="+zipName);
-					ZipUtils.toZip(path, fos1, true);
-					//ZipUtils.toZip(path, fos1, true);
-					
-					
-					/*String excelzipName = qianZhuiExcel + "/" + orderid + ".zip";
-					FileOutputStream fos2 = new FileOutputStream(new File(excelzipName));
-					ZipUtils.toZip(pathExcle, fos2, true);*/
-
-				
-					vod.setCondition("orderid = '" + orderid + "'");
-
-					List<DataMap> list = ServiceBean.getInstance()
-							.getDeviceActiveInfoFacade().getAllCallInfo(vod);
-
-					// String url =
-					// "http://localhost:8080/clothes/upload/photo/"+orderid+"/";
-					vod.setErweima_zip(url + orderid + ".zip");
-					vod.setDabiao_file(url + orderid + ".zip");
-					if (list.size() > 0) {
-						vod.setCondition("id='" + list.get(0).get("id") + "'");
-						/*vod.setErweima_1(url + "1.png");
-					
-						vod.setErweima_3(url + "3.png");
-						vod.setErweima_4(url + "4.png");*/
-					
-						ServiceBean.getInstance().getDeviceActiveInfoFacade()
-								.updateCallInfo(vod);
-
-					} else {
-						vod.setOrderid(orderid);
-						/*vod.setErweima_1(url + "1.png");
-						vod.setErweima_2(url + "2.png");*/
-						ServiceBean.getInstance().getDeviceActiveInfoFacade()
-								.insertCallInfo(vod);
-					}
-
-					
-					vo.setCondition("id='" + form.getId() + "'");
-					vo.setFujian_url(url + orderid + ".zip");
-				
-					//vo.setSocketWay("1");
-					/*ServiceBean.getInstance().getProjectInfoFacade()
-							.updatePorjectInfo(vo);*/
-					
-				}		
-				}
+          
 			
 			
 			

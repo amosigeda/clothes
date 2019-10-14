@@ -860,6 +860,10 @@
 				yichang_q=#yichang_q#
 			</isNotEmpty>
 			
+			<isNotEmpty prepend="," property="jiaofu_time">
+				jiaofu_time=#jiaofu_time#
+			</isNotEmpty>
+			
 			
 			
 		</dynamic>

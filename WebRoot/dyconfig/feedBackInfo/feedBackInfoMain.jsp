@@ -113,6 +113,8 @@ function del(id){
                     <td width="5%">快递类型</td>                  
 					<td width="5%">快递号</td>	
 					<td width="5%">价格</td>	
+					<td width="5%">物品</td>	
+					<td width="5%">数量</td>	
 					<td width="8%">录入时间</td>	
 					<!-- <td width="6%">是否处理</td>	
 					<td width="8%">处理内容</td>	
@@ -137,6 +139,12 @@ function del(id){
 						
 							<td>
 								<bean:write name="element" property="price" />
+						</td>
+						<td>
+								<bean:write name="element" property="wupin" />
+						</td>
+						<td>
+								<bean:write name="element" property="shuliang" />
 						</td>
 						<td>
 							<bean:write name="element" property="date_time" format="yyyy-MM-dd HH:mm:ss"/>

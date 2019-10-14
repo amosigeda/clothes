@@ -80,30 +80,12 @@ System.err.println(png);
 						.setValue(yaowei);
 			}
 			
-			if (valueString.equals("哈哈哈哈")) {
-				((Element) ftpElement.content().get(1)).attribute("value")
-						.setValue(png);
-			}
-			System.out.println("ftp_name1="+ ((Element)ftpElement.content().get(1)).attribute("value").getValue()); 
 		
 			
 		}
 		
 		
-	/*	list = doc.selectNodes("/DLabel/paper/labelobjects");
-		it = list.iterator();
-		while (it.hasNext()) {
-			Element ftpElement = (Element) it.next();
-			String valueString = ((Element) ftpElement.content().get(1))
-					.attribute("image").getValue();
-		
-			if (valueString
-					.equals("C:/Users/Administrator/Desktop/8888/74ea755f957dde2b4862a6b7c24389ef_.jpg")) {
-				((Element) ftpElement.content().get(1)).attribute("base64")
-						.setValue(png);
-			}
 
-		}*/
 
 		// 此时 数据保存在内存中而本地xml没有同步 这时 我们需要内存中的对象 回写到xml
 		OutputFormat format = OutputFormat.createPrettyPrint();
@@ -112,6 +94,30 @@ System.err.println(png);
 		xmlWriter.write(doc);
 		xmlWriter.close();
 	}
+	
+	public static void xmlReadDemopng(String filePath,String png)
+			   throws IOException {
+			  System.err.println(png);
+			   Document doc = load(filePath); 
+			       /** 先用xpath查找所有ftp节点 并输出它的name属性值*/ 
+			       List list = doc.selectNodes("/DLabel/paper/labelobjects/drawobj/textlist" ); 
+			       Iterator it = list.iterator(); 
+			       
+			       list = doc.selectNodes("/DLabel/paper/labelobjects/drawobj[@image='C:/Users/Administrator/Desktop/8888/74ea755f957dde2b4862a6b7c24389ef_.jpg']" );
+			       it = list.iterator(); 
+			       while(it.hasNext()) 
+			       {    
+			           Element ftpElement = (Element)it.next(); 
+
+			           ((Attribute) ftpElement.attribute(7)).setValue(png);
+			       }
+			       
+			     //此时 数据保存在内存中而本地xml没有同步    这时 我们需要内存中的对象 回写到xml
+			   OutputFormat format = OutputFormat.createPrettyPrint();
+			   XMLWriter xmlWriter = new XMLWriter(new FileOutputStream(filePath), format);
+			   xmlWriter.write(doc);
+			   xmlWriter.close();
+			 }
 
 	public static void main(String[] args) throws Exception {
 

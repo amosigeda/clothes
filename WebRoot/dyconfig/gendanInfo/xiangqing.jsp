@@ -135,7 +135,7 @@ function onUpdate(){
 					</td>
 			</tr>
 			
-			<tr>
+	<%-- 		<tr>
 				<td nowrap="nowrap" align="center" width="7%">订单号</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<input style="border:none;" type="text"   size="38"  name="orderNumber" id="orderNumber"  value=<%=projectInfo.getAt("order_number")%>>
@@ -144,6 +144,22 @@ function onUpdate(){
 				<td nowrap="nowrap" align="center" width="7%">
 	<input style="border:none;" type="text"   size="38"  name="salePrice" id="salePrice"  value=<%=projectInfo.getAt("sale_price")%>>
 </td>
+</tr> --%>
+
+	<tr>
+				<td nowrap="nowrap" align="center" width="7%">订单号</td>
+				<td nowrap="nowrap" align="left" width="7%" colspan="7">
+			<input name="orderNumber"  id="orderNumber"  value=<%=projectInfo.getAt("order_number")%>
+					type="text" class="txt_1" maxlength="1000" size="200"/><font color="red"></font></td>
+			</tr>
+				<tr>
+				<td nowrap="nowrap" align="center" width="7%">销售价格</td>
+				<td nowrap="nowrap" align="left" width="7%" colspan="7">
+			<input name="salePrice"  id="salePrice" value=<%=projectInfo.getAt("sale_price")%>
+					type="text" class="txt_1" maxlength="1000" size="200"/><font color="red"></font></td>
+			</tr>
+			
+<tr>
 				<td nowrap="nowrap" align="center" width="7%">身高</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<input style="border:none;" type="text"      size="38"  name="height" id="height"   value="<%=projectInfo.getAt("height")%>"  >
