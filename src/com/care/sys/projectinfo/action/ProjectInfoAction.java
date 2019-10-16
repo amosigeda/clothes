@@ -1047,6 +1047,10 @@ public class ProjectInfoAction extends BaseAction {
 			
 			request.setAttribute("duoyu", listDuoyu.get(0));
 			
+			String gysall = CommUtils.getPrintSelectAll(Clist, "gys1","project_no", "project_no", listDuoyu.get(0).get("gys1")+"", 1);
+			request.setAttribute("gysall", gysall);
+			System.err.println(gysall);
+			
 			String gys1 = CommUtils.getPrintSelectGys(Clist, "gys1","project_no", "project_no", listDuoyu.get(0).get("gys1")+"", 1);
 			request.setAttribute("gys1", gys1);
 			
@@ -3031,6 +3035,54 @@ public class ProjectInfoAction extends BaseAction {
 				insertVO.setGys11(gys11);
 				insertVO.setGys12(gys12);
 				insertVO.setGys13(gys13);
+				
+				
+				String jq = request.getParameter("jg");
+				String jq1 = request.getParameter("jg1");
+				String jq2 = request.getParameter("jg2");
+				String jq3 = request.getParameter("jg3");
+				String jq4 = request.getParameter("jg4");
+				String jq5 = request.getParameter("jg5");
+				String jq6 = request.getParameter("jg6");
+				String jq7 = request.getParameter("jg7");
+				String jq8 = request.getParameter("jg8");
+				String jq9 = request.getParameter("jg9");
+				String jq10 = request.getParameter("jg10");
+				String jq11 = request.getParameter("jg11");
+				String jq12 = request.getParameter("jg12");
+				String jq13 = request.getParameter("jg13");
+				String jq14 = request.getParameter("jg14");
+				
+				System.err.println("jq1="+jq1);
+				System.err.println("jq2="+jq2);
+				System.err.println("jq3="+jq3);
+				System.err.println("jq4="+jq4);
+				System.err.println("jq5="+jq5);
+				System.err.println("jq6="+jq6);
+				System.err.println("jq7="+jq7);
+				System.err.println("jq8="+jq8);
+				System.err.println("jq9="+jq9);
+				System.err.println("jq10="+jq10);
+				System.err.println("jq11="+jq11);
+				System.err.println("jq12="+jq12);
+				System.err.println("jq13="+jq13);
+				System.err.println("jq14="+jq14);
+				
+				insertVO.setJq(jq);
+				insertVO.setJq1(jq1);
+				insertVO.setJq2(jq2);
+				insertVO.setJq3(jq3);
+				insertVO.setJq4(jq4);
+				insertVO.setJq5(jq5);
+				insertVO.setJq6(jq6);
+				insertVO.setJq7(jq7);
+				insertVO.setJq8(jq8);
+				insertVO.setJq9(jq9);
+				insertVO.setJq10(jq10);
+				insertVO.setJq11(jq11);
+				insertVO.setJq12(jq12);
+				insertVO.setJq13(jq13);
+				insertVO.setJq14(jq14);
 				
 				
 				ServiceBean.getInstance().getProjectInfoFacade()

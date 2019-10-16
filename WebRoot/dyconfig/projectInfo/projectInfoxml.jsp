@@ -153,7 +153,7 @@ function pidanTijiao(id){
 
 function  updatedangAnStatus(id,status){
 	if(status==0){
-		alert("×÷·ÏÇë½÷É÷!!!");
+	
 	}
 	if(confirm("È·¶¨?"))
 	{

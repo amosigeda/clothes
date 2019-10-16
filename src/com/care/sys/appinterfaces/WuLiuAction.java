@@ -66,29 +66,48 @@ G、发货-----，扫码，需要填写物流单号，给客户发短信，短�
 		try {
 			/*String phone = object.getString("phone");
 			String wechat = object.getString("wechat");*/
-			String orderId = object.getString("orderId");
-			String expressType = object.getString("expressType");
-			String kuaiDiHao = object.getString("kuaiDiHao");
-			String price = object.getString("price");
-			String token = object.getString("token");
 			
-			AppUserInfo vo = new AppUserInfo(); 
-			vo.setCondition("token='"+token+"'  limit 1");
+			String wechat = object.getString("wechat");
+			String token = object.getString("token");
+	AppUserInfo vo = new AppUserInfo(); 
+			
+			vo.setCondition("  password = '"+ wechat +  "'   and token='"+token+"' order by id desc limit 1");
 			List<DataMap> list  = ServiceBean.getInstance().getAppUserInfoFacade().getAppUserInfo(vo);
-			if(list.size()>0){
-				result = Constant.SUCCESS_CODE;
-				
-				FeedBackInfo fo =new FeedBackInfo();
-			fo.setUser_id(orderId);
-			fo.setProject_name(expressType);
-			fo.setPrice(price);
-			fo.setUser_feedback_content(kuaiDiHao);
-			fo.setDate_time(new Date());
-			ServiceBean.getInstance().getFeedBackInfoFacade().insertFeedBackInfo(fo);
-				
-			}else{
-				result = Constant.FAIL_CODE;
-			}
+if(list.size()<=0){
+	result = Constant.EXCEPTION_CODE;
+}	else{
+	String orderId = object.getString("orderId");
+	String expressType = object.getString("expressType");
+	String kuaiDiHao = object.getString("kuaiDiHao");
+	String price = object.getString("price");
+	String number = object.getString("number");
+	String wupin = object.getString("wupin");
+	
+	
+	FeedBackInfo voo =new FeedBackInfo();
+	voo.setCondition("user_feedback_content='"+kuaiDiHao+"'  limit 1");
+	List<DataMap> listo  = ServiceBean.getInstance().getFeedBackInfoFacade().getFeedBackInfo(voo);
+	if(listo.size()>0){
+		result = Constant.FAIL_CODE;
+		
+		
+	}else{
+result = Constant.SUCCESS_CODE;
+		
+		FeedBackInfo fo =new FeedBackInfo();
+	fo.setUser_id(orderId);
+	fo.setProject_name(expressType);
+	fo.setPrice(price);
+	fo.setUser_feedback_content(kuaiDiHao);
+	fo.setDate_time(new Date());
+	fo.setWupin(wupin);
+	fo.setNumber(number);
+	fo.setNickname(list.get(0).get("nick_name")+"");
+	ServiceBean.getInstance().getFeedBackInfoFacade().insertFeedBackInfo(fo);
+	}
+}		
+			
+		
 		
 		} catch (Exception e) {
 			e.printStackTrace();

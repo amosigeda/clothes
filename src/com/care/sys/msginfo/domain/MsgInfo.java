@@ -104,8 +104,186 @@ public class MsgInfo extends PublicVoBean implements Serializable{
     private String gys13; 
     private String gys14; 
     
+    private String jq; 
+    private String jq1; 
+    private String jq2; 
+    private String jq3; 
+    private String jq4; 
+    private String jq5; 
+    private String jq6; 
+    private String jq7; 
+    private String jq8; 
+    private String jq9; 
+    private String jq10; 
+    private String jq11; 
+    private String jq12; 
+    private String jq13; 
+    private String jq14; 
+    //phone  item address  shouhou_type  jihui  fahuo  reson
+    private String address;
+    private String shouhou_type;
+    private String jihui;
+    private String fahuo;
+    private String reson;
+    
+    private String item1;
+    private String item2;
+    private String item3;
+    private String item4;
+    private String item5;
+    
     
 	
+	public String getItem1() {
+		return item1;
+	}
+	public void setItem1(String item1) {
+		this.item1 = item1;
+	}
+	public String getItem2() {
+		return item2;
+	}
+	public void setItem2(String item2) {
+		this.item2 = item2;
+	}
+	public String getItem3() {
+		return item3;
+	}
+	public void setItem3(String item3) {
+		this.item3 = item3;
+	}
+	public String getItem4() {
+		return item4;
+	}
+	public void setItem4(String item4) {
+		this.item4 = item4;
+	}
+	public String getItem5() {
+		return item5;
+	}
+	public void setItem5(String item5) {
+		this.item5 = item5;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getShouhou_type() {
+		return shouhou_type;
+	}
+	public void setShouhou_type(String shouhou_type) {
+		this.shouhou_type = shouhou_type;
+	}
+	public String getJihui() {
+		return jihui;
+	}
+	public void setJihui(String jihui) {
+		this.jihui = jihui;
+	}
+	public String getFahuo() {
+		return fahuo;
+	}
+	public void setFahuo(String fahuo) {
+		this.fahuo = fahuo;
+	}
+	public String getReson() {
+		return reson;
+	}
+	public void setReson(String reson) {
+		this.reson = reson;
+	}
+	public String getJq() {
+		return jq;
+	}
+	public void setJq(String jq) {
+		this.jq = jq;
+	}
+	public String getJq1() {
+		return jq1;
+	}
+	public void setJq1(String jq1) {
+		this.jq1 = jq1;
+	}
+	public String getJq2() {
+		return jq2;
+	}
+	public void setJq2(String jq2) {
+		this.jq2 = jq2;
+	}
+	public String getJq3() {
+		return jq3;
+	}
+	public void setJq3(String jq3) {
+		this.jq3 = jq3;
+	}
+	public String getJq4() {
+		return jq4;
+	}
+	public void setJq4(String jq4) {
+		this.jq4 = jq4;
+	}
+	public String getJq5() {
+		return jq5;
+	}
+	public void setJq5(String jq5) {
+		this.jq5 = jq5;
+	}
+	public String getJq6() {
+		return jq6;
+	}
+	public void setJq6(String jq6) {
+		this.jq6 = jq6;
+	}
+	public String getJq7() {
+		return jq7;
+	}
+	public void setJq7(String jq7) {
+		this.jq7 = jq7;
+	}
+	public String getJq8() {
+		return jq8;
+	}
+	public void setJq8(String jq8) {
+		this.jq8 = jq8;
+	}
+	public String getJq9() {
+		return jq9;
+	}
+	public void setJq9(String jq9) {
+		this.jq9 = jq9;
+	}
+	public String getJq10() {
+		return jq10;
+	}
+	public void setJq10(String jq10) {
+		this.jq10 = jq10;
+	}
+	public String getJq11() {
+		return jq11;
+	}
+	public void setJq11(String jq11) {
+		this.jq11 = jq11;
+	}
+	public String getJq12() {
+		return jq12;
+	}
+	public void setJq12(String jq12) {
+		this.jq12 = jq12;
+	}
+	public String getJq13() {
+		return jq13;
+	}
+	public void setJq13(String jq13) {
+		this.jq13 = jq13;
+	}
+	public String getJq14() {
+		return jq14;
+	}
+	public void setJq14(String jq14) {
+		this.jq14 = jq14;
+	}
 	public String getMianliao1() {
 		return mianliao1;
 	}

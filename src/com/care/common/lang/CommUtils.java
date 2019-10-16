@@ -247,6 +247,31 @@ public class CommUtils {
 	/*	System.out.println(sf.toString());*/
 		return sf.toString();
 	}
+	public static String getPrintSelectAll(List<DataMap> list, String names, String tname,
+			String tvalue, String svalue, int isSelect) {
+		if (list == null || list.size() == 0) {
+			return "";
+		}
+		StringBuffer sf = new StringBuffer();
+		
+		Iterator<DataMap> it = list.iterator();
+		//sf.append("<option value=''></option>\n");
+		while (it.hasNext()) {
+			DataMap map = it.next();
+			String value = "" + map.getAt(tvalue);
+			String name = "" + map.getAt(tname);
+			
+			String selected = "";
+			if (value.equals(svalue)) {
+				selected = "selected";
+			}
+			sf.append("\t\t\t<option value='" + value + "' " + selected + ">"
+					+ name + "</option>\n");
+		}
+	
+	/*	System.out.println(sf.toString());*/
+		return sf.toString();
+	}
 	public static String getPrintSelect(List<DataMap> list, String names, String tname,
 			String tvalue, String svalue, int isSelect) {
 		if (list == null || list.size() == 0) {

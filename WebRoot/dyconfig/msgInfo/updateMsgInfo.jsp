@@ -65,44 +65,112 @@ function onAdd(wechat){
 			<tr>
 				<td colspan="8" nowrap="nowrap" align="center" width="7%">不一定制售后工单</td>
 			</tr>
-
+			
 			<tr>
-				<td nowrap="nowrap" align="center" width="7%" colspan="2">下单单号</td>
-				<td nowrap="nowrap" align="center" width="7%" colspan="2"><input
-					name="orderNumber" size="38" id="orderNumber" type="text"
-					class="txt_1" maxlength="30" value="<%=msgInfo.getAt("order_id")%>"
-					readonly="true" /></td>
-				<td nowrap="nowrap" align="center" width="7%">下单人</td>
-				<td nowrap="nowrap" align="center" width="7%" colspan="2"><input
-					name="add_user" id="add_user" type="text" class="txt_1"
-					maxlength="20" size="38" value="<%=msgInfo.getAt("add_user")%>" />
-				</td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
-			</tr>
-
-			<tr>
-				<td nowrap="nowrap" align="center" width="7%" colspan="2">姓名</td>
-				<td nowrap="nowrap" align="center" width="7%" colspan="2"><input
-					name="name" id="name" type="text" class="txt_1" maxlength="20"
-					size="38" value="<%=msgInfo.getAt("name")%>" /></td>
-				<td nowrap="nowrap" align="center" width="7%">售后次数</td>
-				<td nowrap="nowrap" align="center" width="7%" colspan="2"><input
-					name="cishu" id="cishu" type="number"
-					value="<%=msgInfo.getAt("cishu")%>" /></td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
-			</tr>
-
-			<tr>
-				<td nowrap="nowrap" align="center" width="7%" colspan="2">下单时间</td>
-				<td nowrap="nowrap" align="center" width="7%"><input
+				<td nowrap="nowrap" align="center" width="7%" colspan="1">下单号</td>
+				<td nowrap="nowrap" align="left" width="7%" colspan="2">
+				<input 
+					name="orderNumber" size="38" id="orderNumber" type="text"  value="<%=msgInfo.getAt("order_id")%>"
+					 maxlength="30"  >
+					</td>
+					<td nowrap="nowrap" align="center" width="7%" colspan="1">售后下单日期</td>
+				<td nowrap="nowrap" align="center" width="7%" colspan="1">
+				<input
 					name="msg_handler_date" id="msg_handler_date"
-					value="<%=msgInfo.getAt("msg_handler_date")%>" /></td>
-				<td nowrap="nowrap" align="center" width="7%">交付日期</td>
-				<td nowrap="nowrap" align="left" width="7%" colspan="3"><input
+					value="<%=msgInfo.getAt("msg_handler_date")%>" />
+					</td>
+					<td nowrap="nowrap" align="center" width="7%" colspan="1">交付日期</td>
+				<td nowrap="nowrap" align="center" width="7%" colspan="1">
+			<input
 					name="jiaofutime" id="jiaofutime" type="text" size="38"
-					maxlength="100" value="<%=msgInfo.getAt("jiaofutime")%>" /></td>
-				<td nowrap="nowrap" align="center" width="7%"></td>
+					maxlength="100" value="<%=msgInfo.getAt("jiaofutime")%>" />
+					</td>
+			
+			
 			</tr>
+			
+			
+			<tr>
+				<td nowrap="nowrap" align="center" width="7%" colspan="1">姓名</td>
+				<td nowrap="nowrap" align="cneter" width="7%" colspan="1">
+				<input
+					name="name" id="name" type="text" class="txt_1" maxlength="20"
+					size="38" value="<%=msgInfo.getAt("name")%>" />
+					</td>
+					<td nowrap="nowrap" align="center" width="7%" colspan="1">电话</td>
+				<td nowrap="nowrap" align="center" width="7%" colspan="1">
+				<input
+					name="phone" id="phone" type="text" class="txt_1" maxlength="20" value="<%=msgInfo.getAt("phone")%>"
+					size="38" />
+					</td>
+					<td nowrap="nowrap" align="center" width="7%" colspan="1">修改物品</td>
+				<td nowrap="nowrap" align="center" width="7%" colspan="1">
+		<input type="checkbox" name="item1" value="上衣" <%=msgInfo.getAt("item1").equals("上衣")? "checked":"" %>><label>上衣</label>
+		<input type="checkbox" name="item2" value="裤子" <%=msgInfo.getAt("item2").equals("裤子")? "checked":"" %>><label>裤子</label>
+		<input type="checkbox" name="item3" value="马甲" <%=msgInfo.getAt("item3").equals("马甲")? "checked":"" %> ><label>马甲</label>
+		<input type="checkbox" name="item4" value="衬衫" <%=msgInfo.getAt("item4").equals("衬衫")? "checked":"" %>  ><label>衬衫</label>
+		<input type="checkbox" name="item5" value="大衣" <%=msgInfo.getAt("item5").equals("大衣")? "checked":"" %>  ><label>大衣</label>
+					</td>
+			</tr>
+			
+			
+				<tr>
+				<td nowrap="nowrap" align="center" width="7%" colspan="1">地址</td>
+				<td nowrap="nowrap" align="left" width="7%" colspan="7"><input
+					name="address" size="38" id="address" type="text"   value="<%=msgInfo.getAt("address")%>"
+					class="txt_1" maxlength="30" />
+					</td>
+			</tr>
+
+
+	<tr>
+				<td nowrap="nowrap" align="center" width="7%" colspan="1">售后类型</td>
+				<td nowrap="nowrap" align="left" width="7%" colspan="1"><input
+					name="shouhou_type" size="38" id="shouhou_type" type="text"   value="<%=msgInfo.getAt("shouhou_type")%>"
+					class="txt_1" maxlength="30" />
+					</td>
+					<td nowrap="nowrap" align="center" width="7%" colspan="1">售后次数</td>
+				<td nowrap="nowrap" align="left" width="7%" colspan="1"><input
+					name="cishu" size="38" id="cishu" type="text"   value="<%=msgInfo.getAt("cishu")%>"
+					class="txt_1" maxlength="30" />
+					</td>
+				
+			</tr>
+			
+				<tr>
+				<td nowrap="nowrap" align="center" width="7%" colspan="1">寄回物流单号</td>
+				<td nowrap="nowrap" align="left" width="7%" colspan="1">
+				<input
+					name="jihui" size="38" id="jihui" type="text"   value="<%=msgInfo.getAt("jihui")%>"
+					class="txt_1" maxlength="30" />
+					</td>
+					<td nowrap="nowrap" align="center" width="7%" colspan="1">发货物流单号</td>
+				<td nowrap="nowrap" align="left" width="7%" colspan="1">
+				<input
+					name="fahuo" size="38" id="fahuo" type="text"   value="<%=msgInfo.getAt("fahuo")%>"
+					class="txt_1" maxlength="30" />
+					</td>
+				
+			</tr>
+			
+			
+				<tr>
+				<td nowrap="nowrap" align="center" width="7%" colspan="1">售后原因</td>
+				<td nowrap="nowrap" align="left" width="7%" colspan="1">
+				<input
+					name="reson" size="38" id="reson" type="text"  value="<%=msgInfo.getAt("reson")%>"
+					class="txt_1" maxlength="30" />
+					</td>
+					<td nowrap="nowrap" align="center" width="7%" colspan="1">归责</td>
+				<td nowrap="nowrap" align="left" width="7%" colspan="3">
+				<input
+					name="guize" size="38" id="guize" type="text"    value="<%=msgInfo.getAt("guize")%>"
+					class="txt_1" maxlength="30" />
+					</td>
+			</tr>
+			
+
+			
 
 			<tr>
 				<td nowrap="nowrap" align="center" width="7%">面料</td>
@@ -135,35 +203,20 @@ function onAdd(wechat){
 				<td nowrap="nowrap" align="center" width="7%"><input name="mi"
 					id="mi" type="text" size="38" maxlength="100"
 					value="<%=msgInfo.getAt("mi")%>" /></td>
+					<td nowrap="nowrap" align="center" width="7%">价格</td>
+				<td nowrap="nowrap" align="center" width="7%"><input name="jg"
+					id="jg" type="text" size="38" maxlength="100"
+					value="<%=msgInfo.getAt("jq")%>" />
+					</td>
 				<td nowrap="nowrap" align="center" width="7%">供应商</td>
 				<td nowrap="nowrap" align="center" width="7%">
 					<!-- <input
 					name="gongyingshang" id="gongyingshang" type="text" size="38"
 					maxlength="100" /> --> <%=request.getAttribute("companyList")%>
 				</td>
-
+	
 			</tr>
-			<!-- 
-			<tr>
-				<td nowrap="nowrap" align="center" width="7%" colspan="3"></td>
-				<td nowrap="nowrap" align="center" width="7%" colspan="4"><input
-					name="guize" id="guize" type="text" size="38" maxlength="100"
-					placeholder="归责：客户要求（手填，创建时）" /></td>
-			</tr> -->
-
-			<tr>
-				<td nowrap="nowrap" align="center" width="7%">备注</td>
-				<td nowrap="nowrap" align="left" width="7%" colspan="7"><input
-					name="remark" id="remark" type="text" size="200" maxlength="100"
-					value="<%=msgInfo.getAt("remark")%>" /></td>
-			</tr>
-
-			<!-- <tr>
-				<td nowrap="nowrap" align="center" width="7%">批单备注</td>
-				<td nowrap="nowrap" align="left" width="7%" colspan="7"><input
-					name="pidanremark" id="pidanremark" type="text" size="200" maxlength="100" />
-				</td>
-			</tr> -->
+		
 
 		
  <%if(!"".equals(msgInfo.getAt("mianliao1"))&& msgInfo.getAt("mianliao1")!=null ){ %>
@@ -194,12 +247,19 @@ function onAdd(wechat){
 				
 				type="text" size="38" maxlength="100"
 					 /></td>
+					 	<td nowrap="nowrap" align="center" width="7%">价格</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="jg1"
+					id="jg1" type="text" size="38" maxlength="100"
+					value="<%=msgInfo.getAt("jq1")%>" />
+					</td>
 				<td nowrap="nowrap" align="center" width="7%">供应商</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<input
 					name="gys1" id="gys1" value="<%=msgInfo.getAt("gys1")%>"
 					type="text" size="38" maxlength="100"
 					 /></td>
+					 
 			</tr>
 			 <%} %>
 			 <%if(!"".equals(msgInfo.getAt("mianliao2"))&& msgInfo.getAt("mianliao2")!=null ){ %>
@@ -213,7 +273,7 @@ function onAdd(wechat){
 					maxlength="100" placeholder=""
 					 />
 					</td>
-				<td nowrap="nowrap" align="center" width="7%">用途</td>
+				<td nowrap="nowrap" align="center" width="7%">用途</td> 
 				<td nowrap="nowrap" align="center" width="7%">
 				<input
 					name="yongtu2" id="yongtu2" 
@@ -230,6 +290,11 @@ function onAdd(wechat){
 				
 				type="text" size="38" maxlength="100"
 					 /></td>
+					 <td nowrap="nowrap" align="center" width="7%">价格</td>
+				<td nowrap="nowrap" align="center" width="7%"><input name="jg2"
+					id="jg2" type="text" size="38" maxlength="100"
+					value="<%=msgInfo.getAt("jq2")%>" />
+					</td>
 				<td nowrap="nowrap" align="center" width="7%">供应商</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<input
@@ -266,6 +331,14 @@ function onAdd(wechat){
 				
 				type="text" size="38" maxlength="100"
 					 /></td>
+					 <td nowrap="nowrap" align="center" width="7%">价格</td>
+				<td nowrap="nowrap" align="center" width="7%">
+				<input name="jg3"
+					id="jg3" 
+					value="<%=msgInfo.getAt("jq3")%>"
+					type="text" size="38" maxlength="100"
+					 />
+					</td>
 				<td nowrap="nowrap" align="center" width="7%">供应商</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<input
@@ -302,6 +375,13 @@ function onAdd(wechat){
 				
 				type="text" size="38" maxlength="100"
 					 /></td>
+					 	<td nowrap="nowrap" align="center" width="7%">
+				<input name="jg4"
+					id="jg4" 
+					value="<%=msgInfo.getAt("jq4")%>"
+					type="text" size="38" maxlength="100"
+					 />
+					</td>
 				<td nowrap="nowrap" align="center" width="7%">供应商</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<input
@@ -338,6 +418,13 @@ function onAdd(wechat){
 				
 				type="text" size="38" maxlength="100"
 					 /></td>
+					 	<td nowrap="nowrap" align="center" width="7%">
+				<input name="jg5"
+					id="jg5" 
+					value="<%=msgInfo.getAt("jq5")%>"
+					type="text" size="38" maxlength="100"
+					 />
+					</td>
 				<td nowrap="nowrap" align="center" width="7%">供应商</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<input
@@ -371,6 +458,13 @@ function onAdd(wechat){
 				
 				type="text" size="38" maxlength="100"
 					 /></td>
+					 	<td nowrap="nowrap" align="center" width="7%">
+				<input name="jg6"
+					id="jg6" 
+					value="<%=msgInfo.getAt("jq6")%>"
+					type="text" size="38" maxlength="100"
+					 />
+					</td>
 				<td nowrap="nowrap" align="center" width="7%">供应商</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<input
@@ -404,6 +498,13 @@ function onAdd(wechat){
 				
 				type="text" size="38" maxlength="100"
 					 /></td>
+					 	<td nowrap="nowrap" align="center" width="7%">
+				<input name="jg7"
+					id="jg7" 
+					value="<%=msgInfo.getAt("jq7")%>"
+					type="text" size="38" maxlength="100"
+					 />
+					</td>
 				<td nowrap="nowrap" align="center" width="7%">供应商</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<input
@@ -437,6 +538,13 @@ function onAdd(wechat){
 				
 				type="text" size="38" maxlength="100"
 					 /></td>
+					 	<td nowrap="nowrap" align="center" width="7%">
+				<input name="jg8"
+					id="jg8" 
+					value="<%=msgInfo.getAt("jq8")%>"
+					type="text" size="38" maxlength="100"
+					 />
+					</td>
 				<td nowrap="nowrap" align="center" width="7%">供应商</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<input
@@ -470,6 +578,13 @@ function onAdd(wechat){
 				
 				type="text" size="38" maxlength="100"
 					 /></td>
+					 	<td nowrap="nowrap" align="center" width="7%">
+				<input name="jg9"
+					id="jg9" 
+					value="<%=msgInfo.getAt("jq9")%>"
+					type="text" size="38" maxlength="100"
+					 />
+					</td>
 				<td nowrap="nowrap" align="center" width="7%">供应商</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<input
@@ -489,6 +604,7 @@ function onAdd(wechat){
 					maxlength="100" placeholder=""
 					 />
 					</td>
+					
 				<td nowrap="nowrap" align="center" width="7%">用途</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<input
@@ -504,6 +620,13 @@ function onAdd(wechat){
 				
 				type="text" size="38" maxlength="100"
 					 /></td>
+					 <td nowrap="nowrap" align="center" width="7%">
+				<input name="jg10"
+					id="jg10" 
+					value="<%=msgInfo.getAt("jq10")%>"
+					type="text" size="38" maxlength="100"
+					 />
+					</td>
 				<td nowrap="nowrap" align="center" width="7%">供应商</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<input
@@ -538,6 +661,13 @@ function onAdd(wechat){
 				
 				type="text" size="38" maxlength="100"
 					 /></td>
+					 <td nowrap="nowrap" align="center" width="7%">
+				<input name="jg11"
+					id="jg11" 
+					value="<%=msgInfo.getAt("jq11")%>"
+					type="text" size="38" maxlength="100"
+					 />
+					</td>
 				<td nowrap="nowrap" align="center" width="7%">供应商</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<input
@@ -572,6 +702,13 @@ function onAdd(wechat){
 				
 				type="text" size="38" maxlength="100"
 					 /></td>
+					 <td nowrap="nowrap" align="center" width="7%">
+				<input name="jg12"
+					id="jg12" 
+					value="<%=msgInfo.getAt("jq12")%>"
+					type="text" size="38" maxlength="100"
+					 />
+					</td>
 				<td nowrap="nowrap" align="center" width="7%">供应商</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<input
@@ -607,6 +744,13 @@ function onAdd(wechat){
 				
 				type="text" size="38" maxlength="100"
 					 /></td>
+					 <td nowrap="nowrap" align="center" width="7%">
+				<input name="jg13"
+					id="jg13" 
+					value="<%=msgInfo.getAt("jq13")%>"
+					type="text" size="38" maxlength="100"
+					 />
+					</td>
 				<td nowrap="nowrap" align="center" width="7%">供应商</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<input
@@ -642,6 +786,13 @@ function onAdd(wechat){
 				
 				type="text" size="38" maxlength="100"
 					 /></td>
+					 <td nowrap="nowrap" align="center" width="7%">
+				<input name="jg14"
+					id="jg14" 
+					value="<%=msgInfo.getAt("jq14")%>"
+					type="text" size="38" maxlength="100"
+					 />
+					</td>
 				<td nowrap="nowrap" align="center" width="7%">供应商</td>
 				<td nowrap="nowrap" align="center" width="7%">
 				<input
@@ -653,6 +804,12 @@ function onAdd(wechat){
 				
 				 
 				<tr>
+				<tr>
+				<td nowrap="nowrap" align="center" width="7%">售后内容</td>
+				<td nowrap="nowrap" align="left" width="7%" colspan="7"><input
+					name="remark" id="remark" type="text" size="200" maxlength="100"
+					value="<%=msgInfo.getAt("remark")%>" /></td>
+			</tr>
 				<td nowrap="nowrap" align="center" width="7%"><input
 					style="border:none;" name="anniu" size="200" id="anniu"
 					type="hidden" class="txt_1" /></td>

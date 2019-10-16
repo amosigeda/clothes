@@ -273,6 +273,10 @@ public class MsgInfoAction extends BaseAction {
 		 SimpleDateFormat yydfhh = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	     Calendar calendar = Calendar.getInstance();
 		request.setAttribute("shijian", yydfhh.format(calendar.getTime()));
+		
+		String gysall = CommUtils.getPrintSelectAll(Clist, "gys1","project_no", "project_no", "", 1);
+		request.setAttribute("gysall", gysall);
+		
 		return mapping.findForward("insertMsgInfo");
 	}
 	
@@ -293,7 +297,8 @@ public class MsgInfoAction extends BaseAction {
 			String fahuo_wuliu = request.getParameter("fahuo_wuliu");
 			String wuliu_bianma = request.getParameter("wuliu_bianma");*/
 		
-			
+			String item = request.getParameter("item");
+			System.err.println("item="+item);
 			
 			String orderNumber = request.getParameter("orderNumber");
 			vo.setOrder_id(orderNumber);
@@ -448,8 +453,61 @@ public class MsgInfoAction extends BaseAction {
 			vo.setGys14(gys14);
 			
 			
+			String jq = request.getParameter("jg");
+			String jq1 = request.getParameter("jg1");
+			String jq2 = request.getParameter("jg2");
+			String jq3 = request.getParameter("jg3");
+			String jq4 = request.getParameter("jg4");
+			String jq5 = request.getParameter("jg5");
+			String jq6 = request.getParameter("jg6");
+			String jq7 = request.getParameter("jg7");
+			String jq8 = request.getParameter("jg8");
+			String jq9 = request.getParameter("jg9");
+			String jq10 = request.getParameter("jg10");
+			String jq11 = request.getParameter("jg11");
+			String jq12 = request.getParameter("jg12");
+			String jq13 = request.getParameter("jg13");
+			String jq14 = request.getParameter("jg14");
+			vo.setJq(jq);
+			vo.setJq1(jq1);
+			vo.setJq2(jq2);
+			vo.setJq3(jq3);
+			vo.setJq4(jq4);
+			vo.setJq5(jq5);
+			vo.setJq6(jq6);
+			vo.setJq7(jq7);
+			vo.setJq8(jq8);
+			vo.setJq9(jq9);
+			vo.setJq10(jq10);
+			vo.setJq11(jq11);
+			vo.setJq12(jq12);
+			vo.setJq13(jq13);
+			vo.setJq14(jq14);
+			//phone  item address  shouhou_type  jihui  fahuo  reson
 			
+			String phone = request.getParameter("phone");
+			String address = request.getParameter("address");
+			String shouhou_type = request.getParameter("shouhou_type");
+			String jihui = request.getParameter("jihui");
+			String fahuo = request.getParameter("fahuo");
+			String reson = request.getParameter("reson");
+			String item1 = request.getParameter("item1");
+			String item2 = request.getParameter("item2");
+			String item3 = request.getParameter("item3");
+			String item4 = request.getParameter("item4");
+			String item5 = request.getParameter("item5");
 			
+			vo.setPhone(phone);
+			vo.setAddress(address);
+			vo.setShouhou_type(shouhou_type);
+			vo.setJihui(jihui);
+			vo.setFahuo(fahuo);
+			vo.setReson(reson);
+			vo.setItem1(item1);
+			vo.setItem2(item2);
+			vo.setItem3(item3);
+			vo.setItem4(item4);
+			vo.setItem5(item5);
 			
 			ServiceBean.getInstance().getMsgInfoFacade().insertMsgInfo(vo);
 			
@@ -521,8 +579,11 @@ public class MsgInfoAction extends BaseAction {
 		String sb = CommUtils.getPrintSelect(Clist, "project_no11",
 				"project_no", "project_no", list.get(0).get("gongyingshang")+"", 1);
 		request.setAttribute("companyList", sb);
+		
+		String gysall = CommUtils.getPrintSelectAll(Clist, "gys1","project_no", "project_no", "", 1);
+		request.setAttribute("gysall", gysall);
+		System.err.println(gysall);
 
-	System.out.println("走到这里否");
 		
 			return mapping.findForward("a");
 		/*	if ("admin".equals(userName)) {
@@ -730,6 +791,63 @@ public class MsgInfoAction extends BaseAction {
 			vo.setGys12(gys12);
 			vo.setGys13(gys13);
 			vo.setGys14(gys14);
+			
+			String jq = request.getParameter("jg");
+			String jq1 = request.getParameter("jg1");
+			String jq2 = request.getParameter("jg2");
+			String jq3 = request.getParameter("jg3");
+			String jq4 = request.getParameter("jg4");
+			String jq5 = request.getParameter("jg5");
+			String jq6 = request.getParameter("jg6");
+			String jq7 = request.getParameter("jg7");
+			String jq8 = request.getParameter("jg8");
+			String jq9 = request.getParameter("jg9");
+			String jq10 = request.getParameter("jg10");
+			String jq11 = request.getParameter("jg11");
+			String jq12 = request.getParameter("jg12");
+			String jq13 = request.getParameter("jg13");
+			String jq14 = request.getParameter("jg14");
+			vo.setJq(jq);
+			vo.setJq1(jq1);
+			vo.setJq2(jq2);
+			vo.setJq3(jq3);
+			vo.setJq4(jq4);
+			vo.setJq5(jq5);
+			vo.setJq6(jq6);
+			vo.setJq7(jq7);
+			vo.setJq8(jq8);
+			vo.setJq9(jq9);
+			vo.setJq10(jq10);
+			vo.setJq11(jq11);
+			vo.setJq12(jq12);
+			vo.setJq13(jq13);
+			vo.setJq14(jq14);
+			//phone  item address  shouhou_type  jihui  fahuo  reson
+			
+			String phone = request.getParameter("phone");
+			String address = request.getParameter("address");
+			String shouhou_type = request.getParameter("shouhou_type");
+			String jihui = request.getParameter("jihui");
+			String fahuo = request.getParameter("fahuo");
+			String reson = request.getParameter("reson");
+			String item1 = request.getParameter("item1");
+			String item2 = request.getParameter("item2");
+			String item3 = request.getParameter("item3");
+			String item4 = request.getParameter("item4");
+			String item5 = request.getParameter("item5");
+			
+			vo.setPhone(phone);
+			vo.setAddress(address);
+			vo.setShouhou_type(shouhou_type);
+			vo.setJihui(jihui);
+			vo.setFahuo(fahuo);
+			vo.setReson(reson);
+			vo.setItem1(item1);
+			vo.setItem2(item2);
+			vo.setItem3(item3);
+			vo.setItem4(item4);
+			vo.setItem5(item5);
+			
 			
 			
 			ServiceBean.getInstance().getMsgInfoFacade().updateMsgInfo(vo);

@@ -31,10 +31,32 @@ public class FeedBackInfo extends PublicVoBean implements Serializable {
     private String price;
     private String user_feedback_content;
     private Date date_time;
+    private String wupin;
+    private String number;
+    private String nickname;
+    
     
     
 
-    public String getUser_id() {
+    public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public String getWupin() {
+		return wupin;
+	}
+	public void setWupin(String wupin) {
+		this.wupin = wupin;
+	}
+	public String getNumber() {
+		return number;
+	}
+	public void setNumber(String number) {
+		this.number = number;
+	}
+	public String getUser_id() {
 		return user_id;
 	}
 	public void setUser_id(String user_id) {

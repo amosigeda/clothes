@@ -97,7 +97,10 @@
 		mianliao1,mianliao2,mianliao3,mianliao4,mianliao5,mianliao6,mianliao7,mianliao8,mianliao9,mianliao10,mianliao11,mianliao12,mianliao13,mianliao14,
 		yongtu1,yongtu2,yongtu3,yongtu4,yongtu5,yongtu6,yongtu7,yongtu8,yongtu9,yongtu10,yongtu11,yongtu12,yongtu13,yongtu14,
 		mi1,mi2,mi3,mi4,mi5,mi6,mi7,mi8,mi9,mi10,mi11,mi12,mi13,mi14,
-		gys1,gys2,gys3,gys4,gys5,gys6,gys7,gys8,gys9,gys10,gys11,gys12,gys13,gys14
+		gys1,gys2,gys3,gys4,gys5,gys6,gys7,gys8,gys9,gys10,gys11,gys12,gys13,gys14,
+		jq,jq1,jq2,jq3,jq4,jq5,jq6,jq7,jq8,jq9,jq10,jq11,jq12,jq13,jq14,
+		address,shouhou_type,jihui,fahuo,reson,
+		item1,item2,item3,item4,item5
 		) 
 		VALUES
 		(#order_id#,#phone#,#fahuo_wuliu#,#wuliu_bianma#,#isHandler#,#msgHandlerDate#,#remark#,#add_user#,
@@ -105,7 +108,10 @@
 		#mianliao1#,#mianliao2#,#mianliao3#,#mianliao4#,#mianliao5#,#mianliao6#,#mianliao7#,#mianliao8#,#mianliao9#,#mianliao10#,#mianliao11#,#mianliao12#,#mianliao13#,#mianliao14#,
 		#yongtu1#,#yongtu2#,#yongtu3#,#yongtu4#,#yongtu5#,#yongtu6#,#yongtu7#,#yongtu8#,#yongtu9#,#yongtu10#,#yongtu11#,#yongtu12#,#yongtu13#,#yongtu14#,
 		#mi1#,#mi2#,#mi3#,#mi4#,#mi5#,#mi6#,#mi7#,#mi8#,#mi9#,#mi10#,#mi11#,#mi12#,#mi13#,#mi14#,
-		#gys1#,#gys2#,#gys3#,#gys4#,#gys5#,#gys6#,#gys7#,#gys8#,#gys9#,#gys10#,#gys11#,#gys12#,#gys13#,#gys14#
+		#gys1#,#gys2#,#gys3#,#gys4#,#gys5#,#gys6#,#gys7#,#gys8#,#gys9#,#gys10#,#gys11#,#gys12#,#gys13#,#gys14#,
+		#jq#,#jq1#,#jq2#,#jq3#,#jq4#,#jq5#,#jq6#,#jq7#,#jq8#,#jq9#,#jq10#,#jq11#,#jq12#,#jq13#,#jq14#,
+		#address#,#shouhou_type#,#jihui#,#fahuo#,#reson#,
+		#item1#,#item2#,#item3#,#item4#,#item5#
 		) 
 	</insert>
 
@@ -316,7 +322,83 @@
 			<isNotEmpty prepend="," property="gys14">
 		      gys14=#gys14#
 			</isNotEmpty>
+			<isNotEmpty prepend="," property="jq">
+		      jq=#jq#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="jq1">
+		      jq1=#jq1#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="jq2">
+		      jq2=#jq2#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="jq3">
+		      jq3=#jq3#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="jq4">
+		      jq4=#jq4#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="jq5">
+		      jq5=#jq5#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="jq6">
+		      jq6=#jq6#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="jq7">
+		      jq7=#jq7#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="jq8">
+		      jq8=#jq8#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="jq9">
+		      jq9=#jq9#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="jq10">
+		      jq10=#jq10#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="jq11">
+		      jq11=#jq11#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="jq12">
+		      jq12=#jq12#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="jq13">
+		      jq13=#jq13#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="jq14">
+		      jq14=#jq14#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="address">
+		      address=#address#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="shouhou_type">
+		      shouhou_type=#shouhou_type#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="jihui">
+		      jihui=#jihui#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="fahuo">
+		      fahuo=#fahuo#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="reson">
+		      reson=#reson#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="item1">
+		      item1=#item1#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="item2">
+		      item2=#item2#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="item3">
+		      item3=#item3#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="item4">
+		      item4=#item4#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="item5">
+		      item5=#item5#
+			</isNotEmpty>
 			
+		
 			
 		</dynamic>  
 		<dynamic prepend="where">
