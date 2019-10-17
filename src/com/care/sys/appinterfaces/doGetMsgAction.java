@@ -92,6 +92,10 @@ public class doGetMsgAction extends BaseAction{
 			json.put("msg_array", msgData); 
 			result = Constant.SUCCESS_CODE;
 			
+			
+
+     
+			
 		}catch(Exception e){
 			e.printStackTrace();	
 			StringBuffer sb1 = new StringBuffer();

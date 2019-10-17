@@ -17,6 +17,22 @@ public class ChannelInfo extends PublicVoBean implements Serializable{
 	private Date addTime;
 	private String remark;
 	private String status;
+	private String order_id;
+	private String phone;
+	
+	
+	public String getOrder_id() {
+		return order_id;
+	}
+	public void setOrder_id(String order_id) {
+		this.order_id = order_id;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 	public int getId() {
 		return id;
 	}

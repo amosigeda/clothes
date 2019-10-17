@@ -33,6 +33,10 @@
 		frmGo.action="doMsgInfo.do?method=initUpdate&id="+id;
 		frmGo.submit();
 	}
+	function xiangqing(id){
+		frmGo.action="doMsgInfo.do?method=xiangqing&id="+id;
+		frmGo.submit();
+	}
 	
 function finds(){
    var st = new Date(frmGo.startTime1.value.replace(/-/g,'/'));
@@ -170,7 +174,7 @@ function c(){
 						</td>
 						
 							<td>
-							 	
+							 	<a href=# onclick="xiangqing('<bean:write name="element" property="id" />')" style="color:#0000FF" > [详情]</a>	
 							 	
 							 		<logic:equal name="element" property="is_handler" value="1">	
    							<%if("客服".equals(request.getAttribute("role")) || "经理".equals(request.getAttribute("role")) || "admin".equals(request.getAttribute("role"))){ %>

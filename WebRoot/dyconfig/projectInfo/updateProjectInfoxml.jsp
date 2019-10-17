@@ -16,6 +16,7 @@
 <link href="<%=request.getContextPath()%>/css/tbls.css" rel="stylesheet" type="text/css">
 <script language="JavaScript" src="<%=request.getContextPath()%>/public/public.js"></script>
 <script language="JavaScript" src="<%=request.getContextPath()%>/js/jquery-1.8.2.js"></script>
+<script language="JavaScript" src="<%=request.getContextPath()%>/public/My97DatePicker/WdatePicker.js"></script>
 <title>无标题文档</title>
 </head>
 <!-- <style>
@@ -28,15 +29,18 @@ appearance: none;
 </style> -->
 <style>
 	.add_order_table tr th, .add_order_table tr td{border-bottom: 1px solid #bbb; border-left:1px solid #bbb; padding:10px;}
-	.add_order_table tr td:first-child{border-left: 0;}
-	.add_order_table tr:last-child td{border-bottom:0;}
+	.add_order_table tr th{border-left:0;}
+	.add_order_table tr td:last-child{border-right:1px solid #bbb;}
+/*	.add_order_table tr td:first-child{border-left: 0;}*/
+/*	.add_order_table tr:last-child td{border-bottom:0;}*/
 	.add_order_table input, .add_order_table select{width: 100%; padding:5px; border:1px solid #ccc;} 
 	.table_title{font-size:22px;}
 	.t_subtitle th, .t_subtitle td{background:#F8CBAD;}
 	.f_bold{font-weight: bold;}
 	.td_bg_pink{background:#FCE4D6;}
-	.td_bg_yellow{background:#FFF2CC;}
+	.td_bg_yellow{background:#FFF2CC; white-space: nowrap;}
 	.add_order_table .btn{padding:6px 20px; width: auto; height: auto; font-size:14px; background:#337ab7; border-radius: 6px; color: #fff; border:1px solid #286090;}
+	.padd0{padding:0 !important;}
 	
 </style>
 <script language="javascript">
@@ -55,14 +59,16 @@ function addTable(cc) {
 	
  
 	if(n<15){
-	for (var i = 0; i < 9; i++) {
+	for (var i = 0; i < 8; i++) {
 		tab.rows[rownum].insertCell(i);//插入列
 		tab.rows[rownum].cells[i].setAttribute("align","center");
 		if (i == 0) {
-			tab.rows[rownum].cells[i].innerHTML = '面料';
+			tab.rows[rownum].cells[i].setAttribute("class", "td_bg_yellow");
+			tab.rows[rownum].cells[i].innerHTML = '<button type="button" onclick="delRow(this)">-</button> 面料';
 		} else if (i == 1) {
 			tab.rows[rownum].cells[i].innerHTML = '<input name="ml'+n+'" type="text"    />';
 		} else if (i == 2) {
+			tab.rows[rownum].cells[i].setAttribute("class", "td_bg_yellow");
 			tab.rows[rownum].cells[i].innerHTML = '用途';
 		} else if( i == 3){
 			tab.rows[rownum].cells[i].innerHTML = '<select name="yt'+n+'"  value="" style="width:100%"  > <option value=""></option> <option value="上衣">上衣</option> <option value="裤子">裤子</option>  <option value="马甲">马甲</option> <option value="衬衫">衬衫</option> <option value="西装套装">西装套装</option><option value="换片">换片</option><option value="其他">其他</option></select>';
@@ -79,23 +85,22 @@ function addTable(cc) {
 			<option value="其他">其他</option> */
 				/* '<input name="yt'+n+'" type="text"  />'; */
 		}else if(i == 4 ){
-			tab.rows[rownum].cells[i].innerHTML = '米数';
+			tab.rows[rownum].cells[i].setAttribute("class", "padd0");
+			tab.rows[rownum].cells[i].innerHTML = '<table class="tbl_11" cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="td_bg_yellow" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;" nowrap="nowrap" align="center">米数</td><td style="border: 0;" nowrap="nowrap" align="center"><input name="ms'+n+'" type="text"   readonly="true" /></td></tr></tbody></table>';
 		}else if(i == 5){
-			tab.rows[rownum].cells[i].innerHTML = '<input name="ms'+n+'" type="text"   readonly="true" />';
+			tab.rows[rownum].cells[i].setAttribute("class", "padd0");
+			tab.rows[rownum].cells[i].innerHTML = '<table class="tbl_11" cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="td_bg_yellow" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;" nowrap="nowrap" align="center">价格</td><td style="border: 0;" nowrap="nowrap" align="center"><input name="jg' + n + '" type="text"  maxlength="100"   /></td></tr></tbody></table>';
 		}else if(i == 6){
+			tab.rows[rownum].cells[i].setAttribute("class", "td_bg_yellow");
 			tab.rows[rownum].cells[i].innerHTML = '供应商';
-		}else  if(i==7){
+		}else {
 			/* tab.rows[rownum].cells[i].innerHTML = '<input name="gys' + n + '" type="text"  maxlength="100" readonly="true" />';*/
 			 tab.rows[rownum].cells[i].innerHTML = '<select name="gys' + n + '"  value="" style="width:100%"  >'+cc+'</select>';
 
-		}else if(i==8){
-			tab.rows[rownum].cells[i].innerHTML = '<input name="jg' + n + '" type="text"  maxlength="100"   />';
-		/* 	tab.rows[rownum].cells[i].innerHTML = '价格'; */
-		}else{
 		}
 	}
-	tab.rows[rownum].insertCell(i);
-	 tab.rows[rownum].cells[i].innerHTML = '<a href="#" onclick="delRow(this)">-</a>'; 
+	//tab.rows[rownum].insertCell(i);
+	 //tab.rows[rownum].cells[i].innerHTML = '<a href="#" onclick="delRow(this)">-</a>'; 
 	}else{
 		alert("最多新增15行");
 		
@@ -151,7 +156,7 @@ function onUpdate(wechat){
 					return false;
 				}
 		   }
-	   }else{
+	   }else if(wechat == "4"){
 		   if(frmGo.gdremark.value.trim() == ''){
 				alert("跟单备注不能为空");
 				frmGo.ProjectName.focus();
@@ -211,15 +216,17 @@ function onUpdate(wechat){
 				 <%if("admin".equals(request.getAttribute("role")) || "客服".equals(request.getAttribute("role")) || "经理".equals(request.getAttribute("role")) ){ %>
 				<select name="qudao" value="qudao">
 					<option value="" <%=projectInfo.getAt("qudao").equals("")? "selected":"" %>></option>
-						<option value="淘宝" <%=projectInfo.getAt("qudao").equals("淘宝")? "selected":"" %>>淘宝</option>
+						<option value="深圳淘宝" <%=projectInfo.getAt("qudao").equals("深圳淘宝")? "selected":"" %>>深圳淘宝</option>
+						<option value="南京淘宝" <%=projectInfo.getAt("qudao").equals("南京淘宝")? "selected":"" %>>南京淘宝</option>
 						<option value="工单" <%=projectInfo.getAt("qudao").equals("工单")? "selected":"" %>>工单</option>
 						<option value="分销" <%=projectInfo.getAt("qudao").equals("分销")? "selected":"" %>>分销</option>
 						<option value="打样" <%=projectInfo.getAt("qudao").equals("打样")? "selected":"" %>>打样</option>
 						<option value="重做" <%=projectInfo.getAt("qudao").equals("重做")? "selected":"" %>>重做</option>
-						<option value="其他" <%=projectInfo.getAt("qudao").equals("其他")? "selected":"" %>>其他</option>
+					
 						<option value="线下转款_曹" <%=projectInfo.getAt("qudao").equals("线下转款_曹")? "selected":"" %>>线下转款_曹</option>
 						<option value="线下转款_周" <%=projectInfo.getAt("qudao").equals("线下转款_周")? "selected":"" %>>线下转款_周</option>
 						<option value="线下转款_公账" <%=projectInfo.getAt("qudao").equals("线下转款_公账")? "selected":"" %>>线下转款_公账</option>
+							<option value="其他" <%=projectInfo.getAt("qudao").equals("其他")? "selected":"" %>>其他</option>
 				</select> 
 				<%}else{ %>
 					<input style="border:none;" type="text"   readOnly="true"    name="project_no12" id="project_no12" value=<%=projectInfo.getAt("qudao")%>>
@@ -318,7 +325,7 @@ function onUpdate(wechat){
 				<input style="border:none;" type="text"    readonly="true"    name="height" id="height"   value="<%=projectInfo.getAt("height")%>"  >
  <%} %>
 				</td>
-				<td nowrap="nowrap" align="center" class="f_bold">体重</td>
+				<td nowrap="nowrap" align="center" class="f_bold">体重(KG)</td>
 				<td nowrap="nowrap" align="center" >
 						 <%if("admin".equals(request.getAttribute("role")) || "客服".equals(request.getAttribute("role")) || "经理".equals(request.getAttribute("role")) ){ %>
 <input style="border:none;" type="text"        name="weight" id="weight"   value="<%=projectInfo.getAt("weight")%>"  >
@@ -374,7 +381,7 @@ function onUpdate(wechat){
 				<td nowrap="nowrap" align="center" >
 					 <%if("admin".equals(request.getAttribute("role")) || "客服".equals(request.getAttribute("role")) || "经理".equals(request.getAttribute("role")) ){ %>
 		
-				<input style="border:none;" type="text"        name="jiaofu_time" id="jiaofu_time"   value="<%=projectInfo.getAt("jiaofu_time")%>"  >
+				<input style="border:none;" type="text"        name="jiaofu_time" id="jiaofu_time"   value="<%=projectInfo.getAt("jiaofu_time")%>"  onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})">
 					 <%}else{ %>
 				<input style="border:none;" type="text"        name="jiaofu_time" id="jiaofu_time"  readonly="true"  value="<%=projectInfo.getAt("jiaofu_time")%>"  >
 	    
@@ -1084,6 +1091,7 @@ function onUpdate(wechat){
 						<option value="双排二扣一" <%=projectInfo.getAt("kouxing_c").equals("双排二扣一")? "selected":"" %>  >双排二扣一</option>
 						<option value="双排四扣二" <%=projectInfo.getAt("kouxing_c").equals("双排四扣二")? "selected":"" %>   >双排四扣二</option>
 						<option value="双排六扣二" <%=projectInfo.getAt("kouxing_c").equals("双排六扣二")? "selected":"" %>  >双排六扣二</option>
+						<option value="五粒扣" <%=projectInfo.getAt("kouxing_c").equals("五粒扣")? "selected":"" %>  >五粒扣</option>
 						<option value="其他" <%=projectInfo.getAt("kouxing_c").equals("其他")? "selected":"" %>  >其他</option>
 				</select>
 				 <%}else{ %>
@@ -1132,6 +1140,7 @@ function onUpdate(wechat){
 						<option value="假平驳" <%=projectInfo.getAt("lingkoukuaishi_b").equals("假平驳")? "selected":"" %>  >假平驳</option>
 						<option value="宽平驳" <%=projectInfo.getAt("lingkoukuaishi_b").equals("宽平驳")? "selected":"" %>  >宽平驳</option>
 						<option value="宽戗驳" <%=projectInfo.getAt("lingkoukuaishi_b").equals("宽戗驳")? "selected":"" %>  >宽戗驳</option>
+						<option value="立领" <%=projectInfo.getAt("lingkoukuaishi_b").equals("立领")? "selected":"" %>  >立领</option>
 						<option value="其他" <%=projectInfo.getAt("lingkoukuaishi_b").equals("其他")? "selected":"" %>  >其他</option>
 				</select> 
 				
@@ -1291,6 +1300,7 @@ function onUpdate(wechat){
 						<option value="双褶" <%=projectInfo.getAt("kuxing").equals("双褶")? "selected":"" %>  >双褶</option>
 						<option value="萝卜裤" <%=projectInfo.getAt("kuxing").equals("萝卜裤")? "selected":"" %>  >萝卜裤</option>
 						<option value="直筒裤" <%=projectInfo.getAt("kuxing").equals("直筒裤")? "selected":"" %>  >直筒裤</option>
+						<option value="阔腿裤" <%=projectInfo.getAt("kuxing").equals("阔腿裤")? "selected":"" %>  >阔腿裤</option>
 						<option value="其它" <%=projectInfo.getAt("kuxing").equals("其它")? "selected":"" %>  >其它</option>
 				</select>
 				</td>
@@ -1408,14 +1418,35 @@ function onUpdate(wechat){
 					 <input style="border:none;" type="text" readonly="true"     name="yongtu1" id="yongtu1"   value="<%=projectInfo.getAt("yong_tu1")%>"  >
 				</td>
  <%} %>
-				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">米数</td>
-				<td nowrap="nowrap" align="center" >
+				
+	 <td nowrap="nowrap" style="padding: 0;">
+		 <table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+		 	 <tr>
+			 	<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">米数</td>
+				<td nowrap="nowrap" align="center" style="border: 0;">
 				 <%if("admin".equals(request.getAttribute("role")) || "批单".equals(request.getAttribute("role")) ){ %>
 						<input style="border:none;" name="mi1"  type="text" class="txt_1" value="<%=projectInfo.getAt("mi1")%>" >
  <%}else{ %>
 						<input style="border:none;" name="mi1"  readonly="true"  type="text" class="txt_1" value="<%=projectInfo.getAt("mi1")%>" >
  <%} %>
 				</td>
+			 </tr>
+		 </table>
+	 </td>
+	<td nowrap="nowrap" style="padding: 0;">
+				 	 <table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+					 	<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">价格</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+							<%if("admin".equals(request.getAttribute("role")) || "跟单".equals(request.getAttribute("role")) ){ %>
+					<input name="jg"  id="jg" type="text" class="txt_1" maxlength="100"  value=<%=duoyu.getAt("jq")%>>
+					 <%}else{ %>
+					 <input name="jg"  id="jg"  readonly="true" type="text" class="txt_1" maxlength="100" value=<%=duoyu.getAt("jq")%>    >
+					  <%} %>
+							</td>
+						 </tr>
+					 </table>
+	</td>
 				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">供应商</td>
 				<td nowrap="nowrap" align="center" >
 				 <%if("admin".equals(request.getAttribute("role")) || "跟单".equals(request.getAttribute("role")) ){ %>
@@ -1424,15 +1455,6 @@ function onUpdate(wechat){
  					<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=projectInfo.getAt("gongyingshang_1")%>>
  <%} %>
 				</td>
-				
-				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">价格</td>
-					<td nowrap="nowrap" align="center" >
-						 <%if("admin".equals(request.getAttribute("role")) || "跟单".equals(request.getAttribute("role")) ){ %>
-					<input name="jg"  id="jg" type="text" class="txt_1" maxlength="100"  value=<%=duoyu.getAt("jq")%>>
-					 <%}else{ %>
-					 <input name="jg"  id="jg" type="text" class="txt_1" maxlength="100" value=<%=duoyu.getAt("jq")%> readonly="true" >
-					  <%} %>
-					</td>
 					
 					
 			</tr>

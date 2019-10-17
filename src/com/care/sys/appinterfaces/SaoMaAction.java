@@ -10,6 +10,7 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -30,6 +31,7 @@ import com.care.common.http.BaseAction;
 import com.care.common.lang.Constant;
 import com.care.sys.appuserinfo.domain.AppUserInfo;
 import com.care.sys.appuserinfo.domain.logic.AppUserInfoFacade;
+import com.care.sys.channelinfo.domain.ChannelInfo;
 import com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo;
 import com.care.sys.deviceactiveinfo.domain.logic.DeviceActiveInfoFacade;
 import com.care.sys.locationinfo.domain.LocationInfo;
@@ -115,6 +117,23 @@ G、发货-----，扫码，6需要填写物流单号，给客户发短信，短�
 					result = Constant.SUCCESS_CODE;
 					ServiceBean.getInstance().getProjectInfoFacade()
 					.updatePorjectInfo(voStatus);
+					
+					
+					ProjectInfo pvo = new ProjectInfo();
+					pvo.setCondition("order_id='" + orderid + "'");
+					List<DataMap>  listOrder =ServiceBean.getInstance().getProjectInfoFacade().getProjectInfo(pvo);
+					if(listOrder.size()>0){
+						String orderNumber = listOrder.get(0).get("order_number")+"";
+						String kehuPhone = listOrder.get(0).get("kehu_phone")+"";
+						 ChannelInfo chInfo = new ChannelInfo();
+					       chInfo.setOrder_id(orderNumber);
+					       chInfo.setPhone(kehuPhone);
+					       chInfo.setAddTime(new Date());
+					       chInfo.setRemark("【"+new SimpleDateFormat("yyyy-MM-dd HH:mm").format(Calendar.getInstance().getTime())+"】【"+orderNumber+"】已经开始裁剪(剪裁师傅已经收到你的订单，并觉得你骨骼惊奇，是个穿西装的好苗子!)");
+					     ServiceBean.getInstance().getChannelInfoFacade().insertChannelInfo(chInfo);
+					}
+					
+				     
 				}
 				
 				
@@ -138,6 +157,25 @@ G、发货-----，扫码，6需要填写物流单号，给客户发短信，短�
 					result = Constant.SUCCESS_CODE;
 					ServiceBean.getInstance().getProjectInfoFacade()
 					.updatePorjectInfo(voStatus);
+					
+					ProjectInfo pvo = new ProjectInfo();
+					pvo.setCondition("order_id='" + orderid + "'");
+					List<DataMap>  listOrder =ServiceBean.getInstance().getProjectInfoFacade().getProjectInfo(pvo);
+					if(listOrder.size()>0){
+						String orderNumber = listOrder.get(0).get("order_number")+"";
+						String kehuPhone = listOrder.get(0).get("kehu_phone")+"";
+						 ChannelInfo chInfo = new ChannelInfo();
+					       chInfo.setOrder_id(orderNumber);
+					       chInfo.setPhone(kehuPhone);
+					       chInfo.setAddTime(new Date());
+					       if(typePerson==5){
+					    	   chInfo.setRemark("【"+new SimpleDateFormat("yyyy-MM-dd HH:mm").format(Calendar.getInstance().getTime())+"】【"+orderNumber+"】订单定型完毕，开始出厂质检程序。（现在我们正在给它仔细检查是否和我们的期待的效果一样");
+					       }else if(typePerson==6){
+					    	   chInfo.setRemark("【"+new SimpleDateFormat("yyyy-MM-dd HH:mm").format(Calendar.getInstance().getTime())+"】【"+orderNumber+"】订单已通过质检流程，现已为您发货物流单号为【物流单号】（顺丰特快）（西装在我们质检小哥哥的检查下已经成功盖章！现在由快递界的老大哥顺丰运输！安排上了！那些将要去的地方，都是素未谋面的故乡！）");
+					       }
+					     ServiceBean.getInstance().getChannelInfoFacade().insertChannelInfo(chInfo);
+					}
+					
 				}else{
 					result = Constant.FAIL_CODE;
 				}
@@ -170,6 +208,28 @@ G、发货-----，扫码，6需要填写物流单号，给客户发短信，短�
 						result = Constant.SUCCESS_CODE;
 						ServiceBean.getInstance().getProjectInfoFacade()
 						.updatePorjectInfo(voStatus);
+						
+						
+						ProjectInfo pvo = new ProjectInfo();
+						pvo.setCondition("order_id='" + orderid + "'");
+						List<DataMap>  listOrder =ServiceBean.getInstance().getProjectInfoFacade().getProjectInfo(pvo);
+						if(listOrder.size()>0){
+							String orderNumber = listOrder.get(0).get("order_number")+"";
+							String kehuPhone = listOrder.get(0).get("kehu_phone")+"";
+							 ChannelInfo chInfo = new ChannelInfo();
+						       chInfo.setOrder_id(orderNumber);
+						       chInfo.setPhone(kehuPhone);
+						       chInfo.setAddTime(new Date());
+						       if(typePerson == 2){
+						    	   chInfo.setRemark("【"+new SimpleDateFormat("yyyy-MM-dd HH:mm").format(Calendar.getInstance().getTime())+"】【"+orderNumber+"】订单已经开始前道制作工序。（前道开包师傅开始作业，随口一句：看长身玉立，精神耿耿。必定以后事业有成！）");
+						       }else if(typePerson == 3){
+						    	   chInfo.setRemark("【"+new SimpleDateFormat("yyyy-MM-dd HH:mm").format(Calendar.getInstance().getTime())+"】【"+orderNumber+"】订单已经开始后道制作工序。（后道师傅已经接手，制作工序已经到了最后的要紧关头！稳住我们能赢！）");
+						       }else if(typePerson == 4){
+						    	   chInfo.setRemark("【"+new SimpleDateFormat("yyyy-MM-dd HH:mm").format(Calendar.getInstance().getTime())+"】【"+orderNumber+"】订单已制作完毕，开始整烫定型。（大烫师傅为了保证衣服的版型，正在给衣服做洗剪吹服务，tony老师已经开始整烫定型！）");
+						       }
+						     ServiceBean.getInstance().getChannelInfoFacade().insertChannelInfo(chInfo);
+						}
+						
 					}
 					
 				}else{

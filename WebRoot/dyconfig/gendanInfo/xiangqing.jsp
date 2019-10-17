@@ -30,15 +30,18 @@ appearance: none;
 -->
 <style>
 	.add_order_table tr th, .add_order_table tr td{border-bottom: 1px solid #bbb; border-left:1px solid #bbb; padding:10px;}
-	.add_order_table tr td:first-child{border-left: 0;}
-	.add_order_table tr:last-child td{border-bottom:0;}
+	.add_order_table tr th{border-left:0;}
+	.add_order_table tr td:last-child{border-right:1px solid #bbb;}
+/*	.add_order_table tr td:first-child{border-left: 0;}*/
+/*	.add_order_table tr:last-child td{border-bottom:0;}*/
 	.add_order_table input, .add_order_table select{width: 100%; padding:5px; border:1px solid #ccc;} 
 	.table_title{font-size:22px;}
 	.t_subtitle th, .t_subtitle td{background:#F8CBAD;}
 	.f_bold{font-weight: bold;}
 	.td_bg_pink{background:#FCE4D6;}
-	.td_bg_yellow{background:#FFF2CC;}
+	.td_bg_yellow{background:#FFF2CC; white-space: nowrap;}
 	.add_order_table .btn{padding:6px 20px; width: auto; height: auto; font-size:14px; background:#337ab7; border-radius: 6px; color: #fff; border:1px solid #286090;}
+	.padd0{padding:0 !important;}
 	
 </style>
 
@@ -241,7 +244,7 @@ function onUpdate(){
 				 <input style="border:none;" name="jiankuanA2"  type="text" class="txt_1"    value="<%=projectInfo.getAt("jiankuan_a2")%>" >
 				</td>
 				<td nowrap="nowrap" align="center"  rowspan="4">
-					<img src="http://47.111.148.8/watch/upload/test.png" width="100" height="100" />
+					<img src="<%=request.getAttribute("erweima_1")%>" width="100" height="100" />
 				</td>
 				<td nowrap="nowrap" align="center" class="f_bold">领围</td>
 				<td nowrap="nowrap" align="center" >
@@ -251,7 +254,7 @@ function onUpdate(){
 				 <input style="border:none;" name="lingweiB2"  type="text" class="txt_1" value="<%=projectInfo.getAt("lingwei_b2")%>" >
 				</td>
 				<td nowrap="nowrap" align="center"  rowspan="4">
-					<img src="http://47.111.148.8/watch/upload/test.png" width="100" height="100" />
+					<img src="<%=request.getAttribute("erweima_2")%>" width="100" height="100" />
 				</td>
 			</tr>
 			<tr class="td_bg_pink">
@@ -434,7 +437,7 @@ function onUpdate(){
 			
 				</td>
 				<td nowrap="nowrap" align="center"  rowspan="4">
-					<img src="http://47.111.148.8/watch/upload/test.png" width="100" height="100" />
+				<img src="<%=request.getAttribute("erweima_3")%>" width="100" height="100" />
 				</td>
 				<td nowrap="nowrap" align="center" class="f_bold">肩宽</td>
 				<td nowrap="nowrap" align="center" >
@@ -444,7 +447,7 @@ function onUpdate(){
 					<input style="border:none;" name="jiankuannew"  type="text" class="txt_1" value="<%=projectInfo.getAt("jiankuanque")%>">
 				</td>
 				<td nowrap="nowrap" align="center"  rowspan="4">
-					<img src="http://47.111.148.8/watch/upload/test.png" width="100" height="100" />
+					<img src="<%=request.getAttribute("erweima_4")%>" width="100" height="100" />
 				</td>
 			</tr>
 			<tr class="td_bg_pink">
@@ -744,17 +747,29 @@ function onUpdate(){
 				</select>  -->
 				
 				</td>
-				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">米数</td>
-				<td nowrap="nowrap" align="center" >
-						<input style="border:none;" name="mi1"  type="text" class="txt_1" value="<%=projectInfo.getAt("mi1")%>" >
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">米数</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input style="border:none;" name="mi1"  type="text" class="txt_1" value="<%=projectInfo.getAt("mi1")%>" >
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">价格</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq")%>>
+							</td>
+						</tr>
+					</table>
 				</td>
 				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">供应商</td>
 				<td nowrap="nowrap" align="center" >
 						<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=projectInfo.getAt("gongyingshang_1")%>>
-				</td>
-				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">价格</td>
-				<td nowrap="nowrap" align="center" >
-						<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq")%>>
 				</td>
 			</tr>
 			
@@ -777,13 +792,27 @@ function onUpdate(){
 					placeholder="" 
 					 /></td>
 
-				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">米数</td>
-				<td nowrap="nowrap" align="center" >
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">米数</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input name="ms1" id="ms1"  value="<%=duoyu.getAt("ms1")%>"	type="text"/>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">价格</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq1")%>>
+							</td>
+						</tr>
+					</table>
 				
-				<input name="ms1" id="ms1"  value="<%=duoyu.getAt("ms1")%>"
-				
-				type="text"  
-					 /></td>
+				</td>
 				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">供应商</td>
 				<td nowrap="nowrap" align="center" >
 				<input
@@ -791,10 +820,6 @@ function onUpdate(){
 					type="text"  
 					 /></td>
 					 
-					 <td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">价格</td>
-				<td nowrap="nowrap" align="center" >
-						<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq1")%>>
-				</td>
 			</tr>
 			
 				 <%} %>
@@ -821,24 +846,34 @@ function onUpdate(){
 					type="text"  
 					placeholder="" 
 					 /></td>
-
-				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">米数</td>
-				<td nowrap="nowrap" align="center" >
 				
-				<input name="ms2" id="ms2"  value="<%=duoyu.getAt("ms2")%>"
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">米数</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input name="ms2" id="ms2"  value="<%=duoyu.getAt("ms2")%>"	type="text"/>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">价格</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq2")%>>
+							</td>
+						</tr>
+					</table>
 				
-				type="text"  
-					 /></td>
+				</td>
 				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">供应商</td>
 				<td nowrap="nowrap" align="center" >
 				<input
 					name="gys2" id="gys2"  value="<%=duoyu.getAt("gys2")%>"
 					type="text"  
 					 /></td>
-					  <td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">价格</td>
-				<td nowrap="nowrap" align="center" >
-						<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq2")%>>
-				</td>
 			</tr>
 			 <%} %>
 			
@@ -865,23 +900,35 @@ function onUpdate(){
 					placeholder="" 
 					 /></td>
 
-				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">米数</td>
-				<td nowrap="nowrap" align="center" >
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">米数</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input name="ms3" id="ms3"  value="<%=duoyu.getAt("ms3")%>" type="text"/>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">价格</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq3")%>>
+							</td>
+						</tr>
+					</table>
 				
-				<input name="ms3" id="ms3"  value="<%=duoyu.getAt("ms3")%>"
+				</td>
 				
-				type="text"  
-					 /></td>
 				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">供应商</td>
 				<td nowrap="nowrap" align="center" >
 				<input
 					name="gys3" id="gys3"  value="<%=duoyu.getAt("gys3")%>"
 					type="text"  
 					 /></td>
-					  <td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">价格</td>
-				<td nowrap="nowrap" align="center" >
-						<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq3")%>>
-				</td>
+					  
 			</tr>
 				 <%} %>
 			
@@ -904,25 +951,36 @@ function onUpdate(){
 					
 					type="text"  
 					placeholder="" 
-					 /></td>
-
-				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">米数</td>
-				<td nowrap="nowrap" align="center" >
+					   /></td>
 				
-				<input name="ms4" id="ms4"  value="<%=duoyu.getAt("ms4")%>"
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">米数</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input name="ms4" id="ms4"  value="<%=duoyu.getAt("ms4")%>" type="text" />
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">价格</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq4")%>>
+							</td>
+						</tr>
+					</table>
 				
-				type="text"  
-					 /></td>
+				</td>
 				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">供应商</td>
 				<td nowrap="nowrap" align="center" >
 				<input
 					name="gys4" id="gys4"  value="<%=duoyu.getAt("gys4")%>"
 					type="text"  
 					 /></td>
-					  <td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">价格</td>
-				<td nowrap="nowrap" align="center" >
-						<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq4")%>>
-				</td>
+					  
 			</tr>
 				 <%} %>
 			
@@ -947,24 +1005,35 @@ function onUpdate(){
 					type="text"  
 					placeholder="" 
 					 /></td>
-
-				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">米数</td>
-				<td nowrap="nowrap" align="center" >
+					
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">米数</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input name="ms5" id="ms5"  value="<%=duoyu.getAt("ms5")%>" type="text"/>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">价格</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq5")%>>
+							</td>
+						</tr>
+					</table>
 				
-				<input name="ms5" id="ms5"  value="<%=duoyu.getAt("ms5")%>"
-				
-				type="text"  
-					 /></td>
+				</td>
 				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">供应商</td>
 				<td nowrap="nowrap" align="center" >
 				<input
 					name="gys5" id="gys5"  value="<%=duoyu.getAt("gys5")%>"
 					type="text"  
 					 /></td>
-					  <td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">价格</td>
-				<td nowrap="nowrap" align="center" >
-						<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq5")%>>
-				</td>
+					  
 			</tr>
 			 <%} %>
 			
@@ -991,23 +1060,35 @@ function onUpdate(){
 					placeholder="" 
 					 /></td>
 
-				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">米数</td>
-				<td nowrap="nowrap" align="center" >
+			
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">米数</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input name="ms6" id="ms6"  value="<%=duoyu.getAt("ms6")%>" type="text"/>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">价格</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq6")%>>
+							</td>
+						</tr>
+					</table>
 				
-				<input name="ms6" id="ms6"  value="<%=duoyu.getAt("ms6")%>"
-				
-				type="text"  
-					 /></td>
+				</td>
 				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">供应商</td>
 				<td nowrap="nowrap" align="center" >
 				<input
 					name="gys6" id="gys6"  value="<%=duoyu.getAt("gys6")%>"
 					type="text"  
 					 /></td>
-					  <td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">价格</td>
-				<td nowrap="nowrap" align="center" >
-						<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq6")%>>
-				</td>
+					  
 			</tr>
 			 <%} %>
 			
@@ -1032,23 +1113,35 @@ function onUpdate(){
 					placeholder="" 
 					 /></td>
 
-				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">米数</td>
-				<td nowrap="nowrap" align="center" >
 				
-				<input name="ms7" id="ms7"  value="<%=duoyu.getAt("ms7")%>"
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">米数</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input name="ms7" id="ms7"  value="<%=duoyu.getAt("ms7")%>" type="text" />
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">价格</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq7")%>>
+							</td>
+						</tr>
+					</table>
 				
-				type="text"  
-					 /></td>
+				</td>
 				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">供应商</td>
 				<td nowrap="nowrap" align="center" >
 				<input
 					name="gys7" id="gys7"  value="<%=duoyu.getAt("gys7")%>"
 					type="text"  
 					 /></td>
-					  <td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">价格</td>
-				<td nowrap="nowrap" align="center" >
-						<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq7")%>>
-				</td>
+					  
 			</tr>
 			 <%} %>
 			
@@ -1075,23 +1168,35 @@ function onUpdate(){
 					placeholder="" 
 					 /></td>
 
-				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">米数</td>
-				<td nowrap="nowrap" align="center" >
 				
-				<input name="ms8" id="ms8"  value="<%=duoyu.getAt("ms8")%>"
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">米数</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input name="ms8" id="ms8"  value="<%=duoyu.getAt("ms8")%>" type="text" />
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">价格</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq8")%>>
+							</td>
+						</tr>
+					</table>
 				
-				type="text"  
-					 /></td>
+				</td>
 				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">供应商</td>
 				<td nowrap="nowrap" align="center" >
 				<input
 					name="gys8" id="gys8"  value="<%=duoyu.getAt("gys8")%>"
 					type="text"  
 					 /></td>
-					  <td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">价格</td>
-				<td nowrap="nowrap" align="center" >
-						<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq8")%>>
-				</td>
+					 
 			</tr>
 			 <%} %>
 			 
@@ -1117,23 +1222,35 @@ function onUpdate(){
 					placeholder="" 
 					 /></td>
 
-				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">米数</td>
-				<td nowrap="nowrap" align="center" >
 				
-				<input name="ms9" id="ms9"  value="<%=duoyu.getAt("ms9")%>"
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">米数</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input name="ms9" id="ms9"  value="<%=duoyu.getAt("ms9")%>" type="text"/>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">价格</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq9")%>>
+							</td>
+						</tr>
+					</table>
 				
-				type="text"  
-					 /></td>
+				</td>
 				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">供应商</td>
 				<td nowrap="nowrap" align="center" >
 				<input
 					name="gys9" id="gys9"  value="<%=duoyu.getAt("gys9")%>"
 					type="text"  
 					 /></td>
-					  <td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">价格</td>
-				<td nowrap="nowrap" align="center" >
-						<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq9")%>>
-				</td>
+					  
 			</tr>
 			 <%} %>
 			
@@ -1157,13 +1274,28 @@ function onUpdate(){
 					placeholder="" 
 					 /></td>
 
-				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">米数</td>
-				<td nowrap="nowrap" align="center" >
 				
-				<input name="ms10" id="ms10"  value="<%=duoyu.getAt("ms10")%>"
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">米数</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input name="ms10" id="ms10"  value="<%=duoyu.getAt("ms10")%>" type="text" />
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">价格</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq10")%>>
+							</td>
+						</tr>
+					</table>
 				
-				type="text"  
-					 /></td>
+				</td>
 				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">供应商</td>
 				<td nowrap="nowrap" align="center" >
 				<input
@@ -1171,10 +1303,7 @@ function onUpdate(){
 					type="text"  
 					 /></td>
 					 
-					  <td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">价格</td>
-				<td nowrap="nowrap" align="center" >
-						<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq10")%>>
-				</td>
+					  
 			</tr> <%} %>
 			
 			
@@ -1199,13 +1328,28 @@ function onUpdate(){
 					placeholder="" 
 					 /></td>
 
-				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">米数</td>
-				<td nowrap="nowrap" align="center" >
 				
-				<input name="ms11" id="ms11"  value="<%=duoyu.getAt("ms11")%>"
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">米数</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input name="ms11" id="ms11"  value="<%=duoyu.getAt("ms11")%>" type="text" />
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">价格</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq11")%>>
+							</td>
+						</tr>
+					</table>
 				
-				type="text"  
-					 /></td>
+				</td>
 				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">供应商</td>
 				<td nowrap="nowrap" align="center" >
 				<input
@@ -1213,10 +1357,6 @@ function onUpdate(){
 					type="text"  
 					 /></td>
 					 
-					  <td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">价格</td>
-				<td nowrap="nowrap" align="center" >
-						<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq11")%>>
-				</td>
 			</tr>
 			 <%} %>
 			 
@@ -1241,23 +1381,35 @@ function onUpdate(){
 					placeholder="" 
 					 /></td>
 
-				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">米数</td>
-				<td nowrap="nowrap" align="center" >
 				
-				<input name="ms12" id="ms12"  value="<%=duoyu.getAt("ms12")%>"
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">米数</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input name="ms12" id="ms12"  value="<%=duoyu.getAt("ms12")%>" type="text" />
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">价格</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq12")%>>
+							</td>
+						</tr>
+					</table>
 				
-				type="text"  
-					 /></td>
+				</td>
 				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">供应商</td>
 				<td nowrap="nowrap" align="center" >
 				<input
 					name="gys12" id="gys12"  value="<%=duoyu.getAt("gys12")%>"
 					type="text"  
 					 /></td>
-					  <td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">价格</td>
-				<td nowrap="nowrap" align="center" >
-						<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq12")%>>
-				</td>
+					  
 			</tr>
 			 <%} %>
 			 
@@ -1282,23 +1434,35 @@ function onUpdate(){
 					placeholder="" 
 					 /></td>
 
-				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">米数</td>
-				<td nowrap="nowrap" align="center" >
 				
-				<input name="ms13" id="ms13"  value="<%=duoyu.getAt("ms13")%>"
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">米数</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input name="ms13" id="ms13"  value="<%=duoyu.getAt("ms13")%>" type="text" />
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">价格</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq13")%>>
+							</td>
+						</tr>
+					</table>
 				
-				type="text"  
-					 /></td>
+				</td>
 				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">供应商</td>
 				<td nowrap="nowrap" align="center" >
 				<input
 					name="gys13" id="gys13"  value="<%=duoyu.getAt("gys13")%>"
 					type="text"  
 					 /></td>
-					  <td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">价格</td>
-				<td nowrap="nowrap" align="center" >
-						<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq13")%>>
-				</td>
+					  
 			</tr>
 			 <%} %>
 			  <%if(!"".equals(duoyu.getAt("ml14"))&& duoyu.getAt("ml14")!=null ){ %>
@@ -1320,23 +1484,35 @@ function onUpdate(){
 					placeholder="" 
 					 /></td>
 
-				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">米数</td>
-				<td nowrap="nowrap" align="center" >
 				
-				<input name="ms14" id="ms14"  value="<%=duoyu.getAt("ms14")%>"
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">米数</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input name="ms14" id="ms14"  value="<%=duoyu.getAt("ms14")%>" type="text" />
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td nowrap="nowrap" class="padd0">
+					<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">价格</td>
+							<td nowrap="nowrap" align="center" style="border: 0;">
+								<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq14")%>>
+							</td>
+						</tr>
+					</table>
 				
-				type="text"  
-					 /></td>
+				</td>
 				<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">供应商</td>
 				<td nowrap="nowrap" align="center" >
 				<input
 					name="gys14" id="gys14"  value="<%=duoyu.getAt("gys14")%>"
 					type="text"  
 					 /></td>
-					  <td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">价格</td>
-				<td nowrap="nowrap" align="center" >
-						<input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=duoyu.getAt("jq14")%>>
-				</td>
+					  
 			</tr> <%} %>
 			
 		<%-- 	<tr>

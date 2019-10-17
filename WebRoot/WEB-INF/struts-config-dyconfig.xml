@@ -91,6 +91,7 @@
     		<forward name="insertMsgInfo" path="/dyconfig/msgInfo/addMsgInfo.jsp" />
     		<forward name="updateMsgInfo" path="/dyconfig/msgInfo/updateMsgInfo.jsp" />
     		<forward name="a" path="/dyconfig/msgInfo/updateMsgInfo.jsp" />
+    		<forward name="xiangqing" path="/dyconfig/msgInfo/xiangqing.jsp" />
     	</action>
     	
     	<action name="safeAreaForm" path="/dyconfig/safeArea/doSafeArea" scope="request" type="com.care.sys.safearea.action.SafeAreaAction" parameter="method">

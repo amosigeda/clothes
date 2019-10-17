@@ -26,15 +26,18 @@ appearance: none;
 </style> -->
 <style>
 	.add_order_table tr th, .add_order_table tr td{border-bottom: 1px solid #bbb; border-left:1px solid #bbb; padding:10px;}
-	.add_order_table tr td:first-child{border-left: 0;}
-	.add_order_table tr:last-child td{border-bottom:0;}
+	.add_order_table tr th{border-left:0;}
+	.add_order_table tr td:last-child{border-right:1px solid #bbb;}
+/*	.add_order_table tr td:first-child{border-left: 0;}*/
+/*	.add_order_table tr:last-child td{border-bottom:0;}*/
 	.add_order_table input, .add_order_table select{width: 100%; padding:5px; border:1px solid #ccc;} 
 	.table_title{font-size:22px;}
 	.t_subtitle th, .t_subtitle td{background:#F8CBAD;}
 	.f_bold{font-weight: bold;}
 	.td_bg_pink{background:#FCE4D6;}
-	.td_bg_yellow{background:#FFF2CC;}
+	.td_bg_yellow{background:#FFF2CC; white-space: nowrap;}
 	.add_order_table .btn{padding:6px 20px; width: auto; height: auto; font-size:14px; background:#337ab7; border-radius: 6px; color: #fff; border:1px solid #286090;}
+	.padd0{padding:0 !important;}
 	
 </style>
 	<script type="text/javascript">
@@ -147,13 +150,14 @@ appearance: none;
 			tab.insertRow(rownum);
 
 			var n = rownum - 28;
+			alert(n);
 			if(n <= 14) {
-				for(var i = 0; i < 9; i++) {
+				for(var i = 0; i < 8; i++) {
 					tab.rows[rownum].insertCell(i); //插入列
 					tab.rows[rownum].cells[i].setAttribute("align", "center");
 					if(i == 0) {
 						tab.rows[rownum].cells[i].setAttribute("class", "td_bg_yellow");
-						tab.rows[rownum].cells[i].innerHTML = '面料';
+						tab.rows[rownum].cells[i].innerHTML = '<button type="button" onclick="delRow(this)">-</button> 面料';
 					} else if(i == 1) {
 						tab.rows[rownum].cells[i].innerHTML = '<input name="ml' + n + '" type="text"   maxlength="100" />';
 					} else if(i == 2) {
@@ -173,22 +177,20 @@ appearance: none;
 						<option value="其他">其他</option> */
 						/* '<input name="yt'+n+'" type="text"  maxlength="100"/>'; */
 					} else if(i == 4) {
-						tab.rows[rownum].cells[i].setAttribute("class", "td_bg_yellow");
-						tab.rows[rownum].cells[i].innerHTML = '米数';
+						tab.rows[rownum].cells[i].setAttribute("class", "padd0");
+						tab.rows[rownum].cells[i].innerHTML = '<table class="tbl_11" cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="td_bg_yellow" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;" nowrap="nowrap" align="center">米数</td><td style="border: 0;" nowrap="nowrap" align="center"><input name="ms' + n + '" type="text"  maxlength="100" readonly="true" /></td></tr></tbody></table>';
 					} else if(i == 5) {
-						tab.rows[rownum].cells[i].innerHTML = '<input name="ms' + n + '" type="text"  maxlength="100" readonly="true" />';
+						tab.rows[rownum].cells[i].setAttribute("class", "padd0");
+						tab.rows[rownum].cells[i].innerHTML = '<table class="tbl_11" cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="td_bg_yellow" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;" nowrap="nowrap" align="center">价格</td><td style="border: 0;" nowrap="nowrap" align="center"><input name="jq' + n + '" type="text"  maxlength="100" readonly="true" /></td></tr></tbody></table>';
 					} else if(i == 6) {
 						tab.rows[rownum].cells[i].setAttribute("class", "td_bg_yellow");
 						tab.rows[rownum].cells[i].innerHTML = '供应商';
-					} else  if(i==7){
+					} else {
 						tab.rows[rownum].cells[i].innerHTML = '<input name="gys' + n + '" type="text"  maxlength="100" readonly="true" />';
-					}else{
-						tab.rows[rownum].cells[i].innerHTML = '价格';
-						tab.rows[rownum].cells[i].innerHTML = '<input name="jq' + n + '" type="text"  maxlength="100" readonly="true" />';
 					}
 				}
-				tab.rows[rownum].insertCell(i);
-				tab.rows[rownum].cells[i].innerHTML = '<a href="#" onclick="delRow(this)">-</a>';
+				//tab.rows[rownum].insertCell(i);
+				//tab.rows[rownum].cells[i].innerHTML = '<a href="#" onclick="delRow(this)">-</a>';
 			} else {
 				alert("最多新增15行");
 			}
@@ -225,6 +227,12 @@ appearance: none;
 			selectObj[0].text = xianshi;
 
 		}
+		
+		function setHiddenRow(oTable,iRow)
+		{
+		       /* oTable.rows[iRow].style.display = oTable.rows[iRow].style.display == "none"; */
+		      (oTable.rows[iRow].style.display = oTable.rows[iRow].style.display == "none"?"block":"none"); 
+		}
 	</script>
 
 	<body>
@@ -240,18 +248,21 @@ appearance: none;
 
 			<table width="100%" id="tab01" class="tbl_11 add_order_table" border="0" cellspacing="0" cellpadding="0">
 
+
 				<tr>
-					<th colspan="8" nowrap="nowrap" align="left">添加订单信息(客户档案) </th>
+					<th colspan="8" nowrap="nowrap" align="left"  >添加订单信息(客户档案) </th>
+				</tr>
+			
+				
+
+			<!-- 	<tr class="tr_11">
+					<td colspan="8" nowrap="nowrap" align="center"  class="table_title">不一定制和周卢江 客户信息档案表</td>
 				</tr>
 
-				<!--<tr class="tr_11">
-					<td colspan="8" nowrap="nowrap" align="center"  class="table_title">不一定制和周卢江 客户信息档案表</td>
-				</tr>-->
-
-				<!--<tr class="t_subtitle">
+			<tr class="t_subtitle">
 					<td colspan="4" nowrap="nowrap" align="center" class="f_bold" >订单信息</td>
 					<td colspan="4" nowrap="nowrap" align="center" class="f_bold">订单信息</td>
-				</tr>-->
+				</tr> -->
 
 				<tr>
 					<td nowrap="nowrap" align="center" class="f_bold">订单编号</td>
@@ -261,15 +272,17 @@ appearance: none;
 					<td nowrap="nowrap" align="center" class="f_bold">渠道</td>
 					<td nowrap="nowrap" align="center" >
 						<select name="qudao" value="qudao">
-							<option value="淘宝">淘宝</option>
+							<option value="深圳淘宝">深圳淘宝</option>
+							<option value="南京淘宝">南京淘宝</option>
 							<option value="工单">工单</option>
 							<option value="分销">分销</option>
 							<option value="打样">打样</option>
 							<option value="重做">重做</option>
-							<option value="其他">其他</option>
+						
 							<option value="线下转款_曹">线下转款_曹</option>
 						<option value="线下转款_周">线下转款_周</option>
 						<option value="线下转款_公账">线下转款_公账</option>
+							<option value="其他">其他</option>
 						</select>
 						<font color="red"></font>
 					</td>
@@ -311,6 +324,7 @@ appearance: none;
 
 				<tr>
 					<td nowrap="nowrap" align="center" class="f_bold">订单号</td>
+<!-- 					<button type="button" onClick="setHiddenRow(document.getElementById('tab01'),0)" style="margin-left: 0px;">+</button> -->
 					<td nowrap="nowrap" align="center" ><input name="orderNumber"  id="orderNumber" type="text" class="txt_1"  />
 						<font color="red"></font>
 					</td>
@@ -322,7 +336,27 @@ appearance: none;
 					<td nowrap="nowrap" align="center" ><input name="height"  id="height" type="text" class="txt_1" maxlength="100" />
 						<font color="red"></font>
 					</td>
-					<td nowrap="nowrap" align="center" class="f_bold">体重</td>
+					<td nowrap="nowrap" align="center" class="f_bold">体重(KG)</td>
+					<td nowrap="nowrap" align="center" ><input name="weight"  id="weight" type="text" class="txt_1" maxlength="100" />
+						<font color="red"></font>
+					</td>
+				</tr>
+				
+				
+				<tr>
+					<td nowrap="nowrap" align="center" class="f_bold">订单号</td>
+					<td nowrap="nowrap" align="center" ><input name="orderNumber"  id="orderNumber" type="text" class="txt_1"  />
+						<font color="red"></font>
+					</td>
+					<td nowrap="nowrap" align="center" class="f_bold">销售价格</td>
+					<td nowrap="nowrap" align="center" ><input name="salePrice"  id="salePrice" type="text" class="txt_1"  />
+						<font color="red"></font>
+					</td>
+					<td nowrap="nowrap" align="center" class="f_bold">身高</td>
+					<td nowrap="nowrap" align="center" ><input name="height"  id="height" type="text" class="txt_1" maxlength="100" />
+						<font color="red"></font>
+					</td>
+					<td nowrap="nowrap" align="center" class="f_bold">体重(KG)</td>
 					<td nowrap="nowrap" align="center" ><input name="weight"  id="weight" type="text" class="txt_1" maxlength="100" />
 						<font color="red"></font>
 					</td>
@@ -351,7 +385,8 @@ appearance: none;
 					</td>
 					<td nowrap="nowrap" align="center" class="f_bold">交付时间</td>
 					<td nowrap="nowrap" align="left" >
-<input name="jiaofu_time" type="text" class="txt_1"  id="jiaofu_time" style="cursor:text"
+<input name="jiaofu_time" type="text" class="txt_1"  id="jiaofu_time" style="cursor:text" 
+onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
 								
 								size="20" > 
 						<!-- 	<input name="startTime1" type="text" class="txt_1"  id="startTime1" style="cursor:text"
@@ -656,6 +691,8 @@ appearance: none;
 							<option value="双排二扣一">双排二扣一</option>
 							<option value="双排四扣二">双排四扣二</option>
 							<option value="双排六扣二">双排六扣二</option>
+							<option value="五粒扣">五粒扣</option>
+							<option value="其他">其他</option>
 						</select>
 						<font color="red"></font>
 					</td>
@@ -696,6 +733,7 @@ appearance: none;
 							<option value="假平驳">假平驳</option>
 							<option value="宽平驳">宽平驳</option>
 							<option value="宽戗驳">宽戗驳</option>
+							<option value="立领">立领</option>
 							<option value="其他">其他</option>
 						</select>
 					</td>
@@ -769,6 +807,7 @@ appearance: none;
 							<option value="双褶">双褶</option>
 							<option value="萝卜裤">萝卜裤</option>
 							<option value="直筒裤">直筒裤</option>
+							<option value="阔腿裤">阔腿裤</option>
 							<option value="其它">其它</option>
 						</select>
 					</td>
@@ -817,14 +856,29 @@ appearance: none;
 							<option value="其他">其他</option>
 						</select>
 					</td>
-					<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">米数</td>
-					<td nowrap="nowrap" align="center" >
-					<input name=""  id="" type="text" class="txt_1" maxlength="100" readonly="true" />
+					<td nowrap="nowrap" style="padding: 0;">
+						<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">米数</td>
+								<td nowrap="nowrap" align="center" style="border: 0;">
+									<input name=""  id="" type="text" class="txt_1" maxlength="100" readonly="true" />
+								</td>
+							</tr>
+						</table>
 					</td>
+					<td nowrap="nowrap" style="padding: 0;">
+						<table class="tbl_11" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold" style="border-left: 0; border-bottom: 0; border-right: 1px solid #bbb;">价格</td>
+							<td nowrap="nowrap" align="center" style="border: 0;"><input name=""  id="" type="text" class="txt_1" maxlength="100" readonly="true" /></td>
+						</tr>
+						</table>
+					</td>
+					
+					
 					<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">供应商</td>
 					<td nowrap="nowrap" align="center" ><input name=""  id="" type="text" class="txt_1" maxlength="100" readonly="true" /></td>
-						<td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">价格</td>
-					<td nowrap="nowrap" align="center" ><input name=""  id="" type="text" class="txt_1" maxlength="100" readonly="true" /></td>
+					
 				</tr>
 				<!-- <tr>
 				<td nowrap="nowrap" align="center" >面料</td>

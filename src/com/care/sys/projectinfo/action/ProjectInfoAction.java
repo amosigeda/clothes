@@ -57,6 +57,7 @@ import com.care.common.lang.GetExCel;
 import com.care.common.lang.ParseDomDocument;
 import com.care.common.lang.TestFileManager;
 import com.care.sys.appuserinfo.domain.AppUserInfo;
+import com.care.sys.channelinfo.domain.ChannelInfo;
 import com.care.sys.companyinfo.domain.CompanyInfo;
 import com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo;
 import com.care.sys.dynamicInfo.domain.DynamicInfo;
@@ -76,7 +77,8 @@ import com.godoing.rose.lang.SystemException;
 import com.godoing.rose.log.LogFactory;
 
 public class ProjectInfoAction extends BaseAction {
-
+	 SimpleDateFormat yydfhh = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	  Calendar calendar = Calendar.getInstance();
 	Log logger = LogFactory.getLog(ProjectInfoAction.class);
 	String xmlfileName = "advertising.xml";
 	// String xmlpath="E:/resin/resin-pro-4.0.53/webapps/ads/WIITE/C7/ads/";
@@ -662,8 +664,8 @@ public class ProjectInfoAction extends BaseAction {
 		
 		 SimpleDateFormat df = new SimpleDateFormat("yyMMdd");
 		 SimpleDateFormat yydf = new SimpleDateFormat("yyyyMMdd");
-		 SimpleDateFormat yydfhh = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-	     Calendar calendar = Calendar.getInstance();
+		
+	   
 	     
 	  	String orderId ="";// 订单编号
 		
@@ -2336,7 +2338,14 @@ public class ProjectInfoAction extends BaseAction {
 			//String tag = request.getParameter("tag");
 			String tag =request.getParameter("anniu");
 			vo.setStatus(tag);
-			
+			if("2".equals(tag)){
+				  ChannelInfo chInfo = new ChannelInfo();
+			       chInfo.setOrder_id(orderNumber);
+			       chInfo.setPhone(kehuPhone);
+			       chInfo.setAddTime(new Date());
+			       chInfo.setRemark("【"+yydfhh.format(calendar.getTime())+"】【"+orderNumber+"】订单已收录入库，分配【不一订制-南京中央工厂】制作.");
+			     ServiceBean.getInstance().getChannelInfoFacade().insertChannelInfo(chInfo);
+			}
 			
 			String jiaofu_time= request.getParameter("jiaofu_time");
 			
@@ -3109,6 +3118,13 @@ public class ProjectInfoAction extends BaseAction {
 					}else if("2".equals(tag)){
 						vo.setStatus("5");
 						vo.setPidan_time(new Date());
+						
+						 ChannelInfo chInfo = new ChannelInfo();
+					       chInfo.setOrder_id(orderNumber);
+					       chInfo.setPhone(kehuPhone);
+					       chInfo.setAddTime(new Date());
+					       chInfo.setRemark("【"+yydfhh.format(calendar.getTime())+"】【"+orderNumber+"】订单信息已经批核（订单数据分析完成！");
+					     ServiceBean.getInstance().getChannelInfoFacade().insertChannelInfo(chInfo);
 					}
 					
 					vo.setCondition("id='" + id + "'");
@@ -3125,6 +3141,9 @@ public class ProjectInfoAction extends BaseAction {
 						vo.setStatus("9");
 						vo.setGendan_fuze(loginUser.getUserName()+"");
 						vo.setGendan_tijiao_time(new Date());
+						
+						//跟单提交
+					
 						
 					}else if("4".equals(tag)){
 						vo.setStatus("4");
@@ -3470,7 +3489,7 @@ public class ProjectInfoAction extends BaseAction {
 
 		List<DataMap> downlist = ServiceBean.getInstance()
 				.getDeviceActiveInfoFacade().getAllCallInfo(vod);
-		
+		String pngmoren ="http://47.111.148.8/watch/upload/test.png";
 		if(downlist.size()>0){
 			String fujian =downlist.get(0).get("fujian")+"";
 	
@@ -3488,8 +3507,39 @@ public class ProjectInfoAction extends BaseAction {
 				request.setAttribute("erweima_zip", downlist.get(0).get("erweima_zip")+"");
 			}
 			
+		
+            String erweima_1 =downlist.get(0).get("erweima_1")+"";
+			if("".equals(erweima_1) || erweima_1 == null ||erweima_1.length()<10 ){
+				request.setAttribute("erweima_1", pngmoren);
+			}else{
+				request.setAttribute("erweima_1", erweima_1);
+			}
+			 String erweima_2 =downlist.get(0).get("erweima_2")+"";
+				if("".equals(erweima_2) || erweima_2 == null ||erweima_2.length()<10 ){
+					request.setAttribute("erweima_2", pngmoren);
+				}else{
+					request.setAttribute("erweima_2", erweima_2);
+				}
+				 String erweima_3 =downlist.get(0).get("erweima_3")+"";
+					if("".equals(erweima_3) || erweima_3 == null ||erweima_3.length()<10 ){
+						request.setAttribute("erweima_3", pngmoren);
+					}else{
+						request.setAttribute("erweima_3", erweima_3);
+					}
+					String erweima_4 =downlist.get(0).get("erweima_4")+"";
+					if("".equals(erweima_4) || erweima_4 == null ||erweima_4.length()<10 ){
+						request.setAttribute("erweima_4", erweima_4);
+					}else{
+						request.setAttribute("erweima_4", erweima_4);
+					}
+				
+			
 			
 		}else{
+			request.setAttribute("erweima_1", pngmoren);
+			request.setAttribute("erweima_2", pngmoren);
+			request.setAttribute("erweima_3", pngmoren);
+			request.setAttribute("erweima_4", pngmoren);
 			request.setAttribute("fujian", "无");
 			request.setAttribute("erweima_zip", "无");
 		}
@@ -3742,6 +3792,10 @@ public class ProjectInfoAction extends BaseAction {
 			voStatus.setStatus(status);
 
 			if ("10".equals(status)) {
+				
+				
+			     
+			     
 				voStatus.setJiaoLiaoTime(new Date());
 				  String qianZhui = "D:/resin/webapps/watch/upload/photo/";
 					
@@ -3753,6 +3807,19 @@ public class ProjectInfoAction extends BaseAction {
 					DeviceActiveInfo vod = new DeviceActiveInfo();	
 					if(listOrder.size()>0){
 						orderid = listOrder.get(0).get("order_id")+"";
+						
+						String orderNumber = listOrder.get(0).get("order_number")+"";
+						String kehuPhone = listOrder.get(0).get("kehu_phone")+"";
+						
+						 ChannelInfo chInfo = new ChannelInfo();
+					       chInfo.setOrder_id(orderNumber);
+					       chInfo.setPhone(kehuPhone);
+					       chInfo.setAddTime(new Date());
+					       chInfo.setRemark("【"+yydfhh.format(calendar.getTime())+"】【"+orderNumber+"】仓库已备料，发往【南京中央工厂】备裁.正在配备布料，长路漫漫，未来可期!");
+					     ServiceBean.getInstance().getChannelInfoFacade().insertChannelInfo(chInfo);
+					     chInfo.setRemark("【"+yydfhh.format(calendar.getTime())+"】【"+orderNumber+"】订单已经做好全部制前准备，将送【南京中央工厂-二号车间】生产。（所有准备工作完成！即将开始制作，所有美好的事物都值得等待。");
+					     ServiceBean.getInstance().getChannelInfoFacade().insertChannelInfo(chInfo);
+					     
 
 						String url = "http://47.111.148.8:80/watch/upload/zip/";
 						String urlPhoto = "http://47.111.148.8:80/watch/upload/photo/"+orderid+"/";

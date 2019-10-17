@@ -722,6 +722,34 @@ public class UserInfoAction extends BaseAction {
 		return null;
 	}
 	
+	
+	
+	public ActionForward getHongHaoInfo(ActionMapping mapping,ActionForm actionForm,
+			 HttpServletRequest request,HttpServletResponse response){
+List<DataMap> list = null;
+UserInfo vo = new UserInfo();
+String gongHao = request.getParameter("gongHao");
+UserInfoFacade facade = ServiceBean.getInstance().getUserInfoFacade();
+if(gongHao != null && !"".equals(gongHao)){
+vo.setCondition("gong_hao ='"+gongHao+"'");
+try {
+list = facade.getUserInfo(vo);
+if(!list.isEmpty()){
+response.getWriter().write("fail");
+}else{
+response.getWriter().write("success");
+}
+} catch (SystemException e) {
+e.printStackTrace();
+} catch (IOException e) {
+e.printStackTrace();
+}
+}				
+return null;
+}
+	
+	
+	
 	/*public ActionForward getAllCompany(ActionMapping mapping,
 			ActionForm actionForm, HttpServletRequest request,
 			HttpServletResponse response) {

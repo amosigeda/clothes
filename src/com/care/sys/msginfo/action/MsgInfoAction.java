@@ -64,7 +64,12 @@ public class MsgInfoAction extends BaseAction {
 				list = ServiceBean.getInstance()
 						.getProjectInfoFacade().getProjectInfo(vo);
 				if (!list.isEmpty()&&list.size()>0) {
-					response.getWriter().write("fail");
+					String name = list.get(0).get("kehu_name")+"";
+					String phone = list.get(0).get("kehu_phone")+"";
+					String address = list.get(0).get("address")+"";
+					StringBuffer sb = new StringBuffer("fail");
+					sb.append(";").append(name).append(";").append(phone).append(";").append(address);
+					response.getWriter().write(sb.toString());
 				} else {
 					response.getWriter().write("success");
 				}
@@ -586,6 +591,65 @@ public class MsgInfoAction extends BaseAction {
 
 		
 			return mapping.findForward("a");
+		/*	if ("admin".equals(userName)) {
+		} else {
+			return mapping.findForward("updateProjectInfoxmlOther");
+		}*/
+	}
+	
+	
+	public ActionForward xiangqing(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		LoginUser loginUser = (LoginUser) request.getSession().getAttribute(
+				Config.SystemConfig.LOGINUSER);
+		/*if (loginUser == null) {
+			return null;
+		}*/
+
+		String userName = loginUser.getUserName();
+		request.setAttribute("role","admin");
+		UserInfo uvo =new UserInfo();
+		uvo.setCondition("userCode = '"+userName+"' limit 1");
+		List<DataMap> listUo =  ServiceBean.getInstance().getUserInfoFacade().getUserInfo(uvo);
+		if(listUo.size()>0){
+			String role = listUo.get(0).get("code")+"";
+			request.setAttribute("role",role);
+		}
+
+		
+		
+		
+		String id = request.getParameter("id");
+		MsgInfo vo = new MsgInfo();
+		vo.setCondition("id='" + id + "' limit 1");
+		List<DataMap> list = ServiceBean.getInstance().getMsgInfoFacade().getMsgInfoByIdUpdate(vo);
+		if (list == null || list.size() == 0) {
+			Result result = new Result();
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryMsgInfo"));
+			result.setResultCode("rowDel");
+			result.setResultType("success");
+			return mapping.findForward("result");
+		}
+		
+		
+		
+		request.setAttribute("msgInfo", list.get(0));
+		
+		ProjectInfo voo = new ProjectInfo();
+		List<DataMap> Clist = ServiceBean.getInstance().getProjectInfoFacade()
+				.getProjectWatchInfo(voo);
+		String sb = CommUtils.getPrintSelect(Clist, "project_no11",
+				"project_no", "project_no", list.get(0).get("gongyingshang")+"", 1);
+		request.setAttribute("companyList", sb);
+		
+		String gysall = CommUtils.getPrintSelectAll(Clist, "gys1","project_no", "project_no", "", 1);
+		request.setAttribute("gysall", gysall);
+		System.err.println(gysall);
+
+		
+			return mapping.findForward("xiangqing");
 		/*	if ("admin".equals(userName)) {
 		} else {
 			return mapping.findForward("updateProjectInfoxmlOther");

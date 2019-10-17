@@ -66,6 +66,7 @@ G、大汤-----，扫码4
 F、质检-----，扫码 5
 G、发货-----，扫码，6需要填写物流单号，给客户发短信，短信内容暂定，至少要包含物流单号*/
 		String token = request.getParameter("token");
+		String wechat = request.getParameter("wechat");
 		try {
 		
 			
@@ -75,7 +76,7 @@ G、发货-----，扫码，6需要填写物流单号，给客户发短信，短�
 		
 			
 			
-			vo.setCondition(  " token='"+token+"' order by id desc limit 1");
+			vo.setCondition("password='"+wechat+  "'   and token='"+token+"' order by id desc limit 1");
 			List<DataMap> list  = ServiceBean.getInstance().getAppUserInfoFacade().getAppUserInfo(vo);
 			if(list.size()>0){
 				json.put("gz", list.get(0).get("last_name")+"");

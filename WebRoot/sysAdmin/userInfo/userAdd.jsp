@@ -76,6 +76,23 @@
 		 	 }
 		 });
 	 });
+	 
+	 $("#gongHao").blur(function(){
+		 var gongHaoValue = $("#gongHao").val().trim();
+		 $.ajax({
+			 type:"post",
+			 url:"doUserInfo.do?method=getHongHaoInfo",
+		 	 data:"gongHao="+gongHaoValue,
+		 	 success:function(msg){
+		 		 if(msg=="fail"){
+		 			 alert("该工号已经被使用！");
+		 			 $("#gongHao").focus();
+		 			 return false;
+		 		 }
+		 	 }
+		 });
+	 });
+	 
  });
  function onAdd(){
 		if(frm.userCode.value.trim() == ''){
@@ -83,13 +100,13 @@
 			frm.userCode.focus();
 			return false;
 		}else{
-			var userCode = frm.userCode.value;
-			var reg = /^[a-zA-Z]\w{4,14}$/;		
+			/*var userCode = frm.userCode.value;
+			 var reg = /^[a-zA-Z]\w{4,14}$/;		
 			if(!reg.test(userCode)){
 				alert("账号格式不正确，请重新输入！");
 				frm.userCode.focus();
 				return false;
-			}
+			} */
 		}
 		if(frm.passWrd.value.trim() == ''){
 			alert("密码不能为空");
@@ -110,6 +127,19 @@
 				return false;
 			}
 		}
+		
+		if(frm.gongHao.value.trim() == ''){
+			alert("工号不能为空");
+			frm.gongHao.focus();
+			return false;
+		}
+		
+		if(frm.remark.value.trim() == ''){
+			alert("备注不能为空");
+			frm.remark.focus();
+			return false;
+		}
+		
 		if(frm.remark.value.trim().length > 30){
 			alert("字数不能超过30字");
 			frm.remark.focus();
@@ -137,7 +167,7 @@
   <tr class="tr_11">
     <td align="left" width="12%">&nbsp;&nbsp;登录账号</td>
     <td align="left" width="20%" colspan="2">
-      <input name="userCode" id="userCode" type="text" class="txt_1"maxlength="20"/><font color="red">*（字母开头，5~15位字母、数字或下滑线组合）</font>
+      <input name="userCode" id="userCode" type="text" class="txt_1"maxlength="20"/></font>
     </td>
     <td></td>
     </tr>
@@ -175,7 +205,13 @@
     <tr class="tr_11" >
     <td align="left" width="12%">&nbsp;&nbsp;分公司</td>
     <td align="left" width="20%">
-        <input name="fenComPany" type="text" class="txt_1"maxlength="20"><font color="red">*</font>
+    <select name="fenComPany">
+						<option value="1">深圳</option>
+						<option value="2">南京</option>
+					
+				</select>
+				
+       
     </td>
     <td><font color="red"></font></td>
     <td></td>
@@ -184,7 +220,7 @@
       <tr class="tr_11" >
     <td align="left" width="12%">&nbsp;&nbsp;工号</td>
     <td align="left" width="20%">
-        <input name="gongHao" type="text" class="txt_1"maxlength="20"><font color="red">*</font>
+        <input name="gongHao" id="gongHao" type="text" class="txt_1"maxlength="20"><font color="red">*</font>
     </td>
     <td><font color="red"></font></td>
     <td></td>

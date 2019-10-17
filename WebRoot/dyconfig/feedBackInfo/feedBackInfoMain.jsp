@@ -140,8 +140,15 @@ function del(id){
 							<td>
 								<bean:write name="element" property="price" />
 						</td>
+						
 						<td>
-								<bean:write name="element" property="wupin" />
+							<logic:equal name="element" property="wupin" value="1">上衣</logic:equal>							
+							<logic:equal name="element" property="wupin" value="2">裤子</logic:equal>							
+							<logic:equal name="element" property="wupin" value="3">马甲</logic:equal>							
+							<logic:equal name="element" property="wupin" value="4">衬衫</logic:equal>							
+							<logic:equal name="element" property="wupin" value="5">领带</logic:equal>							
+										
+							
 						</td>
 						<td>
 								<bean:write name="element" property="shuliang" />

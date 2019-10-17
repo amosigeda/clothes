@@ -54,7 +54,7 @@ public class doGetMsgOrderAction extends BaseAction{
 				sb.append(online);
 			}
 			//JSONObject object = JSONObject.fromObject(sb.toString());
-			String phone =request.getParameter("orderid"); 
+			String orderid =request.getParameter("orderid"); 
 			
 		
 			
@@ -62,7 +62,7 @@ public class doGetMsgOrderAction extends BaseAction{
 //			String user_id = request.getParameter("user_id");
 			
 			ChannelInfo vo = new ChannelInfo(); 
-			vo .setCondition("order_id ='"+phone+"' order by id");
+			vo .setCondition("order_id ='"+orderid+"' order by id");
 		
     		
 			List<DataMap> msgList = instance.getChannelInfoFacade().getChannelInfo(vo);
@@ -82,7 +82,7 @@ public class doGetMsgOrderAction extends BaseAction{
 			
 			//json.put("msg_count", msgCount);  //��Ϣ����
 			json.put("msg_array", msgData); 
-			json.put("orderid", phone); 
+			json.put("orderid", orderid); 
 			result = Constant.SUCCESS_CODE;
 			
 		}catch(Exception e){
