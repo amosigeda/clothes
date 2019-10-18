@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html;charset=gb2312"%>
 <%@ page import = "com.care.common.lang.*" %>
 <%@ page autoFlush="true" %>
-<html>
+<html >
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 <link href="<%=request.getContextPath()%>/css/style1.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/dtree.js"></script>
-<title>无标题文档</title>
+<title>脦脼卤锚脤芒脦脛碌碌</title>
 <script type="text/javascript">
    function CheckShowLeft(){
      if(document.all){
@@ -24,12 +24,12 @@
 <body onload="CheckShowLeft();">
 <table cellpadding="0" cellspacing="0" class="table2" id="leftmenu">
   <tr>
-     <td width="120" valign="top" > 
+     <td width="100%" valign="top" > 
       <script type="text/javascript">
 		 <%new CommUtils().printUserMenu(request,response);%>
 	  </script>
     </td>
-      <td width="15" valign="top">&nbsp;</td>   
+<!--      <td width="15" valign="top">&nbsp;</td>   -->
   </tr>
 </table>
 </body>

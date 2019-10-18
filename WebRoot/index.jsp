@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 <script language="JavaScript" src="public/g_js.js"></script>
-<title> 登录不一后台管理系统 </title>
+<title> 登录不一订制和周卢江管理系统 </title>
 <link href="css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <script language="javascript">
@@ -57,77 +57,27 @@ function clears(){
 }
 </script>
 <body>
+<div class="loginpage">
 <form name="frmLogon" method="post" action="validate.jsp" onSubmit="return check()">
-<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0" background="images/login/blue.jpg">
-  
-  <tr>
-    <td height="699"><table width="862" border="0" align="center" cellpadding="0" cellspacing="0">
-      <tr>
-        <td height="198">&nbsp;</td>
-      </tr>
-      <tr>
-        <td height="245"><table width="861" border="0" cellspacing="0">
-            <tr>
-              <td width="236" height="244">&nbsp;</td>
-              <td width="373"><table width="378" height="240" border="0" cellspacing="0" background="images/login/desktop.jpg">
-                <tr>
-                  <td width="90" height="56">&nbsp;</td>
-                  <td width="192">&nbsp;</td>
-                  <td width="90">&nbsp;</td>
-                </tr>
-                <tr>
-                  <td height="125">&nbsp;</td>
-                  <td><table width="100%" height="128" border="0" cellpadding="0" cellspacing="0">
-                    <tr>
-                      <td width="230" height="118"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-                          <tr>
-                            <td width="28%" height="30"><div align="center"><span class="STYLE3">用户</span></div></td>
-                            <td width="72%" height="30"><input type="text" name="code" value="" style="height:18px; width:130px; border:solid 1px #cadcb2; font-size:12px;" ></td>
-                          </tr>
-                          <tr>
-                            <td height="30"><div align="center"><span class="STYLE3">密码</span></div></td>
-                            <td height="30"><input type="password" name="paw" value="" style="height:18px; width:130px; border:solid 1px #cadcb2; font-size:12px;"></td>
-                          </tr>
-                         <!--  <tr>
-                            <td height="30"><div align="center"><span class="STYLE3">校验码</span></div></td>
-                            <td width="72%" height="30"><input type="text" name="rand" value="" style="height:18px; width:130px; border:solid 1px #cadcb2; font-size:12px;" ></td>
-                          </tr>
-                          <tr>
-                           </tr>
-                            <tr>
-                            <td height="30"><div align="center"><span class="STYLE3"><a href="javascript:loadimage();">换一张</a></span></div></td>
-                            <td width="72%" height="30"><img alt="code..." name="randImage" id="randImage" src="image.jsp" style="height:18px; width:130px; border:solid 1px #cadcb2; font-size:12px;" ></td>
-                            
-                          </tr> -->
-                          <tr>
-                            <td height="30">&nbsp;</td>
-                            <td height="30"><input type="submit" name="b1" value="确定">
-                                <input type="button" name="b2" value="清空" onClick="javascript:clears()"></td>
-                          </tr>
-                      </table></td>
-            </tr>
-                  </table></td>
-                  <td>&nbsp;</td>
-                </tr>
-                <tr>
-                  <td height="53">&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                </tr>
-              </table></td>
-              <td width="246">&nbsp;</td>
-            </tr>
-            
-            
-          </table></td>
-      </tr>
-      <tr>
-        <td height="250" valign="top">&nbsp;</td>
-      </tr>
-    </table></td>
-  </tr>
-</table>
+	<div class="loginBox">
+		<h2>不一订制和周卢江</h2>
+		<div class="loginBox_input">
+			<div class="LB_group">
+				<label>用 户</label>
+				<input type="text" name="code" value="" placeholder="请输入用户名">
+			</div>
+			<div class="LB_group">
+				<label>密 码</label>
+				<input type="password" name="paw" value="" placeholder="请输入密码">
+			</div>
+			<div class="LB_btn">
+				<input class="btn" type="submit" name="b1" value="确定">
+    			<input class="btn" type="button" name="b2" value="清空" onClick="javascript:clears()">
+			</div>
+		</div>
+	</div>
 </form>
+</div>
 </body>
 <script language="javascript" type="text/javascript">
 frmLogon.code.focus();

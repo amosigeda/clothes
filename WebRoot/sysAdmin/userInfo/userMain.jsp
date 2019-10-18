@@ -101,8 +101,8 @@ function c(){
 					 <td width="6%">电话</td>
 					<td width="15%">创建时间</td>
 					<td width="15%">最新修改时间</td> 
-					<td width="15%">备注</td>
-					<td width="15%">操作</td>                 
+					<td width="">备注</td>
+					<td width="9%">操作</td>                 
 				</tr>
 				<logic:iterate id="element" name="pageList">
 					<tr class="tr_5" onmouseover='this.className="tr_4"' onmouseout='this.className="tr_5"' >

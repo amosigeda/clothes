@@ -8,7 +8,7 @@
 	</select>
 
 	<select id="getShareInfo" resultClass="com.godoing.rose.lang.DataMap" parameterClass="com.care.sys.shareinfo.domain.ShareInfo">
-		SELECT * FROM share_info
+		SELECT * FROM orderid_all
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
 				$condition$
@@ -77,7 +77,15 @@ FROM
 	</select>
 
 	<insert id="insertShareInfo" parameterClass="com.care.sys.shareinfo.domain.ShareInfo">
-		INSERT INTO share_info(user_id,to_user_id,device_imei,is_priority,share_date,belong_project) VALUES (#userId#,#toUserId#,#deviceId#,#isPriority#,#shareDate#,#belongProject#)
+		INSERT INTO orderid_all
+		(order_id,addhang,addhang1,
+		orderNumber,orderNumber1,orderNumber2,orderNumber3,orderNumber4,orderNumber5,orderNumber6,orderNumber7,orderNumber8,orderNumber9,
+		xsjg,xsjg1,xsjg2,xsjg3,xsjg4,xsjg5,xsjg6,xsjg7,xsjg8,xsjg9
+		) 
+		VALUES 
+		(#order_id#,#addhang#,#addhang1#,
+		#orderNumber#,#orderNumber1#,#orderNumber2#,#orderNumber3#,#orderNumber4#,#orderNumber5#,#orderNumber6#,#orderNumber7#,#orderNumber8#,#orderNumber9#,
+		#xsjg#,#xsjg1#,#xsjg2#,#xsjg3#,#xsjg4#,#xsjg5#,#xsjg6#,#xsjg7#,#xsjg8#,#xsjg9#)
 	</insert>
 
 	<update id="updateShareInfo" parameterClass="com.care.sys.shareinfo.domain.ShareInfo">

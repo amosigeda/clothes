@@ -80,3 +80,24 @@ SELECT
 	text-align: center;
 }
 
+.loginpage{position:fixed;top:0;bottom:0;left:0;right:0;background:#00ACDD;}
+.loginBox{
+	background:#fff; box-shadow: 0 0 5px rgba(0,0,0,.3); border-radius: 6px;padding:20px;position: absolute;top:50%; left:50%;
+	transform:translate(-50%,-50%);
+	-ms-transform:translate(-50%,-50%); 	/* IE 9 */
+	-moz-transform:translate(-50%,-50%); 	/* Firefox */
+	-webkit-transform:translate(-50%,-50%); /* Safari ºÍ Chrome */
+	-o-transform:translate(-50%,-50%);
+}
+.loginBox_input{padding:20px 60px;}
+.loginBox h2{text-align: center; border-bottom:1px solid #ddd; padding-bottom:15px; margin-top:0; line-height: 32px;} 
+.LB_group{margin-bottom: 15px;}
+.LB_group label{margin-right:10px; font-size:14px; width: 30px;}
+.LB_group input{height:32px; line-height:32px; border:1px solid #ddd; border-radius: 6px; padding:0 10px; width:200px;}
+.LB_btn{padding-left:40px;}
+.btn{padding:4px 15px; border-radius: 5px; color:#fff; background:#00ACDD; height:auto; font-size:14px; border:0; box-shadow: 0 0 3px rgba(0,0,0,.6);}
+.LB_btn .btn{ margin: 0 5px;}
+
+
+
+

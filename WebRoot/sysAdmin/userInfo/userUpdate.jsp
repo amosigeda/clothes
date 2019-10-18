@@ -89,7 +89,7 @@ window.location="doUserInfo.do?method=initAdverPower&id="+id+"&userCode="+userCo
 <table width="100%" border="0"cellpadding="0" cellspacing="1"  class="tbl_11">
   <tr>
      <th colspan="4" nowrap="nowrap" align="left">
-                           配置<font color="#FFFF00"><%=userInfo.getAt("userCode") %></font>
+                           配置 <font color="#449d44"><%=userInfo.getAt("userCode") %></font>
      </th>
    </tr>
    <!-- <tr class="tr_11">
@@ -97,7 +97,7 @@ window.location="doUserInfo.do?method=initAdverPower&id="+id+"&userCode="+userCo
    	<td><%=userInfo.getAt("userCode") %></td>
    </tr> -->
    <tr class="tr_11">
-    <td width="12%" align="left">&nbsp;&nbsp;密码</td>
+    <td width="12%" align="right">&nbsp;&nbsp;密码</td>
     <td align="left" width="20%">
     	<input name="passWrd" type="text"  accesskey="p" tabindex="p" value="<%=userInfo.getAt("passWrd1")%>">
 	  	<font color="red">*5~16位字母、数字或下滑线组合</font>
@@ -128,28 +128,28 @@ window.location="doUserInfo.do?method=initAdverPower&id="+id+"&userCode="+userCo
   </tr> --%>
   
      <tr class="tr_11">
-    <td width="12%" align="left">&nbsp;&nbsp;分公司</td>
+    <td width="12%" align="right">&nbsp;&nbsp;分公司</td>
     <td align="left" width="20%">
     	<input name="company" type="text"  accesskey="p" tabindex="p" value="<%=userInfo.getAt("company")%>">
     </td>
   </tr>
   
     <tr class="tr_11">
-    <td width="12%" align="left">&nbsp;&nbsp;电话</td>
+    <td width="12%" align="right">&nbsp;&nbsp;电话</td>
     <td align="left" width="20%">
     	<input name="phoneNo" type="text"  accesskey="p" tabindex="p" value="<%=userInfo.getAt("phoneNo")%>">
     </td>
   </tr>
   
      <tr class="tr_11">
-    <td width="12%" align="left">&nbsp;&nbsp;工号</td>
+    <td width="12%" align="right">&nbsp;&nbsp;工号</td>
     <td align="left" width="20%">
     	<input name="gong_hao" type="text"  accesskey="p" tabindex="p" value="<%=userInfo.getAt("gong_hao")%>">
     </td>
   </tr>
   
     <tr class="tr_11">
-    <td width="12%" align="left">&nbsp;&nbsp;性别</td>
+    <td width="12%" align="right">&nbsp;&nbsp;性别</td>
     <td align="left" width="20%">
     	<select name="sex"  id="sex">     
   <option value="男" <%=userInfo.getAt("sex").equals("男")? "selected":"" %>>男</option>     
@@ -160,7 +160,7 @@ window.location="doUserInfo.do?method=initAdverPower&id="+id+"&userCode="+userCo
   
   
     <tr class="tr_11">
-    <td width="12%" align="left">&nbsp;&nbsp;备注</td>
+    <td width="12%" align="right">&nbsp;&nbsp;备注</td>
     <td align="left" >
       <textarea name="remark" id="remark" rows="5" cols="50" class="txt_1"><%=userInfo.getAt("remark")%></textarea>
     </td>

@@ -51,12 +51,32 @@ appearance: none;
 					success: function(msg) {
 						if(msg == "fail") {
 							alert("订单号重复！！！");
+							$("#orderNumber").val("");
 							$("#orderNumber").focus();
 							return false;
 						}
 					}
 				});
 			});
+			
+			/* $("#orderNumber1").blur(function() {
+				var userCodeValue = $("#orderNumber1").val().trim();
+				$.ajax({
+					type: "post",
+					url: "doProjectInfo.do?method=verfyDingDan",
+					data: "userCode=" + userCodeValue,
+					success: function(msg) {
+						if(msg == "fail") {
+							alert("订单号重复！！！");
+							$("#orderNumber1").val("");
+							$("#orderNumber1").focus();
+							return false;
+						}
+					}
+				});
+			}); */
+			
+			
 		});
 
 		function setSecond(obj) {
@@ -85,6 +105,7 @@ appearance: none;
 				frmGo.orderNumber.focus();
 				return false;
 			}
+			
 			frmGo.submit();
 		}
 
@@ -138,6 +159,57 @@ appearance: none;
 			document.getElementById("anniu").setAttribute("value", wechat);
 		}
 
+		function addTableOrder() {
+			var tab = document.getElementById("tab01"); //获得表格
+			//var colsNum = tab.rows.item(0).cells.length; //表格的列数
+			//表格当前的行数 
+			var num = document.getElementById("tab01").rows.length;
+			/*   alert("当前行="+num); */
+				var addhang1 = parseFloat(frmGo.addhang1.value); 
+			
+			var rownum = num - 30-addhang1;
+
+			tab.insertRow(rownum);
+
+			var n = rownum - 3;
+		
+			
+			/* alert(n);  */
+			
+			  document.getElementById("addhang").setAttribute("value", n);
+			
+			if(n <= 9) {
+				for(var i = 0; i < 8; i++) {
+					tab.rows[rownum].insertCell(i); //插入列
+					tab.rows[rownum].cells[i].setAttribute("align", "center");
+					if(i == 0) {
+						tab.rows[rownum].cells[i].setAttribute("class", "td_bg_yellow");
+						tab.rows[rownum].cells[i].innerHTML = '<button type="button" onclick="delRowOrder(this)">-</button> 订单号';
+					} else if(i == 1) {
+						tab.rows[rownum].cells[i].innerHTML = '<input name="orderNumber' + n + '"   id="orderNumber' + n + '" value=""  type="text"   maxlength="100" />';
+					} else if(i == 2) {
+						tab.rows[rownum].cells[i].setAttribute("class", "td_bg_yellow");
+						tab.rows[rownum].cells[i].innerHTML = '销售价格';
+					} else if(i == 3) {
+						tab.rows[rownum].cells[i].innerHTML = '<input name="xsjg' + n + '" type="text" value=""  maxlength="100" />';
+					}
+				}
+				//tab.rows[rownum].insertCell(i);
+				//tab.rows[rownum].cells[i].innerHTML = '<a href="#" onclick="delRow(this)">-</a>';
+			} else {
+				alert("最多新增9行");
+			}
+		}
+		//删除行
+		function delRowOrder(obj) {
+			var Row = obj.parentNode;
+			var Row = obj.parentNode; //tr
+			while(Row.tagName.toLowerCase() != "tr") {
+				Row = Row.parentNode;
+			}
+			Row.parentNode.removeChild(Row); //删除行
+		}
+		
 		//添加行  id="huanjiename'+n+'"
 		function addTable() {
 			var tab = document.getElementById("tab01"); //获得表格
@@ -150,7 +222,11 @@ appearance: none;
 			tab.insertRow(rownum);
 
 			var n = rownum - 28;
-			alert(n);
+			var addhang = parseFloat(frmGo.addhang.value); 
+			n=n-addhang;
+			 document.getElementById("addhang1").setAttribute("value", n);
+			
+			
 			if(n <= 14) {
 				for(var i = 0; i < 8; i++) {
 					tab.rows[rownum].insertCell(i); //插入列
@@ -204,6 +280,9 @@ appearance: none;
 			}
 			Row.parentNode.removeChild(Row); //删除行
 		}
+		
+		
+		
 
 		function look() {
 			var value = document.getElementById("jiaofu_time").value; //获取值
@@ -226,12 +305,6 @@ appearance: none;
 			alert(selectObj);
 			selectObj[0].text = xianshi;
 
-		}
-		
-		function setHiddenRow(oTable,iRow)
-		{
-		       /* oTable.rows[iRow].style.display = oTable.rows[iRow].style.display == "none"; */
-		      (oTable.rows[iRow].style.display = oTable.rows[iRow].style.display == "none"?"block":"none"); 
 		}
 	</script>
 
@@ -323,9 +396,11 @@ appearance: none;
 				</tr>
 
 				<tr>
-					<td nowrap="nowrap" align="center" class="f_bold">订单号</td>
+					<td nowrap="nowrap" align="center" class="f_bold"><button type="button" onclick="addTableOrder();" style="margin-left: 0px;">+</button>订单号</td>
 <!-- 					<button type="button" onClick="setHiddenRow(document.getElementById('tab01'),0)" style="margin-left: 0px;">+</button> -->
-					<td nowrap="nowrap" align="center" ><input name="orderNumber"  id="orderNumber" type="text" class="txt_1"  />
+					<td nowrap="nowrap" align="center" >
+					<input name="orderNumber"  id="orderNumber" type="text" class="txt_1"  />
+							
 						<font color="red"></font>
 					</td>
 					<td nowrap="nowrap" align="center" class="f_bold">销售价格</td>
@@ -343,24 +418,7 @@ appearance: none;
 				</tr>
 				
 				
-				<tr>
-					<td nowrap="nowrap" align="center" class="f_bold">订单号</td>
-					<td nowrap="nowrap" align="center" ><input name="orderNumber"  id="orderNumber" type="text" class="txt_1"  />
-						<font color="red"></font>
-					</td>
-					<td nowrap="nowrap" align="center" class="f_bold">销售价格</td>
-					<td nowrap="nowrap" align="center" ><input name="salePrice"  id="salePrice" type="text" class="txt_1"  />
-						<font color="red"></font>
-					</td>
-					<td nowrap="nowrap" align="center" class="f_bold">身高</td>
-					<td nowrap="nowrap" align="center" ><input name="height"  id="height" type="text" class="txt_1" maxlength="100" />
-						<font color="red"></font>
-					</td>
-					<td nowrap="nowrap" align="center" class="f_bold">体重(KG)</td>
-					<td nowrap="nowrap" align="center" ><input name="weight"  id="weight" type="text" class="txt_1" maxlength="100" />
-						<font color="red"></font>
-					</td>
-				</tr>
+				
 				<tr>
 					<td nowrap="nowrap" align="center" class="f_bold">旺旺名</td>
 					<td nowrap="nowrap" align="center" ><input name="projectNo"  id="projectNo" type="text" class="txt_1"  />
@@ -969,6 +1027,8 @@ onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
 					<td nowrap="nowrap" align="center" ></td>
 					<td nowrap="nowrap" align="right" >
 						<input name="anniu" id="anniu" type="hidden" class="txt_1" />
+							<input  name="addhang"  id="addhang" type="hidden" class="txt_1"   value="0"/>
+							<input  name="addhang1"  id="addhang1" type="hidden" class="txt_1"   value="0"/>
 
 						<input id="ok" title="1" type="button" name="ok" accesskey="y" tabindex="y" value="保存" class="but_1 btn" onclick="onAdd(this.title)">
 					</td>

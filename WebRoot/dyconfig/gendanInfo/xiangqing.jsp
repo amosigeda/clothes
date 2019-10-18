@@ -6,7 +6,7 @@
 <%@ page import="com.care.app.LoginUser"%>
 <%@ taglib uri="/WEB-INF/struts-bean" prefix="bean"%>
 <%@ taglib uri="/WEB-INF/struts-logic" prefix="logic"%>
-
+<jsp:useBean id = "orderall" scope = "request" class = "com.godoing.rose.lang.DataMap"/>
 <jsp:useBean id = "projectInfo" scope = "request" class = "com.godoing.rose.lang.DataMap"/>
 <jsp:useBean id = "duoyu" scope = "request" class = "com.godoing.rose.lang.DataMap"/>
 <%@ page autoFlush="true" %>
@@ -171,6 +171,117 @@ function onUpdate(){
 <input style="border:none;" type="text"        name="weight" id="weight"   value="<%=projectInfo.getAt("weight")%>"  >
 </td>
 			</tr>
+				 <%if(!"".equals(orderall.getAt("orderNumber1"))&& orderall.getAt("orderNumber1")!=null ){ %>
+          	<tr>
+				<td nowrap="nowrap" align="center" class="f_bold">订单号</td>
+				<td nowrap="nowrap" align="center" >
+				<input style="border:none;" type="text"     name="orderNumber" id="orderNumber"  value=<%=orderall.getAt("orderNumber1")%>>
+				</td>
+				<td nowrap="nowrap" align="center" class="f_bold">销售价格</td>
+				<td nowrap="nowrap" align="center" >
+	<input style="border:none;" type="text"     name="salePrice" id="salePrice"  value=<%=orderall.getAt("xsjg1")%>>
+</td>
+			</tr>
+			 <%} %>
+			  <%if(!"".equals(orderall.getAt("orderNumber2"))&& orderall.getAt("orderNumber2")!=null ){ %>
+          	<tr>
+				<td nowrap="nowrap" align="center" class="f_bold">订单号</td>
+				<td nowrap="nowrap" align="center" >
+				<input style="border:none;" type="text"     name="orderNumber" id="orderNumber"  value=<%=orderall.getAt("orderNumber2")%>>
+				</td>
+				<td nowrap="nowrap" align="center" class="f_bold">销售价格</td>
+				<td nowrap="nowrap" align="center" >
+	<input style="border:none;" type="text"     name="salePrice" id="salePrice"  value=<%=orderall.getAt("xsjg2")%>>
+</td>
+			</tr>
+			 <%} %>
+			 
+			  <%if(!"".equals(orderall.getAt("orderNumber3"))&& orderall.getAt("orderNumber3")!=null ){ %>
+          	<tr>
+				<td nowrap="nowrap" align="center" class="f_bold">订单号</td>
+				<td nowrap="nowrap" align="center" >
+				<input style="border:none;" type="text"     name="orderNumber" id="orderNumber"  value=<%=orderall.getAt("orderNumber3")%>>
+				</td>
+				<td nowrap="nowrap" align="center" class="f_bold">销售价格</td>
+				<td nowrap="nowrap" align="center" >
+	<input style="border:none;" type="text"     name="salePrice" id="salePrice"  value=<%=orderall.getAt("xsjg3")%>>
+</td>
+			</tr>
+			 <%} %>
+			  <%if(!"".equals(orderall.getAt("orderNumber4"))&& orderall.getAt("orderNumber4")!=null ){ %>
+          	<tr>
+				<td nowrap="nowrap" align="center" class="f_bold">订单号</td>
+				<td nowrap="nowrap" align="center" >
+				<input style="border:none;" type="text"     name="orderNumber" id="orderNumber"  value=<%=orderall.getAt("orderNumber4")%>>
+				</td>
+				<td nowrap="nowrap" align="center" class="f_bold">销售价格</td>
+				<td nowrap="nowrap" align="center" >
+	<input style="border:none;" type="text"     name="salePrice" id="salePrice"  value=<%=orderall.getAt("xsjg4")%>>
+</td>
+			</tr>
+			 <%} %>
+			  <%if(!"".equals(orderall.getAt("orderNumber5"))&& orderall.getAt("orderNumber5")!=null ){ %>
+          	<tr>
+				<td nowrap="nowrap" align="center" class="f_bold">订单号</td>
+				<td nowrap="nowrap" align="center" >
+				<input style="border:none;" type="text"     name="orderNumber" id="orderNumber"  value=<%=orderall.getAt("orderNumber5")%>>
+				</td>
+				<td nowrap="nowrap" align="center" class="f_bold">销售价格</td>
+				<td nowrap="nowrap" align="center" >
+	<input style="border:none;" type="text"     name="salePrice" id="salePrice"  value=<%=orderall.getAt("xsjg5")%>>
+</td>
+			</tr>
+			 <%} %>
+			  <%if(!"".equals(orderall.getAt("orderNumber6"))&& orderall.getAt("orderNumber6")!=null ){ %>
+          	<tr>
+				<td nowrap="nowrap" align="center" class="f_bold">订单号</td>
+				<td nowrap="nowrap" align="center" >
+				<input style="border:none;" type="text"     name="orderNumber" id="orderNumber"  value=<%=orderall.getAt("orderNumber6")%>>
+				</td>
+				<td nowrap="nowrap" align="center" class="f_bold">销售价格</td>
+				<td nowrap="nowrap" align="center" >
+	<input style="border:none;" type="text"     name="salePrice" id="salePrice"  value=<%=orderall.getAt("xsjg6")%>>
+</td>
+			</tr>
+			 <%} %>
+			 
+			  <%if(!"".equals(orderall.getAt("orderNumber7"))&& orderall.getAt("orderNumber7")!=null ){ %>
+          	<tr>
+				<td nowrap="nowrap" align="center" class="f_bold">订单号</td>
+				<td nowrap="nowrap" align="center" >
+				<input style="border:none;" type="text"     name="orderNumber" id="orderNumber"  value=<%=orderall.getAt("orderNumber7")%>>
+				</td>
+				<td nowrap="nowrap" align="center" class="f_bold">销售价格</td>
+				<td nowrap="nowrap" align="center" >
+	<input style="border:none;" type="text"     name="salePrice" id="salePrice"  value=<%=orderall.getAt("xsjg7")%>>
+</td>
+			</tr>
+			 <%} %>
+			   <%if(!"".equals(orderall.getAt("orderNumber8"))&& orderall.getAt("orderNumber8")!=null ){ %>
+          	<tr>
+				<td nowrap="nowrap" align="center" class="f_bold">订单号</td>
+				<td nowrap="nowrap" align="center" >
+				<input style="border:none;" type="text"     name="orderNumber" id="orderNumber"  value=<%=orderall.getAt("orderNumber8")%>>
+				</td>
+				<td nowrap="nowrap" align="center" class="f_bold">销售价格</td>
+				<td nowrap="nowrap" align="center" >
+	<input style="border:none;" type="text"     name="salePrice" id="salePrice"  value=<%=orderall.getAt("xsjg8")%>>
+</td>
+			</tr>
+			 <%} %>
+			 
+			   <%if(!"".equals(orderall.getAt("orderNumber9"))&& orderall.getAt("orderNumber9")!=null ){ %>
+          	<tr>
+				<td nowrap="nowrap" align="center" class="f_bold">订单号</td>
+				<td nowrap="nowrap" align="center" >
+				<input style="border:none;" type="text"     name="orderNumber" id="orderNumber"  value=<%=orderall.getAt("orderNumber9")%>>
+				</td>
+				<td nowrap="nowrap" align="center" class="f_bold">销售价格</td>
+				<td nowrap="nowrap" align="center" >
+	<input style="border:none;" type="text"     name="salePrice" id="salePrice"  value=<%=orderall.getAt("xsjg9")%>>
+</td>
+			</tr>
+			 <%} %>
 			<tr>
 				<td nowrap="nowrap" align="center" class="f_bold">旺旺名</td>
 				<td nowrap="nowrap" align="center" >
@@ -244,7 +355,7 @@ function onUpdate(){
 				 <input style="border:none;" name="jiankuanA2"  type="text" class="txt_1"    value="<%=projectInfo.getAt("jiankuan_a2")%>" >
 				</td>
 				<td nowrap="nowrap" align="center"  rowspan="4">
-					<img src="<%=request.getAttribute("erweima_1")%>" width="100" height="100" />
+				<img src="<%=request.getAttribute("erweima_1")%>" width="100" height="100" />
 				</td>
 				<td nowrap="nowrap" align="center" class="f_bold">领围</td>
 				<td nowrap="nowrap" align="center" >
@@ -254,7 +365,7 @@ function onUpdate(){
 				 <input style="border:none;" name="lingweiB2"  type="text" class="txt_1" value="<%=projectInfo.getAt("lingwei_b2")%>" >
 				</td>
 				<td nowrap="nowrap" align="center"  rowspan="4">
-					<img src="<%=request.getAttribute("erweima_2")%>" width="100" height="100" />
+				<img src="<%=request.getAttribute("erweima_2")%>" width="100" height="100" />
 				</td>
 			</tr>
 			<tr class="td_bg_pink">
@@ -437,7 +548,7 @@ function onUpdate(){
 			
 				</td>
 				<td nowrap="nowrap" align="center"  rowspan="4">
-				<img src="<%=request.getAttribute("erweima_3")%>" width="100" height="100" />
+					<img src="<%=request.getAttribute("erweima_3")%>" width="100" height="100" />
 				</td>
 				<td nowrap="nowrap" align="center" class="f_bold">肩宽</td>
 				<td nowrap="nowrap" align="center" >

@@ -22,6 +22,11 @@ public class Utils {
 	 *            字符串形式的ip
 	 * @return 字节数组形式的ip
 	 */
+	
+	public static boolean isEmpty(String str) {
+		return null == str || "".equals(str);
+	}
+	
 	public static byte[] getIpByteArrayFromString(String ip) {
 		byte[] ret = new byte[4];
 		java.util.StringTokenizer st = new java.util.StringTokenizer(ip, ".");

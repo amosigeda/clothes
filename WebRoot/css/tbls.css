@@ -1,3 +1,7 @@
+
+html{height: 100%; overflow: hidden;}
+body{margin: 0;padding: 0 20px 20px;box-shadow: inset 15px 0px 10px -15px rgba(0,0,0,.2); height: calc(100% - 20px); overflow-y: scroll;background:#F0F3F4;}
+form{margin-bottom:0;}
 /* *{margin:0;padding:0} */
 .result_cess {
 	font-size: 12px;
@@ -54,18 +58,28 @@
 }
 .tbl_11 {
 	font-size: 12px;
+/*
 	border-color: #B0C4DE;
 	border: 2px solid #B1B6D2;
 	background-color: #FFFFFF;
+*/
 }
 .tbl_11 th{
+/*
 	border: 1px solid #CECFDA; 
 	background: #6D73A5 url("../images/bg/title_bg5.gif"); 
+*/
 	font-weight:bold;
-	padding: 6px 6px;
-	color:#fff;
+	padding: 15px;
+	color:#333;
 	font-size:14px;
+	border-bottom: 1px solid #ddd;
 }
+.tbl_11 td{
+	padding:15px 10px 0;
+}
+.tbl_11 input[type="text"]{line-height:24px; border-radius: 3px; border:1px solid #A0B8BE; padding-left: 5px;}
+.tbl_11 input, .tbl_11 select{margin-right:5px;}
 .tr_11 {
 	margin-top: 50px;
 	/* line-height:25px; */
@@ -76,7 +90,7 @@
 	background-color: #cccccc;
 	empty-cells: show; 
 	border-collapse: collapse;
-	font-family:"Î¢ÈíÑÅºÚ";
+	font-family:"Î¢É­Ò…Ûš";
 }
 .tbl_3 {
 	font-size: 12px;
@@ -84,7 +98,7 @@
 	background-color: #cccccc;
 	empty-cells: show; 
 	border-collapse: collapse;
-	font-family:"Î¢ÈíÑÅºÚ";
+	font-family:"Î¢É­Ò…Ûš";
 }
 .tbl_1 th{
 	border: 1px solid #CECFDA; 
@@ -149,13 +163,15 @@
 }
 .txt_1 {
 	border: 1px solid #A0B8BE;
-	line-height: 16px;
+	border-radius: 3px;
+	line-height: 22px;
+	padding-left:5px;
 	background-color: #FAFCFC;
 	color: #080808;
 }
 
 /*ZST@20151112
- *ÉèÖÃInput Type=numberµÄÑùÊ½
+ *Ê¨×ƒInput Type=numberÖ„Ò¹Ê½
 */
 .txt_number {
 	border: 1px solid #A0B8BE;
@@ -166,18 +182,15 @@
 }
 
 .but_1 {
-	border:2px solid #B77206;
-	border-top:2px solid #ffeebe;
-	border-left:2px solid #ffeebe;
+	border:1px solid #4cae4c;
 	border-radius:3px;
-	-moz-border-radius:3px;
-	-webkit-border-radius:3px;
-	background:#FFD050;
-	color:#5C4215;
+	background:#5cb85c;
+	color:#fff;
 	cursor: pointer;
-	height:22px;
+	padding: 3px 16px;
 	margin-left:10px;
 }
+.but_1:hover{background:#449d44;}
 .but_2 {
 	background-color: #87CEFA;
 	border: 1px solid #A0B8BE;
@@ -199,7 +212,7 @@
 	line-height: 20px;
 	font-size: 12px;
 }
-/*ÐÂÔö*/
+/*Ñ‚Õ¶*/
 .tb2_1{
 	font-size: 12px;
 	background-color: #B0C4DE;
@@ -261,20 +274,20 @@
 	background-color: #B0C4DE;
 }
 .table { 
-	border: 1px solid #ff9933;
-	background: #fff;  
+/*	border: 1px solid #ff9933;*/
+/*	background: #fff;  */
 	empty-cells: show; 
 	border-collapse: collapse; 
-	margin-bottom:5px;
+/*	margin-bottom:5px;*/
 	text-align:left;
 	width:100%;
-	font-family:"Î¢ÈíÑÅºÚ";
+	font-family:"Î¢É­Ò…Ûš";
 	font-size: 12px;
 }
 .title_2 td{ 
 	border: 1px solid #CECFDA; 
-	background: #E7E9F3; 
-	color:#7F85C8;
+	background: #efefef; 
+	color:#0092BB;
 	text-indent: 5pt;
 	text-align: center;
 	line-width: 60px;
@@ -311,15 +324,15 @@
 }
 .tr_4 {
 	border: 1px solid #DADDEC;
-	background-color: #FFEE7A;
+	background-color: #00ACDD;
 	line-height: 28px;
-	color: #080808;
+	color: #fff;
 	font-size: 12px;
 	text-indent: 5pt;
 	text-align: center;
 }
 .tr_4 td{
-	background-color: #FFEE7A;
+	background-color: #00ACDDs;
 	border: 1px solid #DADDEC;
 	font-size: 105%;
 }
@@ -352,7 +365,7 @@
 	background:#E7E9F3;
 }
 .tr_7 {
-	/*9400D3#008000(ÂÌ)#7fc5ac(µ­ÂÌ)*/
+	/*9400D3#008000(ÃŒ)#7fc5ac(Õ­ÃŒ)*/
 	background-color: #008000;
 	color: #FFFFFF;
 	line-height: 26px;
@@ -377,16 +390,16 @@
 }
 .title_3 td { 
 	border: 1px solid #CCCFE0; 
-	background: #DADDEC; 
-	color:#7F85C8;
+	background: #e2e2e2; 
+	color:#0092BB;
 	padding:4px 10px;
 }
 .table th { 
-	border: 1px solid #B1B6D2; 
-	background: #6D73A5 url("../images/bg/title_bg5.gif"); 
-	padding:4px 15px;
+/*	border: 1px solid #B1B6D2; 
+	background: #6D73A5 url("../images/bg/title_bg5.gif"); */
+	padding:15px 15px;
 	font-weight:bold;
-	color:#fff;
+	color:#333;
 	font-size:14px;
 	
 }
@@ -509,7 +522,7 @@ A:hover { COLOR: #CD0000; TEXT-DECORATION: none }
 	height:25px;
 	background:#ff9933;
 	color:#336699;
-	font-family:Î¢ÈíÑÅºÚ;
+	font-family:Î¢É­Ò…Ûš;
 	border:2px solid #B77206;
 	border-radius:3px;
 	-moz-border-radius:3px;
@@ -585,3 +598,6 @@ a{
 	padding-left: 10px;
 	color: #336699;
 }
+
+
+

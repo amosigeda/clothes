@@ -1,5 +1,8 @@
 eclipse.preferences.version=1
+encoding//WebRoot/Left.jsp=UTF-8
 encoding//WebRoot/WEB-INF/resource.xml=UTF-8
+encoding//WebRoot/css/style.css=UTF-8
+encoding//WebRoot/css/tbls.css=UTF-8
 encoding//WebRoot/sysAdmin/roleInfo/roleFuncPop.jsp=UTF-8
 encoding//WebRoot/update.html=GB2312
 encoding//src/com/care/common/config/Config.java=UTF-8

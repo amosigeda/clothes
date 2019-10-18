@@ -47,6 +47,7 @@
 				success : function(msg) {
 					if (msg == "success") {
 						alert("ÎÞ¸Ã¶©µ¥ºÅ");
+						$("#orderNumber").val("");
 						$("#orderNumber").focus();
 						return false;
 					}else{

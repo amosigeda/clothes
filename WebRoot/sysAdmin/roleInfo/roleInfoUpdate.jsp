@@ -60,8 +60,8 @@ function onUpdate(){
   <tr class="tr_11" align="center">
   	<td></td>
     <td align="left">
-    	&nbsp;&nbsp;<input type="submit" name="ok" accesskey="y" tabindex="y"  value="确定" class="but_1" style="font-size:11;width:40px;height:21px;" onclick="onUpdate()">
-      	<input type="button" name="back" accesskey="b" tabindex="b" value="返 回" class="but_1" onclick="location='doRoleInfo.do?method=queryRoleInfo'" style="font-size:11;width:40px;height:21px;">  
+    	&nbsp;&nbsp;<input type="submit" name="ok" accesskey="y" tabindex="y"  value="确定" class="but_1" onclick="onUpdate()">
+      	<input type="button" name="back" accesskey="b" tabindex="b" value="返 回" class="but_1" onclick="location='doRoleInfo.do?method=queryRoleInfo'">  
     </td>
   </tr>
 </table>

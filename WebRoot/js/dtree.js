@@ -132,10 +132,10 @@ dTree.prototype.node = function(node, nodeId) {
 		str += '<img id="i' + this.obj + nodeId + '" src="' + ((node._io) ? node.iconOpen : node.icon) + '" alt="" />';
 	}
 	if(!node.url &&node.pid==0){
-		str += '<table class="menu_table" >\n<tr>\n<th nowrap="nowrap" style="color:#87CEFA;background:#707070;">\n'+node.name+'</th>\n</tr>\n';
+		str += '<table class="menu_table" >\n<tr>\n<th nowrap="nowrap" style="color:#87CEFA;background:#1b4759;">\n'+node.name+'</th>\n</tr>\n';
 	}
 	if(!node.url && node.pid == 1){
-		str += '<table class="menu_table">\n<tr>\n<th nowrap="nowrap" >\n'+node.name+'</th>\n</tr>\n';
+		//str += '<table class="menu_table">\n<tr>\n<th nowrap="nowrap" >\n'+node.name+'</th>\n</tr>\n';
 	}
 	
 	if (node.url) {

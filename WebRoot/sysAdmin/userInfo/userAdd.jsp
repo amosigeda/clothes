@@ -70,6 +70,7 @@
 		 	 success:function(msg){
 		 		 if(msg=="fail"){
 		 			 alert("该登录账号已经被占用！");
+		 			$("#userCode").val("");
 		 			 $("#userCode").focus();
 		 			 return false;
 		 		 }
@@ -86,6 +87,7 @@
 		 	 success:function(msg){
 		 		 if(msg=="fail"){
 		 			 alert("该工号已经被使用！");
+		 			$("#gongHao").val("");
 		 			 $("#gongHao").focus();
 		 			 return false;
 		 		 }
@@ -100,13 +102,13 @@
 			frm.userCode.focus();
 			return false;
 		}else{
-			/*var userCode = frm.userCode.value;
-			 var reg = /^[a-zA-Z]\w{4,14}$/;		
+			var userCode = frm.userCode.value;
+			var reg = /^[a-zA-Z]\w{4,14}$/;		
 			if(!reg.test(userCode)){
 				alert("账号格式不正确，请重新输入！");
 				frm.userCode.focus();
 				return false;
-			} */
+			}
 		}
 		if(frm.passWrd.value.trim() == ''){
 			alert("密码不能为空");
@@ -127,19 +129,6 @@
 				return false;
 			}
 		}
-		
-		if(frm.gongHao.value.trim() == ''){
-			alert("工号不能为空");
-			frm.gongHao.focus();
-			return false;
-		}
-		
-		if(frm.remark.value.trim() == ''){
-			alert("备注不能为空");
-			frm.remark.focus();
-			return false;
-		}
-		
 		if(frm.remark.value.trim().length > 30){
 			alert("字数不能超过30字");
 			frm.remark.focus();
@@ -165,14 +154,14 @@
         </th>
        </tr>
   <tr class="tr_11">
-    <td align="left" width="12%">&nbsp;&nbsp;登录账号</td>
+    <td align="right" width="12%">&nbsp;&nbsp;登录账号</td>
     <td align="left" width="20%" colspan="2">
-      <input name="userCode" id="userCode" type="text" class="txt_1"maxlength="20"/></font>
+      <input name="userCode" id="userCode" type="text" class="txt_1"maxlength="20"/><font color="red">*</font>
     </td>
     <td></td>
     </tr>
    <tr class="tr_11">
-    <td align="left" width="12%">&nbsp;&nbsp;密码</td>
+    <td align="right" width="12%">&nbsp;&nbsp;密码</td>
     <td align="left" width="20%" colspan="2">
       <input name="passWrd" type="text" class="txt_1"maxlength="20"><font color="red">*（5~15位字母、数字或下滑线组合）</font>
     </td>
@@ -180,7 +169,7 @@
   </tr>
     
   <tr class="tr_11">
-    <td align="left" width="12%">&nbsp;&nbsp;是否生效
+    <td align="right" width="12%">&nbsp;&nbsp;是否生效
  	</td>
     <td align="left" width="20%" colspan="2">
       <div style="margin-left: 10px;">是 <input name="tag" type="radio" class="radio_1" value="1" checked="checked" >
@@ -190,7 +179,7 @@
     <td></td>
   </tr>
   <tr class="tr_11" id="tr_role">
-    <td align="left" width="12%">&nbsp;&nbsp;角色</td>   
+    <td align="right" width="12%">&nbsp;&nbsp;角色</td>   
     <td align="left" width="20%" colspan="2" id="td_role">
 		<%=request.getAttribute("roleList") %><font color="red">*</font>
     </td>
@@ -203,22 +192,20 @@
   </tr> --%>
   
     <tr class="tr_11" >
-    <td align="left" width="12%">&nbsp;&nbsp;分公司</td>
+    <td align="right" width="12%">&nbsp;&nbsp;分公司</td>
     <td align="left" width="20%">
-    <select name="fenComPany">
+      <select name="fenComPany">
 						<option value="1">深圳</option>
 						<option value="2">南京</option>
 					
 				</select>
-				
-       
     </td>
     <td><font color="red"></font></td>
     <td></td>
   </tr>
   
       <tr class="tr_11" >
-    <td align="left" width="12%">&nbsp;&nbsp;工号</td>
+    <td align="right" width="12%">&nbsp;&nbsp;工号</td>
     <td align="left" width="20%">
         <input name="gongHao" id="gongHao" type="text" class="txt_1"maxlength="20"><font color="red">*</font>
     </td>
@@ -227,7 +214,7 @@
   </tr>
   
   <tr class="tr_11">
-    <td align="left" width="12%">&nbsp;&nbsp;性别
+    <td align="right" width="12%">&nbsp;&nbsp;性别
  	</td>
     <td align="left" width="20%" colspan="2">
       <div style="margin-left: 10px;">男 <input name="sex" type="radio" class="radio_1" value="男 " checked="checked" >
@@ -239,7 +226,7 @@
   
   
     <tr class="tr_11" >
-    <td align="left" width="12%">&nbsp;&nbsp;电话</td>
+    <td align="right" width="12%">&nbsp;&nbsp;电话</td>
     <td align="left" width="20%">
         <input name="phone" type="text" class="txt_1"maxlength="20"><font color="red">*</font>
     </td>
@@ -249,7 +236,7 @@
   
  
   <tr class="tr_11" >
-    <td align="left" width="12%">&nbsp;&nbsp;备注</td>
+    <td align="right" width="12%">&nbsp;&nbsp;备注</td>
     <td align="left" width="20%">
       <textarea name="remark" id="remark" rows="5" cols="50" class="txt_1"></textarea>
     </td>
@@ -261,8 +248,8 @@
   </tr>
   <tr class="tr_11">
   <td width="12%"></td>
-    <td align="left" colspan="2">&nbsp;&nbsp;&nbsp;<input type="button" name="ok"accesskey="y" tabindex="y"  value="确 定" class="but_1" onclick="onAdd()" style="font-size:12;width:40px;height:21px;">
-      <input type="button" name="back"accesskey="b" tabindex="b" value="返 回" class="but_1" onclick="location='doUserInfo.do?method=queryUserInfo'" style="font-size:12;width:40px;height:21px;">
+    <td align="left" colspan="2">&nbsp;&nbsp;&nbsp;<input type="button" name="ok"accesskey="y" tabindex="y"  value="确 定" class="but_1" onclick="onAdd()">
+      <input type="button" name="back"accesskey="b" tabindex="b" value="返 回" class="but_1" onclick="location='doUserInfo.do?method=queryUserInfo'">
   
     </td>
     <td></td>

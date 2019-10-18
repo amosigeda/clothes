@@ -64,9 +64,11 @@ import com.care.sys.dynamicInfo.domain.DynamicInfo;
 import com.care.sys.projectinfo.domain.ProjectInfo;
 import com.care.sys.projectinfo.domain.logic.ProjectInfoFacade;
 import com.care.sys.projectinfo.form.ProjectInfoForm;
+import com.care.sys.shareinfo.domain.ShareInfo;
 import com.care.sys.userinfo.domain.UserInfo;
 import com.care.sys.userinfo.domain.logic.UserInfoFacade;
 import com.care.utils.QRCodeUtil;
+import com.care.utils.Utils;
 import com.care.utils.ZipUtils;
 import com.godoing.rose.http.common.HttpTools;
 import com.godoing.rose.http.common.PagePys;
@@ -1019,6 +1021,13 @@ public class ProjectInfoAction extends BaseAction {
 		
 		
 		request.setAttribute("projectInfo", list.get(0));
+		
+		String orderNumberOne = list.get(0).get("order_number")+"";
+		request.setAttribute("orderNumberOne", orderNumberOne);
+		if(orderNumberOne.contains(",")){
+			request.setAttribute("orderNumberOne", orderNumberOne.split(",")[0]);
+		}
+		
 	
 		
 		ProjectInfo voo = new ProjectInfo();
@@ -1094,6 +1103,13 @@ public class ProjectInfoAction extends BaseAction {
 			
 			String gys14 = CommUtils.getPrintSelectGys(Clist, "gys14","project_no", "project_no", listDuoyu.get(0).get("gys14")+"", 1);
 			request.setAttribute("gys14", gys14);
+		}
+		
+		ShareInfo vso = new ShareInfo(); 
+		vso.setCondition("order_id='"+orderId+"' order by id desc limit 1");
+		List<DataMap> listorderall = ServiceBean.getInstance().getShareInfoFacade().getShareInfo(vso);
+		if(listorderall.size()>0){
+			request.setAttribute("orderall", listorderall.get(0));
 		}
 		
 		
@@ -2183,14 +2199,133 @@ public class ProjectInfoAction extends BaseAction {
 				
 
 			}
-
+			
+			String salePrice = request.getParameter("salePrice");
+			String orderNumber = request.getParameter("orderNumber");
+			
+			String orderNumber1 = request.getParameter("orderNumber1");
+			String orderNumber2 = request.getParameter("orderNumber2");
+			String orderNumber3 = request.getParameter("orderNumber3");
+			String orderNumber4 = request.getParameter("orderNumber4");
+			String orderNumber5 = request.getParameter("orderNumber5");
+			String orderNumber6 = request.getParameter("orderNumber6");
+			String orderNumber7 = request.getParameter("orderNumber7");
+			String orderNumber8 = request.getParameter("orderNumber8");
+			String orderNumber9 = request.getParameter("orderNumber9");
+			
+			
+			
+			StringBuffer oderSb = new StringBuffer();
+			oderSb.append(orderNumber);
+			if(!Utils.isEmpty(orderNumber1)){
+				oderSb.append(",").append(orderNumber1);
+			}
+			if(!Utils.isEmpty(orderNumber2)){
+				oderSb.append(",").append(orderNumber2);
+			}
+			if(!Utils.isEmpty(orderNumber3)){
+				oderSb.append(",").append(orderNumber3);
+			}
+			if(!Utils.isEmpty(orderNumber4)){
+				oderSb.append(",").append(orderNumber4);
+			}
+			if(!Utils.isEmpty(orderNumber5)){
+				oderSb.append(",").append(orderNumber5);
+			}
+			if(!Utils.isEmpty(orderNumber6)){
+				oderSb.append(",").append(orderNumber6);
+			}
+			if(!Utils.isEmpty(orderNumber7)){
+				oderSb.append(",").append(orderNumber7);
+			}
+			if(!Utils.isEmpty(orderNumber8)){
+				oderSb.append(",").append(orderNumber8);
+			}
+			if(!Utils.isEmpty(orderNumber9)){
+				oderSb.append(",").append(orderNumber9);
+			}
+			
+			
+			
+			String xsjg1 = request.getParameter("xsjg1");
+			String xsjg2 = request.getParameter("xsjg2");
+			String xsjg3 = request.getParameter("xsjg3");
+			String xsjg4 = request.getParameter("xsjg4");
+			String xsjg5 = request.getParameter("xsjg5");
+			String xsjg6 = request.getParameter("xsjg6");
+			String xsjg7 = request.getParameter("xsjg7");
+			String xsjg8 = request.getParameter("xsjg8");
+			String xsjg9 = request.getParameter("xsjg9");
+			
+			StringBuffer xsjgsb = new StringBuffer();
+			xsjgsb.append(salePrice);
+			if(!Utils.isEmpty(xsjg1)){
+				xsjgsb.append(",").append(xsjg1);
+			}
+			if(!Utils.isEmpty(xsjg2)){
+				xsjgsb.append(",").append(xsjg2);
+			}
+			if(!Utils.isEmpty(xsjg3)){
+				xsjgsb.append(",").append(xsjg3);
+			}
+			if(!Utils.isEmpty(xsjg4)){
+				xsjgsb.append(",").append(xsjg4);
+			}
+			if(!Utils.isEmpty(xsjg5)){
+				xsjgsb.append(",").append(xsjg5);
+			}
+			if(!Utils.isEmpty(xsjg6)){
+				xsjgsb.append(",").append(xsjg6);
+			}
+			if(!Utils.isEmpty(xsjg7)){
+				xsjgsb.append(",").append(xsjg7);
+			}
+			if(!Utils.isEmpty(xsjg8)){
+				xsjgsb.append(",").append(xsjg8);
+			}
+			if(!Utils.isEmpty(xsjg9)){
+				xsjgsb.append(",").append(xsjg9);
+			}
+			
+			
+			
+			String addhang1 = request.getParameter("addhang1");
+			String addhang = request.getParameter("addhang");
+			
+					
+					ShareInfo vso = new ShareInfo(); 
+					vso.setOrderNumber(orderNumber);
+					vso.setOrderNumber1(orderNumber1);
+					vso.setOrderNumber2(orderNumber2);
+					vso.setOrderNumber3(orderNumber3);
+					vso.setOrderNumber4(orderNumber4);
+					vso.setOrderNumber5(orderNumber5);
+					vso.setOrderNumber6(orderNumber6);
+					vso.setOrderNumber7(orderNumber7);
+					vso.setOrderNumber8(orderNumber8);
+					vso.setOrderNumber9(orderNumber9);
+					vso.setXsjg(salePrice);;
+				vso.setXsjg1(xsjg1);
+				vso.setXsjg2(xsjg2);
+				vso.setXsjg3(xsjg3);
+				vso.setXsjg4(xsjg4);
+				vso.setXsjg5(xsjg5);
+				vso.setXsjg6(xsjg6);
+				vso.setXsjg7(xsjg7);
+				vso.setXsjg8(xsjg8);
+				vso.setXsjg9(xsjg9);
+				vso.setAddhang(addhang);
+				vso.setAddhang1(addhang1);
+				vso.setOrder_id(orderId);
+				
+				ServiceBean.getInstance().getShareInfoFacade().insertShareInfo(vso);
 		/*	String ok = request.getParameter("okk");
 			System.out.println("ok="+ok);*/
 			System.out.println("按钮值="+request.getParameter("anniu"));
 			String wwName = request.getParameter("projectNo");
-			String salePrice = request.getParameter("salePrice");
+		
 			String wechat = request.getParameter("wechat");
-			String orderNumber = request.getParameter("orderNumber");
+			
 			Date addTime = new Date();
 			String kehuPhone = request.getParameter("kehuPhone");
 			String orderType = request.getParameter("orderType");
@@ -2253,9 +2388,9 @@ public class ProjectInfoAction extends BaseAction {
 		
 			vo.setOrderId(orderId);
 			vo.setWwName(wwName);
-			vo.setSalePrice(salePrice);
+			vo.setSalePrice(xsjgsb.toString());
 			vo.setWechat(wechat);
-			vo.setOrderNumber(orderNumber);
+			vo.setOrderNumber(oderSb.toString());
 			vo.setAddTime(addTime);
 			vo.setKehuPhone(kehuPhone);
 			vo.setOrderType(orderType);
@@ -2340,10 +2475,10 @@ public class ProjectInfoAction extends BaseAction {
 			vo.setStatus(tag);
 			if("2".equals(tag)){
 				  ChannelInfo chInfo = new ChannelInfo();
-			       chInfo.setOrder_id(orderNumber);
+			       chInfo.setOrder_id(oderSb.toString());
 			       chInfo.setPhone(kehuPhone);
 			       chInfo.setAddTime(new Date());
-			       chInfo.setRemark("【"+yydfhh.format(calendar.getTime())+"】【"+orderNumber+"】订单已收录入库，分配【不一订制-南京中央工厂】制作.");
+			       chInfo.setRemark("【"+yydfhh.format(calendar.getTime())+"】【"+oderSb.toString()+"】订单已收录入库，分配【不一订制-南京中央工厂】制作.");
 			     ServiceBean.getInstance().getChannelInfoFacade().insertChannelInfo(chInfo);
 			}
 			
@@ -2639,6 +2774,30 @@ public class ProjectInfoAction extends BaseAction {
 			vo.setMajia_number(majia_number);
 			
 			
+			String orderNumber1 = request.getParameter("orderNumber1");
+			String orderNumber2 = request.getParameter("orderNumber2");
+			String orderNumber3 = request.getParameter("orderNumber3");
+			String orderNumber4 = request.getParameter("orderNumber4");
+			String orderNumber5 = request.getParameter("orderNumber5");
+			String orderNumber6 = request.getParameter("orderNumber6");
+			String orderNumber7 = request.getParameter("orderNumber7");
+			String orderNumber8 = request.getParameter("orderNumber8");
+			String orderNumber9 = request.getParameter("orderNumber9");
+			
+			String xsjg1 = request.getParameter("xsjg1");
+			String xsjg2 = request.getParameter("xsjg2");
+			String xsjg3 = request.getParameter("xsjg3");
+			String xsjg4 = request.getParameter("xsjg4");
+			String xsjg5 = request.getParameter("xsjg5");
+			String xsjg6 = request.getParameter("xsjg6");
+			String xsjg7 = request.getParameter("xsjg7");
+			String xsjg8 = request.getParameter("xsjg8");
+			String xsjg9 = request.getParameter("xsjg9");
+			
+			String addhang1 = request.getParameter("addhang1");
+			String addhang = request.getParameter("addhang");
+			
+			
 			
 			String salePrice = request.getParameter("salePrice");
 			String wechat = request.getParameter("wechat");
@@ -2700,12 +2859,75 @@ public class ProjectInfoAction extends BaseAction {
 			String jiaofu_time = request.getParameter("jiaofu_time");
 
 			
+			
+			StringBuffer oderSb = new StringBuffer();
+			oderSb.append(orderNumber);
+			if(!Utils.isEmpty(orderNumber1)){
+				oderSb.append(",").append(orderNumber1);
+			}
+			if(!Utils.isEmpty(orderNumber2)){
+				oderSb.append(",").append(orderNumber2);
+			}
+			if(!Utils.isEmpty(orderNumber3)){
+				oderSb.append(",").append(orderNumber3);
+			}
+			if(!Utils.isEmpty(orderNumber4)){
+				oderSb.append(",").append(orderNumber4);
+			}
+			if(!Utils.isEmpty(orderNumber5)){
+				oderSb.append(",").append(orderNumber5);
+			}
+			if(!Utils.isEmpty(orderNumber6)){
+				oderSb.append(",").append(orderNumber6);
+			}
+			if(!Utils.isEmpty(orderNumber7)){
+				oderSb.append(",").append(orderNumber7);
+			}
+			if(!Utils.isEmpty(orderNumber8)){
+				oderSb.append(",").append(orderNumber8);
+			}
+			if(!Utils.isEmpty(orderNumber9)){
+				oderSb.append(",").append(orderNumber9);
+			}
+
+
+     StringBuffer xsjgsb = new StringBuffer();
+			xsjgsb.append(salePrice);
+			if(!Utils.isEmpty(xsjg1)){
+				xsjgsb.append(",").append(xsjg1);
+			}
+			if(!Utils.isEmpty(xsjg2)){
+				xsjgsb.append(",").append(xsjg2);
+			}
+			if(!Utils.isEmpty(xsjg3)){
+				xsjgsb.append(",").append(xsjg3);
+			}
+			if(!Utils.isEmpty(xsjg4)){
+				xsjgsb.append(",").append(xsjg4);
+			}
+			if(!Utils.isEmpty(xsjg5)){
+				xsjgsb.append(",").append(xsjg5);
+			}
+			if(!Utils.isEmpty(xsjg6)){
+				xsjgsb.append(",").append(xsjg6);
+			}
+			if(!Utils.isEmpty(xsjg7)){
+				xsjgsb.append(",").append(xsjg7);
+			}
+			if(!Utils.isEmpty(xsjg8)){
+				xsjgsb.append(",").append(xsjg8);
+			}
+			if(!Utils.isEmpty(xsjg9)){
+				xsjgsb.append(",").append(xsjg9);
+			}
+			
+			
 			vo.setJiaofu_time(jiaofu_time);
 			//vo.setOrderId(orderId);
 			vo.setWwName(wwName);
-			vo.setSalePrice(salePrice);
+			vo.setSalePrice(xsjgsb.toString());
 			vo.setWechat(wechat);
-			vo.setOrderNumber(orderNumber);
+			vo.setOrderNumber(oderSb.toString());
 			vo.setAddTime(addTime);
 			vo.setKehuPhone(kehuPhone);
 			vo.setOrderType(orderType);
@@ -3120,10 +3342,10 @@ public class ProjectInfoAction extends BaseAction {
 						vo.setPidan_time(new Date());
 						
 						 ChannelInfo chInfo = new ChannelInfo();
-					       chInfo.setOrder_id(orderNumber);
+					       chInfo.setOrder_id(oderSb.toString());
 					       chInfo.setPhone(kehuPhone);
 					       chInfo.setAddTime(new Date());
-					       chInfo.setRemark("【"+yydfhh.format(calendar.getTime())+"】【"+orderNumber+"】订单信息已经批核（订单数据分析完成！");
+					       chInfo.setRemark("【"+yydfhh.format(calendar.getTime())+"】【"+oderSb.toString()+"】订单信息已经批核（订单数据分析完成！");
 					     ServiceBean.getInstance().getChannelInfoFacade().insertChannelInfo(chInfo);
 					}
 					
@@ -3156,6 +3378,38 @@ public class ProjectInfoAction extends BaseAction {
 			}
 				
 			
+			
+			
+			
+		
+			
+					
+					ShareInfo vso = new ShareInfo(); 
+					vso.setOrderNumber(orderNumber);
+					vso.setOrderNumber1(orderNumber1);
+					vso.setOrderNumber2(orderNumber2);
+					vso.setOrderNumber3(orderNumber3);
+					vso.setOrderNumber4(orderNumber4);
+					vso.setOrderNumber5(orderNumber5);
+					vso.setOrderNumber6(orderNumber6);
+					vso.setOrderNumber7(orderNumber7);
+					vso.setOrderNumber8(orderNumber8);
+					vso.setOrderNumber9(orderNumber9);
+					vso.setXsjg(salePrice);;
+				vso.setXsjg1(xsjg1);
+				vso.setXsjg2(xsjg2);
+				vso.setXsjg3(xsjg3);
+				vso.setXsjg4(xsjg4);
+				vso.setXsjg5(xsjg5);
+				vso.setXsjg6(xsjg6);
+				vso.setXsjg7(xsjg7);
+				vso.setXsjg8(xsjg8);
+				vso.setXsjg9(xsjg9);
+				vso.setAddhang(addhang);
+				vso.setAddhang1(addhang1);
+				vso.setOrder_id(orderId);
+				
+				ServiceBean.getInstance().getShareInfoFacade().insertShareInfo(vso);
 			
 			
 			
@@ -3557,6 +3811,15 @@ public class ProjectInfoAction extends BaseAction {
 			request.setAttribute("fuwei_queb", listDuoyu.get(0).get("fuwei_queb")+"");
 			request.setAttribute("duoyu", listDuoyu.get(0));
 		}
+		
+		ShareInfo vso = new ShareInfo(); 
+		vso.setCondition("order_id='"+orderId+"' order by id desc limit 1");
+		List<DataMap> listorderall = ServiceBean.getInstance().getShareInfoFacade().getShareInfo(vso);
+		if(listorderall.size()>0){
+			request.setAttribute("orderall", listorderall.get(0));
+		}
+		
+	
 		
 
 		/*ProjectInfo voo = new ProjectInfo();

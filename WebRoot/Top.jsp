@@ -8,7 +8,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 		<meta http-equiv="x-ua-compatible" content="ie=7" />
 		<link href="css/style.css" rel="stylesheet" type="text/css">
-		<link href="css/tbls.css" rel="stylesheet" type="text/css">
+<!--		<link href="css/tbls.css" rel="stylesheet" type="text/css">-->
 		<script language="JavaScript" src="../../js/jquery-1.8.2.js"></script>
 		<title>无标题文档</title>
 		<style type="text/css">
@@ -108,7 +108,7 @@ function exit(){
             <a href="sysAdmin/sysLogInfo/doSysLogInfo.do?method=getOutTime" id="a_test" onclick="exit()" style="color:red">退出</a>
   </div>
 	<div class="manage_title">
-	     不一管理系统
+	     不一订制和周卢江管理系统
     </div>
 <ul class="view_menu">
 		   <%
