@@ -76,6 +76,9 @@ G、发货-----，扫码，需要填写物流单号，给客户发短信，短�
 if(list.size()<=0){
 	result = Constant.EXCEPTION_CODE;
 }	else{
+	if("1".equals(list.get(0).get("status"))){
+		
+	
 	String orderId = object.getString("orderId");
 	String expressType = object.getString("expressType");
 	String kuaiDiHao = object.getString("kuaiDiHao");
@@ -105,6 +108,10 @@ result = Constant.SUCCESS_CODE;
 	fo.setNickname(list.get(0).get("nick_name")+"");
 	ServiceBean.getInstance().getFeedBackInfoFacade().insertFeedBackInfo(fo);
 	}
+	
+}else{
+	result = Constant.STATUSS_CODE;
+}
 }		
 			
 		

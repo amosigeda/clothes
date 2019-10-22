@@ -49,7 +49,7 @@ public class SaoMaAction extends BaseAction {
 		request.setCharacterEncoding("UTF-8");
 		String href = request.getServletPath();
 		JSONObject json = new JSONObject();
-		
+
 		ServletInputStream input = request.getInputStream();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 		StringBuffer sb = new StringBuffer();
@@ -59,195 +59,402 @@ public class SaoMaAction extends BaseAction {
 			sb.append(online);
 		}
 		JSONObject object = JSONObject.fromObject(sb.toString());
-		
+
 		/*
-d、裁床-----，扫码，一扫码状态自动更新，流程下一步  1  2
-E、前道开包-----，扫码  2
-F、后道-----，扫码  3
-G、大汤-----，扫码4
-F、质检-----，扫码 5
-G、发货-----，扫码，6需要填写物流单号，给客户发短信，短信内容暂定，至少要包含物流单号*/
-		
+		 * d、裁床-----，扫码，一扫码状态自动更新，流程下一步 1 2 E、前道开包-----，扫码 2 F、后道-----，扫码 3
+		 * G、大汤-----，扫码4 F、质检-----，扫码 5
+		 * G、发货-----，扫码，6需要填写物流单号，给客户发短信，短信内容暂定，至少要包含物流单号
+		 */
+		ChannelInfo cvo = new ChannelInfo();
 		try {
 			String orderid = object.getString("orderid");
 			String wechat = object.getString("wechat");
-			System.out.println("wechat="+wechat);
+			System.out.println("wechat=" + wechat);
 			String token = object.getString("token");
-			String clothes_type = object.getString("clothesType");//xizhuang
-			
-			
-			AppUserInfo vo = new AppUserInfo(); 
-			
-		
-			
-			
-			vo.setCondition("  password = '"+ wechat +  "'   and token='"+token+"' order by id desc limit 1");
-			List<DataMap> list  = ServiceBean.getInstance().getAppUserInfoFacade().getAppUserInfo(vo);
-			if(list.size()>0){
-			int typePerson = Integer.valueOf(list.get(0).get("last_name")+"");
-			String phone =  list.get(0).get("user_name")+"";
-			String nickName = list.get(0).get("nick_name")+"";
-			
-			ProjectInfo voStatus = new ProjectInfo();
-			voStatus.setCondition("order_id='" + orderid + "'");
-		
-			
-			voStatus.setStatus("2"+typePerson);
-	
-	
-			//这个人的状态值
-			if(typePerson == 1){
-				
-				vo.setCondition("order_id='"+orderid +"' and  clothes_type= '"+clothes_type +  "'   and last_name='1'   limit 1");
-				List<DataMap> listSaoMa  = ServiceBean.getInstance().getAppUserInfoFacade().getSaoMaInfo(vo);
-				
-				if(listSaoMa.size()>0){
-					result = Constant.FAIL_CODE;
-				}else{
-					//vo.setUserName(phone);
-					vo.setPassword(wechat);
-					vo.setNickName(nickName);
-					vo.setCreateTime(new Date());
-					vo.setLast_name(typePerson+"");
-					vo.setOrder_id(orderid);
-					vo.setClothes_type(clothes_type);
-					vo.setUserName(phone);
-					
-					ServiceBean.getInstance().getAppUserInfoFacade().insertSaoMaInfo(vo);
-					result = Constant.SUCCESS_CODE;
-					ServiceBean.getInstance().getProjectInfoFacade()
-					.updatePorjectInfo(voStatus);
-					
-					
-					ProjectInfo pvo = new ProjectInfo();
-					pvo.setCondition("order_id='" + orderid + "'");
-					List<DataMap>  listOrder =ServiceBean.getInstance().getProjectInfoFacade().getProjectInfo(pvo);
-					if(listOrder.size()>0){
-						String orderNumber = listOrder.get(0).get("order_number")+"";
-						String kehuPhone = listOrder.get(0).get("kehu_phone")+"";
-						 ChannelInfo chInfo = new ChannelInfo();
-					       chInfo.setOrder_id(orderNumber);
-					       chInfo.setPhone(kehuPhone);
-					       chInfo.setAddTime(new Date());
-					       chInfo.setRemark("【"+new SimpleDateFormat("yyyy-MM-dd HH:mm").format(Calendar.getInstance().getTime())+"】【"+orderNumber+"】已经开始裁剪(剪裁师傅已经收到你的订单，并觉得你骨骼惊奇，是个穿西装的好苗子!)");
-					     ServiceBean.getInstance().getChannelInfoFacade().insertChannelInfo(chInfo);
-					}
-					
-				     
-				}
-				
-				
-			}else if(typePerson == 5 || typePerson == 6){
+			String clothes_type = object.getString("clothesType");// xizhuang
 
+			AppUserInfo vo = new AppUserInfo();
 
-				
-				vo.setCondition("order_id='"+orderid +"'  and  clothes_type= '"+clothes_type +  "'   and last_name='"+(typePerson-1)+"'   limit 1");
-				List<DataMap> listSaoMa  = ServiceBean.getInstance().getAppUserInfoFacade().getSaoMaInfo(vo);
-				
-				if(listSaoMa.size()>0){
-					//vo.setUserName(phone);
-					vo.setPassword(wechat);
-					vo.setNickName(nickName);
-					vo.setCreateTime(new Date());
-					vo.setLast_name(typePerson+"");
-					vo.setOrder_id(orderid);
-					vo.setClothes_type(clothes_type);
-					vo.setUserName(phone);
-					ServiceBean.getInstance().getAppUserInfoFacade().insertSaoMaInfo(vo);
-					result = Constant.SUCCESS_CODE;
-					ServiceBean.getInstance().getProjectInfoFacade()
-					.updatePorjectInfo(voStatus);
-					
-					ProjectInfo pvo = new ProjectInfo();
-					pvo.setCondition("order_id='" + orderid + "'");
-					List<DataMap>  listOrder =ServiceBean.getInstance().getProjectInfoFacade().getProjectInfo(pvo);
-					if(listOrder.size()>0){
-						String orderNumber = listOrder.get(0).get("order_number")+"";
-						String kehuPhone = listOrder.get(0).get("kehu_phone")+"";
-						 ChannelInfo chInfo = new ChannelInfo();
-					       chInfo.setOrder_id(orderNumber);
-					       chInfo.setPhone(kehuPhone);
-					       chInfo.setAddTime(new Date());
-					       if(typePerson==5){
-					    	   chInfo.setRemark("【"+new SimpleDateFormat("yyyy-MM-dd HH:mm").format(Calendar.getInstance().getTime())+"】【"+orderNumber+"】订单定型完毕，开始出厂质检程序。（现在我们正在给它仔细检查是否和我们的期待的效果一样");
-					       }else if(typePerson==6){
-					    	   chInfo.setRemark("【"+new SimpleDateFormat("yyyy-MM-dd HH:mm").format(Calendar.getInstance().getTime())+"】【"+orderNumber+"】订单已通过质检流程，现已为您发货物流单号为【物流单号】（顺丰特快）（西装在我们质检小哥哥的检查下已经成功盖章！现在由快递界的老大哥顺丰运输！安排上了！那些将要去的地方，都是素未谋面的故乡！）");
-					       }
-					     ServiceBean.getInstance().getChannelInfoFacade().insertChannelInfo(chInfo);
-					}
-					
-				}else{
-					result = Constant.FAIL_CODE;
-				}
-				
-			
-			
-			}else{
+			vo.setCondition("  password = '" + wechat + "'   and token='"
+					+ token + "'  order by id desc limit 1");
+			List<DataMap> list = ServiceBean.getInstance()
+					.getAppUserInfoFacade().getAppUserInfo(vo);
+			if (list.size() > 0) {
+				String status = list.get(0).get("status") + "";
+				if ("1".equals(status)) {
+					int typePerson = Integer.valueOf(list.get(0).get(
+							"last_name")
+							+ "");
+					String phone = list.get(0).get("user_name") + "";
+					String nickName = list.get(0).get("nick_name") + "";
 
-				
-				vo.setCondition("order_id='"+orderid +"'  and  clothes_type= '"+clothes_type +  "'   and last_name='"+(typePerson-1)+"'   limit 1");
-				List<DataMap> listSaoMa  = ServiceBean.getInstance().getAppUserInfoFacade().getSaoMaInfo(vo);
-				
-				if(listSaoMa.size()>0){
-					
-					vo.setCondition("order_id='"+orderid +"' and   clothes_type= '"+clothes_type +  "'   and last_name='"+typePerson+"'   limit 1");
-					List<DataMap> listSaoMaEr  = ServiceBean.getInstance().getAppUserInfoFacade().getSaoMaInfo(vo);
-					
-					if(listSaoMaEr.size()>0){
-						result = Constant.STATUS_CODE;
-					}else{
-						//vo.setUserName(phone);
-						vo.setPassword(wechat);
-						vo.setNickName(nickName);
-						vo.setCreateTime(new Date());
-						vo.setLast_name(typePerson+"");
-						vo.setOrder_id(orderid);
-						vo.setClothes_type(clothes_type);
-						vo.setUserName(phone);
-						ServiceBean.getInstance().getAppUserInfoFacade().insertSaoMaInfo(vo);
-						result = Constant.SUCCESS_CODE;
-						ServiceBean.getInstance().getProjectInfoFacade()
-						.updatePorjectInfo(voStatus);
+					ProjectInfo voStatus = new ProjectInfo();
+					voStatus.setCondition("order_id='" + orderid + "'");
+
+					voStatus.setStatus("2" + typePerson);
+
+					// 这个人的状态值
+					if (typePerson == 1) {
+
+						vo.setCondition("order_id='" + orderid
+								+ "' and  clothes_type= '" + clothes_type
+								+ "'   and last_name='1'   limit 1");
+						List<DataMap> listSaoMa = ServiceBean.getInstance()
+								.getAppUserInfoFacade().getSaoMaInfoNew(vo);
+
+						if (listSaoMa.size() > 0) {
+							result = Constant.FAIL_CODE;
+						} else {
+
+							vo.setPassword(wechat);
+							vo.setNickName(nickName);
+							vo.setCreateTime(new Date());
+							vo.setLast_name(typePerson + "");
+							vo.setOrder_id(orderid);
+							vo.setClothes_type(clothes_type);
+							vo.setUserName(phone);
+
+							ServiceBean.getInstance().getAppUserInfoFacade()
+									.insertSaoMaInfoNew(vo);
+
 						
-						
-						ProjectInfo pvo = new ProjectInfo();
-						pvo.setCondition("order_id='" + orderid + "'");
-						List<DataMap>  listOrder =ServiceBean.getInstance().getProjectInfoFacade().getProjectInfo(pvo);
-						if(listOrder.size()>0){
-							String orderNumber = listOrder.get(0).get("order_number")+"";
-							String kehuPhone = listOrder.get(0).get("kehu_phone")+"";
-							 ChannelInfo chInfo = new ChannelInfo();
-						       chInfo.setOrder_id(orderNumber);
-						       chInfo.setPhone(kehuPhone);
-						       chInfo.setAddTime(new Date());
-						       if(typePerson == 2){
-						    	   chInfo.setRemark("【"+new SimpleDateFormat("yyyy-MM-dd HH:mm").format(Calendar.getInstance().getTime())+"】【"+orderNumber+"】订单已经开始前道制作工序。（前道开包师傅开始作业，随口一句：看长身玉立，精神耿耿。必定以后事业有成！）");
-						       }else if(typePerson == 3){
-						    	   chInfo.setRemark("【"+new SimpleDateFormat("yyyy-MM-dd HH:mm").format(Calendar.getInstance().getTime())+"】【"+orderNumber+"】订单已经开始后道制作工序。（后道师傅已经接手，制作工序已经到了最后的要紧关头！稳住我们能赢！）");
-						       }else if(typePerson == 4){
-						    	   chInfo.setRemark("【"+new SimpleDateFormat("yyyy-MM-dd HH:mm").format(Calendar.getInstance().getTime())+"】【"+orderNumber+"】订单已制作完毕，开始整烫定型。（大烫师傅为了保证衣服的版型，正在给衣服做洗剪吹服务，tony老师已经开始整烫定型！）");
-						       }
-						     ServiceBean.getInstance().getChannelInfoFacade().insertChannelInfo(chInfo);
+
+							result = Constant.SUCCESS_CODE;
+							ServiceBean.getInstance().getProjectInfoFacade()
+									.updatePorjectInfo(voStatus);
+
+							cvo.setCondition("order_id = '" + orderid
+									+ "' limit 1" );
+							List<DataMap> msgList = ServiceBean.getInstance()
+									.getChannelInfoFacade().getChannelInfo(cvo);
+							if (msgList.size() <= 0) {
+								ProjectInfo pvo = new ProjectInfo();
+								pvo.setCondition("order_id='" + orderid + "'");
+								List<DataMap> listOrder = ServiceBean
+										.getInstance().getProjectInfoFacade()
+										.getProjectInfo(pvo);
+								if (listOrder.size() > 0) {
+									String orderNumber = listOrder.get(0).get(
+											"order_id")
+											+ "";
+									String kehuPhone = listOrder.get(0).get(
+											"kehu_phone")
+											+ "";
+									ChannelInfo chInfo = new ChannelInfo();
+									chInfo.setOrder_id(orderNumber);
+									chInfo.setPhone(kehuPhone);
+									chInfo.setAddTime(new Date());
+									chInfo.setRemark("【"
+											+ new SimpleDateFormat(
+													"yyyy-MM-dd HH:mm")
+													.format(Calendar
+															.getInstance()
+															.getTime())
+											+ "】【"
+											+ orderNumber
+											+ "】已经开始裁剪</br>(剪裁师傅已经收到你的订单，并觉得你骨骼惊奇，是个穿西装的好苗子!)");
+									chInfo.setStatus(clothes_type);
+									ServiceBean.getInstance()
+											.getChannelInfoFacade()
+											.insertChannelInfo(chInfo);
+								}
+							}
+
 						}
+
+					} else if (typePerson == 5 || typePerson == 6) {
+
+						vo.setCondition("order_id='" + orderid
+								+ "'  and  clothes_type= '" + clothes_type
+								+ "'   and last_name='" + (typePerson - 1)
+								+ "'   limit 1");
+						List<DataMap> listSaoMa = ServiceBean.getInstance()
+								.getAppUserInfoFacade().getSaoMaInfo(vo);
+
+						if (listSaoMa.size() > 0) {
+							// vo.setUserName(phone);
+							vo.setPassword(wechat);
+							vo.setNickName(nickName);
+							vo.setCreateTime(new Date());
+							vo.setLast_name(typePerson + "");
+							vo.setOrder_id(orderid);
+							vo.setClothes_type(clothes_type);
+							vo.setUserName(phone);
+							ServiceBean.getInstance().getAppUserInfoFacade()
+									.insertSaoMaInfoNew(vo);
+
+
+							result = Constant.SUCCESS_CODE;
+							ServiceBean.getInstance().getProjectInfoFacade()
+									.updatePorjectInfo(voStatus);
+
+							cvo.setCondition("order_id = '" + orderid
+									+ "' limit 1" );
+							List<DataMap> msgList = ServiceBean.getInstance()
+									.getChannelInfoFacade().getChannelInfo(cvo);
+							if (msgList.size() <= 0) {
+								ProjectInfo pvo = new ProjectInfo();
+								pvo.setCondition("order_id='" + orderid + "'");
+								List<DataMap> listOrder = ServiceBean
+										.getInstance().getProjectInfoFacade()
+										.getProjectInfo(pvo);
+								if (listOrder.size() > 0) {
+									String orderNumber = listOrder.get(0).get(
+											"order_number")
+											+ "";
+									String kehuPhone = listOrder.get(0).get(
+											"kehu_phone")
+											+ "";
+									ChannelInfo chInfo = new ChannelInfo();
+									chInfo.setOrder_id(orderNumber);
+									chInfo.setPhone(kehuPhone);
+									chInfo.setAddTime(new Date());
+									if (typePerson == 5) {
+										chInfo.setRemark("【"
+												+ new SimpleDateFormat(
+														"yyyy-MM-dd HH:mm")
+														.format(Calendar
+																.getInstance()
+																.getTime())
+												+ "】【"
+												+ orderNumber
+												+ "】订单定型完毕，开始出厂质检程序。（现在我们正在给它仔细检查是否和我们的期待的效果一样");
+									} else if (typePerson == 6) {
+										chInfo.setRemark("【"
+												+ new SimpleDateFormat(
+														"yyyy-MM-dd HH:mm")
+														.format(Calendar
+																.getInstance()
+																.getTime())
+												+ "】【"
+												+ orderNumber
+												+ "】订单已通过质检流程，现已为您发货物流单号为【物流单号】</br>（顺丰特快）（西装在我们质检小哥哥的检查下已经成功盖章！现在由快递界的老大哥顺丰运输！安排上了！那些将要去的地方，都是素未谋面的故乡！）");
+									}
+									chInfo.setStatus(clothes_type);
+									ServiceBean.getInstance()
+											.getChannelInfoFacade()
+											.insertChannelInfo(chInfo);
+								}
+							}
+						} else {
+							result = Constant.FAIL_CODE;
+						}
+
+					} else {
+
+						vo.setCondition("order_id='" + orderid
+								+ "'  and  clothes_type= '" + clothes_type
+								+ "'   and last_name='" + (typePerson - 1)
+								+ "'   limit 1");
+						List<DataMap> listSaoMa = ServiceBean.getInstance()
+								.getAppUserInfoFacade().getSaoMaInfo(vo);
+
+						if (listSaoMa.size() > 0) {
+
+							vo.setCondition("order_id='" + orderid
+									+ "' and   clothes_type= '" + clothes_type
+									+ "'   and last_name='" + typePerson
+									+ "'   limit 1");
+							List<DataMap> listSaoMaEr = ServiceBean
+									.getInstance().getAppUserInfoFacade()
+									.getSaoMaInfo(vo);
+
+							if (listSaoMaEr.size() > 0) {
+								result = Constant.STATUS_CODE;
+							} else {
+								// vo.setUserName(phone);
+								vo.setPassword(wechat);
+								vo.setNickName(nickName);
+								vo.setCreateTime(new Date());
+								vo.setLast_name(typePerson + "");
+								vo.setOrder_id(orderid);
+								vo.setClothes_type(clothes_type);
+								vo.setUserName(phone);
+								ServiceBean.getInstance()
+										.getAppUserInfoFacade()
+										.insertSaoMaInfoNew(vo);
+
 						
+								result = Constant.SUCCESS_CODE;
+								ServiceBean.getInstance()
+										.getProjectInfoFacade()
+										.updatePorjectInfo(voStatus);
+
+								cvo.setCondition("order_id = '" + orderid
+										+ "' limit 1" );
+								List<DataMap> msgList = ServiceBean
+										.getInstance().getChannelInfoFacade()
+										.getChannelInfo(cvo);
+								if (msgList.size() <= 0) {
+									ProjectInfo pvo = new ProjectInfo();
+									pvo.setCondition("order_id='" + orderid
+											+ "'");
+									List<DataMap> listOrder = ServiceBean
+											.getInstance()
+											.getProjectInfoFacade()
+											.getProjectInfo(pvo);
+									if (listOrder.size() > 0) {
+										String orderNumber = listOrder.get(0)
+												.get("order_number") + "";
+										String kehuPhone = listOrder.get(0)
+												.get("kehu_phone") + "";
+										ChannelInfo chInfo = new ChannelInfo();
+										chInfo.setOrder_id(orderNumber);
+										chInfo.setPhone(kehuPhone);
+										chInfo.setAddTime(new Date());
+										if (typePerson == 2) {
+											chInfo.setRemark("【"
+													+ new SimpleDateFormat(
+															"yyyy-MM-dd HH:mm")
+															.format(Calendar
+																	.getInstance()
+																	.getTime())
+													+ "】【"
+													+ orderNumber
+													+ "】订单已经开始前道制作工序。</br>（前道开包师傅开始作业，随口一句：看长身玉立，精神耿耿。必定以后事业有成！）");
+										} else if (typePerson == 3) {
+											chInfo.setRemark("【"
+													+ new SimpleDateFormat(
+															"yyyy-MM-dd HH:mm")
+															.format(Calendar
+																	.getInstance()
+																	.getTime())
+													+ "】【"
+													+ orderNumber
+													+ "】订单已经开始后道制作工序。</br>（后道师傅已经接手，制作工序已经到了最后的要紧关头！稳住我们能赢！）");
+										} else if (typePerson == 4) {
+											chInfo.setRemark("【"
+													+ new SimpleDateFormat(
+															"yyyy-MM-dd HH:mm")
+															.format(Calendar
+																	.getInstance()
+																	.getTime())
+													+ "】【"
+													+ orderNumber
+													+ "】订单已制作完毕，开始整烫定型。</br>（大烫师傅为了保证衣服的版型，正在给衣服做洗剪吹服务，tony老师已经开始整烫定型！）");
+										}
+										chInfo.setStatus(clothes_type);
+										ServiceBean.getInstance()
+												.getChannelInfoFacade()
+												.insertChannelInfo(chInfo);
+									}
+
+								}
+							}
+						} else {
+							result = Constant.FAIL_CODE;
+						}
+
 					}
-					
-				}else{
-					result = Constant.FAIL_CODE;
+
+				} else {
+					result = Constant.STATUSS_CODE;
 				}
-				
-			
-			}
-			
-	       
-			
-				
-			
-				
-			}else{
+
+			} else {
 				result = Constant.EXCEPTION_CODE;
 			}
-		
+			
+			
+			
+			if(result == 1){
+				System.out.println("走到这里了没");
+				
+
+				AppUserInfo voNumber = new AppUserInfo();
+				voNumber.setCondition("password ='" + wechat
+						+ "'   limit 1");
+				List<DataMap> listSaoMaNumber = ServiceBean
+						.getInstance().getAppUserInfoFacade()
+						.getSaoMaInfo(voNumber);
+				
+				ProjectInfo pvo = new ProjectInfo();
+				pvo.setCondition("order_id='" + orderid + "'");
+				List<DataMap> listOrder = ServiceBean
+						.getInstance().getProjectInfoFacade()
+						.getProjectInfo(pvo);
+				if(listOrder.size()>0){
+					if (listSaoMaNumber.size() > 0) {
+						String id = listSaoMaNumber.get(0).get("id")
+								+ "";
+						Integer xzNumber = Integer
+								.valueOf(listOrder.get(0).get(
+										"xizhuang_number")
+										+ "") + 1;
+						Integer csNumber = Integer
+								.valueOf(listOrder.get(0).get(
+										"chenshan_number")
+										+ "") + 1;
+						Integer xkNumber = Integer
+								.valueOf(listOrder.get(0).get(
+										"xiku_number")
+										+ "") + 1;
+						Integer mjNumber = Integer
+								.valueOf(listOrder.get(0).get(
+										"majia_number")
+										+ "") + 1;
+
+						if ("1".equals(clothes_type)) {
+							vo.setXizhuang_number(xzNumber);
+						} else if ("3".equals(clothes_type)) {
+							vo.setXiku_number(xkNumber);
+						} else if ("4".equals(clothes_type)) {
+							vo.setChenshan_number(csNumber);
+						} else if ("2".equals(clothes_type)) {
+							vo.setMajia_number(mjNumber);
+						}
+						vo.setCondition("id='" + id + "'");
+						ServiceBean.getInstance()
+								.getAppUserInfoFacade()
+								.updateSaoMaInfo(vo);
+
+					} else {
+						
+					
+							vo.setXizhuang_number(0);
+					
+							vo.setXiku_number(0);
+						
+							vo.setChenshan_number(0);
+						
+							vo.setMajia_number(0);
+						
+							Integer xzNumber = Integer
+									.valueOf(listOrder.get(0).get(
+											"xizhuang_number")
+											+ "");
+							Integer csNumber = Integer
+									.valueOf(listOrder.get(0).get(
+											"chenshan_number")
+											+ "") ;
+							Integer xkNumber = Integer
+									.valueOf(listOrder.get(0).get(
+											"xiku_number")
+											+ "") ;
+							Integer mjNumber = Integer
+									.valueOf(listOrder.get(0).get(
+											"majia_number")
+											+ "") ;
+						
+						
+						if ("1".equals(clothes_type)) {
+							vo.setXizhuang_number(xzNumber);
+						} else if ("3".equals(clothes_type)) {
+							vo.setXiku_number(xkNumber);
+						} else if ("4".equals(clothes_type)) {
+							vo.setChenshan_number(csNumber);
+						} else if ("2".equals(clothes_type)) {
+							vo.setMajia_number(mjNumber);
+						}
+						ServiceBean.getInstance()
+								.getAppUserInfoFacade()
+								.insertSaoMaInfo(vo);
+					}
+				}
+				
+			
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			StringBuffer sb1 = new StringBuffer();
@@ -265,7 +472,7 @@ G、发货-----，扫码，6需要填写物流单号，给客户发短信，短�
 			result = Constant.EXCEPTION_CODE;
 		}
 		json.put("resultCode", result);
-	
+
 		json.put("request", href);
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(json.toString());

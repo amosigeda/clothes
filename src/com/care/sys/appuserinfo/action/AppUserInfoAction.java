@@ -1,9 +1,11 @@
 package com.care.sys.appuserinfo.action;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.util.Date;
@@ -11,6 +13,15 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import jxl.Workbook;
+import jxl.format.VerticalAlignment;
+import jxl.write.BorderLineStyle;
+import jxl.write.Label;
+import jxl.write.WritableCellFormat;
+import jxl.write.WritableFont;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.logging.Log;
@@ -27,6 +38,7 @@ import com.care.sys.appuserinfo.domain.AppUserInfo;
 import com.care.sys.appuserinfo.domain.logic.AppUserInfoFacade;
 import com.care.sys.appuserinfo.form.AppUserInfoForm;
 import com.care.sys.projectinfo.domain.ProjectInfo;
+import com.care.sys.projectinfo.form.ProjectInfoForm;
 import com.care.sys.sysregisterinfo.domain.UserInfo;
 import com.godoing.rose.http.common.HttpTools;
 import com.godoing.rose.http.common.PagePys;
@@ -294,6 +306,15 @@ public class AppUserInfoAction extends BaseAction{
 		           request.setAttribute("result", null);
 		           return mapping.findForward("result");
 			}
+			
+			String anniu =request.getParameter("anniu");
+			System.err.println("按钮="+anniu);
+			//1 查询   2导出
+			
+			
+              
+
+			
 			String companyInfoId = loginUser.getCompanyId();
 			String projectInfoId = loginUser.getProjectId();
 			AppUserInfoForm form = (AppUserInfoForm) actionForm;
@@ -303,6 +324,7 @@ public class AppUserInfoAction extends BaseAction{
 			String endTime   = request.getParameter("endTime");	
 			String user_id = request.getParameter("user_id");
 			String phone = request.getParameter("phone");
+			String nickname = request.getParameter("nickname");
 			String gongzhong = request.getParameter("gongzhong");
 
 			/*���û������ֶ�*/
@@ -314,13 +336,13 @@ public class AppUserInfoAction extends BaseAction{
 				if(sb.length() > 0){
 					sb.append(" and ");
 				}
-				sb.append("substring(create_time,1,10) >= '"+startTime+"'");
+				sb.append("create_time >= '"+startTime+"'");
 			}
 			if(endTime != null && !"".equals(endTime)){
 				if(sb.length() > 0){
 					sb.append(" and ");
 				}
-				sb.append("substring(create_time,1,10) <= '"+endTime+"'");
+				sb.append("create_time<= '"+endTime+"'");
 			}
 			if(userName != null && !"".equals(userName)){
 				if(sb.length() > 0){
@@ -346,6 +368,12 @@ public class AppUserInfoAction extends BaseAction{
 				}
 				sb.append("user_name='"+phone+"'");
 			}
+			if(nickname != null && !"".equals(nickname)){
+				if(sb.length() > 0){
+					sb.append(" and ");
+				}
+				sb.append("nick_name='"+nickname+"'");
+			}
 			/*ProjectInfo pro = new ProjectInfo();
 			List<DataMap> pros = ServiceBean.getInstance().getProjectInfoFacade().getProjectInfo(pro);
 			request.setAttribute("project", pros);*/
@@ -353,12 +381,159 @@ public class AppUserInfoAction extends BaseAction{
 			request.setAttribute("fNow_date", startTime);
 		    request.setAttribute("now_date", endTime);
 		    request.setAttribute("user", userName);
+		    request.setAttribute("nickname", nickname);
 		    request.setAttribute("user_id", user_id);
 		    request.setAttribute("phone", phone);
 		    request.setAttribute("gongzhong", gongzhong);
 		    
 			vo.setCondition(sb.toString());
 			
+			
+			   if("2".equals(anniu)){
+					
+					String orderIdName = System.currentTimeMillis()+"";
+					
+
+					String Divpath = "D:/resin/webapps/watch/upload/daochu/";// 文件保存路径
+					File dirFile = new File(Divpath);
+					if (!dirFile.exists()) {// 文件路径不存在时，自动创建目录
+						dirFile.mkdir();
+					}
+					String path = Divpath +orderIdName+".xls";// 文件名字
+					// 创建一个可写入的excel文件对象
+					WritableWorkbook workbook = Workbook.createWorkbook(new File(path));
+					// 使用第一张工作表，将其命名为“测试”
+					WritableSheet sheet = workbook.createSheet("导出", 0);
+
+					// 设置字体种类和格式
+					WritableFont bold = new WritableFont(WritableFont.createFont("宋体") , 9,
+							WritableFont.BOLD);
+					WritableCellFormat bai = new WritableCellFormat();
+					bai.setAlignment(jxl.format.Alignment.CENTRE);// 单元格中的内容水平方向居中
+					bai.setBorder(jxl.format.Border.ALL, BorderLineStyle.MEDIUM);
+					bai.setVerticalAlignment(VerticalAlignment.CENTRE);
+					WritableFont bold1 = new WritableFont(WritableFont.createFont("宋体") , 9,
+							WritableFont.BOLD);
+					WritableCellFormat bai1 = new WritableCellFormat(bold1);
+					bai1.setAlignment(jxl.format.Alignment.CENTRE);// 单元格中的内容水平方向居中
+					bai1.setBorder(jxl.format.Border.ALL, BorderLineStyle.MEDIUM);
+					bai1.setVerticalAlignment(VerticalAlignment.CENTRE);
+					
+					
+					WritableCellFormat hei = new WritableCellFormat(bold);
+					hei.setAlignment(jxl.format.Alignment.CENTRE);// 单元格中的内容水平方向居中
+					hei.setBorder(jxl.format.Border.ALL, BorderLineStyle.MEDIUM);
+					hei.setVerticalAlignment(VerticalAlignment.CENTRE);
+					// 单元格是字符串格式！第一个是代表列数,第二是代表行数，第三个代表要写入的内容,第四个代表字体格式
+					// （0代表excel的第一行或者第一列）
+					
+					Label label00 = new Label(0, 0, "扫码人", hei); // 这里的（0,0）表示第一行第一列的表格
+					sheet.addCell(label00);
+					
+					Label label10 = new Label(1, 0, "订单号", hei); // 这里的（0,0）表示第一行第一列的表格
+					sheet.addCell(label10);
+					Label label20 = new Label(2, 0, "上衣数量", hei); // 这里的（0,0）表示第一行第一列的表格
+					sheet.addCell(label20);
+					Label label30 = new Label(3, 0, "衬衫数量", hei); // 这里的（0,0）表示第一行第一列的表格
+					sheet.addCell(label30);
+					Label label40 = new Label(4, 0, "裤子数量", hei); // 这里的（0,0）表示第一行第一列的表格
+					sheet.addCell(label40);
+					Label label50 = new Label(5, 0, "马甲数量", hei); // 这里的（0,0）表示第一行第一列的表格
+					sheet.addCell(label50);
+					Label label60 = new Label(6, 0, "客户姓名", hei); // 这里的（0,0）表示第一行第一列的表格
+					sheet.addCell(label60);
+					Label label70 = new Label(7, 0, "订单状态", hei); // 这里的（0,0）表示第一行第一列的表格
+					sheet.addCell(label70);
+					
+					AppUserInfo avo = new AppUserInfo();
+					avo.setCondition(sb.toString());
+					List<DataMap> proslist = ServiceBean.getInstance()
+							.getAppUserInfoFacade().getSaoMaInfoNew(vo);
+					
+			/*		for(int i=0;i<proslist.size();i++){
+						String ooid =proslist.get(i).get("order_id")+"";
+					    sheet.addCell(new Label(0, i+1, ooid ,   bai));
+						sheet.addCell(new Label(1, i+1, proslist.get(i).get("nick_name")+"", bai));
+						sheet.addCell(new Label(2, i+1,  proslist.get(i).get("order_id")+"", bai));
+						sheet.addCell(new Label(3, i+1, proslist.get(i).get("wechat")+"", bai));
+						sheet.addCell(new Label(4, i+1, proslist.get(i).get("order_number")+"", bai));
+						sheet.addCell(new Label(5, i+1, proslist.get(i).get("add_time")+"", bai));
+						sheet.addCell(new Label(6, i+1, proslist.get(i).get("kehu_phone")+"", bai));
+						sheet.addCell(new Label(7, i+1, proslist.get(i).get("kehu_name")+"", bai));
+					
+						
+						AppUserInfo voapp = new AppUserInfo(); 
+						
+						voapp.setCondition("order_id='"+ooid +"'  and last_name='6'   limit 1"); //
+						List<DataMap> listSaoMa  = ServiceBean.getInstance().getAppUserInfoFacade().getSaoMaInfo(voapp);
+						
+						sheet.addCell(new Label(12, i+1, "", bai));
+						if(listSaoMa.size()>0){
+							sheet.addCell(new Label(12, i+1, listSaoMa.get(0).get("create_time")+"", bai));
+						}
+						sheet.addCell(new Label(13, i+1, proslist.get(i).get("xiadan_kefu")+"", bai));
+					
+					
+						sheet.setRowView(i+1, 250, false);
+					}*/
+					
+					
+					sheet.setColumnView(0, 15);
+					sheet.setColumnView(1, 15);
+					sheet.setColumnView(2, 15);
+					sheet.setColumnView(3, 15);
+					sheet.setColumnView(4, 15);
+					sheet.setColumnView(5, 15);
+					sheet.setColumnView(6, 15);
+					sheet.setColumnView(7, 15);
+					sheet.setColumnView(8, 15);
+					sheet.setColumnView(9, 15);
+					sheet.setColumnView(10, 15);
+					sheet.setColumnView(11, 15);
+					sheet.setColumnView(12, 15);
+					sheet.setColumnView(13, 15);
+					sheet.setColumnView(14, 15);
+					sheet.setColumnView(15, 15);
+				
+					
+					sheet.setRowView(0, 300, false);
+					workbook.write();
+					workbook.close();
+		
+				
+		
+		
+					
+						
+						 // path是指欲下载的文件的路径。
+					      File file = new File(path);
+					      
+					      if (file.exists()) {
+					    	  System.err.println("文件存在");
+					    	   // 取得文件名。
+						      String filename = file.getName();
+						      // 取得文件的后缀名。
+						      //String ext = filename.substring(filename.lastIndexOf(".") + 1).toUpperCase();
+						 
+						      // 以流的形式下载文件。
+						      InputStream fis = new BufferedInputStream(new FileInputStream(path));
+						      byte[] buffer = new byte[fis.available()];
+						      fis.read(buffer);
+						      fis.close();
+						      // 清空response
+						      response.reset();
+						      // 设置response的Header
+						      response.addHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes()));
+						      response.addHeader("Content-Length", "" + file.length());
+						      OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
+						      response.setContentType("application/octet-stream");
+						      toClient.write(buffer);
+						      toClient.flush();
+						      toClient.close();
+							}
+				}
+			   
+			   
          	BeanUtils.copyProperties(vo,form);			
          	list = info.getSaoMaInfoListByVo(vo);  
 			BeanUtils.copyProperties(pys, form); 
@@ -385,5 +560,72 @@ public class AppUserInfoAction extends BaseAction{
 		return mapping.findForward("queryGongLiangInfo");
 	}
 	
+	
+	public ActionForward deleteinfo(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		Result result = new Result();
+		try {
+		
+			AppUserInfo vo = new AppUserInfo(); 
+			vo.setCondition("id='" + request.getParameter("id") + "'");
+		
+			ServiceBean.getInstance().getAppUserInfoFacade().deleteById(vo);
+
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryAppUserInfo"));
+			result.setResultCode("deletes");
+			result.setResultType("success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.debug(request.getQueryString() + "  " + e);
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryAppUserInfo"));
+			if (e instanceof SystemException) { /* ����֪�쳣���н��� */
+				result.setResultCode(((SystemException) e).getErrCode());
+				result.setResultType(((SystemException) e).getErrType());
+			} else { /* ��δ֪�쳣���н�������ȫ�������δ֪�쳣 */
+				result.setResultCode("noKnownException");
+				result.setResultType("sysRunException");
+			}
+		} finally {
+			request.setAttribute("result", result);
+		}
+		return mapping.findForward("result");
+	}
+	public ActionForward updateInfo(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		Result result = new Result();
+		try {
+		
+			AppUserInfo vo = new AppUserInfo(); 
+			vo.setCondition("id='" + request.getParameter("id") + "'");
+		vo.setStatus("1");
+			ServiceBean.getInstance().getAppUserInfoFacade().updateAppUserInfo(vo);
+
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryAppUserInfo"));
+			result.setResultCode("deletes");
+			result.setResultType("success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.debug(request.getQueryString() + "  " + e);
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryAppUserInfo"));
+			if (e instanceof SystemException) { /* ����֪�쳣���н��� */
+				result.setResultCode(((SystemException) e).getErrCode());
+				result.setResultType(((SystemException) e).getErrType());
+			} else { /* ��δ֪�쳣���н�������ȫ�������δ֪�쳣 */
+				result.setResultCode("noKnownException");
+				result.setResultType("sysRunException");
+			}
+		} finally {
+			request.setAttribute("result", result);
+		}
+		return mapping.findForward("result");
+	}
 
 }

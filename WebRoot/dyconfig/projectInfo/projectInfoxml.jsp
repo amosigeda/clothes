@@ -255,7 +255,7 @@ function ofuncs(projectId){
 				<%int i=1; %>
                   <tr class="title_2">
                  	<td width="5%">
-						系统生成订单编号
+						订单编号
 					</td> 
 					<td width="5%">
 					订单号
@@ -316,16 +316,16 @@ function ofuncs(projectId){
 						<td>							
 							<bean:write name="element" property="order_id" />
 						</td>
-						<td>							
+						<td style="word-wrap:break-word;word-break:break-all;padding:0 5px;">							
 							<bean:write name="element" property="order_number" />
 						</td>
 						<td>							
 							<bean:write name="element" property="ww_name" />
 						</td>
-						<td>							
+						<td style="word-wrap:break-word;word-break:break-all;padding:0 5px;">							
 							<bean:write name="element" property="kehu_phone" />
 						</td>
-						<td>							
+						<td style="word-wrap:break-word;word-break:break-all;padding:0 5px;">							
 							<bean:write name="element" property="sale_price" />
 						</td>
 						<td>							

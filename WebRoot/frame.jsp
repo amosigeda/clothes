@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
-<title>欢迎使用不一订制和周卢江管理系统</title>
+<title>欢迎使用不周山1.0系统</title>
 <link href="css/style1.css" rel="stylesheet" type="text/css">
 <SCRIPT language="javascript">
 top.moveTo(0,0);

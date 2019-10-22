@@ -226,7 +226,7 @@ function daDan(id,orderid){
 				<%int i=1; %>
                   <tr class="title_2">
                  	<td width="5%">
-						系统生成编号
+						订单编号
 					</td> 
 					<td width="5%">
 						订单号

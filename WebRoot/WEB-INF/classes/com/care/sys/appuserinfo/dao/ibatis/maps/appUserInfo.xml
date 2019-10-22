@@ -23,6 +23,26 @@
 		</dynamic>
 	</select>
 	
+		<select id="getSaoMaInfoNew" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
+		SELECT * FROM saomainfo_info
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+		<delete id="deleteById" parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
+		DELETE FROM appuserinfo
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+	
+	
 	<select id="getProjectImageInfo" resultClass="com.godoing.rose.lang.DataMap"
 		parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
 		SELECT * FROM projectimage
@@ -133,7 +153,25 @@
 	
 	<insert id="insertSaoMaInfo" parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
 		INSERT INTO
-		saomainfo(create_time,user_name,nick_name,password,last_name,order_id,clothes_type)
+		saomainfo(create_time,user_name,nick_name,password,last_name,order_id,clothes_type,
+		xizhuang_number,
+		chenshan_number,
+		xiku_number,
+		majia_number
+		
+		)
+		VALUES
+		(#createTime#,#userName#,#nickName#,#password#,#last_name#,#order_id#,#clothes_type#,
+			#xizhuang_number#,
+		#chenshan_number#,
+		#xiku_number#,
+		#majia_number#
+		)
+	</insert>
+	
+		<insert id="insertSaoMaInfoNew" parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
+		INSERT INTO
+		saomainfo_info(create_time,user_name,nick_name,password,last_name,order_id,clothes_type)
 		VALUES
 		(#createTime#,#userName#,#nickName#,#password#,#last_name#,#order_id#,#clothes_type#)
 	</insert>
@@ -174,6 +212,78 @@
 			</isNotEmpty>
 				<isNotEmpty prepend="," property="token">
 				token=#token#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="status">
+				status=#status#
+			</isNotEmpty>
+			
+				<isNotEmpty prepend="," property="chenshan_number">
+				chenshan_number=#chenshan_number#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="xizhuang_number">
+				xizhuang_number=#xizhuang_number#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="xiku_number">
+				xiku_number=#xiku_number#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="majia_number">
+				majia_number=#majia_number#
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</update>
+	
+	
+	
+	<update id="updateSaoMaInfo" parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
+		UPDATE saomainfo
+		<dynamic prepend="set">
+			<isNotEmpty prepend="," property="createTime">
+				create_time=#createTime#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="userName">
+				user_name=#userName#
+			</isNotEmpty>
+        	<isNotEmpty prepend="," property="first_name">
+				first_name=#first_name#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="nickName">
+				nick_name=#nickName#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="password">
+				password=#password#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="last_name">
+				last_name=#last_name#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="email">
+				email=#email#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="update_time">
+				update_time=#update_time#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="token">
+				token=#token#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="status">
+				status=#status#
+			</isNotEmpty>
+			
+				<isNotEmpty prepend="," property="chenshan_number">
+				chenshan_number=#chenshan_number#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="xizhuang_number">
+				xizhuang_number=#xizhuang_number#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="xiku_number">
+				xiku_number=#xiku_number#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="majia_number">
+				majia_number=#majia_number#
 			</isNotEmpty>
 		</dynamic>
 		<dynamic prepend="where">

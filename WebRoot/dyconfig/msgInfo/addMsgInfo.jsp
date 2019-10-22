@@ -221,7 +221,7 @@
 				<select name="shouhou_type" value="shouhou_type">
 					<option value=""></option>
 							<option value="退款">退款</option>
-							<option value="退改">退改</option>
+							<option value="修改">修改</option>
 						
 						</select>
 			

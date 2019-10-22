@@ -47,6 +47,23 @@ function onView(download){
 	frmGo.action="doAppUserInfo.do?method=downloadApk&download="+download;
    	frmGo.submit();
 }
+
+
+function deletee(id){
+	if(confirm("确定删除吗?"))
+	{
+		frmGo.action="doAppUserInfo.do?method=deleteinfo&id="+id;
+		frmGo.submit();
+	}
+}
+
+function update(id){
+	if(confirm("确定吗?"))
+	{
+		frmGo.action="doAppUserInfo.do?method=updateInfo&id="+id;
+		frmGo.submit();
+	}
+}
 </script>
 	<body>
 		<span class="title_1"></span>
@@ -94,7 +111,9 @@ function onView(download){
                  
                   	<td width="8%" >微信号</td>
                   	<td width="8%" >工种</td>
+                  	<td width="8%" >状态</td>
                     <td width="8%" >备注</td>
+                    <td width="8%" >操作</td>
                      <!-- <td width="8%" >头像</td> -->
              
 				</tr>
@@ -130,9 +149,18 @@ function onView(download){
 						
 						<td>
 						<logic:empty name="element" property="last_name">无</logic:empty>
-						<logic:notEmpty name="element" property="last_name">
-						<bean:write name="element" property="last_name" />
-						</logic:notEmpty>
+							<logic:equal name="element" property="last_name" value="1">裁床</logic:equal>		
+							<logic:equal name="element" property="last_name" value="2">前道开包</logic:equal>		
+							<logic:equal name="element" property="last_name" value="3">后道</logic:equal>		
+							<logic:equal name="element" property="last_name" value="4">大汤</logic:equal>		
+							<logic:equal name="element" property="last_name" value="5">质检</logic:equal>		
+							<logic:equal name="element" property="last_name" value="6">发货</logic:equal>		
+								
+						</td>
+							<td>
+						
+							<logic:equal name="element" property="status" value="0"><font color="red">待确认</font></logic:equal>		
+							<logic:equal name="element" property="status" value="1">正常</logic:equal>		
 						</td>
 						
 						<td>
@@ -149,6 +177,11 @@ function onView(download){
 							</logic:notEmpty>							
 						</td> --%>
 						
+						<td>
+						<logic:equal name="element" property="status" value="0"><font color="red">	<a href=# onclick="update('<bean:write name="element" property="id" />')" style="color:#0000FF" > [同意]</a></font></logic:equal>		
+					
+						<a href=# onclick="deletee('<bean:write name="element" property="id" />')" style="color:#0000FF" > [删除]</a>
+						</td>
 					</tr>
 				</logic:iterate> 
 

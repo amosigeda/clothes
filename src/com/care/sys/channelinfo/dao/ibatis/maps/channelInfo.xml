@@ -36,8 +36,8 @@
 	</select>
 	
 	<insert id="insertChannelInfo" parameterClass="com.care.sys.channelinfo.domain.ChannelInfo">
-		INSERT INTO channelinfo (id,order_id,phone,add_time,remark) VALUES 
-		(#id#,#order_id#,#phone#,#addTime#,#remark#)
+		INSERT INTO channelinfo (id,order_id,phone,add_time,remark,status) VALUES 
+		(#id#,#order_id#,#phone#,#addTime#,#remark#,#status#)
 	</insert>
 	
 </sqlMap>

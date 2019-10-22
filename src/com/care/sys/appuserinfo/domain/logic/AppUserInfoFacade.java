@@ -36,4 +36,12 @@ public interface AppUserInfoFacade {
 	public DataList getSaoMaInfoListByVo(AppUserInfo vo)throws SystemException;
 
 	public List<DataMap> getSaoMaInfo(AppUserInfo vo)throws SystemException;
+
+	public int deleteById(AppUserInfo vo)throws SystemException;
+
+	public int insertSaoMaInfoNew(AppUserInfo vo)throws SystemException;
+
+	public List<DataMap> getSaoMaInfoNew(AppUserInfo vo)throws SystemException;
+
+	public int updateSaoMaInfo(AppUserInfo voNumber)throws SystemException;
 }

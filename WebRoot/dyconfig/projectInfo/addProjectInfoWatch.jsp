@@ -81,14 +81,15 @@ $("#province").change();
      <tr class="tr_11">
     <td align="left" width="7%">&nbsp;&nbsp;类型</td>
     <td align="left" width="20%" colspan="2">
-    <input name="companyId" size="50" type="text" class="txt_1"maxlength="100"><font color="red">*</font>
-   <!--  <select name="companyId"  value="companyId">     
+  <!--   <input name="companyId" size="50" type="text" class="txt_1"maxlength="100"><font color="red">*</font> -->
+    <select name="companyId"  value="companyId">     
   <option value="1">1</option>     
   <option value="2">2</option>  
   <option value="3">3</option>  
   <option value="4">4</option>  
   <option value="5">5</option>  
- </select>   -->
+ </select>   
+ 
     </td>
   </tr>
   
@@ -155,8 +156,8 @@ $("#province").change();
   </tr>
   <tr class="tr_11">
   <td width="7%"></td>
-    <td align="left" colspan="2">&nbsp;&nbsp;&nbsp;<input type="button" name="ok"accesskey="y" tabindex="y"  value="确 定" class="but_1" onclick="onAdd()" style="font-size:12;width:40px;height:21px;">
-      <input type="button" name="back"accesskey="b" tabindex="b" value="返 回" class="but_1" onclick="location='doProjectInfo.do?method=queryWatchInfo'" style="font-size:12;width:40px;height:21px;">
+    <td align="left" colspan="2">&nbsp;&nbsp;&nbsp;<input type="button" name="ok"accesskey="y" tabindex="y"  value="确 定" class="but_1" onclick="onAdd()">
+      <input type="button" name="back"accesskey="b" tabindex="b" value="返 回" class="but_1" onclick="location='doProjectInfo.do?method=queryWatchInfo'">
   
     </td>
   </tr>

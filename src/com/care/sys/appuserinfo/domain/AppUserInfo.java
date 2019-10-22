@@ -41,10 +41,41 @@ public class AppUserInfo extends PublicVoBean implements Serializable{
 	private String token;
 	private String order_id;
 	private String clothes_type;
+	
+	private Integer xizhuang_number;
+	private Integer chenshan_number;
+	private Integer xiku_number;
+	private Integer majia_number;
+
+	
 
 	
 	
 	
+	public Integer getXizhuang_number() {
+		return xizhuang_number;
+	}
+	public void setXizhuang_number(Integer xizhuang_number) {
+		this.xizhuang_number = xizhuang_number;
+	}
+	public Integer getChenshan_number() {
+		return chenshan_number;
+	}
+	public void setChenshan_number(Integer chenshan_number) {
+		this.chenshan_number = chenshan_number;
+	}
+	public Integer getXiku_number() {
+		return xiku_number;
+	}
+	public void setXiku_number(Integer xiku_number) {
+		this.xiku_number = xiku_number;
+	}
+	public Integer getMajia_number() {
+		return majia_number;
+	}
+	public void setMajia_number(Integer majia_number) {
+		this.majia_number = majia_number;
+	}
 	public String getClothes_type() {
 		return clothes_type;
 	}

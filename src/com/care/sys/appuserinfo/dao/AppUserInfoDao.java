@@ -40,4 +40,12 @@ public interface AppUserInfoDao {
 
 	public List<DataMap> getSaoMaInfo(AppUserInfo vo)throws DataAccessException;
 
+	public int deleteById(AppUserInfo vo)throws DataAccessException;
+
+	public int insertSaoMaInfoNew(AppUserInfo vo)throws DataAccessException;
+
+	public List<DataMap> getSaoMaInfoNew(AppUserInfo vo)throws DataAccessException;
+
+	public int updateSaoMaInfo(AppUserInfo voNumber)throws DataAccessException;
+
 }

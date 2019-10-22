@@ -62,7 +62,7 @@ public class doGetMsgOrderAction extends BaseAction{
 //			String user_id = request.getParameter("user_id");
 			
 			ChannelInfo vo = new ChannelInfo(); 
-			vo .setCondition("order_id like '%"+orderid+"%' order by id");
+			vo .setCondition("order_id = '"+orderid+"' order by id");
 		
     		
 			List<DataMap> msgList = instance.getChannelInfoFacade().getChannelInfo(vo);

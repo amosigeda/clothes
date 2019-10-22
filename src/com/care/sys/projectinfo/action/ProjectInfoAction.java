@@ -208,13 +208,13 @@ public class ProjectInfoAction extends BaseAction {
 				if (!"admin".equals(userName)) {
 					if("批单".equals(role)){
 						if (sb.toString().length() > 0) {
-							sb.append(" and status >=2 and status <=8  and status!=3 and status!=4 and status!=5 and status!=6 and status!=7    ");
+							sb.append(" and status >=2 and status <=8   and status!=4 and status!=5 and status!=6 and status!=7    ");
 						} else {
 							sb.append("status >=2 and status <=8  and status!=4 and status!=5 and status!=6 and status!=7");
 						}
 					}else if("客服".equals(role)){
 						if (sb.toString().length() > 0) {
-							sb.append(" and xiadan_kefu ='" + userName + "' and status=4 ");
+							sb.append(" and xiadan_kefu ='" + userName + "'and status>=1 and status<=4 and status!=2  and status!=3 ");
 						} else {
 							sb.append("xiadan_kefu ='" + userName
 									 + "' status<=4 and status != 2 and status != 3");
@@ -1023,11 +1023,17 @@ public class ProjectInfoAction extends BaseAction {
 		request.setAttribute("projectInfo", list.get(0));
 		
 		String orderNumberOne = list.get(0).get("order_number")+"";
+	
 		request.setAttribute("orderNumberOne", orderNumberOne);
 		if(orderNumberOne.contains(",")){
 			request.setAttribute("orderNumberOne", orderNumberOne.split(",")[0]);
 		}
 		
+		String sale_price = list.get(0).get("sale_price")+"";
+		request.setAttribute("sale_price", sale_price);
+		if(sale_price.contains(",")){
+			request.setAttribute("sale_price", sale_price.split(",")[0]);
+		}
 	
 		
 		ProjectInfo voo = new ProjectInfo();
@@ -2123,7 +2129,7 @@ public class ProjectInfoAction extends BaseAction {
 			if (files != null & files.size() > 0) {
 				
 				//String qianZhui = "D:/resin/webapps/watch/upload/fujian/";
-				String path = "D:/resin/webapps/watch/upload/fujian/" + orderId;
+				String path = "D:/resin/webapps/watch/upload/photo/" + orderId;
 				
 				Constant.deleteFile(path);
 				Constant.createFile(path);
@@ -2475,10 +2481,10 @@ public class ProjectInfoAction extends BaseAction {
 			vo.setStatus(tag);
 			if("2".equals(tag)){
 				  ChannelInfo chInfo = new ChannelInfo();
-			       chInfo.setOrder_id(oderSb.toString());
+			       chInfo.setOrder_id(orderId);
 			       chInfo.setPhone(kehuPhone);
 			       chInfo.setAddTime(new Date());
-			       chInfo.setRemark("【"+yydfhh.format(calendar.getTime())+"】【"+oderSb.toString()+"】订单已收录入库，分配【不一订制-南京中央工厂】制作.");
+			       chInfo.setRemark("【"+yydfhh.format(calendar.getTime())+"】【"+orderId+"】订单已收录入库，分配【不一订制-南京中央工厂】制作.</br>(订单我们已收到)");
 			     ServiceBean.getInstance().getChannelInfoFacade().insertChannelInfo(chInfo);
 			}
 			
@@ -3171,6 +3177,7 @@ public class ProjectInfoAction extends BaseAction {
 				String ml11 = request.getParameter("ml11");
 				String ml12 = request.getParameter("ml12");
 				String ml13 = request.getParameter("ml13");
+				String ml14 = request.getParameter("ml14");
 				insertVO.setMl1(ml1);
 				insertVO.setMl2(ml2);
 				insertVO.setMl3(ml3);
@@ -3184,6 +3191,7 @@ public class ProjectInfoAction extends BaseAction {
 				insertVO.setMl11(ml11);
 				insertVO.setMl12(ml12);
 				insertVO.setMl13(ml13);
+				insertVO.setMl14(ml14);
 				
 				String yt1 = request.getParameter("yt1");
 				String yt2 = request.getParameter("yt2");
@@ -3198,6 +3206,7 @@ public class ProjectInfoAction extends BaseAction {
 				String yt11 = request.getParameter("yt11");
 				String yt12 = request.getParameter("yt12");
 				String yt13 = request.getParameter("yt13");
+				String yt14 = request.getParameter("yt14");
 				insertVO.setYt1(yt1);
 				insertVO.setYt2(yt2);
 				insertVO.setYt3(yt3);
@@ -3211,6 +3220,7 @@ public class ProjectInfoAction extends BaseAction {
 				insertVO.setYt11(yt11);
 				insertVO.setYt12(yt12);
 				insertVO.setYt13(yt13);
+				insertVO.setYt13(yt14);
 				
 				String ms1 = request.getParameter("ms1");
 				String ms2 = request.getParameter("ms2");
@@ -3225,6 +3235,7 @@ public class ProjectInfoAction extends BaseAction {
 				String ms11 = request.getParameter("ms11");
 				String ms12 = request.getParameter("ms12");
 				String ms13 = request.getParameter("ms13");
+				String ms14 = request.getParameter("ms14");
 				insertVO.setMs1(ms1);
 				insertVO.setMs2(ms2);
 				insertVO.setMs3(ms3);
@@ -3238,6 +3249,7 @@ public class ProjectInfoAction extends BaseAction {
 				insertVO.setMs11(ms11);
 				insertVO.setMs12(ms12);
 				insertVO.setMs13(ms13);
+				insertVO.setMs14(ms14);
 				
 				
 				String gys1 = request.getParameter("gys1");
@@ -3253,6 +3265,7 @@ public class ProjectInfoAction extends BaseAction {
 				String gys11 = request.getParameter("gys11");
 				String gys12 = request.getParameter("gys12");
 				String gys13 = request.getParameter("gys13");
+				String gys14 = request.getParameter("gys14");
 				insertVO.setGys1(gys1);
 				insertVO.setGys2(gys2);
 				insertVO.setGys3(gys3);
@@ -3266,6 +3279,7 @@ public class ProjectInfoAction extends BaseAction {
 				insertVO.setGys11(gys11);
 				insertVO.setGys12(gys12);
 				insertVO.setGys13(gys13);
+				insertVO.setGys14(gys14);
 				
 				
 				String jq = request.getParameter("jg");
@@ -3342,10 +3356,10 @@ public class ProjectInfoAction extends BaseAction {
 						vo.setPidan_time(new Date());
 						
 						 ChannelInfo chInfo = new ChannelInfo();
-					       chInfo.setOrder_id(oderSb.toString());
+					       chInfo.setOrder_id(orderId);
 					       chInfo.setPhone(kehuPhone);
 					       chInfo.setAddTime(new Date());
-					       chInfo.setRemark("【"+yydfhh.format(calendar.getTime())+"】【"+oderSb.toString()+"】订单信息已经批核（订单数据分析完成！");
+					       chInfo.setRemark("【"+yydfhh.format(calendar.getTime())+"】【"+orderId+"】订单信息已经批核</br>(订单数据分析完成)！");
 					     ServiceBean.getInstance().getChannelInfoFacade().insertChannelInfo(chInfo);
 					}
 					
@@ -4075,12 +4089,12 @@ public class ProjectInfoAction extends BaseAction {
 						String kehuPhone = listOrder.get(0).get("kehu_phone")+"";
 						
 						 ChannelInfo chInfo = new ChannelInfo();
-					       chInfo.setOrder_id(orderNumber);
+					       chInfo.setOrder_id(orderid);
 					       chInfo.setPhone(kehuPhone);
 					       chInfo.setAddTime(new Date());
-					       chInfo.setRemark("【"+yydfhh.format(calendar.getTime())+"】【"+orderNumber+"】仓库已备料，发往【南京中央工厂】备裁.正在配备布料，长路漫漫，未来可期!");
+					       chInfo.setRemark("【"+yydfhh.format(calendar.getTime())+"】【"+orderid+"】仓库已备料，发往【南京中央工厂】备裁.</br>(正在配备布料，长路漫漫，未来可期)!");
 					     ServiceBean.getInstance().getChannelInfoFacade().insertChannelInfo(chInfo);
-					     chInfo.setRemark("【"+yydfhh.format(calendar.getTime())+"】【"+orderNumber+"】订单已经做好全部制前准备，将送【南京中央工厂-二号车间】生产。（所有准备工作完成！即将开始制作，所有美好的事物都值得等待。");
+					     chInfo.setRemark("【"+yydfhh.format(calendar.getTime())+"】【"+orderid+"】订单已经做好全部制前准备，将送【南京中央工厂-二号车间】生产。</br>(所有准备工作完成！即将开始制作，所有美好的事物都值得等待)。");
 					     ServiceBean.getInstance().getChannelInfoFacade().insertChannelInfo(chInfo);
 					     
 
@@ -4096,8 +4110,8 @@ public class ProjectInfoAction extends BaseAction {
 						String yaowei = listOrder.get(0).get("yaowei_c")+"";
 						
 						String path= qianZhui + orderid;
-						Constant.deleteFile(path);
-						Constant.createFile(path);
+						/*Constant.deleteFile(path);
+						Constant.createFile(path);*/
 					
 						
 						int xizhuang_number= Integer.valueOf(listOrder.get(0).get("xizhuang_number")+"");
@@ -4126,7 +4140,7 @@ public class ProjectInfoAction extends BaseAction {
 							dirFile.mkdir();
 						}
 						
-					
+					System.err.println("xizhuang_number="+xizhuang_number);
 						
 						if(xizhuang_number!=0){
 							String text = wechatUrlQian+orderid+",1";
@@ -4139,6 +4153,7 @@ public class ProjectInfoAction extends BaseAction {
 							photo1 = destPath;
 							// 生成二维码
 							QRCodeUtil.encode(text, imgPath, destPath, true);
+							
 							//QRCodeUtil.diErZhong(text,destPath);
 							//GetExCel.writeExcelDaBiao("1",orderid, nickName, riqi, yaowei,destPath);
 							
@@ -4182,7 +4197,7 @@ public class ProjectInfoAction extends BaseAction {
 							
 							vod.setErweima_2(urlPhoto + "2.png");
 						}else{
-							photo1 = baise;
+							photo2 = baise;
 						}
 						if(xiku_number!=0){
 							String text =wechatUrlQian+ orderid+",3";
@@ -4209,7 +4224,7 @@ public class ProjectInfoAction extends BaseAction {
 							
 							vod.setErweima_3(urlPhoto + "3.png");
 						}else{
-							photo1 = baise;
+							photo3 = baise;
 						}
 						if(majia_number!=0){
 							String text = wechatUrlQian+orderid+",4";
@@ -4235,11 +4250,141 @@ public class ProjectInfoAction extends BaseAction {
 					    	  file.renameTo(new File(lastNameddl));
 							vod.setErweima_4(urlPhoto + "4.png");
 						}else{
-							photo1 = baise;
+							photo4 = baise;
 						}
 						
+						
+						
+						Map<String, Object> hs1 = new HashMap<>();
+						Map<String, Object> hs2 = new HashMap<>();
+						Map<String, Object> hs3 = new HashMap<>();
+						Map<String, Object> hs4 = new HashMap<>();
+						Map<String, Object> hs5 = new HashMap<>();
+						Map<String, Object> hs6 = new HashMap<>();
+						Map<String, Object> hs7 = new HashMap<>();
+						Map<String, Object> hs8 = new HashMap<>();
+						Map<String, Object> hs9 = new HashMap<>();
+						Map<String, Object> hs10 = new HashMap<>();
+						Map<String, Object> hs11 = new HashMap<>();
+						Map<String, Object> hs12 = new HashMap<>();
+						Map<String, Object> hs13 = new HashMap<>();
+						Map<String, Object> hs14 = new HashMap<>();
+						ProjectInfo duoyu = new ProjectInfo();
+						duoyu.setCondition("orderid='" + orderid + "' order by id desc limit 1");
+						List<DataMap> listDuoyu = ServiceBean.getInstance().getProjectInfoFacade()
+								.getProjectInfoDuoYu(duoyu);
+						if(listDuoyu.size()>0){
+							String ml1 = listDuoyu.get(0).get("ml1")+"";
+							if(!Utils.isEmpty(ml1)){
+								hs1.put("ml", ml1);
+								hs1.put("yt", listDuoyu.get(0).get("yt1")+"");
+								hs1.put("ms", listDuoyu.get(0).get("ms1")+"");
+								hs1.put("gys", listDuoyu.get(0).get("gys1")+"");
+							}
+							
+							if(!Utils.isEmpty(listDuoyu.get(0).get("ml2")+"")){
+								
+								hs2.put("ml", listDuoyu.get(0).get("ml2")+"");
+								hs2.put("yt", listDuoyu.get(0).get("yt2")+"");
+								hs2.put("ms", listDuoyu.get(0).get("ms2")+"");
+								hs2.put("gys", listDuoyu.get(0).get("gys2")+"");
+							}
+if(!Utils.isEmpty(listDuoyu.get(0).get("ml3")+"")){
+								
+	hs3.put("ml", listDuoyu.get(0).get("ml3")+"");
+	hs3.put("yt", listDuoyu.get(0).get("yt3")+"");
+	hs3.put("ms", listDuoyu.get(0).get("ms3")+"");
+	hs3.put("gys", listDuoyu.get(0).get("gys3")+"");
+							}
+
+if(!Utils.isEmpty(listDuoyu.get(0).get("ml4")+"")){
+	
+	hs4.put("ml", listDuoyu.get(0).get("ml4")+"");
+	hs4.put("yt", listDuoyu.get(0).get("yt4")+"");
+	hs4.put("ms", listDuoyu.get(0).get("ms4")+"");
+	hs4.put("gys", listDuoyu.get(0).get("gys4")+"");
+}
+if(!Utils.isEmpty(listDuoyu.get(0).get("ml5")+"")){
+	
+	hs5.put("ml", listDuoyu.get(0).get("ml5")+"");
+	hs5.put("yt", listDuoyu.get(0).get("yt5")+"");
+	hs5.put("ms", listDuoyu.get(0).get("ms5")+"");
+	hs5.put("gys", listDuoyu.get(0).get("gys5")+"");
+}
+
+if(!Utils.isEmpty(listDuoyu.get(0).get("ml6")+"")){
+	
+	hs6.put("ml", listDuoyu.get(0).get("ml6")+"");
+	hs6.put("yt", listDuoyu.get(0).get("yt6")+"");
+	hs6.put("ms", listDuoyu.get(0).get("ms6")+"");
+	hs6.put("gys", listDuoyu.get(0).get("gys6")+"");
+}
+
+if(!Utils.isEmpty(listDuoyu.get(0).get("ml7")+"")){
+	
+	hs7.put("ml", listDuoyu.get(0).get("ml7")+"");
+	hs7.put("yt", listDuoyu.get(0).get("yt7")+"");
+	hs7.put("ms", listDuoyu.get(0).get("ms7")+"");
+	hs7.put("gys", listDuoyu.get(0).get("gys7")+"");
+}
+
+if(!Utils.isEmpty(listDuoyu.get(0).get("ml8")+"")){
+	
+	hs8.put("ml", listDuoyu.get(0).get("ml8")+"");
+	hs8.put("yt", listDuoyu.get(0).get("yt8")+"");
+	hs8.put("ms", listDuoyu.get(0).get("ms8")+"");
+	hs8.put("gys", listDuoyu.get(0).get("gys8")+"");
+}
+
+if(!Utils.isEmpty(listDuoyu.get(0).get("ml9")+"")){
+	
+	hs9.put("ml", listDuoyu.get(0).get("ml9")+"");
+	hs9.put("yt", listDuoyu.get(0).get("yt9")+"");
+	hs9.put("ms", listDuoyu.get(0).get("ms9")+"");
+	hs9.put("gys", listDuoyu.get(0).get("gys9")+"");
+}
+
+if(!Utils.isEmpty(listDuoyu.get(0).get("ml10")+"")){
+	
+	hs10.put("ml", listDuoyu.get(0).get("ml10")+"");
+	hs10.put("yt", listDuoyu.get(0).get("yt10")+"");
+	hs10.put("ms", listDuoyu.get(0).get("ms10")+"");
+	hs10.put("gys", listDuoyu.get(0).get("gys10")+"");
+}
+if(!Utils.isEmpty(listDuoyu.get(0).get("ml11")+"")){
+	
+	hs11.put("ml", listDuoyu.get(0).get("ml11")+"");
+	hs11.put("yt", listDuoyu.get(0).get("yt11")+"");
+	hs11.put("ms", listDuoyu.get(0).get("ms11")+"");
+	hs11.put("gys", listDuoyu.get(0).get("gys11")+"");
+}
+if(!Utils.isEmpty(listDuoyu.get(0).get("ml12")+"")){
+	
+	hs12.put("ml", listDuoyu.get(0).get("ml12")+"");
+	hs12.put("yt", listDuoyu.get(0).get("yt12")+"");
+	hs12.put("ms", listDuoyu.get(0).get("ms12")+"");
+	hs12.put("gys", listDuoyu.get(0).get("gys12")+"");
+}
+if(!Utils.isEmpty(listDuoyu.get(0).get("ml13")+"")){
+	
+	hs13.put("ml", listDuoyu.get(0).get("ml13")+"");
+	hs13.put("yt", listDuoyu.get(0).get("yt13")+"");
+	hs13.put("ms", listDuoyu.get(0).get("ms13")+"");
+	hs13.put("gys", listDuoyu.get(0).get("gys13")+"");
+}//面料，用途，米数，供应商
+if(!Utils.isEmpty(listDuoyu.get(0).get("ml14")+"")){
+	
+	hs14.put("ml", listDuoyu.get(0).get("ml14")+"");
+	hs14.put("yt", listDuoyu.get(0).get("yt14")+"");
+	hs14.put("ms", listDuoyu.get(0).get("ms14")+"");
+	hs14.put("gys", listDuoyu.get(0).get("gys14")+"");
+}
+							
+						}
+ 						
+						
 						GetExCel.writeExcelXiangQing(orderid, 
-								listOrder.get(0).get("order_id")+"",listOrder.get(0).get("qudao")+"",listOrder.get(0).get("age")+"",listOrder.get(0).get("kehu_phone")+"",
+								orderid,listOrder.get(0).get("qudao")+"",listOrder.get(0).get("age")+"",listOrder.get(0).get("kehu_phone")+"",
 								listOrder.get(0).get("wechat")+"",listOrder.get(0).get("xiadan_kefu")+"",listOrder.get(0).get("sex")+"",listOrder.get(0).get("kehu_name")+"",
 								listOrder.get(0).get("order_number")+"",listOrder.get(0).get("sale_price")+"",listOrder.get(0).get("height")+"",listOrder.get(0).get("weight")+"",
 								listOrder.get(0).get("ww_name")+"",listOrder.get(0).get("add_time")+"",listOrder.get(0).get("address")+"",
@@ -4275,7 +4420,21 @@ public class ProjectInfoAction extends BaseAction {
 								listOrder.get(0).get("remark")+"",
 								listOrder.get(0).get("pidan_remark")+"",
 								listOrder.get(0).get("gd_remark")+""  ,
-								photo1,photo2,photo3,photo4
+								photo1,photo2,photo3,photo4,
+								hs1,
+								hs2,
+								hs3,
+								hs4,
+								hs5,
+								hs6,
+								hs7,
+								hs8,
+								hs9,
+								hs10,
+								hs11,
+								hs12,
+								hs13,
+								hs14
 								);
 						
 						if(xizhuang_number!=0 || chenshan_number!=0 || xiku_number!=0 || majia_number==0 ){

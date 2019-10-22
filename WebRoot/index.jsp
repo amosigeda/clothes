@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 <script language="JavaScript" src="public/g_js.js"></script>
-<title> 登录不一订制和周卢江管理系统 </title>
+<title> 登录不周山1.0系统 </title>
 <link href="css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <script language="javascript">
@@ -60,7 +60,7 @@ function clears(){
 <div class="loginpage">
 <form name="frmLogon" method="post" action="validate.jsp" onSubmit="return check()">
 	<div class="loginBox">
-		<h2>不一订制和周卢江</h2>
+		<h2>不周山1.0系统</h2>
 		<div class="loginBox_input">
 			<div class="LB_group">
 				<label>用 户</label>

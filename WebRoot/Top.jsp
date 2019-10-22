@@ -108,7 +108,7 @@ function exit(){
             <a href="sysAdmin/sysLogInfo/doSysLogInfo.do?method=getOutTime" id="a_test" onclick="exit()" style="color:red">退出</a>
   </div>
 	<div class="manage_title">
-	     不一订制和周卢江管理系统
+	     不周山1.0系统
     </div>
 <ul class="view_menu">
 		   <%

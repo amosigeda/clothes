@@ -360,13 +360,13 @@ function onUpdate(wechat){
       <td nowrap="nowrap" align="center" ><%if("admin".equals(request.getAttribute("role")) || "客服".equals(request.getAttribute("role")) || "经理".equals(request.getAttribute("role")) ){ %>
         <input style="border:none;" type="text"     name="orderNumber" id="orderNumber"  value=<%=request.getAttribute("orderNumberOne")%>>
         <%}else{ %>
-        <input style="border:none;" type="text"  readonly="true"   name="orderNumber" id="orderNumber"  value=<%=projectInfo.getAt("order_number")%>>
+        <input style="border:none;" type="text"  readonly="true"   name="orderNumber" id="orderNumber"  value=<%=request.getAttribute("orderNumberOne")%>>
         <%} %></td>
       <td nowrap="nowrap" align="center" class="f_bold">销售价格</td>
       <td nowrap="nowrap" align="center" ><%if("admin".equals(request.getAttribute("role")) || "客服".equals(request.getAttribute("role")) || "经理".equals(request.getAttribute("role")) ){ %>
-        <input style="border:none;" type="text"     name="salePrice" id="salePrice"  value=<%=projectInfo.getAt("sale_price")%>>
+        <input style="border:none;" type="text"     name="salePrice" id="salePrice"  value=<%=request.getAttribute("sale_price")%>>
         <%}else{ %>
-        <input style="border:none;" type="text" readonly="true"    name="salePrice" id="salePrice"  value=<%=projectInfo.getAt("sale_price")%>>
+        <input style="border:none;" type="text" readonly="true"    name="salePrice" id="salePrice"  value=<%=request.getAttribute("sale_price")%>>
         <%} %></td>
       <td nowrap="nowrap" align="center" class="f_bold">身高</td>
       <td nowrap="nowrap" align="center" ><%if("admin".equals(request.getAttribute("role")) || "客服".equals(request.getAttribute("role")) || "经理".equals(request.getAttribute("role")) ){ %>
@@ -723,7 +723,7 @@ function onUpdate(wechat){
         <%} %></td>
       <td nowrap="nowrap" align="center" class="f_bold">中腰</td>
       <td nowrap="nowrap" align="center" ><%if("admin".equals(request.getAttribute("role")) || "客服".equals(request.getAttribute("role")) || "经理".equals(request.getAttribute("role")) ){ %>
-        <input style="border:none;" type="text"        name="zhongyaoA" id="zhongyaoA"   value="<%=projectInfo.getAt("zhongyao_b")%>"  >
+        <input style="border:none;" type="text"        name="zhongyaoB" id="zhongyaoB"   value="<%=projectInfo.getAt("zhongyao_b")%>"  >
         <%}else{ %>
         <input style="border:none;" type="text"   readonly="true"     name="zhongyaoA" id="zhongyaoA"   value="<%=projectInfo.getAt("zhongyao_b")%>"  >
         <%} %></td>
@@ -2399,7 +2399,7 @@ function onUpdate(wechat){
 					type="text"   readonly="true"
 					 />
         <%} %>
-        <%----%></td>
+        </td>
       
 			
 		
@@ -2407,8 +2407,10 @@ function onUpdate(wechat){
     <%} %>
     <%if(!"".equals(duoyu.getAt("ml13"))&& duoyu.getAt("ml13")!=null ){ %>
     <tr>
-      <td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">面料</td>
-      <td nowrap="nowrap" align="center" ><%if("admin".equals(request.getAttribute("role")) || "客服".equals(request.getAttribute("role")) || "经理".equals(request.getAttribute("role")) ){ %>
+     
+      <%if("admin".equals(request.getAttribute("role")) || "客服".equals(request.getAttribute("role")) || "经理".equals(request.getAttribute("role")) ){ %>
+        <td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">面料</td>
+      <td nowrap="nowrap" align="center" >
         <input name="ml13" id="ml13"  value="<%=duoyu.getAt("ml13")%>"
 				
 				 type="text" 
@@ -2425,12 +2427,7 @@ function onUpdate(wechat){
           <option value="换片" <%=duoyu.getAt("yt13").equals("换片")? "selected":"" %>  >换片</option>
           <option value="其他" <%=duoyu.getAt("yt13").equals("其他")? "selected":"" %>  >其他</option>
         </select>
-        <%-- 	<input
-					name="yt13" id="yt13"  value="<%=duoyu.getAt("yt13")%>"
-					
-					type="text"  
-					placeholder="" 
-					 /> --%></td>
+      </td>
       <%}else{ %>
       <td nowrap="nowrap" align="center" class="td_bg_yellow f_bold">面料</td>
       <td nowrap="nowrap" align="center" ><input name="ml13" id="ml13"  value="<%=duoyu.getAt("ml13")%>"

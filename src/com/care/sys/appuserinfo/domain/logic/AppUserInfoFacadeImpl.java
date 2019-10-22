@@ -96,4 +96,26 @@ public class AppUserInfoFacadeImpl implements AppUserInfoFacade{
 		return appUserInfoDao.getSaoMaInfo(vo);
 	}
 
+	@Override
+	public int deleteById(AppUserInfo vo) throws SystemException {
+		// TODO Auto-generated method stub
+		return appUserInfoDao.deleteById(vo);
+	}
+
+	@Override
+	public int insertSaoMaInfoNew(AppUserInfo vo) throws SystemException {
+		return appUserInfoDao.insertSaoMaInfoNew(vo);
+	}
+
+	@Override
+	public List<DataMap> getSaoMaInfoNew(AppUserInfo vo) throws SystemException {
+		return appUserInfoDao.getSaoMaInfoNew(vo);
+	}
+
+	@Override
+	public int updateSaoMaInfo(AppUserInfo voNumber) throws SystemException {
+		// TODO Auto-generated method stub
+		return appUserInfoDao.updateSaoMaInfo(voNumber);
+	}
+
 }

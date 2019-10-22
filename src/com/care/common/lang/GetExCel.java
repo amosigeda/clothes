@@ -3,6 +3,10 @@ package com.care.common.lang;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.care.utils.Utils;
 
 import jxl.Workbook;
 import jxl.format.Alignment;
@@ -279,7 +283,23 @@ System.out.println("生成EXCEL文件 名称="+name+"         订单号1123="+or
 			String photo1,
 			String photo2,
 			String photo3,
-			String photo4
+			String photo4,
+			
+			Map<String, Object> hs1,
+			Map<String, Object> hs2,
+			Map<String, Object> hs3,
+			Map<String, Object> hs4,
+			Map<String, Object> hs5,
+			Map<String, Object> hs6,
+			Map<String, Object> hs7,
+			Map<String, Object> hs8,
+			Map<String, Object> hs9,
+			Map<String, Object> hs10,
+			Map<String, Object> hs11,
+			Map<String, Object> hs12,
+			Map<String, Object> hs13,
+			Map<String, Object> hs14
+		
 			)
 					throws IOException 
 					{
@@ -356,17 +376,20 @@ System.out.println("生成EXCEL文件 名称="+name+"         订单号1123="+or
 			//第五行
 			Label label04 = new Label(0, 4, "订单号", bFormat);
 			sheet.addCell(label04);
+			if(i.contains(",")){
+			i= i.split(",")[0];
+			}
 			Label label14 = new Label(1, 4, i, aFormat);
 			sheet.addCell(label14);
 			Label label24 = new Label(2, 4, "销售价格", bFormat);
 			sheet.addCell(label24);
-			Label label34 = new Label(3, 4, j, aFormat);
+			Label label34 = new Label(3, 4, "", aFormat);
 			sheet.addCell(label34);
 			Label label44 = new Label(4, 4, "身高", bFormat);
 			sheet.addCell(label44);
 			Label label54 = new Label(5, 4, k, aFormat);
 			sheet.addCell(label54);
-			Label label64 = new Label(6, 4, "体重", bFormat);
+			Label label64 = new Label(6, 4, "体重KG", bFormat);
 			sheet.addCell(label64);
 			 Label label74 = new Label(7, 4, l, aFormat);
 			sheet.addCell(label74);
@@ -783,64 +806,197 @@ System.out.println("生成EXCEL文件 名称="+name+"         订单号1123="+or
 			sheet.addCell(label129);
 			Label label229 = new Label(2, 29, "米数", bFormat);
 			sheet.addCell(label229);
-			Label label329 = new Label(3, 29, b30, aFormat);
+			Label label329 = new Label(3, 29,c30, aFormat);
 			sheet.addCell(label329);
 			Label label429 = new Label(4, 29, "用途", bFormat);
 			sheet.addCell(label429);
-			Label label529 = new Label(5, 29, c30, aFormat);
+			Label label529 = new Label(5, 29, b30, aFormat);
 			sheet.addCell(label529);
 			Label label629 = new Label(6, 29, "供应商", bFormat);
 			sheet.addCell(label629);
 			Label label729 = new Label(7, 29, d30, aFormat);
 			sheet.addCell(label729);
 			
-			//第二十九行
-			/*Label label030 = new Label(0, 30, "面料1", bFormat);
-			sheet.addCell(label030);
-			Label label130 = new Label(1, 30, a31, aFormat);
-			sheet.addCell(label130);
-			Label label230 = new Label(2, 30, "米数", bFormat);
-			sheet.addCell(label230);
-			Label label330 = new Label(3, 30, b31, aFormat);
-			sheet.addCell(label330);
-			Label label430 = new Label(4, 30, "用途", bFormat);
-			sheet.addCell(label430);
-			Label label530 = new Label(5, 30, c31, aFormat);
-			sheet.addCell(label530);
-			Label label630 = new Label(6, 30, "供应商", bFormat);
-			sheet.addCell(label630);
-			Label label730 = new Label(7, 30, d31, aFormat);
-			sheet.addCell(label730);*/
+			//面料，用途，米数，供应商
 			
+			int xz = 0;
+			if(!Utils.isEmpty(hs1.get("ml")+"")&&!"null".equals(hs1.get("ml"))){
+				xz=xz+1;
+				sheet.addCell(new Label(0, 29+xz, "面料", bFormat));
+				sheet.addCell(new Label(2, 29+xz, "米数", bFormat));
+				sheet.addCell(new Label(4, 29+xz, "用途", bFormat));
+				sheet.addCell(new Label(6, 29+xz, "供应商", bFormat));
+				sheet.addCell(new Label(1, 29+xz, hs1.get("ml")+"", aFormat));
+				sheet.addCell(new Label(3, 29+xz,hs1.get("ms")+"", aFormat));
+				sheet.addCell(new Label(5, 29+xz, hs1.get("yt")+"", aFormat));
+				sheet.addCell(new Label(7, 29+xz, hs1.get("gys")+"", aFormat));
+			}
+			
+			
+			if(!Utils.isEmpty(hs2.get("ml")+"")&&!"null".equals(hs2.get("ml"))){
+				xz=xz+1;
+				sheet.addCell(new Label(0, 29+xz, "面料", bFormat));
+				sheet.addCell(new Label(2, 29+xz, "米数", bFormat));
+				sheet.addCell(new Label(4, 29+xz, "用途", bFormat));
+				sheet.addCell(new Label(6, 29+xz, "供应商", bFormat));
+				sheet.addCell(new Label(1, 29+xz, hs2.get("ml")+"", aFormat));
+				sheet.addCell(new Label(3, 29+xz,hs2.get("ms")+"", aFormat));
+				sheet.addCell(new Label(5, 29+xz, hs2.get("yt")+"", aFormat));
+				sheet.addCell(new Label(7, 29+xz, hs2.get("gys")+"", aFormat));
+			}
+			if(!Utils.isEmpty(hs3.get("ml")+"")&&!"null".equals(hs3.get("ml"))){
+				xz=xz+1;
+				sheet.addCell(new Label(0, 29+xz, "面料", bFormat));
+				sheet.addCell(new Label(2, 29+xz, "米数", bFormat));
+				sheet.addCell(new Label(4, 29+xz, "用途", bFormat));
+				sheet.addCell(new Label(6, 29+xz, "供应商", bFormat));
+				sheet.addCell(new Label(1, 29+xz, hs3.get("ml")+"", aFormat));
+				sheet.addCell(new Label(3, 29+xz,hs3.get("ms")+"", aFormat));
+				sheet.addCell(new Label(5, 29+xz, hs3.get("yt")+"", aFormat));
+				sheet.addCell(new Label(7, 29+xz, hs3.get("gys")+"", aFormat));
+			}
+			if(!Utils.isEmpty(hs4.get("ml")+"")&&!"null".equals(hs4.get("ml"))){
+				xz=xz+1;
+				sheet.addCell(new Label(0, 29+xz, "面料", bFormat));
+				sheet.addCell(new Label(2, 29+xz, "米数", bFormat));
+				sheet.addCell(new Label(4, 29+xz, "用途", bFormat));
+				sheet.addCell(new Label(6, 29+xz, "供应商", bFormat));
+				sheet.addCell(new Label(1, 29+xz, hs4.get("ml")+"", aFormat));
+				sheet.addCell(new Label(3, 29+xz,hs4.get("ms")+"", aFormat));
+				sheet.addCell(new Label(5, 29+xz, hs4.get("yt")+"", aFormat));
+				sheet.addCell(new Label(7, 29+xz, hs4.get("gys")+"", aFormat));
+			}
+			if(!Utils.isEmpty(hs5.get("ml")+"")&&!"null".equals(hs5.get("ml"))){
+				xz=xz+1;
+				sheet.addCell(new Label(0, 29+xz, "面料", bFormat));
+				sheet.addCell(new Label(2, 29+xz, "米数", bFormat));
+				sheet.addCell(new Label(4, 29+xz, "用途", bFormat));
+				sheet.addCell(new Label(6, 29+xz, "供应商", bFormat));
+				sheet.addCell(new Label(1, 29+xz, hs5.get("ml")+"", aFormat));
+				sheet.addCell(new Label(3, 29+xz, hs5.get("ms")+"", aFormat));
+				sheet.addCell(new Label(5, 29+xz, hs5.get("yt")+"", aFormat));
+				sheet.addCell(new Label(7, 29+xz, hs5.get("gys")+"", aFormat));
+			}
+			if(!Utils.isEmpty(hs6.get("ml")+"")&&!"null".equals(hs6.get("ml"))){
+				xz=xz+1;
+				sheet.addCell(new Label(0, 29+xz, "面料", bFormat));
+				sheet.addCell(new Label(2, 29+xz, "米数", bFormat));
+				sheet.addCell(new Label(4, 29+xz, "用途", bFormat));
+				sheet.addCell(new Label(6, 29+xz, "供应商", bFormat));
+				sheet.addCell(new Label(1, 29+xz, hs6.get("ml")+"", aFormat));
+				sheet.addCell(new Label(3, 29+xz, hs6.get("ms")+"", aFormat));
+				sheet.addCell(new Label(5, 29+xz, hs6.get("yt")+"", aFormat));
+				sheet.addCell(new Label(7, 29+xz, hs6.get("gys")+"", aFormat));
+			}
+			if(!Utils.isEmpty(hs7.get("ml")+"")&&!"null".equals(hs7.get("ml"))){
+				xz=xz+1;
+				sheet.addCell(new Label(0, 29+xz, "面料", bFormat));
+				sheet.addCell(new Label(2, 29+xz, "米数", bFormat));
+				sheet.addCell(new Label(4, 29+xz, "用途", bFormat));
+				sheet.addCell(new Label(6, 29+xz, "供应商", bFormat));
+				sheet.addCell(new Label(1, 29+xz, hs7.get("ml")+"", aFormat));
+				sheet.addCell(new Label(3, 29+xz, hs7.get("ms")+"", aFormat));
+				sheet.addCell(new Label(5, 29+xz, hs7.get("yt")+"", aFormat));
+				sheet.addCell(new Label(7, 29+xz, hs7.get("gys")+"", aFormat));
+			}
+			if(!Utils.isEmpty(hs8.get("ml")+"")&&!"null".equals(hs8.get("ml"))){
+				xz=xz+1;
+				sheet.addCell(new Label(0, 29+xz, "面料", bFormat));
+				sheet.addCell(new Label(2, 29+xz, "米数", bFormat));
+				sheet.addCell(new Label(4, 29+xz, "用途", bFormat));
+				sheet.addCell(new Label(6, 29+xz, "供应商", bFormat));
+				sheet.addCell(new Label(1, 29+xz, hs8.get("ml")+"", aFormat));
+				sheet.addCell(new Label(3, 29+xz, hs8.get("ms")+"", aFormat));
+				sheet.addCell(new Label(5, 29+xz, hs8.get("yt")+"", aFormat));
+				sheet.addCell(new Label(7, 29+xz, hs8.get("gys")+"", aFormat));
+			}
+			if(!Utils.isEmpty(hs9.get("ml")+"")&&!"null".equals(hs9.get("ml"))){
+				xz=xz+1;
+				sheet.addCell(new Label(0, 29+xz, "面料", bFormat));
+				sheet.addCell(new Label(2, 29+xz, "米数", bFormat));
+				sheet.addCell(new Label(4, 29+xz, "用途", bFormat));
+				sheet.addCell(new Label(6, 29+xz, "供应商", bFormat));
+				sheet.addCell(new Label(1, 29+xz, hs9.get("ml")+"", aFormat));
+				sheet.addCell(new Label(3, 29+xz, hs9.get("ms")+"", aFormat));
+				sheet.addCell(new Label(5, 29+xz, hs9.get("yt")+"", aFormat));
+				sheet.addCell(new Label(7, 29+xz, hs9.get("gys")+"", aFormat));
+			}
+			if(!Utils.isEmpty(hs10.get("ml")+"")&&!"null".equals(hs10.get("ml"))){
+				xz=xz+1;
+				sheet.addCell(new Label(0, 29+xz, "面料", bFormat));
+				sheet.addCell(new Label(2, 29+xz, "米数", bFormat));
+				sheet.addCell(new Label(4, 29+xz, "用途", bFormat));
+				sheet.addCell(new Label(6, 29+xz, "供应商", bFormat));
+				sheet.addCell(new Label(1, 29+xz, hs10.get("ml")+"", aFormat));
+				sheet.addCell(new Label(3, 29+xz, hs10.get("ms")+"", aFormat));
+				sheet.addCell(new Label(5, 29+xz, hs10.get("yt")+"", aFormat));
+				sheet.addCell(new Label(7, 29+xz, hs10.get("gys")+"", aFormat));
+			}
+			if(!Utils.isEmpty(hs11.get("ml")+"")&&!"null".equals(hs11.get("ml"))){
+				xz=xz+1;
+				sheet.addCell(new Label(0, 29+xz, "面料", bFormat));
+				sheet.addCell(new Label(2, 29+xz, "米数", bFormat));
+				sheet.addCell(new Label(4, 29+xz, "用途", bFormat));
+				sheet.addCell(new Label(6, 29+xz, "供应商", bFormat));
+				sheet.addCell(new Label(1, 29+xz, hs11.get("ml")+"", aFormat));
+				sheet.addCell(new Label(3, 29+xz, hs11.get("ms")+"", aFormat));
+				sheet.addCell(new Label(5, 29+xz, hs11.get("yt")+"", aFormat));
+				sheet.addCell(new Label(7, 29+xz, hs11.get("gys")+"", aFormat));
+			}
+			if(!Utils.isEmpty(hs12.get("ml")+"")&&!"null".equals(hs12.get("ml"))){
+				xz=xz+1;
+				sheet.addCell(new Label(0, 29+xz, "面料", bFormat));
+				sheet.addCell(new Label(2, 29+xz, "米数", bFormat));
+				sheet.addCell(new Label(4, 29+xz, "用途", bFormat));
+				sheet.addCell(new Label(6, 29+xz, "供应商", bFormat));
+				sheet.addCell(new Label(1, 29+xz, hs12.get("ml")+"", aFormat));
+				sheet.addCell(new Label(3, 29+xz, hs12.get("ms")+"", aFormat));
+				sheet.addCell(new Label(5, 29+xz, hs12.get("yt")+"", aFormat));
+				sheet.addCell(new Label(7, 29+xz, hs12.get("gys")+"", aFormat));
+			}
+			if(!Utils.isEmpty(hs13.get("ml")+"")&&!"null".equals(hs13.get("ml"))){
+				xz=xz+1;
+				sheet.addCell(new Label(0, 29+xz, "面料", bFormat));
+				sheet.addCell(new Label(2, 29+xz, "米数", bFormat));
+				sheet.addCell(new Label(4, 29+xz, "用途", bFormat));
+				sheet.addCell(new Label(6, 29+xz, "供应商", bFormat));
+				sheet.addCell(new Label(1, 29+xz, hs13.get("ml")+"", aFormat));
+				sheet.addCell(new Label(3, 29+xz, hs13.get("ms")+"", aFormat));
+				sheet.addCell(new Label(5, 29+xz, hs13.get("yt")+"", aFormat));
+				sheet.addCell(new Label(7, 29+xz, hs13.get("gys")+"", aFormat));
+			}
+			if(!Utils.isEmpty(hs14.get("ml")+"")&&!"null".equals(hs14.get("ml"))){
+				xz=xz+1;
+				sheet.addCell(new Label(0, 29+xz, "面料", bFormat));
+				sheet.addCell(new Label(2, 29+xz, "米数", bFormat));
+				sheet.addCell(new Label(4, 29+xz, "用途", bFormat));
+				sheet.addCell(new Label(6, 29+xz, "供应商", bFormat));
+				sheet.addCell(new Label(1, 29+xz, hs14.get("ml")+"", aFormat));
+				sheet.addCell(new Label(3, 29+xz, hs14.get("ms")+"", aFormat));
+				sheet.addCell(new Label(5, 29+xz, hs14.get("yt")+"", aFormat));
+				sheet.addCell(new Label(7, 29+xz, hs14.get("gys")+"", aFormat));
+			}
+			System.out.println("最后="+xz);
 			//第三十行
-			Label label031 = new Label(0, 31, "客服备注", bFormat);
-			sheet.addCell(label031);
-			Label label131 = new Label(1, 31, a32, aFormat);
-			sheet.addCell(label131);
-			
-			
+			sheet.addCell(new Label(0, 30+xz, "客服备注", bFormat));
+			sheet.addCell(new Label(1, 30+xz, a32, aFormat));
 			//第三十一行
-			Label label032 = new Label(0, 32, "批单备注", bFormat);
-			sheet.addCell(label032);
-			Label label132 = new Label(1, 32, a33, aFormat);
-			sheet.addCell(label132);
+			sheet.addCell(new Label(0, 31+xz, "批单备注", bFormat));
+			sheet.addCell(new Label(1, 31+xz, a33, aFormat));
+			//第三十二行
+			sheet.addCell(new Label(0, 32+xz, "跟单备注", bFormat));
+			sheet.addCell(new Label(1, 32+xz, a34, aFormat));
 			
 			//第三十二行
-			Label label033 = new Label(0, 33, "跟单备注", bFormat);
-			sheet.addCell(label033);
-			Label label133 = new Label(1, 33, a34, aFormat);
-			sheet.addCell(label133);
-			
-			
-			//第三十二行
-			Label label034 = new Label(0, 34, "备注", bFormat);
-			sheet.addCell(label034);
-			Label label134 = new Label(1, 34, "", aFormat);
-			sheet.addCell(label134);
+			sheet.addCell(new Label(0, 33+xz, "备注", bFormat));
+			sheet.addCell(new Label(1, 33+xz, "", aFormat));
 			
 			
 			
-			
+			  sheet.mergeCells(1, 30+xz, 7, 30+xz);  
+			    sheet.mergeCells(1, 31+xz, 7, 31+xz);   
+			    sheet.mergeCells(1, 32+xz, 7, 32+xz);  
+			    sheet.mergeCells(1, 33+xz, 7, 33+xz);  
 			
 			
 			
@@ -956,16 +1112,16 @@ System.out.println("生成EXCEL文件 名称="+name+"         订单号1123="+or
 		   
 		
 		    
-		    sheet.mergeCells(1, 31, 7, 31);   //横 1 4  纵   纵 0 2
-		    sheet.mergeCells(1, 32, 7, 32);   //横 1 4  纵   纵 0 2
-		    sheet.mergeCells(1, 33, 7, 33);   //横 1 4  纵   纵 0 2
-		    sheet.mergeCells(1, 34, 7, 34);   //横 1 4  纵   纵 0 2
+		  
 		    
 		    sheet.mergeCells(3, 22, 3, 25);   //横 1 4  纵   纵 0 2
 		    sheet.mergeCells(4, 22, 4, 25);   //横 1 4  纵   纵 0 2
 		    sheet.mergeCells(5, 22, 6, 25);   //横 1 4  纵   纵 0 2
 		    sheet.mergeCells(7, 22, 7, 25);   //横 1 4  纵   纵 0 2
-			// 关闭对象，释放资源
+		    
+		    
+		
+		// 关闭对象，释放资源
 			workbook.write();
 			workbook.close();
 
@@ -1262,15 +1418,17 @@ System.out.println("ok");
 	
 	
 	public static void main(String[] args) {
-		try {
-			writeExcelDaoChu("121");
+		/*try {*/
+			//writeExcelDaoChu("121");
 			//writeExcelShouHou();
 			//writeExcel();
-			
+			String a = "2,马甲,,";
+			System.out.println(a.split(",").length);
+			System.out.println(a.split(",")[2]);
 			//writeExcelDaBiao("4","11909200007001");
 			//writeExcelXiangQing("123","11909200007001");
-		} catch (IOException e) {
+		/*} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}*/
 	}
 }
