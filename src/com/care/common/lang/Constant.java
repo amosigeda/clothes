@@ -21,6 +21,7 @@ public class Constant {
 	public final static int SUCCESS_CODE = 1; // 锟缴癸拷
 	public final static int STATUS_CODE = 2; // 锟缴癸拷
 	public final static int STATUSS_CODE = 3; // 锟缴癸拷
+	public final static int STATUSS_CODEe = 4; // 锟缴癸拷
 
 	public final static int FAIL_CODE = 0; // 失锟斤拷
 

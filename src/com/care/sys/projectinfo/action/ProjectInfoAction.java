@@ -3124,7 +3124,9 @@ public class ProjectInfoAction extends BaseAction {
 					
 					
 					String xc_que = request.getParameter("xc_que");
+					System.err.println("xc_que="+xc_que);
 					vo.setXc_que(xc_que);
+					
 					
 					String jiankuanque = request.getParameter("jiankuanque");
 					vo.setJiankuanque(jiankuanque);
@@ -4173,7 +4175,7 @@ public class ProjectInfoAction extends BaseAction {
 							photo1 = baise;
 						}
 						if(chenshan_number!=0){
-							String text = wechatUrlQian+orderid+",2";
+							String text = wechatUrlQian+orderid+",4";
 							// 嵌入二维码的图片路径
 							// String imgPath = "F:/UI/test/1.png";
 							String imgPath = "D:/1.png";
@@ -4227,7 +4229,7 @@ public class ProjectInfoAction extends BaseAction {
 							photo3 = baise;
 						}
 						if(majia_number!=0){
-							String text = wechatUrlQian+orderid+",4";
+							String text = wechatUrlQian+orderid+",2";
 							// 嵌入二维码的图片路径
 							// String imgPath = "F:/UI/test/1.png";
 							String imgPath = "D:/1.png";

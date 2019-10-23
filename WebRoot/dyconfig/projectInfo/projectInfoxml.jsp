@@ -367,7 +367,7 @@ function ofuncs(projectId){
 							<logic:equal name="element" property="status" value="21"><font color="green">裁床</font></logic:equal>
 							<logic:equal name="element" property="status" value="22"><font color="green">前道开包</font></logic:equal>
 							<logic:equal name="element" property="status" value="23"><font color="green">后道</font></logic:equal>
-							<logic:equal name="element" property="status" value="24"><font color="green">大汤</font></logic:equal>
+							<logic:equal name="element" property="status" value="24"><font color="green">大烫</font></logic:equal>
 							<logic:equal name="element" property="status" value="25"><font color="green">质检</font></logic:equal>
 							<logic:equal name="element" property="status" value="26"><font color="green">发货</font></logic:equal>
 						</td>

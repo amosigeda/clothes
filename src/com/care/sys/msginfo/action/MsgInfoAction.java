@@ -59,7 +59,7 @@ public class MsgInfoAction extends BaseAction {
 		ProjectInfo vo = new ProjectInfo();
 		String userCode = request.getParameter("userCode");
 		if (userCode != null && !"".equals(userCode)) {
-			vo.setCondition("order_number ='" + userCode + "'");
+			vo.setCondition("order_id ='" + userCode + "'");
 			try {
 				list = ServiceBean.getInstance()
 						.getProjectInfoFacade().getProjectInfo(vo);

@@ -65,6 +65,7 @@ public class SaoMaAction extends BaseAction {
 		 * G、大汤-----，扫码4 F、质检-----，扫码 5
 		 * G、发货-----，扫码，6需要填写物流单号，给客户发短信，短信内容暂定，至少要包含物流单号
 		 */
+		int zhijian = 10;
 		ChannelInfo cvo = new ChannelInfo();
 		try {
 			String orderid = object.getString("orderid");
@@ -103,7 +104,7 @@ public class SaoMaAction extends BaseAction {
 								.getAppUserInfoFacade().getSaoMaInfoNew(vo);
 
 						if (listSaoMa.size() > 0) {
-							result = Constant.FAIL_CODE;
+							result = 2;
 						} else {
 
 							vo.setPassword(wechat);
@@ -116,15 +117,13 @@ public class SaoMaAction extends BaseAction {
 
 							ServiceBean.getInstance().getAppUserInfoFacade()
 									.insertSaoMaInfoNew(vo);
-
-						
-
+							zhijian = 11;
 							result = Constant.SUCCESS_CODE;
 							ServiceBean.getInstance().getProjectInfoFacade()
 									.updatePorjectInfo(voStatus);
 
 							cvo.setCondition("order_id = '" + orderid
-									+ "' limit 1" );
+									+ "' and  status='1' limit 1");
 							List<DataMap> msgList = ServiceBean.getInstance()
 									.getChannelInfoFacade().getChannelInfo(cvo);
 							if (msgList.size() <= 0) {
@@ -153,7 +152,7 @@ public class SaoMaAction extends BaseAction {
 											+ "】【"
 											+ orderNumber
 											+ "】已经开始裁剪</br>(剪裁师傅已经收到你的订单，并觉得你骨骼惊奇，是个穿西装的好苗子!)");
-									chInfo.setStatus(clothes_type);
+									chInfo.setStatus("1");
 									ServiceBean.getInstance()
 											.getChannelInfoFacade()
 											.insertChannelInfo(chInfo);
@@ -169,73 +168,93 @@ public class SaoMaAction extends BaseAction {
 								+ "'   and last_name='" + (typePerson - 1)
 								+ "'   limit 1");
 						List<DataMap> listSaoMa = ServiceBean.getInstance()
-								.getAppUserInfoFacade().getSaoMaInfo(vo);
+								.getAppUserInfoFacade().getSaoMaInfoNew(vo);
 
 						if (listSaoMa.size() > 0) {
-							// vo.setUserName(phone);
-							vo.setPassword(wechat);
-							vo.setNickName(nickName);
-							vo.setCreateTime(new Date());
-							vo.setLast_name(typePerson + "");
-							vo.setOrder_id(orderid);
-							vo.setClothes_type(clothes_type);
-							vo.setUserName(phone);
-							ServiceBean.getInstance().getAppUserInfoFacade()
-									.insertSaoMaInfoNew(vo);
-
-
-							result = Constant.SUCCESS_CODE;
-							ServiceBean.getInstance().getProjectInfoFacade()
-									.updatePorjectInfo(voStatus);
-
-							cvo.setCondition("order_id = '" + orderid
-									+ "' limit 1" );
-							List<DataMap> msgList = ServiceBean.getInstance()
-									.getChannelInfoFacade().getChannelInfo(cvo);
-							if (msgList.size() <= 0) {
-								ProjectInfo pvo = new ProjectInfo();
-								pvo.setCondition("order_id='" + orderid + "'");
-								List<DataMap> listOrder = ServiceBean
-										.getInstance().getProjectInfoFacade()
-										.getProjectInfo(pvo);
-								if (listOrder.size() > 0) {
-									String orderNumber = listOrder.get(0).get(
-											"order_number")
-											+ "";
-									String kehuPhone = listOrder.get(0).get(
-											"kehu_phone")
-											+ "";
-									ChannelInfo chInfo = new ChannelInfo();
-									chInfo.setOrder_id(orderNumber);
-									chInfo.setPhone(kehuPhone);
-									chInfo.setAddTime(new Date());
-									if (typePerson == 5) {
-										chInfo.setRemark("【"
-												+ new SimpleDateFormat(
-														"yyyy-MM-dd HH:mm")
-														.format(Calendar
-																.getInstance()
-																.getTime())
-												+ "】【"
-												+ orderNumber
-												+ "】订单定型完毕，开始出厂质检程序。（现在我们正在给它仔细检查是否和我们的期待的效果一样");
-									} else if (typePerson == 6) {
-										chInfo.setRemark("【"
-												+ new SimpleDateFormat(
-														"yyyy-MM-dd HH:mm")
-														.format(Calendar
-																.getInstance()
-																.getTime())
-												+ "】【"
-												+ orderNumber
-												+ "】订单已通过质检流程，现已为您发货物流单号为【物流单号】</br>（顺丰特快）（西装在我们质检小哥哥的检查下已经成功盖章！现在由快递界的老大哥顺丰运输！安排上了！那些将要去的地方，都是素未谋面的故乡！）");
-									}
-									chInfo.setStatus(clothes_type);
+							
+							vo.setCondition("order_id='" + orderid
+									+ "'  and  clothes_type= '" + clothes_type
+									+ "'   and last_name='" + typePerson 
+									+ "'   limit 1");
+							List<DataMap> listSaoMaa = ServiceBean.getInstance()
+									.getAppUserInfoFacade().getSaoMaInfoNew(vo);
+							
+							if(listSaoMaa.size()<=0){
+							
+								vo.setPassword(wechat);
+								vo.setNickName(nickName);
+								vo.setCreateTime(new Date());
+								vo.setLast_name(typePerson + "");
+								vo.setOrder_id(orderid);
+								vo.setClothes_type(clothes_type);
+								vo.setUserName(phone);
+								
+								ServiceBean.getInstance().getAppUserInfoFacade()
+										.insertSaoMaInfoNew(vo);
+								zhijian=11;
+								// 如果等于1说明有人扫过
+								/*if (listSaoMa.size() == 1) {*/
+									result = Constant.SUCCESS_CODE;
 									ServiceBean.getInstance()
-											.getChannelInfoFacade()
-											.insertChannelInfo(chInfo);
-								}
+											.getProjectInfoFacade()
+											.updatePorjectInfo(voStatus);
+
+									cvo.setCondition("order_id = '" + orderid
+											+ "' and status='" +typePerson+"' limit 1");
+									List<DataMap> msgList = ServiceBean
+											.getInstance().getChannelInfoFacade()
+											.getChannelInfo(cvo);
+									if (msgList.size() <= 0) {
+										ProjectInfo pvo = new ProjectInfo();
+										pvo.setCondition("order_id='" + orderid
+												+ "'");
+										List<DataMap> listOrder = ServiceBean
+												.getInstance()
+												.getProjectInfoFacade()
+												.getProjectInfo(pvo);
+										if (listOrder.size() > 0) {
+											String orderNumber = listOrder.get(0)
+													.get("order_id") + "";
+											String kehuPhone = listOrder.get(0)
+													.get("kehu_phone") + "";
+											ChannelInfo chInfo = new ChannelInfo();
+											chInfo.setOrder_id(orderNumber);
+											chInfo.setPhone(kehuPhone);
+											chInfo.setAddTime(new Date());
+											if (typePerson == 5) {
+												chInfo.setRemark("【"
+														+ new SimpleDateFormat(
+																"yyyy-MM-dd HH:mm")
+																.format(Calendar
+																		.getInstance()
+																		.getTime())
+														+ "】【"
+														+ orderNumber
+														+ "】订单定型完毕，开始出厂质检程序。（现在我们正在给它仔细检查是否和我们的期待的效果一样");
+											} else if (typePerson == 6) {
+												chInfo.setRemark("【"
+														+ new SimpleDateFormat(
+																"yyyy-MM-dd HH:mm")
+																.format(Calendar
+																		.getInstance()
+																		.getTime())
+														+ "】【"
+														+ orderNumber
+														+ "】订单已通过质检流程，现已为您发货物流单号为【物流单号】</br>（顺丰特快）（西装在我们质检小哥哥的检查下已经成功盖章！现在由快递界的老大哥顺丰运输！安排上了！那些将要去的地方，都是素未谋面的故乡！）");
+											}
+											chInfo.setStatus(typePerson+"");
+											ServiceBean.getInstance()
+													.getChannelInfoFacade()
+													.insertChannelInfo(chInfo);
+										}
+									}
+								/*} else {
+									result = Constant.SUCCESS_CODE;
+
+								}*/
 							}
+						
+
 						} else {
 							result = Constant.FAIL_CODE;
 						}
@@ -247,7 +266,7 @@ public class SaoMaAction extends BaseAction {
 								+ "'   and last_name='" + (typePerson - 1)
 								+ "'   limit 1");
 						List<DataMap> listSaoMa = ServiceBean.getInstance()
-								.getAppUserInfoFacade().getSaoMaInfo(vo);
+								.getAppUserInfoFacade().getSaoMaInfoNew(vo);
 
 						if (listSaoMa.size() > 0) {
 
@@ -257,10 +276,10 @@ public class SaoMaAction extends BaseAction {
 									+ "'   limit 1");
 							List<DataMap> listSaoMaEr = ServiceBean
 									.getInstance().getAppUserInfoFacade()
-									.getSaoMaInfo(vo);
+									.getSaoMaInfoNew(vo);
 
 							if (listSaoMaEr.size() > 0) {
-								result = Constant.STATUS_CODE;
+								result = 2;
 							} else {
 								// vo.setUserName(phone);
 								vo.setPassword(wechat);
@@ -273,15 +292,14 @@ public class SaoMaAction extends BaseAction {
 								ServiceBean.getInstance()
 										.getAppUserInfoFacade()
 										.insertSaoMaInfoNew(vo);
-
-						
+								zhijian=11;
 								result = Constant.SUCCESS_CODE;
 								ServiceBean.getInstance()
 										.getProjectInfoFacade()
 										.updatePorjectInfo(voStatus);
 
 								cvo.setCondition("order_id = '" + orderid
-										+ "' limit 1" );
+										+ "' and status='" +typePerson+"' limit 1");
 								List<DataMap> msgList = ServiceBean
 										.getInstance().getChannelInfoFacade()
 										.getChannelInfo(cvo);
@@ -295,7 +313,7 @@ public class SaoMaAction extends BaseAction {
 											.getProjectInfo(pvo);
 									if (listOrder.size() > 0) {
 										String orderNumber = listOrder.get(0)
-												.get("order_number") + "";
+												.get("order_id") + "";
 										String kehuPhone = listOrder.get(0)
 												.get("kehu_phone") + "";
 										ChannelInfo chInfo = new ChannelInfo();
@@ -312,6 +330,7 @@ public class SaoMaAction extends BaseAction {
 													+ "】【"
 													+ orderNumber
 													+ "】订单已经开始前道制作工序。</br>（前道开包师傅开始作业，随口一句：看长身玉立，精神耿耿。必定以后事业有成！）");
+											
 										} else if (typePerson == 3) {
 											chInfo.setRemark("【"
 													+ new SimpleDateFormat(
@@ -322,6 +341,7 @@ public class SaoMaAction extends BaseAction {
 													+ "】【"
 													+ orderNumber
 													+ "】订单已经开始后道制作工序。</br>（后道师傅已经接手，制作工序已经到了最后的要紧关头！稳住我们能赢！）");
+											chInfo.setStatus(clothes_type);
 										} else if (typePerson == 4) {
 											chInfo.setRemark("【"
 													+ new SimpleDateFormat(
@@ -333,7 +353,7 @@ public class SaoMaAction extends BaseAction {
 													+ orderNumber
 													+ "】订单已制作完毕，开始整烫定型。</br>（大烫师傅为了保证衣服的版型，正在给衣服做洗剪吹服务，tony老师已经开始整烫定型！）");
 										}
-										chInfo.setStatus(clothes_type);
+										chInfo.setStatus(typePerson+"");
 										ServiceBean.getInstance()
 												.getChannelInfoFacade()
 												.insertChannelInfo(chInfo);
@@ -354,45 +374,43 @@ public class SaoMaAction extends BaseAction {
 			} else {
 				result = Constant.EXCEPTION_CODE;
 			}
-			
-			
-			
-			if(result == 1){
-				System.out.println("走到这里了没");
-				
 
+			if (result == 1) {
+				System.out.println("走到这里了没");
+
+				if(zhijian==11){
 				AppUserInfo voNumber = new AppUserInfo();
-				voNumber.setCondition("password ='" + wechat
-						+ "'   limit 1");
-				List<DataMap> listSaoMaNumber = ServiceBean
-						.getInstance().getAppUserInfoFacade()
-						.getSaoMaInfo(voNumber);
-				
+				voNumber.setCondition("password ='" + wechat + "'   limit 1");
+				List<DataMap> listSaoMaNumber = ServiceBean.getInstance()
+						.getAppUserInfoFacade().getSaoMaInfo(voNumber);
+
 				ProjectInfo pvo = new ProjectInfo();
 				pvo.setCondition("order_id='" + orderid + "'");
-				List<DataMap> listOrder = ServiceBean
-						.getInstance().getProjectInfoFacade()
-						.getProjectInfo(pvo);
-				if(listOrder.size()>0){
+				List<DataMap> listOrder = ServiceBean.getInstance()
+						.getProjectInfoFacade().getProjectInfo(pvo);
+				if (listOrder.size() > 0) {
 					if (listSaoMaNumber.size() > 0) {
-						String id = listSaoMaNumber.get(0).get("id")
-								+ "";
-						Integer xzNumber = Integer
-								.valueOf(listOrder.get(0).get(
+						String id = listSaoMaNumber.get(0).get("id") + "";
+						Integer xzNumber = Integer.valueOf(listOrder.get(0)
+								.get("xizhuang_number") + "")
+								+ Integer.valueOf(listSaoMaNumber.get(0).get(
 										"xizhuang_number")
-										+ "") + 1;
-						Integer csNumber = Integer
-								.valueOf(listOrder.get(0).get(
+										+ "");
+						Integer csNumber = Integer.valueOf(listOrder.get(0)
+								.get("chenshan_number") + "")
+								+ Integer.valueOf(listSaoMaNumber.get(0).get(
 										"chenshan_number")
-										+ "") + 1;
-						Integer xkNumber = Integer
-								.valueOf(listOrder.get(0).get(
+										+ "");
+						Integer xkNumber = Integer.valueOf(listOrder.get(0)
+								.get("xiku_number") + "")
+								+ Integer.valueOf(listSaoMaNumber.get(0).get(
 										"xiku_number")
-										+ "") + 1;
-						Integer mjNumber = Integer
-								.valueOf(listOrder.get(0).get(
+										+ "");
+						Integer mjNumber = Integer.valueOf(listOrder.get(0)
+								.get("majia_number") + "")
+								+ Integer.valueOf(listSaoMaNumber.get(0).get(
 										"majia_number")
-										+ "") + 1;
+										+ "");
 
 						if ("1".equals(clothes_type)) {
 							vo.setXizhuang_number(xzNumber);
@@ -404,39 +422,28 @@ public class SaoMaAction extends BaseAction {
 							vo.setMajia_number(mjNumber);
 						}
 						vo.setCondition("id='" + id + "'");
-						ServiceBean.getInstance()
-								.getAppUserInfoFacade()
+						ServiceBean.getInstance().getAppUserInfoFacade()
 								.updateSaoMaInfo(vo);
 
 					} else {
-						
-					
-							vo.setXizhuang_number(0);
-					
-							vo.setXiku_number(0);
-						
-							vo.setChenshan_number(0);
-						
-							vo.setMajia_number(0);
-						
-							Integer xzNumber = Integer
-									.valueOf(listOrder.get(0).get(
-											"xizhuang_number")
-											+ "");
-							Integer csNumber = Integer
-									.valueOf(listOrder.get(0).get(
-											"chenshan_number")
-											+ "") ;
-							Integer xkNumber = Integer
-									.valueOf(listOrder.get(0).get(
-											"xiku_number")
-											+ "") ;
-							Integer mjNumber = Integer
-									.valueOf(listOrder.get(0).get(
-											"majia_number")
-											+ "") ;
-						
-						
+
+						vo.setXizhuang_number(0);
+
+						vo.setXiku_number(0);
+
+						vo.setChenshan_number(0);
+
+						vo.setMajia_number(0);
+
+						Integer xzNumber = Integer.valueOf(listOrder.get(0)
+								.get("xizhuang_number") + "");
+						Integer csNumber = Integer.valueOf(listOrder.get(0)
+								.get("chenshan_number") + "");
+						Integer xkNumber = Integer.valueOf(listOrder.get(0)
+								.get("xiku_number") + "");
+						Integer mjNumber = Integer.valueOf(listOrder.get(0)
+								.get("majia_number") + "");
+
 						if ("1".equals(clothes_type)) {
 							vo.setXizhuang_number(xzNumber);
 						} else if ("3".equals(clothes_type)) {
@@ -446,13 +453,11 @@ public class SaoMaAction extends BaseAction {
 						} else if ("2".equals(clothes_type)) {
 							vo.setMajia_number(mjNumber);
 						}
-						ServiceBean.getInstance()
-								.getAppUserInfoFacade()
+						ServiceBean.getInstance().getAppUserInfoFacade()
 								.insertSaoMaInfo(vo);
 					}
-				}
-				
-			
+				}}
+
 			}
 
 		} catch (Exception e) {

@@ -10,6 +10,7 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -30,6 +31,7 @@ import com.care.common.http.BaseAction;
 import com.care.common.lang.Constant;
 import com.care.sys.appuserinfo.domain.AppUserInfo;
 import com.care.sys.appuserinfo.domain.logic.AppUserInfoFacade;
+import com.care.sys.channelinfo.domain.ChannelInfo;
 import com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo;
 import com.care.sys.deviceactiveinfo.domain.logic.DeviceActiveInfoFacade;
 import com.care.sys.feedbackinfo.domain.FeedBackInfo;
@@ -77,7 +79,7 @@ if(list.size()<=0){
 	result = Constant.EXCEPTION_CODE;
 }	else{
 	if("1".equals(list.get(0).get("status"))){
-		
+		if("6".equals(list.get(0).get("last_name")+"")){
 	
 	String orderId = object.getString("orderId");
 	String expressType = object.getString("expressType");
@@ -95,7 +97,7 @@ if(list.size()<=0){
 		
 		
 	}else{
-result = Constant.SUCCESS_CODE;
+		result = Constant.SUCCESS_CODE;
 		
 		FeedBackInfo fo =new FeedBackInfo();
 	fo.setUser_id(orderId);
@@ -107,8 +109,49 @@ result = Constant.SUCCESS_CODE;
 	fo.setNumber(number);
 	fo.setNickname(list.get(0).get("nick_name")+"");
 	ServiceBean.getInstance().getFeedBackInfoFacade().insertFeedBackInfo(fo);
-	}
 	
+	ProjectInfo pvo = new ProjectInfo();
+	pvo.setCondition("order_id='" + orderId + "'");
+	List<DataMap> listOrder = ServiceBean
+			.getInstance().getProjectInfoFacade()
+			.getProjectInfo(pvo);
+	if(listOrder.size()>0){
+		String  kehuPhone= listOrder.get(0).get(
+				"kehu_phone")
+				+ "";
+		
+		ChannelInfo chInfo = new ChannelInfo();
+		chInfo.setOrder_id(orderId);
+		chInfo.setPhone(kehuPhone);
+		chInfo.setAddTime(new Date());
+		chInfo.setRemark("【"
+				+ new SimpleDateFormat(
+						"yyyy-MM-dd HH:mm")
+						.format(Calendar
+								.getInstance()
+								.getTime())
+				+ "】【"
+				+ orderId
+				+ "】订单已通过质检流程，现已为您发货物流单号为【"+kuaiDiHao+"】</br>（顺丰特快）（西装在我们质检小哥哥的检查下已经成功盖章！现在由快递界的老大哥顺丰运输！安排上了！那些将要去的地方，都是素未谋面的故乡！）");
+		chInfo.setStatus("1");
+		ServiceBean.getInstance()
+				.getChannelInfoFacade()
+				.insertChannelInfo(chInfo);
+		
+		ProjectInfo voStatus = new ProjectInfo();
+		voStatus.setCondition("order_id='" + orderId + "'");
+		voStatus.setStatus("26");
+		ServiceBean.getInstance().getProjectInfoFacade()
+		.updatePorjectInfo(voStatus);
+
+	}else{
+		result = 5;
+	}
+
+	}
+	}else{
+		result = 6;
+	}
 }else{
 	result = Constant.STATUSS_CODE;
 }

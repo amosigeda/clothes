@@ -111,9 +111,9 @@ function findss(wechat){
                   	<td width="8%" >姓名</td>
                   	
                   	<td width="8%" >西装数量</td>
-                  	<td width="8%" >马甲数量</td>
-                  	<td width="8%" >西裤数量</td>
                   	<td width="8%" >衬衫数量</td>
+                  	<td width="8%" >西裤数量</td>
+                  	<td width="8%" >马甲数量</td>
                   <!-- 	<td width="8%" >工种</td> -->
                   	<!-- <td width="8%" >类型</td> -->
              
