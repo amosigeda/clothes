@@ -322,10 +322,13 @@ public class AppUserInfoAction extends BaseAction{
 			String userName = request.getParameter("user");
 			String startTime = request.getParameter("startTime");
 			String endTime   = request.getParameter("endTime");	
+			
 			String user_id = request.getParameter("user_id");
 			String phone = request.getParameter("phone");
 			String nickname = request.getParameter("nickname");
 			String gongzhong = request.getParameter("gongzhong");
+			
+		
 
 			/*���û������ֶ�*/
             form.setOrderBy("id"); 
@@ -534,8 +537,15 @@ public class AppUserInfoAction extends BaseAction{
 				}
 			   
 			   
-         	BeanUtils.copyProperties(vo,form);			
-         	list = info.getSaoMaInfoListByVo(vo);  
+         	BeanUtils.copyProperties(vo,form);	
+        	if(startTime != null && !"".equals(startTime)){	
+        		vo.setCondition(sb.toString());
+        		
+        		list = info.getSaoMaInfoListByVoGroup(vo);  
+        	}else{
+        		
+        		list = info.getSaoMaInfoListByVo(vo);  
+        	}
 			BeanUtils.copyProperties(pys, form); 
 			pys.setCounts(list.getTotalSize());   
 			/* ���û������ֶ� */ 

@@ -41,7 +41,7 @@ import com.care.sys.projectinfo.domain.ProjectInfo;
 import com.godoing.rose.lang.DataMap;
 import com.godoing.rose.log.LogFactory;
 
-public class WuLiuAction extends BaseAction {
+public class ShouHouWuLiuAction extends BaseAction {
 	Log logger = LogFactory.getLog(setSportInfoAction.class);
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
@@ -94,7 +94,7 @@ if(list.size()<=0){
 	String[]  abc=number.split(",");
 	
 	FeedBackInfo voo =new FeedBackInfo();
-	voo.setCondition("user_feedback_content='"+kuaiDiHao+"'  limit 1");
+	voo.setCondition("user_feedback_content='"+kuaiDiHao+"'  and shuliang='2'  limit 1");
 	List<DataMap> listo  = ServiceBean.getInstance().getFeedBackInfoFacade().getFeedBackInfo(voo);
 	if(listo.size()>0){
 		result = Constant.FAIL_CODE;
@@ -110,7 +110,7 @@ if(list.size()<=0){
 	fo.setUser_feedback_content(kuaiDiHao);
 	fo.setDate_time(new Date());
 	fo.setWupin(wupin);
-	fo.setNumber(number);
+	fo.setNumber("2");
 	fo.setNickname(list.get(0).get("nick_name")+"");
 
 	fo.setShangyi(abc[0]);
@@ -142,7 +142,7 @@ if(list.size()<=0){
 								.getTime())
 				+ "】【"
 				+ orderId
-				+ "】订单已通过质检流程，现已为您发货物流单号为【"+kuaiDiHao+"】</br>（顺丰特快）（西装在我们质检小哥哥的检查下已经成功盖章！现在由快递界的老大哥顺丰运输！安排上了！那些将要去的地方，都是素未谋面的故乡！）");
+				+ "】订单已通过质检流程，现已为您发货物流单号为【"+kuaiDiHao+"】</br>（顺丰特快）（还是熟悉的配方还是熟悉的味道，顺丰特快为了你服务！我虽鞭长莫及但是马不停蹄。）");
 		chInfo.setStatus("1");
 		ServiceBean.getInstance()
 				.getChannelInfoFacade()
@@ -150,7 +150,7 @@ if(list.size()<=0){
 		
 		ProjectInfo voStatus = new ProjectInfo();
 		voStatus.setCondition("order_id='" + orderId + "'");
-		voStatus.setStatus("26");
+		voStatus.setStatus("35");
 		ServiceBean.getInstance().getProjectInfoFacade()
 		.updatePorjectInfo(voStatus);
 

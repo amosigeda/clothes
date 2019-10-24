@@ -87,6 +87,33 @@
 		</isNotEmpty>
 	</select>
 	
+	
+	
+		<select id="getSaoMaInfoListByVoGroup" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
+		SELECT * FROM saomainfo_info 
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		
+		group by password
+		<dynamic prepend="order by">
+			<isNotEmpty prepend="order by" property="orderBy">
+				$orderBy$
+			</isNotEmpty>
+		</dynamic>
+		limit
+		<isNotEmpty prepend=" " property="from">
+			$from$
+		</isNotEmpty>
+		,
+		<isNotEmpty prepend=" " property="pageSize">
+			$pageSize$
+		</isNotEmpty>
+	</select>
+	
 	<select id="getSaoMaInfoListByVo" resultClass="com.godoing.rose.lang.DataMap"
 		parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
 		SELECT * FROM saomainfo
@@ -130,6 +157,17 @@
 				$condition$
 			</isNotEmpty>
 		</dynamic>
+	</select>
+	
+		<select id="getAppUserInfoCountByVoGroup" resultClass="java.lang.Integer"
+		parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
+		SELECT COUNT(*) FROM ( SELECT * FROM saomainfo_info   GROUP BY PASSWORD) AS a 
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+		
 	</select>
 
 	<select id="getAppUserInfoCountByVo" resultClass="java.lang.Integer"

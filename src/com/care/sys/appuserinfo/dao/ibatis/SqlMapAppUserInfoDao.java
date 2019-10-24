@@ -129,4 +129,18 @@ public class SqlMapAppUserInfoDao extends SqlMapClientDaoSupport implements AppU
 		logger.debug("updateSaoMaInfo(AppUserInfo vo)");
 		return getSqlMapClientTemplate().update("updateSaoMaInfo", voNumber);
 	}
+
+	@Override
+	public List<DataMap> getSaoMaInfoListByVoGroup(AppUserInfo vo)
+			throws DataAccessException {
+		logger.debug("getSaoMaInfoListByVoGroup(AppUserInfo vo)");
+		return getSqlMapClientTemplate().queryForList("getSaoMaInfoListByVoGroup", vo);
+	}
+
+	@Override
+	public Integer getAppUserInfoCountByVoGroup(AppUserInfo vo)
+			throws DataAccessException {
+		logger.debug("getAppUserInfoCountByVoGroup(AppUserInfo vo)");
+		return (Integer)getSqlMapClientTemplate().queryForObject("getAppUserInfoCountByVoGroup", vo);
+	}
 }

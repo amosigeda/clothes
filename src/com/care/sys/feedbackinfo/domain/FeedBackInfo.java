@@ -34,11 +34,47 @@ public class FeedBackInfo extends PublicVoBean implements Serializable {
     private String wupin;
     private String number;
     private String nickname;
+
+    private String shangyi;
+    private String kuzi;
+    private String majia;
+    private String chenshan;
+    private String lingdai;
     
     
     
 
-    public String getNickname() {
+    public String getShangyi() {
+		return shangyi;
+	}
+	public void setShangyi(String shangyi) {
+		this.shangyi = shangyi;
+	}
+	public String getKuzi() {
+		return kuzi;
+	}
+	public void setKuzi(String kuzi) {
+		this.kuzi = kuzi;
+	}
+	public String getMajia() {
+		return majia;
+	}
+	public void setMajia(String majia) {
+		this.majia = majia;
+	}
+	public String getChenshan() {
+		return chenshan;
+	}
+	public void setChenshan(String chenshan) {
+		this.chenshan = chenshan;
+	}
+	public String getLingdai() {
+		return lingdai;
+	}
+	public void setLingdai(String lingdai) {
+		this.lingdai = lingdai;
+	}
+	public String getNickname() {
 		return nickname;
 	}
 	public void setNickname(String nickname) {

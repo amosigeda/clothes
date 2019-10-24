@@ -57,9 +57,13 @@
 
 	<insert id="insertFeedBackInfo" parameterClass="com.care.sys.feedbackinfo.domain.FeedBackInfo">
 		INSERT INTO feedbackinfo
-		(user_id,project_name,price,user_feedback_content,date_time,shuliang,wupin,nickname)  
+		(user_id,project_name,price,user_feedback_content,date_time,shuliang,wupin,nickname,
+		shangyi,kuzi,majia,chenshan,lingdai
+		)  
 		VALUES 
-		(#user_id#,#project_name#,#price#,#user_feedback_content#,#date_time#,#number#,#wupin#,#nickname#)
+		(#user_id#,#project_name#,#price#,#user_feedback_content#,#date_time#,#number#,#wupin#,#nickname#,
+		#shangyi#,#kuzi#,#majia#,#chenshan#,#lingdai#
+		)
 	</insert>
 
 	<delete id="deleteFeedBackInfo" parameterClass="com.care.sys.feedbackinfo.domain.FeedBackInfo">

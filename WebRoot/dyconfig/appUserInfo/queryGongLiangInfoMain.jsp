@@ -25,17 +25,17 @@
 	</head>
 	<script language="javascript">
 function finds(){
-   /*  var st = new Date(frmGo.startTime.value.replace(/-/g,'/'));
+    var st = new Date(frmGo.startTime.value.replace(/-/g,'/'));
 	var et = new Date(frmGo.endTime.value.replace(/-/g,'/'));
 	if(Date.parse(st) - Date.parse(et)>0){
 		alert("开始时间不能大于结束时间!");
 		return false;
-	} */
+	} 
 	   frmGo.submit();
 }
 function c(){
-   /*  document.all.startTime.value="";
-    document.all.endTime.value=""; */
+    document.all.startTime.value="";
+    document.all.endTime.value="";
     document.all.phone.value="";   
     document.all.nickname.value="";   
   /*   document.all.gongzhong.value="";    */
@@ -80,6 +80,15 @@ function findss(wechat){
 						    姓名				
 						    <input id="nickname" name="nickname" type="text" class="txt_1" 
 						    value="<%CommUtils.printReqByAtt(request,response,"nickname");%>" size="15">
+						    
+						    	      创建时间
+                     <input  name="startTime" type="text" class="txt_1"  id="startTime" style="cursor:text"
+								value="<%CommUtils.printReqByAtt(request,response,"fNow_date");%>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+								size="20" readonly> -
+							<input  style="border:none;" name="endTime" type="text" class="txt_1" id="endTime" style="cursor:text"
+								value="<%CommUtils.printReqByAtt(request,response,"now_date");%>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+								size="20" readonly>	
+								
 						  <%--   工种			
 						    <input id="gongzhong" name="gongzhong" type="text" class="txt_1" 
 						    value="<%CommUtils.printReqByAtt(request,response,"gongzhong");%>" size="15"> --%>
@@ -97,8 +106,8 @@ function findss(wechat){
 					     <input name="clear" type="button" class="but_1" accesskey="c"
 						    tabindex="c"  value="清除搜索" onclick="c()">
 						    
-						     <input name="find2" type="button" class="but_1" accesskey="f"  title="2"
-							tabindex="f" value="导出EXCEL" onclick="javascript:findss(this.title)">
+						   <!--   <input name="find2" type="button" class="but_1" accesskey="f"  title="2"
+							tabindex="f" value="导出EXCEL" onclick="javascript:findss(this.title)"> -->
 							 <input name="anniu" size="200" id="anniu"
 					 type="hidden" class="txt_1"  />
 				</tr> 

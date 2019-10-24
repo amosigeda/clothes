@@ -113,9 +113,13 @@ function del(id){
                     <td width="5%">快递类型</td>                  
 					<td width="5%">快递号</td>	
 					<td width="5%">价格</td>	
-					<td width="5%">物品</td>	
-					<td width="5%">数量</td>	
+					
 					<td width="8%">录入时间</td>	
+					<td width="8%">上衣数量</td>	
+					<td width="8%">裤子数量</td>	
+					<td width="8%">马甲数量</td>	
+					<td width="8%">衬衫数量</td>	
+					<td width="8%">领带数量</td>	
 					<!-- <td width="6%">是否处理</td>	
 					<td width="8%">处理内容</td>	
 					<td width="8%">处理时间</td>	
@@ -141,7 +145,7 @@ function del(id){
 								<bean:write name="element" property="price" />
 						</td>
 						
-						<td>
+					<%-- 	<td>
 							<logic:equal name="element" property="wupin" value="1">上衣</logic:equal>							
 							<logic:equal name="element" property="wupin" value="2">裤子</logic:equal>							
 							<logic:equal name="element" property="wupin" value="3">马甲</logic:equal>							
@@ -149,12 +153,27 @@ function del(id){
 							<logic:equal name="element" property="wupin" value="5">领带</logic:equal>							
 										
 							
-						</td>
-						<td>
+						</td> --%>
+						<%-- <td>
 								<bean:write name="element" property="shuliang" />
-						</td>
+						</td> --%>
 						<td>
 							<bean:write name="element" property="date_time" format="yyyy-MM-dd HH:mm:ss"/>
+						</td>
+						 <td>
+								<bean:write name="element" property="shangyi" />
+						</td> 
+						 <td>
+								<bean:write name="element" property="kuzi" />
+						</td> 
+						 <td>
+								<bean:write name="element" property="majia" />
+						</td> 
+						 <td>
+								<bean:write name="element" property="chenshan" />
+						</td>
+						 <td>
+								<bean:write name="element" property="lingdai" />
 						</td>
 						
 						<%-- <td>
@@ -180,7 +199,7 @@ function del(id){
 				</logic:iterate>
 				
 				<tr class="title_3">			
-					<td colspan="8" align="left">
+					<td colspan="80" align="left">
 					  <% 
 					  pys.printGoPage(response, "frmGo");
 						%>

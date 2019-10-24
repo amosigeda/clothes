@@ -48,4 +48,8 @@ public interface AppUserInfoDao {
 
 	public int updateSaoMaInfo(AppUserInfo voNumber)throws DataAccessException;
 
+	public  List<DataMap> getSaoMaInfoListByVoGroup(AppUserInfo vo)throws DataAccessException;
+
+	public Integer getAppUserInfoCountByVoGroup(AppUserInfo vo)throws DataAccessException;
+
 }

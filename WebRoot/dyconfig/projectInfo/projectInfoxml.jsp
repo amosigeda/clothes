@@ -370,6 +370,12 @@ function ofuncs(projectId){
 							<logic:equal name="element" property="status" value="24"><font color="green">大烫</font></logic:equal>
 							<logic:equal name="element" property="status" value="25"><font color="green">质检</font></logic:equal>
 							<logic:equal name="element" property="status" value="26"><font color="green">发货</font></logic:equal>
+							
+							<logic:equal name="element" property="status" value="31"><font color="green">售后客服提交</font></logic:equal>
+							<logic:equal name="element" property="status" value="32"><font color="green">售后跟单打印</font></logic:equal>
+							<logic:equal name="element" property="status" value="33"><font color="green">售后修改扫码</font></logic:equal>
+							<logic:equal name="element" property="status" value="34"><font color="green">售后质检扫码</font></logic:equal>
+							<logic:equal name="element" property="status" value="35"><font color="green">售后发货扫码</font></logic:equal>
 						</td>
 						
 							<%-- <td>							

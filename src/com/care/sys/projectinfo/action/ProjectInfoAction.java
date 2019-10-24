@@ -3124,9 +3124,10 @@ public class ProjectInfoAction extends BaseAction {
 					
 					
 					String xc_que = request.getParameter("xc_que");
-					System.err.println("xc_que="+xc_que);
-					vo.setXc_que(xc_que);
 					
+					vo.setXc_que(xc_que);
+					String xiukou_que = request.getParameter("xiukou_que");
+				vo.setMiaoliao2(xiukou_que);
 					
 					String jiankuanque = request.getParameter("jiankuanque");
 					vo.setJiankuanque(jiankuanque);
@@ -3752,6 +3753,13 @@ public class ProjectInfoAction extends BaseAction {
 			return mapping.findForward("result");
 		}
 		request.setAttribute("projectInfo", list.get(0));
+		
+		String orderNumberOne = list.get(0).get("order_number")+"";
+		
+		request.setAttribute("orderNumberOne", orderNumberOne);
+		if(orderNumberOne.contains(",")){
+			request.setAttribute("orderNumberOne", orderNumberOne.split(",")[0]);
+		}
 		
 		String orderId = list.get(0).get("order_id")+"";
 		DeviceActiveInfo vod = new DeviceActiveInfo();
@@ -4385,6 +4393,20 @@ if(!Utils.isEmpty(listDuoyu.get(0).get("ml14")+"")){
 						}
  						
 						
+						
+						ProjectInfo duoyuaa = new ProjectInfo();
+						duoyuaa.setCondition("orderid='" + orderid + "' order by id desc limit 1");
+						
+						
+						
+						List<DataMap> listDuoyuaa = ServiceBean.getInstance().getProjectInfoFacade()
+								.getProjectInfoDuoYu(duoyuaa);
+						String que4 ="";
+						if(listDuoyu.size()>0){
+							
+							 que4 =  listDuoyuaa.get(0).get("fuwei_queb")+"";
+						
+						}
 						GetExCel.writeExcelXiangQing(orderid, 
 								orderid,listOrder.get(0).get("qudao")+"",listOrder.get(0).get("age")+"",listOrder.get(0).get("kehu_phone")+"",
 								listOrder.get(0).get("wechat")+"",listOrder.get(0).get("xiadan_kefu")+"",listOrder.get(0).get("sex")+"",listOrder.get(0).get("kehu_name")+"",
@@ -4436,7 +4458,13 @@ if(!Utils.isEmpty(listDuoyu.get(0).get("ml14")+"")){
 								hs11,
 								hs12,
 								hs13,
-								hs14
+								hs14,
+								listOrder.get(0).get("lingwei_b2")+"",
+								listOrder.get(0).get("yichang_q")+"",
+								listOrder.get(0).get("fuwei_queb")+"",
+								listOrder.get(0).get("miao_liao2")+"",
+								que4
+								
 								);
 						
 						if(xizhuang_number!=0 || chenshan_number!=0 || xiku_number!=0 || majia_number==0 ){

@@ -221,6 +221,8 @@
 
 		<action path="/xyzselect" type="com.care.sys.appinterfaces.GetOrderIdInfoAction"></action>
 		<action path="/saoma" type="com.care.sys.appinterfaces.SaoMaAction"></action>
+		<action path="/shouhou" type="com.care.sys.appinterfaces.ShouHouAction"></action>
+		<action path="/shouhouwuliu" type="com.care.sys.appinterfaces.ShouHouWuLiuAction"></action>
 		<action path="/wuliu" type="com.care.sys.appinterfaces.WuLiuAction"></action>
 		<action path="/selectGongZhong" type="com.care.sys.appinterfaces.GongZhongAction"></action>
 		<action path="/bohui" type="com.care.sys.appinterfaces.BohuiAction"></action>

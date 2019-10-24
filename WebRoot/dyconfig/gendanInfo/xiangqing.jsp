@@ -156,7 +156,7 @@ function onUpdate(){
 			<tr>
 				<td nowrap="nowrap" align="center" class="f_bold">订单号</td>
 				<td nowrap="nowrap" align="center" >
-				<input  type="text"     name="orderNumber" id="orderNumber"  value=<%=projectInfo.getAt("order_number")%>>
+				<input  type="text"     name="orderNumber" id="orderNumber"  value=<%=request.getAttribute("orderNumberOne")%>>
 				</td>
 				<td nowrap="nowrap" align="center" class="f_bold">销售价格</td>
 				<td nowrap="nowrap" align="center" >
@@ -507,7 +507,7 @@ function onUpdate(){
 </td>
 				<td nowrap="nowrap" align="center" >
 			
-				
+				<input  name="xiukouA2"  type="text" class="txt_1" value="<%=projectInfo.getAt("xiukou_a2")%>">
 				</td>
 <!--				<td nowrap="nowrap" align="center" ></td>-->
 			</tr>
@@ -525,7 +525,7 @@ function onUpdate(){
 					<input  type="text"        name="xiukouA" id="xiukouA"   value="<%=projectInfo.getAt("xiukou_a")%>"  >
 				</td>
 				<td nowrap="nowrap" align="center" >
-					<input  name="xiukouA2"  type="text" class="txt_1" value="<%=projectInfo.getAt("xiukou_a2")%>">
+					<input  name="xiukouA2"  type="text" class="txt_1" value="<%=projectInfo.getAt("miao_liao2")%>">
 				</td>
 <!--				<td nowrap="nowrap" align="center" ></td>-->
 			</tr>

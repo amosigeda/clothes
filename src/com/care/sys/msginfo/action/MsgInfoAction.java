@@ -29,6 +29,7 @@ import com.care.common.http.BaseAction;
 import com.care.common.lang.CommUtils;
 import com.care.common.lang.Constant;
 import com.care.common.lang.GetExCel;
+import com.care.sys.channelinfo.domain.ChannelInfo;
 import com.care.sys.dynamicInfo.domain.DynamicInfo;
 import com.care.sys.dynamicInfo.form.DynamicInfoForm;
 import com.care.sys.msginfo.domain.MsgInfo;
@@ -39,6 +40,7 @@ import com.care.sys.projectinfo.domain.logic.ProjectInfoFacade;
 import com.care.sys.projectinfo.form.ProjectInfoForm;
 import com.care.sys.roleinfo.domain.RoleInfo;
 import com.care.sys.userinfo.domain.UserInfo;
+import com.care.utils.Utils;
 import com.godoing.rose.http.common.HttpTools;
 import com.godoing.rose.http.common.PagePys;
 import com.godoing.rose.http.common.Result;
@@ -330,7 +332,35 @@ public class MsgInfoAction extends BaseAction {
 			vo.setYongtu(yongtu);
 			
 			String anniu = request.getParameter("anniu");
+			String phone = request.getParameter("phone");
 			System.out.println("按钮="+anniu);
+			if("2".equals(anniu)){
+				ChannelInfo chInfo = new ChannelInfo();
+				chInfo.setOrder_id(orderNumber);
+				chInfo.setPhone(phone);
+				chInfo.setAddTime(new Date());
+				chInfo.setRemark("【"
+						+ new SimpleDateFormat(
+								"yyyy-MM-dd HH:mm")
+								.format(Calendar
+										.getInstance()
+										.getTime())
+						+ "】【"
+						+ orderNumber
+						+ "】订单售后需求已收到，需求已入库，等待收到修改订单。<br/>（数据已经修正！正在核对修改数据内容！不要慌！问题不大。）");
+				chInfo.setStatus("11");
+				ServiceBean.getInstance()
+						.getChannelInfoFacade()
+						.insertChannelInfo(chInfo);
+				
+				ProjectInfo voStatus = new ProjectInfo();
+				voStatus.setCondition("order_id='" + orderNumber + "'");
+
+				voStatus.setStatus("31");
+				ServiceBean.getInstance().getProjectInfoFacade()
+				.updatePorjectInfo(voStatus);
+				
+			}
 		
 			
 			vo.setIsHandler(anniu);
@@ -490,7 +520,6 @@ public class MsgInfoAction extends BaseAction {
 			vo.setJq14(jq14);
 			//phone  item address  shouhou_type  jihui  fahuo  reson
 			
-			String phone = request.getParameter("phone");
 			String address = request.getParameter("address");
 			String shouhou_type = request.getParameter("shouhou_type");
 			String jihui = request.getParameter("jihui");
@@ -704,6 +733,8 @@ public class MsgInfoAction extends BaseAction {
 			vo.setYongtu(yongtu);
 			
 			String anniu = request.getParameter("anniu");
+			String orderNumber = request.getParameter("orderNumber");
+			String phone = request.getParameter("phone");
 			System.out.println("按钮="+anniu);
 			String role = request.getParameter("role");
 			System.out.println("角色="+role);
@@ -719,10 +750,34 @@ public class MsgInfoAction extends BaseAction {
 				}
 			}else if("2".equals(anniu)){
 
-				if("客服".equals(role)){
+				if("客服".equals(role)||"经理".equals(role)){
 					vo.setIsHandler("2");
-				}else if("经理".equals(role)){
-					vo.setIsHandler("2");
+					
+					ChannelInfo chInfo = new ChannelInfo();
+					chInfo.setOrder_id(orderNumber);
+					chInfo.setPhone(phone);
+					chInfo.setAddTime(new Date());
+					chInfo.setRemark("【"
+							+ new SimpleDateFormat(
+									"yyyy-MM-dd HH:mm")
+									.format(Calendar
+											.getInstance()
+											.getTime())
+							+ "】【"
+							+ orderNumber
+							+ "】订单售后需求已收到，需求已入库，等待收到修改订单。<br/>（数据已经修正！正在核对修改数据内容！不要慌！问题不大。）");
+					chInfo.setStatus("11");
+					ServiceBean.getInstance()
+							.getChannelInfoFacade()
+							.insertChannelInfo(chInfo);
+					
+					ProjectInfo voStatus = new ProjectInfo();
+					voStatus.setCondition("order_id='" + orderNumber + "'");
+
+					voStatus.setStatus("31");
+					ServiceBean.getInstance().getProjectInfoFacade()
+					.updatePorjectInfo(voStatus);
+					
 				}else if("批单".equals(role)){
 					vo.setIsHandler("4");
 				}else if("跟单".equals(role)){
@@ -888,7 +943,7 @@ public class MsgInfoAction extends BaseAction {
 			vo.setJq14(jq14);
 			//phone  item address  shouhou_type  jihui  fahuo  reson
 			
-			String phone = request.getParameter("phone");
+		
 			String address = request.getParameter("address");
 			String shouhou_type = request.getParameter("shouhou_type");
 			String jihui = request.getParameter("jihui");
@@ -917,23 +972,89 @@ public class MsgInfoAction extends BaseAction {
 			ServiceBean.getInstance().getMsgInfoFacade().updateMsgInfo(vo);
 			
 			if("2".equals(anniu)&&"跟单".equals(role)){
+				
+				ChannelInfo chInfo = new ChannelInfo();
+				chInfo.setOrder_id(orderNumber);
+				chInfo.setPhone(phone);
+				chInfo.setAddTime(new Date());
+				chInfo.setRemark("【"
+						+ new SimpleDateFormat(
+								"yyyy-MM-dd HH:mm")
+								.format(Calendar
+										.getInstance()
+										.getTime())
+						+ "】【"
+						+ orderNumber
+						+ "】已经收到售后订单，开始准备修改。。<br/>（数据传输完成，问题不大，别慌，我们能赢！）");
+				chInfo.setStatus("12");
+				ServiceBean.getInstance()
+						.getChannelInfoFacade()
+						.insertChannelInfo(chInfo);
+				ProjectInfo voStatus = new ProjectInfo();
+				voStatus.setCondition("order_id='" + orderNumber + "'");
+
+				voStatus.setStatus("32");
+				ServiceBean.getInstance().getProjectInfoFacade()
+				.updatePorjectInfo(voStatus);
+				
+				
 				MsgInfo voDaYin = new MsgInfo();
 				voDaYin.setCondition("id='" + id + "' limit 1");
 				List<DataMap> listExcel = ServiceBean.getInstance().getMsgInfoFacade().getMsgInfoById(voDaYin);
 				if(listExcel.size()>0){
 					String orderId = listExcel.get(0).get("order_id")+"";
-					GetExCel.writeExcelShouHou(orderId,
-							listExcel.get(0).get("msg_handler_date")+"",
-							listExcel.get(0).get("add_user")+"",
-							listExcel.get(0).get("name")+"",
-							listExcel.get(0).get("cishu")+"",
+					StringBuffer sb =new StringBuffer();
+					if(!Utils.isEmpty(listExcel.get(0).get("item1")+"")&&!"null1".equals(listExcel.get(0).get("item1")+"1")){
+						sb.append(listExcel.get(0).get("item1")+"");
+					}
+					if(!Utils.isEmpty(listExcel.get(0).get("item2")+"")&&!"null1".equals(listExcel.get(0).get("item2")+"1")){
+						if(sb.length()>0){
+							sb.append(",");
+						}
+						sb.append(listExcel.get(0).get("item2")+"");
+					}
+					if(!Utils.isEmpty(listExcel.get(0).get("item3")+"")&&!"null1".equals(listExcel.get(0).get("item3")+"1")){
+						if(sb.length()>0){
+							sb.append(",");
+						}
+						sb.append(listExcel.get(0).get("item3")+"");
+					}
+					if(!Utils.isEmpty(listExcel.get(0).get("item4")+"")&&!"null1".equals(listExcel.get(0).get("item4")+"1")){
+						if(sb.length()>0){
+							sb.append(",");
+						}
+						sb.append(listExcel.get(0).get("item4")+"");
+					}
+					
+					if(!Utils.isEmpty(listExcel.get(0).get("item5")+"")&&!"null1".equals(listExcel.get(0).get("item5")+"1")){
+						if(sb.length()>0){
+							sb.append(",");
+						}
+						sb.append(listExcel.get(0).get("item5")+"");
+					}
+							
+					GetExCel.writeExcelShouHou1024(
+							orderId,
+							orderId,
 							listExcel.get(0).get("msg_handler_date")+"",
 							listExcel.get(0).get("jiaofutime")+"",
+							listExcel.get(0).get("name")+"",
+							listExcel.get(0).get("phone")+"",
+							sb.toString(),
+							listExcel.get(0).get("address")+"",
+							listExcel.get(0).get("shouhou_type")+"",
+							listExcel.get(0).get("cishu")+"",
+							listExcel.get(0).get("jihui")+"",
+							listExcel.get(0).get("fahuo")+"",
+							listExcel.get(0).get("reson")+"",
+							listExcel.get(0).get("guize")+"",
 							listExcel.get(0).get("mianliao")+"",
 							listExcel.get(0).get("yongtu")+"",
 							listExcel.get(0).get("mi")+"",
+							listExcel.get(0).get("jq")+"",
 							listExcel.get(0).get("gongyingshang")+"",
 							listExcel.get(0).get("remark")+""
+							
 							);
 					
 					MsgInfo voexcel = new MsgInfo();

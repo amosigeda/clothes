@@ -893,9 +893,9 @@ function onUpdate(wechat){
         <input style="border:none;" type="text"   readonly="true"     name="xiukouA" id="xiukouA"   value="<%=projectInfo.getAt("xiukou_a")%>"  >
         <%} %></td>
       <td nowrap="nowrap" align="center" ><%if("admin".equals(request.getAttribute("role")) || "Åúµ¥".equals(request.getAttribute("role")) ){ %>
-        <input style="border:none;" type="text"        name="xiukou_que" id="xiukou_que"   value="<%=projectInfo.getAt("xiukou_que")%>"  >
+        <input style="border:none;" type="text"        name="xiukou_que" id="xiukou_que"   value="<%=projectInfo.getAt("miao_liao2")%>"  >
         <%}else{ %>
-        <input style="border:none;" type="text"  readonly="true"      name="xiukou_que" id="xiukou_que"   value="<%=projectInfo.getAt("xiukou_que")%>"  >
+        <input style="border:none;" type="text"  readonly="true"      name="xiukou_que" id="xiukou_que"   value="<%=projectInfo.getAt("miao_liao2")%>"  >
         <%} %></td>
       <!-- <td nowrap="nowrap" align="center" ></td> --> 
     </tr>
