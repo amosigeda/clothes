@@ -152,7 +152,7 @@ function update(id){
 							<logic:equal name="element" property="last_name" value="1">裁床</logic:equal>		
 							<logic:equal name="element" property="last_name" value="2">前道开包</logic:equal>		
 							<logic:equal name="element" property="last_name" value="3">后道</logic:equal>		
-							<logic:equal name="element" property="last_name" value="4">大汤</logic:equal>		
+							<logic:equal name="element" property="last_name" value="4">大烫</logic:equal>		
 							<logic:equal name="element" property="last_name" value="5">质检</logic:equal>		
 							<logic:equal name="element" property="last_name" value="6">发货</logic:equal>		
 							<logic:equal name="element" property="last_name" value="7">售后修改</logic:equal>		

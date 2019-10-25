@@ -226,6 +226,9 @@
 		<action path="/wuliu" type="com.care.sys.appinterfaces.WuLiuAction"></action>
 		<action path="/selectGongZhong" type="com.care.sys.appinterfaces.GongZhongAction"></action>
 		<action path="/bohui" type="com.care.sys.appinterfaces.BohuiAction"></action>
+		
+		
+			<action path="/isShouHoubyOrderId" type="com.care.sys.appinterfaces.IsShouHouByIdOrderAction"></action>
 	</action-mappings>
 	<message-resources parameter="ApplicationResources" />
 </struts-config>

@@ -17,6 +17,7 @@ import java.util.List;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.xa.Xid;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -73,6 +74,21 @@ public class SaoMaAction extends BaseAction {
 			System.out.println("wechat=" + wechat);
 			String token = object.getString("token");
 			String clothes_type = object.getString("clothesType");// xizhuang
+			
+			ProjectInfo pvoo = new ProjectInfo();
+			pvoo.setCondition("order_id='" + orderid + "'");
+			
+			List<DataMap> listOrdero = ServiceBean.getInstance()
+					.getProjectInfoFacade().getProjectInfo(pvoo);
+			Integer xzNumberr = Integer.valueOf(listOrdero.get(0)
+					.get("xizhuang_number") + "");
+			Integer csNumberr = Integer.valueOf(listOrdero.get(0)
+					.get("chenshan_number") + "");
+			Integer xkNumberr = Integer.valueOf(listOrdero.get(0)
+					.get("xiku_number") + "");
+			Integer mjNumberr = Integer.valueOf(listOrdero.get(0)
+					.get("majia_number") + "");
+			
 
 			AppUserInfo vo = new AppUserInfo();
 
@@ -114,6 +130,21 @@ public class SaoMaAction extends BaseAction {
 							vo.setOrder_id(orderid);
 							vo.setClothes_type(clothes_type);
 							vo.setUserName(phone);
+							
+							vo.setXizhuang_number(0);
+							vo.setXiku_number(0);
+							vo.setChenshan_number(0);
+							vo.setMajia_number(0);
+							
+							if ("1".equals(clothes_type)) {
+								vo.setXizhuang_number(xzNumberr);
+							} else if ("3".equals(clothes_type)) {
+								vo.setXiku_number(xkNumberr);
+							} else if ("4".equals(clothes_type)) {
+								vo.setChenshan_number(csNumberr);
+							} else if ("2".equals(clothes_type)) {
+								vo.setMajia_number(mjNumberr);
+							}
 
 							ServiceBean.getInstance().getAppUserInfoFacade()
 									.insertSaoMaInfoNew(vo);
@@ -161,7 +192,7 @@ public class SaoMaAction extends BaseAction {
 
 						}
 
-					} else if (typePerson == 5 || typePerson == 6) {
+					} else if (typePerson == 5) {
 
 						vo.setCondition("order_id='" + orderid
 								+ "'  and  clothes_type= '" + clothes_type
@@ -189,6 +220,20 @@ public class SaoMaAction extends BaseAction {
 								vo.setClothes_type(clothes_type);
 								vo.setUserName(phone);
 								
+								vo.setXizhuang_number(0);
+								vo.setXiku_number(0);
+								vo.setChenshan_number(0);
+								vo.setMajia_number(0);
+								
+								if ("1".equals(clothes_type)) {
+									vo.setXizhuang_number(xzNumberr);
+								} else if ("3".equals(clothes_type)) {
+									vo.setXiku_number(xkNumberr);
+								} else if ("4".equals(clothes_type)) {
+									vo.setChenshan_number(csNumberr);
+								} else if ("2".equals(clothes_type)) {
+									vo.setMajia_number(mjNumberr);
+								}
 								ServiceBean.getInstance().getAppUserInfoFacade()
 										.insertSaoMaInfoNew(vo);
 								zhijian=11;
@@ -289,6 +334,22 @@ public class SaoMaAction extends BaseAction {
 								vo.setOrder_id(orderid);
 								vo.setClothes_type(clothes_type);
 								vo.setUserName(phone);
+							
+
+								vo.setXizhuang_number(0);
+								vo.setXiku_number(0);
+								vo.setChenshan_number(0);
+								vo.setMajia_number(0);
+								
+								if ("1".equals(clothes_type)) {
+									vo.setXizhuang_number(xzNumberr);
+								} else if ("3".equals(clothes_type)) {
+									vo.setXiku_number(xkNumberr);
+								} else if ("4".equals(clothes_type)) {
+									vo.setChenshan_number(csNumberr);
+								} else if ("2".equals(clothes_type)) {
+									vo.setMajia_number(mjNumberr);
+								}
 								ServiceBean.getInstance()
 										.getAppUserInfoFacade()
 										.insertSaoMaInfoNew(vo);

@@ -1441,7 +1441,21 @@ System.out.println("ok");
 			String a16,
 			String a17,
 			String a18,
-			String a19
+			String a19,
+			Map<String, Object> hs1,
+			Map<String, Object> hs2,
+			Map<String, Object> hs3,
+			Map<String, Object> hs4,
+			Map<String, Object> hs5,
+			Map<String, Object> hs6,
+			Map<String, Object> hs7,
+			Map<String, Object> hs8,
+			Map<String, Object> hs9,
+			Map<String, Object> hs10,
+			Map<String, Object> hs11,
+			Map<String, Object> hs12,
+			Map<String, Object> hs13,
+			Map<String, Object> hs14
 			) throws IOException {
 		try {
 //			String Divpath = "E:\\idea\\test\\";// 文件保存路径
@@ -1536,15 +1550,177 @@ System.out.println("ok");
 			sheet.addCell(new Label(1, 7, a14,bai1));
 			sheet.addCell(new Label(2, 7, "用途",bai1));
 			sheet.addCell(new Label(3, 7, a15,bai1));
-			sheet.addCell(new Label(4, 7, "米数"+a16,bai1));
-			sheet.addCell(new Label(5, 7, "价格"+a17,bai1));
+			sheet.addCell(new Label(4, 7, "米数",bai1));
+			sheet.addCell(new Label(5, 7, a16,bai1));//+a17
 			sheet.addCell(new Label(6, 7, "供应商",bai1));
 			sheet.addCell(new Label(7, 7, a18,bai1));
 			
+			int xz = 0;
+			/*
+			 * hs11.put("ml", listExcel.get(0).get("ml11")+"");
+						hs11.put("yt", listExcel.get(0).get("yongtu11")+"");
+						hs11.put("ms", listExcel.get(0).get("mi11")+"");
+						hs11.put("jg", listExcel.get(0).get("jg11")+"");
+						hs11.put("gys", listExcel.get(0).get("gys11")+"");*/
+			if(!Utils.isEmpty(hs1.get("ml")+"")&&!"null".equals(hs1.get("ml"))){
+				xz=xz+1;
+				sheet.addCell(new Label(0, 7+xz, "面料",bai1));
+				sheet.addCell(new Label(1, 7+xz, hs1.get("ml")+"",bai1));
+				sheet.addCell(new Label(2, 7+xz, "用途",bai1));
+				sheet.addCell(new Label(3, 7+xz,  hs1.get("yt")+"",bai1));
+				sheet.addCell(new Label(4, 7+xz, "米数" ,bai1));
+				sheet.addCell(new Label(5, 7+xz, hs1.get("ms")+"",bai1));
+				sheet.addCell(new Label(6, 7+xz, "供应商",bai1));
+				sheet.addCell(new Label(7, 7+xz, hs1.get("gys")+"",bai1));
+			}
+			System.err.println("h2="+hs2.get("ml"));
+			if(!Utils.isEmpty(hs2.get("ml")+"")&&!"null".equals(hs2.get("ml"))){
+				xz=xz+1;
+				sheet.addCell(new Label(0, 7+xz, "面料",bai1));
+				sheet.addCell(new Label(1, 7+xz, hs2.get("ml")+"",bai1));
+				sheet.addCell(new Label(2, 7+xz, "用途",bai1));
+				sheet.addCell(new Label(3, 7+xz,  hs2.get("yt")+"",bai1));
+				sheet.addCell(new Label(4, 7+xz, "米数" ,bai1));
+				sheet.addCell(new Label(5, 7+xz, hs2.get("ms")+"",bai1));
+				sheet.addCell(new Label(6, 7+xz, "供应商",bai1));
+				sheet.addCell(new Label(7, 7+xz, hs2.get("gys")+"",bai1));
+			}
+			if(!Utils.isEmpty(hs3.get("ml")+"")&&!"null".equals(hs3.get("ml"))){
+				xz=xz+1;
+				sheet.addCell(new Label(0, 7+xz, "面料",bai1));
+				sheet.addCell(new Label(1, 7+xz, hs3.get("ml")+"",bai1));
+				sheet.addCell(new Label(2, 7+xz, "用途",bai1));
+				sheet.addCell(new Label(3, 7+xz,  hs3.get("yt")+"",bai1));
+				sheet.addCell(new Label(4, 7+xz, "米数" ,bai1));
+				sheet.addCell(new Label(5, 7+xz, hs3.get("ms")+"",bai1));
+				sheet.addCell(new Label(6, 7+xz, "供应商",bai1));
+				sheet.addCell(new Label(7, 7+xz, hs3.get("gys")+"",bai1));
+			}
+			if(!Utils.isEmpty(hs4.get("ml")+"")&&!"null".equals(hs4.get("ml"))){
+				xz=xz+1;
+				sheet.addCell(new Label(0, 7+xz, "面料",bai1));
+				sheet.addCell(new Label(1, 7+xz, hs4.get("ml")+"",bai1));
+				sheet.addCell(new Label(2, 7+xz, "用途",bai1));
+				sheet.addCell(new Label(3, 7+xz,  hs4.get("yt")+"",bai1));
+				sheet.addCell(new Label(4, 7+xz, "米数" ,bai1));
+				sheet.addCell(new Label(5, 7+xz, hs4.get("ms")+"",bai1));
+				sheet.addCell(new Label(6, 7+xz, "供应商",bai1));
+				sheet.addCell(new Label(7, 7+xz, hs4.get("gys")+"",bai1));
+			}
+			if(!Utils.isEmpty(hs5.get("ml")+"")&&!"null".equals(hs5.get("ml"))){
+				xz=xz+1;
+				sheet.addCell(new Label(0, 7+xz, "面料",bai1));
+				sheet.addCell(new Label(1, 7+xz, hs5.get("ml")+"",bai1));
+				sheet.addCell(new Label(2, 7+xz, "用途",bai1));
+				sheet.addCell(new Label(3, 7+xz,  hs5.get("yt")+"",bai1));
+				sheet.addCell(new Label(4, 7+xz, "米数" ,bai1));
+				sheet.addCell(new Label(5, 7+xz, hs5.get("ms")+"",bai1));
+				sheet.addCell(new Label(6, 7+xz, "供应商",bai1));
+				sheet.addCell(new Label(7, 7+xz, hs5.get("gys")+"",bai1));
+			}
+			if(!Utils.isEmpty(hs6.get("ml")+"")&&!"null".equals(hs6.get("ml"))){
+				xz=xz+1;
+				sheet.addCell(new Label(0, 7+xz, "面料",bai1));
+				sheet.addCell(new Label(1, 7+xz, hs6.get("ml")+"",bai1));
+				sheet.addCell(new Label(2, 7+xz, "用途",bai1));
+				sheet.addCell(new Label(3, 7+xz,  hs6.get("yt")+"",bai1));
+				sheet.addCell(new Label(4, 7+xz, "米数" ,bai1));
+				sheet.addCell(new Label(5, 7+xz, hs6.get("ms")+"",bai1));
+				sheet.addCell(new Label(6, 7+xz, "供应商",bai1));
+				sheet.addCell(new Label(7, 7+xz, hs6.get("gys")+"",bai1));
+			}
+			if(!Utils.isEmpty(hs7.get("ml")+"")&&!"null".equals(hs7.get("ml"))){
+				xz=xz+1;
+				sheet.addCell(new Label(0, 7+xz, "面料",bai1));
+				sheet.addCell(new Label(1, 7+xz, hs7.get("ml")+"",bai1));
+				sheet.addCell(new Label(2, 7+xz, "用途",bai1));
+				sheet.addCell(new Label(3, 7+xz,  hs7.get("yt")+"",bai1));
+				sheet.addCell(new Label(4, 7+xz, "米数" ,bai1));
+				sheet.addCell(new Label(5, 7+xz, hs7.get("ms")+"",bai1));
+				sheet.addCell(new Label(6, 7+xz, "供应商",bai1));
+				sheet.addCell(new Label(7, 7+xz, hs7.get("gys")+"",bai1));
+			}
+			if(!Utils.isEmpty(hs8.get("ml")+"")&&!"null".equals(hs8.get("ml"))){
+				xz=xz+1;
+				sheet.addCell(new Label(0, 7+xz, "面料",bai1));
+				sheet.addCell(new Label(1, 7+xz, hs8.get("ml")+"",bai1));
+				sheet.addCell(new Label(2, 7+xz, "用途",bai1));
+				sheet.addCell(new Label(3, 7+xz,  hs8.get("yt")+"",bai1));
+				sheet.addCell(new Label(4, 7+xz, "米数" ,bai1));
+				sheet.addCell(new Label(5, 7+xz, hs8.get("ms")+"",bai1));
+				sheet.addCell(new Label(6, 7+xz, "供应商",bai1));
+				sheet.addCell(new Label(7, 7+xz, hs8.get("gys")+"",bai1));
+			}
+			if(!Utils.isEmpty(hs9.get("ml")+"")&&!"null".equals(hs9.get("ml"))){
+				xz=xz+1;
+				sheet.addCell(new Label(0, 7+xz, "面料",bai1));
+				sheet.addCell(new Label(1, 7+xz, hs9.get("ml")+"",bai1));
+				sheet.addCell(new Label(2, 7+xz, "用途",bai1));
+				sheet.addCell(new Label(3, 7+xz,  hs9.get("yt")+"",bai1));
+				sheet.addCell(new Label(4, 7+xz, "米数" ,bai1));
+				sheet.addCell(new Label(5, 7+xz, hs9.get("ms")+"",bai1));
+				sheet.addCell(new Label(6, 7+xz, "供应商",bai1));
+				sheet.addCell(new Label(7, 7+xz, hs9.get("gys")+"",bai1));
+			}
+			if(!Utils.isEmpty(hs10.get("ml")+"")&&!"null".equals(hs10.get("ml"))){
+				xz=xz+1;
+				sheet.addCell(new Label(0, 7+xz, "面料",bai1));
+				sheet.addCell(new Label(1, 7+xz, hs10.get("ml")+"",bai1));
+				sheet.addCell(new Label(2, 7+xz, "用途",bai1));
+				sheet.addCell(new Label(3, 7+xz,  hs10.get("yt")+"",bai1));
+				sheet.addCell(new Label(4, 7+xz, "米数" ,bai1));
+				sheet.addCell(new Label(5, 7+xz, hs10.get("ms")+"",bai1));
+				sheet.addCell(new Label(6, 7+xz, "供应商",bai1));
+				sheet.addCell(new Label(7, 7+xz, hs10.get("gys")+"",bai1));
+			}
+			if(!Utils.isEmpty(hs11.get("ml")+"")&&!"null".equals(hs11.get("ml"))){
+				xz=xz+1;
+				sheet.addCell(new Label(0, 7+xz, "面料",bai1));
+				sheet.addCell(new Label(1, 7+xz, hs11.get("ml")+"",bai1));
+				sheet.addCell(new Label(2, 7+xz, "用途",bai1));
+				sheet.addCell(new Label(3, 7+xz,  hs11.get("yt")+"",bai1));
+				sheet.addCell(new Label(4, 7+xz, "米数" ,bai1));
+				sheet.addCell(new Label(5, 7+xz, hs11.get("ms")+"",bai1));
+				sheet.addCell(new Label(6, 7+xz, "供应商",bai1));
+				sheet.addCell(new Label(7, 7+xz, hs11.get("gys")+"",bai1));
+			}
+			if(!Utils.isEmpty(hs12.get("ml")+"")&&!"null".equals(hs12.get("ml"))){
+				xz=xz+1;
+				sheet.addCell(new Label(0, 7+xz, "面料",bai1));
+				sheet.addCell(new Label(1, 7+xz, hs12.get("ml")+"",bai1));
+				sheet.addCell(new Label(2, 7+xz, "用途",bai1));
+				sheet.addCell(new Label(3, 7+xz,  hs12.get("yt")+"",bai1));
+				sheet.addCell(new Label(4, 7+xz, "米数" ,bai1));
+				sheet.addCell(new Label(5, 7+xz, hs12.get("ms")+"",bai1));
+				sheet.addCell(new Label(6, 7+xz, "供应商",bai1));
+				sheet.addCell(new Label(7, 7+xz, hs12.get("gys")+"",bai1));
+			}
+			if(!Utils.isEmpty(hs13.get("ml")+"")&&!"null".equals(hs13.get("ml"))){
+				xz=xz+1;
+				sheet.addCell(new Label(0, 7+xz, "面料",bai1));
+				sheet.addCell(new Label(1, 7+xz, hs13.get("ml")+"",bai1));
+				sheet.addCell(new Label(2, 7+xz, "用途",bai1));
+				sheet.addCell(new Label(3, 7+xz,  hs13.get("yt")+"",bai1));
+				sheet.addCell(new Label(4, 7+xz, "米数" ,bai1));
+				sheet.addCell(new Label(5, 7+xz, hs13.get("ms")+"",bai1));
+				sheet.addCell(new Label(6, 7+xz, "供应商",bai1));
+				sheet.addCell(new Label(7, 7+xz, hs13.get("gys")+"",bai1));
+			}
+			if(!Utils.isEmpty(hs14.get("ml")+"")&&!"null".equals(hs14.get("ml"))){
+				xz=xz+1;
+				sheet.addCell(new Label(0, 7+xz, "面料",bai1));
+				sheet.addCell(new Label(1, 7+xz, hs14.get("ml")+"",bai1));
+				sheet.addCell(new Label(2, 7+xz, "用途",bai1));
+				sheet.addCell(new Label(3, 7+xz,  hs14.get("yt")+"",bai1));
+				sheet.addCell(new Label(4, 7+xz, "米数" ,bai1));
+				sheet.addCell(new Label(5, 7+xz, hs14.get("ms")+"",bai1));
+				sheet.addCell(new Label(6, 7+xz, "供应商",bai1));
+				sheet.addCell(new Label(7, 7+xz, hs14.get("gys")+"",bai1));
+			}
 			
-			sheet.addCell(new Label(0, 8, "售后内容",bai1));
-			sheet.addCell(new Label(1, 8, a19,bai1));
-			sheet.mergeCells(1, 8, 7, 8); 
+			sheet.addCell(new Label(0, 8+xz, "售后内容",bai1));
+			sheet.addCell(new Label(1, 8+xz, a19,bai1));
+			sheet.mergeCells(1, 8+xz, 7, 8+xz); 
 			
 			
 		

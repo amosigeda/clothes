@@ -115,6 +115,22 @@ public class ShouHouAction extends BaseAction {
 							vo.setClothes_type(clothes_type);
 							vo.setUserName(phone);
 							vo.setStatus("7");
+							if ("1".equals(clothes_type)) {
+								vo.setXizhuang_number(1);
+							} else if ("3".equals(clothes_type)) {
+								vo.setXiku_number(1);
+							} else if ("4".equals(clothes_type)) {
+								vo.setChenshan_number(1);
+							} else if ("2".equals(clothes_type)) {
+								vo.setMajia_number(1);
+							}
+							vo.setXizhuang_number(0);
+							vo.setXiku_number(0);
+							vo.setChenshan_number(0);
+							vo.setMajia_number(0);
+							
+					
+							
 							ServiceBean.getInstance().getAppUserInfoFacade()
 									.insertSaoMaInfoNew(vo);
 							zhijian = 11;
@@ -165,32 +181,46 @@ public class ShouHouAction extends BaseAction {
 
 						vo.setCondition("order_id='" + orderid
 								+ "'  and  clothes_type= '" + clothes_type
-								+ "'   and last_name='" + (typePerson - 1)
-								+ "'   limit 1");
+								+ "'   and last_name='7'   limit 1");
 						List<DataMap> listSaoMa = ServiceBean.getInstance()
 								.getAppUserInfoFacade().getSaoMaInfoNew(vo);
 
 						if (listSaoMa.size() > 0) {
-							
+							result =1;
 							vo.setCondition("order_id='" + orderid
 									+ "'  and  clothes_type= '" + clothes_type
-									+ "'   and last_name='" + typePerson 
-									+ "'   limit 1");
+									+ "'   and last_name='8'   limit 1");
 							List<DataMap> listSaoMaa = ServiceBean.getInstance()
 									.getAppUserInfoFacade().getSaoMaInfoNew(vo);
 							
 							if(listSaoMaa.size()<=0){
 							
-								vo.setPassword(wechat);
-								vo.setNickName(nickName);
-								vo.setCreateTime(new Date());
-								vo.setLast_name(typePerson + "");
-								vo.setOrder_id(orderid);
-								vo.setClothes_type(clothes_type);
-								vo.setUserName(phone);
+							/*	vo.setCondition("order_id='" + orderid
+										+ "'  and  clothes_type= '" + clothes_type
+										+ "'   and last_name='8'   limit 1");
+								List<DataMap> listSaoMaazhijian = ServiceBean.getInstance()
+										.getAppUserInfoFacade().getSaoMaInfoNew(vo);
+								if(listSaoMaazhijian.size()<=0){*/
+									vo.setPassword(wechat);
+									vo.setNickName(nickName);
+									vo.setCreateTime(new Date());
+									vo.setLast_name("8");
+									vo.setOrder_id(orderid);
+									vo.setClothes_type(clothes_type);
+									vo.setUserName(phone);
+									
+									vo.setXizhuang_number(0);
+									vo.setXiku_number(0);
+									vo.setChenshan_number(0);
+									vo.setMajia_number(0);
+									vo.setStatus("8");
 								
-								ServiceBean.getInstance().getAppUserInfoFacade()
-										.insertSaoMaInfoNew(vo);
+									ServiceBean.getInstance().getAppUserInfoFacade()
+											.insertSaoMaInfoNew(vo);
+								
+								
+								
+							
 								zhijian=11;
 								// 如果等于1说明有人扫过
 								/*if (listSaoMa.size() == 1) {*/
@@ -244,7 +274,7 @@ public class ShouHouAction extends BaseAction {
 
 								}*/
 							}
-						
+							
 
 						} else {
 							result = Constant.FAIL_CODE;

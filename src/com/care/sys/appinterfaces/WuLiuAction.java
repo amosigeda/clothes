@@ -110,7 +110,7 @@ if(list.size()<=0){
 	fo.setUser_feedback_content(kuaiDiHao);
 	fo.setDate_time(new Date());
 	fo.setWupin(wupin);
-	fo.setNumber(number);
+	fo.setNumber("1");
 	fo.setNickname(list.get(0).get("nick_name")+"");
 
 	fo.setShangyi(abc[0]);

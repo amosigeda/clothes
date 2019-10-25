@@ -36,8 +36,8 @@ function finds(){
 function c(){
     document.all.startTime.value="";
     document.all.endTime.value="";
-    document.all.phone.value="";   
-    document.all.nickname.value="";   
+   /*  document.all.phone.value="";   
+    document.all.nickname.value="";    */
   /*   document.all.gongzhong.value="";    */
 } 
 function onView(download){
@@ -74,12 +74,12 @@ function findss(wechat){
 							<input name="endTime" type="text" class="txt_1" id="endTime" style="cursor:text"
 								value="<%CommUtils.printReqByAtt(request,response,"now_date");%>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
 								size="15" readonly>	 --%>					
-						手机号				
+				<%-- 		手机号				
 						    <input id="phone" name="phone" type="text" class="txt_1" 
 						    value="<%CommUtils.printReqByAtt(request,response,"phone");%>" size="15">
 						    姓名				
 						    <input id="nickname" name="nickname" type="text" class="txt_1" 
-						    value="<%CommUtils.printReqByAtt(request,response,"nickname");%>" size="15">
+						    value="<%CommUtils.printReqByAtt(request,response,"nickname");%>" size="15"> --%>
 						    
 						    	      创建时间
                      <input  name="startTime" type="text" class="txt_1"  id="startTime" style="cursor:text"
@@ -123,6 +123,7 @@ function findss(wechat){
                   	<td width="8%" >衬衫数量</td>
                   	<td width="8%" >西裤数量</td>
                   	<td width="8%" >马甲数量</td>
+                  	<!-- <td width="8%" >创建时间</td> -->
                   <!-- 	<td width="8%" >工种</td> -->
                   	<!-- <td width="8%" >类型</td> -->
              
@@ -141,13 +142,13 @@ function findss(wechat){
 						</td> --%>
 						<td><bean:write name="element" property="user_name"/></td>
 						
-						<td>
+					<%-- 	<td>
 						<logic:empty name="element" property="password">无</logic:empty>
 						<logic:notEmpty name="element" property="password">
 									<bean:write name="element" property="password"/>
 					</logic:notEmpty>
-						</td>
-						
+						</td> --%>
+						<td><bean:write name="element" property="password"/></td>
 						
 						<td>
 						<logic:empty name="element" property="nick_name">无</logic:empty>
@@ -162,6 +163,13 @@ function findss(wechat){
 					<td><bean:write name="element" property="chenshan_number"/></td>
 					<td><bean:write name="element" property="xiku_number"/></td>
 					<td><bean:write name="element" property="majia_number"/></td>
+					
+					<%-- <td>
+						<logic:empty name="element" property="create_time">无</logic:empty>
+						<logic:notEmpty name="element" property="create_time">
+						<bean:write name="element" property="create_time" format="yyyy-MM-dd HH:mm:ss"/>
+						</logic:notEmpty>
+						</td> --%>
 						
 						<%-- <td>
 						<logic:empty name="element" property="last_name">无</logic:empty>

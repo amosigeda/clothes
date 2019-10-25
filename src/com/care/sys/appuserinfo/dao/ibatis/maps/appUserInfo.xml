@@ -91,14 +91,21 @@
 	
 		<select id="getSaoMaInfoListByVoGroup" resultClass="com.godoing.rose.lang.DataMap"
 		parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
-		SELECT * FROM saomainfo_info 
+		SELECT user_name,
+password,
+nick_name,
+SUM(xizhuang_number) AS xizhuang_number,
+SUM(chenshan_number) AS chenshan_number,
+SUM(xiku_number) AS xiku_number,
+SUM(majia_number) AS majia_number
+ FROM saomainfo_info 
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
 				$condition$
 			</isNotEmpty>
 		</dynamic>
 		
-		group by password
+	
 		<dynamic prepend="order by">
 			<isNotEmpty prepend="order by" property="orderBy">
 				$orderBy$
@@ -116,7 +123,7 @@
 	
 	<select id="getSaoMaInfoListByVo" resultClass="com.godoing.rose.lang.DataMap"
 		parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
-		SELECT * FROM saomainfo
+		SELECT * FROM saomainfo_info
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
 				$condition$
@@ -151,7 +158,7 @@
 	
 	<select id="getSaoMaInfoCount" resultClass="java.lang.Integer"
 		parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
-		SELECT COUNT(*) FROM saomainfo
+		SELECT COUNT(*) FROM saomainfo_info
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
 				$condition$
@@ -161,12 +168,14 @@
 	
 		<select id="getAppUserInfoCountByVoGroup" resultClass="java.lang.Integer"
 		parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
-		SELECT COUNT(*) FROM ( SELECT * FROM saomainfo_info   GROUP BY PASSWORD) AS a 
+		SELECT COUNT(*) FROM ( SELECT * FROM saomainfo_info  
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
 				$condition$
 			</isNotEmpty>
 		</dynamic>
+		
+		 ) AS a 
 		
 	</select>
 
@@ -209,9 +218,18 @@
 	
 		<insert id="insertSaoMaInfoNew" parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
 		INSERT INTO
-		saomainfo_info(create_time,user_name,nick_name,password,last_name,order_id,clothes_type)
+		saomainfo_info(create_time,user_name,nick_name,password,last_name,order_id,clothes_type,
+		xizhuang_number,
+		chenshan_number,
+		xiku_number,
+		majia_number
+		)
 		VALUES
-		(#createTime#,#userName#,#nickName#,#password#,#last_name#,#order_id#,#clothes_type#)
+		(#createTime#,#userName#,#nickName#,#password#,#last_name#,#order_id#,#clothes_type#,
+			#xizhuang_number#,
+		#chenshan_number#,
+		#xiku_number#,
+		#majia_number#)
 	</insert>
 	
 	<insert id="insertUserPhotoInfo" parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">

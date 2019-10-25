@@ -9,8 +9,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -1032,6 +1034,121 @@ public class MsgInfoAction extends BaseAction {
 						}
 						sb.append(listExcel.get(0).get("item5")+"");
 					}
+					
+					Map<String, Object> hs1 = new HashMap<>();
+					Map<String, Object> hs2 = new HashMap<>();
+					Map<String, Object> hs3 = new HashMap<>();
+					Map<String, Object> hs4 = new HashMap<>();
+					Map<String, Object> hs5 = new HashMap<>();
+					Map<String, Object> hs6 = new HashMap<>();
+					Map<String, Object> hs7 = new HashMap<>();
+					Map<String, Object> hs8 = new HashMap<>();
+					Map<String, Object> hs9 = new HashMap<>();
+					Map<String, Object> hs10 = new HashMap<>();
+					Map<String, Object> hs11 = new HashMap<>();
+					Map<String, Object> hs12 = new HashMap<>();
+					Map<String, Object> hs13 = new HashMap<>();
+					Map<String, Object> hs14 = new HashMap<>();
+					
+					if(!Utils.isEmpty(listExcel.get(0).get("mianliao1")+"")){
+						hs1.put("ml", listExcel.get(0).get("mianliao1")+"");
+						hs1.put("yt", listExcel.get(0).get("yongtu1")+"");
+						hs1.put("ms", listExcel.get(0).get("mi1")+"");
+						hs1.put("jg", listExcel.get(0).get("jg1")+"");
+						hs1.put("gys", listExcel.get(0).get("gys1")+"");
+					}
+					if(!Utils.isEmpty(listExcel.get(0).get("mianliao2")+"")){
+						hs2.put("ml", listExcel.get(0).get("mianliao2")+"");
+						hs2.put("yt", listExcel.get(0).get("yongtu2")+"");
+						hs2.put("ms", listExcel.get(0).get("mi2")+"");
+						hs2.put("jg", listExcel.get(0).get("jg2")+"");
+						hs2.put("gys", listExcel.get(0).get("gys2")+"");
+					}
+					if(!Utils.isEmpty(listExcel.get(0).get("mianliao3")+"")){
+						hs3.put("ml", listExcel.get(0).get("mianliao3")+"");
+						hs3.put("yt", listExcel.get(0).get("yongtu3")+"");
+						hs3.put("ms", listExcel.get(0).get("mi3")+"");
+						hs3.put("jg", listExcel.get(0).get("jg3")+"");
+						hs3.put("gys", listExcel.get(0).get("gys3")+"");
+					}
+					if(!Utils.isEmpty(listExcel.get(0).get("mianliao4")+"")){
+						hs4.put("ml", listExcel.get(0).get("mianliao4")+"");
+						hs4.put("yt", listExcel.get(0).get("yongtu4")+"");
+						hs4.put("ms", listExcel.get(0).get("mi4")+"");
+						hs4.put("jg", listExcel.get(0).get("jg4")+"");
+						hs4.put("gys", listExcel.get(0).get("gys4")+"");
+					}
+					if(!Utils.isEmpty(listExcel.get(0).get("mianliao5")+"")){
+						hs5.put("ml", listExcel.get(0).get("mianliao5")+"");
+						hs5.put("yt", listExcel.get(0).get("yongtu5")+"");
+						hs5.put("ms", listExcel.get(0).get("mi5")+"");
+						hs5.put("jg", listExcel.get(0).get("jg5")+"");
+						hs5.put("gys", listExcel.get(0).get("gys5")+"");
+					}
+					
+					if(!Utils.isEmpty(listExcel.get(0).get("mianliao6")+"")){
+						hs6.put("ml", listExcel.get(0).get("mianliao6")+"");
+						hs6.put("yt", listExcel.get(0).get("yongtu6")+"");
+						hs6.put("ms", listExcel.get(0).get("mi6")+"");
+						hs6.put("jg", listExcel.get(0).get("jg6")+"");
+						hs6.put("gys", listExcel.get(0).get("gys6")+"");
+					}
+					if(!Utils.isEmpty(listExcel.get(0).get("mianliao7")+"")){
+						hs7.put("ml", listExcel.get(0).get("mianliao7")+"");
+						hs7.put("yt", listExcel.get(0).get("yongtu7")+"");
+						hs7.put("ms", listExcel.get(0).get("mi7")+"");
+						hs7.put("jg", listExcel.get(0).get("jg7")+"");
+						hs7.put("gys", listExcel.get(0).get("gys7")+"");
+					}
+					if(!Utils.isEmpty(listExcel.get(0).get("mianliao8")+"")){
+						hs8.put("ml", listExcel.get(0).get("mianliao8")+"");
+						hs8.put("yt", listExcel.get(0).get("yongtu8")+"");
+						hs8.put("ms", listExcel.get(0).get("mi8")+"");
+						hs8.put("jg", listExcel.get(0).get("jg8")+"");
+						hs8.put("gys", listExcel.get(0).get("gys8")+"");
+					}
+					if(!Utils.isEmpty(listExcel.get(0).get("mianliao9")+"")){
+						hs9.put("ml", listExcel.get(0).get("mianliao9")+"");
+						hs9.put("yt", listExcel.get(0).get("yongtu9")+"");
+						hs9.put("ms", listExcel.get(0).get("mi9")+"");
+						hs9.put("jg", listExcel.get(0).get("jg9")+"");
+						hs9.put("gys", listExcel.get(0).get("gys9")+"");
+					}
+					if(!Utils.isEmpty(listExcel.get(0).get("mianliao10")+"")){
+						hs10.put("ml", listExcel.get(0).get("mianliao10")+"");
+						hs10.put("yt", listExcel.get(0).get("yongtu10")+"");
+						hs10.put("ms", listExcel.get(0).get("mi10")+"");
+						hs10.put("jg", listExcel.get(0).get("jg10")+"");
+						hs10.put("gys", listExcel.get(0).get("gys10")+"");
+					}
+					if(!Utils.isEmpty(listExcel.get(0).get("mianliao11")+"")){
+						hs11.put("ml", listExcel.get(0).get("mianliao11")+"");
+						hs11.put("yt", listExcel.get(0).get("yongtu11")+"");
+						hs11.put("ms", listExcel.get(0).get("mi11")+"");
+						hs11.put("jg", listExcel.get(0).get("jg11")+"");
+						hs11.put("gys", listExcel.get(0).get("gys11")+"");
+					}
+					if(!Utils.isEmpty(listExcel.get(0).get("mianliao12")+"")){
+						hs12.put("ml", listExcel.get(0).get("mianliao12")+"");
+						hs12.put("yt", listExcel.get(0).get("yongtu12")+"");
+						hs12.put("ms", listExcel.get(0).get("mi12")+"");
+						hs12.put("jg", listExcel.get(0).get("jg12")+"");
+						hs12.put("gys", listExcel.get(0).get("gys12")+"");
+					}
+					if(!Utils.isEmpty(listExcel.get(0).get("mianliao13")+"")){
+						hs13.put("ml", listExcel.get(0).get("mianliao13")+"");
+						hs13.put("yt", listExcel.get(0).get("yongtu13")+"");
+						hs13.put("ms", listExcel.get(0).get("mi13")+"");
+						hs13.put("jg", listExcel.get(0).get("jg13")+"");
+						hs13.put("gys", listExcel.get(0).get("gys13")+"");
+					}
+					if(!Utils.isEmpty(listExcel.get(0).get("mianliao14")+"")){
+						hs14.put("ml", listExcel.get(0).get("mianliao14")+"");
+						hs14.put("yt", listExcel.get(0).get("yongtu14")+"");
+						hs14.put("ms", listExcel.get(0).get("mi14")+"");
+						hs14.put("jg", listExcel.get(0).get("jg14")+"");
+						hs14.put("gys", listExcel.get(0).get("gys14")+"");
+					}
 							
 					GetExCel.writeExcelShouHou1024(
 							orderId,
@@ -1053,7 +1170,21 @@ public class MsgInfoAction extends BaseAction {
 							listExcel.get(0).get("mi")+"",
 							listExcel.get(0).get("jq")+"",
 							listExcel.get(0).get("gongyingshang")+"",
-							listExcel.get(0).get("remark")+""
+							listExcel.get(0).get("remark")+"",
+							hs1,
+							hs2,
+							hs3,
+							hs4,
+							hs5,
+							hs6,
+							hs7,
+							hs8,
+							hs9,
+							hs10,
+							hs11,
+							hs12,
+							hs13,
+							hs14
 							
 							);
 					

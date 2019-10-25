@@ -388,7 +388,9 @@ public class AppUserInfoAction extends BaseAction{
 		    request.setAttribute("user_id", user_id);
 		    request.setAttribute("phone", phone);
 		    request.setAttribute("gongzhong", gongzhong);
-		    
+		    if(sb.toString().length()>0){
+		    	sb.append("  GROUP BY PASSWORD");
+		    }
 			vo.setCondition(sb.toString());
 			
 			
@@ -538,14 +540,14 @@ public class AppUserInfoAction extends BaseAction{
 			   
 			   
          	BeanUtils.copyProperties(vo,form);	
-        	if(startTime != null && !"".equals(startTime)){	
-        		vo.setCondition(sb.toString());
-        		
-        		list = info.getSaoMaInfoListByVoGroup(vo);  
-        	}else{
-        		
-        		list = info.getSaoMaInfoListByVo(vo);  
-        	}
+        
+         	 if(sb.toString().length()>0){
+         		list = info.getSaoMaInfoListByVoGroup(vo);
+ 		    }else{
+ 		    	
+ 		    	list = info.getSaoMaInfoListByVo(vo);  
+ 		    }
+        	
 			BeanUtils.copyProperties(pys, form); 
 			pys.setCounts(list.getTotalSize());   
 			/* ���û������ֶ� */ 
