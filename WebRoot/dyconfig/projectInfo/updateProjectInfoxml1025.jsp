@@ -399,7 +399,6 @@ function onUpdate(wechat){
 	<input style="border:none;" type="text"   readonly="true"  name="xsjg1" id="xsjg1"  value=<%=orderall.getAt("xsjg1")%>>
 				    <%} %>
 </td>
-		 <td nowrap="nowrap" align="center" colspan="4"></td>
 			</tr>
 			 <%} %>
 			  <%if(!"".equals(orderall.getAt("orderNumber2"))&& orderall.getAt("orderNumber2")!=null ){ %>
@@ -422,7 +421,6 @@ function onUpdate(wechat){
 	<input style="border:none;" type="text"    readonly="true"  name="xsjg2" id="xsjg2"  value=<%=orderall.getAt("xsjg2")%>>
 				 <%} %>
 </td>
-				<td nowrap="nowrap" align="center" colspan="4"></td>
 			</tr>
 			 <%} %>
 			 
@@ -446,7 +444,6 @@ function onUpdate(wechat){
 	<input style="border:none;" type="text"  readonly="true"   name="xsjg3" id="xsjg3"  value=<%=orderall.getAt("xsjg3")%>>
 				 <%} %>
 </td>
-				<td nowrap="nowrap" align="center" colspan="4"></td>
 			</tr>
 			 <%} %>
 			  <%if(!"".equals(orderall.getAt("orderNumber4"))&& orderall.getAt("orderNumber4")!=null ){ %>
@@ -469,7 +466,6 @@ function onUpdate(wechat){
 	<input style="border:none;" type="text"  readonly="true"   name="xsjg4" id="xsjg4"  value=<%=orderall.getAt("xsjg4")%>>
 				 <%} %>
 </td>
-				<td nowrap="nowrap" align="center" colspan="4"></td>
 			</tr>
 			 <%} %>
 			  <%if(!"".equals(orderall.getAt("orderNumber5"))&& orderall.getAt("orderNumber5")!=null ){ %>
@@ -492,7 +488,6 @@ function onUpdate(wechat){
 	<input style="border:none;" type="text"   readonly="true"  name="xsjg5" id="xsjg5"  value=<%=orderall.getAt("xsjg5")%>>
 				 <%} %>
 </td>
-				<td nowrap="nowrap" align="center" colspan="4"></td>
 			</tr>
 			 <%} %>
 			  <%if(!"".equals(orderall.getAt("orderNumber6"))&& orderall.getAt("orderNumber6")!=null ){ %>
@@ -515,7 +510,6 @@ function onUpdate(wechat){
 	<input style="border:none;" type="text"  readonly="true"   name="xsjg6" id="xsjg6"  value=<%=orderall.getAt("xsjg6")%>>
 				 <%} %>
 </td>
-				<td nowrap="nowrap" align="center" colspan="4"></td>
 			</tr>
 			 <%} %>
 			 
@@ -539,7 +533,6 @@ function onUpdate(wechat){
 	<input style="border:none;" type="text"   readonly="true"  name="xsjg7" id="xsjg7"  value=<%=orderall.getAt("xsjg7")%>>
 				 <%} %>
 </td>
-				<td nowrap="nowrap" align="center" colspan="4"></td>
 			</tr>
 			 <%} %>
 			   <%if(!"".equals(orderall.getAt("orderNumber8"))&& orderall.getAt("orderNumber8")!=null ){ %>
@@ -562,7 +555,6 @@ function onUpdate(wechat){
 	<input style="border:none;" type="text"   readonly="true"  name="xsjg8" id="xsjg8"  value=<%=orderall.getAt("xsjg8")%>>
 				 <%} %>
 </td>
-				<td nowrap="nowrap" align="center" colspan="4"></td>
 			</tr>
 			 <%} %>
 			 
@@ -586,7 +578,6 @@ function onUpdate(wechat){
 	<input style="border:none;" type="text"   readonly="true"  name="xsjg9" id="xsjg9"  value=<%=orderall.getAt("xsjg9")%>>
 				 <%} %>
 </td>
-				<td nowrap="nowrap" align="center" colspan="4"></td>
 			</tr>
 			 <%} %>
     

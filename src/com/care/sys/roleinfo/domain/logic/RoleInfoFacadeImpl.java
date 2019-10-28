@@ -90,7 +90,7 @@ public class RoleInfoFacadeImpl implements RoleInfoFacade {
             rfList.add((String)map.get("funcCode"));
         }
 
-     
+    
         StringBuffer dt = new StringBuffer("d = new dTree('d');\r\t");
         dt.append("d.add(0,-1,'权限列表');\r\t"); 
         

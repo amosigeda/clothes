@@ -45,4 +45,7 @@ public interface AppUserInfoFacade {
 	public List<DataMap> getSaoMaInfoNew(AppUserInfo vo)throws SystemException;
 
 	public int updateSaoMaInfo(AppUserInfo voNumber)throws SystemException;
+
+	public List<DataMap> getShuliangByWechat(AppUserInfo vo)throws SystemException;
+
 }

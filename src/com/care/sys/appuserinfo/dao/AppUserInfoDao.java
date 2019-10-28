@@ -52,4 +52,6 @@ public interface AppUserInfoDao {
 
 	public Integer getAppUserInfoCountByVoGroup(AppUserInfo vo)throws DataAccessException;
 
+	public List<DataMap> getShuliangByWechat(AppUserInfo vo)throws DataAccessException;
+
 }

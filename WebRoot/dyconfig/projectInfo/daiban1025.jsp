@@ -225,62 +225,62 @@ function daDan(id,orderid){
 				</tr> 
 				<%int i=1; %>
                   <tr class="title_2">
-                 	<td width="5%" style="white-space: nowrap;;">
+                 	<td width="5%">
 						订单编号
 					</td> 
-					<td width="5%" style="white-space: nowrap;">
+					<td width="5%">
 						订单号
 					</td> 
-					<td width="5%" style="white-space: nowrap;">
+					<td width="5%">
 						负责人(跟单)
 					</td> 
-					<td width="5%" style="white-space: nowrap;">
+					<td width="5%">
 					旺旺名
 					</td> 
-					<td width="5%" style="white-space: nowrap;">
+					<td width="5%">
 					手机号
 					</td> 
-						<td width="5%" style="white-space: nowrap;">
+						<td width="5%">
 					销售价格
 					</td> 
-						<td width="5%" style="white-space: nowrap;">
+						<td width="5%">
 					微信名
 					</td>
 					
-					<td width="5%" style="white-space: nowrap;">
+					<td width="5%">
 					订单类型
 					</td>
-						<td width="5%" style="white-space: nowrap;">
+						<td width="5%">
 					渠道
 					</td>
 					
-					<td width="5%" style="white-space: nowrap;">
+					<td width="5%">
 					性别
 					</td>
-					<td width="5%" style="white-space: nowrap;">
+					<td width="5%">
 					下单时间
 					</td>
-						<td width="5%" style="white-space: nowrap;">
+						<td width="5%">
 					下单客服
 					</td>
-						<td width="5%" style="white-space: nowrap;">
+						<td width="5%">
 					状态
 					</td>
-					<td width="5%" style="white-space: nowrap;">
+					<td width="5%">
 					退回时间
 					</td>
-					<td width="5%" style="white-space: nowrap;">
+					<td width="5%">
 						批单时间
 					</td>
-					<td width="5%" style="white-space: nowrap;">
+					<td width="5%">
 						批单备注
 					</td>
-					<td width="5%" style="white-space: nowrap;">
+					<td width="5%">
 						叫料时间
 					</td>
 					
 					
-             <td width="5%" style="white-space: nowrap;">
+             <td width="5%">
 						操作
 					</td>
 				
@@ -293,7 +293,7 @@ function daDan(id,orderid){
 						<td>							
 							<bean:write name="element" property="order_id" />
 						</td>
-						<td style="word-wrap:break-word;word-break:break-all;padding:0 5px;">							
+						<td>							
 							<bean:write name="element" property="order_number" />
 						</td>
 						<td>							
@@ -305,7 +305,7 @@ function daDan(id,orderid){
 						<td>							
 							<bean:write name="element" property="kehu_phone" />
 						</td>
-						<td style="word-wrap:break-word;word-break:break-all;padding:0 5px;">							
+						<td>							
 							<bean:write name="element" property="sale_price" />
 						</td>
 						<td>							

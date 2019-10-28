@@ -25,6 +25,7 @@ import org.apache.struts.action.ActionMapping;
 import com.care.common.config.ServiceBean;
 import com.care.common.http.BaseAction;
 import com.care.common.lang.Constant;
+import com.care.sys.appuserinfo.domain.AppUserInfo;
 import com.care.sys.msginfo.domain.MsgInfo;
 import com.care.sys.projectinfo.domain.ProjectInfo;
 import com.godoing.rose.lang.DataMap;
@@ -61,23 +62,23 @@ public class doGetClothesCountAction extends BaseAction{
 		
 			
 			try{		//get����
-		ProjectInfo vo = new ProjectInfo();
-		vo.setCondition("add_time >='" + starttime + "' and add_time <='"+endtime +"' and wechat='"+wechat+"'");
+				AppUserInfo vo = new AppUserInfo(); 
+		vo.setCondition("create_time >='" + starttime + "' and create_time <='"+endtime +"' and password='"+wechat+"'");
 		List<DataMap> list = ServiceBean.getInstance()
-				.getProjectInfoFacade().getProjectInfo(vo);
+				.getAppUserInfoFacade().getShuliangByWechat(vo);
+		
 		int xizhuang_number =0;
 		int chenshan_number =0;
 		int xiku_number =0;
 		int majia_number =0;
-		
+		System.err.println(list.size());
 		if(list.size()>0){
-	
-			for(int i=0;i<list.size();i++){
-				xizhuang_number=xizhuang_number+Integer.valueOf(list.get(i).get("xizhuang_number")+"");
-				chenshan_number=chenshan_number+Integer.valueOf(list.get(i).get("chenshan_number")+"");
-				xiku_number=xiku_number+Integer.valueOf(list.get(i).get("xiku_number")+"");
-				majia_number=majia_number+Integer.valueOf(list.get(i).get("majia_number")+"");
-			}
+		
+				xizhuang_number=Integer.valueOf(list.get(0).get("xizhuang_number")+"");
+				chenshan_number=Integer.valueOf(list.get(0).get("chenshan_number")+"");
+				xiku_number=Integer.valueOf(list.get(0).get("xiku_number")+"");
+				majia_number=Integer.valueOf(list.get(0).get("majia_number")+"");
+		
 			
 		}
 		
@@ -104,8 +105,13 @@ public class doGetClothesCountAction extends BaseAction{
 			sb1.append(resultSb);
 			
 			logger.error(e);
-			result = Constant.EXCEPTION_CODE;
-			json.put(Constant.EXCEPTION, sb1.toString());
+			json.put("xizhuang_number", 0);
+			json.put("chenshan_number", 0);
+			json.put("xiku_number", 0);
+			json.put("majia_number", 0);
+			
+				result = Constant.SUCCESS_CODE;
+		//	json.put(Constant.EXCEPTION, sb1.toString());
 		}
 		json.put("request", href);
 		json.put(Constant.RESULTCODE, result);

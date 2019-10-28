@@ -61,6 +61,7 @@ import com.care.sys.channelinfo.domain.ChannelInfo;
 import com.care.sys.companyinfo.domain.CompanyInfo;
 import com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo;
 import com.care.sys.dynamicInfo.domain.DynamicInfo;
+import com.care.sys.feedbackinfo.domain.FeedBackInfo;
 import com.care.sys.projectinfo.domain.ProjectInfo;
 import com.care.sys.projectinfo.domain.logic.ProjectInfoFacade;
 import com.care.sys.projectinfo.form.ProjectInfoForm;
@@ -502,35 +503,27 @@ public class ProjectInfoAction extends BaseAction {
 				// 单元格是字符串格式！第一个是代表列数,第二是代表行数，第三个代表要写入的内容,第四个代表字体格式
 				// （0代表excel的第一行或者第一列）
 				
-				Label label00 = new Label(0, 0, "订单编号", hei); // 这里的（0,0）表示第一行第一列的表格
-				sheet.addCell(label00);
+				sheet.addCell(new Label(0, 0, "订单编号", hei));
+				sheet.addCell(new Label(1, 0, "旺旺名", hei));
+				sheet.addCell(new Label(2, 0, "销售价格", hei));
+				sheet.addCell(new Label(3, 0, "微信名", hei));
+				sheet.addCell(new Label(4, 0, "订单号", hei));
+				sheet.addCell(new Label(5, 0, "下单时间", hei));
 				
-				Label label10 = new Label(1, 0, "旺旺名", hei); // 这里的（0,0）表示第一行第一列的表格
-				sheet.addCell(label10);
-				Label label20 = new Label(2, 0, "销售价格", hei); // 这里的（0,0）表示第一行第一列的表格
-				sheet.addCell(label20);
-				Label label30 = new Label(3, 0, "微信名", hei); // 这里的（0,0）表示第一行第一列的表格
-				sheet.addCell(label30);
-				Label label40 = new Label(4, 0, "订单号", hei); // 这里的（0,0）表示第一行第一列的表格
-				sheet.addCell(label40);
-				Label label50 = new Label(5, 0, "下单时间", hei); // 这里的（0,0）表示第一行第一列的表格
-				sheet.addCell(label50);
-				Label label60 = new Label(6, 0, "客户电话", hei); // 这里的（0,0）表示第一行第一列的表格
-				sheet.addCell(label60);
-				Label label70 = new Label(7, 0, "客户姓名", hei); // 这里的（0,0）表示第一行第一列的表格
-				sheet.addCell(label70);
-				Label label80 = new Label(8, 0, "客户地址", hei); // 这里的（0,0）表示第一行第一列的表格
-				sheet.addCell(label80);
-				Label label90 = new Label(9, 0, "渠道", hei); // 这里的（0,0）表示第一行第一列的表格
-				sheet.addCell(label90);
-				Label label100 = new Label(10, 0, "订单类型", hei); // 这里的（0,0）表示第一行第一列的表格
-				sheet.addCell(label100);
-				Label label110 = new Label(11, 0, "交付时间", hei); // 这里的（0,0）表示第一行第一列的表格
-				sheet.addCell(label110);
-				Label label120 = new Label(12, 0, "发货时间", hei); // 这里的（0,0）表示第一行第一列的表格
-				sheet.addCell(label120);
-				Label label130 = new Label(13, 0, "下单客服", hei); // 这里的（0,0）表示第一行第一列的表格
-				sheet.addCell(label130);
+				sheet.addCell(new Label(6, 0, "产品", hei));
+				sheet.addCell(new Label(7, 0, "面料号", hei));
+				sheet.addCell(new Label(8, 0, "面料米数", hei));
+				sheet.addCell(new Label(9, 0, "面料金额", hei));
+				sheet.addCell(new Label(10, 0, "供应商", hei));
+				
+				sheet.addCell(new Label(11, 0, "客户电话", hei));
+				sheet.addCell(new Label(12, 0, "客户姓名", hei));
+				sheet.addCell(new Label(13, 0, "客户地址", hei));
+				sheet.addCell(new Label(14, 0, "渠道", hei));
+				sheet.addCell(new Label(15, 0, "订单类型", hei));
+				sheet.addCell(new Label(16, 0, "交付时间", hei));
+				sheet.addCell(new Label(17, 0, "发货时间", hei));
+				sheet.addCell(new Label(18, 0, "下单客服", hei));
 				
 				
 				
@@ -542,23 +535,344 @@ public class ProjectInfoAction extends BaseAction {
 					sheet.addCell(new Label(3, i+1, proslist.get(i).get("wechat")+"", bai));
 					sheet.addCell(new Label(4, i+1, proslist.get(i).get("order_number")+"", bai));
 					sheet.addCell(new Label(5, i+1, proslist.get(i).get("add_time")+"", bai));
-					sheet.addCell(new Label(6, i+1, proslist.get(i).get("kehu_phone")+"", bai));
-					sheet.addCell(new Label(7, i+1, proslist.get(i).get("kehu_name")+"", bai));
-					sheet.addCell(new Label(8, i+1, proslist.get(i).get("address")+"", bai));
-					sheet.addCell(new Label(9, i+1, proslist.get(i).get("qudao")+"", bai));
-					sheet.addCell(new Label(10, i+1, proslist.get(i).get("order_type")+"", bai));
-					sheet.addCell(new Label(11, i+1, proslist.get(i).get("jiaofu_time")+"", bai));
 					
-					AppUserInfo voapp = new AppUserInfo(); 
+					ProjectInfo duoyu = new ProjectInfo();
+					duoyu.setCondition("orderid='" + ooid + "' order by id desc limit 1");
 					
-					voapp.setCondition("order_id='"+ooid +"'  and last_name='6'   limit 1"); //
-					List<DataMap> listSaoMa  = ServiceBean.getInstance().getAppUserInfoFacade().getSaoMaInfo(voapp);
+					List<DataMap> listDuoyu = ServiceBean.getInstance().getProjectInfoFacade()
+							.getProjectInfoDuoYu(duoyu);
 					
-					sheet.addCell(new Label(12, i+1, "", bai));
-					if(listSaoMa.size()>0){
-						sheet.addCell(new Label(12, i+1, listSaoMa.get(0).get("create_time")+"", bai));
+					StringBuffer sb1= new StringBuffer("");
+					StringBuffer sb2= new StringBuffer("");
+					StringBuffer sb3= new StringBuffer("");
+					StringBuffer sb4= new StringBuffer("");
+					StringBuffer sb5= new StringBuffer("");
+					if(listDuoyu.size()>0){
+						if(!Utils.isEmpty(listDuoyu.get(0).get("yt1")+"")&&!"null".equals(listDuoyu.get(0).get("yt1")+"")){
+							sb1.append(",");
+							sb1.append(listDuoyu.get(0).get("yt1")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("yt2")+"")&&!"null".equals(listDuoyu.get(0).get("yt2")+"")){
+							sb1.append(",");
+							sb1.append(listDuoyu.get(0).get("yt2")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("yt3")+"")&&!"null".equals(listDuoyu.get(0).get("yt3")+"")){
+							sb1.append(",");
+							sb1.append(listDuoyu.get(0).get("yt3")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("yt4")+"")&&!"null".equals(listDuoyu.get(0).get("yt4")+"")){
+							sb1.append(",");
+							sb1.append(listDuoyu.get(0).get("yt4")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("yt5")+"")&&!"null".equals(listDuoyu.get(0).get("yt5")+"")){
+							sb1.append(",");
+							sb1.append(listDuoyu.get(0).get("yt5")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("yt6")+"")&&!"null".equals(listDuoyu.get(0).get("yt6")+"")){
+							sb1.append(",");
+							sb1.append(listDuoyu.get(0).get("yt6")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("yt7")+"")&&!"null".equals(listDuoyu.get(0).get("yt7")+"")){
+							sb1.append(",");
+							sb1.append(listDuoyu.get(0).get("yt7")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("yt8")+"")&&!"null".equals(listDuoyu.get(0).get("yt8")+"")){
+							sb1.append(",");
+							sb1.append(listDuoyu.get(0).get("yt8")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("yt9")+"")&&!"null".equals(listDuoyu.get(0).get("yt9")+"")){
+							sb1.append(",");
+							sb1.append(listDuoyu.get(0).get("yt9")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("yt10")+"")&&!"null".equals(listDuoyu.get(0).get("yt10")+"")){
+							sb1.append(",");
+							sb1.append(listDuoyu.get(0).get("yt10")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("yt11")+"")&&!"null".equals(listDuoyu.get(0).get("yt11")+"")){
+							sb1.append(",");
+							sb1.append(listDuoyu.get(0).get("yt11")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("yt12")+"")&&!"null".equals(listDuoyu.get(0).get("yt12")+"")){
+							sb1.append(",");
+							sb1.append(listDuoyu.get(0).get("yt12")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("yt13")+"")&&!"null".equals(listDuoyu.get(0).get("yt13")+"")){
+							sb1.append(",");
+							sb1.append(listDuoyu.get(0).get("yt13")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("yt14")+"")&&!"null".equals(listDuoyu.get(0).get("yt14")+"")){
+							sb1.append(",");
+							sb1.append(listDuoyu.get(0).get("yt14")+"");
+						}
+						
+						
+						
+						if(!Utils.isEmpty(listDuoyu.get(0).get("ml1")+"")&&!"null".equals(listDuoyu.get(0).get("ml1")+"")){
+							sb2.append(",");
+							sb2.append(listDuoyu.get(0).get("ml1")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("ml2")+"")&&!"null".equals(listDuoyu.get(0).get("ml2")+"")){
+							sb2.append(",");
+							sb2.append(listDuoyu.get(0).get("ml2")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("ml3")+"")&&!"null".equals(listDuoyu.get(0).get("ml3")+"")){
+							sb2.append(",");
+							sb2.append(listDuoyu.get(0).get("ml3")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("ml4")+"")&&!"null".equals(listDuoyu.get(0).get("ml4")+"")){
+							sb2.append(",");
+							sb2.append(listDuoyu.get(0).get("ml4")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("ml5")+"")&&!"null".equals(listDuoyu.get(0).get("ml5")+"")){
+							sb2.append(",");
+							sb2.append(listDuoyu.get(0).get("ml5")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("ml6")+"")&&!"null".equals(listDuoyu.get(0).get("ml6")+"")){
+							sb2.append(",");
+							sb2.append(listDuoyu.get(0).get("ml6")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("ml7")+"")&&!"null".equals(listDuoyu.get(0).get("ml7")+"")){
+							sb2.append(",");
+							sb2.append(listDuoyu.get(0).get("ml7")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("ml8")+"")&&!"null".equals(listDuoyu.get(0).get("ml8")+"")){
+							sb2.append(",");
+							sb2.append(listDuoyu.get(0).get("ml8")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("ml9")+"")&&!"null".equals(listDuoyu.get(0).get("ml9")+"")){
+							sb2.append(",");
+							sb2.append(listDuoyu.get(0).get("ml9")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("ml10")+"")&&!"null".equals(listDuoyu.get(0).get("ml10")+"")){
+							sb2.append(",");
+							sb2.append(listDuoyu.get(0).get("ml10")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("ml11")+"")&&!"null".equals(listDuoyu.get(0).get("ml11")+"")){
+							sb2.append(",");
+							sb2.append(listDuoyu.get(0).get("ml11")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("ml12")+"")&&!"null".equals(listDuoyu.get(0).get("ml12")+"")){
+							sb2.append(",");
+							sb2.append(listDuoyu.get(0).get("ml12")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("ml13")+"")&&!"null".equals(listDuoyu.get(0).get("ml13")+"")){
+							sb2.append(",");
+							sb2.append(listDuoyu.get(0).get("ml13")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("ml14")+"")&&!"null".equals(listDuoyu.get(0).get("ml14")+"")){
+							sb2.append(",");
+							sb2.append(listDuoyu.get(0).get("ml14")+"");
+						}
+						
+						
+						
+						if(!Utils.isEmpty(listDuoyu.get(0).get("ms1")+"")&&!"null".equals(listDuoyu.get(0).get("ms1")+"")){
+							sb3.append(",");
+							sb3.append(listDuoyu.get(0).get("ms1")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("ms2")+"")&&!"null".equals(listDuoyu.get(0).get("ms2")+"")){
+							sb3.append(",");
+							sb3.append(listDuoyu.get(0).get("ms2")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("ms3")+"")&&!"null".equals(listDuoyu.get(0).get("ms3")+"")){
+							sb3.append(",");
+							sb3.append(listDuoyu.get(0).get("ms3")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("ms4")+"")&&!"null".equals(listDuoyu.get(0).get("ms4")+"")){
+							sb3.append(",");
+							sb3.append(listDuoyu.get(0).get("ms4")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("ms5")+"")&&!"null".equals(listDuoyu.get(0).get("ms5")+"")){
+							sb3.append(",");
+							sb3.append(listDuoyu.get(0).get("ms5")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("ms6")+"")&&!"null".equals(listDuoyu.get(0).get("ms6")+"")){
+							sb3.append(",");
+							sb3.append(listDuoyu.get(0).get("ms6")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("ms7")+"")&&!"null".equals(listDuoyu.get(0).get("ms7")+"")){
+							sb3.append(",");
+							sb3.append(listDuoyu.get(0).get("ms7")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("ms8")+"")&&!"null".equals(listDuoyu.get(0).get("ms8")+"")){
+							sb3.append(",");
+							sb3.append(listDuoyu.get(0).get("ms8")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("ms9")+"")&&!"null".equals(listDuoyu.get(0).get("ms9")+"")){
+							sb3.append(",");
+							sb3.append(listDuoyu.get(0).get("ms9")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("ms10")+"")&&!"null".equals(listDuoyu.get(0).get("ms10")+"")){
+							sb3.append(",");
+							sb3.append(listDuoyu.get(0).get("ms10")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("ms11")+"")&&!"null".equals(listDuoyu.get(0).get("ms11")+"")){
+							sb3.append(",");
+							sb3.append(listDuoyu.get(0).get("ms11")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("ms12")+"")&&!"null".equals(listDuoyu.get(0).get("ms12")+"")){
+							sb3.append(",");
+							sb3.append(listDuoyu.get(0).get("ms12")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("ms13")+"")&&!"null".equals(listDuoyu.get(0).get("ms13")+"")){
+							sb3.append(",");
+							sb3.append(listDuoyu.get(0).get("ms13")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("ms14")+"")&&!"null".equals(listDuoyu.get(0).get("ms14")+"")){
+							sb3.append(",");
+							sb3.append(listDuoyu.get(0).get("ms14")+"");
+						}
+						
+						
+						
+						
+						
+						
+						
+						if(!Utils.isEmpty(listDuoyu.get(0).get("jq")+"")&&!"null".equals(listDuoyu.get(0).get("jq")+"")){
+							sb4.append(listDuoyu.get(0).get("jq")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("jq1")+"")&&!"null".equals(listDuoyu.get(0).get("jq1")+"")){
+							sb4.append(",");
+							sb4.append(listDuoyu.get(0).get("jq1")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("jq2")+"")&&!"null".equals(listDuoyu.get(0).get("jq2")+"")){
+							sb4.append(",");
+							sb4.append(listDuoyu.get(0).get("jq2")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("jq3")+"")&&!"null".equals(listDuoyu.get(0).get("jq3")+"")){
+							sb4.append(",");
+							sb4.append(listDuoyu.get(0).get("jq3")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("jq4")+"")&&!"null".equals(listDuoyu.get(0).get("jq4")+"")){
+							sb4.append(",");
+							sb4.append(listDuoyu.get(0).get("jq4")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("jq5")+"")&&!"null".equals(listDuoyu.get(0).get("jq5")+"")){
+							sb4.append(",");
+							sb4.append(listDuoyu.get(0).get("jq5")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("jq6")+"")&&!"null".equals(listDuoyu.get(0).get("jq6")+"")){
+							sb4.append(",");
+							sb4.append(listDuoyu.get(0).get("jq6")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("jq7")+"")&&!"null".equals(listDuoyu.get(0).get("jq7")+"")){
+							sb4.append(",");
+							sb4.append(listDuoyu.get(0).get("jq7")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("jq8")+"")&&!"null".equals(listDuoyu.get(0).get("jq8")+"")){
+							sb4.append(",");
+							sb4.append(listDuoyu.get(0).get("jq8")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("jq9")+"")&&!"null".equals(listDuoyu.get(0).get("jq9")+"")){
+							sb4.append(",");
+							sb4.append(listDuoyu.get(0).get("jq9")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("jq10")+"")&&!"null".equals(listDuoyu.get(0).get("jq10")+"")){
+							sb4.append(",");
+							sb4.append(listDuoyu.get(0).get("jq10")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("jq11")+"")&&!"null".equals(listDuoyu.get(0).get("jq11")+"")){
+							sb4.append(",");
+							sb4.append(listDuoyu.get(0).get("jq11")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("jq12")+"")&&!"null".equals(listDuoyu.get(0).get("jq12")+"")){
+							sb4.append(",");
+							sb4.append(listDuoyu.get(0).get("jq12")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("jq13")+"")&&!"null".equals(listDuoyu.get(0).get("jq13")+"")){
+							sb4.append(",");
+							sb4.append(listDuoyu.get(0).get("jq13")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("jq14")+"")&&!"null".equals(listDuoyu.get(0).get("jq14")+"")){
+							sb4.append(",");
+							sb4.append(listDuoyu.get(0).get("jq14")+"");
+						}
+						
+						if(!Utils.isEmpty(listDuoyu.get(0).get("gys1")+"")&&!"null".equals(listDuoyu.get(0).get("gys1")+"")){
+							sb5.append(",");
+							sb5.append(listDuoyu.get(0).get("gys1")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("gys2")+"")&&!"null".equals(listDuoyu.get(0).get("gys2")+"")){
+							sb5.append(",");
+							sb5.append(listDuoyu.get(0).get("gys2")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("gys3")+"")&&!"null".equals(listDuoyu.get(0).get("gys3")+"")){
+							sb5.append(",");
+							sb5.append(listDuoyu.get(0).get("gys3")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("gys4")+"")&&!"null".equals(listDuoyu.get(0).get("gys4")+"")){
+							sb5.append(",");
+							sb5.append(listDuoyu.get(0).get("gys4")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("gys5")+"")&&!"null".equals(listDuoyu.get(0).get("gys5")+"")){
+							sb5.append(",");
+							sb5.append(listDuoyu.get(0).get("gys5")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("gys6")+"")&&!"null".equals(listDuoyu.get(0).get("gys6")+"")){
+							sb5.append(",");
+							sb5.append(listDuoyu.get(0).get("gys6")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("gys7")+"")&&!"null".equals(listDuoyu.get(0).get("gys7")+"")){
+							sb5.append(",");
+							sb5.append(listDuoyu.get(0).get("gys7")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("gys8")+"")&&!"null".equals(listDuoyu.get(0).get("gys8")+"")){
+							sb5.append(",");
+							sb5.append(listDuoyu.get(0).get("gys8")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("gys9")+"")&&!"null".equals(listDuoyu.get(0).get("gys9")+"")){
+							sb5.append(",");
+							sb5.append(listDuoyu.get(0).get("gys9")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("gys10")+"")&&!"null".equals(listDuoyu.get(0).get("gys10")+"")){
+							sb5.append(",");
+							sb5.append(listDuoyu.get(0).get("gys10")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("gys11")+"")&&!"null".equals(listDuoyu.get(0).get("gys11")+"")){
+							sb5.append(",");
+							sb5.append(listDuoyu.get(0).get("gys11")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("gys12")+"")&&!"null".equals(listDuoyu.get(0).get("gys12")+"")){
+							sb5.append(",");
+							sb5.append(listDuoyu.get(0).get("gys12")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("gys13")+"")&&!"null".equals(listDuoyu.get(0).get("gys13")+"")){
+							sb5.append(",");
+							sb5.append(listDuoyu.get(0).get("gys13")+"");
+						}
+						if(!Utils.isEmpty(listDuoyu.get(0).get("gys14")+"")&&!"null".equals(listDuoyu.get(0).get("gys14")+"")){
+							sb5.append(",");
+							sb5.append(listDuoyu.get(0).get("gys14")+"");
+						}
 					}
-					sheet.addCell(new Label(13, i+1, proslist.get(i).get("xiadan_kefu")+"", bai));
+					
+					sheet.addCell(new Label(6, i+1, proslist.get(i).get("yong_tu1")+""+sb1.toString(), bai));//yong_tu1  yt1
+					sheet.addCell(new Label(7, i+1, proslist.get(i).get("miao_liao1")+""+sb2.toString(), bai));//miao_liao1  duoyu.getAt("ml1")
+					sheet.addCell(new Label(8, i+1, proslist.get(i).get("mi1")+""+sb3.toString(), bai));//mi1     duoyu.ms1
+					sheet.addCell(new Label(9, i+1, sb4.toString(), bai));//             duoyu.getAt("jq
+					sheet.addCell(new Label(10, i+1,  proslist.get(i).get("gongyingshang_1")+""+sb5.toString(), bai));//             duoyu.getAt("jq
+					
+					
+					
+					sheet.addCell(new Label(11, i+1, proslist.get(i).get("kehu_phone")+"", bai));
+					sheet.addCell(new Label(12, i+1, proslist.get(i).get("kehu_name")+"", bai));
+					sheet.addCell(new Label(13, i+1, proslist.get(i).get("address")+"", bai));
+					sheet.addCell(new Label(14, i+1, proslist.get(i).get("qudao")+"", bai));
+					sheet.addCell(new Label(15, i+1, proslist.get(i).get("order_type")+"", bai));
+					sheet.addCell(new Label(16, i+1, proslist.get(i).get("jiaofu_time")+"", bai));
+					
+					FeedBackInfo voo =new FeedBackInfo();
+					voo.setCondition("user_id='"+ooid+"'  order by id desc limit 1");
+					List<DataMap> listocc  = ServiceBean.getInstance().getFeedBackInfoFacade().getFeedBackInfo(voo);
+					
+					
+					if(listocc.size()>0){
+						sheet.addCell(new Label(17, i+1, listocc.get(0).get("date_time")+"", bai));
+					}else{
+						sheet.addCell(new Label(17, i+1, "", bai));
+					}
+					sheet.addCell(new Label(18, i+1, proslist.get(i).get("xiadan_kefu")+"", bai));
 				
 				
 					sheet.setRowView(i+1, 250, false);
@@ -579,6 +893,10 @@ public class ProjectInfoAction extends BaseAction {
 				sheet.setColumnView(13, 15);
 				sheet.setColumnView(14, 15);
 				sheet.setColumnView(15, 15);
+				sheet.setColumnView(16, 15);
+				sheet.setColumnView(17, 15);
+				sheet.setColumnView(18, 15);
+				sheet.setColumnView(19, 15);
 			
 				
 				sheet.setRowView(0, 300, false);

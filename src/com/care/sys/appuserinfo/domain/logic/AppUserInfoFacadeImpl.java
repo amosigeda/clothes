@@ -126,4 +126,10 @@ public class AppUserInfoFacadeImpl implements AppUserInfoFacade{
 		return list;
 	}
 
+	@Override
+	public List<DataMap> getShuliangByWechat(AppUserInfo vo)
+			throws SystemException {
+		return appUserInfoDao.getShuliangByWechat(vo);
+	}
+
 }

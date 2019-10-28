@@ -143,4 +143,11 @@ public class SqlMapAppUserInfoDao extends SqlMapClientDaoSupport implements AppU
 		logger.debug("getAppUserInfoCountByVoGroup(AppUserInfo vo)");
 		return (Integer)getSqlMapClientTemplate().queryForObject("getAppUserInfoCountByVoGroup", vo);
 	}
+
+	@Override
+	public List<DataMap> getShuliangByWechat(AppUserInfo vo)
+			throws DataAccessException {
+		logger.debug("getShuliangByWechat(AppUserInfo vo)");
+		return getSqlMapClientTemplate().queryForList("getShuliangByWechat", vo);
+	}
 }

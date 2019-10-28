@@ -121,6 +121,26 @@ SUM(majia_number) AS majia_number
 		</isNotEmpty>
 	</select>
 	
+	
+	
+			<select id="getShuliangByWechat" resultClass="com.godoing.rose.lang.DataMap"
+		parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
+		SELECT user_name,
+password,
+nick_name,
+SUM(xizhuang_number) AS xizhuang_number,
+SUM(chenshan_number) AS chenshan_number,
+SUM(xiku_number) AS xiku_number,
+SUM(majia_number) AS majia_number
+ FROM saomainfo_info 
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="condition">
+				$condition$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	
 	<select id="getSaoMaInfoListByVo" resultClass="com.godoing.rose.lang.DataMap"
 		parameterClass="com.care.sys.appuserinfo.domain.AppUserInfo">
 		SELECT * FROM saomainfo_info
