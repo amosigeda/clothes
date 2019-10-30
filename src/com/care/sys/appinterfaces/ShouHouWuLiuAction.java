@@ -28,6 +28,7 @@ import org.apache.struts.action.ActionMapping;
 
 import com.care.common.config.ServiceBean;
 import com.care.common.http.BaseAction;
+import com.care.common.http.HttpRequest;
 import com.care.common.lang.Constant;
 import com.care.sys.appuserinfo.domain.AppUserInfo;
 import com.care.sys.appuserinfo.domain.logic.AppUserInfoFacade;
@@ -82,7 +83,7 @@ if(list.size()<=0){
 		if("6".equals(list.get(0).get("last_name")+"")){
 	
 	String orderId = object.getString("orderId");
-	//String expressType = object.getString("expressType");
+	String expressType = object.getString("expressType");
 	String kuaiDiHao = object.getString("kuaiDiHao");
 	String price = object.getString("price");
 	String number = object.getString("number");
@@ -105,7 +106,14 @@ if(list.size()<=0){
 		
 		FeedBackInfo fo =new FeedBackInfo();
 	fo.setUser_id(orderId);
-	fo.setProject_name("顺丰");
+	 if("1".equals(expressType)){
+		  fo.setProject_name("顺丰");
+	  }else if("2".equals(expressType)){
+		  fo.setProject_name("京东");
+	  }else{
+		  fo.setProject_name(expressType);
+	  }
+	 
 	fo.setPrice(price);
 	fo.setUser_feedback_content(kuaiDiHao);
 	fo.setDate_time(new Date());
@@ -126,9 +134,19 @@ if(list.size()<=0){
 			.getInstance().getProjectInfoFacade()
 			.getProjectInfo(pvo);
 	if(listOrder.size()>0){
+		
+		String name = listOrder.get(0).get("kehu_name")+"";
 		String  kehuPhone= listOrder.get(0).get(
 				"kehu_phone")
 				+ "";
+		HttpRequest.urlReturnParams("http://localhost:9999/mobilepay/watchAppUser/sendwuliu/"+name+"/"+kehuPhone+"/"+orderId);
+		String wuliuname="顺丰";
+		if("1".equals(expressType)){
+			wuliuname="顺丰";
+		  }else if("2".equals(expressType)){
+			  wuliuname="京东";
+		  }
+		
 		
 		ChannelInfo chInfo = new ChannelInfo();
 		chInfo.setOrder_id(orderId);
@@ -142,7 +160,7 @@ if(list.size()<=0){
 								.getTime())
 				+ "】【"
 				+ orderId
-				+ "】订单已通过质检流程，现已为您发货物流单号为【"+kuaiDiHao+"】</br>（顺丰特快）（还是熟悉的配方还是熟悉的味道，顺丰特快为了你服务！我虽鞭长莫及但是马不停蹄。）");
+				+ "】订单已通过质检流程，现已为您发货物流单号为【"+kuaiDiHao+"】</br>（"+wuliuname+"）（还是熟悉的配方还是熟悉的味道，顺丰特快为了你服务！我虽鞭长莫及但是马不停蹄。）");
 		chInfo.setStatus("1");
 		ServiceBean.getInstance()
 				.getChannelInfoFacade()

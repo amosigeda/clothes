@@ -1,8 +1,24 @@
 package com.care.sys.feedbackinfo.action;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
+
 import javax.servlet.http.*;
+
+import jxl.Workbook;
+import jxl.format.VerticalAlignment;
+import jxl.write.BorderLineStyle;
+import jxl.write.Label;
+import jxl.write.WritableCellFormat;
+import jxl.write.WritableFont;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
 
 import org.apache.commons.beanutils.*;
 import org.apache.struts.action.*;
@@ -20,6 +36,7 @@ import com.care.sys.roleinfo.domain.RoleInfo;
 import com.care.sys.userinfo.domain.*;
 import com.care.sys.userinfo.domain.logic.*;
 import com.care.sys.userinfo.form.*;
+import com.care.utils.Utils;
 import com.godoing.rose.http.common.HttpTools;
 import com.godoing.rose.http.common.PagePys;
 import com.godoing.rose.http.common.Result;
@@ -141,6 +158,7 @@ public class FeedBackInfoAction extends BaseAction {
 		
 			vo.setCondition(sb.toString());
 			
+			
 			ProjectInfo pro = new ProjectInfo();
 			List<DataMap> pros = ServiceBean.getInstance().getProjectInfoFacade().getProjectInfo(pro);
 			request.setAttribute("project", pros);
@@ -151,6 +169,145 @@ public class FeedBackInfoAction extends BaseAction {
 		    request.setAttribute("belongProject", belongProject);
 			BeanUtils.copyProperties(vo, form);
 			list = info.getDataFeedBackInfoListByVo(vo);
+			
+			
+			String anniu = request.getParameter("anniu");
+			
+			if(list.size()>=1 && "2".equals(anniu)){
+				FeedBackInfo voo = new FeedBackInfo();
+				voo.setCondition(sb.toString());
+				System.err.println("**********************************************");
+				List<DataMap>  proslist = info.getFeedBackInfo(voo);
+
+				
+				String orderIdName = System.currentTimeMillis()+"";
+				
+
+				String Divpath = "D:/resin/webapps/watch/upload/daochu/";// 文件保存路径
+				File dirFile = new File(Divpath);
+				if (!dirFile.exists()) {// 文件路径不存在时，自动创建目录
+					dirFile.mkdir();
+				}
+				String path = Divpath +orderIdName+".xls";// 文件名字
+				// 创建一个可写入的excel文件对象
+				WritableWorkbook workbook = Workbook.createWorkbook(new File(path));
+				// 使用第一张工作表，将其命名为“测试”
+				WritableSheet sheet = workbook.createSheet("导出", 0);
+
+				// 设置字体种类和格式
+				WritableFont bold = new WritableFont(WritableFont.createFont("宋体") , 9,
+						WritableFont.BOLD);
+				WritableCellFormat bai = new WritableCellFormat();
+				bai.setAlignment(jxl.format.Alignment.CENTRE);// 单元格中的内容水平方向居中
+				bai.setBorder(jxl.format.Border.ALL, BorderLineStyle.MEDIUM);
+				bai.setVerticalAlignment(VerticalAlignment.CENTRE);
+				WritableFont bold1 = new WritableFont(WritableFont.createFont("宋体") , 9,
+						WritableFont.BOLD);
+				WritableCellFormat bai1 = new WritableCellFormat(bold1);
+				bai1.setAlignment(jxl.format.Alignment.CENTRE);// 单元格中的内容水平方向居中
+				bai1.setBorder(jxl.format.Border.ALL, BorderLineStyle.MEDIUM);
+				bai1.setVerticalAlignment(VerticalAlignment.CENTRE);
+				
+				
+				WritableCellFormat hei = new WritableCellFormat(bold);
+				hei.setAlignment(jxl.format.Alignment.CENTRE);// 单元格中的内容水平方向居中
+				hei.setBorder(jxl.format.Border.ALL, BorderLineStyle.MEDIUM);
+				hei.setVerticalAlignment(VerticalAlignment.CENTRE);
+				// 单元格是字符串格式！第一个是代表列数,第二是代表行数，第三个代表要写入的内容,第四个代表字体格式
+				// （0代表excel的第一行或者第一列）
+				
+				sheet.addCell(new Label(0, 0, "订单编号", hei));
+				sheet.addCell(new Label(1, 0, "快递类型", hei));
+				sheet.addCell(new Label(2, 0, "快递号", hei));
+				sheet.addCell(new Label(3, 0, "价格", hei));
+				sheet.addCell(new Label(4, 0, "录入时间", hei));
+				sheet.addCell(new Label(5, 0, "上衣数量", hei));
+				
+				sheet.addCell(new Label(6, 0, "裤子数量", hei));
+				sheet.addCell(new Label(7, 0, "马甲数量", hei));
+				sheet.addCell(new Label(8, 0, "衬衫数量", hei));
+				sheet.addCell(new Label(9, 0, "领导数量", hei));
+				
+				
+				
+				
+				for(int i=0;i<proslist.size();i++){
+					String ooid =proslist.get(i).get("user_id")+"";
+				    sheet.addCell(new Label(0, i+1, ooid ,   bai));
+					sheet.addCell(new Label(1, i+1, proslist.get(i).get("project_name")+"", bai));
+					sheet.addCell(new Label(2, i+1,  proslist.get(i).get("user_feedback_content")+"", bai));
+					sheet.addCell(new Label(3, i+1, proslist.get(i).get("price")+"", bai));
+					sheet.addCell(new Label(4, i+1, proslist.get(i).get("date_time")+"", bai));
+					sheet.addCell(new Label(5, i+1, proslist.get(i).get("shangyi")+"", bai));
+					sheet.addCell(new Label(6, i+1, proslist.get(i).get("kuzi")+"", bai));
+					sheet.addCell(new Label(7, i+1, proslist.get(i).get("majia")+"", bai));
+					sheet.addCell(new Label(8, i+1, proslist.get(i).get("chenshan")+"", bai));
+					sheet.addCell(new Label(9, i+1, proslist.get(i).get("lingdai")+"", bai));
+					
+				
+				
+					sheet.setRowView(i+1, 250, false);
+				}
+				sheet.setColumnView(0, 15);
+				sheet.setColumnView(1, 15);
+				sheet.setColumnView(2, 15);
+				sheet.setColumnView(3, 15);
+				sheet.setColumnView(4, 15);
+				sheet.setColumnView(5, 15);
+				sheet.setColumnView(6, 15);
+				sheet.setColumnView(7, 15);
+				sheet.setColumnView(8, 15);
+				sheet.setColumnView(9, 15);
+				sheet.setColumnView(10, 15);
+				sheet.setColumnView(11, 15);
+				sheet.setColumnView(12, 15);
+				sheet.setColumnView(13, 15);
+				sheet.setColumnView(14, 15);
+				sheet.setColumnView(15, 15);
+				sheet.setColumnView(16, 15);
+				sheet.setColumnView(17, 15);
+				sheet.setColumnView(18, 15);
+				sheet.setColumnView(19, 15);
+			
+				
+				sheet.setRowView(0, 300, false);
+				workbook.write();
+				workbook.close();
+	
+			
+	
+	
+				
+					
+					 // path是指欲下载的文件的路径。
+				      File file = new File(path);
+				      
+				      if (file.exists()) {
+				    	  System.err.println("文件存在");
+				    	   // 取得文件名。
+					      String filename = file.getName();
+					      // 取得文件的后缀名。
+					      //String ext = filename.substring(filename.lastIndexOf(".") + 1).toUpperCase();
+					 
+					      // 以流的形式下载文件。
+					      InputStream fis = new BufferedInputStream(new FileInputStream(path));
+					      byte[] buffer = new byte[fis.available()];
+					      fis.read(buffer);
+					      fis.close();
+					      // 清空response
+					      response.reset();
+					      // 设置response的Header
+					      response.addHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes()));
+					      response.addHeader("Content-Length", "" + file.length());
+					      OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
+					      response.setContentType("application/octet-stream");
+					      toClient.write(buffer);
+					      toClient.flush();
+					      toClient.close();
+						}
+			
+			}
+			
 			BeanUtils.copyProperties(pys, form);
 			pys.setCounts(list.getTotalSize());
 			/* 锟斤拷锟矫伙拷锟斤拷锟斤拷锟街讹拷 */

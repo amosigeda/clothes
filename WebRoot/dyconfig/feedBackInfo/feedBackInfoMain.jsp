@@ -24,7 +24,9 @@
 			src="<%=request.getContextPath()%>/public/My97DatePicker/WdatePicker.js"></script>
 	</head>
 	<script language="javascript">
-function finds(){
+function finds(wechat){
+	  document.getElementById("anniu").setAttribute("value", wechat);
+	  
     var st = new Date(frmGo.startTime.value.replace(/-/g,'/'));
 	var et = new Date(frmGo.endTime.value.replace(/-/g,'/'));
 	if(Date.parse(st) - Date.parse(et)>0){
@@ -102,10 +104,15 @@ function del(id){
 							</select>
 							<%} %> --%>
 								
-						<input name="find1" type="button" class="but_1" accesskey="f"
-							tabindex="f" value="ËÑ Ë÷" onclick="javascript:finds()">
+						<input name="find1" type="button" class="but_1" accesskey="f" title="1"
+							tabindex="f" value="ËÑ Ë÷" onclick="javascript:finds(this.title)">
 							 <input name="clear" type="button" class="but_1" accesskey="c"
 						    tabindex="c"  value="Çå³ýËÑË÷" onclick="c()">
+						    
+						        <input name="find2" type="button" class="but_1" accesskey="f"  title="2"
+							tabindex="f" value="µ¼³öEXCEL" onclick="javascript:finds(this.title)">
+							    <input name="anniu" size="200" id="anniu"
+					 type="hidden" class="txt_1"  />
 						</td>					
 				</tr>
                  <tr class="title_2">                 	

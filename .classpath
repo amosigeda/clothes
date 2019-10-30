@@ -58,6 +58,16 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/dom4j-1.6.1 .jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jaxen-1.1.2.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/base64-2.3.8.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/aip-java-sdk-4.4.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/aliyun-java-sdk-dyvmsapi-1.0.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/aliyun-java-sdk-dysmsapi-1.0.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/aliyun-java-taobao-1.0.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/core-3.3.3.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/javase-3.3.3.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/taobao-sdk-java-auto_1455552377940-20161018-1.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/aliyun-java-sdk-push-3.5.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/aliyun-sdk-oss-2.8.3.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/aliyun-java-sdk-core-3.2.5.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="com.genuitec.runtime.library/com.genuitec.generic_5.0">
