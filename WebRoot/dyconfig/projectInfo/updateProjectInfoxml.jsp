@@ -284,7 +284,9 @@ function onUpdate(wechat){
     
     <tr>
       <td nowrap="nowrap" align="center" class="f_bold">订单编号</td>
-      <td nowrap="nowrap" align="center" ><input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=projectInfo.getAt("order_id")%>></td>
+      <td nowrap="nowrap" align="center" >
+      <input style="border:none;" type="text"   readOnly="true"    name="project_no1" id="project_no1" value=<%=projectInfo.getAt("order_id")%>>
+      </td>
       <td nowrap="nowrap" align="center" class="f_bold">渠道</td>
       <td nowrap="nowrap" align="center" ><%if("admin".equals(request.getAttribute("role")) || "客服".equals(request.getAttribute("role")) || "经理".equals(request.getAttribute("role")) ){ %>
         <select name="qudao" value="qudao">
@@ -327,8 +329,8 @@ function onUpdate(wechat){
     <tr>
       <td nowrap="nowrap" align="center" class="f_bold">微信号</td>
       <td nowrap="nowrap" align="center" ><%if("admin".equals(request.getAttribute("role")) || "客服".equals(request.getAttribute("role")) || "经理".equals(request.getAttribute("role")) ){ %>
-        <input style="border:none; width:auto;" type="text"     name="wechat" id="wechat"  value=<%=projectInfo.getAt("wechat")%>>
-       
+        
+          <input style="border:none;" type="text"      name="wechat" id="wechat" value=<%=projectInfo.getAt("wechat")%>>
         <%}else{ %>
         <input style="border:none;" type="text"  readonly="true"   name="wechat" id="wechat"  value=<%=projectInfo.getAt("wechat")%>>
         <%} %></td>
@@ -2602,7 +2604,24 @@ function onUpdate(wechat){
         <a href="<%=projectInfo.getAt("fujian_url")%>" title="zip" style="color:#0000FF">【下载】</a>
         <%}else{ %>
         <%} %>
-        <input  type="file" id="inputfile" name="inputfile"  	 />
+     
+
+						<input type="file" name="impFile[0]" />
+					
+
+					</td>
+
+					<td nowrap="nowrap" align="center" >
+						<input type="file" name="impFile[1]" />
+					</td>
+					<td nowrap="nowrap" align="center" >
+						<input type="file" name="impFile[2]" />
+					</td>
+					<td nowrap="nowrap" align="center" >
+						<input type="file" name="impFile[3]" />
+					</td>
+					<td nowrap="nowrap" align="center" >	<input type="file" name="impFile[4]" /></td>
+					<td nowrap="nowrap" align="center" ></td>
         
         <!-- 	<input style="border:none;" type="file" name="file"  multiple="multiple"
 					id="file"  class="imagePath" /> --></td>

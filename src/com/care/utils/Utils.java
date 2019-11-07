@@ -27,6 +27,22 @@ public class Utils {
 		return null == str || "".equals(str);
 	}
 	
+	/* SimpleDateFormat yydfhh = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	 SimpleDateFormat yydfhhh = new SimpleDateFormat("yyyy-MM-dd");*/
+	 
+	public static String getnewTimedf(){
+		return new SimpleDateFormat("yyMMdd").format(new Date());
+		
+	}
+	public static String getnewTimeyydf(){
+		return new SimpleDateFormat("yyyyMMdd").format(new Date());
+		
+	}
+	
+	public static String getnewTime(){
+		return new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date());
+		
+	}
 	public static byte[] getIpByteArrayFromString(String ip) {
 		byte[] ret = new byte[4];
 		java.util.StringTokenizer st = new java.util.StringTokenizer(ip, ".");

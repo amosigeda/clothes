@@ -41,7 +41,7 @@ public class ParseDomDocument {
 	}
 
 	public static void xmlReadDemo(String filePath, String orderId,
-			String kehuName, String riqi, String yaowei, String png)
+			String kehuName, String riqi, String yaowei, String png,String taoxi)
 			throws IOException {
 System.err.println(png);
 		Document doc = load(filePath);
@@ -78,6 +78,10 @@ System.err.println(png);
 			if (valueString.equals("74")) {
 				((Element) ftpElement.content().get(1)).attribute("value")
 						.setValue(yaowei);
+			}
+			if (valueString.equals("套西qq")) {
+				((Element) ftpElement.content().get(1)).attribute("value")
+						.setValue(taoxi);
 			}
 			
 		

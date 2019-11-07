@@ -80,7 +80,7 @@ import com.godoing.rose.lang.SystemException;
 import com.godoing.rose.log.LogFactory;
 
 public class ProjectInfoAction extends BaseAction {
-	 SimpleDateFormat yydfhh = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	
 	  Calendar calendar = Calendar.getInstance();
 	Log logger = LogFactory.getLog(ProjectInfoAction.class);
 	String xmlfileName = "advertising.xml";
@@ -982,8 +982,8 @@ public class ProjectInfoAction extends BaseAction {
 		
 		request.setAttribute("userName", userName);
 		
-		 SimpleDateFormat df = new SimpleDateFormat("yyMMdd");
-		 SimpleDateFormat yydf = new SimpleDateFormat("yyyyMMdd");
+		/* SimpleDateFormat df = new SimpleDateFormat("yyMMdd");
+		 SimpleDateFormat yydf = new SimpleDateFormat("yyyyMMdd");*/
 		
 	   
 	     
@@ -994,7 +994,7 @@ public class ProjectInfoAction extends BaseAction {
 		List<DataMap> listUo =  ServiceBean.getInstance().getUserInfoFacade().getUserInfo(uvo);
 		
 	     ProjectInfo voCount = new ProjectInfo();
-	     voCount.setCondition("add_time>= '"+yydf.format(calendar.getTime())+"' and xiadan_kefu = '"+userName+"'");
+	     voCount.setCondition("add_time>= '"+Utils.getnewTimeyydf()+"' and xiadan_kefu = '"+userName+"'");
 	    int shuliang =   ServiceBean.getInstance()
 				.getProjectInfoFacade().getProjectInfoCount(voCount)+1;
 	    String compnay = listUo.get(0).get("company")+"";
@@ -1012,12 +1012,13 @@ public class ProjectInfoAction extends BaseAction {
 	    	id="0000"+id;
 	    }
 	    	if(shuliang<10){
-	    		 orderId = compnay+ df.format(calendar.getTime()) +id+"0"+shuliang;
+	    		 orderId = compnay+ Utils.getnewTimedf() +id+"0"+shuliang;
 	    	}else{
-	    		orderId = compnay+ df.format(calendar.getTime()) +id+shuliang;
+	    		orderId = compnay+ Utils.getnewTimedf() +id+shuliang;
 	    	}
-	    	request.setAttribute("dingdan", orderId);
-	    	request.setAttribute("shijian", yydfhh.format(calendar.getTime()));
+	    	request.setAttribute("ding_dan", orderId);
+	    	
+	    	request.setAttribute("sj_new", Utils.getnewTime());
 	    	
 	    	/*StringBuffer sf = new StringBuffer();
 			sf.append("<select name='jiaofu_time' id='jiaofu_time'>\n");
@@ -2802,7 +2803,7 @@ public class ProjectInfoAction extends BaseAction {
 			       chInfo.setOrder_id(orderId);
 			       chInfo.setPhone(kehuPhone);
 			       chInfo.setAddTime(new Date());
-			       chInfo.setRemark("【"+yydfhh.format(calendar.getTime())+"】【"+orderId+"】订单已收录入库，分配【不一订制-南京中央工厂】制作.</br>(订单我们已收到)");
+			       chInfo.setRemark("【"+Utils.getnewTime()+"】【"+orderId+"】订单已收录入库，分配【不一订制-南京中央工厂】制作.</br>(订单我们已收到)");
 			     ServiceBean.getInstance().getChannelInfoFacade().insertChannelInfo(chInfo);
 			}
 			
@@ -2970,7 +2971,7 @@ public class ProjectInfoAction extends BaseAction {
 			String downloadUrl ="http://47.111.148.8:80/watch/upload/fujianzip/"+orderId+".zip";
 			vo.setFujian_url(downloadUrl);
 			
-			String qianZhui = "D:/resin/webapps/watch/upload/fujian/";
+			String qianZhui = "D:/resin/webapps/watch/upload/photo/";
 			String path = qianZhui + orderId;
 			ProjectInfoForm form = (ProjectInfoForm) actionForm;
 			Hashtable<?, ?> files = form.getMultipartRequestHandler()
@@ -2978,7 +2979,7 @@ public class ProjectInfoAction extends BaseAction {
 			System.out.println("文件数量="+ files.size());
 			if (files != null & files.size() > 0) {
 				
-				Constant.deleteFile(path);
+				//Constant.deleteFile(path);
 				Constant.createFile(path);
 				
 				Enumeration<?> enums = files.keys();
@@ -3680,7 +3681,7 @@ public class ProjectInfoAction extends BaseAction {
 					       chInfo.setOrder_id(orderId);
 					       chInfo.setPhone(kehuPhone);
 					       chInfo.setAddTime(new Date());
-					       chInfo.setRemark("【"+yydfhh.format(calendar.getTime())+"】【"+orderId+"】订单信息已经批核</br>(订单数据分析完成)！");
+					       chInfo.setRemark("【"+Utils.getnewTime()+"】【"+orderId+"】订单信息已经批核</br>(订单数据分析完成)！");
 					     ServiceBean.getInstance().getChannelInfoFacade().insertChannelInfo(chInfo);
 					}
 					
@@ -4074,6 +4075,15 @@ public class ProjectInfoAction extends BaseAction {
 		
 		String orderNumberOne = list.get(0).get("order_number")+"";
 		
+		String sale_price = list.get(0).get("sale_price")+"";
+		request.setAttribute("sale_pricebb", sale_price);
+		System.out.println("sale_price="+sale_price);
+		if(sale_price.contains(",")){
+			String cc= sale_price.split(",")[0];
+			System.err.println("sale_pricebb="+cc);
+			request.setAttribute("sale_pricebb",cc );
+		}
+		
 		request.setAttribute("orderNumberOne", orderNumberOne);
 		if(orderNumberOne.contains(",")){
 			request.setAttribute("orderNumberOne", orderNumberOne.split(",")[0]);
@@ -4420,9 +4430,9 @@ public class ProjectInfoAction extends BaseAction {
 					       chInfo.setOrder_id(orderid);
 					       chInfo.setPhone(kehuPhone);
 					       chInfo.setAddTime(new Date());
-					       chInfo.setRemark("【"+yydfhh.format(calendar.getTime())+"】【"+orderid+"】仓库已备料，发往【南京中央工厂】备裁.</br>(正在配备布料，长路漫漫，未来可期)!");
+					       chInfo.setRemark("【"+Utils.getnewTime()+"】【"+orderid+"】仓库已备料，发往【南京中央工厂】备裁.</br>(正在配备布料，长路漫漫，未来可期)!");
 					     ServiceBean.getInstance().getChannelInfoFacade().insertChannelInfo(chInfo);
-					     chInfo.setRemark("【"+yydfhh.format(calendar.getTime())+"】【"+orderid+"】订单已经做好全部制前准备，将送【南京中央工厂-二号车间】生产。</br>(所有准备工作完成！即将开始制作，所有美好的事物都值得等待)。");
+					     chInfo.setRemark("【"+Utils.getnewTime()+"】【"+orderid+"】订单已经做好全部制前准备，将送【南京中央工厂-二号车间】生产。</br>(所有准备工作完成！即将开始制作，所有美好的事物都值得等待)。");
 					     ServiceBean.getInstance().getChannelInfoFacade().insertChannelInfo(chInfo);
 					     
 
@@ -4489,7 +4499,7 @@ public class ProjectInfoAction extends BaseAction {
 					    	  String lastName = Divpath + "1.xml";//复制到的地方路径和名称
 					    	  File dest = new File(lastName);
 					    	  TestFileManager.copyFileUsingFileChannels(source,dest);
-					    	  ParseDomDocument.xmlReadDemo(lastName,orderid,nickName,riqi,yaowei,Base64Convert.GetImageStr(photo1));
+					    	  ParseDomDocument.xmlReadDemo(lastName,orderid,nickName,riqi,yaowei,Base64Convert.GetImageStr(photo1),"西装");
 					    	  ParseDomDocument.xmlReadDemopng(lastName,Base64Convert.GetImageStr(photo1));
 					    	  File file = new File(lastName);
 					    	  String lastNameddl = Divpath + "1.ddl";//最终修改的名称
@@ -4517,7 +4527,7 @@ public class ProjectInfoAction extends BaseAction {
 					    	  String lastName = Divpath + "2.xml";//复制到的地方路径和名称
 					    	  File dest = new File(lastName);
 					    	  TestFileManager.copyFileUsingFileChannels(source,dest);
-					    	  ParseDomDocument.xmlReadDemo(lastName,orderid,nickName,riqi,yaowei,Base64Convert.GetImageStr(photo2));
+					    	  ParseDomDocument.xmlReadDemo(lastName,orderid,nickName,riqi,yaowei,Base64Convert.GetImageStr(photo2),"衬衫");
 					    	  ParseDomDocument.xmlReadDemopng(lastName,Base64Convert.GetImageStr(photo2));
 					    	  File file = new File(lastName);
 					    	  String lastNameddl = Divpath + "2.ddl";//最终修改的名称
@@ -4544,7 +4554,7 @@ public class ProjectInfoAction extends BaseAction {
 					    	  String lastName = Divpath + "3.xml";//复制到的地方路径和名称
 					    	  File dest = new File(lastName);
 					    	  TestFileManager.copyFileUsingFileChannels(source,dest);
-					    	  ParseDomDocument.xmlReadDemo(lastName,orderid,nickName,riqi,yaowei,Base64Convert.GetImageStr(photo3));
+					    	  ParseDomDocument.xmlReadDemo(lastName,orderid,nickName,riqi,yaowei,Base64Convert.GetImageStr(photo3),"西裤");
 					    	  ParseDomDocument.xmlReadDemopng(lastName,Base64Convert.GetImageStr(photo3));
 					    	  File file = new File(lastName);
 					    	  String lastNameddl = Divpath + "3.ddl";//最终修改的名称
@@ -4571,7 +4581,7 @@ public class ProjectInfoAction extends BaseAction {
 					    	  String lastName = Divpath + "4.xml";//复制到的地方路径和名称
 					    	  File dest = new File(lastName);
 					    	  TestFileManager.copyFileUsingFileChannels(source,dest);
-					    	  ParseDomDocument.xmlReadDemo(lastName,orderid,nickName,riqi,yaowei,Base64Convert.GetImageStr(photo4));
+					    	  ParseDomDocument.xmlReadDemo(lastName,orderid,nickName,riqi,yaowei,Base64Convert.GetImageStr(photo4),"马甲");
 					    	  ParseDomDocument.xmlReadDemopng(lastName,Base64Convert.GetImageStr(photo4));
 					    	  File file = new File(lastName);
 					    	  String lastNameddl = Divpath + "4.ddl";//最终修改的名称

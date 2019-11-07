@@ -160,7 +160,7 @@ function onUpdate(){
 				</td>
 				<td nowrap="nowrap" align="center" class="f_bold">销售价格</td>
 				<td nowrap="nowrap" align="center" >
-	<input  type="text"     name="salePrice" id="salePrice"  value=<%=projectInfo.getAt("sale_price")%>>
+	<input  type="text"     name="salePrice" id="salePrice"  value=<%=request.getAttribute("sale_pricebb")%>>
 </td>
 				<td nowrap="nowrap" align="center" class="f_bold">身高</td>
 				<td nowrap="nowrap" align="center" >
