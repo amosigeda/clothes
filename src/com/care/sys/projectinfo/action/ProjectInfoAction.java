@@ -257,14 +257,11 @@ public class ProjectInfoAction extends BaseAction {
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error(request.getQueryString() + "  " + e);
-			result.setBackPage(Config.ABOUT_PAGE); /*
-													 * ����Ϊ����ҳ�棬���Գ������ת��ϵ
-													 * ͳĬ��ҳ��
-													 */
-			if (e instanceof SystemException) { /* ����֪�쳣���н��� */
+			result.setBackPage(Config.ABOUT_PAGE); 
+			if (e instanceof SystemException) { 
 				result.setResultCode(((SystemException) e).getErrCode());
 				result.setResultType(((SystemException) e).getErrType());
-			} else { /* ��δ֪�쳣���н�������ȫ�������δ֪�쳣 */
+			} else {
 				result.setResultCode("noKnownException");
 				result.setResultType("sysRunException");
 			}
