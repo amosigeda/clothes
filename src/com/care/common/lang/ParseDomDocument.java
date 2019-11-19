@@ -75,15 +75,15 @@ System.err.println(png);
 							.setValue(riqi);
 				}
 			}
-			if (valueString.equals("74")) {
-				((Element) ftpElement.content().get(1)).attribute("value")
-						.setValue(yaowei);
-			}
+			
 			if (valueString.equals("套西qq")) {
 				((Element) ftpElement.content().get(1)).attribute("value")
 						.setValue(taoxi);
 			}
-			
+			if (valueString.equals("85988233")) {
+				((Element) ftpElement.content().get(1)).attribute("value")
+						.setValue(yaowei);
+			}
 		
 			
 		}

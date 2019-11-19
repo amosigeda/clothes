@@ -68,6 +68,7 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/aliyun-java-sdk-push-3.5.1.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/aliyun-sdk-oss-2.8.3.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/aliyun-java-sdk-core-3.2.5.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/httpclient-4.5.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="com.genuitec.runtime.library/com.genuitec.generic_5.0">

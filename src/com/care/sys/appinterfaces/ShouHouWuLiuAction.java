@@ -139,7 +139,7 @@ if(list.size()<=0){
 		String  kehuPhone= listOrder.get(0).get(
 				"kehu_phone")
 				+ "";
-		HttpRequest.urlReturnParams("http://localhost:9999/mobilepay/watchAppUser/sendwuliu/"+name+"/"+kehuPhone+"/"+orderId);
+		HttpRequest.get("http://localhost:9999/mobilepay/watchAppUser/sendwuliu/"+name+"/"+kehuPhone+"/"+orderId);
 		String wuliuname="顺丰";
 		if("1".equals(expressType)){
 			wuliuname="顺丰";

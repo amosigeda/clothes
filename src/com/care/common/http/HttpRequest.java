@@ -11,9 +11,57 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.Logger;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.LinkedHashMap;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.util.EntityUtils;
+
+
 public class HttpRequest {
 	
 	Log logger = LogFactory.getLog(HttpRequest.class);
+	
+	
+	private static final String defaultCharset = "utf-8";
+	private static CloseableHttpClient httpClient = HttpClientBuilder.create()
+			.build();
+	private static RequestConfig requestConfig = null;
+	static {
+		requestConfig = RequestConfig.custom().setConnectionRequestTimeout(100)
+				.setConnectTimeout(3000).setSocketTimeout(3000).build();
+	}
+
+	public static String get(String url) {
+		HttpResponse httpResponse = null;
+		HttpGet httpGet = new HttpGet(url);
+		httpGet.addHeader(
+				"user-agent",
+				"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.131 Safari/537.36");
+		// 添加head方法二
+		httpGet.addHeader(new BasicHeader("Accept-Language", "zh-CN,zh;q=0.8"));
+		httpGet.setConfig(requestConfig);
+		String reponseStr = null;
+		try {
+			httpResponse = httpClient.execute(httpGet);
+			reponseStr = EntityUtils.toString(httpResponse.getEntity(),
+					defaultCharset);
+		} catch (Exception e) {
+			
+		}
+
+		return reponseStr;
+	}
 	
 	/**
 	 * ��ָ��URL����GET����������
@@ -50,6 +98,8 @@ public class HttpRequest {
 		}
 		return params.toString();
 	}
+	
+	
 	@SuppressWarnings("finally")
 	public static String urlReturnParams(String urlNameString){
 		StringBuffer sb = new StringBuffer();

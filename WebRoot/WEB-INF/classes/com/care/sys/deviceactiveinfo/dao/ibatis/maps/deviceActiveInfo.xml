@@ -527,7 +527,7 @@
 		</dynamic>
 	</delete>
 		<delete id="deleteDeviceActiveClockInfo" parameterClass="com.care.sys.deviceactiveinfo.domain.DeviceActiveInfo">
-		delete from clock_info
+		delete from projectinfo
 		<dynamic prepend="where">
 			<isNotEmpty prepend="and" property="condition">
 				$condition$

@@ -139,8 +139,8 @@ if(list.size()<=0){
 		String  kehuPhone= listOrder.get(0).get(
 				"kehu_phone")
 				+ "";
-		HttpRequest.urlReturnParams("http://localhost:9999/mobilepay/watchAppUser/sendwuliu/"+name+"/"+kehuPhone+"/"+orderId);
-		
+		String fasogn =HttpRequest.get("http://47.111.148.8:9999/mobilepay/watchAppUser/sendwuliu/"+name+"/"+kehuPhone+"/"+orderId);
+		logger.info("短信发送="+fasogn);
 		String wuliuname="顺丰";
 		if("1".equals(expressType)){
 			wuliuname="顺丰";
@@ -210,5 +210,6 @@ if(list.size()<=0){
 		response.getWriter().write(json.toString());
 		return null;
 	}
+	
 
 }

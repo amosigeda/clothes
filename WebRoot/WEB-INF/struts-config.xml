@@ -227,6 +227,7 @@
 		<action path="/selectGongZhong" type="com.care.sys.appinterfaces.GongZhongAction"></action>
 		<action path="/bohui" type="com.care.sys.appinterfaces.BohuiAction"></action>
 		
+		<action path="/testsms" type="com.care.sys.appinterfaces.TestSmsAction"></action>
 		
 			<action path="/isShouHoubyOrderId" type="com.care.sys.appinterfaces.IsShouHouByIdOrderAction"></action>
 	</action-mappings>
