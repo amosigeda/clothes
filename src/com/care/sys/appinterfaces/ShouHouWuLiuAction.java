@@ -61,7 +61,7 @@ public class ShouHouWuLiuAction extends BaseAction {
 			sb.append(online);
 		}
 		JSONObject object = JSONObject.fromObject(sb.toString());
-		
+		logger.info("////shouhouwuliu接口请求参数="+sb.toString());
 		/*
 
 G、发货-----，扫码，需要填写物流单号，给客户发短信，短信内容暂定，至少要包含物流单号*/
@@ -139,7 +139,9 @@ if(list.size()<=0){
 		String  kehuPhone= listOrder.get(0).get(
 				"kehu_phone")
 				+ "";
-		HttpRequest.get("http://localhost:9999/mobilepay/watchAppUser/sendwuliu/"+name+"/"+kehuPhone+"/"+orderId);
+		String url ="http://47.111.148.8:9999/mobilepay/watchAppUser/sendwuliu/"+kehuPhone+"/"+orderId;
+		url = url.replaceAll(" ", "");
+		HttpRequest.get(url);
 		String wuliuname="顺丰";
 		if("1".equals(expressType)){
 			wuliuname="顺丰";
@@ -207,6 +209,7 @@ if(list.size()<=0){
 	
 		json.put("request", href);
 		response.setCharacterEncoding("UTF-8");
+		logger.info("////shouhouwuliu接口返回参数="+json.toString());
 		response.getWriter().write(json.toString());
 		return null;
 	}

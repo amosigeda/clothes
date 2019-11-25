@@ -59,7 +59,7 @@ public class ShouHouAction extends BaseAction {
 			sb.append(online);
 		}
 		JSONObject object = JSONObject.fromObject(sb.toString());
-
+		logger.info("///shouhou接口请求参数="+sb.toString());
 		/*
 		 * d、裁床-----，扫码，一扫码状态自动更新，流程下一步 1 2 E、前道开包-----，扫码 2 F、后道-----，扫码 3
 		 * G、大汤-----，扫码4 F、质检-----，扫码 5
@@ -395,6 +395,7 @@ public class ShouHouAction extends BaseAction {
 
 		json.put("request", href);
 		response.setCharacterEncoding("UTF-8");
+		logger.info("///shouhou返回参数="+json.toString());
 		response.getWriter().write(json.toString());
 		return null;
 	}
