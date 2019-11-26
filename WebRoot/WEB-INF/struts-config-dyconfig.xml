@@ -128,10 +128,14 @@
    	 		<forward name="querySwitchInfo"  path="/dyconfig/projectInfo/projectSwitch.jsp"></forward>
    	 		<!--**************************************************************************************************************************************************************************** -->
    	 		<forward name="queryWatchInfoAdmin" path="/dyconfig/projectInfo/watchInfoxmlAdmin.jsp"></forward>
+   	 		<forward name="queryWatchInfoAdminNew" path="/dyconfig/projectInfo/watchInfoxmlAdminNew.jsp"></forward>
+   	 		
    	 			<forward name="queryWatchInfo" path="/dyconfig/projectInfo/watchInfoxml.jsp"></forward>
    	 		<forward name="addProjectInfoWatch" path="/dyconfig/projectInfo/addProjectInfoWatch.jsp"></forward>
+   	 		<forward name="addProjectInfoWatcho" path="/dyconfig/projectInfo/addProjectInfoWatcho.jsp"></forward>
    	 			<forward name="addProjectInfoWatchOther" path="/dyconfig/projectInfo/addProjectInfoxmlOther.jsp"></forward>
    	 				<forward name="updateProjectWatchInfo" path="/dyconfig/projectInfo/updateProjectInfoWatch.jsp"></forward>
+   	 				<forward name="updateProjectWatchInfoo" path="/dyconfig/projectInfo/updateProjectInfoWatcho.jsp"></forward>
    	 		<forward name="updateProjectWatchInfoOther" path="/dyconfig/projectInfo/updateProjectInfoWatchOther.jsp"></forward>
    	 		
    	 		<!-- 批单修改 -->

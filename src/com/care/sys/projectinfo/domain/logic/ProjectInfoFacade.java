@@ -60,5 +60,15 @@ public interface ProjectInfoFacade {
 
 	public List<DataMap> getProjectInfoDuoYu(ProjectInfo duoyu)throws SystemException;
 
+	public DataList getWatchInfoListByVoCompany(ProjectInfo vo)throws SystemException;
+
+	public int insertProjectWatchInfoo(ProjectInfo vo)throws SystemException;
+
+	public List<DataMap> getProjectWatchInfoo(ProjectInfo vo)throws SystemException;
+
+	public int updatePorjectWatchInfoo(ProjectInfo vo)throws SystemException;
+
+	public int deletePorjectInfoWatcho(ProjectInfo vo)throws SystemException;
+
 
 }

@@ -70,4 +70,16 @@ public interface ProjectInfoDao {
 
 	public List<DataMap> getProjectInfoDuoYu(ProjectInfo vo)throws DataAccessException;
 
+	public List<DataMap> getWatchInfoListByVoCompany(ProjectInfo vo)throws DataAccessException;
+
+	public int getWatchInfoListCountByVoCompany(ProjectInfo vo)throws DataAccessException;
+
+	public int insertProjectWatchInfoo(ProjectInfo vo)throws DataAccessException;
+
+	public List<DataMap> getProjectWatchInfoo(ProjectInfo vo)throws DataAccessException;
+
+	public int updatePorjectWatchInfoo(ProjectInfo vo)throws DataAccessException;
+
+	public int deletePorjectInfoWatcho(ProjectInfo vo)throws DataAccessException;
+
 }

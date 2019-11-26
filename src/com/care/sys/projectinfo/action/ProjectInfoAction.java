@@ -2159,46 +2159,7 @@ public class ProjectInfoAction extends BaseAction {
 				return null;
 			}
 			ProjectInfoForm form = (ProjectInfoForm) actionForm;
-			System.out.println(form.getChannelId());
-			Hashtable<?, ?> files = form.getMultipartRequestHandler()
-					.getFileElements();// 获取所有文件路径的枚举；
-
-			if (files != null & files.size() > 0) {
-				Enumeration<?> enums = files.keys();
-				String fileKey = null;
-				while (enums.hasMoreElements()) {
-					fileKey = (String) (enums.nextElement());
-					FormFile file = (FormFile) files.get(fileKey);
-					if (!file.getFileName().isEmpty()) {
-						fileFormat = file.toString().substring(
-								file.toString().lastIndexOf("."),
-								file.toString().length());
-						name = fileName + fileFormat;
-						System.out.println(name);
-						if (name.contains(".zip")) {
-							zipName = name;
-						}
-						// CommUtils.createDateFile(dir); //创建当前文件夹，存在则返回文件名；
-						InputStream in = file.getInputStream();
-						// photoPath = photoPath + name; //输出文件路径
-						System.out.println(clockxmlpath + name);
-						File f = new File(clockxmlpath + name);
-						if (f.exists()) {
-							f.delete();
-						}
-
-						OutputStream out = new FileOutputStream(clockxmlpath
-								+ name);
-						out.write(file.getFileData(), 0, file.getFileSize());
-
-						out.close();
-						out = null;
-						in.close();
-					}
-
-				}
-
-			}
+		
 
 			StringBuffer sb = new StringBuffer();
 			String userName = loginUser.getUserName();
@@ -5414,5 +5375,442 @@ public class ProjectInfoAction extends BaseAction {
 					 * mapping.findForward("result");
 					 */
 	}
+	
+	public ActionForward queryWatchInfoo(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		String href = request.getServletPath();
+		Date start = new Date();
+		Result result = new Result();// ���
 
+		LoginUser loginUser = (LoginUser) request.getSession().getAttribute(
+				Config.SystemConfig.LOGINUSER);
+		if (loginUser == null) {
+			result.setBackPage(Config.INDEX_PAGE);
+			result.setResultCode("timeout");
+			result.setResultType("fail");
+			request.setAttribute("result", null);
+			return mapping.findForward("result");
+		}
+
+		PagePys pys = new PagePys();// ҳ������
+		DataList list = null; // ����ҳ��List ��logic itrate��ȡ��
+		StringBuffer sb = new StringBuffer();// �����ַ�����
+		ProjectInfoFacade info = ServiceBean.getInstance()
+				.getProjectInfoFacade();// ����userApp������ȡ��user�ֵ䣩
+		ProjectInfo pro = new ProjectInfo();
+
+		String userName = loginUser.getUserName();
+
+		try {
+
+			String companyInfoId = loginUser.getCompanyId();
+			String projectInfoId = loginUser.getProjectId();
+			ProjectInfoForm form = (ProjectInfoForm) actionForm;
+			ProjectInfo vo = new ProjectInfo();
+			String startTime = request.getParameter("startTime");
+			String endTime = request.getParameter("endTime");
+			String companyId = request.getParameter("companyId");
+			String userId = request.getParameter("userId");
+			String projectId = request.getParameter("projectId");
+
+			String projectNo = request.getParameter("project_no");
+			String project_name = request.getParameter("project_name");
+
+			/* ���û������ֶ� */
+			form.setOrderBy("p.add_time");
+			form.setSort("1");
+			// sb.append("1=1");
+			if (!"admin".equals(userName)) {
+				UserInfo voa = new UserInfo();
+				voa.setCondition("userCode ='" + userName + "'");
+				List<DataMap> listt = ServiceBean.getInstance()
+						.getUserInfoFacade().getUserInfo(voa);
+				if (listt.size() > 0) {
+					String companys = listt.get(0).getAt("company_id") + "";
+					if (!"0".equals(companys)) {
+						String[] strArray = companys.split(",");
+						if (strArray.length > 0) {
+							sb.append("(");
+							for (int i = 0; i < strArray.length; i++) {
+								if (strArray[i] != projectNo) {
+									if (strArray[i] != null
+											&& !"".equals(strArray[i])) {
+										if (sb.length() > 1) {
+											sb.append(" or ");
+										}
+										sb.append("   p.project_no='"
+												+ strArray[i] + "'");
+									}
+								}
+							}
+							sb.append(" ) ");
+						} else {
+							if (sb.length() > 0) {
+								sb.append(" or ");
+							}
+							sb.append("   p.project_no='" + userName + "'");
+						}
+					} else {
+						if (sb.length() > 0) {
+							sb.append(" and ");
+						}
+						sb.append("   p.project_no='" + userName + "'");
+					}
+				}
+
+			}
+
+			if (projectNo != null && !"".equals(projectNo)) {
+				if (sb.length() <= 0) {
+					sb.append(" p.project_no like '%" + projectNo + "%'");
+				} else {
+					sb.append(" and p.project_no like '%" + projectNo + "%'");
+				}
+			}
+			if (project_name != null && !"".equals(project_name)) {
+				if (sb.length() <= 0) {
+					sb.append("p.project_name like '%" + project_name + "%'");
+				} else {
+					sb.append(" and p.project_name  like '%" + project_name
+							+ "%'");
+				}
+			}
+
+			if (!projectInfoId.equals("0")) {
+				sb.append(" and p.id in(" + projectInfoId + ")");
+			} else {
+				if (!"0".equals(companyId) && companyId != null) {
+					sb.append(" and p.company_id in(" + companyInfoId + ")");
+				}
+			}
+			if (startTime != null && !"".equals(startTime)) {
+				sb.append(" and substring(p.add_time,1,10) >= '" + startTime
+						+ "'");
+			}
+			if (endTime != null && !"".equals(endTime)) {
+				sb.append(" and substring(p.add_time,1,10) <= '" + endTime
+						+ "'");
+			}
+			if (companyId != null && !"".equals(companyId)) {
+				sb.append(" and p.company_id='" + companyId + "'");
+			}
+			if (projectId != null && !"".equals(projectId)) {
+				sb.append(" and p.id ='" + projectId + "'");
+			}
+			if (userId != null && !"".equals(userId)) {
+				sb.append(" and p.company_id='" + userId + "'");
+				pro.setCondition("company_id = '" + userId + "'");
+			}
+			List<DataMap> pros = ServiceBean.getInstance()
+					.getProjectInfoFacade().getProjectInfo(pro);
+			request.setAttribute("project", pros);
+
+			CompanyInfo ci = new CompanyInfo();
+			List<DataMap> coms = ServiceBean.getInstance()
+					.getCompanyInfoFacade().getCompanyInfo(ci);
+			request.setAttribute("company", coms);
+
+			request.setAttribute("project_no", projectNo);
+			request.setAttribute("project_name", project_name);
+
+			request.setAttribute("fNow_date", startTime);
+			request.setAttribute("now_date", endTime);
+			request.setAttribute("companyId", companyId);
+			request.setAttribute("userId", userId);
+			request.setAttribute("projectId", projectId);
+
+			if (!"admin".equals(userName)) {
+				if (sb.length() <= 0) {
+					sb.append("p.status='" + 1 + "'");
+				} else {
+					sb.append(" and p.status='" + 1 + "'");
+				}
+			}
+
+			vo.setCondition(sb.toString());
+
+			BeanUtils.copyProperties(vo, form);
+			list = info.getWatchInfoListByVoCompany(vo);
+			BeanUtils.copyProperties(pys, form);
+			pys.setCounts(list.getTotalSize());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error(request.getQueryString() + "  " + e);
+			result.setBackPage(Config.ABOUT_PAGE);
+			if (e instanceof SystemException) {
+				result.setResultCode(((SystemException) e).getErrCode());
+				result.setResultType(((SystemException) e).getErrType());
+			} else {
+				result.setResultCode("noKnownException");
+				result.setResultType("sysRunException");
+			}
+		} finally {
+			request.setAttribute("result", result);
+			request.setAttribute("pageList", list);
+			request.setAttribute("PagePys", pys);
+		}
+		CommUtils.getIntervalTime(start, new Date(), href);
+		if ("admin".equals(userName)) {
+			return mapping.findForward("queryWatchInfoAdminNew");
+		}
+		return mapping.findForward("queryWatchInfo");
+	}
+	
+	public ActionForward initInsertWatcho(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		LoginUser loginUser = (LoginUser) request.getSession().getAttribute(
+				Config.SystemConfig.LOGINUSER);
+		if (loginUser == null) {
+			return null;
+		}
+
+		String userName = loginUser.getUserName();
+		if ("admin".equals(userName)) {
+			return mapping.findForward("addProjectInfoWatcho");
+		} else {
+			return mapping.findForward("addProjectInfoWatchOther");
+		}
+	}
+
+	public ActionForward insertProjectInfoWatcho(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		String companyId = request.getParameter("companyId");
+		// String channelId = request.getParameter("channelId");
+		Result result = new Result();
+		String name = "";
+		String fileFormat = "";
+		String zipName = "";
+		String fileName = Long.toString(new Date().getTime());
+		try {
+			LoginUser loginUser = (LoginUser) request.getSession()
+					.getAttribute(Config.SystemConfig.LOGINUSER);
+			if (loginUser == null) {
+				return null;
+			}
+			ProjectInfoForm form = (ProjectInfoForm) actionForm;
+		
+
+			StringBuffer sb = new StringBuffer();
+			String userName = loginUser.getUserName();
+			// ProjectInfoForm form = (ProjectInfoForm) actionForm;
+			ProjectInfoFacade facade = ServiceBean.getInstance()
+					.getProjectInfoFacade();
+			ProjectInfo vo = new ProjectInfo();
+			int num = ServiceBean.getInstance().getProjectInfoFacade()
+					.getProjectInfoCount(vo) + 1;
+			BeanUtils.copyProperties(vo, form);
+			// vo.setId(num);
+			String proNo = form.getProjectNo();
+			System.out.println(proNo);
+			if ("admin".equals(userName)) {
+				vo.setProjectNo(proNo);
+				vo.setHeartS(proNo);
+			} else {
+				vo.setProjectNo(userName);
+				vo.setHeartS(userName);
+			}
+			vo.setCompanyId(companyId);
+			vo.setChannelId(zipName);
+			vo.setRemark(fileName);
+			if ("".equals(name) || name == "" || name == null) {
+				vo.setChannelId("");
+				vo.setAdTitle("");
+				vo.setAdDetail("");
+				vo.setRemark("");
+			}
+			vo.setProjectName(form.getProjectName());
+			vo.setAddTime(new Date());
+			String suoZaiDi = request.getParameter("suozaidi");
+			String phone = request.getParameter("phone");
+			vo.setAdTitle(suoZaiDi);
+			vo.setAdDetail(phone);
+			vo.setStatus("1");
+			vo.setChannelId(phone);
+			vo.setRemark(request.getParameter("remark"));
+
+			String addType = request.getParameter("addType");
+			vo.setSocketWay(addType);
+
+			facade.insertProjectWatchInfoo(vo);
+
+			result.setBackPage(HttpTools.httpServletPath(request, // ����ɹ�����ת��ԭ��ҳ��
+					"queryWatchInfoo"));
+			result.setResultCode("inserts"); // ���ò���Code
+			result.setResultType("success"); // ���ò���ɹ�
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.debug(request.getQueryString() + "  " + e);
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"initInsertWatch"));
+			if (e instanceof SystemException) { /* ����֪�쳣���н��� */
+				result.setResultCode(((SystemException) e).getErrCode());
+				result.setResultType(((SystemException) e).getErrType());
+			} else { /* ��δ֪�쳣���н�������ȫ�������δ֪�쳣 */
+				result.setResultCode("noKnownException");
+				result.setResultType("sysRunException");
+			}
+		} finally {
+			request.setAttribute("result", result);
+		}
+		return mapping.findForward("result");
+	}
+	
+	public ActionForward initUpdateWatcho(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		LoginUser loginUser = (LoginUser) request.getSession().getAttribute(
+				Config.SystemConfig.LOGINUSER);
+		if (loginUser == null) {
+			return null;
+		}
+
+		String userName = loginUser.getUserName();
+
+		String id = request.getParameter("id");
+		ProjectInfo vo = new ProjectInfo();
+		vo.setCondition("id='" + id + "'");
+		List<DataMap> list = ServiceBean.getInstance().getProjectInfoFacade()
+				.getProjectWatchInfoo(vo);
+		if (list == null || list.size() == 0) {
+			Result result = new Result();
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryWatchInfoo"));
+			result.setResultCode("rowDel");
+			result.setResultType("success");
+			return mapping.findForward("result");
+		}
+		request.setAttribute("projectInfo", list.get(0));
+		return mapping.findForward("updateProjectWatchInfoo");
+		/*
+		 * if ("admin".equals(userName)) { } else { return
+		 * mapping.findForward("updateProjectWatchInfoOther"); }
+		 */
+	}
+	
+	public ActionForward updateProjectWatchInfoo(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) {
+		LoginUser loginUser = (LoginUser) request.getSession().getAttribute(
+				Config.SystemConfig.LOGINUSER);
+		if (loginUser == null) {
+			return null;
+		}
+		String userName = loginUser.getUserName();
+
+		Result result = new Result();
+		String zipName = "";
+		String fileName = Long.toString(new Date().getTime());
+		try {
+			String id = request.getParameter("id");
+			String project_no = request.getParameter("project_no");
+			String project_name = request.getParameter("project_name");
+			String company_id = request.getParameter("company_id");
+
+			// ProjectInfoForm form = (ProjectInfoForm) actionForm;
+
+			ProjectInfoForm form = (ProjectInfoForm) actionForm;
+			String name = "";
+			String fileFormat = "";
+		
+
+			ProjectInfo vo = new ProjectInfo();
+			vo.setCondition("id='" + id + "'");
+
+			vo.setProjectName(project_name);
+			if ("admin".equals(userName)) {
+				vo.setProjectNo(project_no);
+				vo.setHeartS(project_no);
+			}
+			vo.setChannelId(zipName);
+			vo.setAdTitle(clockdownloadUrl + zipName);
+			vo.setAdDetail(clockdownloadUrl + name);
+			vo.setRemark(fileName);
+			if ("".equals(name) || name == "" || name == null) {
+				vo.setChannelId("");
+				vo.setAdTitle("");
+				vo.setAdDetail("");
+				vo.setRemark("");
+			}
+			vo.setCompanyId(company_id);
+
+			String channel_id = request.getParameter("channel_id");
+			String remark = request.getParameter("remark");
+			String remarka = request.getParameter("remarka");
+			String adTitle = request.getParameter("adTitle");
+			System.out.println("remark= " + remark);
+			System.out.println("remark= " + remarka);
+			vo.setChannelId(channel_id);
+			vo.setRemark(remarka);
+			vo.setAdTitle(adTitle);
+
+			String addType = request.getParameter("addType");
+
+			vo.setSocketWay(addType);
+
+			ServiceBean.getInstance().getProjectInfoFacade()
+					.updatePorjectWatchInfoo(vo);
+
+			result.setBackPage(HttpTools.httpServletPath(request, // ����ɹ�����ת��ԭ��ҳ��
+					"queryWatchInfoo"));
+			result.setResultCode("updates");
+			result.setResultType("success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.debug(request.getQueryString() + "  " + e);
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryWatchInfoo"));
+			if (e instanceof SystemException) { /* ����֪�쳣���н��� */
+				result.setResultCode(((SystemException) e).getErrCode());
+				result.setResultType(((SystemException) e).getErrType());
+			} else { /* ��δ֪�쳣���н�������ȫ�������δ֪�쳣 */
+				result.setResultCode("noKnownException");
+				result.setResultType("sysRunException");
+			}
+		} finally {
+			request.setAttribute("result", result);
+		}
+		return mapping.findForward("result");
+	}
+	public ActionForward deletewatcho(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		Result result = new Result();
+		try {
+			ProjectInfoForm form = (ProjectInfoForm) actionForm;
+
+			ProjectInfo vo = new ProjectInfo();
+			vo.setCondition("id='" + form.getId() + "'");
+		
+			ServiceBean.getInstance().getProjectInfoFacade()
+					.deletePorjectInfoWatcho(vo);
+			
+
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryWatchInfoo"));
+			result.setResultCode("deletes");
+			result.setResultType("success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.debug(request.getQueryString() + "  " + e);
+			result.setBackPage(HttpTools.httpServletPath(request,
+					"queryWatchInfoo"));
+			if (e instanceof SystemException) { /* ����֪�쳣���н��� */
+				result.setResultCode(((SystemException) e).getErrCode());
+				result.setResultType(((SystemException) e).getErrType());
+			} else { /* ��δ֪�쳣���н�������ȫ�������δ֪�쳣 */
+				result.setResultCode("noKnownException");
+				result.setResultType("sysRunException");
+			}
+		} finally {
+			request.setAttribute("result", result);
+		}
+		return mapping.findForward("result");
+	}
 }

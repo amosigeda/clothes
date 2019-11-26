@@ -177,6 +177,42 @@ public class SqlMapProjectInfoDao extends SqlMapClientDaoSupport implements Proj
 		logger.debug("getProjectInfoDuoYu(ProjectInfo vo)");
 		return getSqlMapClientTemplate().queryForList("getProjectInfoDuoYu", vo);
 	}
+	@Override
+	public List<DataMap> getWatchInfoListByVoCompany(ProjectInfo vo)
+			throws DataAccessException {
+		logger.debug("getWatchInfoListByVoCompany(ProjectInfo vo)");
+		return getSqlMapClientTemplate().queryForList("getWatchInfoListByVoCompany", vo);
+	}
+	@Override
+	public int getWatchInfoListCountByVoCompany(ProjectInfo vo)
+			throws DataAccessException {
+		logger.debug("getWatchInfoListCountByVoCompany(ProjectInfo vo)");
+		return (Integer)getSqlMapClientTemplate().queryForObject("getWatchInfoListCountByVoCompany", vo);
+	}
+	@Override
+	public int insertProjectWatchInfoo(ProjectInfo vo)
+			throws DataAccessException {
+		logger.debug("insertProjectWatchInfoo(ProjectInfo vo)");
+		return getSqlMapClientTemplate().update("insertProjectWatchInfoo", vo);
+	}
+	@Override
+	public List<DataMap> getProjectWatchInfoo(ProjectInfo vo)
+			throws DataAccessException {
+		logger.debug("getProjectWatchInfoo(ProjectInfo vo)");
+		return getSqlMapClientTemplate().queryForList("getProjectWatchInfoo", vo);
+	}
+	@Override
+	public int updatePorjectWatchInfoo(ProjectInfo vo)
+			throws DataAccessException {
+		logger.debug("updatePorjectWatchInfoo(ProjectInfo vo)");
+		return getSqlMapClientTemplate().update("updatePorjectWatchInfoo", vo);
+	}
+	@Override
+	public int deletePorjectInfoWatcho(ProjectInfo vo)
+			throws DataAccessException {
+		logger.debug("deletePorjectInfoWatcho(ProjectInfo vo)");
+		return getSqlMapClientTemplate().update("deletePorjectInfoWatcho", vo);
+	}
 
 	
 

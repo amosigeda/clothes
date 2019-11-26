@@ -149,6 +149,10 @@ if(list.size()<=0){
 			wuliuname="顺丰";
 		  }else if("2".equals(expressType)){
 			  wuliuname="京东";
+		  }else if("3".equals(expressType)){
+			  wuliuname="其它物流";
+		  }else if("4".equals(expressType)){
+			  wuliuname="无需物流";
 		  }
 		
 		ChannelInfo chInfo = new ChannelInfo();

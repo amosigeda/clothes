@@ -240,4 +240,33 @@ public class ProjectInfoFacadeImpl implements ProjectInfoFacade{
 		return projectInfoDao.getProjectInfoDuoYu(duoyu);
 	}
 
+	@Override
+	public DataList getWatchInfoListByVoCompany(ProjectInfo vo)
+			throws SystemException {
+		DataList list = new DataList(projectInfoDao.getWatchInfoListByVoCompany(vo));
+		list.setTotalSize(projectInfoDao.getWatchInfoListCountByVoCompany(vo));
+		return list;
+	}
+
+	@Override
+	public int insertProjectWatchInfoo(ProjectInfo vo) throws SystemException {
+		return projectInfoDao.insertProjectWatchInfoo(vo);
+	}
+
+	@Override
+	public List<DataMap> getProjectWatchInfoo(ProjectInfo vo)
+			throws SystemException {
+		return projectInfoDao.getProjectWatchInfoo(vo);
+	}
+
+	@Override
+	public int updatePorjectWatchInfoo(ProjectInfo vo) throws SystemException {
+		return  projectInfoDao.updatePorjectWatchInfoo(vo);
+	}
+
+	@Override
+	public int deletePorjectInfoWatcho(ProjectInfo vo) throws SystemException {
+		return projectInfoDao.deletePorjectInfoWatcho(vo);
+	}
+
 }
