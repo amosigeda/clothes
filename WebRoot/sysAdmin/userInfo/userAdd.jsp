@@ -194,11 +194,12 @@
     <tr class="tr_11" >
     <td align="right" width="12%">&nbsp;&nbsp;分公司</td>
     <td align="left" width="20%">
-      <select name="fenComPany">
+    	<%=request.getAttribute("roleListt") %>
+      <!-- <select name="fenComPany">
 						<option value="1">深圳</option>
 						<option value="2">南京</option>
 					
-				</select>
+				</select> -->
     </td>
     <td><font color="red"></font></td>
     <td></td>
