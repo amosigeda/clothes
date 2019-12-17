@@ -145,7 +145,11 @@ function del(id){
 							</a> --%>
 						</td>
 						<td >
-							<bean:write name="element" property="user_feedback_content" />
+							<logic:equal name="element" property="project_name" value="无需物流"></logic:equal>			
+							<logic:equal name="element" property="project_name" value="顺丰"><bean:write name="element" property="user_feedback_content" /></logic:equal>			
+							<logic:equal name="element" property="project_name" value="京东"><bean:write name="element" property="user_feedback_content" /></logic:equal>			
+							<logic:equal name="element" property="project_name" value="其他物流"><bean:write name="element" property="user_feedback_content" /></logic:equal>			
+							
 						</td>
 						
 							<td>

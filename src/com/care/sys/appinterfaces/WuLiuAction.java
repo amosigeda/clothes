@@ -110,6 +110,10 @@ if(list.size()<=0){
 	  fo.setProject_name("顺丰");
   }else if("2".equals(expressType)){
 	  fo.setProject_name("京东");
+  }else if("3".equals(expressType)){
+	  fo.setProject_name("其它物流");
+  }else if("4".equals(expressType)){
+	  fo.setProject_name("无需物流");
   }else{
 	  fo.setProject_name(expressType);
   }

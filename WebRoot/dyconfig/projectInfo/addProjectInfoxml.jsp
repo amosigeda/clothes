@@ -353,7 +353,7 @@ document.getElementById("today").value = today();//将获取到的 年-月-日 时:分:秒 
 				<tr>
 					<td nowrap="nowrap" align="center" class="f_bold">订单编号</td>
 					<td nowrap="nowrap" align="center" >
-						  <input name="wechata"  id="wechata"  readonly="true" type="text" class="txt_1"  value="<%=request.getAttribute("ding_dan")%>" />
+						  <input name="wechataa"  id="wechataa"  readonly="true" type="text" class="txt_1"  value="<%=request.getAttribute("ding_dan")%>" />
 					</td>
 					<td nowrap="nowrap" align="center" class="f_bold">渠道</td>
 					<td nowrap="nowrap" align="center" >

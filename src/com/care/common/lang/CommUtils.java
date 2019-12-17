@@ -321,6 +321,32 @@ public class CommUtils {
 					+ name + "</option>\n");
 		}
 		sf.append("\t\t\t</select>");
+		System.out.println(sf.toString());
+		return sf.toString();
+	}
+	public static String getPrintRegisterSelecto(List<DataMap> list, String names, String tname,
+			String tvalue, int isSelect) {
+		if (list == null || list.size() == 0) {
+			return "";
+		}
+		StringBuffer sf = new StringBuffer();
+		sf.append("<select name='" + names + "' id='"+ names +"'>\n");
+	
+		Iterator<DataMap> it = list.iterator();
+		while (it.hasNext()) {
+			DataMap map = it.next();
+			String value = "" + map.getAt(tvalue);
+			String name = "" + map.getAt(tname);
+			
+			String selected = "";
+			if (value.equals(Integer.toString(isSelect))) {
+				selected = "selected";
+			}
+			sf.append("\t\t\t<option value='" + value + "' " + selected + ">"
+					+ name + "</option>\n");
+		}
+		sf.append("\t\t\t</select>");
+		System.out.println(sf.toString());
 		return sf.toString();
 	}
 	

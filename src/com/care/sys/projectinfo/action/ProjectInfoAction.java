@@ -370,7 +370,7 @@ public class ProjectInfoAction extends BaseAction {
 				sb.append(" and p.company_id='" + companyId + "'");
 			}
 			if (orderId != null && !"".equals(orderId)) {
-				sb.append(" and order_number like '%" + orderId + "%'");
+				sb.append(" and order_id = '" + orderId + "'");
 			}
 			if (userId != null && !"".equals(userId)) {
 				sb.append(" and p.company_id='" + userId + "'");
@@ -2550,7 +2550,13 @@ public class ProjectInfoAction extends BaseAction {
 				return null;
 			}
 
-			String orderId = "";// 订单编号
+			String orderId = request.getParameter("wechataa");// 订单编号
+			System.err.println("************************orderId="+orderId);
+			ProjectInfo chaxun =new ProjectInfo();
+			chaxun.setCondition("order_id='"+orderId+"'");
+			List<DataMap> getProjectInfolist = ServiceBean.getInstance().getProjectInfoFacade().getProjectInfo(chaxun);
+			if(getProjectInfolist.size()<=0){
+				
 			String userName = loginUser.getUserName();
 			UserInfo uvo = new UserInfo();
 			uvo.setCondition("userCode = '" + userName + "' limit 1");
@@ -2572,7 +2578,7 @@ public class ProjectInfoAction extends BaseAction {
 				compnay = "1";
 			}
 
-			String id = listUo.get(0).get("id") + "";
+			/*String id = listUo.get(0).get("id") + "";
 			if (id.length() == 4) {
 				id = "0" + id;
 			} else if (id.length() == 3) {
@@ -2581,15 +2587,15 @@ public class ProjectInfoAction extends BaseAction {
 				id = "000" + id;
 			} else if (id.length() == 1) {
 				id = "0000" + id;
-			}
+			}*/
 
-			if (shuliang < 10) {
+			/*if (shuliang < 10) {
 				orderId = compnay + df.format(calendar.getTime()) + id + "0"
 						+ shuliang;
 			} else {
 				orderId = compnay + df.format(calendar.getTime()) + id
 						+ shuliang;
-			}
+			}*/
 
 			ProjectInfo vo = new ProjectInfo();
 
@@ -3073,6 +3079,12 @@ public class ProjectInfoAction extends BaseAction {
 			result.setBackPage(HttpTools.httpServletPath(request, "daiban"));
 			result.setResultCode("inserts");
 			result.setResultType("success");
+			
+		}else{
+			result.setBackPage(HttpTools.httpServletPath(request, "daiban"));
+			result.setResultCode("tagError");
+			result.setResultType("fail");
+		}
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.debug(request.getQueryString() + "  " + e);

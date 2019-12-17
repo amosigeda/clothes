@@ -156,6 +156,15 @@ public class UserInfoAction extends BaseAction {
 		request.setAttribute("companyList", s);*/
 		System.out.println(CommUtils.getPrintSelect(rlist,"groupCode", "roleName", "id", groupCode, 1));
 		request.setAttribute("roleList", CommUtils.getPrintSelect(rlist,"groupCode", "roleName", "id", groupCode, 1));
+		
+		ProjectInfo vo = new ProjectInfo();
+		
+		List<DataMap> list = ServiceBean.getInstance().getProjectInfoFacade()
+				.getProjectWatchInfoo(vo);
+		System.err.println("列出***");
+		request.setAttribute("roleListt", CommUtils.getPrintRegisterSelecto(
+				list, "fenComPany", "project_name", "project_no", 1));
+		
 		return mapping.findForward("insertUserInfo");
 	}
 

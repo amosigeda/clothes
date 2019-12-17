@@ -17,6 +17,7 @@ import com.care.common.config.Config;
 import com.care.common.config.ServiceBean;
 import com.care.common.http.BaseAction;
 import com.care.common.lang.CommUtils;
+import com.care.sys.projectinfo.domain.ProjectInfo;
 import com.care.sys.roleinfo.domain.RoleInfo;
 import com.care.sys.roleinfo.domain.logic.RoleInfoFacade;
 import com.care.sys.roleinfo.form.RoleInfoForm;
@@ -36,7 +37,8 @@ import com.godoing.rose.log.LogFactory;
 public class DoRoleInfoAction extends BaseAction{
 	Log logger = LogFactory.getLog(DoRoleInfoAction.class);
 
-	public ActionForward queryRoleInfo(ActionMapping mapping, ActionForm actionForm,HttpServletRequest request,HttpServletResponse response) throws Exception {
+	public ActionForward queryRoleInfo(ActionMapping mapping, ActionForm actionForm,HttpServletRequest request,HttpServletResponse response) 
+			throws Exception {
 		String href= request.getServletPath();
 		Date start = new Date();
 		Result result = new Result();
@@ -103,6 +105,7 @@ public class DoRoleInfoAction extends BaseAction{
 
 	public ActionForward initInsert(ActionMapping mapping, ActionForm form,HttpServletRequest request,HttpServletResponse response) throws Exception {
 		/* ȡ���ֵ� */
+		
 		
 		return mapping.findForward("insertRoleInfo");
 	}

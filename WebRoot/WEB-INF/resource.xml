@@ -16,7 +16,7 @@
 				<userCodeError>系统中存在重复的帐号</userCodeError>
 				<userNameError>存在重复的用户名</userNameError>
 				<productError>存在重复的项目</productError>
-				<tagError>该项目已同步不能删除</tagError>
+				<tagError>system has this orderid</tagError>
 				<customAddError>该商务存在客户，无法删除</customAddError>
 				<customError>该客户已有项目,请先删除项目</customError>
 				<CodeCountError>已超过最大数目</CodeCountError>

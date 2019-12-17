@@ -330,7 +330,7 @@
 				<td nowrap="nowrap" align="left" colspan="7">
 				<input
 					name="remark"  id="remark" type="text" 
-					class="txt_1" maxlength="30" />
+					class="txt_1" maxlength="2000" />
 					</td>
 			
 			</tr>
